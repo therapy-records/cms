@@ -1,32 +1,48 @@
 import React from 'react'
+import { Field, reduxForm } from 'redux-form'
 import './NewsPostForm.scss'
 
-export const NewsPostForm = () => (
-  <div>
-  <h2>New news post</h2>
-    <form>
+export const NewsPostForm = (props) => {
 
-      <label>Title</label>
-      <br/>
-      <input type="text" placeholder="Hello world" />
+  const { handleSubmit, pristine, reset, submitting } = props
 
-      <br/>
+  return (
+    <section>
+      <h2>New news post</h2>
 
-      <label>Sub heading</label>
-      <br/>
-      <input type="text" placeholder="From Earth" />
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Title</label>
+          <Field name="title" component="input" type="text" placeholder="Hello World" />
+        </div>
 
-      <br/>
+        <br/>
 
-      <label>Main content</label>
-      <br/>
-      <textarea></textarea>
+        <div>
+          <label>Sub heading</label>
+          <Field name="subHeading" component="input" type="text" placeholder="From Earth"/>
+        </div>
 
-      <br/>
+        <br/>
 
-      <button>Submit</button>
-    </form>
-  </div>
-)
+        <div>
+          <label>Main content</label>
+          <Field name="mainContent" component="textarea" type="text" placeholder="Main content"/>
+        </div>
 
-export default NewsPostForm
+        <br/>
+
+        <div>
+          <button type="submit" disabled={pristine || submitting}>Submit</button>
+        </div>
+
+      </form>
+
+    </section>
+  );
+}
+
+// export default NewsPostForm
+export default reduxForm({
+  form: 'NEWS_POST_FORM'
+})(NewsPostForm)

@@ -19,3 +19,23 @@ body {
 *:after {
   box-sizing: inherit;
 }
+
+
+label {
+  display: block;
+  text-align: left;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.5em;
+}
+
+button {
+  width: 100%;
+  padding: 2em;
+  background: #bada55;
+  border: 0 none;
+  appearance: none;
+}
