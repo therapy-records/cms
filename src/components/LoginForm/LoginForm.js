@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import './LoginForm.scss'
 
 export const LoginForm = () => (
-  <div>
+  <div className="login-form">
     <form>
       <input type="text" placeholder="email" />
       <br/>

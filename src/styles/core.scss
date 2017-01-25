@@ -30,6 +30,11 @@ input,
 textarea {
   width: 100%;
   padding: 0.5em;
+  margin-bottom: 1em;
+}
+
+textarea {
+  max-width: 1005;
 }
 
 button {
