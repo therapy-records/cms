@@ -1,6 +1,31 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Field, reduxForm, SubmissionError } from 'redux-form'
-import './NewsPostForm.scss'
+import RichTextEditor from 'react-rte';
+
+class MainContentEditor extends Component {
+
+  state = {
+    value: RichTextEditor.createEmptyValue()
+  }
+
+  onChange = (value) => {
+    this.setState({value});
+    if (this.props.onChange) {
+      this.props.onChange(
+        value.toString('html')
+      );
+    }
+  };
+
+  render () {
+    return (
+      <RichTextEditor
+        value={this.state.value}
+        onChange={this.onChange}
+        autoFocus/>
+    );
+  }
+}
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
@@ -24,8 +49,14 @@ const textarea = ({ input, label, type, meta: { touched, error }}) => (
   </div>
 )
 
-const required = value => value ? undefined : 'required';
+const mainContentRTE = ({ input, onChange, meta: { error }}) => (
+  <div>
+    {error && (<p>Main content is {error}</p>)}
+    <MainContentEditor value={input} onChange={e => { input.onChange(e) }} />
+  </div>
+)
 
+const required = value => value ? undefined : 'required';
 
 class NewsPostForm extends React.Component {
 
@@ -57,13 +88,9 @@ class NewsPostForm extends React.Component {
 
         <br/>
 
-        <div>
-          <Field name="mainContent"
-                 component={textarea}
-                 placeholder="Main content"
-                 label="Main content"
-                 validate={required} />
-        </div>
+        <Field name="mainContent"
+               component={mainContentRTE}
+               validate={required}/>
 
         <br/>
 
@@ -72,7 +99,7 @@ class NewsPostForm extends React.Component {
         <br/>
 
         <div>
-          <button type="submit" disabled={pristine || submitting}>Submit</button>
+          <button type="submit" disabled={error || pristine || submitting}>Submit</button>
         </div>
 
       </form>
