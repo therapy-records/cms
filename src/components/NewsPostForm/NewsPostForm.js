@@ -1,34 +1,73 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, SubmissionError } from 'redux-form'
 import './NewsPostForm.scss'
 
-export const NewsPostForm = (props) => {
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-  const { handleSubmit, pristine, reset, submitting } = props
+const submit = (values) => {
+  console.log('submit!');
+}
 
-  return (
+const textInput = ({ input, label, type, meta: { touched, error } }) => (
+  <div>
+    <label>{label}</label>
+    <input {...input} placeholder={label} type={type}/>
+    {touched && error && <span>{label} is {error}</span>}
+  </div>
+)
+
+const textarea = ({ input, label, type, meta: { touched, error }}) => (
+  <div>
+    <label>{label}</label>
+    <textarea {...input}></textarea>
+    {touched && error && <span>{label} is {error}</span>}
+  </div>
+)
+
+const required = value => value ? undefined : 'required';
+
+
+class NewsPostForm extends React.Component {
+
+  render() {
+
+    const { error, handleSubmit, pristine, reset, submitting } = this.props
+
+    return (
     <section>
       <h2>New news post</h2>
 
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Title</label>
-          <Field name="title" component="input" type="text" placeholder="Hello World" />
-        </div>
+      <form onSubmit={handleSubmit(submit)}>
+
+        <Field name="title"
+               component={textInput}
+               type="text"
+               placeholder="Hello World"
+               label="Title"
+               validate={required}/>
+
+        <br/>
+
+        <Field name="subHeading"
+               component={textInput}
+               type="text"
+               placeholder="From Earth"
+               label="Sub heading"
+               validate={required}/>
 
         <br/>
 
         <div>
-          <label>Sub heading</label>
-          <Field name="subHeading" component="input" type="text" placeholder="From Earth"/>
+          <Field name="mainContent"
+                 component={textarea}
+                 placeholder="Main content"
+                 label="Main content"
+                 validate={required} />
         </div>
 
         <br/>
 
-        <div>
-          <label>Main content</label>
-          <Field name="mainContent" component="textarea" type="text" placeholder="Main content"/>
-        </div>
+        {error && <strong>{error}</strong>}
 
         <br/>
 
@@ -39,10 +78,10 @@ export const NewsPostForm = (props) => {
       </form>
 
     </section>
-  );
+    )
+  }
 }
 
-// export default NewsPostForm
 export default reduxForm({
   form: 'NEWS_POST_FORM'
 })(NewsPostForm)
