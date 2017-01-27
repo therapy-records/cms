@@ -1,31 +1,6 @@
 import React, { Component } from 'react'
 import { Field, reduxForm, SubmissionError } from 'redux-form'
-import RichTextEditor from 'react-rte';
-
-class MainContentEditor extends Component {
-
-  state = {
-    value: RichTextEditor.createEmptyValue()
-  }
-
-  onChange = (value) => {
-    this.setState({value});
-    if (this.props.onChange) {
-      this.props.onChange(
-        value.toString('html')
-      );
-    }
-  };
-
-  render () {
-    return (
-      <RichTextEditor
-        value={this.state.value}
-        onChange={this.onChange}
-        autoFocus/>
-    );
-  }
-}
+import RichTextEditor from '../RichTextEditor';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
@@ -51,8 +26,9 @@ const textarea = ({ input, label, type, meta: { touched, error }}) => (
 
 const mainContentRTE = ({ input, onChange, meta: { error }}) => (
   <div>
+    <p><strong>Main content</strong></p>
     {error && (<p>Main content is {error}</p>)}
-    <MainContentEditor value={input} onChange={e => { input.onChange(e) }} />
+    <RichTextEditor value={input} onChange={e => { input.onChange(e) }}/>
   </div>
 )
 
