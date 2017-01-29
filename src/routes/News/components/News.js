@@ -1,26 +1,28 @@
 import React from 'react'
 
-const mockData = [
-  {
-    title: 'title A'
-  },
-  {
-    title: 'title B'
-  },
-  {
-    title: 'title C'
-  }
-];
+class News extends React.Component {
 
-export const News = () => {
-  return (
-    <div>
-      <h2>News</h2>
-        {mockData.map((d) => {
-          return <li key={d.title}>{d.title}</li>
-        })}
-    </div>
-  )
+  componentWillMount(){
+    this.props.getNews();
+  }
+
+  render() {
+    return (
+      <div>
+        {
+          this.props.newsPosts.map((p) => (
+            <div key={p._id}>
+              <h3>{p.title}</h3>
+              {p.createdAt}
+            </div>
+          ))
+        }
+        {!this.props.newsPosts.length && (
+          <p>Unable to fetch news posts :(</p>
+        )}
+      </div>
+    )
+  }
 }
 
 export default News

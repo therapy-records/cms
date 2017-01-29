@@ -1,14 +1,14 @@
 import { connect } from 'react-redux'
+import { fetchNews, doubleAsync } from '../modules/news'
 
 import News from '../components/News'
 
 const mapDispatchToProps = {
-  // increment : () => increment(1),
-  // doubleAsync
+  getNews: () => fetchNews()
 }
 
 const mapStateToProps = (state) => ({
-  dashboard : state.dashboard
+  newsPosts : state.newsPosts
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(News)
