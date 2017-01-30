@@ -1,5 +1,5 @@
 import React from 'react'
-import NewsPostForm  from '../../../components/NewsPostForm'
+import NewsPostForm  from '../../../../components/NewsPostForm'
 
 class News extends React.Component {
 
