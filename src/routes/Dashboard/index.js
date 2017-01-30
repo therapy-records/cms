@@ -1,5 +1,3 @@
-import { injectReducer } from '../../store/reducers'
-
 export default (store) => ({
   path : 'dashboard',
   /*  Async getComponent is only invoked when route matches   */
@@ -10,10 +8,6 @@ export default (store) => ({
       /*  Webpack - use require callback to define
           dependencies for bundling   */
       const Dashboard = require('./containers/DashboardContainer').default
-      const reducer = require('./modules/dashboard').default
-
-      /*  Add the reducer to the store on key 'dashboard'  */
-      // injectReducer(store, { key: 'dashboard', reducer })
 
       /*  Return getComponent   */
       cb(null, Dashboard)

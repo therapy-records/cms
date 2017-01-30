@@ -82,7 +82,7 @@ export const actions = {
 const ACTION_HANDLERS = {
   [FETCH_NEWS_POSTS_SUCCESS] : (state, action) => state = action.payload,
   [FETCH_NEWS_POSTS_ERROR] : (state, action) => state = action.payload,
-  [POST_NEWS_FORM_SUCCESS] : (state, action) => state = action.payload
+  [POST_NEWS_FORM_SUCCESS] : (state, action) => state = action.payload,
   [POST_NEWS_FORM_ERROR] : (state, action) => state = action.payload
 }
 

@@ -4,7 +4,7 @@ import NewsPostForm  from '../../../components/NewsPostForm'
 class News extends React.Component {
 
   componentWillMount(){
-    this.props.getNews();
+    this.props.onFetchNews();
   }
 
   render() {
