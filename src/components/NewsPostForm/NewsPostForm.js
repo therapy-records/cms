@@ -2,12 +2,6 @@ import React, { Component } from 'react'
 import { Field, reduxForm, SubmissionError } from 'redux-form'
 import RichTextEditor from '../RichTextEditor';
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-
-const submit = (values) => {
-  console.log('submit!');
-}
-
 const textInput = ({ input, label, type, meta: { touched, error } }) => (
   <div>
     <label>{label}</label>
@@ -38,13 +32,13 @@ class NewsPostForm extends React.Component {
 
   render() {
 
-    const { error, handleSubmit, pristine, reset, submitting } = this.props
+    const { error, handleSubmit, pristine, reset, submitting, onSubmit } = this.props
 
     return (
     <section>
       <h2>New news post</h2>
 
-      <form onSubmit={handleSubmit(submit)}>
+      <form onSubmit={(e) => e.preventDefault()}>
 
         <Field name="title"
                component={textInput}
@@ -75,7 +69,7 @@ class NewsPostForm extends React.Component {
         <br/>
 
         <div>
-          <button type="submit" disabled={error || pristine || submitting}>Submit</button>
+          <button type="submit" disabled={error || pristine || submitting} onClick={() => onSubmit()}>Submit</button>
         </div>
 
       </form>

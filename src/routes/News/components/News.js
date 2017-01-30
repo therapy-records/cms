@@ -1,4 +1,5 @@
 import React from 'react'
+import NewsPostForm  from '../../../components/NewsPostForm'
 
 class News extends React.Component {
 
@@ -20,7 +21,11 @@ class News extends React.Component {
         {!this.props.newsPosts.length && (
           <p>Unable to fetch news posts :(</p>
         )}
+
+        <NewsPostForm onSubmit={this.props.onPostNews}/>
+
       </div>
+
     )
   }
 }

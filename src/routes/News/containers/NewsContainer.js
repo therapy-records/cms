@@ -1,10 +1,20 @@
 import { connect } from 'react-redux'
-import { fetchNews, doubleAsync } from '../modules/news'
+import {
+  fetchNews,
+  postNews,
+  doubleAsync
+} from '../modules/news'
 
 import News from '../components/News'
 
+const mockPost = {
+  title: 'something',
+  body: 'hello'
+};
+
 const mapDispatchToProps = {
-  getNews: () => fetchNews()
+  getNews: () => fetchNews(),
+  onPostNews: () => postNews()
 }
 
 const mapStateToProps = (state) => ({
