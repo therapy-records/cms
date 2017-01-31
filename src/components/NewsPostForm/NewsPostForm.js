@@ -36,10 +36,10 @@ class NewsPostForm extends React.Component {
 
     return (
     <section>
-      <h2>New news post</h2>
+      <h2>New post</h2>
 
       {postSuccess ? (
-        <h2>Successfully posted! 🚀</h2>
+        <h2>Successfully posted! <br/><br/>🚀</h2>
       ) : (
 
         <form onSubmit={(e) => e.preventDefault()}>

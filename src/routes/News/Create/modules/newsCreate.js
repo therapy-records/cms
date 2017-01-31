@@ -1,3 +1,7 @@
+import {
+  API_ROOT,
+  NEWS_CREATE
+} from '../../../../constants'
 export const POST_NEWS_FORM_SUCCESS = 'POST_NEWS_FORM_SUCCESS';
 export const POST_NEWS_FORM_ERROR = 'POST_NEWS_FORM_ERROR';
 
@@ -33,7 +37,7 @@ export const postNews = () => {
     const postHeaders = new Headers();
     postHeaders.set('Content-Type', 'application/json');
     return new Promise((resolve) => {
-      fetch('http://localhost:4040/api/news/create', {
+      fetch(API_ROOT + NEWS_CREATE, {
           method: 'POST',
           headers: postHeaders,
           body: formObj()

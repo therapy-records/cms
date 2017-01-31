@@ -6,7 +6,7 @@ class News extends React.Component {
   render() {
     return (
       <div>
-        <NewsPostForm onSubmit={this.props.onPostNews} postSuccess={this.props.newsCreateSuccess}/>
+        <NewsPostForm onSubmit={this.props.onPostNews} postSuccess={this.props.postSuccess}/>
       </div>
     )
   }

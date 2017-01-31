@@ -1,4 +1,8 @@
-export const FETCH_NEWS_POSTS = 'FETCH_NEWS_POSTS';
+import {
+  API_ROOT,
+  NEWS
+} from '../../../../constants'
+export const FETCH_NEWS_POSTS = 'FETCH_NEWS_POSTS'
 export const FETCH_NEWS_POSTS_SUCCESS = 'FETCH_NEWS_POSTS_SUCCESS'
 export const FETCH_NEWS_POSTS_ERROR = 'FETCH_NEWS_POSTS_ERROR'
 
@@ -24,7 +28,7 @@ function error(err){
 export const fetchNews = () => {
   return (dispatch, getState) => {
     return new Promise((resolve) => {
-      fetch('http://localhost:4040/api/news')
+      fetch(API_ROOT + NEWS)
       .then(res => res.json())
       .then(
         data => dispatch({
