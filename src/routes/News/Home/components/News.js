@@ -1,4 +1,5 @@
 import React from 'react'
+import './News.scss'
 
 class News extends React.Component {
 
@@ -11,9 +12,11 @@ class News extends React.Component {
       <div>
         {
           this.props.newsPosts.map((p) => (
-            <div key={p._id}>
-              <h3>{p.title}</h3>
-              {p.createdAt}
+            <div key={p._id} className='news-card'>
+              <div className='inner'>
+                <h3>{p.title}</h3>
+                {p.createdAt}
+              </div>
             </div>
           ))
         }

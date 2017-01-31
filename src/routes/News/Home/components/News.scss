@@ -1,0 +1,16 @@
+.news-card {
+  padding:1em;
+  text-align:left;
+  @media(min-width: 768px) {
+    width: 50%;
+    float: left;
+  }
+  .inner {
+    padding:1em;
+    background:#EEE;
+    margin-bottom: 1em;
+  }
+  h3 {
+    margin-top:0;
+  }
+}
