@@ -18,7 +18,7 @@ const textarea = ({ input, label, type, meta: { touched, error }}) => (
   </div>
 )
 
-const mainContentRTE = ({ input, onChange, meta: { error }}) => (
+const mainBodyRTE = ({ input, onChange, meta: { error }}) => (
   <div>
     <p><strong>Main content</strong></p>
     {error && (<p>Main content is {error}</p>)}
@@ -49,17 +49,8 @@ class NewsPostForm extends React.Component {
 
         <br/>
 
-        <Field name="subHeading"
-               component={textInput}
-               type="text"
-               placeholder="From Earth"
-               label="Sub heading"
-               validate={required}/>
-
-        <br/>
-
-        <Field name="mainContent"
-               component={mainContentRTE}
+        <Field name="mainBodyRTE"
+               component={mainBodyRTE}
                validate={required}/>
 
         <br/>

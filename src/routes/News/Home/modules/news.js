@@ -52,9 +52,12 @@ export const postNews = (data) => {
         return null;
       }
     }
+    const postHeaders = new Headers();
+    postHeaders.set('Content-Type', 'application/json');
     return new Promise((resolve) => {
       fetch('http://localhost:4040/api/news', {
           method: 'POST',
+          haeders: postHeaders,
           body: formObjFromStore()
         }
       )
