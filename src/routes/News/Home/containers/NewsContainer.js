@@ -1,14 +1,12 @@
 import { connect } from 'react-redux'
 import {
-  fetchNews,
-  postNews
+  fetchNews
 } from '../modules/news'
 
 import News from '../components/News'
 
 const mapDispatchToProps = {
-  onFetchNews: () => fetchNews(),
-  onPostNews: () => postNews()
+  onFetchNews: () => fetchNews()
 }
 
 const mapStateToProps = (state) => ({
