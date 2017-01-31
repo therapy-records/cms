@@ -43,7 +43,7 @@ class NewsPostForm extends React.Component {
       {postSuccess ? (
         <div>
           <h2>Successfully posted! <br/><br/>🚀</h2>
-          <Link to='news'>Go to news</Link>
+          <Link to='news' className='news-link'>Go to news</Link>
         </div>
       ) : (
 

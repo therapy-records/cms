@@ -8,21 +8,20 @@ export const POST_NEWS_FORM_ERROR = 'POST_NEWS_FORM_ERROR';
 // ------------------------------------
 // Actions
 // ------------------------------------
-/*
-function success(data){
+
+function success(){
   return {
-    type: FETCH_NEWS_POSTS_SUCCESS,
-    payload: data
+    type: POST_NEWS_FORM_SUCCESS,
+    payload: {success: true}
   }
 }
 
 function error(err){
   return {
-    type: FETCH_NEWS_POSTS_ERROR,
-    payload: getState().newsPosts
+    type: POST_NEWS_FORM_ERROR,
+    payload: err
   }
 }
-*/
 
 export const postNews = () => {
   return (dispatch, getState) => {
@@ -44,14 +43,8 @@ export const postNews = () => {
         }
       )
       .then(
-        data => dispatch({
-          type: POST_NEWS_FORM_SUCCESS,
-          payload: {success: true}
-        }),
-        err => dispatch({
-          type: POST_NEWS_FORM_ERROR,
-          payload: err
-        })
+        data => dispatch(success(data)),
+        err => dispatch(error(err))
       )
     })
   }

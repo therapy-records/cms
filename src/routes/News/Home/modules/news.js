@@ -9,7 +9,7 @@ export const FETCH_NEWS_POSTS_ERROR = 'FETCH_NEWS_POSTS_ERROR'
 // ------------------------------------
 // Actions
 // ------------------------------------
-/*
+
 function success(data){
   return {
     type: FETCH_NEWS_POSTS_SUCCESS,
@@ -23,7 +23,6 @@ function error(err){
     payload: getState().newsPosts
   }
 }
-*/
 
 export const fetchNews = () => {
   return (dispatch, getState) => {
@@ -31,14 +30,8 @@ export const fetchNews = () => {
       fetch(API_ROOT + NEWS)
       .then(res => res.json())
       .then(
-        data => dispatch({
-          type    : FETCH_NEWS_POSTS_SUCCESS,
-          payload : data
-        }),
-        err => dispatch({
-          type    : FETCH_NEWS_POSTS_ERROR,
-          payload : getState().newsPosts
-        })
+        data => dispatch(success(data)),
+        err => dispatch(error(err))
       );
     })
   }
