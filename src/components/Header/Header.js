@@ -7,6 +7,9 @@ export const Header = () => (
     <h1>
       <Link to='/' activeClassName='route--active'>Mini cms</Link>
     </h1>
+    <Link to='/dashboard' activeClassName='route--active'>
+      Dashbord
+    </Link>
     {' · '}
     <Link to='/counter' activeClassName='route--active'>
       Counter

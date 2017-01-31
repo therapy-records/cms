@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import RichTextEditor from 'react-rte';
+import RichTextEditor from 'react-rte'
+import './RichTextEditor.scss'
 
 class _RichTextEditor extends Component {
 

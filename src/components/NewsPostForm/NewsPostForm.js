@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 import { Field, reduxForm, SubmissionError } from 'redux-form'
 import RichTextEditor from '../RichTextEditor';
+import './NewsPostForm.scss'
 
 const textInput = ({ input, label, type, meta: { touched, error } }) => (
   <div>
@@ -35,11 +37,14 @@ class NewsPostForm extends React.Component {
     const { error, handleSubmit, pristine, reset, submitting, onSubmit, postSuccess } = this.props
 
     return (
-    <section>
+    <section className='news-post-form'>
       <h2>New post</h2>
 
       {postSuccess ? (
-        <h2>Successfully posted! <br/><br/>🚀</h2>
+        <div>
+          <h2>Successfully posted! <br/><br/>🚀</h2>
+          <Link to='news'>Go to news</Link>
+        </div>
       ) : (
 
         <form onSubmit={(e) => e.preventDefault()}>

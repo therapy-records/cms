@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 import './News.scss'
 
 class News extends React.Component {
@@ -10,6 +11,10 @@ class News extends React.Component {
   render() {
     return (
       <div>
+        <div className='news-feed-header'>
+          <Link to='news/create'>Create a new post</Link>
+        </div>
+        <br/>
         {
           this.props.newsPosts.map((p) => (
             <div key={p._id} className='news-card'>
