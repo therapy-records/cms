@@ -10,7 +10,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  // newsPosts : state.newsPosts
+  postSuccess : state.newsCreate.success
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewsCreate)

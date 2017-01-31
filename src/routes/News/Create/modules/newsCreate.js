@@ -20,12 +20,12 @@ function error(err){
 }
 */
 
-export const postNews = (data) => {
+export const postNews = () => {
   return (dispatch, getState) => {
-    const formObjFromStore = () => {
+    const formObj = () => {
       if (getState().form.NEWS_POST_FORM &&
           getState().form.NEWS_POST_FORM.values) {
-        return getState().form.NEWS_POST_FORM.values
+        return JSON.stringify(getState().form.NEWS_POST_FORM.values);
       } else {
         return null;
       }
@@ -33,16 +33,16 @@ export const postNews = (data) => {
     const postHeaders = new Headers();
     postHeaders.set('Content-Type', 'application/json');
     return new Promise((resolve) => {
-      fetch('http://localhost:4040/api/news', {
+      fetch('http://localhost:4040/api/news/create', {
           method: 'POST',
-          haeders: postHeaders,
-          body: formObjFromStore()
+          headers: postHeaders,
+          body: formObj()
         }
       )
       .then(
         data => dispatch({
           type: POST_NEWS_FORM_SUCCESS,
-          payload: data
+          payload: {success: true}
         }),
         err => dispatch({
           type: POST_NEWS_FORM_ERROR,
@@ -68,7 +68,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = [];
+const initialState = {success: false};
 export default function newsPostsReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 

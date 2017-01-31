@@ -32,38 +32,43 @@ class NewsPostForm extends React.Component {
 
   render() {
 
-    const { error, handleSubmit, pristine, reset, submitting, onSubmit } = this.props
+    const { error, handleSubmit, pristine, reset, submitting, onSubmit, postSuccess } = this.props
 
     return (
     <section>
       <h2>New news post</h2>
 
-      <form onSubmit={(e) => e.preventDefault()}>
+      {postSuccess ? (
+        <h2>Successfully posted! 🚀</h2>
+      ) : (
 
-        <Field name="title"
-               component={textInput}
-               type="text"
-               placeholder="Hello World"
-               label="Title"
-               validate={required}/>
+        <form onSubmit={(e) => e.preventDefault()}>
 
-        <br/>
+          <Field name="title"
+                 component={textInput}
+                 type="text"
+                 placeholder="Hello World"
+                 label="Title"
+                 validate={required}/>
 
-        <Field name="mainBodyRTE"
-               component={mainBodyRTE}
-               validate={required}/>
+          <br/>
 
-        <br/>
+          <Field name="mainBody"
+                 component={mainBodyRTE}
+                 validate={required}/>
 
-        {error && <strong>{error}</strong>}
+          <br/>
 
-        <br/>
+          {error && <strong>{error}</strong>}
 
-        <div>
-          <button type="submit" disabled={error || pristine || submitting} onClick={() => onSubmit()}>Submit</button>
-        </div>
+          <br/>
 
-      </form>
+          <div>
+            <button type="submit" disabled={error || pristine || submitting} onClick={() => onSubmit()}>Submit</button>
+          </div>
+
+        </form>
+      )}
 
     </section>
     )
