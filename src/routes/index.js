@@ -5,6 +5,7 @@ import CounterRoute from './Counter'
 import DashboardRoute from './Dashboard'
 import NewsHomeRoute from './News/Home'
 import NewsCreateRoute from './News/Create'
+import NewsPostSingleRoute from './News/Post'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -17,7 +18,8 @@ export const createRoutes = (store) => ({
     CounterRoute(store),
     DashboardRoute(store),
     NewsHomeRoute(store),
-    NewsCreateRoute(store)
+    NewsCreateRoute(store),
+    NewsPostSingleRoute(store)
   ]
 })
 
