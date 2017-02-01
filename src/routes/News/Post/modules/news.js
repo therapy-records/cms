@@ -22,7 +22,7 @@ function success(data){
 function error(){
   return {
     type:   FETCH_NEWS_POST_SINGLE_ERROR,
-    payload: getState().newsPost
+    payload: {error: true}
   }
 }
 

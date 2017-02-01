@@ -15,9 +15,17 @@ class NewsPost extends React.Component {
     const { newsPost } = this.props;
     return (
       <article>
-        <h2>{newsPost.title}</h2>
-        <small>{newsPost.createdAt}</small>
-        <div dangerouslySetInnerHTML={this.renderHtml(newsPost.mainBody)}></div>
+       {
+        newsPost && newsPost.title ? (
+          <div>
+            <h2>{newsPost.title}</h2>
+            <small>{newsPost.createdAt}</small>
+            <div dangerouslySetInnerHTML={this.renderHtml(newsPost.mainBody)}></div>
+          </div>
+        ) : (
+          <p>error fetching news post :(</p>
+        )
+       }
       </article>
     )
   }
