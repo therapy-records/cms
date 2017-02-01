@@ -27,4 +27,10 @@ class _RichTextEditor extends Component {
   }
 }
 
+
+_RichTextEditor.propTypes = {
+  onChange: React.PropTypes.func.isRequired
+}
+
+
 export default _RichTextEditor;

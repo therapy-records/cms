@@ -31,4 +31,10 @@ class NewsPost extends React.Component {
   }
 }
 
+NewsPost.propTypes = {
+  location: React.PropTypes.object.isRequired,
+  onFetchNewsPost: React.PropTypes.func.isRequired,
+  newsPost: React.PropTypes.object.isRequired
+}
+
 export default NewsPost

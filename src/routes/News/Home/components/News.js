@@ -37,4 +37,10 @@ class News extends React.Component {
   }
 }
 
+News.propTypes = {
+  onFetchNews: React.PropTypes.func.isRequired,
+  newsPosts: React.PropTypes.array.isRequired
+}
+
+
 export default News

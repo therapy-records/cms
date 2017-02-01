@@ -12,4 +12,9 @@ class News extends React.Component {
   }
 }
 
+News.propTypes = {
+  onSubmit: React.PropTypes.func.isRequired,
+  postSuccess: React.PropTypes.bool.isRequired
+}
+
 export default News
