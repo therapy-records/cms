@@ -10,10 +10,10 @@ import NewsPostSingleRoute from './News/Post'
 export const createRoutes = (store) => {
 
   const requireLogin = (nextState, replace, cb) => {
-    // const { session: { user } } = store.getState();
-    // if (!store.user) {
+    const { user } = store.getState();
+    if (!user || !user.isAuth) {
       replace('/');
-    // }
+    }
     cb();
   };
 

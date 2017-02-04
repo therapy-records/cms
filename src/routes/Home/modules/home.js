@@ -1,6 +1,6 @@
 import {
-  API_ROOT
-  // NEWS
+  API_ROOT,
+  AUTH
 } from '../../../constants'
 export const USER_AUTH_SUCCESS = 'USER_AUTH_SUCCESS'
 export const USER_AUTH_ERROR = 'USER_AUTH_ERROR'
@@ -12,28 +12,47 @@ export const USER_AUTH_ERROR = 'USER_AUTH_ERROR'
 function success(data){
   return {
     type: USER_AUTH_SUCCESS,
-    payload: data
+    payload: {
+      isAuth: true
+    }
   }
 }
 
-//todo: why doesn't error work?
 function error(){
   return {
     type: USER_AUTH_ERROR,
-    payload: {error: true}
+    payload: {
+      isAuth: false
+    }
   }
 }
 
 export const userAuth = (postId) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const userObj = () => {
+      if (getState().form.LOGIN_FORM &&
+          getState().form.LOGIN_FORM.values) {
+        return JSON.stringify(getState().form.LOGIN_FORM.values)
+      } else {
+        return null;
+      }
+    }
+    const postHeaders = new Headers();
+    postHeaders.set('Content-Type', 'application/json');
     return new Promise((resolve) => {
-      fetch(API_ROOT + 'auth')
+      fetch(API_ROOT + AUTH, {
+        method: 'POST',
+        headers: postHeaders,
+        body: userObj()
+      })
         .then(res => res.json())
         .then((data) => {
           if (data) {
-            dispatch(success(data))
+            localStorage.setItem('token', data.token)
+            dispatch(success())
             resolve()
           } else if (err) {
+            localStorage.removeItem('token')
             dispatch(error())
             resolve()
           }
