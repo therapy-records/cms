@@ -7,21 +7,46 @@ import NewsHomeRoute from './News/Home'
 import NewsCreateRoute from './News/Create'
 import NewsPostSingleRoute from './News/Post'
 
-/*  Note: Instead of using JSX, we recommend using react-router
-    PlainRoute objects to build route definitions.   */
+export const createRoutes = (store) => {
 
-export const createRoutes = (store) => ({
-  path        : '/',
-  component   : CoreLayout,
-  indexRoute  : Home,
-  childRoutes : [
-    CounterRoute(store),
-    DashboardRoute(store),
-    NewsHomeRoute(store),
-    NewsCreateRoute(store),
-    NewsPostSingleRoute(store)
-  ]
-})
+  const requireLogin = (nextState, replace, cb) => {
+    // const { session: { user } } = store.getState();
+    // if (!store.user) {
+      replace('login');
+    // }
+    cb();
+  };
+
+  return ({
+    path        : '/',
+    component   : CoreLayout,
+    indexRoute  : Home,
+    childRoutes : [
+      {
+        onEnter: requireLogin,
+        childRoutes:[
+          DashboardRoute(store),
+          NewsHomeRoute(store),
+          NewsCreateRoute(store),
+          NewsPostSingleRoute(store)
+        ]
+      },
+      {
+        childRoutes: [
+          // LoginRoute(store),
+          // SignupRoute(store)
+          // Home(store),
+          CounterRoute(store),
+        ]
+      },
+      {
+        path: '*',
+        indexRoute: '/',
+        status: 404
+      }
+    ]
+  });
+}
 
 /*  Note: childRoutes can be chunked or otherwise loaded programmatically
     using getChildRoutes with the following signature:
