@@ -12,7 +12,7 @@ export const createRoutes = (store) => {
   const requireLogin = (nextState, replace, cb) => {
     // const { session: { user } } = store.getState();
     // if (!store.user) {
-      replace('login');
+      replace('/');
     // }
     cb();
   };
@@ -20,7 +20,7 @@ export const createRoutes = (store) => {
   return ({
     path        : '/',
     component   : CoreLayout,
-    indexRoute  : Home,
+    indexRoute  : Home(store),
     childRoutes : [
       {
         onEnter: requireLogin,
