@@ -3,7 +3,7 @@ import React from 'react'
 class NewsPost extends React.Component {
 
   componentWillMount(){
-    let id = this.props.location.pathname.split('/news/')[1];
+    let id = this.props.location.pathname.replace('news/', '');
     this.props.onFetchNewsPost(id);
   }
 
