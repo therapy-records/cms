@@ -6,16 +6,40 @@ import DashboardRoute from './Dashboard'
 import NewsHomeRoute from './News/Home'
 import NewsCreateRoute from './News/Create'
 import NewsPostSingleRoute from './News/Post'
+import { userAuth } from './Home/modules/home'
 
 export const createRoutes = (store) => {
 
   const requireLogin = (nextState, replace, cb) => {
-    const { user } = store.getState();
-    if (!user || !user.isAuth) {
-      replace('/');
-    }
-    cb();
-  };
+    return (nextState, replace, cb) => {
+      const token = localStorage.getItem('token');
+      const { user } = store.getState();
+      // todo: if tokenIsValid (do api check)
+      if (!token) {
+        replace('/');
+        store.dispatch({
+          type: 'USER_AUTH_CHECK_FAILURE',
+          payload: {
+            isAuth: false
+          }
+        });
+      } else {
+        store.dispatch({
+          type: 'USER_AUTH_CHECK_SUCCESS',
+          payload: {
+            isAuth: true
+          }
+        });
+        if (nextState.location.pathname === '/') {
+          replace('/dashboard');
+        }
+        if (nextState.location.pathname !== '/dashboard') {
+          replace('/dashboard');
+        }
+      }
+      cb();
+    };
+  }
 
   return ({
     path        : '/',
@@ -23,7 +47,7 @@ export const createRoutes = (store) => {
     indexRoute  : Home(store),
     childRoutes : [
       {
-        onEnter: requireLogin,
+        onEnter: requireLogin(store),
         childRoutes:[
           DashboardRoute(store),
           NewsHomeRoute(store),
@@ -34,8 +58,7 @@ export const createRoutes = (store) => {
       {
         childRoutes: [
           // LoginRoute(store),
-          // SignupRoute(store)
-          // Home(store),
+          // SignupRoute(store),
           CounterRoute(store),
         ]
       },

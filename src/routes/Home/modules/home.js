@@ -27,10 +27,11 @@ function error(){
   }
 }
 
-export const userAuth = (postId) => {
+export const userLogin = () => {
   return (dispatch, getState) => {
     const userObj = () => {
-      if (getState().form.LOGIN_FORM &&
+      if (getState().form &&
+          getState().form.LOGIN_FORM &&
           getState().form.LOGIN_FORM.values) {
         return JSON.stringify(getState().form.LOGIN_FORM.values)
       } else {
@@ -59,12 +60,11 @@ export const userAuth = (postId) => {
         }
       );
     })
-
   }
 }
 
 export const actions = {
-  userAuth
+  userLogin
 }
 
 // ------------------------------------

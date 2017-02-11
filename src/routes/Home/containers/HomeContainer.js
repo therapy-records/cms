@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
-import { userAuth } from '../modules/home'
+import { userLogin } from '../modules/home'
 
 import Home from '../components/Home'
 
 const mapDispatchToProps = {
-  onPostForm : () => userAuth()
+  onPostForm : () => userLogin()
 }
 
 const mapStateToProps = (state) => ({
