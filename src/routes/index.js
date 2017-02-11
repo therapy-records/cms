@@ -7,6 +7,10 @@ import NewsHomeRoute from './News/Home'
 import NewsCreateRoute from './News/Create'
 import NewsPostSingleRoute from './News/Post'
 import { userAuth } from './Home/modules/home'
+import {
+  USER_AUTH_SUCCESS,
+  USER_AUTH_ERROR 
+} from '../constants/actions'
 
 export const createRoutes = (store) => {
 
@@ -18,22 +22,19 @@ export const createRoutes = (store) => {
       if (!token) {
         replace('/');
         store.dispatch({
-          type: 'USER_AUTH_CHECK_FAILURE',
+          type: USER_AUTH_ERROR,
           payload: {
             isAuth: false
           }
         });
       } else {
         store.dispatch({
-          type: 'USER_AUTH_CHECK_SUCCESS',
+          type: USER_AUTH_SUCCESS,
           payload: {
             isAuth: true
           }
         });
         if (nextState.location.pathname === '/') {
-          replace('/dashboard');
-        }
-        if (nextState.location.pathname !== '/dashboard') {
           replace('/dashboard');
         }
       }

@@ -2,8 +2,10 @@ import {
   API_ROOT,
   AUTH
 } from '../../../constants'
-export const USER_AUTH_SUCCESS = 'USER_AUTH_SUCCESS'
-export const USER_AUTH_ERROR = 'USER_AUTH_ERROR'
+import {
+  USER_AUTH_SUCCESS,
+  USER_AUTH_ERROR 
+} from '../../../constants/actions'
 
 // ------------------------------------
 // Actions
