@@ -35,6 +35,7 @@ export const postNews = () => {
     }
     const postHeaders = new Headers();
     postHeaders.set('Content-Type', 'application/json');
+    postHeaders.set('Authorization', localStorage.getItem('token'))
     return new Promise((resolve) => {
       fetch(API_ROOT + NEWS_CREATE, {
           method: 'POST',
