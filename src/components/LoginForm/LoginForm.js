@@ -1,5 +1,4 @@
 import React from 'react'
-import { browserHistory } from 'react-router'
 import { Field, reduxForm } from 'redux-form'
 import './LoginForm.scss'
 
@@ -15,54 +14,40 @@ const required = value => value ? undefined : 'required';
 
 class LoginForm extends React.Component {
 
-  componentWillUpdate(props) {
-    if (props.postSuccess === true) {
-      browserHistory.push('/dashboard');
-    }
-  }
-
   render() {
 
-    const { error, handleSubmit, pristine, reset, submitting, onSubmit, postSuccess } = this.props
+    const { error, handleSubmit, pristine, reset, submitting, onSubmit } = this.props
 
     return (
       <section className='login-form'>
-      {postSuccess ? (
-        <div>success!</div>
-      ) : (
-        <div>
           <h2>Login</h2>
+          <form onSubmit={(e) => e.preventDefault()}>
 
-            <form onSubmit={(e) => e.preventDefault()}>
+            <Field name='username'
+                    component={textInput}
+                    type='text'
+                    placeholder='username'
+                    label='Username'
+                    validate={required}/>
 
-              <Field name='username'
-                     component={textInput}
-                     type='text'
-                     placeholder='username'
-                     label='Username'
-                     validate={required}/>
+            <br/>
 
-              <br/>
+            <Field name='password'
+                    component={textInput}
+                    type='password'
+                    placeholder='password'
+                    label='Password'
+                    validate={required}/>
 
-              <Field name='password'
-                     component={textInput}
-                     type='password'
-                     placeholder='password'
-                     label='Password'
-                     validate={required}/>
+            {error && <strong>{error}</strong>}
 
-              {error && <strong>{error}</strong>}
+            <br/>
 
-              <br/>
+            <div>
+              <button type='submit' disabled={error || pristine || submitting} onClick={() => onSubmit()}>Submit</button>
+            </div>
 
-              <div>
-                <button type='submit' disabled={error || pristine || submitting} onClick={() => onSubmit()}>Submit</button>
-              </div>
-
-            </form>
-        </div>
-        )}
-
+          </form>
       </section>
     )
   }

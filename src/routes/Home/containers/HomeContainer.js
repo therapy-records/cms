@@ -8,7 +8,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  postSuccess : state.user.isAuth
+  isAuthenticated : state.user.isAuth
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

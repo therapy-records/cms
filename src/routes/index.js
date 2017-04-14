@@ -6,40 +6,50 @@ import DashboardRoute from './Dashboard'
 import NewsHomeRoute from './News/Home'
 import NewsCreateRoute from './News/Create'
 import NewsPostSingleRoute from './News/Post'
-import { userAuth } from './Home/modules/home'
 import {
-  USER_AUTH_SUCCESS,
-  USER_AUTH_ERROR 
-} from '../constants/actions'
+  authSuccess,
+  authError
+} from './Home/modules/home'
+import {
+  API_ROOT,
+  AUTH
+} from '../constants'
 
 export const createRoutes = (store) => {
 
-  const requireLogin = (nextState, replace, cb) => {
+  const requireLogin = (store, nextState, replace, cb) => {
     return (nextState, replace, cb) => {
       const token = localStorage.getItem('token');
       const { user } = store.getState();
-      // todo: if tokenIsValid (do api check)
-      if (!token) {
-        replace('/');
-        store.dispatch({
-          type: USER_AUTH_ERROR,
-          payload: {
-            isAuth: false
+
+      const postHeaders = new Headers();
+      postHeaders.set('Content-Type', 'application/json');
+      postHeaders.set('Authorization', localStorage.getItem('token'));
+      return new Promise((resolve, reject) => {
+        fetch(API_ROOT + AUTH, {
+          method: 'POST',
+          headers: postHeaders
+        })
+          .then(res => res.json())
+          .then((data) => {
+            if (data.success === true) {
+              if (nextState.location.pathname === '/') {
+                replace('/dashboard');
+              }
+              store.dispatch(authSuccess());
+              resolve();
+              cb();
+            } else {
+              postHeaders.set('Authorization', localStorage.removeItem('token'));
+              store.dispatch(authError())
+              replace('/');
+              cb();
+            }
           }
-        });
-      } else {
-        store.dispatch({
-          type: USER_AUTH_SUCCESS,
-          payload: {
-            isAuth: true
-          }
-        });
-        if (nextState.location.pathname === '/') {
-          replace('/dashboard');
-        }
-      }
-      cb();
+        );
+      })
     };
+    cb();
   }
 
   return ({

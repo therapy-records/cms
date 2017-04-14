@@ -1,6 +1,6 @@
 import {
   API_ROOT,
-  AUTH
+  AUTH_LOGIN
 } from '../../../constants'
 import {
   USER_AUTH_SUCCESS,
@@ -11,7 +11,7 @@ import {
 // Actions
 // ------------------------------------
 
-function success(data){
+export function authSuccess(data){
   return {
     type: USER_AUTH_SUCCESS,
     payload: {
@@ -20,7 +20,7 @@ function success(data){
   }
 }
 
-function error(){
+export function authError(){
   return {
     type: USER_AUTH_ERROR,
     payload: {
@@ -43,18 +43,19 @@ export const userLogin = () => {
     const postHeaders = new Headers();
     postHeaders.set('Content-Type', 'application/json');
     return new Promise((resolve) => {
-      fetch(API_ROOT + AUTH, {
+      fetch(API_ROOT + AUTH_LOGIN, {
         method: 'POST',
         headers: postHeaders,
         body: userObj()
       })
         .then(res => res.json())
         .then((data) => {
-          if (data) {
+
+          if (data.success === true) {
             localStorage.setItem('token', data.token)
             dispatch(success())
             resolve()
-          } else if (err) {
+          } else {
             localStorage.removeItem('token')
             dispatch(error())
             resolve()
