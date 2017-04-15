@@ -20,10 +20,11 @@ class News extends React.Component {
           this.props.newsPosts.map((p) => (
             <div key={p._id} className='news-card'>
               <div className='inner'>
-                <Link to={`news/${p._id}`}>
-                  <h3>{p.title}</h3>
-                  <p>{moment(p.createdAt).fromNow()}</p>
-                </Link>
+                <h3>{p.title}</h3>
+                <p>{moment(p.createdAt).fromNow()}</p>
+                <Link to={`news/${p._id}`}>View</Link>
+                {' - '}
+                <Link to={`news/${p._id}/edit`}>Edit</Link>
               </div>
             </div>
           ))

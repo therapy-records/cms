@@ -4,7 +4,14 @@ import NewsPostForm  from '../../../../components/NewsPostForm'
 class NewsPostEdit extends React.Component {
 
   componentWillMount(){
-    const id = this.props.location.pathname.replace(/\/news\/|\/edit/gi, '');
+    const locationPathname = this.props.location.pathname;
+    let id;
+    if (locationPathname.includes('edit')) {
+      id = locationPathname.replace(/\/edit/g, ''); 
+      id = id.replace(/news\//g, ''); 
+    } else {
+      id = locationPathname.replace(/\/news\//gi, '');
+    }
     this.props.onFetchNewsPost(id);
   }
 
@@ -31,7 +38,6 @@ class NewsPostEdit extends React.Component {
 }
 
 NewsPostEdit.propTypes = {
-  // location: React.PropTypes.object.isRequired,
   onFetchNewsPost: React.PropTypes.func.isRequired,
   newsPost: React.PropTypes.object.isRequired
 }

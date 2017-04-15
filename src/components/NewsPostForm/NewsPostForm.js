@@ -53,8 +53,7 @@ class NewsPostForm extends React.Component {
 
           <Field name="mainBody"
                  component={mainBodyRTE}
-                 validate={required}
-                 props={this.state.newsPost.mainBody}/>
+                 validate={required} />
 
           <br/>
 
