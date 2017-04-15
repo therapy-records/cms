@@ -6,6 +6,7 @@ import DashboardRoute from './Dashboard'
 import NewsHomeRoute from './News/Home'
 import NewsCreateRoute from './News/Create'
 import NewsPostSingleRoute from './News/Post'
+import NewsPostEditSingleRoute from './News/PostEdit'
 import {
   authSuccess,
   authError
@@ -63,7 +64,8 @@ export const createRoutes = (store) => {
           DashboardRoute(store),
           NewsHomeRoute(store),
           NewsCreateRoute(store),
-          NewsPostSingleRoute(store)
+          NewsPostSingleRoute(store),
+          NewsPostEditSingleRoute(store)
         ]
       },
       {

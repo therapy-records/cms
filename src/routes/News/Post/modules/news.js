@@ -21,7 +21,7 @@ function success(data){
 //todo: why doesn't error work?
 function error(){
   return {
-    type:   FETCH_NEWS_POST_SINGLE_ERROR,
+    type: FETCH_NEWS_POST_SINGLE_ERROR,
     payload: {error: true}
   }
 }
@@ -33,7 +33,7 @@ export const fetchNewsPost = (postId) => {
         .then(res => res.json())
         .then((data) => {
           if (data) {
-            dispatch(success(data))
+            dispatch(success(data));
             resolve()
           } else if (err) {
             dispatch(error())

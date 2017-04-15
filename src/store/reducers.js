@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux'
 import locationReducer from './location'
 import homeReducer from '../routes/Home/modules/home';
+import newsPostsReducer from '../routes/News/Home/modules/news';
+import newsPostReducer from '../routes/News/Post/modules/news';
 import { reducer as formReducer } from 'redux-form';
 
 export const makeRootReducer = (asyncReducers) => {
@@ -8,6 +10,8 @@ export const makeRootReducer = (asyncReducers) => {
     location: locationReducer,
     form: formReducer,
     user: homeReducer,
+    newsPosts: newsPostsReducer,
+    newsPost: newsPostReducer,
     ...asyncReducers
   })
 }
