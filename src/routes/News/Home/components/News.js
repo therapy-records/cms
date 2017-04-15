@@ -9,6 +9,20 @@ class News extends React.Component {
     this.props.onFetchNews();
   }
 
+  renderPost(p){
+    return (
+      <div key={p._id} className='news-card'>
+        <div className='inner'>
+          <h3>{p.title}</h3>
+          <p>{moment(p.createdAt).fromNow()}</p>
+          <Link to={`news/${p._id}`}>View</Link>
+          {' - '}
+          <Link to={`news/${p._id}/edit`}>Edit</Link>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div>
@@ -16,25 +30,11 @@ class News extends React.Component {
           <Link to='news/create'>Create a new post</Link>
         </div>
         <br/>
-        {
-          this.props.newsPosts.map((p) => (
-            <div key={p._id} className='news-card'>
-              <div className='inner'>
-                <h3>{p.title}</h3>
-                <p>{moment(p.createdAt).fromNow()}</p>
-                <Link to={`news/${p._id}`}>View</Link>
-                {' - '}
-                <Link to={`news/${p._id}/edit`}>Edit</Link>
-              </div>
-            </div>
-          ))
-        }
+        {this.props.newsPosts.map((p) => this.renderPost(p) ) }
         {!this.props.newsPosts.length && (
           <p>Unable to fetch news posts :(</p>
         )}
-
       </div>
-
     )
   }
 }
