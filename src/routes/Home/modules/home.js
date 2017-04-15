@@ -66,8 +66,18 @@ export const userLogin = () => {
   }
 }
 
+export const userLogout = () => {
+  return (dispatch, getState) =>
+    new Promise((resolve) => {
+      localStorage.removeItem('token')
+      dispatch(authError());
+      resolve();
+    })
+}
+
 export const actions = {
-  userLogin
+  userLogin,
+  userLogout
 }
 
 // ------------------------------------
