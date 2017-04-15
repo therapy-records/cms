@@ -5,6 +5,8 @@ import {
 export const FETCH_SELECTED_NEWS_POST_SUCCESS = 'FETCH_SELECTED_NEWS_POST_SUCCESS'
 export const FETCH_SELECTED_NEWS_POST_ERROR = 'FETCH_SELECTED_NEWS_POST_ERROR'
 export const DESTROY_SELECTED_NEWS_POST = 'DESTROY_SELECTED_NEWS_POST';
+export const DELETE_SINGLE_NEWS_POST_SUCCESS = 'DELETE_SINGLE_NEWS_POST_SUCCESS';
+export const DELETE_SINGLE_NEWS_POST_ERROR = 'DELETE_SINGLE_NEWS_POST_ERROR';
 
 // ------------------------------------
 // Actions
@@ -26,6 +28,22 @@ function error(){
   }
 }
 
+function deleteSuccess(data){
+  return {
+    type: DELETE_SINGLE_NEWS_POST_SUCCESS,
+    payload: data
+  }
+}
+
+
+//todo: why doesn't error work?
+function deleteError(){
+  return {
+    type: DELETE_SINGLE_NEWS_POST_ERROR,
+    payload: {error: true}
+  }
+}
+
 export const fetchNewsPost = (postId) => {
   return (dispatch) => {
     return new Promise((resolve) => {
@@ -42,7 +60,32 @@ export const fetchNewsPost = (postId) => {
         }
       );
     })
+  }
+}
 
+export const deleteNewsPost = (postId) => {
+  return (dispatch) => {
+    const postHeaders = new Headers();
+    postHeaders.set('Content-Type', 'application/json');
+    postHeaders.set('Authorization', localStorage.getItem('token'));
+    return new Promise((resolve) => {
+      fetch(API_ROOT + NEWS + '/' + postId, {
+        method: 'DELETE',
+        header: postHeaders
+        // body: {}
+      })
+        .then(res => res.json())
+        .then((data) => {
+          if (data) {
+            dispatch(deleteSuccess(data));
+            resolve()
+          } else if (err) {
+            dispatch(deleteError())
+            resolve()
+          }
+        }
+      );
+    })
   }
 }
 
@@ -57,6 +100,7 @@ export const destroyNewsPost = () => {
 
 export const actions = {
   fetchNewsPost,
+  deleteNewsPost,
   destroyNewsPost
 }
 
@@ -66,7 +110,9 @@ export const actions = {
 const ACTION_HANDLERS = {
   [FETCH_SELECTED_NEWS_POST_SUCCESS] : (state, action) => state = action.payload,
   [FETCH_SELECTED_NEWS_POST_ERROR] : (state, action) => state = action.payload,
-  [DESTROY_SELECTED_NEWS_POST] : (state, action) => state = action.payload
+  [DESTROY_SELECTED_NEWS_POST] : (state, action) => state = action.payload,
+  [DELETE_SINGLE_NEWS_POST_SUCCESS] : (state, action) => state = action.payload,
+  [DELETE_SINGLE_NEWS_POST_ERROR] :  (state, action) => state = action.payload
 }
 
 // ------------------------------------
