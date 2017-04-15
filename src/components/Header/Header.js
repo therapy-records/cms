@@ -19,20 +19,18 @@ class Header extends React.Component {
         <h1>
           <Link to='/' activeClassName='route--active'>Mini cms</Link>
         </h1>
-        <Link to='/dashboard' activeClassName='route--active'>
-          Dashbord
-        </Link>
-        {' | '}
-        <Link to='/counter' activeClassName='route--active'>
-          Counter
-        </Link>
-        {' | '}
-        <Link to='/news' activeClassName='route--active'>
-          News
-        </Link>
-        {' | '}
         {isAuthenticated ? (
-          <button onClick={() =>  { onLogout(); this.redirectToHome(); }} className="btn-logout">Log out</button>
+          <div>
+            <Link to='/dashboard' activeClassName='route--active'>
+              Dashbord
+            </Link>
+            {' | '}
+            <Link to='/news' activeClassName='route--active'>
+              News
+            </Link>
+            {' | '}
+            <button onClick={() =>  { onLogout(); this.redirectToHome(); }} className="btn-logout">Log out</button>
+          </div>
         ) : (
           <Link to='/' activeClassName='route--active'>Log in</Link>
         )}
