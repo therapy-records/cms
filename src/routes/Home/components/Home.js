@@ -4,7 +4,9 @@ import LoginForm from '../../../components/LoginForm'
 
 class Home extends React.Component {
   redirectToDashboard(){
-    browserHistory.push('/dashboard');
+    setTimeout(() => {
+      browserHistory.push('/dashboard');
+    }, 10);
   }
 
   render() {
@@ -18,9 +20,11 @@ class Home extends React.Component {
 
     return (
       <div>
-        {!isAuthenticated &&
-          <LoginForm onSubmit={this.props.onPostForm} isAuthenticated={this.props.isAuthenticated} />
-        }
+        {!isAuthenticated ? (
+          <LoginForm onSubmit={() => { this.props.onPostForm(); }} isAuthenticated={this.props.isAuthenticated} />
+        ) : (
+          <p>already logged in, redirecting...</p>
+        )}
       </div>
     )
   }
