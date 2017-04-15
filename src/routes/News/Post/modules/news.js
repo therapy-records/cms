@@ -2,9 +2,9 @@ import {
   API_ROOT,
   NEWS
 } from '../../../../constants'
-export const FETCH_NEWS_POST_SINGLE = 'FETCH_NEWS_POST_SINGLE'
-export const FETCH_NEWS_POST_SINGLE_SUCCESS = 'FETCH_NEWS_POST_SINGLE_SUCCESS'
-export const FETCH_NEWS_POST_SINGLE_ERROR = 'FETCH_NEWS_POST_SINGLE_ERROR'
+export const FETCH_SELECTED_NEWS_POST_SUCCESS = 'FETCH_SELECTED_NEWS_POST_SUCCESS'
+export const FETCH_SELECTED_NEWS_POST_ERROR = 'FETCH_SELECTED_NEWS_POST_ERROR'
+export const DESTROY_SELECTED_NEWS_POST = 'DESTROY_SELECTED_NEWS_POST';
 
 // ------------------------------------
 // Actions
@@ -12,7 +12,7 @@ export const FETCH_NEWS_POST_SINGLE_ERROR = 'FETCH_NEWS_POST_SINGLE_ERROR'
 
 function success(data){
   return {
-    type: FETCH_NEWS_POST_SINGLE_SUCCESS,
+    type: FETCH_SELECTED_NEWS_POST_SUCCESS,
     payload: data
   }
 }
@@ -21,7 +21,7 @@ function success(data){
 //todo: why doesn't error work?
 function error(){
   return {
-    type: FETCH_NEWS_POST_SINGLE_ERROR,
+    type: FETCH_SELECTED_NEWS_POST_ERROR,
     payload: {error: true}
   }
 }
@@ -46,23 +46,34 @@ export const fetchNewsPost = (postId) => {
   }
 }
 
+export const destroyNewsPost = () => {
+  return (dispatch) => {
+    dispatch({
+      type: DESTROY_SELECTED_NEWS_POST,
+      payload: {}
+    })
+  }
+}
+
 export const actions = {
-  fetchNewsPost
+  fetchNewsPost,
+  destroyNewsPost
 }
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [FETCH_NEWS_POST_SINGLE_SUCCESS] : (state, action) => state = action.payload,
-  [FETCH_NEWS_POST_SINGLE_ERROR] : (state, action) => state = action.payload
+  [FETCH_SELECTED_NEWS_POST_SUCCESS] : (state, action) => state = action.payload,
+  [FETCH_SELECTED_NEWS_POST_ERROR] : (state, action) => state = action.payload,
+  [DESTROY_SELECTED_NEWS_POST] : (state, action) => state = action.payload
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
 const initialState = {};
-export default function blaReducer (state = initialState, action) {
+export default function selectedNewsPostReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state

@@ -12,6 +12,10 @@ class NewsPost extends React.Component {
     return {__html: data}
   }
 
+  componentWillUnmount(){
+    this.props.onUnmount();
+  }
+
   render() {
     const { newsPost } = this.props;
     return (
@@ -40,6 +44,7 @@ class NewsPost extends React.Component {
 NewsPost.propTypes = {
   location: React.PropTypes.object.isRequired,
   onFetchNewsPost: React.PropTypes.func.isRequired,
+  onUnmount: React.PropTypes.func.isRequired,
   newsPost: React.PropTypes.object.isRequired
 }
 

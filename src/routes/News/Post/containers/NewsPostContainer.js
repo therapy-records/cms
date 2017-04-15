@@ -1,13 +1,15 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import {
-  fetchNewsPost
+  fetchNewsPost,
+  destroyNewsPost
 } from '../modules/news'
 
 import NewsPost from '../components/NewsPost'
 
 const mapDispatchToProps = {
-  onFetchNewsPost: (id) => fetchNewsPost(id)
+  onFetchNewsPost: (id) => fetchNewsPost(id),
+  onUnmount: () => destroyNewsPost()
 }
 
 const mapStateToProps = (state) => ({

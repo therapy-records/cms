@@ -81,8 +81,8 @@ let InitFromStateForm = reduxForm({
 InitFromStateForm = connect(
   state => ({
     initialValues: {
-      title: state.newsPost.title,
-      mainBody: state.newsPost.mainBody
+      title: state.selectedNewsPost.title,
+      mainBody: state.selectedNewsPost.mainBody
     }
   })
 )(InitFromStateForm);
