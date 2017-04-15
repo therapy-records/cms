@@ -53,11 +53,11 @@ export const userLogin = () => {
 
           if (data.success === true) {
             localStorage.setItem('token', data.token)
-            dispatch(success())
+            dispatch(authSuccess())
             resolve()
           } else {
             localStorage.removeItem('token')
-            dispatch(error())
+            dispatch(authError())
             resolve()
           }
         }
