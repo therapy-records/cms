@@ -12,13 +12,13 @@ export default (store) => ({
       const NewsPost = require('./containers/NewsPostContainer').default
       const reducer = require('./modules/news').default
 
-      /*  Add the reducer to the store on key 'newsPost'  */
-      injectReducer(store, { key: 'newsPost', reducer })
+      /*  Add the reducer to the store on key 'selectedNewsPost'  */
+      injectReducer(store, { key: 'selectedNewsPost', reducer })
 
       /*  Return getComponent   */
       cb(null, NewsPost)
 
     /* Webpack named bundle   */
-    }, 'newspost')
+    }, 'newsPost')
   }
 })

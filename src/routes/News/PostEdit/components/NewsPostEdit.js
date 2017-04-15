@@ -19,6 +19,10 @@ class NewsPostEdit extends React.Component {
     return {__html: data}
   }
 
+  componentWillUnmount(){
+    this.props.onUnmount();
+  }
+
   render() {
     const { newsPost } = this.props;
     return (
@@ -39,7 +43,8 @@ class NewsPostEdit extends React.Component {
 
 NewsPostEdit.propTypes = {
   onFetchNewsPost: React.PropTypes.func.isRequired,
-  newsPost: React.PropTypes.object.isRequired
+  newsPost: React.PropTypes.object.isRequired,
+  onUnmount: React.PropTypes.func.isRequired,
 }
 
 export default NewsPostEdit

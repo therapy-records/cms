@@ -15,9 +15,8 @@ class News extends React.Component {
         <div className='inner'>
           <h3>{p.title}</h3>
           <p>{moment(p.createdAt).fromNow()}</p>
-          <Link to={`news/${p._id}`}>View</Link>
-          {' - '}
-          <Link to={`news/${p._id}/edit`}>Edit</Link>
+          <Link to={`news/${p._id}`} className='btn'>View</Link>
+          <Link to={`news/${p._id}/edit`} className='btn'>Edit</Link>
         </div>
       </div>
     );

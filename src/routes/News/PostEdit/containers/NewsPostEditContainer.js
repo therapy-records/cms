@@ -1,15 +1,20 @@
 import { connect } from 'react-redux'
-import { fetchNewsPost, postNews } from '../../Post/modules/news'
+import {
+  fetchNewsPost,
+  postNews,
+  destroyNewsPost
+} from '../../Post/modules/news'
 // import { postNews } from '../../Post/modules/news'
 import NewsPostEdit from '../components/NewsPostEdit'
 
 const mapDispatchToProps = {
   onFetchNewsPost: (id) => fetchNewsPost(id),
-  onPostNews: () => postNews()
+  onPostNews: () => postNews(),
+  onUnmount: () => destroyNewsPost()
 }
 
 const mapStateToProps = (state) => ({
-  newsPost : state.newsPost
+  newsPost : state.selectedNewsPost
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewsPostEdit)

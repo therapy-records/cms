@@ -13,7 +13,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  newsPost : state.newsPost
+  newsPost : state.selectedNewsPost
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewsPost)
