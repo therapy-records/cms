@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import RichTextEditor from 'react-rte'
 import './RichTextEditor.scss'
 
-class _RichTextEditor extends Component {
+class _RichTextEditor extends React.Component {
 
   state = {
     value: RichTextEditor.createEmptyValue()
+    // value: RichTextEditor.createValueFromString(this.props.initValue, 'html')
   }
-
   onChange = (value) => {
     this.setState({value});
     if (this.props.onChange) {

@@ -1,30 +1,23 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
+import { connect } from 'react-redux'
 import { Field, reduxForm, SubmissionError } from 'redux-form'
-import RichTextEditor from '../RichTextEditor';
+import RichTextEditor from '../RichTextEditor'
 import './NewsPostForm.scss'
 
-const textInput = ({ input, label, type, meta: { touched, error } }) => (
+const textInput = ({ input, label, type, props, meta: { touched, error } }) => (
   <div>
     <label>{label}</label>
-    <input {...input} placeholder={label} type={type}/>
+    <input {...input} placeholder={label} type={type} {...props}/>
     {touched && error && <span>{label} is {error}</span>}
   </div>
 )
 
-const textarea = ({ input, label, type, meta: { touched, error }}) => (
-  <div>
-    <label>{label}</label>
-    <textarea {...input}></textarea>
-    {touched && error && <span>{label} is {error}</span>}
-  </div>
-)
-
-const mainBodyRTE = ({ input, onChange, meta: { error }}) => (
+const mainBodyRTE = ({ input, onChange, props, meta: { error }}) => (
   <div>
     <p><strong>Main content</strong></p>
     {error && (<p>Main content is {error}</p>)}
-    <RichTextEditor value={input} onChange={e => { input.onChange(e) }}/>
+    <RichTextEditor value={input} onChange={e => { input.onChange(e) }} {...props}/>
   </div>
 )
 
@@ -33,12 +26,12 @@ const required = value => value ? undefined : 'required';
 class NewsPostForm extends React.Component {
 
   render() {
-
+    
     const { error, handleSubmit, pristine, reset, submitting, onSubmit, postSuccess } = this.props
 
     return (
     <section className='news-post-form'>
-      <h2>New post</h2>
+      <h2>Create/edit post</h2>
 
       {postSuccess ? (
         <div>
@@ -60,7 +53,8 @@ class NewsPostForm extends React.Component {
 
           <Field name="mainBody"
                  component={mainBodyRTE}
-                 validate={required}/>
+                 validate={required}
+                 props={this.state.newsPost.mainBody}/>
 
           <br/>
 
@@ -80,6 +74,18 @@ class NewsPostForm extends React.Component {
   }
 }
 
-export default reduxForm({
-  form: 'NEWS_POST_FORM'
-})(NewsPostForm)
+let InitFromStateForm = reduxForm({
+  form: 'NEWS_POST_FORM',
+  enableReinitialize : true
+})(NewsPostForm);
+
+InitFromStateForm = connect(
+  state => ({
+    initialValues: {
+      title: state.newsPost.title,
+      mainBody: state.newsPost.mainBody
+    }
+  })
+)(InitFromStateForm);
+
+export default InitFromStateForm;
