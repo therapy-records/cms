@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
+import moment from 'moment';
 import './News.scss'
 
 class News extends React.Component {
@@ -21,7 +22,7 @@ class News extends React.Component {
               <div className='inner'>
                 <Link to={`news/${p._id}`}>
                   <h3>{p.title}</h3>
-                  {p.createdAt}
+                  <p>{moment(p.createdAt).fromNow()}</p>
                 </Link>
               </div>
             </div>

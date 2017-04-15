@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment';
 
 class NewsPost extends React.Component {
 
@@ -19,7 +20,12 @@ class NewsPost extends React.Component {
         newsPost && newsPost.title ? (
           <div>
             <h2>{newsPost.title}</h2>
-            <small>{newsPost.createdAt}</small>
+            <p>Created {moment(newsPost.createdAt).fromNow()} <small>{moment(newsPost.createdAt).format('DD/mm/YYYY')}</small></p>
+            {newsPost.editedAt && 
+              <p>Last modified {moment(newsPost.editedAt).fromNow()} <small>{moment(newsPost.editedAt).format('DD/mm/YYYY')}</small></p>
+            }
+            <br />
+            <br />
             <div dangerouslySetInnerHTML={this.renderHtml(newsPost.mainBody)}></div>
           </div>
         ) : (

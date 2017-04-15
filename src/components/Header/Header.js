@@ -22,7 +22,7 @@ class Header extends React.Component {
         {isAuthenticated ? (
           <div>
             <Link to='/dashboard' activeClassName='route--active'>
-              Dashbord
+              Dashboard
             </Link>
             {' | '}
             <Link to='/news' activeClassName='route--active'>
