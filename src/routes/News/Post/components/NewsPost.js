@@ -1,4 +1,5 @@
 import React from 'react'
+import { browserHistory } from 'react-router'
 import moment from 'moment';
 import { ModalContainer, ModalDialog } from 'react-modal-dialog';
 
@@ -26,6 +27,15 @@ class NewsPost extends React.Component {
 
   render() {
     const { newsPost } = this.props;
+    let deletedState = false;
+
+    if (newsPost.message && newsPost.message === 'Post deleted') {
+      deletedState = true;
+      setTimeout(() => {
+        browserHistory.push('/news');
+      }, 1000)
+    }
+
     return (
       <article>
        {
@@ -59,10 +69,19 @@ class NewsPost extends React.Component {
          this.state.isShowingModal &&
           <ModalContainer onClose={this.handleModalClose}>
             <ModalDialog onClose={this.handleModalClose}>
-              <h4>Are you sure you want to delete this post?</h4>
-              <p>It will be gone forever!</p>
-              <button className='btn' onClick={() => { this.props.onDeleteNewsPost(newsPost._id) }}>Delete post</button>
-              <button className='btn' onClick={this.handleModalClose}>Cancel</button>
+            {deletedState ? (
+              <div>
+                <h4>Successfully deleted!</h4>
+                <p>redirecting..</p>
+              </div>
+            ) : (
+              <div>
+                <h4>Are you sure you want to delete this post?</h4>
+                <p>It will be gone forever!</p>
+                <button className='btn' onClick={() => { this.props.onDeleteNewsPost(newsPost._id) }}>Delete post</button>
+                <button className='btn' onClick={this.handleModalClose}>Cancel</button>
+              </div>
+            )}
             </ModalDialog>
           </ModalContainer>
         }
