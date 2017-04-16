@@ -6,7 +6,9 @@ import './News.scss'
 class News extends React.Component {
 
   componentWillMount(){
-    this.props.onFetchNews();
+    if (!this.props.newsPosts.length) {
+      this.props.onFetchNews(); 
+    }
   }
 
   renderPost(p){

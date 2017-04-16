@@ -1,8 +1,5 @@
 import { connect } from 'react-redux'
-import {
-  fetchNews
-} from '../modules/news'
-
+import { fetchNews } from '../modules/news'
 import News from '../components/News'
 
 const mapDispatchToProps = {
