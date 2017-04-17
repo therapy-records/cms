@@ -1,8 +1,10 @@
 import {
   API_ROOT,
+  NEWS,
   NEWS_CREATE
 } from '../../../../constants'
 export const POST_NEWS_FORM_SUCCESS = 'POST_NEWS_FORM_SUCCESS';
+export const EDIT_NEWS_FORM_SUCCESS = 'EDIT_NEWS_FORM_SUCCESS';
 export const POST_NEWS_FORM_ERROR = 'POST_NEWS_FORM_ERROR';
 
 // ------------------------------------
@@ -12,6 +14,13 @@ export const POST_NEWS_FORM_ERROR = 'POST_NEWS_FORM_ERROR';
 function success(){
   return {
     type: POST_NEWS_FORM_SUCCESS,
+    payload: {success: true}
+  }
+}
+
+function successEdit() {
+  return {
+    type: EDIT_NEWS_FORM_SUCCESS,
     payload: {success: true}
   }
 }
@@ -51,8 +60,40 @@ export const postNews = () => {
   }
 }
 
+export const editNews = (editedPost) => {
+  return (dispatch, getState) => {
+    let getFormValues = () => {
+      if (getState().form.NEWS_POST_FORM &&
+          getState().form.NEWS_POST_FORM.values) {
+        return getState().form.NEWS_POST_FORM.values;
+      } else {
+        return null;
+      }
+    }
+    const reduxFormObj = getFormValues();
+    editedPost.title = reduxFormObj.title;
+    editedPost.mainBody = reduxFormObj.mainBody;
+    const postHeaders = new Headers();
+    postHeaders.set('Content-Type', 'application/json');
+    postHeaders.set('Authorization', localStorage.getItem('token'))
+    return new Promise((resolve) => {
+      fetch(API_ROOT + NEWS + '/' + editedPost._id, {
+          method: 'PUT',
+          headers: postHeaders,
+          body: JSON.stringify(editedPost)
+        }
+      )
+      .then(
+        data => dispatch(successEdit(data)),
+        err => dispatch(error(err))
+      )
+    })
+  }
+}
+
 export const actions = {
-  postNews
+  postNews,
+  editNews
 }
 
 // ------------------------------------
@@ -60,6 +101,7 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [POST_NEWS_FORM_SUCCESS] : (state, action) => state = action.payload,
+  [EDIT_NEWS_FORM_SUCCESS] : (state, action) => state = action.payload,
   [POST_NEWS_FORM_ERROR] : (state, action) => state = action.payload
 }
 

@@ -72,7 +72,6 @@ export const deleteNewsPost = (postId) => {
       fetch(API_ROOT + NEWS + '/' + postId, {
         method: 'DELETE',
         header: postHeaders
-        // body: {}
       })
         .then(res => res.json())
         .then((data) => {

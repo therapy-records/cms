@@ -28,7 +28,11 @@ class NewsPostEdit extends React.Component {
         <br />
         <br />
       {/* <NewsPostForm onSubmit={this.props.onPostNews} postSuccess={this.props.postSuccess}/> */}
-      <NewsPostForm post={newsPost}/>
+      <NewsPostForm 
+        post={newsPost}
+        onSubmit={() => this.props.onPostForm(newsPost)}
+        postSuccess={this.props.postSuccess}
+      />
       </article>
     )
   }
@@ -36,7 +40,7 @@ class NewsPostEdit extends React.Component {
 
 NewsPostEdit.propTypes = {
   onFetchNews: React.PropTypes.func.isRequired,
-  onPostNews: React.PropTypes.func.isRequired,
+  onPostForm: React.PropTypes.func.isRequired,
   newsPost: React.PropTypes.object.isRequired
 }
 
