@@ -6,35 +6,36 @@ import { ModalContainer, ModalDialog } from 'react-modal-dialog';
 class NewsPost extends React.Component {
 
   state = {
-    isShowingModal: false,
+    isShowingModal: false
   }
 
   handleModalOpen = () => this.setState({isShowingModal: true})
   handleModalClose = () => this.setState({isShowingModal: false})
 
   componentWillMount(){
-    let id = this.props.location.pathname.replace('news/', '');
-    this.props.onFetchNewsPost(id);
+    if (!this.props.newsPosts) {
+      this.props.onFetchNews();
+    }
   }
 
   renderHtml(data) {
     return {__html: data}
   }
 
-  componentWillUnmount(){
-    this.props.onUnmount();
-  }
-
   render() {
     const { newsPost } = this.props;
     let deletedState = false;
 
-    if (newsPost.message && newsPost.message === 'Post deleted') {
-      deletedState = true;
-      setTimeout(() => {
-        browserHistory.push('/news');
-      }, 1000)
-    }
+    // todo: fix me so that promise success for deletion is seen via 
+    // state.uiState. or similar.
+    // this logic is based on previous approach of 'selecteNewsPost' in store.
+
+    // if (newsPost.message && newsPost.message === 'Post deleted') {
+    //   deletedState = true;
+    //   setTimeout(() => {
+    //     browserHistory.push('/news');
+    //   }, 1000)
+    // }
 
     return (
       <article>
@@ -93,9 +94,7 @@ class NewsPost extends React.Component {
 
 NewsPost.propTypes = {
   location: React.PropTypes.object.isRequired,
-  onFetchNewsPost: React.PropTypes.func.isRequired,
   onDeleteNewsPost: React.PropTypes.func.isRequired,
-  onUnmount: React.PropTypes.func.isRequired,
   newsPost: React.PropTypes.object.isRequired
 }
 

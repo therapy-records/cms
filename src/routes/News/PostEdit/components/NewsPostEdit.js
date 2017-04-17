@@ -4,10 +4,6 @@ import NewsPostForm  from '../../../../components/NewsPostForm'
 class NewsPostEdit extends React.Component {
 
   componentWillMount(){
-    const locationPathname = this.props.location.pathname;
-    let id;
-    id = locationPathname.replace(/\/edit/g, ''); 
-    id = id.replace(/news\//g, ''); 
     if (!this.props.newsPosts) {
       this.props.onFetchNews();
     }

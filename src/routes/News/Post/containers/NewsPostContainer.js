@@ -1,21 +1,18 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import {
-  fetchNewsPost,
-  deleteNewsPost,
-  destroyNewsPost
-} from '../modules/news'
+import { fetchNews } from '../../Home/modules/news';
+import { deleteNewsPost } from '../modules/news'
+import { selectNewsPostsPost } from '../../../../selectors/news';
 
 import NewsPost from '../components/NewsPost'
 
 const mapDispatchToProps = {
-  onFetchNewsPost: (id) => fetchNewsPost(id),
-  onDeleteNewsPost: (id) => deleteNewsPost(id),
-  onUnmount: () => destroyNewsPost()
+  onFetchNews: () => fetchNews(),
+  onDeleteNewsPost: (id) => deleteNewsPost(id)
 }
 
-const mapStateToProps = (state) => ({
-  newsPost : state.selectedNewsPost
+const mapStateToProps = (state, props) => ({
+  newsPost: selectNewsPostsPost(state, props.params.id)[0] || {}
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewsPost)
