@@ -28,7 +28,7 @@ class NewsPostEdit extends React.Component {
         <br />
         <br />
       {/* <NewsPostForm onSubmit={this.props.onPostNews} postSuccess={this.props.postSuccess}/> */}
-      <NewsPostForm  />
+      <NewsPostForm post={newsPost}/>
       </article>
     )
   }

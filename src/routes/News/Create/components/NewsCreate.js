@@ -1,7 +1,7 @@
 import React from 'react'
 import NewsPostForm  from '../../../../components/NewsPostForm'
 
-class News extends React.Component {
+class NewsCreate extends React.Component {
 
   render() {
     return (
@@ -12,9 +12,9 @@ class News extends React.Component {
   }
 }
 
-News.propTypes = {
-  onSubmit: React.PropTypes.func.isRequired,
+NewsCreate.propTypes = {
+  onPostNews: React.PropTypes.func.isRequired,
   postSuccess: React.PropTypes.bool.isRequired
 }
 
-export default News
+export default NewsCreate

@@ -3,6 +3,10 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import { Field, reduxForm, SubmissionError } from 'redux-form'
 import RichTextEditor from '../RichTextEditor'
+import {
+  selectNewsPostsPostTitle,
+  selectNewsPostsPostMainBody 
+} from '../../selectors/news';
 import './NewsPostForm.scss'
 
 const textInput = ({ input, label, type, props, meta: { touched, error } }) => (
@@ -79,10 +83,10 @@ let InitFromStateForm = reduxForm({
 })(NewsPostForm);
 
 InitFromStateForm = connect(
-  state => ({
+  (state, props) => ({
     initialValues: {
-      title: state.selectedNewsPost.title,
-      mainBody: state.selectedNewsPost.mainBody
+      title: props.post && selectNewsPostsPostTitle(state, props.post._id),
+      mainBody: props.post && selectNewsPostsPostMainBody(state, props.post._id)
     }
   })
 )(InitFromStateForm);
