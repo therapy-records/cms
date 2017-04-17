@@ -5,8 +5,7 @@ import './RichTextEditor.scss'
 class _RichTextEditor extends React.Component {
 
   state = {
-    value: RichTextEditor.createEmptyValue()
-    // value: RichTextEditor.createValueFromString(this.props.initValue, 'html')
+    value: RichTextEditor.createValueFromString(this.props.value, 'html')
   }
   onChange = (value) => {
     this.setState({value});
@@ -22,7 +21,7 @@ class _RichTextEditor extends React.Component {
       <RichTextEditor
         value={this.state.value}
         onChange={this.onChange}
-        autoFocus/>
+        />
     );
   }
 }

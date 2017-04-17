@@ -21,9 +21,9 @@ const mainBodyRTE = ({ input, onChange, props, meta: { error }}) => (
   <div>
     <p><strong>Main content</strong></p>
     {error && (<p>Main content is {error}</p>)}
-    <RichTextEditor value={input} onChange={e => { input.onChange(e) }} {...props}/>
+    <RichTextEditor value={input.value} onChange={e => { input.onChange(e) }} {...props}/>
   </div>
-)
+);
 
 const required = value => value ? undefined : 'required';
 
