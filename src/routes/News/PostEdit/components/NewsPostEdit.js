@@ -6,25 +6,22 @@ class NewsPostEdit extends React.Component {
   componentWillMount(){
     const locationPathname = this.props.location.pathname;
     let id;
-    if (locationPathname.includes('edit')) {
-      id = locationPathname.replace(/\/edit/g, ''); 
-      id = id.replace(/news\//g, ''); 
-    } else {
-      id = locationPathname.replace(/\/news\//gi, '');
+    id = locationPathname.replace(/\/edit/g, ''); 
+    id = id.replace(/news\//g, ''); 
+    if (!this.props.newsPosts) {
+      this.props.onFetchNews();
     }
-    this.props.onFetchNewsPost(id);
   }
 
   renderHtml(data) {
     return {__html: data}
   }
 
-  componentWillUnmount(){
-    this.props.onUnmount();
-  }
-
   render() {
     const { newsPost } = this.props;
+    if (!newsPost) {
+      return null;
+    }
     return (
       <article>
         <p>hello  from news post edit</p>
@@ -42,9 +39,9 @@ class NewsPostEdit extends React.Component {
 }
 
 NewsPostEdit.propTypes = {
-  onFetchNewsPost: React.PropTypes.func.isRequired,
-  newsPost: React.PropTypes.object.isRequired,
-  onUnmount: React.PropTypes.func.isRequired,
+  onFetchNews: React.PropTypes.func.isRequired,
+  onPostNews: React.PropTypes.func.isRequired,
+  newsPost: React.PropTypes.object.isRequired
 }
 
 export default NewsPostEdit
