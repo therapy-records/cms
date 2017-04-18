@@ -7,6 +7,7 @@ import NewsHomeRoute from './News/Home'
 import NewsCreateRoute from './News/Create'
 import NewsPostSingleRoute from './News/Post'
 import NewsPostEditSingleRoute from './News/PostEdit'
+import PressRoute from './Press';
 import { routeAuthCheck }  from '../actions/auth';
 export const createRoutes = (store) => {
   return ({
@@ -21,7 +22,8 @@ export const createRoutes = (store) => {
           NewsHomeRoute(store),
           NewsCreateRoute(store),
           NewsPostSingleRoute(store),
-          NewsPostEditSingleRoute(store)
+          NewsPostEditSingleRoute(store),
+          PressRoute(store)
         ]
       },
       {

@@ -29,6 +29,10 @@ class Header extends React.Component {
               News
             </Link>
             {' | '}
+            <Link to='/press' activeClassName='route--active'>
+              Press
+            </Link>
+            {' | '}
             <button onClick={() =>  { onLogout(); this.redirectToHome(); }} className="btn-logout">Log out</button>
           </div>
         ) : (
