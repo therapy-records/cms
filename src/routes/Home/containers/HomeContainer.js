@@ -2,8 +2,10 @@ import { connect } from 'react-redux'
 import { userLogin } from '../modules/home'
 import { fetchNews } from '../../News/Home/modules/news'
 import Home from '../components/Home'
+import { authCheck } from '../../../actions/auth';
 
 const mapDispatchToProps = {
+  onAuthCheck: () => authCheck(),
   onPostForm : () => userLogin()
 }
 

@@ -7,7 +7,7 @@ import NewsHomeRoute from './News/Home'
 import NewsCreateRoute from './News/Create'
 import NewsPostSingleRoute from './News/Post'
 import NewsPostEditSingleRoute from './News/PostEdit'
-import { authCheck }  from '../actions/auth';
+import { routeAuthCheck }  from '../actions/auth';
 export const createRoutes = (store) => {
   return ({
     path        : '/',
@@ -15,7 +15,7 @@ export const createRoutes = (store) => {
     indexRoute  : Home(store),
     childRoutes : [
       {
-        onEnter: authCheck(store),
+        onEnter: routeAuthCheck(store),
         childRoutes:[
           DashboardRoute(store),
           NewsHomeRoute(store),

@@ -3,6 +3,12 @@ import { browserHistory } from 'react-router';
 import LoginForm from '../../../components/LoginForm'
 
 class Home extends React.Component {
+
+  componentWillMount(props){
+    if (!this.props.isAuthenticated) {
+      this.props.onAuthCheck();
+    }
+  }
   redirectToDashboard(){
     setTimeout(() => {
       browserHistory.push('/dashboard');
