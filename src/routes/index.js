@@ -7,59 +7,15 @@ import NewsHomeRoute from './News/Home'
 import NewsCreateRoute from './News/Create'
 import NewsPostSingleRoute from './News/Post'
 import NewsPostEditSingleRoute from './News/PostEdit'
-import {
-  authSuccess,
-  authError
-} from './Home/modules/home'
-import {
-  API_ROOT,
-  AUTH
-} from '../constants'
-
+import { authCheck }  from '../actions/auth';
 export const createRoutes = (store) => {
-
-  const requireLogin = (store, nextState, replace, cb) => {
-    return (nextState, replace, cb) => {
-      const token = localStorage.getItem('token');
-      const { user } = store.getState();
-
-      const postHeaders = new Headers();
-      postHeaders.set('Content-Type', 'application/json');
-      postHeaders.set('Authorization', localStorage.getItem('token'));
-      return new Promise((resolve, reject) => {
-        fetch(API_ROOT + AUTH, {
-          method: 'POST',
-          headers: postHeaders
-        })
-          .then(res => res.json())
-          .then((data) => {
-            if (data.success === true) {
-              if (nextState.location.pathname === '/') {
-                replace('/dashboard');
-              }
-              store.dispatch(authSuccess());
-              resolve();
-              cb();
-            } else {
-              postHeaders.set('Authorization', localStorage.removeItem('token'));
-              store.dispatch(authError())
-              replace('/');
-              cb();
-            }
-          }
-        );
-      })
-    };
-    cb();
-  }
-
   return ({
     path        : '/',
     component   : CoreLayout,
     indexRoute  : Home(store),
     childRoutes : [
       {
-        onEnter: requireLogin(store),
+        onEnter: authCheck(store),
         childRoutes:[
           DashboardRoute(store),
           NewsHomeRoute(store),
