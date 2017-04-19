@@ -41,30 +41,29 @@ class NewsPost extends React.Component {
       <article>
        {
         newsPost && newsPost.title ? (
-          <div>
-            <h2>{newsPost.title}</h2>
-            <p>Created {moment(newsPost.createdAt).fromNow()} <small>{moment(newsPost.createdAt).format('DD/mm/YYYY')}</small></p>
-            {newsPost.editedAt && 
-              <p>Last modified {moment(newsPost.editedAt).fromNow()} <small>{moment(newsPost.editedAt).format('DD/mm/YYYY')}</small></p>
-            }
-            <br />
-            <br />
-            <div dangerouslySetInnerHTML={this.renderHtml(newsPost.mainBody)}></div>
+          <div className='flex-root'>
+            <div>
+              <h2>{newsPost.title}</h2>
+              <img src="http://placehold.it/350x150" />
+              <div dangerouslySetInnerHTML={this.renderHtml(newsPost.mainBody)}></div>
+            </div>
+            <div>
+              <p><a href={`http://fionaross.co.uk/news/${newsPost._id}`}>View live post</a></p>
+              <p>Created {moment(newsPost.createdAt).fromNow()} <small>{moment(newsPost.createdAt).format('DD/mm/YYYY')}</small></p>
+              {newsPost.editedAt && 
+                <p>Last modified {moment(newsPost.editedAt).fromNow()} <small>{moment(newsPost.editedAt).format('DD/mm/YYYY')}</small></p>
+              }
+              <button 
+                className='btn' 
+                onClick={this.handleModalOpen} 
+                style={{width: 'auto', background: 'darkred', color: '#fff'}}>Delete post
+              </button>
+            </div>
           </div>
         ) : (
           <p>error fetching news post :(</p>
         )
        }
-
-       <br />
-       <br />
-       <br />
-
-       <button 
-         className='btn' 
-         onClick={this.handleModalOpen} 
-         style={{width: 'auto', background: 'darkred', color: '#fff'}}>Delete post
-       </button>
 
         {
          this.state.isShowingModal &&
