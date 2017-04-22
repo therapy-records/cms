@@ -18,12 +18,21 @@ class NewsPost extends React.Component {
     }
   }
 
+  componentWillUnmount(){
+    this.props.resetPromiseState();
+  }
+
   renderHtml(data) {
     return {__html: data}
   }
 
   render() {
-    const { newsPost } = this.props;
+    const {
+      newsPost,
+      promiseLoading,
+      promiseSuccess,
+      promiseError
+    } = this.props;
     let deletedState = false;
 
     // todo: fix me so that promise success for deletion is seen via 
@@ -39,35 +48,38 @@ class NewsPost extends React.Component {
 
     return (
       <article>
-       {
-        newsPost && newsPost.title ? (
-          <div className='flex-root'>
-            <div>
-              <h2>{newsPost.title}</h2>
-              <img src="http://placehold.it/350x150" />
-              <div dangerouslySetInnerHTML={this.renderHtml(newsPost.mainBody)}></div>
-            </div>
-            <div>
-              {/* <p><a href={`http://fionaross.co.uk/news/${newsPost._id}`}>View live post</a></p> */}
-              <p><a href={`http://fionaross.co.uk/news`}>View live post</a></p>
-              <p>Created {moment(newsPost.createdAt).fromNow()} <small>{moment(newsPost.createdAt).format('DD/mm/YYYY')}</small></p>
-              {newsPost.editedAt && 
-                <p>Last modified {moment(newsPost.editedAt).fromNow()} <small>{moment(newsPost.editedAt).format('DD/mm/YYYY')}</small></p>
-              }
-              <button 
-                className='btn' 
-                onClick={this.handleModalOpen} 
-                style={{width: 'auto', background: 'darkred', color: '#fff'}}>Delete post
-              </button>
-            </div>
-          </div>
-        ) : (
-          <p>error fetching news post :(</p>
-        )
+       {promiseLoading &&
+         <h1>loading...</h1>
        }
 
-        {
-         this.state.isShowingModal &&
+       {(promiseSuccess && newsPost && newsPost.title) &&
+        <div className='flex-root'>
+          <div>
+            <h2>{newsPost.title}</h2>
+            <img src="http://placehold.it/350x150" />
+            <div dangerouslySetInnerHTML={this.renderHtml(newsPost.mainBody)}></div>
+          </div>
+          <div>
+            {/* <p><a href={`http://fionaross.co.uk/news/${newsPost._id}`}>View live post</a></p> */}
+            <p><a href={`http://fionaross.co.uk/news`}>View live post</a></p>
+            <p>Created {moment(newsPost.createdAt).fromNow()} <small>{moment(newsPost.createdAt).format('DD/mm/YYYY')}</small></p>
+            {newsPost.editedAt && 
+              <p>Last modified {moment(newsPost.editedAt).fromNow()} <small>{moment(newsPost.editedAt).format('DD/mm/YYYY')}</small></p>
+            }
+            <button 
+              className='btn' 
+              onClick={this.handleModalOpen} 
+              style={{width: 'auto', background: 'darkred', color: '#fff'}}>Delete post
+            </button>
+          </div>
+        </div>
+       }
+
+       {promiseError &&
+        <p>error fetching news post :(</p>
+       }
+
+        {this.state.isShowingModal &&
           <ModalContainer onClose={this.handleModalClose}>
             <ModalDialog onClose={this.handleModalClose}>
             {deletedState ? (
@@ -93,9 +105,12 @@ class NewsPost extends React.Component {
 }
 
 NewsPost.propTypes = {
-  location: React.PropTypes.object.isRequired,
   onDeleteNewsPost: React.PropTypes.func.isRequired,
-  newsPost: React.PropTypes.object.isRequired
+  newsPost: React.PropTypes.object.isRequired,
+  promiseLoading: React.PropTypes.bool,
+  promiseSuccess: React.PropTypes.bool,
+  promiseError: React.PropTypes.bool,
+  resetPromiseState: React.PropTypes.func.isRequired
 }
 
 export default NewsPost

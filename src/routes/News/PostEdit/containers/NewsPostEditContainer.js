@@ -2,12 +2,13 @@ import { connect } from 'react-redux'
 import { fetchNews } from '../../Home/modules/news';
 import { postNews, editNews } from '../../Create/modules/newsCreate'
 import { selectNewsPostsPost } from '../../../../selectors/news';
-
+import { resetPromiseState } from '../../../../reducers/uiState';
 import NewsPostEdit from '../components/NewsPostEdit'
 
 const mapDispatchToProps = {
   onFetchNews: () => fetchNews(),
-  onPostForm: (post) => editNews(post)
+  onPostForm: (post) => editNews(post),
+  resetPromiseState: () => resetPromiseState()
 }
 
 const mapStateToProps = (state, props) => ({

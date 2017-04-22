@@ -10,6 +10,10 @@ class NewsPostEdit extends React.Component {
     }
   }
 
+  componentWillUnmount(){
+    this.props.resetPromiseState();
+  }
+
   renderHtml(data) {
     return {__html: data}
   }
@@ -18,7 +22,8 @@ class NewsPostEdit extends React.Component {
     const { 
       newsPost,
       promiseLoading,
-      promiseSuccess
+      promiseSuccess,
+      promiseError
     } = this.props;
     if (!newsPost) {
       return null;
@@ -36,7 +41,10 @@ class NewsPostEdit extends React.Component {
             <Link to='news' className='news-link'>Go to news</Link>
           </div>
         */}
-        {!promiseLoading &&
+        {promiseError &&
+          <p>error fetching news post :(</p>
+        }
+        {promiseSuccess &&
           <div>
             <p>editing <br />{newsPost.title}</p>
             <br />
@@ -58,7 +66,11 @@ class NewsPostEdit extends React.Component {
 NewsPostEdit.propTypes = {
   onFetchNews: React.PropTypes.func.isRequired,
   onPostForm: React.PropTypes.func.isRequired,
-  newsPost: React.PropTypes.object.isRequired
+  newsPost: React.PropTypes.object.isRequired,
+  promiseLoading: React.PropTypes.bool,
+  promiseSuccess: React.PropTypes.bool,
+  promiseError: React.PropTypes.bool,
+  resetPromiseState: React.PropTypes.func.isRequired
 }
 
 export default NewsPostEdit

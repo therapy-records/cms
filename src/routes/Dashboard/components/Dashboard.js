@@ -10,6 +10,10 @@ class Dashboard extends React.Component {
     }
   }
 
+  componentWillUnmount(){
+    this.props.resetPromiseState();
+  }
+
   render(){
     return (
       <div>

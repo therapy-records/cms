@@ -1,6 +1,7 @@
 export const UISTATE_PROMISE_LOADING = 'UISTATE_PROMISE_LOADING'
 export const UISTATE_PROMISE_SUCCESS = 'UISTATE_PROMISE_SUCCESS'
 export const UISTATE_PROMISE_ERROR = 'UISTATE_PROMISE_ERROR'
+export const UISTATE_PROMISE_SUCCESS_RESET = 'UISTATE_PROMISE_SUCCESS_RESET'
 
 // ------------------------------------
 // Actions
@@ -13,10 +14,10 @@ export const promiseLoading = (bool) => {
   }
 }
 
-export const promiseSuccess = () => {
+export const promiseSuccess = (bool) => {
   return {
     type: UISTATE_PROMISE_SUCCESS,
-    payload: true
+    payload: bool
   }
 }
 
@@ -24,6 +25,13 @@ export const promiseError = (err) => {
   return {
     type: UISTATE_PROMISE_ERROR,
     payload: err
+  }
+}
+
+export const resetPromiseState = () => {
+  return {
+    type: UISTATE_PROMISE_SUCCESS_RESET,
+    payload: false
   }
 }
 
@@ -39,6 +47,9 @@ const ACTION_HANDLERS = {
   },
   [UISTATE_PROMISE_ERROR] : (state, action) => {
     return {...state, promiseError: action.payload}
+  },
+  [UISTATE_PROMISE_SUCCESS_RESET] : (state, action) => {
+    return {...state, promiseSuccess: action.payload}
   }
 }
 

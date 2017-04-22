@@ -39,10 +39,8 @@ export const fetchNews = () => {
         (data) => {
           // todo: clean news specific actions/state
           dispatch(success(data));
-          setTimeout(() => {
-            dispatch(promiseLoading(false));
-            dispatch(promiseSuccess());
-          }, 3000);
+          dispatch(promiseLoading(false));
+          dispatch(promiseSuccess(true));
         },
         (err) => {
           // todo: clean news specific actions/state 
