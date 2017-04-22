@@ -31,18 +31,11 @@ class NewsPostForm extends React.Component {
 
   render() {
     
-    const { error, handleSubmit, pristine, reset, submitting, onSubmit, postSuccess } = this.props
+    const { error, handleSubmit, pristine, reset, submitting, onSubmit } = this.props
 
     return (
     <section className='news-post-form'>
       <h2>Create/edit post</h2>
-
-      {postSuccess ? (
-        <div>
-          <h2>Successfully posted! <br/><br/>🚀</h2>
-          <Link to='news' className='news-link'>Go to news</Link>
-        </div>
-      ) : (
 
         <form onSubmit={(e) => e.preventDefault()}>
 
@@ -70,8 +63,6 @@ class NewsPostForm extends React.Component {
           </div>
 
         </form>
-      )}
-
     </section>
     )
   }

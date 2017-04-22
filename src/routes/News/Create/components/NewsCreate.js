@@ -1,12 +1,30 @@
 import React from 'react'
+import { Link } from 'react-router'
 import NewsPostForm  from '../../../../components/NewsPostForm'
 
 class NewsCreate extends React.Component {
-
   render() {
+    const { 
+      newsPost,
+      promiseLoading,
+      promiseSuccess
+    } = this.props;
+
     return (
       <div>
-        <NewsPostForm onSubmit={this.props.onPostNews} postSuccess={this.props.postSuccess}/>
+        {promiseLoading && 
+          <p>loading...</p>
+        }
+        {/*!promiseLoading && promiseSuccess ? (
+          <div>
+            <h2>Successfully posted! <br/><br/>🚀</h2>
+            <Link to='news' className='news-link'>Go to news</Link>
+          </div>
+        */}
+        {!promiseLoading && 
+          <NewsPostForm onSubmit={this.props.onPostNews} />
+        }
+        
       </div>
     )
   }
@@ -14,7 +32,8 @@ class NewsCreate extends React.Component {
 
 NewsCreate.propTypes = {
   onPostNews: React.PropTypes.func.isRequired,
-  postSuccess: React.PropTypes.bool.isRequired
+  promiseLoading: React.PropTypes.bool,
+  promiseSuccess: React.PropTypes.bool
 }
 
 export default NewsCreate

@@ -9,20 +9,18 @@ export const UISTATE_PROMISE_ERROR = 'UISTATE_PROMISE_ERROR'
 export const promiseLoading = (bool) => {
   return {
     type: UISTATE_PROMISE_LOADING,
-    payload: {
-      loading: bool
-    }
+    payload: bool
   }
 }
 
-function promiseSuccess(){
+export const promiseSuccess = () => {
   return {
-    type: UISTATE_PROMISE_LOADING,
+    type: UISTATE_PROMISE_SUCCESS,
     payload: true
   }
 }
 
-function promiseError(err){
+export const promiseError = (err) => {
   return {
     type: UISTATE_PROMISE_ERROR,
     payload: err
@@ -33,22 +31,27 @@ function promiseError(err){
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [UISTATE_PROMISE_LOADING] : (state, action) => state.loading = action.payload,
-  [UISTATE_PROMISE_SUCCESS] : (state, action) => state.success = action.payload,
-  [UISTATE_PROMISE_ERROR] : (state, action) => state.error = action.payload
+  [UISTATE_PROMISE_LOADING] : (state, action) => {
+    return {...state, promiseLoading: action.payload}
+  },
+  [UISTATE_PROMISE_SUCCESS] : (state, action) => {
+    return {...state, promiseSuccess: action.payload}
+  },
+  [UISTATE_PROMISE_ERROR] : (state, action) => {
+    return {...state, promiseError: action.payload}
+  }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
 const initialState = {
-  loading: false,
-  success: false,
-  error: false
+  promiseLoading: false,
+  promiseSuccess: false,
+  promiseError: false
 };
 
 export default function uiStateReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
-
   return handler ? handler(state, action) : state
 }

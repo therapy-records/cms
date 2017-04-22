@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 import NewsPostForm  from '../../../../components/NewsPostForm'
 
 class NewsPostEdit extends React.Component {
@@ -14,25 +15,41 @@ class NewsPostEdit extends React.Component {
   }
 
   render() {
-    const { newsPost } = this.props;
+    const { 
+      newsPost,
+      promiseLoading,
+      promiseSuccess
+    } = this.props;
     if (!newsPost) {
       return null;
     }
+
     return (
       <article>
-        <p>hello  from news post edit</p>
-        <p>title of post: {newsPost.title}</p>
-        <br />
-        <br />
-        <hr />
-        <br />
-        <br />
-      {/* <NewsPostForm onSubmit={this.props.onPostNews} postSuccess={this.props.postSuccess}/> */}
-      <NewsPostForm 
-        post={newsPost}
-        onSubmit={() => this.props.onPostForm(newsPost)}
-        postSuccess={this.props.postSuccess}
-      />
+        {promiseLoading &&
+          <h1>loading...</h1>
+        }
+        {/*
+          !promiseLoading && promiseSuccess &&
+          <div>
+            <h2>Successfully posted! <br/><br/>🚀</h2>
+            <Link to='news' className='news-link'>Go to news</Link>
+          </div>
+        */}
+        {!promiseLoading &&
+          <div>
+            <p>editing <br />{newsPost.title}</p>
+            <br />
+            <br />
+            <hr />
+            <br />
+            <br />
+            <NewsPostForm 
+              post={newsPost}
+              onSubmit={() => this.props.onPostForm(newsPost)}
+            />
+          </div>
+        }
       </article>
     )
   }

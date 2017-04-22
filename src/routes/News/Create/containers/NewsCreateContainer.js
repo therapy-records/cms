@@ -10,7 +10,10 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  postSuccess : state.newsCreate.success
+  // postSuccess : state.newsCreate.success,
+  promiseLoading: state.uiState.promiseLoading,
+  promiseSuccess: state.uiState.promiseSuccess
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewsCreate)

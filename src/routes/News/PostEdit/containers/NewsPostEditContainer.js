@@ -11,7 +11,9 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state, props) => ({
-  newsPost: selectNewsPostsPost(state, props.params.id)[0] || {}
+  newsPost: selectNewsPostsPost(state, props.params.id)[0] || {},
+  promiseLoading: state.uiState.promiseLoading,
+  promiseSuccess: state.uiState.promiseSuccess
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewsPostEdit)
