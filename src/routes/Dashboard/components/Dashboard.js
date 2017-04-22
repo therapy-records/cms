@@ -4,7 +4,7 @@ import './Dashboard.scss'
 
 class Dashboard extends React.Component {
 
-  componentWillMount() {
+  componentDidMount() {
     if (!this.props.newsPosts.length) {
       this.props.onFetchNews();
     }

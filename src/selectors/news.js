@@ -1,17 +1,17 @@
 import { createSelector } from 'reselect'
 
-const newsPostsSelector = (state) => state.newsPosts;
+const newsPostsSelector = (state) => state.news.posts;
 
-export const selectNewsPostsPost = (state, id) => state.newsPosts.filter((p) => p._id === id); 
+export const selectNewsPostsPost = (state, id) => state.news.posts.filter((p) => p._id === id); 
 
 export const selectNewsPostsPostTitle = createSelector(
   selectNewsPostsPost,
   (post) => post[0] && post[0].title
 );
 
-export const selectNewsPostsPostMainBody = createSelector(
+export const selectNewsPostsPostBodyMain = createSelector(
   selectNewsPostsPost,
-  (post) => post[0] && post[0].mainBody
+  (post) => post[0] && post[0].bodyMain
 );
 
 export const selectedNewsPostSelector = (state) => state.selectedNewsPost;

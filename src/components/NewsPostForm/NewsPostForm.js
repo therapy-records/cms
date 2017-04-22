@@ -5,7 +5,7 @@ import { Field, reduxForm, SubmissionError } from 'redux-form'
 import RichTextEditor from '../RichTextEditor'
 import {
   selectNewsPostsPostTitle,
-  selectNewsPostsPostMainBody 
+  selectNewsPostsPostBodyMain 
 } from '../../selectors/news';
 import './NewsPostForm.scss'
 
@@ -17,7 +17,7 @@ const textInput = ({ input, label, type, props, meta: { touched, error } }) => (
   </div>
 )
 
-const mainBodyRTE = ({ input, onChange, props, meta: { error }}) => (
+const bodyMainRTE = ({ input, onChange, props, meta: { error }}) => (
   <div>
     <p><strong>Main content</strong></p>
     {error && (<p>Main content is {error}</p>)}
@@ -48,8 +48,8 @@ class NewsPostForm extends React.Component {
 
           <br/>
 
-          <Field name="mainBody"
-                 component={mainBodyRTE}
+          <Field name="bodyMain"
+                 component={bodyMainRTE}
                  validate={required} />
 
           <br/>
@@ -77,7 +77,7 @@ InitFromStateForm = connect(
   (state, props) => ({
     initialValues: {
       title: props.post && selectNewsPostsPostTitle(state, props.post._id),
-      mainBody: props.post && selectNewsPostsPostMainBody(state, props.post._id)
+      bodyMain: props.post && selectNewsPostsPostBodyMain(state, props.post._id)
     }
   })
 )(InitFromStateForm);

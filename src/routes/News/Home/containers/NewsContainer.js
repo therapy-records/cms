@@ -1,13 +1,15 @@
 import { connect } from 'react-redux'
-import { fetchNews } from '../modules/news'
+import { fetchNews } from '../../../../reducers/news'
+import { resetPromiseState } from '../../../../reducers/uiState'
 import News from '../components/News'
 
 const mapDispatchToProps = {
-  onFetchNews: () => fetchNews()
+  onFetchNews: () => fetchNews(),
+  resetPromiseState: () => resetPromiseState()
 }
 
 const mapStateToProps = (state) => ({
-  newsPosts : state.newsPosts.reverse()
+  newsPosts : state.news.posts.reverse()
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(News)

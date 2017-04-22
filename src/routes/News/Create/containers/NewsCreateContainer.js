@@ -1,19 +1,16 @@
 import { connect } from 'react-redux'
-import {
-  postNews
-} from '../modules/newsCreate'
-
+import { postNews } from '../../../../reducers/news'
+import { resetPromiseState } from '../../../../reducers/uiState'
 import NewsCreate from '../components/NewsCreate'
 
 const mapDispatchToProps = {
-  onPostNews: () => postNews()
+  onPostNews: () => postNews(),
+  resetPromiseState: () => resetPromiseState()
 }
 
 const mapStateToProps = (state) => ({
-  // postSuccess : state.newsCreate.success,
   promiseLoading: state.uiState.promiseLoading,
   promiseSuccess: state.uiState.promiseSuccess
-
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewsCreate)

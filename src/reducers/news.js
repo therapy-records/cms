@@ -2,33 +2,48 @@ import {
   API_ROOT,
   NEWS,
   NEWS_CREATE
-} from '../../../../constants'
+} from '../constants'
+
+
+import {
+  promiseLoading,
+  promiseSuccess,
+  promiseError,
+  resetPromiseState
+} from './uiState';
+
+export const FETCH_NEWS_POSTS_SUCCESS = 'FETCH_NEWS_POSTS_SUCCESS'
 export const POST_NEWS_FORM_SUCCESS = 'POST_NEWS_FORM_SUCCESS';
-export const EDIT_NEWS_FORM_SUCCESS = 'EDIT_NEWS_FORM_SUCCESS';
-export const POST_NEWS_FORM_ERROR = 'POST_NEWS_FORM_ERROR';
 
 // ------------------------------------
 // Actions
 // ------------------------------------
 
-function success(){
+function fetchSuccess(data){
   return {
-    type: POST_NEWS_FORM_SUCCESS,
-    payload: {success: true}
+    type: FETCH_NEWS_POSTS_SUCCESS,
+    payload: data
   }
 }
 
-function successEdit() {
-  return {
-    type: EDIT_NEWS_FORM_SUCCESS,
-    payload: {success: true}
-  }
-}
-
-function error(err){
-  return {
-    type: POST_NEWS_FORM_ERROR,
-    payload: err
+export const fetchNews = () => {
+  return (dispatch, getState) => {
+    dispatch(promiseLoading(true));
+    return new Promise((resolve) => {
+      fetch(API_ROOT + NEWS)
+      .then(res => res.json())
+      .then(
+        (data) => {
+          dispatch(fetchSuccess(data));
+          dispatch(promiseLoading(false));
+          dispatch(promiseSuccess(true));
+        },
+        (err) => {
+          dispatch(promiseLoading(false));
+          dispatch(promiseError(err));
+        }
+      );
+    })
   }
 }
 
@@ -53,8 +68,13 @@ export const postNews = () => {
         }
       )
       .then(
-        data => dispatch(success(data)),
-        err => dispatch(error(err))
+        (data) => {
+          dispatch(promiseLoading(false));
+          dispatch(promiseSuccess(true));
+        }, (err) => {
+          dispatch(promiseLoading(false));
+          dispatch(promiseError(err));
+        }
       )
     })
   }
@@ -72,7 +92,7 @@ export const editNews = (editedPost) => {
     }
     const reduxFormObj = getFormValues();
     editedPost.title = reduxFormObj.title;
-    editedPost.mainBody = reduxFormObj.mainBody;
+    editedPost.bodyMain = reduxFormObj.bodyMain;
     const postHeaders = new Headers();
     postHeaders.set('Content-Type', 'application/json');
     postHeaders.set('Authorization', localStorage.getItem('token'))
@@ -84,14 +104,20 @@ export const editNews = (editedPost) => {
         }
       )
       .then(
-        data => dispatch(successEdit(data)),
-        err => dispatch(error(err))
+        (data) => {
+          dispatch(promiseLoading(false));
+          dispatch(promiseSuccess(true)); 
+        }, (err) => {
+          dispatch(promiseLoading(false));
+          dispatch(promiseError(err)); 
+        }
       )
     })
   }
 }
 
 export const actions = {
+  fetchNews,
   postNews,
   editNews
 }
@@ -100,17 +126,19 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [POST_NEWS_FORM_SUCCESS] : (state, action) => state = action.payload,
-  [EDIT_NEWS_FORM_SUCCESS] : (state, action) => state = action.payload,
-  [POST_NEWS_FORM_ERROR] : (state, action) => state = action.payload
+  [FETCH_NEWS_POSTS_SUCCESS] : (state, action) => {
+    return {...state, posts: action.payload}
+  },
+  [POST_NEWS_FORM_SUCCESS] : (state, action) => state = action.payload
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = {success: false};
-export default function newsPostsReducer (state = initialState, action) {
+const initialState = {
+  posts: []
+};
+export default function newsReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
-
   return handler ? handler(state, action) : state
 }

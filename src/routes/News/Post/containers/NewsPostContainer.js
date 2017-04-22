@@ -1,10 +1,9 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import { fetchNews } from '../../Home/modules/news';
-import { deleteNewsPost } from '../modules/news'
-import { selectNewsPostsPost } from '../../../../selectors/news';
 import { resetPromiseState } from '../../../../reducers/uiState';
-
+import { fetchNews } from '../../../../reducers/news';
+import { selectNewsPostsPost } from '../../../../selectors/news';
+import { deleteNewsPost } from '../modules/news';
 import NewsPost from '../components/NewsPost'
 
 const mapDispatchToProps = {

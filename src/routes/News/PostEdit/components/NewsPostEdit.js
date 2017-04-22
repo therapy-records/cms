@@ -4,12 +4,6 @@ import NewsPostForm  from '../../../../components/NewsPostForm'
 
 class NewsPostEdit extends React.Component {
 
-  componentWillMount(){
-    if (!this.props.newsPosts) {
-      this.props.onFetchNews();
-    }
-  }
-
   componentWillUnmount(){
     this.props.resetPromiseState();
   }
@@ -25,7 +19,8 @@ class NewsPostEdit extends React.Component {
       promiseSuccess,
       promiseError
     } = this.props;
-    if (!newsPost) {
+
+    if (!newsPost || !newsPost.title) {
       return null;
     }
 
@@ -34,17 +29,17 @@ class NewsPostEdit extends React.Component {
         {promiseLoading &&
           <h1>loading...</h1>
         }
-        {/*
-          !promiseLoading && promiseSuccess &&
+
+        {promiseError &&
+          <p>error updating news post :( {promiseError.message}</p>
+        }
+        {(!promiseLoading && promiseSuccess) &&
           <div>
-            <h2>Successfully posted! <br/><br/>🚀</h2>
+            <h2>Successfully updated! <br/><br/>🚀</h2>
             <Link to='news' className='news-link'>Go to news</Link>
           </div>
-        */}
-        {promiseError &&
-          <p>error fetching news post :(</p>
         }
-        {promiseSuccess &&
+        {!promiseLoading && !promiseSuccess &&
           <div>
             <p>editing <br />{newsPost.title}</p>
             <br />

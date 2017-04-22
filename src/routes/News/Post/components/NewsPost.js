@@ -57,7 +57,7 @@ class NewsPost extends React.Component {
           <div>
             <h2>{newsPost.title}</h2>
             <img src="http://placehold.it/350x150" />
-            <div dangerouslySetInnerHTML={this.renderHtml(newsPost.mainBody)}></div>
+            <div dangerouslySetInnerHTML={this.renderHtml(newsPost.bodyMain)}></div>
           </div>
           <div>
             {/* <p><a href={`http://fionaross.co.uk/news/${newsPost._id}`}>View live post</a></p> */}

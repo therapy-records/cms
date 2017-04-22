@@ -11,6 +11,10 @@ class News extends React.Component {
     }
   }
 
+  componentWillUnmount(){
+    this.props.resetPromiseState();
+  }
+
   renderPost(p){
     return (
       <div key={p._id} className='news-card'>
@@ -25,6 +29,14 @@ class News extends React.Component {
   }
 
   render() {
+    const {
+      newsPosts
+    } = this.props;
+
+    if (!newsPosts) {
+      return null;
+    }
+
     return (
       <div>
         <div className='news-feed-header'>
