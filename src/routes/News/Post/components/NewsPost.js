@@ -48,7 +48,8 @@ class NewsPost extends React.Component {
               <div dangerouslySetInnerHTML={this.renderHtml(newsPost.mainBody)}></div>
             </div>
             <div>
-              <p><a href={`http://fionaross.co.uk/news/${newsPost._id}`}>View live post</a></p>
+              {/* <p><a href={`http://fionaross.co.uk/news/${newsPost._id}`}>View live post</a></p> */}
+              <p><a href={`http://fionaross.co.uk/news`}>View live post</a></p>
               <p>Created {moment(newsPost.createdAt).fromNow()} <small>{moment(newsPost.createdAt).format('DD/mm/YYYY')}</small></p>
               {newsPost.editedAt && 
                 <p>Last modified {moment(newsPost.editedAt).fromNow()} <small>{moment(newsPost.editedAt).format('DD/mm/YYYY')}</small></p>
