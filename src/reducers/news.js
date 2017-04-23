@@ -49,7 +49,7 @@ export const fetchNews = () => {
 
 export const postNews = () => {
   return (dispatch, getState) => {
-    const formObj = () => {
+    const getFormObj = () => {
       if (getState().form.NEWS_POST_FORM &&
           getState().form.NEWS_POST_FORM.values) {
         return JSON.stringify(getState().form.NEWS_POST_FORM.values);
@@ -57,14 +57,16 @@ export const postNews = () => {
         return null;
       }
     }
+
     const postHeaders = new Headers();
     postHeaders.set('Content-Type', 'application/json');
     postHeaders.set('Authorization', localStorage.getItem('token'))
+
     return new Promise((resolve) => {
       fetch(API_ROOT + NEWS_CREATE, {
           method: 'POST',
           headers: postHeaders,
-          body: formObj()
+          body: getFormObj()
         }
       )
       .then(
@@ -77,6 +79,7 @@ export const postNews = () => {
         }
       )
     })
+
   }
 }
 

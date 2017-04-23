@@ -14,9 +14,9 @@ export const selectNewsPostsPostBodyMain = createSelector(
   (post) => post[0] && post[0].bodyMain
 );
 
-export const selectNewsPostsPostImageUrl = createSelector(
+export const selectNewsPostsPostMainImageUrl = createSelector(
   selectNewsPostsPost,
-  (post) => post[0] && post[0].imageUrl
+  (post) => post[0] && post[0].mainImageUrl
 );
 
 export const selectedNewsPostSelector = (state) => state.selectedNewsPost;

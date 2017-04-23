@@ -10,3 +10,35 @@
     margin: 0 auto;
   }
 }
+
+.dropzone {
+  width: auto;
+  min-height: 200px;
+  border: dashed 5px #CCC;
+  background:#EEE;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom:1em;
+  transition: all 0.2s ease;
+  min-width:350px;
+}
+
+.dropzone-cta {
+  position: absolute;
+  z-index:1;
+  transition: all 0.2s ease;
+}
+
+
+.dropzone-active {
+  background:#FDFDFD;
+  border-color:#EEE;
+  img {
+    opacity:0.4;
+  }
+  .dropzone-cta {
+    font-size:1.1em;
+    opacity:0.6;
+  }
+}

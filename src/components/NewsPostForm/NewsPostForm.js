@@ -2,35 +2,73 @@ import React, { Component } from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import { Field, reduxForm, SubmissionError } from 'redux-form'
-import RichTextEditor from '../RichTextEditor'
 import Dropzone from 'react-dropzone'
+import request from 'superagent'
+import RichTextEditor from '../RichTextEditor'
 import {
   selectNewsPostsPostTitle,
   selectNewsPostsPostBodyMain 
 } from '../../selectors/news';
 import './NewsPostForm.scss'
 
-const renderDropzoneInput = (field) => {
-  const files = field.input.value;
-  return (
-    <div>
-    <p><strong>Main image</strong></p>
-      <Dropzone
-        name={field.name}
-        onDrop={( filesToUpload, e ) => field.input.onChange(filesToUpload)}
-      >
-        <div>Drag &amp; Drop or click &amp; select</div>
-      </Dropzone>
-      {field.meta.touched &&
-        field.meta.error &&
-        <span className="error">{field.meta.error}</span>}
-      {files && Array.isArray(files) && (
-        <ul>
-          { files.map((file, i) => <li key={i}> <img src={file.preview} /></li>) }
-        </ul>
-      )}
-    </div>
-  );
+const CLOUDINARY_UPLOAD_PRESET_ID = 'g668btkv';
+const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dswia8t5y/upload';
+
+class renderDropzoneInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      uploadedFileUrl: ''
+    };
+  }
+
+  handleImageUpload(file) {
+    let upload = request.post(CLOUDINARY_UPLOAD_URL)
+                        .field('upload_preset', CLOUDINARY_UPLOAD_PRESET_ID)
+                        .field('file', file);
+    upload.end((err, response) => {
+      if (response.body.secure_url !== '') {
+        this.setState({
+          uploadedFileUrl: response.body.secure_url
+        });
+        this.props.input.onChange(this.state.uploadedFileUrl);
+      }
+    });
+  }
+
+  onImageDrop(files){
+    this.handleImageUpload(files[0]);
+  }
+
+  render() {
+    const {
+      input,
+      meta
+    } = this.props;
+
+    return (
+      <div>
+      <p><strong>Main image</strong></p>
+        <Dropzone
+          name={input.name}
+          onDrop={this.onImageDrop.bind(this)}
+          className='dropzone'
+          activeClassName='dropzone-active'
+        >
+          {!this.state.uploadedFileUrl &&
+            <div className='dropzone-cta'>Drag &amp; Drop or click &amp; select</div>
+          }
+          {this.state.uploadedFileUrl &&
+            <img src={this.state.uploadedFileUrl} /> 
+          }
+        </Dropzone>
+        {meta.touched &&
+          meta.error &&
+          <span className="error">{meta.error}</span>
+        }
+      </div>
+    );
+  }
 }
 
 const textInput = ({ input, label, type, props, meta: { touched, error } }) => (
@@ -63,7 +101,7 @@ class NewsPostForm extends React.Component {
 
         <form onSubmit={(e) => e.preventDefault()}>
 
-          <Field name="imageUrl"
+          <Field name="mainImageUrl"
                  component={renderDropzoneInput} />
 
           <br/>
@@ -107,7 +145,7 @@ InitFromStateForm = connect(
     initialValues: {
       title: props.post && selectNewsPostsPostTitle(state, props.post._id),
       bodyMain: props.post && selectNewsPostsPostBodyMain(state, props.post._id),
-      imageUrl: props.post && selectNewsPostsPostImageUrl(state, props.post._id)
+      mainImageUrl: props.post && selectNewsPostsPostMainImageUrl(state, props.post._id)
     }
   })
 )(InitFromStateForm);

@@ -60,7 +60,7 @@ class NewsPost extends React.Component {
           <h2>{newsPost.title}</h2>
             <div dangerouslySetInnerHTML={this.renderHtml(newsPost.bodyMain)}></div>
             <br />
-            <img src="http://placehold.it/350x150" />
+            <img src={newsPost.mainImageUrl} />
           </div>
           <div className='col-2'>
             <div className='summary-box'>
