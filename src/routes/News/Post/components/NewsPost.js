@@ -1,7 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router'
 import { browserHistory } from 'react-router'
 import moment from 'moment';
 import { ModalContainer, ModalDialog } from 'react-modal-dialog';
+import './NewsPost.scss'
 
 class NewsPost extends React.Component {
 
@@ -54,23 +56,30 @@ class NewsPost extends React.Component {
 
        {(promiseSuccess && newsPost && newsPost.title) &&
         <div className='flex-root'>
-          <div>
-            <h2>{newsPost.title}</h2>
-            <img src="http://placehold.it/350x150" />
+          <div className='col-1'>
+          <h2>{newsPost.title}</h2>
             <div dangerouslySetInnerHTML={this.renderHtml(newsPost.bodyMain)}></div>
+            <br />
+            <img src="http://placehold.it/350x150" />
           </div>
-          <div>
-            {/* <p><a href={`http://fionaross.co.uk/news/${newsPost._id}`}>View live post</a></p> */}
-            <p><a href={`http://fionaross.co.uk/news`}>View live post</a></p>
-            <p>Created {moment(newsPost.createdAt).fromNow()} <small>{moment(newsPost.createdAt).format('DD/mm/YYYY')}</small></p>
-            {newsPost.editedAt && 
-              <p>Last modified {moment(newsPost.editedAt).fromNow()} <small>{moment(newsPost.editedAt).format('DD/mm/YYYY')}</small></p>
-            }
-            <button 
-              className='btn' 
-              onClick={this.handleModalOpen} 
-              style={{width: 'auto', background: 'darkred', color: '#fff'}}>Delete post
-            </button>
+          <div className='col-2'>
+            <div className='summary-box'>
+              <div className='summary-box-inner'>
+                {/* <p><a href={`http://fionaross.co.uk/news/${newsPost._id}`}>View live post</a></p> */}
+                <p><a href={`http://fionaross.co.uk/news`} target='blank'>View live post</a></p>
+                <p>Created {moment(newsPost.createdAt).fromNow()} <small>{moment(newsPost.createdAt).format('DD/mm/YYYY')}</small></p>
+                {newsPost.editedAt && 
+                  <p>Last modified {moment(newsPost.editedAt).fromNow()} <small>{moment(newsPost.editedAt).format('DD/mm/YYYY')}</small></p>
+                }
+
+                <Link to={`/news/${newsPost._id}/edit`} className='btn'>Edit post</Link>
+                <button 
+                  className='btn' 
+                  onClick={this.handleModalOpen} 
+                  style={{width: 'auto', background: 'darkred', color: '#fff'}}>Delete post
+                </button>
+              </div>
+            </div>
           </div>
         </div>
        }

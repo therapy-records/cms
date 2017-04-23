@@ -15,7 +15,7 @@ class Header extends React.Component {
     } = this.props;
 
     return (
-      <div>
+      <div className='header'>
         <h1>
           <Link to='/' activeClassName='route--active'>Mini cms</Link>
         </h1>
