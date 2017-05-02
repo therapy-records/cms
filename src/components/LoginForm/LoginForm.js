@@ -55,7 +55,7 @@ class LoginForm extends React.Component {
 }
 
 LoginForm.contextTypes = {
-  router: React.PropTypes.object.isRequired
+  router: PropTypes.object.isRequired
 }
 
 
