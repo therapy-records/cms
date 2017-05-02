@@ -3,21 +3,21 @@ import { bindActionCreators } from 'redux';
 import { resetPromiseState } from '../../../../reducers/uiState';
 import { fetchNews } from '../../../../reducers/news';
 import { selectNewsPostsPost } from '../../../../selectors/news';
-import { deleteNewsPost } from '../modules/news';
-import NewsPost from '../components/NewsPost'
+import { deleteNewsPost } from '../modules/article';
+import Article from '../components/Article'
 
 const mapDispatchToProps = {
   onFetchNews: () => fetchNews(),
-  onDeleteNewsPost: (id) => deleteNewsPost(id),
+  onDeleteArticle: (id) => deleteNewsPost(id),
   resetPromiseState: () => resetPromiseState()
 }
 
 const mapStateToProps = (state, props) => ({
-  newsPost: selectNewsPostsPost(state, props.params.id)[0] || {},
+  article: selectNewsPostsPost(state, props.params.id)[0] || {},
   promiseLoading: state.uiState.promiseLoading,
   promiseSuccess: state.uiState.promiseSuccess,
   promiseError: state.uiState.promiseError
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewsPost)
+export default connect(mapStateToProps, mapDispatchToProps)(Article)
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 import NewsPostForm  from '../../../../components/NewsPostForm'
 
-class NewsPostEdit extends React.Component {
+class ArticleEdit extends React.Component {
 
   componentWillUnmount(){
     this.props.resetPromiseState();
@@ -14,13 +14,13 @@ class NewsPostEdit extends React.Component {
 
   render() {
     const { 
-      newsPost,
+      article,
       promiseLoading,
       promiseSuccess,
       promiseError
     } = this.props;
 
-    if (!newsPost || !newsPost.title) {
+    if (!article || !article.title) {
       return null;
     }
 
@@ -41,15 +41,15 @@ class NewsPostEdit extends React.Component {
         }
         {!promiseLoading && !promiseSuccess &&
           <div>
-            <p>editing <br />{newsPost.title}</p>
+            <p>editing <br />{article.title}</p>
             <br />
             <br />
             <hr />
             <br />
             <br />
             <NewsPostForm 
-              post={newsPost}
-              onSubmit={() => this.props.onPostForm(newsPost)}
+              post={article}
+              onSubmit={() => this.props.onPostForm(article)}
             />
           </div>
         }
@@ -58,14 +58,14 @@ class NewsPostEdit extends React.Component {
   }
 }
 
-NewsPostEdit.propTypes = {
+ArticleEdit.propTypes = {
   onFetchNews: React.PropTypes.func.isRequired,
   onPostForm: React.PropTypes.func.isRequired,
-  newsPost: React.PropTypes.object.isRequired,
+  article: React.PropTypes.object.isRequired,
   promiseLoading: React.PropTypes.bool,
   promiseSuccess: React.PropTypes.bool,
   promiseError: React.PropTypes.bool,
   resetPromiseState: React.PropTypes.func.isRequired
 }
 
-export default NewsPostEdit
+export default ArticleEdit

@@ -1,7 +1,5 @@
-import { injectReducer } from '../../../store/reducers'
-
 export default (store) => ({
-  path : 'news/:id/edit',
+  path : 'news/create',
   /*  Async getComponent is only invoked when route matches   */
   getComponent (nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point
@@ -9,16 +7,12 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const NewsPostEdit = require('./containers/NewsPostEditContainer').default
-      const reducer = require('../Post/modules/news').default
-
-      /*  Add the reducer to the store on key 'selectedNewsPost'  */
-      injectReducer(store, { key: 'selectedNewsPost', reducer })
+      const News = require('./containers/ArticleCreateContainer').default
 
       /*  Return getComponent   */
-      cb(null, NewsPostEdit)
+      cb(null, News)
 
     /* Webpack named bundle   */
-    }, 'newsPostEdit')
+    }, 'articleCreate')
   }
 })

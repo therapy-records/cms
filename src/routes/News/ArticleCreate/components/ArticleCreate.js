@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 import NewsPostForm  from '../../../../components/NewsPostForm'
 
-class NewsCreate extends React.Component {
+class ArticleCreate extends React.Component {
   
   componentWillUnmount(){
     this.props.resetPromiseState();
@@ -39,11 +39,11 @@ class NewsCreate extends React.Component {
   }
 }
 
-NewsCreate.propTypes = {
+ArticleCreate.propTypes = {
   onPostNews: React.PropTypes.func.isRequired,
   promiseLoading: React.PropTypes.bool,
   promiseSuccess: React.PropTypes.bool,
   promiseError: React.PropTypes.object
 }
 
-export default NewsCreate
+export default ArticleCreate

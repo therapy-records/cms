@@ -9,8 +9,8 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const NewsPost = require('./containers/NewsPostContainer').default
-      const reducer = require('./modules/news').default
+      const NewsPost = require('./containers/ArticleContainer').default
+      const reducer = require('./modules/article').default
 
       /*  Add the reducer to the store on key 'selectedNewsPost'  */
       injectReducer(store, { key: 'selectedNewsPost', reducer })
@@ -19,6 +19,6 @@ export default (store) => ({
       cb(null, NewsPost)
 
     /* Webpack named bundle   */
-    }, 'newsPost')
+    }, 'article')
   }
 })

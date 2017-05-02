@@ -4,9 +4,9 @@ import Home from './Home'
 import CounterRoute from './Counter'
 import DashboardRoute from './Dashboard'
 import NewsHomeRoute from './News/Home'
-import NewsCreateRoute from './News/Create'
-import NewsPostSingleRoute from './News/Post'
-import NewsPostEditSingleRoute from './News/PostEdit'
+import ArticleCreateRoute from './News/ArticleCreate'
+import ArticleRoute from './News/Article'
+import ArticleEditRoute from './News/ArticleEdit'
 import PressRoute from './Press';
 import { routeAuthCheck }  from '../actions/auth';
 export const createRoutes = (store) => {
@@ -20,9 +20,9 @@ export const createRoutes = (store) => {
         childRoutes:[
           DashboardRoute(store),
           NewsHomeRoute(store),
-          NewsCreateRoute(store),
-          NewsPostSingleRoute(store),
-          NewsPostEditSingleRoute(store),
+          ArticleCreateRoute(store),
+          ArticleRoute(store),
+          ArticleEditRoute(store),
           PressRoute(store)
         ]
       },

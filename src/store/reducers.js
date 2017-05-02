@@ -3,7 +3,7 @@ import locationReducer from './location'
 import uiStateReducer from '../reducers/uiState';
 import homeReducer from '../routes/Home/modules/home';
 import newsReducer from '../reducers/news';
-import selectedNewsPostReducer from '../routes/News/Post/modules/news';
+import selectedNewsPostReducer from '../routes/News/Article/modules/article';
 import { reducer as formReducer } from 'redux-form';
 
 export const makeRootReducer = (asyncReducers) => {

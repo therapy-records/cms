@@ -3,9 +3,9 @@ import { Link } from 'react-router'
 import { browserHistory } from 'react-router'
 import moment from 'moment';
 import { ModalContainer, ModalDialog } from 'react-modal-dialog';
-import './NewsPost.scss'
+import './Article.scss'
 
-class NewsPost extends React.Component {
+class Article extends React.Component {
 
   state = {
     isShowingModal: false
@@ -15,7 +15,7 @@ class NewsPost extends React.Component {
   handleModalClose = () => this.setState({isShowingModal: false})
 
   componentWillMount(){
-    if (!this.props.newsPosts) {
+    if (!this.props.newsArticles) {
       this.props.onFetchNews();
     }
   }
@@ -30,7 +30,7 @@ class NewsPost extends React.Component {
 
   render() {
     const {
-      newsPost,
+      article,
       promiseLoading,
       promiseSuccess,
       promiseError
@@ -41,7 +41,7 @@ class NewsPost extends React.Component {
     // state.uiState. or similar.
     // this logic is based on previous approach of 'selecteNewsPost' in store.
 
-    // if (newsPost.message && newsPost.message === 'Post deleted') {
+    // if (article.message && article.message === 'Post deleted') {
     //   deletedState = true;
     //   setTimeout(() => {
     //     browserHistory.push('/news');
@@ -54,25 +54,25 @@ class NewsPost extends React.Component {
          <h1>loading...</h1>
        }
 
-       {(promiseSuccess && newsPost && newsPost.title) &&
+       {(promiseSuccess && article && article.title) &&
         <div className='flex-root'>
           <div className='col-1'>
-          <h2>{newsPost.title}</h2>
-            <div dangerouslySetInnerHTML={this.renderHtml(newsPost.bodyMain)}></div>
+          <h2>{article.title}</h2>
+            <div dangerouslySetInnerHTML={this.renderHtml(article.bodyMain)}></div>
             <br />
-            <img src={newsPost.mainImageUrl} />
+            <img src={article.mainImageUrl} />
           </div>
           <div className='col-2'>
             <div className='summary-box'>
               <div className='summary-box-inner'>
-                {/* <p><a href={`http://fionaross.co.uk/news/${newsPost._id}`}>View live post</a></p> */}
+                {/* <p><a href={`http://fionaross.co.uk/news/${article._id}`}>View live post</a></p> */}
                 <p><a href={`http://fionaross.co.uk/news`} target='blank'>View live post</a></p>
-                <p>Created {moment(newsPost.createdAt).fromNow()} <small>{moment(newsPost.createdAt).format('DD/mm/YYYY')}</small></p>
-                {newsPost.editedAt && 
-                  <p>Last modified {moment(newsPost.editedAt).fromNow()} <small>{moment(newsPost.editedAt).format('DD/mm/YYYY')}</small></p>
+                <p>Created {moment(article.createdAt).fromNow()} <small>{moment(article.createdAt).format('DD/mm/YYYY')}</small></p>
+                {article.editedAt && 
+                  <p>Last modified {moment(article.editedAt).fromNow()} <small>{moment(article.editedAt).format('DD/mm/YYYY')}</small></p>
                 }
 
-                <Link to={`/news/${newsPost._id}/edit`} className='btn'>Edit post</Link>
+                <Link to={`/news/${article._id}/edit`} className='btn'>Edit post</Link>
                 <button 
                   className='btn' 
                   onClick={this.handleModalOpen} 
@@ -100,7 +100,7 @@ class NewsPost extends React.Component {
               <div>
                 <h4>Are you sure you want to delete this post?</h4>
                 <p>It will be gone forever!</p>
-                <button className='btn' onClick={() => { this.props.onDeleteNewsPost(newsPost._id) }}>Delete post</button>
+                <button className='btn' onClick={() => { this.props.onDeleteArticle(article._id) }}>Delete post</button>
                 <button className='btn' onClick={this.handleModalClose}>Cancel</button>
               </div>
             )}
@@ -113,13 +113,13 @@ class NewsPost extends React.Component {
   }
 }
 
-NewsPost.propTypes = {
-  onDeleteNewsPost: React.PropTypes.func.isRequired,
-  newsPost: React.PropTypes.object.isRequired,
+Article.propTypes = {
+  onDeleteArticle: React.PropTypes.func.isRequired,
+  article: React.PropTypes.object.isRequired,
   promiseLoading: React.PropTypes.bool,
   promiseSuccess: React.PropTypes.bool,
   promiseError: React.PropTypes.bool,
   resetPromiseState: React.PropTypes.func.isRequired
 }
 
-export default NewsPost
+export default Article

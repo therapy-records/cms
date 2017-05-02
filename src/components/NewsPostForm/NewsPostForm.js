@@ -7,7 +7,8 @@ import request from 'superagent'
 import RichTextEditor from '../RichTextEditor'
 import {
   selectNewsPostsPostTitle,
-  selectNewsPostsPostBodyMain 
+  selectNewsPostsPostBodyMain,
+  selectNewsPostsPostMainImageUrl
 } from '../../selectors/news';
 import './NewsPostForm.scss'
 
