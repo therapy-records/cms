@@ -19,7 +19,7 @@ export const POST_NEWS_FORM_SUCCESS = 'POST_NEWS_FORM_SUCCESS';
 // Actions
 // ------------------------------------
 
-function fetchSuccess(data){
+export function fetchSuccess(data){
   return {
     type: FETCH_NEWS_POSTS_SUCCESS,
     payload: data
