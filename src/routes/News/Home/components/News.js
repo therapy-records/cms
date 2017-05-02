@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router'
 import moment from 'moment';
 import './News.scss'
@@ -53,9 +54,8 @@ class News extends React.Component {
 }
 
 News.propTypes = {
-  onFetchNews: React.PropTypes.func.isRequired,
-  newsPosts: React.PropTypes.array.isRequired
+  onFetchNews: PropTypes.func.isRequired,
+  newsPosts: PropTypes.array.isRequired
 }
-
 
 export default News

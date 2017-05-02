@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router'
 import NewsPostForm  from '../../../../components/NewsPostForm'
 
@@ -59,13 +60,13 @@ class ArticleEdit extends React.Component {
 }
 
 ArticleEdit.propTypes = {
-  onFetchNews: React.PropTypes.func.isRequired,
-  onPostForm: React.PropTypes.func.isRequired,
-  article: React.PropTypes.object.isRequired,
-  promiseLoading: React.PropTypes.bool,
-  promiseSuccess: React.PropTypes.bool,
-  promiseError: React.PropTypes.bool,
-  resetPromiseState: React.PropTypes.func.isRequired
+  onFetchNews: PropTypes.func.isRequired,
+  onPostForm: PropTypes.func.isRequired,
+  article: PropTypes.object.isRequired,
+  promiseLoading: PropTypes.bool,
+  promiseSuccess: PropTypes.bool,
+  promiseError: PropTypes.bool,
+  resetPromiseState: PropTypes.func.isRequired
 }
 
 export default ArticleEdit

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router'
 import NewsPostForm  from '../../../../components/NewsPostForm'
 
@@ -40,10 +41,10 @@ class ArticleCreate extends React.Component {
 }
 
 ArticleCreate.propTypes = {
-  onPostNews: React.PropTypes.func.isRequired,
-  promiseLoading: React.PropTypes.bool,
-  promiseSuccess: React.PropTypes.bool,
-  promiseError: React.PropTypes.object
+  onPostNews: PropTypes.func.isRequired,
+  promiseLoading: PropTypes.bool,
+  promiseSuccess: PropTypes.bool,
+  promiseError: PropTypes.object
 }
 
 export default ArticleCreate

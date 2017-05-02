@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router'
 import { browserHistory } from 'react-router'
 import moment from 'moment';
@@ -114,12 +115,12 @@ class Article extends React.Component {
 }
 
 Article.propTypes = {
-  onDeleteArticle: React.PropTypes.func.isRequired,
-  article: React.PropTypes.object.isRequired,
-  promiseLoading: React.PropTypes.bool,
-  promiseSuccess: React.PropTypes.bool,
-  promiseError: React.PropTypes.bool,
-  resetPromiseState: React.PropTypes.func.isRequired
+  onDeleteArticle: PropTypes.func.isRequired,
+  article: PropTypes.object.isRequired,
+  promiseLoading: PropTypes.bool,
+  promiseSuccess: PropTypes.bool,
+  promiseError: PropTypes.bool,
+  resetPromiseState: PropTypes.func.isRequired
 }
 
 export default Article

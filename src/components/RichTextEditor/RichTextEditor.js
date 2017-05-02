@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import RichTextEditor from 'react-rte'
 import './RichTextEditor.scss'
 
@@ -28,7 +29,7 @@ class _RichTextEditor extends React.Component {
 
 
 _RichTextEditor.propTypes = {
-  onChange: React.PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired
 }
 
 
