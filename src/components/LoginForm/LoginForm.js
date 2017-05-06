@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import './LoginForm.scss'
 
-const textInput = ({ input, label, type, meta: { touched, error } }) => (
+export const textInput = ({ input, label, type, meta: { touched, error } }) => (
   <div>
     <label>{label}</label>
     <input {...input} placeholder={label} type={type}/>
@@ -11,9 +11,9 @@ const textInput = ({ input, label, type, meta: { touched, error } }) => (
   </div>
 )
 
-const required = value => value ? undefined : 'required';
+export const required = value => value ? undefined : 'required';
 
-class LoginForm extends React.Component {
+export class LoginForm extends React.Component {
 
   render() {
 
@@ -25,27 +25,31 @@ class LoginForm extends React.Component {
           <form onSubmit={(e) => e.preventDefault()}>
 
             <Field name='username'
-                    component={textInput}
-                    type='text'
-                    placeholder='username'
-                    label='Username'
-                    validate={required}/>
+                   component={textInput}
+                   type='text'
+                   placeholder='username'
+                   label='Username'
+                   validate={required}/>
 
             <br/>
 
             <Field name='password'
-                    component={textInput}
-                    type='password'
-                    placeholder='password'
-                    label='Password'
-                    validate={required}/>
+                   component={textInput}
+                   type='password'
+                   placeholder='password'
+                   label='Password'
+                   validate={required}/>
 
             {error && <strong>{error}</strong>}
 
             <br/>
 
             <div>
-              <button type='submit' disabled={error || pristine || submitting} onClick={() => onSubmit()}>Submit</button>
+              <button 
+                type='submit' 
+                disabled={error || pristine || submitting} 
+                onClick={() => onSubmit()}>Submit
+              </button>
             </div>
 
           </form>
@@ -53,11 +57,6 @@ class LoginForm extends React.Component {
     )
   }
 }
-
-LoginForm.contextTypes = {
-  router: PropTypes.object.isRequired
-}
-
 
 export default reduxForm({
   form: 'LOGIN_FORM'
