@@ -1,4 +1,5 @@
 import React from 'react'
+import { bindActionCreators } from 'redux'
 import Header from 'components/Header/Header'
 import { IndexLink, Link } from 'react-router'
 import { shallow } from 'enzyme'
@@ -58,11 +59,32 @@ describe('(Component) Header', () => {
       expect(actual3).to.equal(true);
     });
 
-    it('should render a logout link', () => {
-      const actual = wrapper.containsMatchingElement(
-        <button className="btn-logout">Log out</button>
-      );
-      expect(actual).to.equal(true);
+    describe('logout link', () => {
+      
+      
+      it('should be rendered', () => {
+        const actual = wrapper.containsMatchingElement(
+          <button className="btn-logout">Log out</button>
+        );
+        expect(actual).to.equal(true);
+      });
+      
+      it('should call dispatch and onLogout on click', () => {
+        let spies = {};
+        props = {
+          isAuthenticated: true,
+          ...bindActionCreators({
+            onLogout: (spies.onLogout = sinon.spy())
+          }, spies.dispatch = sinon.spy())
+        }
+        const buttonWrapper = shallow(<Header {...props} />)
+        spies.dispatch.should.have.not.been.called
+        const button = buttonWrapper.find('button');
+        button.simulate('click');
+        spies.dispatch.should.have.been.called;
+        spies.onLogout.should.have.been.called;
+      });
+
     });
     
   });
