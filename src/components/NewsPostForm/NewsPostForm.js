@@ -17,7 +17,7 @@ import './NewsPostForm.scss'
 const CLOUDINARY_UPLOAD_PRESET_ID = 'g668btkv';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dswia8t5y/upload';
 
-class renderDropzoneInput extends React.Component {
+export class renderDropzoneInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -82,7 +82,7 @@ const textInput = ({ input, label, type, placeholder, props, meta: { touched, er
   </div>
 )
 
-const bodyMainRTE = ({ input, onChange, props, meta: { error }}) => (
+export const bodyMainRTE = ({ input, onChange, props, meta: { error }}) => (
   <div>
     <p><strong>Main content</strong></p>
     {error && (<p>Main content is {error}</p>)}
@@ -90,9 +90,9 @@ const bodyMainRTE = ({ input, onChange, props, meta: { error }}) => (
   </div>
 );
 
-const required = value => value ? undefined : 'required';
+export const required = value => value ? undefined : 'required';
 
-class NewsPostForm extends React.Component {
+export class NewsPostForm extends React.Component {
 
   render() {
     

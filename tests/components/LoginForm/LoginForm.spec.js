@@ -4,7 +4,7 @@ import { LoginForm, textInput, required } from 'components/LoginForm/LoginForm'
 import { shallow } from 'enzyme'
 
 describe('(Component) LoginForm', () => {
-  let loginForm, wrapper, props;
+  let wrapper, props;
 
   beforeEach(() => {
     wrapper = shallow(<LoginForm {...props} />);
