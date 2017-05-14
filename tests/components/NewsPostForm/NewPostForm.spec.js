@@ -92,10 +92,6 @@ describe('(Component) NewsPostForm', () => {
         pristine: false,
         submitting: false
       }
-      const spies = {
-        buttonClick: sinon.spy()
-      };
-
       const buttonWrapper = shallow(<NewsPostForm {...props} />);
       const button = buttonWrapper.find('button');
       button.simulate('click');

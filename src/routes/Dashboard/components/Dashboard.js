@@ -2,23 +2,20 @@ import React from 'react'
 import { Link } from 'react-router'
 import './Dashboard.scss'
 
-class Dashboard extends React.Component {
-
-  componentDidMount() {
-    if (!this.props.newsPosts.length) {
-      this.props.onFetchNews();
-    }
-  }
+export class Dashboard extends React.Component {
 
   componentWillUnmount(){
     this.props.resetPromiseState();
   }
 
-  render(){
-
+  render() {
     const {
       newsPosts
     } = this.props;
+
+    if (!newsPosts || !newsPosts.length) {
+      this.props.onFetchNews();
+    }
 
     return (
       <div>
