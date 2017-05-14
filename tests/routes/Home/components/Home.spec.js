@@ -18,7 +18,6 @@ describe('(Component) Home', () => {
     });
 
     it('should render LoginForm reduxForm', () => {
-      console.log(wrapper.debug());
       const reduxForm = wrapper.find('ReduxForm');
       expect(reduxForm).to.have.length(1);
       const reduxFormIsAuth = reduxForm.prop('isAuthenticated');
