@@ -2,7 +2,7 @@ import React from 'react'
 import { browserHistory } from 'react-router';
 import LoginForm from '../../../components/LoginForm'
 
-class Home extends React.Component {
+export class Home extends React.Component {
 
   componentWillMount(props){
     if (!this.props.isAuthenticated) {
