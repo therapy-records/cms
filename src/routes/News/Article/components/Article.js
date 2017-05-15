@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router'
 import { browserHistory } from 'react-router'
 import moment from 'moment';
-import { ModalContainer, ModalDialog } from 'react-modal-dialog';
 import './Article.scss'
+import ArticleDeleteModal from './ArticleDeleteModal';
 
 class Article extends React.Component {
 
@@ -90,23 +90,7 @@ class Article extends React.Component {
        }
 
         {this.state.isShowingModal &&
-          <ModalContainer onClose={this.handleModalClose}>
-            <ModalDialog onClose={this.handleModalClose}>
-            {deletedState ? (
-              <div>
-                <h4>Successfully deleted!</h4>
-                <p>redirecting..</p>
-              </div>
-            ) : (
-              <div>
-                <h4>Are you sure you want to delete this post?</h4>
-                <p>It will be gone forever!</p>
-                <button className='btn' onClick={() => { this.props.onDeleteArticle(article._id) }}>Delete post</button>
-                <button className='btn' onClick={this.handleModalClose}>Cancel</button>
-              </div>
-            )}
-            </ModalDialog>
-          </ModalContainer>
+          <ArticleDeleteModal deleted={deletedState} />
         }
 
       </article>
