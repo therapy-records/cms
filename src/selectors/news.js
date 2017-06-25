@@ -19,4 +19,15 @@ export const selectNewsPostsPostMainImageUrl = createSelector(
   (post) => post[0] && post[0].mainImageUrl
 );
 
+export const selectNewsPostsPostTicketsLink = createSelector(
+  selectNewsPostsPost,
+  (post) => post[0] && post[0].ticketsLink
+);
+
+export const selectNewsPostsPostVenueLink = createSelector(
+  selectNewsPostsPost,
+  (post) => post[0] && post[0].venueLink
+);
+
+
 export const selectedNewsPostSelector = (state) => state.selectedNewsPost;

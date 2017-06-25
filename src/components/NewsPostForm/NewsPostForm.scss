@@ -11,8 +11,20 @@
   }
 }
 
+.cols-container {
+  display: flex;
+  .col-1 {
+    flex: 1 500px;
+    padding-right: 8em;
+  }
+  .col-2 {
+    flex: 1 200px;
+    justify-content: flex-end;
+  }
+}
+
 .dropzone {
-  width: auto;
+  width: 100%;
   min-height: 200px;
   border: dashed 5px #CCC;
   background:#EEE;

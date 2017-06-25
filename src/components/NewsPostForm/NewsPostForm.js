@@ -8,7 +8,9 @@ import RichTextEditor from '../RichTextEditor'
 import {
   selectNewsPostsPostTitle,
   selectNewsPostsPostBodyMain,
-  selectNewsPostsPostMainImageUrl
+  selectNewsPostsPostMainImageUrl,
+  selectNewsPostsPostTicketsLink,
+  selectNewsPostsPostVenueLink
 } from '../../selectors/news';
 import './NewsPostForm.scss'
 
@@ -72,10 +74,10 @@ class renderDropzoneInput extends React.Component {
   }
 }
 
-const textInput = ({ input, label, type, props, meta: { touched, error } }) => (
+const textInput = ({ input, label, type, placeholder, props, meta: { touched, error } }) => (
   <div>
     <label>{label}</label>
-    <input {...input} placeholder={label} type={type} {...props}/>
+    <input {...input} placeholder={placeholder} type={type} {...props}/>
     {touched && error && <span>{label} is {error}</span>}
   </div>
 )
@@ -102,18 +104,45 @@ class NewsPostForm extends React.Component {
 
         <form onSubmit={(e) => e.preventDefault()}>
 
-          <Field name="mainImageUrl"
-                 component={renderDropzoneInput} />
+          <div className='cols-container'>
+
+            <div className='col-1'>
+
+              <Field name="title"
+                    component={textInput}
+                    type="text"
+                    placeholder="Hello World"
+                    label="Title"
+                    validate={required}/>
+
+              <br/>
+
+              <Field name="mainImageUrl"
+                    component={renderDropzoneInput} />
+
+            </div>
+
+            <div className='col-2'>
+
+              <Field name="ticketsLink"
+                    component={textInput}
+                    type="text"
+                    placeholder="http://www..."
+                    label="Link to get tickets " />
+
+              <br/>
+
+              <Field name="venueLink"
+                    component={textInput}
+                    type="text"
+                    placeholder="http://www..."
+                    label="Link to venue" />
+
+            </div>
+
+          </div>
 
           <br/>
-
-          <Field name="title"
-                 component={textInput}
-                 type="text"
-                 placeholder="Hello World"
-                 label="Title"
-                 validate={required}/>
-
           <br/>
 
           <Field name="bodyMain"
@@ -146,7 +175,9 @@ InitFromStateForm = connect(
     initialValues: {
       title: props.post && selectNewsPostsPostTitle(state, props.post._id),
       bodyMain: props.post && selectNewsPostsPostBodyMain(state, props.post._id),
-      mainImageUrl: props.post && selectNewsPostsPostMainImageUrl(state, props.post._id)
+      mainImageUrl: props.post && selectNewsPostsPostMainImageUrl(state, props.post._id),
+      ticketsLink: props.post && selectNewsPostsPostTicketsLink(state, props.post._id),
+      venueLink: props.post && selectNewsPostsPostVenuLink(state, props.post._id)
     }
   })
 )(InitFromStateForm);
