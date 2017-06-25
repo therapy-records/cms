@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-// import RichTextEditor from 'react-rte'
+import RichTextEditor from 'react-rte'
 import './RichTextEditor.scss'
 
 class _RichTextEditor extends React.Component {
 
   state = {
-    // value: RichTextEditor.createValueFromString(this.props.value, 'html')
+    value: RichTextEditor.createValueFromString(this.props.value, 'html')
   }
   onChange = (value) => {
     this.setState({value});
@@ -19,11 +19,10 @@ class _RichTextEditor extends React.Component {
 
   render () {
     return (
-      // <RichTextEditor
-      //   value={this.state.value}
-      //   onChange={this.onChange}
-      //   />
-      <div></div>
+      <RichTextEditor
+        value={this.state.value}
+        onChange={this.onChange}
+        />
     );
   }
 }
