@@ -28,7 +28,7 @@ class ArticleEdit extends React.Component {
     return (
       <article>
         {promiseLoading &&
-          <h1>loading...</h1>
+          <p>loading...</p>
         }
 
         {promiseError &&
