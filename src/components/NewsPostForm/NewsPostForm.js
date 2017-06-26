@@ -14,8 +14,8 @@ import {
 } from '../../selectors/news';
 import './NewsPostForm.scss'
 
-const CLOUDINARY_UPLOAD_PRESET_ID = 'g668btkv';
-const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dswia8t5y/upload';
+const CLOUDINARY_UPLOAD_PRESET_ID = 'gflm7wbr';
+const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dpv2k0qsj/upload';
 
 export class renderDropzoneInput extends React.Component {
   constructor(props) {
@@ -46,7 +46,8 @@ export class renderDropzoneInput extends React.Component {
   render() {
     const {
       input,
-      meta
+      meta,
+      multiple
     } = this.props;
 
     return (
@@ -57,6 +58,7 @@ export class renderDropzoneInput extends React.Component {
           onDrop={this.onImageDrop.bind(this)}
           className='dropzone'
           activeClassName='dropzone-active'
+          multiple={multiple}
         >
           {!this.state.uploadedFileUrl &&
             <div className='dropzone-cta'>Drag &amp; Drop or click &amp; select</div>
@@ -107,6 +109,12 @@ export class NewsPostForm extends React.Component {
           <div className='cols-container'>
 
             <div className='col-1'>
+
+            
+            <Field name="mainImageUrl"
+                  component={renderDropzoneInput}
+                  multiple />
+            
 
               <Field name="title"
                     component={textInput}
