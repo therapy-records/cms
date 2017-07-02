@@ -1,15 +1,44 @@
 .header {
-  padding-top:1em;  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 1em 0 ;
+  background:#111;
+
+  h1 {
+    margin-bottom: 0;
+    padding-left:0;
+    a {
+      color: #EEE !important;
+      background: none !important;
+      text-decoration: none !important;
+    }
+  }
+  a,
+  button {
+    color: #EEE;
+    text-decoration: none;
+    padding: 0.5em;
+    transition: all 0.3s ease;
+    &.route--active,
+    &:hover,
+    &:focus {
+      background: #EEE;
+      color: #111;
+      text-decoration: none;
+    }
+  }
 }
 
-.route--active {
-  font-weight: bold;
-  text-decoration: underline;
+.header-nav {
+  color: #666;
 }
 
 .btn-logout {
   background: none;
-  padding: 0;
   width: auto;
   color: #337ab7;
 }

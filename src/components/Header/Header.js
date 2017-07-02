@@ -20,7 +20,7 @@ class Header extends React.Component {
           <Link to='/' activeClassName='route--active'>Mini cms</Link>
         </h1>
         {isAuthenticated ? (
-          <div>
+          <div className='header-nav'>
             <Link to='/dashboard' activeClassName='route--active'>
               Dashboard
             </Link>
