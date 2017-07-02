@@ -11,16 +11,13 @@
   }
 }
 
-.cols-container {
-  display: flex;
-  .col-1 {
-    flex: 1 500px;
-    padding-right: 8em;
-  }
-  .col-2 {
-    flex: 1 200px;
-    justify-content: flex-end;
-  }
+.col-1 {
+  flex: 1 500px;
+  padding-right: 8em;
+}
+.col-2 {
+  flex: 1 200px;
+  justify-content: flex-end;
 }
 
 .dropzone {
@@ -33,7 +30,9 @@
   justify-content: center;
   margin-bottom:1em;
   transition: all 0.2s ease;
-  min-width:350px;
+  &.large {
+    min-width:350px;
+  }
 }
 
 .dropzone-cta {

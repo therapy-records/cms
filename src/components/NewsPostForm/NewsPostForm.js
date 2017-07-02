@@ -12,69 +12,11 @@ import {
   selectNewsPostsPostTicketsLink,
   selectNewsPostsPostVenueLink
 } from '../../selectors/news';
-import './NewsPostForm.scss'
+import './NewsPostForm.scss';
+import DropzoneImageUpload from './DropzoneImageUpload';
 
 const CLOUDINARY_UPLOAD_PRESET_ID = 'gflm7wbr';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dpv2k0qsj/upload';
-
-export class renderDropzoneInput extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      uploadedFileUrl: ''
-    };
-  }
-
-  handleImageUpload(file) {
-    let upload = request.post(CLOUDINARY_UPLOAD_URL)
-                        .field('upload_preset', CLOUDINARY_UPLOAD_PRESET_ID)
-                        .field('file', file);
-    upload.end((err, response) => {
-      if (response.body.secure_url !== '') {
-        this.setState({
-          uploadedFileUrl: response.body.secure_url
-        });
-        this.props.input.onChange(this.state.uploadedFileUrl);
-      }
-    });
-  }
-
-  onImageDrop(files){
-    this.handleImageUpload(files[0]);
-  }
-
-  render() {
-    const {
-      input,
-      meta,
-      multiple
-    } = this.props;
-
-    return (
-      <div>
-      <p><strong>Main image</strong></p>
-        <Dropzone
-          name={input.name}
-          onDrop={this.onImageDrop.bind(this)}
-          className='dropzone'
-          activeClassName='dropzone-active'
-          multiple={multiple}
-        >
-          {!this.state.uploadedFileUrl &&
-            <div className='dropzone-cta'>Drag &amp; Drop or click &amp; select</div>
-          }
-          {this.state.uploadedFileUrl &&
-            <img src={this.state.uploadedFileUrl} /> 
-          }
-        </Dropzone>
-        {meta.touched &&
-          meta.error &&
-          <span className="error">{meta.error}</span>
-        }
-      </div>
-    );
-  }
-}
 
 const textInput = ({ input, label, type, placeholder, props, meta: { touched, error } }) => (
   <div>
@@ -84,10 +26,10 @@ const textInput = ({ input, label, type, placeholder, props, meta: { touched, er
   </div>
 )
 
-export const bodyMainRTE = ({ input, onChange, props, meta: { error }}) => (
+export const bodyMainRTE = ({ input, onChange, props, meta: { touched, error }}) => (
   <div>
     <p><strong>Main content</strong></p>
-    {error && (<p>Main content is {error}</p>)}
+    {touched && error && (<p>Main content is {error}</p>)}
     <RichTextEditor value={input.value} onChange={e => { input.onChange(e) }} {...props} />
   </div>
 );
@@ -95,7 +37,7 @@ export const bodyMainRTE = ({ input, onChange, props, meta: { error }}) => (
 export const required = value => value ? undefined : 'required';
 
 export class NewsPostForm extends React.Component {
-
+  
   render() {
     
     const { error, handleSubmit, pristine, reset, submitting, onSubmit } = this.props
@@ -104,39 +46,48 @@ export class NewsPostForm extends React.Component {
     <section className='news-post-form'>
       <h2>Create/edit post</h2>
 
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form onSubmit={(e) => e.preventDefault()} encType='multipart/form-data'>
 
           <div className='cols-container'>
 
             <div className='col-1'>
 
-            
-            <Field name="mainImageUrl"
-                  component={renderDropzoneInput}
-                  multiple />
-            
+              <p><strong>Gallery images</strong></p>
+
+
+              <Field name="miniGalleryImages"
+                     component={DropzoneImageUpload}
+                     title="Mini gallery images"
+                     multiple />
+
+              <br />
+              <br />
+              <br />
+
+              <div className='col-clear' />
 
               <Field name="title"
-                    component={textInput}
-                    type="text"
-                    placeholder="Hello World"
-                    label="Title"
-                    validate={required}/>
+                     component={textInput}
+                     type="text"
+                     placeholder="Hello World"
+                     label="Title"
+                     validate={required}/>
 
               <br/>
 
               <Field name="mainImageUrl"
-                    component={renderDropzoneInput} />
+                     component={DropzoneImageUpload}
+                     title="Main image" />
 
             </div>
 
             <div className='col-2'>
 
               <Field name="ticketsLink"
-                    component={textInput}
-                    type="text"
-                    placeholder="http://www..."
-                    label="Link to get tickets " />
+                     component={textInput}
+                     type="text"
+                     placeholder="http://www..."
+                     label="Link to get tickets " />
 
               <br/>
 

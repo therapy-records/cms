@@ -51,6 +51,9 @@ button {
   margin-right: 0.5em;
 }
 
+.btn-width-auto {
+  width: auto;
+}
 
 h1,h2,h3,h4,h5,h6 {
   margin-top:0;
@@ -59,4 +62,31 @@ h1,h2,h3,h4,h5,h6 {
 
 img {
   max-width: 100%;
+}
+
+.no-list-style {
+  list-style-type: none;
+}
+
+ul,
+ol {
+  margin:0;
+  padding:0;
+}
+
+.cols-container {
+  display: flex;
+}
+
+.col-clear {
+  clear:both;
+}
+
+.col-33 {
+  width: 33.333%;
+}
+
+.gallery-image-upload-item {
+  float: left;
+  padding: 0.5em;
 }
