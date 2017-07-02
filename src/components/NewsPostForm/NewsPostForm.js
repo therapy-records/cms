@@ -133,7 +133,7 @@ InitFromStateForm = connect(
       bodyMain: props.post && selectNewsPostsPostBodyMain(state, props.post._id),
       mainImageUrl: props.post && selectNewsPostsPostMainImageUrl(state, props.post._id),
       ticketsLink: props.post && selectNewsPostsPostTicketsLink(state, props.post._id),
-      venueLink: props.post && selectNewsPostsPostVenuLink(state, props.post._id),
+      venueLink: props.post && selectNewsPostsPostVenueLink(state, props.post._id),
       miniGallery: props.post && selectNewsPostsPostMiniGallery(state, props.post._id),
     }
   })
