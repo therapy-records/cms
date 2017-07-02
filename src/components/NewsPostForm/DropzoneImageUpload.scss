@@ -1,9 +1,12 @@
 .flex-root {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .gallery-image-upload-item {
+  flex: 1 0 50%;
+  max-width: 50%;
   padding-left: 0.5em;
   padding-bottom: 0.5em;
 }

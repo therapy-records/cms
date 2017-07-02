@@ -57,12 +57,25 @@ class Article extends React.Component {
 
        {(promiseSuccess && article && article.title) &&
         <div className='flex-root'>
+
           <div className='col-1'>
-          <h2>{article.title}</h2>
+            <h2>{article.title}</h2>
             <div dangerouslySetInnerHTML={this.renderHtml(article.bodyMain)}></div>
             <br />
             <img src={article.mainImageUrl} />
+            <br />
+            <br />
+
+            <ul className='gallery-flex-root'>
+              {article.miniGalleryImages && article.miniGalleryImages.map((i) => (
+                <li key={i} className='col-50 no-list-style gallery-item'>
+                  <img src={i} />
+                </li>
+              ))}
+            </ul> 
+
           </div>
+
           <div className='col-2'>
             <div className='summary-box'>
               <div className='summary-box-inner'>
@@ -74,6 +87,7 @@ class Article extends React.Component {
                 }
 
                 <Link to={`/news/${article._id}/edit`} className='btn'>Edit post</Link>
+
                 <button 
                   className='btn' 
                   onClick={this.handleModalOpen} 

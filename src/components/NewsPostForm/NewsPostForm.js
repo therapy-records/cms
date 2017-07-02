@@ -66,7 +66,6 @@ export class NewsPostForm extends React.Component {
 
               <Field name="mainImageUrl"
                      component={DropzoneImageUpload}
-                     doThings={this.testinggg}
                      title="Main image" />
 
             </div>
