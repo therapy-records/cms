@@ -66,14 +66,18 @@ class Article extends React.Component {
             <br />
             <br />
 
-            <h3>Mini gallery images</h3>
-            <ul className='gallery-flex-root'>
-              {article.miniGalleryImages && article.miniGalleryImages.map((i) => (
-                <li key={i} className='col-50 no-list-style gallery-item'>
-                  <img src={i} />
-                </li>
-              ))}
-            </ul> 
+            {article.miniGalleryImages.length ?
+              <div>
+                <h3>Mini gallery images</h3>
+                <ul className='gallery-flex-root'>
+                  {article.miniGalleryImages.map((i) => (
+                    <li key={i} className='col-50 no-list-style gallery-item'>
+                      <img src={i} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            : null}
 
           </div>
 
