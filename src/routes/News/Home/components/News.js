@@ -19,6 +19,7 @@ class News extends React.Component {
   renderPost(p){
     return (
       <div key={p._id} className='news-card'>
+        <div className='bg-inner' style={{ backgroundImage: `url('${p.mainImageUrl}')` }} />
         <div className='inner'>
           <h3>{p.title}</h3>
           {p.createdAt && <p>{moment(p.createdAt).fromNow()}</p>}
@@ -47,7 +48,11 @@ class News extends React.Component {
         {!this.props.newsPosts || !this.props.newsPosts.length && (
           <p>Unable to fetch news posts :(</p>
         )}
-        {this.props.newsPosts && this.props.newsPosts.map((p) => this.renderPost(p) ) }
+        {this.props.newsPosts && 
+          <div className='flex-root'>
+            {this.props.newsPosts.map((p) => this.renderPost(p) )}
+          </div> 
+        }
       </div>
     )
   }

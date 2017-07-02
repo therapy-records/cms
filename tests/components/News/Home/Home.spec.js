@@ -34,6 +34,7 @@ describe('(Component) News - Home', () => {
       const p = props.newsPosts[key];
       return ( 
         <div key={p._id} className='news-card'>
+        <div className='bg-inner' />
           <div className='inner'>
             <h3>{p.title}</h3>
             <Link to={`news/${p._id}`} className='btn'>View</Link>
@@ -42,7 +43,6 @@ describe('(Component) News - Home', () => {
         </div>
       )
     };
-    console.log(wrapper.debug());
     const child0 = wrapper.containsMatchingElement( renderNewsPost(0) );
     expect(child0).to.equal(true);
     const child1 = wrapper.containsMatchingElement( renderNewsPost(1) );
