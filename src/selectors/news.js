@@ -34,5 +34,9 @@ export const selectNewsPostsPostMiniGallery = createSelector(
   (post) => post[0] && post[0].miniGallery
 );
 
+export const selectNewsPostsPostVideoEmbed = createSelector(
+  selectNewsPostsPost,
+  (post) => post[0] && post[0].videoEmbed
+);
 
 export const selectedNewsPostSelector = (state) => state.selectedNewsPost;

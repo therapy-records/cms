@@ -11,7 +11,8 @@ import {
   selectNewsPostsPostMainImageUrl,
   selectNewsPostsPostTicketsLink,
   selectNewsPostsPostVenueLink,
-  selectNewsPostsPostMiniGallery
+  selectNewsPostsPostMiniGallery,
+  selectNewsPostsPostVideoEmbed
 } from '../../selectors/news';
 import './NewsPostForm.scss';
 import DropzoneImageUpload from './DropzoneImageUpload';
@@ -86,6 +87,12 @@ export class NewsPostForm extends React.Component {
                     placeholder="http://www..."
                     label="Link to venue" />
 
+              <Field name="videoEmbed"
+                     component={textInput}
+                     type="text"
+                     placeholder="https://www.youtube.com/embed/45JLCGLplvk"
+                     label="YouTube video link" />
+
             </div>
 
           </div>
@@ -135,6 +142,7 @@ InitFromStateForm = connect(
       ticketsLink: props.post && selectNewsPostsPostTicketsLink(state, props.post._id),
       venueLink: props.post && selectNewsPostsPostVenueLink(state, props.post._id),
       miniGallery: props.post && selectNewsPostsPostMiniGallery(state, props.post._id),
+      videoEmbed: props.post && selectNewsPostsPostVideoEmbed(state, props.post_id)
     }
   })
 )(InitFromStateForm);
