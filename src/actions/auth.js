@@ -78,6 +78,4 @@ export const routeAuthCheck = (store, nextState, replace, cb) => {
       );
     })
   };
-  cb();
 }
-

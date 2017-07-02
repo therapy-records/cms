@@ -4,8 +4,8 @@ import LoginForm from '../../../components/LoginForm'
 
 export class Home extends React.Component {
 
-  componentWillMount(props){
-    if (!this.props.isAuthenticated) {
+  componentWillMount(){
+    if (!this.props.isAuthenticated && this.props.onAuthCheck) {
       this.props.onAuthCheck();
     }
   }

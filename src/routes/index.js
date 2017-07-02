@@ -4,6 +4,7 @@ import Home from './Home'
 import CounterRoute from './Counter'
 import DashboardRoute from './Dashboard'
 import NewsHomeRoute from './News/Home'
+import ErrorComponent from '../components/Error/Error'
 import ArticleCreateRoute from './News/ArticleCreate'
 import ArticleRoute from './News/Article'
 import ArticleEditRoute from './News/ArticleEdit'
@@ -35,6 +36,7 @@ export const createRoutes = (store) => {
       },
       {
         path: '*',
+        component: ErrorComponent,
         indexRoute: '/',
         status: 404
       }
