@@ -29,5 +29,10 @@ export const selectNewsPostsPostVenueLink = createSelector(
   (post) => post[0] && post[0].venueLink
 );
 
+export const selectNewsPostsPostMiniGallery = createSelector(
+  selectNewsPostsPost,
+  (post) => post[0] && post[0].miniGallery
+);
+
 
 export const selectedNewsPostSelector = (state) => state.selectedNewsPost;

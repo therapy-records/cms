@@ -10,7 +10,8 @@ import {
   selectNewsPostsPostBodyMain,
   selectNewsPostsPostMainImageUrl,
   selectNewsPostsPostTicketsLink,
-  selectNewsPostsPostVenueLink
+  selectNewsPostsPostVenueLink,
+  selectNewsPostsPostMiniGallery
 } from '../../selectors/news';
 import './NewsPostForm.scss';
 import DropzoneImageUpload from './DropzoneImageUpload';
@@ -52,18 +53,6 @@ export class NewsPostForm extends React.Component {
 
             <div className='col-1'>
 
-              <p><strong>Gallery images</strong></p>
-
-
-              <Field name="miniGalleryImages"
-                     component={DropzoneImageUpload}
-                     title="Mini gallery images"
-                     multiple />
-
-              <br />
-              <br />
-              <br />
-
               <div className='col-clear' />
 
               <Field name="title"
@@ -77,6 +66,7 @@ export class NewsPostForm extends React.Component {
 
               <Field name="mainImageUrl"
                      component={DropzoneImageUpload}
+                     doThings={this.testinggg}
                      title="Main image" />
 
             </div>
@@ -109,6 +99,14 @@ export class NewsPostForm extends React.Component {
                  validate={required} />
 
           <br/>
+          <br/>
+          
+          <Field name="miniGalleryImages"
+                component={DropzoneImageUpload}
+                title="Mini gallery images"
+                multiple />
+
+          <br/>
 
           {error && <strong>{error}</strong>}
 
@@ -136,7 +134,8 @@ InitFromStateForm = connect(
       bodyMain: props.post && selectNewsPostsPostBodyMain(state, props.post._id),
       mainImageUrl: props.post && selectNewsPostsPostMainImageUrl(state, props.post._id),
       ticketsLink: props.post && selectNewsPostsPostTicketsLink(state, props.post._id),
-      venueLink: props.post && selectNewsPostsPostVenuLink(state, props.post._id)
+      venueLink: props.post && selectNewsPostsPostVenuLink(state, props.post._id),
+      miniGallery: props.post && selectNewsPostsPostMiniGallery(state, props.post._id),
     }
   })
 )(InitFromStateForm);

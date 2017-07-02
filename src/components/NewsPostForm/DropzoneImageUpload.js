@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Dropzone from 'react-dropzone'
 import request from 'superagent'
 import DropzoneImageUpload from './DropzoneImageUpload';
+import './DropzoneImageUpload.scss';
 
 const CLOUDINARY_UPLOAD_PRESET_ID = 'gflm7wbr';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dpv2k0qsj/upload';
@@ -24,6 +25,7 @@ export class DropzoneNew extends React.Component {
         this.setState({
           items: [...this.state.items, ...[response.body.secure_url] ]
         });
+        this.props.input.onChange(this.state.items);
       }
     });
   }
@@ -36,7 +38,8 @@ export class DropzoneNew extends React.Component {
     const {
       input,
       title,
-      multiple
+      multiple,
+      doThings
     } = this.props;
     const {
       items
@@ -44,38 +47,46 @@ export class DropzoneNew extends React.Component {
 
     return (
       <div>
-      <p><b>{title}</b></p>
-        <Dropzone
-          name={input.name}
-          onDrop={this.handleImageUpload.bind(this)}
-          className='dropzone'
-          activeClassName='dropzone-active'
-          multiple={multiple}
-        >
-          {(!multiple && !items.length) &&
-            <div className='dropzone-cta'>
-              <span>Drag &amp; drop</span>
-            </div>
-          }
-          {multiple &&
-            <div className='dropzone-cta'>
-              <span>Drag &amp; drop  multiple images</span>
-            </div>
-          }
-          {(!multiple && items.length) &&
-            <img src={items[0]} />
-          }
-        </Dropzone>
+        <p><b>{title}</b></p>
+        <div className={multiple && 'cols-container'}>
 
-        {(multiple && items && items.length) && 
-          <ul>
-            {items.map((i) => (
-              <li key={i} className={i === 3 ? 'col-33 col-clear no-list-style gallery-image-upload-item' : 'col-33 no-list-style gallery-image-upload-item'}>
-                <img src={i} />
-              </li>
-            ))}
-          </ul> 
-        }
+          <div className={multiple && 'col-1'}>
+            <Dropzone
+              name={input.name}
+              onDrop={this.handleImageUpload.bind(this)}
+              className='dropzone'
+              activeClassName='dropzone-active'
+              multiple={multiple}
+            >
+              {(!multiple && !items.length) &&
+                <div className='dropzone-cta'>
+                  <span>Drag &amp; drop</span>
+                </div>
+              }
+              {multiple &&
+                <div className='dropzone-cta'>
+                  <span>Drag &amp; drop  multiple images</span>
+                </div>
+              }
+              {(!multiple && items.length) &&
+                <img src={items[0]} />
+              }
+            </Dropzone>
+          </div>
+
+          <div className={multiple && 'col-2'}>
+            {(multiple && items && items.length) && 
+              <ul className='flex-root'>
+                {items.map((i) => (
+                  <li key={i} className='col-50 no-list-style gallery-image-upload-item'>
+                    <img src={i} />
+                  </li>
+                ))}
+              </ul> 
+            }
+          </div>
+
+        </div>
       </div>
     )
   }
