@@ -18,7 +18,8 @@ class ArticleEdit extends React.Component {
       article,
       promiseLoading,
       promiseSuccess,
-      promiseError
+      promiseError,
+      location
     } = this.props;
 
     if (!article || !article.title) {
@@ -50,6 +51,7 @@ class ArticleEdit extends React.Component {
             <br />
             <NewsPostForm 
               post={article}
+              location={location}
               onSubmit={() => this.props.onPostForm(article)}
             />
           </div>

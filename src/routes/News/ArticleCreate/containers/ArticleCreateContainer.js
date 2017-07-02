@@ -10,7 +10,8 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   promiseLoading: state.uiState.promiseLoading,
-  promiseSuccess: state.uiState.promiseSuccess
+  promiseSuccess: state.uiState.promiseSuccess,
+  location: state.location
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleCreate)

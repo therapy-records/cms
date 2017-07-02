@@ -42,11 +42,26 @@ export class NewsPostForm extends React.Component {
   
   render() {
     
-    const { error, handleSubmit, pristine, reset, submitting, onSubmit } = this.props
+    const {
+      error,
+      handleSubmit,
+      pristine,
+      reset,
+      submitting,
+      onSubmit,
+      location
+    } = this.props;
+
+    let isEditForm;
+    if (location.pathname.includes('edit')) {
+      isEditForm = true;  
+    } else {
+      isEditForm = false;
+    }
 
     return (
     <section className='news-post-form'>
-      <h2>Create/edit post</h2>
+      <h2>{isEditForm ? 'Edit post' : 'Create post'}</h2>
 
         <form onSubmit={(e) => e.preventDefault()} encType='multipart/form-data'>
 

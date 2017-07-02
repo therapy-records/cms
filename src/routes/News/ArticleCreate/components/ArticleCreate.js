@@ -14,7 +14,8 @@ class ArticleCreate extends React.Component {
       newsPost,
       promiseLoading,
       promiseSuccess,
-      promiseError
+      promiseError,
+      location
     } = this.props;
 
     return (
@@ -32,7 +33,7 @@ class ArticleCreate extends React.Component {
           </div>
         }
         {!promiseLoading && !promiseSuccess && 
-          <NewsPostForm onSubmit={this.props.onPostNews} />
+          <NewsPostForm onSubmit={this.props.onPostNews} location={location} />
         }
         
       </div>
@@ -44,7 +45,8 @@ ArticleCreate.propTypes = {
   onPostNews: PropTypes.func.isRequired,
   promiseLoading: PropTypes.bool,
   promiseSuccess: PropTypes.bool,
-  promiseError: PropTypes.object
+  promiseError: PropTypes.object,
+  location: PropTypes.object
 }
 
 export default ArticleCreate
