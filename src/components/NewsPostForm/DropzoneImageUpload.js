@@ -11,7 +11,8 @@ export class DropzoneNew extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      items: [],
+      singleItem: ''
     };
   }
 
@@ -22,10 +23,17 @@ export class DropzoneNew extends React.Component {
                         .field('file', file);
     upload.end((err, response) => {
       if (response.body.secure_url !== '') {
-        this.setState({
-          items: [...this.state.items, ...[response.body.secure_url] ]
-        });
-        this.props.input.onChange(this.state.items);
+        if (this.props.multiple === true) {
+          this.setState({
+            items: [...this.state.items, ...[response.body.secure_url] ]
+          });
+          this.props.input.onChange(this.state.items);
+        } else {
+          this.setState({
+            singleItem: response.body.secure_url
+          });
+          this.props.input.onChange(this.state.singleItem);
+        }
       }
     });
   }
