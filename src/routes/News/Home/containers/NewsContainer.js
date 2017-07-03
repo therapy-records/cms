@@ -9,7 +9,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  newsPosts : state.news.posts.reverse()
+  newsPosts : state.news.posts && state.news.posts.reverse()
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(News)

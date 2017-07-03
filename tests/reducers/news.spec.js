@@ -1,12 +1,58 @@
+import 'core-js';
+import axios from 'axios';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import nock from 'nock';
+import { _axios } from 'reducers/news';
 import {
   FETCH_NEWS_POSTS_SUCCESS,
   POST_NEWS_FORM_SUCCESS,
   fetchSuccess,
   fetchNews,
-  // postNews,
-  // editNews,
+  postNews,
+  editNews,
   default as newsReducer
-} from 'reducers/news'
+} from 'reducers/news';
+import { 
+  UISTATE_PROMISE_LOADING,
+  UISTATE_PROMISE_SUCCESS,
+  UISTATE_PROMISE_ERROR
+} from 'reducers/uiState'
+import {
+  API_ROOT,
+  NEWS,
+  NEWS_CREATE
+} from 'constants';
+
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
+
+const mock = {
+  getNewsResponse: {
+    data: [
+      { title: 'do something' }, 
+      { title: 'do something else' }
+    ]
+  },
+  newsPost: {
+    _id: 'xcxcxcxcxccx1234',
+    title: 'hello',
+    createdAt: new Date(),
+    mainBody: '<p>test</p>'
+  }
+};
+const mockState = {
+  news: { 
+    posts: mock.getNewsResponse.data
+  },
+  form: {
+    NEWS_POST_FORM: {
+      values: mock.newsPost
+    }
+  }
+};
+
+const store = mockStore(mockState);
 
 describe('(Redux Module) news', () => {
   it('Should export a constant FETCH_NEWS_POSTS_SUCCESS', () => {
@@ -30,50 +76,11 @@ describe('(Redux Module) news', () => {
     });
   });
 
-
-  describe('(Action) fetchNews', () => {  
-    let _globalState
-    let _dispatchSpy
-    let _getStateSpy
-
-    beforeEach(() => {
-      _globalState = {
-        posts : newsReducer(undefined, {})
-      }
-      _dispatchSpy = sinon.spy((action) => {
-        _globalState = {
-          ..._globalState,
-          posts : newsReducer(_globalState.posts, action)
-        }
-      })
-      _getStateSpy = sinon.spy(() => {
-        return _globalState
-      })
-    })
-
-    it('should be exported as a function', () => {
-      expect(fetchNews).to.be.a('function');
+  describe('(Action) fetchSuccess', () => {
+    afterEach(() => {
+      nock.cleanAll()
     });
 
-    it('should return a function (is a thunk)', () => {
-      expect(fetchNews()).to.be.a('function')
-    })
-
-    // it('Should return a promise from that thunk that gets fulfilled.', () => {
-    //   return fetchNews()(_dispatchSpy, _getStateSpy).should.eventually.be.fulfilled
-    // })
-
-    // it('Should call dispatch and getState exactly once.', () => {
-    //   return fetchNews()(_dispatchSpy, _getStateSpy)
-    //     .then(() => {
-    //       _dispatchSpy.should.have.been.calledOnce
-    //       _getStateSpy.should.have.been.calledOnce
-    //     })
-    // })
-
-  });
-
-  describe('(Action handler) fetchSuccess', () => {
     it('should be exported as a function', () => {
       expect(fetchSuccess).to.be.a('function');
     });
@@ -84,7 +91,7 @@ describe('(Redux Module) news', () => {
 
     it('should assign the first argument to the payload property', () => {
       const mockData = [ { title: 'something' }, { title: 'test' } ];
-      expect(fetchSuccess(mockData)).to.have.property('payload', mockData)
+      expect(fetchSuccess(mockData)).to.have.property('payload', mockData);
     });
 
     it('should update state', () => {
@@ -100,27 +107,138 @@ describe('(Redux Module) news', () => {
       });
     });
   });
+
+  describe('(Thunk) fetchNews', () => {
+    afterEach(() => {
+      nock.cleanAll();
+    });
+
+    it('should be exported as a function', () => {
+      expect(fetchNews).to.be.a('function');
+    });
+
+    it('should return a function', () => {
+      expect(fetchNews()).to.be.a('function');
+    });
+
+    it('should dispatch the correct actions', () => {
+      axios.get = sinon.stub().returns(Promise.resolve(mock.getNewsResponse));
+      nock(API_ROOT + NEWS)
+        .get('/news')
+        .reply(200, mock.getNewsResponse.data );
+
+      const expectedActions = [
+        { type: UISTATE_PROMISE_LOADING, payload: true },
+        { type: FETCH_NEWS_POSTS_SUCCESS, payload: mock.getNewsResponse.data },
+        { type: UISTATE_PROMISE_LOADING, payload: false },
+        { type: UISTATE_PROMISE_SUCCESS, payload: true },
+      ];
+
+      return store.dispatch(fetchNews()).then(() => {
+        const storeActions = store.getActions();
+        expect(storeActions).to.deep.equal(expectedActions);
+        store.clearActions();
+      });
+    });
+  });
   
+  describe('(Thunk) postNews', () => {
+    afterEach(() => {
+      nock.cleanAll();
+    });
+    it('should be exported as a function', () => {
+      expect(postNews).to.be.a('function');
+    });
 
+    it('should return a function', () => {
+      expect(postNews()).to.be.a('function');
+    });
+    
+    it('should dispatch the correct actions on success', () => {
+      _axios.post = sinon.stub().returns(Promise.resolve(mock.newsPost));
+      nock(API_ROOT + NEWS_CREATE)
+        .post(NEWS_CREATE, mock.newsPost)
+        .reply(200, mock.newsPost);
 
+      const expectedActions = [
+        { type: UISTATE_PROMISE_LOADING, payload: true },
+        { type: UISTATE_PROMISE_LOADING, payload: false },
+        { type: UISTATE_PROMISE_SUCCESS, payload: true },
+      ];
 
+      return store.dispatch(postNews(mock.newsPost)).then(() => {
+        const storeActions = store.getActions();
+        expect(storeActions).to.deep.equal(expectedActions);
+        store.clearActions();
+      });
+    });
+    it('should dispatch the correct actions on error', () => {
+      _axios.post = sinon.stub().returns(Promise.reject({ error: true}));
+      nock(API_ROOT + NEWS_CREATE)
+        .post(NEWS_CREATE, mock.newsPost);
 
-  // describe('(Action Creator) increment', () => {
-  //   it('Should be exported as a function.', () => {
-  //     expect(increment).to.be.a('function')
-  //   })
+      const expectedActions = [
+        { type: UISTATE_PROMISE_LOADING, payload: true },
+        { type: UISTATE_PROMISE_LOADING, payload: false },
+        { type: UISTATE_PROMISE_ERROR, payload: { error: true } }
+      ];
 
-  //   it('Should return an action with type "COUNTER_INCREMENT".', () => {
-  //     expect(increment()).to.have.property('type', COUNTER_INCREMENT)
-  //   })
+      return store.dispatch(postNews(mock.newsPost)).then(() => {
+        const storeActions = store.getActions();
+        expect(storeActions).to.deep.equal(expectedActions);
+        store.clearActions();
+      });
+    });
+  });
 
-  //   it('Should assign the first argument to the "payload" property.', () => {
-  //     expect(increment(5)).to.have.property('payload', 5)
-  //   })
+  describe('(Thunk) editNews', () => {
+    afterEach(() => {
+      nock.cleanAll();
+    });
+    it('should be exported as a function', () => {
+      expect(editNews).to.be.a('function');
+    });
 
-  //   it('Should default the "payload" property to 1 if not provided.', () => {
-  //     expect(increment()).to.have.property('payload', 1)
-  //   })
-  // })
+    it('should return a function', () => {
+      expect(editNews()).to.be.a('function');
+    });
 
-})
+    it('should dispatch the correct actions on success', () => {
+      _axios.put = sinon.stub().returns(Promise.resolve(mock.newsPost));
+      nock(API_ROOT + NEWS + 'asdf1234')
+        .put(`${NEWS}asdf1234`, {})
+        .reply(200, mock.newsPost);
+
+      const expectedActions = [
+        { type: UISTATE_PROMISE_LOADING, payload: false },
+        { type: UISTATE_PROMISE_SUCCESS, payload: true },
+      ];
+
+      store.clearActions();
+      return store.dispatch(editNews(mock.newsPost)).then(() => {
+        const storeActions = store.getActions();
+        expect(storeActions).to.deep.equal(expectedActions);
+        store.clearActions();
+      });
+    });
+    
+    it('should dispatch the correct actions on error', () => {
+      _axios.put = sinon.stub().returns(Promise.reject({ error: true}));
+      nock(API_ROOT + NEWS + 'asdf1234')
+        .put(`${NEWS}asdf1234`, {})
+        .reply(500);
+
+      const expectedActions = [
+        { type: UISTATE_PROMISE_LOADING, payload: false },
+        { type: UISTATE_PROMISE_ERROR, payload: { error: true } }
+      ];
+
+      return store.dispatch(editNews({})).then(() => {
+        const storeActions = store.getActions();
+        expect(storeActions).to.deep.equal(expectedActions);
+        store.clearActions();
+      });
+    });
+  });
+
+});

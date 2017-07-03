@@ -1,10 +1,10 @@
+import fetch from 'isomorphic-fetch';
+import axios from 'axios';
 import {
   API_ROOT,
   NEWS,
   NEWS_CREATE
-} from '../constants'
-
-
+} from '../constants';
 import {
   promiseLoading,
   promiseSuccess,
@@ -12,8 +12,15 @@ import {
   resetPromiseState
 } from './uiState';
 
-export const FETCH_NEWS_POSTS_SUCCESS = 'FETCH_NEWS_POSTS_SUCCESS'
+export const FETCH_NEWS_POSTS_SUCCESS = 'FETCH_NEWS_POSTS_SUCCESS';
 export const POST_NEWS_FORM_SUCCESS = 'POST_NEWS_FORM_SUCCESS';
+
+export const _axios = axios.create({
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': localStorage.getItem('token')
+  }
+});
 
 // ------------------------------------
 // Actions
@@ -29,12 +36,10 @@ export function fetchSuccess(data){
 export const fetchNews = () => {
   return (dispatch, getState) => {
     dispatch(promiseLoading(true));
-    return new Promise((resolve) => {
-      fetch(API_ROOT + NEWS)
-      .then(res => res.json())
+    return axios.get(API_ROOT + NEWS)
       .then(
-        (data) => {
-          dispatch(fetchSuccess(data));
+        (res) => {
+          dispatch(fetchSuccess(res.data));
           dispatch(promiseLoading(false));
           dispatch(promiseSuccess(true));
         },
@@ -42,13 +47,13 @@ export const fetchNews = () => {
           dispatch(promiseLoading(false));
           dispatch(promiseError(err));
         }
-      );
-    })
+      )
   }
 }
 
 export const postNews = () => {
   return (dispatch, getState) => {
+    dispatch(promiseLoading(true));
     const getFormObj = () => {
       if (getState().form.NEWS_POST_FORM &&
           getState().form.NEWS_POST_FORM.values) {
@@ -57,28 +62,18 @@ export const postNews = () => {
         return null;
       }
     }
-
-    const postHeaders = new Headers();
-    postHeaders.set('Content-Type', 'application/json');
-    postHeaders.set('Authorization', localStorage.getItem('token'))
-
-    return new Promise((resolve) => {
-      fetch(API_ROOT + NEWS_CREATE, {
-          method: 'POST',
-          headers: postHeaders,
-          body: getFormObj()
-        }
-      )
-      .then(
-        (data) => {
-          dispatch(promiseLoading(false));
-          dispatch(promiseSuccess(true));
-        }, (err) => {
-          dispatch(promiseLoading(false));
-          dispatch(promiseError(err));
-        }
-      )
-    })
+    return _axios.post(
+      API_ROOT + NEWS_CREATE,
+      getFormObj()
+    ).then(
+      (data) => {
+        dispatch(promiseLoading(false));
+        dispatch(promiseSuccess(true));
+      }, (err) => {
+        dispatch(promiseLoading(false));
+        dispatch(promiseError(err));
+      }
+    );
 
   }
 }
@@ -99,23 +94,19 @@ export const editNews = (editedPost) => {
     const postHeaders = new Headers();
     postHeaders.set('Content-Type', 'application/json');
     postHeaders.set('Authorization', localStorage.getItem('token'))
-    return new Promise((resolve) => {
-      fetch(API_ROOT + NEWS + '/' + editedPost._id, {
-          method: 'PUT',
-          headers: postHeaders,
-          body: JSON.stringify(editedPost)
-        }
-      )
-      .then(
-        (data) => {
-          dispatch(promiseLoading(false));
-          dispatch(promiseSuccess(true)); 
-        }, (err) => {
-          dispatch(promiseLoading(false));
-          dispatch(promiseError(err)); 
-        }
-      )
-    })
+
+    return _axios.put(
+      API_ROOT + NEWS + '/' + editedPost._id,
+      JSON.stringify(editedPost)
+    ).then(
+      (data) => {
+        dispatch(promiseLoading(false));
+        dispatch(promiseSuccess(true)); 
+      }, (err) => {
+        dispatch(promiseLoading(false));
+        dispatch(promiseError(err)); 
+      }
+    );
   }
 }
 
