@@ -210,6 +210,7 @@ describe('(Redux Module) news', () => {
         .reply(200, mock.newsPost);
 
       const expectedActions = [
+        { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
         { type: UISTATE_PROMISE_SUCCESS, payload: true },
       ];
@@ -229,6 +230,7 @@ describe('(Redux Module) news', () => {
         .reply(500);
 
       const expectedActions = [
+        { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
         { type: UISTATE_PROMISE_ERROR, payload: { error: true } }
       ];

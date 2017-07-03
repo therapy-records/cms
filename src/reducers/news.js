@@ -1,4 +1,3 @@
-import fetch from 'isomorphic-fetch';
 import axios from 'axios';
 import {
   API_ROOT,
@@ -80,6 +79,7 @@ export const postNews = () => {
 
 export const editNews = (editedPost) => {
   return (dispatch, getState) => {
+    dispatch(promiseLoading(true));
     let getFormValues = () => {
       if (getState().form.NEWS_POST_FORM &&
           getState().form.NEWS_POST_FORM.values) {
@@ -91,9 +91,6 @@ export const editNews = (editedPost) => {
     const reduxFormObj = getFormValues();
     editedPost.title = reduxFormObj.title;
     editedPost.bodyMain = reduxFormObj.bodyMain;
-    const postHeaders = new Headers();
-    postHeaders.set('Content-Type', 'application/json');
-    postHeaders.set('Authorization', localStorage.getItem('token'))
 
     return _axios.put(
       API_ROOT + NEWS + '/' + editedPost._id,
