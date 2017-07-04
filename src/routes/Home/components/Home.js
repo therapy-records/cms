@@ -1,22 +1,23 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { browserHistory } from 'react-router';
 import LoginForm from '../../../components/LoginForm'
 
 export class Home extends React.Component {
 
-  componentWillMount(){
+  componentWillMount() {
     if (!this.props.isAuthenticated && this.props.onAuthCheck) {
       this.props.onAuthCheck();
     }
   }
-  redirectToDashboard(){
+  redirectToDashboard() {
     setTimeout(() => {
       browserHistory.push('/dashboard');
     }, 10);
   }
 
   render() {
-    const  {
+    const {
       isAuthenticated
     } = this.props;
 
@@ -34,6 +35,12 @@ export class Home extends React.Component {
       </div>
     )
   }
+}
+
+Home.propTypes = {
+  isAuthenticated: PropTypes.bool,
+  onPostForm: PropTypes.func
+
 }
 
 export default Home

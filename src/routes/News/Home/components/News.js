@@ -6,13 +6,13 @@ import './News.scss'
 
 class News extends React.Component {
 
-  componentWillMount(){
+  componentWillMount() {
     if (!this.props.newsPosts || !this.props.newsPosts.length) {
       this.props.onFetchNews(); 
     }
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.props.resetPromiseState();
   }
 

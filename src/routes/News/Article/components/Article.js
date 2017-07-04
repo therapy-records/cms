@@ -15,13 +15,13 @@ class Article extends React.Component {
   handleModalOpen = () => this.setState({isShowingModal: true})
   handleModalClose = () => this.setState({isShowingModal: false})
 
-  componentWillMount(){
+  componentWillMount() {
     if (!this.props.newsArticles) {
       this.props.onFetchNews();
     }
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.props.resetPromiseState();
   }
 

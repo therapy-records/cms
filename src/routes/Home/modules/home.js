@@ -4,14 +4,14 @@ import {
 } from '../../../constants'
 import {
   USER_AUTH_SUCCESS,
-  USER_AUTH_ERROR 
+  USER_AUTH_ERROR
 } from '../../../constants/actions'
 
 // ------------------------------------
 // Actions
 // ------------------------------------
 
-export function authSuccess(data){
+export function authSuccess(data) {
   return {
     type: USER_AUTH_SUCCESS,
     payload: {
@@ -20,7 +20,7 @@ export function authSuccess(data){
   }
 }
 
-export function authError(){
+export function authError() {
   return {
     type: USER_AUTH_ERROR,
     payload: {
@@ -50,7 +50,6 @@ export const userLogin = () => {
       })
         .then(res => res.json())
         .then((data) => {
-
           if (data.success === true) {
             localStorage.setItem('token', data.token)
             dispatch(authSuccess())
@@ -83,16 +82,18 @@ export const actions = {
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
+/* eslint-disable no-return-assign */
 const ACTION_HANDLERS = {
   [USER_AUTH_SUCCESS] : (state, action) => state = action.payload,
   [USER_AUTH_ERROR] : (state, action) => state = action.payload
 }
+/* eslint-enable no-return-assign */
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
 const initialState = {};
-export default function homeReducer (state = initialState, action) {
+export default function homeReducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state

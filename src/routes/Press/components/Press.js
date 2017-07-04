@@ -1,7 +1,7 @@
 import React from 'react'
 
 class Press extends React.Component {
-  render(){
+  render() {
     return (
       <div>
         <p>Coming soon...</p>

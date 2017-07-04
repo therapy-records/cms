@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
-import Dropzone from 'react-dropzone'
-import request from 'superagent'
-import DropzoneImageUpload from './DropzoneImageUpload';
-import './DropzoneImageUpload.scss';
+/* eslint-disable react/prop-types, react/jsx-no-bind, */
+import React from 'react';
+import Dropzone from 'react-dropzone';
+import request from 'superagent';
 
 const CLOUDINARY_UPLOAD_PRESET_ID = 'gflm7wbr';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dpv2k0qsj/upload';
@@ -25,7 +24,7 @@ export class DropzoneNew extends React.Component {
       if (response.body.secure_url !== '') {
         if (this.props.multiple === true) {
           this.setState({
-            items: [...this.state.items, ...[response.body.secure_url] ]
+            items: [ ...this.state.items, ...[response.body.secure_url] ]
           });
           this.props.input.onChange(this.state.items);
         } else {
@@ -35,6 +34,11 @@ export class DropzoneNew extends React.Component {
           this.props.input.onChange(this.state.singleItem);
         }
       }
+      if (err) {
+        this.setState({
+          singleItem: `Sorry, error ${err}`
+        });
+      }
     });
   }
 
@@ -42,12 +46,11 @@ export class DropzoneNew extends React.Component {
     files.forEach((f) => this.uploadSingleImage(f));
   }
 
-  render(){
+  render() {
     const {
       input,
       title,
-      multiple,
-      doThings
+      multiple
     } = this.props;
     const {
       items
@@ -83,14 +86,14 @@ export class DropzoneNew extends React.Component {
           </div>
 
           <div className={multiple && 'col-2'}>
-            {(multiple && items && items.length) && 
+            {(multiple && items && items.length) &&
               <ul className='flex-root'>
                 {items.map((i) => (
                   <li key={i} className='col-50 no-list-style gallery-image-upload-item'>
                     <img src={i} />
                   </li>
                 ))}
-              </ul> 
+              </ul>
             }
           </div>
 
@@ -101,3 +104,4 @@ export class DropzoneNew extends React.Component {
 }
 
 export default DropzoneNew;
+/* eslint-enable react/prop-types, react/jsx-no-bind, */

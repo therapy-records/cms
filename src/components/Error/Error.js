@@ -1,9 +1,9 @@
 import React from 'react'
-import { Link, browserHistory } from 'react-router'
+import { browserHistory } from 'react-router'
 
 class ErrorComponent extends React.Component {
 
-  redirectToHome(){
+  redirectToHome() {
     browserHistory.push('/');
   }
 
@@ -11,10 +11,9 @@ class ErrorComponent extends React.Component {
     return (
       <div>
         <h3>Oh no, 404 :(</h3>
-        <button onClick={() => this.redirectToHome()} className="btn-logout">Go home</button>
+        <button onClick={() => this.redirectToHome()} className='btn-logout'>Go home</button>
       </div>
     )
   }
 }
-
 export default ErrorComponent

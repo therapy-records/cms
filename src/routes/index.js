@@ -9,7 +9,7 @@ import ArticleCreateRoute from './News/ArticleCreate'
 import ArticleRoute from './News/Article'
 import ArticleEditRoute from './News/ArticleEdit'
 import PressRoute from './Press';
-import { routeAuthCheck }  from '../actions/auth';
+import { routeAuthCheck } from '../actions/auth';
 export const createRoutes = (store) => {
   return ({
     path        : '/',
@@ -31,7 +31,7 @@ export const createRoutes = (store) => {
         childRoutes: [
           // LoginRoute(store),
           // SignupRoute(store),
-          CounterRoute(store),
+          CounterRoute(store)
         ]
       },
       {

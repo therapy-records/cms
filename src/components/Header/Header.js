@@ -1,10 +1,11 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link, browserHistory } from 'react-router'
 import './Header.scss'
 
 class Header extends React.Component {
 
-  redirectToHome(){
+  redirectToHome() {
     browserHistory.push('/');
   }
 
@@ -33,7 +34,7 @@ class Header extends React.Component {
               Press
             </Link>
             {' | '}
-            <button onClick={() =>  { onLogout(); this.redirectToHome(); }} className="btn-logout">Log out</button>
+            <button onClick={() => { onLogout(); this.redirectToHome(); }} className='btn-logout'>Log out</button>
           </div>
         ) : (
           <Link to='/' activeClassName='route--active'>Log in</Link>
@@ -41,6 +42,11 @@ class Header extends React.Component {
       </div>
     )
   }
-}
+};
 
-export default Header
+Header.propTypes = {
+  isAuthenticated: PropTypes.bool,
+  onLogout: PropTypes.func.isRequired
+};
+
+export default Header;

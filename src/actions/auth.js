@@ -29,7 +29,6 @@ export const authCheck = () => {
       })
         .then(res => res.json())
         .then((data) => {
-
           if (data.success === true) {
             localStorage.setItem('token', data.token)
             dispatch(authSuccess())
@@ -45,15 +44,12 @@ export const authCheck = () => {
   }
 }
 
-
 export const routeAuthCheck = (store, nextState, replace, cb) => {
   return (nextState, replace, cb) => {
     const token = localStorage.getItem('token');
-    const { user } = store.getState();
-
     const postHeaders = new Headers();
     postHeaders.set('Content-Type', 'application/json');
-    postHeaders.set('Authorization', localStorage.getItem('token'));
+    postHeaders.set('Authorization', token);
     return new Promise((resolve, reject) => {
       fetch(API_ROOT + AUTH, {
         method: 'POST',

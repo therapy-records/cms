@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { ModalContainer, ModalDialog } from 'react-modal-dialog';
 
 class ArticleDeleteModal extends React.Component {
-  render(){
+  render() {
     const {
       isDeleted
     } = this.props;

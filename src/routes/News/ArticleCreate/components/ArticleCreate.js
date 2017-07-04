@@ -5,7 +5,7 @@ import NewsPostForm  from '../../../../components/NewsPostForm'
 
 class ArticleCreate extends React.Component {
   
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.props.resetPromiseState();
   }
 

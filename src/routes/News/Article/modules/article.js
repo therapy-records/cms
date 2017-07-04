@@ -21,7 +21,7 @@ function success(data){
 
 
 //todo: why doesn't error work?
-function error(){
+function error() {
   return {
     type: FETCH_SELECTED_NEWS_POST_ERROR,
     payload: {error: true}
@@ -37,7 +37,7 @@ function deleteSuccess(data){
 
 
 //todo: why doesn't error work?
-function deleteError(){
+function deleteError() {
   return {
     type: DELETE_SINGLE_NEWS_POST_ERROR,
     payload: {error: true}

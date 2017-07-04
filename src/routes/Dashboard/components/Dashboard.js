@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router'
+import PropTypes from 'prop-types'
 import './Dashboard.scss'
 
 export class Dashboard extends React.Component {
-
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.props.resetPromiseState();
   }
 
@@ -36,6 +36,11 @@ export class Dashboard extends React.Component {
     )
   }
 
+}
+
+Dashboard.propTypes = {
+  newsPosts: PropTypes.array,  
+  onFetchNews: PropTypes.func.isRequired
 }
 
 export default Dashboard

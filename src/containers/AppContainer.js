@@ -5,11 +5,11 @@ import { Provider } from 'react-redux'
 
 class AppContainer extends Component {
 
-  shouldComponentUpdate () {
+  shouldComponentUpdate() {
     return false
   }
 
-  render () {
+  render() {
     const { routes, store } = this.props
 
     return (

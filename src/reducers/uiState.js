@@ -40,16 +40,16 @@ export const resetPromiseState = () => {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [UISTATE_PROMISE_LOADING] : (state, action) => {
-    return {...state, promiseLoading: action.payload}
+    return { ...state, promiseLoading: action.payload }
   },
   [UISTATE_PROMISE_SUCCESS] : (state, action) => {
-    return {...state, promiseSuccess: action.payload}
+    return { ...state, promiseSuccess: action.payload }
   },
   [UISTATE_PROMISE_ERROR] : (state, action) => {
-    return {...state, promiseError: action.payload}
+    return { ...state, promiseError: action.payload }
   },
   [UISTATE_PROMISE_SUCCESS_RESET] : (state, action) => {
-    return {...state, promiseSuccess: action.payload}
+    return { ...state, promiseSuccess: action.payload }
   }
 }
 
@@ -62,7 +62,7 @@ const initialState = {
   promiseError: false
 };
 
-export default function uiStateReducer (state = initialState, action) {
+export default function uiStateReducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
   return handler ? handler(state, action) : state
 }
