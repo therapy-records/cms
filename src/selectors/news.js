@@ -1,8 +1,6 @@
 import { createSelector } from 'reselect'
 
-const newsPostsSelector = (state) => state.news.posts;
-
-export const selectNewsPostsPost = (state, id) => state.news.posts.filter((p) => p._id === id); 
+export const selectNewsPostsPost = (state, id) => state.news.posts.filter((p) => p._id === id);
 
 export const selectNewsPostsPostTitle = createSelector(
   selectNewsPostsPost,

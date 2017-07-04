@@ -1,17 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router'
-import NewsPostForm  from '../../../../components/NewsPostForm'
+import NewsPostForm from '../../../../components/NewsPostForm'
 
 class ArticleCreate extends React.Component {
-  
   componentWillUnmount() {
     this.props.resetPromiseState();
   }
 
   render() {
-    const { 
-      newsPost,
+    const {
       promiseLoading,
       promiseSuccess,
       promiseError,
@@ -20,7 +18,7 @@ class ArticleCreate extends React.Component {
 
     return (
       <div>
-        {promiseLoading && 
+        {promiseLoading &&
           <p>loading...</p>
         }
         {promiseError &&
@@ -32,10 +30,9 @@ class ArticleCreate extends React.Component {
             <Link to='news' className='news-link'>Go to news</Link>
           </div>
         }
-        {!promiseLoading && !promiseSuccess && 
+        {!promiseLoading && !promiseSuccess &&
           <NewsPostForm onSubmit={this.props.onPostNews} location={location} />
-        }
-        
+        }        
       </div>
     )
   }
@@ -46,7 +43,8 @@ ArticleCreate.propTypes = {
   promiseLoading: PropTypes.bool,
   promiseSuccess: PropTypes.bool,
   promiseError: PropTypes.object,
-  location: PropTypes.object
+  location: PropTypes.object,
+  resetPromiseState: PropTypes.func
 }
 
 export default ArticleCreate

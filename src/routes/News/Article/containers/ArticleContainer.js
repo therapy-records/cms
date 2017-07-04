@@ -1,5 +1,4 @@
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { resetPromiseState } from '../../../../reducers/uiState';
 import { fetchNews } from '../../../../reducers/news';
 import { selectNewsPostsPost } from '../../../../selectors/news';

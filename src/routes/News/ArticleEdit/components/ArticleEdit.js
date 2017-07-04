@@ -1,16 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router'
-import NewsPostForm  from '../../../../components/NewsPostForm'
+import NewsPostForm from '../../../../components/NewsPostForm'
 
 class ArticleEdit extends React.Component {
-
   componentWillUnmount() {
     this.props.resetPromiseState();
   }
 
   renderHtml(data) {
-    return {__html: data}
+    return { __html: data }
   }
 
   render() {
@@ -37,7 +36,7 @@ class ArticleEdit extends React.Component {
         }
         {(!promiseLoading && promiseSuccess) &&
           <div>
-            <h2>Successfully updated! <br/><br/>🚀</h2>
+            <h2>Successfully updated! <br /><br />🚀</h2>
             <Link to='news' className='news-link'>Go to news</Link>
           </div>
         }
@@ -68,7 +67,8 @@ ArticleEdit.propTypes = {
   promiseLoading: PropTypes.bool,
   promiseSuccess: PropTypes.bool,
   promiseError: PropTypes.bool,
-  resetPromiseState: PropTypes.func.isRequired
+  resetPromiseState: PropTypes.func.isRequired,
+  location: PropTypes.object.isRequired
 }
 
 export default ArticleEdit

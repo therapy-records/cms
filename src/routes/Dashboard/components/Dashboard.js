@@ -26,7 +26,7 @@ export class Dashboard extends React.Component {
         <br />
 
         <p>Stats</p>
-        {newsPosts && <p>News posts: {newsPosts.length}</p>} 
+        {newsPosts && <p>News posts: {newsPosts.length}</p>}
         {/*
         <p>Press releases: ...</p>
         <p>Collaborators: ...</p>
@@ -39,8 +39,9 @@ export class Dashboard extends React.Component {
 }
 
 Dashboard.propTypes = {
-  newsPosts: PropTypes.array,  
-  onFetchNews: PropTypes.func.isRequired
+  newsPosts: PropTypes.array,
+  onFetchNews: PropTypes.func.isRequired,
+  resetPromiseState: PropTypes.func.isRequired
 }
 
 export default Dashboard

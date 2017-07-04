@@ -25,6 +25,7 @@
     "object-curly-spacing" : [2, "always"],
     "semi": 0,
     "space-before-function-paren": ["error", "never"],
-    "react/jsx-indent-props": 0
+    "react/jsx-indent-props": 0,
+    "operator-linebreak": 0
   }
 }

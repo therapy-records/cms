@@ -112,7 +112,7 @@ export class NewsPostForm extends React.Component {
 
           <br />
           <br />
-          
+
           <Field name='miniGalleryImages'
                 component={DropzoneImageUpload}
                 title='Mini gallery images'

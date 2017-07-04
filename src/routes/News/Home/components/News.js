@@ -8,7 +8,7 @@ class News extends React.Component {
 
   componentWillMount() {
     if (!this.props.newsPosts || !this.props.newsPosts.length) {
-      this.props.onFetchNews(); 
+      this.props.onFetchNews();
     }
   }
 
@@ -44,11 +44,11 @@ class News extends React.Component {
         <div className='news-feed-header'>
           <Link to='news/create'>Create a new post</Link>
         </div>
-        <br/>
+        <br />
         {!this.props.newsPosts || !this.props.newsPosts.length && (
           <p>Unable to fetch news posts :(</p>
         )}
-        {this.props.newsPosts && 
+        {this.props.newsPosts &&
           <div className='flex-root'>
             {this.props.newsPosts.map((p) => this.renderPost(p) )}
           </div> 
@@ -60,7 +60,8 @@ class News extends React.Component {
 
 News.propTypes = {
   onFetchNews: PropTypes.func.isRequired,
-  newsPosts: PropTypes.array.isRequired
+  newsPosts: PropTypes.array.isRequired,
+  resetPromiseState: PropTypes.func
 }
 
 export default News

@@ -39,7 +39,8 @@ export class Home extends React.Component {
 
 Home.propTypes = {
   isAuthenticated: PropTypes.bool,
-  onPostForm: PropTypes.func
+  onPostForm: PropTypes.func,
+  onAuthCheck: PropTypes.func.isRequired
 
 }
 

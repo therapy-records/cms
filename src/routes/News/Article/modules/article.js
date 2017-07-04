@@ -12,35 +12,24 @@ export const DELETE_SINGLE_NEWS_POST_ERROR = 'DELETE_SINGLE_NEWS_POST_ERROR';
 // Actions
 // ------------------------------------
 
-function success(data){
+function success(data) {
   return {
     type: FETCH_SELECTED_NEWS_POST_SUCCESS,
     payload: data
   }
 }
 
-
-//todo: why doesn't error work?
-function error() {
-  return {
-    type: FETCH_SELECTED_NEWS_POST_ERROR,
-    payload: {error: true}
-  }
-}
-
-function deleteSuccess(data){
+function deleteSuccess(data) {
   return {
     type: DELETE_SINGLE_NEWS_POST_SUCCESS,
     payload: data
   }
 }
 
-
-//todo: why doesn't error work?
 function deleteError() {
   return {
     type: DELETE_SINGLE_NEWS_POST_ERROR,
-    payload: {error: true}
+    payload: { error: true }
   }
 }
 
@@ -53,9 +42,9 @@ export const fetchNewsPost = (postId) => {
           if (data) {
             dispatch(success(data));
             resolve()
-          } else if (err) {
-            dispatch(error())
-            resolve()
+          } else {
+            dispatch(deleteError())
+            reject()
           }
         }
       );
@@ -78,7 +67,7 @@ export const deleteNewsPost = (postId) => {
           if (data) {
             dispatch(deleteSuccess(data));
             resolve()
-          } else if (err) {
+          } else {
             dispatch(deleteError())
             resolve()
           }
@@ -106,6 +95,7 @@ export const actions = {
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
+/* eslint-disable no-return-assign */
 const ACTION_HANDLERS = {
   [FETCH_SELECTED_NEWS_POST_SUCCESS] : (state, action) => state = action.payload,
   [FETCH_SELECTED_NEWS_POST_ERROR] : (state, action) => state = action.payload,
@@ -113,12 +103,13 @@ const ACTION_HANDLERS = {
   [DELETE_SINGLE_NEWS_POST_SUCCESS] : (state, action) => state = action.payload,
   [DELETE_SINGLE_NEWS_POST_ERROR] :  (state, action) => state = action.payload
 }
+/* eslint-enable no-return-assign */
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
 const initialState = {};
-export default function selectedNewsPostReducer (state = initialState, action) {
+export default function selectedNewsPostReducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state
