@@ -1,7 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { Link } from 'react-router'
-import moment from 'moment'
 import News from 'routes/News/Home/components/News'
 
 const mockNewsPosts = [
@@ -11,13 +10,13 @@ const mockNewsPosts = [
 ];
 
 describe('(Component) News - Home', () => {
-  let wrapper, 
+  let wrapper,
       props,
       baseProps = {
         onFetchNews: () => {},
         newsPosts: mockNewsPosts
       };
-  
+
   it('should render create a new post link', () => {
     props = baseProps;
     wrapper = shallow(<News {...props} />);
@@ -31,10 +30,10 @@ describe('(Component) News - Home', () => {
     props = baseProps;
     wrapper = shallow(<News {...props} />);
     const renderNewsPost = (key) => {
-      const p = props.newsPosts[key];
-      return ( 
+      const p = props.newsPosts[key]; // eslint-disable-line
+      return (
         <div key={p._id} className='news-card'>
-        <div className='bg-inner' />
+          <div className='bg-inner' />
           <div className='inner'>
             <h3>{p.title}</h3>
             <Link to={`news/${p._id}`} className='btn'>View</Link>
@@ -43,11 +42,11 @@ describe('(Component) News - Home', () => {
         </div>
       )
     };
-    const child0 = wrapper.containsMatchingElement( renderNewsPost(0) );
+    const child0 = wrapper.containsMatchingElement(renderNewsPost(0));
     expect(child0).to.equal(true);
-    const child1 = wrapper.containsMatchingElement( renderNewsPost(1) );
+    const child1 = wrapper.containsMatchingElement(renderNewsPost(1));
     expect(child1).to.equal(true);
-    const child2 = wrapper.containsMatchingElement( renderNewsPost(2) );
+    const child2 = wrapper.containsMatchingElement(renderNewsPost(2));
     expect(child2).to.equal(true);
   });
 
@@ -60,5 +59,4 @@ describe('(Component) News - Home', () => {
     );
     expect(actual).to.equal(true);
   });
-
 });

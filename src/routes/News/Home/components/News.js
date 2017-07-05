@@ -5,7 +5,6 @@ import moment from 'moment';
 import './News.scss'
 
 class News extends React.Component {
-
   componentWillMount() {
     if (!this.props.newsPosts || !this.props.newsPosts.length) {
       this.props.onFetchNews();
@@ -16,7 +15,7 @@ class News extends React.Component {
     this.props.resetPromiseState();
   }
 
-  renderPost(p){
+  renderPost(p) {
     return (
       <div key={p._id} className='news-card'>
         <div className='bg-inner' style={{ backgroundImage: `url('${p.mainImageUrl}')` }} />
@@ -50,8 +49,8 @@ class News extends React.Component {
         )}
         {this.props.newsPosts &&
           <div className='flex-root'>
-            {this.props.newsPosts.map((p) => this.renderPost(p) )}
-          </div> 
+            {this.props.newsPosts.map((p) => this.renderPost(p))}
+          </div>
         }
       </div>
     )

@@ -2,16 +2,15 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { Link } from 'react-router'
 import ArticleEdit from 'routes/News/ArticleEdit/components/ArticleEdit'
-import { NewsPostForm }  from 'components/NewsPostForm/NewsPostForm'
 
 describe('(Component) News - ArticleEdit', () => {
-  let wrapper, 
+  let wrapper,
       props,
       baseProps = {
         onPostForm: () => {},
         article: { title: 'test' }
       };
-  
+
   it('should render editing title', () => {
     props = baseProps;
     wrapper = shallow(<ArticleEdit {...props} />);
@@ -20,8 +19,6 @@ describe('(Component) News - ArticleEdit', () => {
     );
     expect(actual).to.equal(true);
   });
-
-  // it('should render a NewsPostForm', () => { });
 
   describe('when promise is loading', () => {
     beforeEach(() => {
@@ -46,7 +43,7 @@ describe('(Component) News - ArticleEdit', () => {
     });
     it('should show success message and link', () => {
       const actual = wrapper.containsAllMatchingElements([
-        <h2>Successfully updated! <br/><br/>🚀</h2>,
+        <h2>Successfully updated! <br /><br />🚀</h2>,
         <Link to='news' className='news-link'>Go to news</Link>
       ]);
       expect(actual).to.equal(true);
@@ -68,5 +65,4 @@ describe('(Component) News - ArticleEdit', () => {
       expect(actual).to.equal(true);
     });
   });
-
 });

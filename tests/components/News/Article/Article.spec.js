@@ -1,23 +1,22 @@
 import React from 'react'
 import Article from 'routes/News/Article/components/Article'
 import ArticleDeleteModal from 'routes/News/Article/components/ArticleDeleteModal'
-import { ModalContainer, ModalDialog } from 'react-modal-dialog';
 import { shallow } from 'enzyme'
 
 describe('(Component) News - Article', () => {
-  let wrapper, 
+  let wrapper,
       props,
       mockArticle = {
-      _id: 'asdf1234',
-      title: 'hello world',
-      bodyMain: '<p>dummy copy</p><div>something<h2>title</h2></div>',
-      mainImageUrl: 'http://test.com/hi.jpg',
-      createdAt: new Date()
-    },
-    baseProps = {
-      onFetchNews: () => {},
-      onDeleteArticle: () => {}
-    };
+        _id: 'asdf1234',
+        title: 'hello world',
+        bodyMain: '<p>dummy copy</p><div>something<h2>title</h2></div>',
+        mainImageUrl: 'http://test.com/hi.jpg',
+        createdAt: new Date()
+      },
+      baseProps = {
+        onFetchNews: () => {},
+        onDeleteArticle: () => {}
+      };
 
   describe('when promise is loading', () => {
     beforeEach(() => {
@@ -67,7 +66,6 @@ describe('(Component) News - Article', () => {
       );
       expect(actual).to.equal(true);
     });
-
   });
 
   describe('delete post button', () => {
@@ -80,7 +78,6 @@ describe('(Component) News - Article', () => {
     });
 
     it('should not render <ArticleDeleteModal /> by default', () => {
-      const button = wrapper.find('button');
       const actual = wrapper.containsMatchingElement(
         <ArticleDeleteModal />
       );
@@ -96,5 +93,4 @@ describe('(Component) News - Article', () => {
       expect(actual).to.equal(true);
     });
   });
-
 });

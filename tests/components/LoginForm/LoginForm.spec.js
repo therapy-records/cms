@@ -16,14 +16,14 @@ describe('(Component) LoginForm', () => {
     );
     expect(actual).to.equal(true);
   });
-  
+
   it('should render a username field', () => {
     const actual = wrapper.containsMatchingElement(
-      <Field name="username"
+      <Field name='username'
              component={textInput}
-             type="text"
-             placeholder="username"
-             label="Username"
+             type='text'
+             placeholder='username'
+             label='Username'
              validate={required} />
     );
     expect(actual).to.equal(true);
@@ -31,11 +31,11 @@ describe('(Component) LoginForm', () => {
 
   it('should render a password field', () => {
     const actual = wrapper.containsMatchingElement(
-      <Field name="password"
+      <Field name='password'
              component={textInput}
-             type="password"
-             placeholder="password"
-             label="Password"
+             type='password'
+             placeholder='password'
+             label='Password'
              validate={required} />
     );
     expect(actual).to.equal(true);
@@ -55,7 +55,6 @@ describe('(Component) LoginForm', () => {
   });
 
   describe('submit button', () => {
- 
     it('should render a button', () => {
       props = {
         onSubmit: () => {},
@@ -65,7 +64,7 @@ describe('(Component) LoginForm', () => {
       }
       const buttonWrapper = shallow(<LoginForm {...props} />);
       const actual = buttonWrapper.containsMatchingElement(
-        <button type="submit" disabled={false}>Submit</button>
+        <button type='submit' disabled={false}>Submit</button>
       );
       expect(actual).to.equal(true);
     });
@@ -76,17 +75,11 @@ describe('(Component) LoginForm', () => {
         error: false,
         pristine: false,
         submitting: false
-      }
-      const spies = {
-        buttonClick: sinon.spy()
       };
-
       const buttonWrapper = shallow(<LoginForm {...props} />);
       const button = buttonWrapper.find('button');
       button.simulate('click');
       props.onSubmit.should.have.been.called;
     });
-    
   });
-
 });

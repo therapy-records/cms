@@ -96,9 +96,9 @@ class Article extends React.Component {
 
                   <Link to={`/news/${article._id}/edit`} className='btn'>Edit post</Link>
 
-                  <button 
-                    className='btn' 
-                    onClick={this.handleModalOpen} 
+                  <button
+                    className='btn'
+                    onClick={this.handleModalOpen}
                     style={{ width: 'auto', background: 'darkred', color: '#fff' }}>Delete post
                   </button>
                 </div>

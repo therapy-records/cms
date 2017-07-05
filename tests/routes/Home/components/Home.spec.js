@@ -1,11 +1,9 @@
 import React from 'react'
-import ReduxForm from 'redux-form'
 import { Home } from 'routes/Home/components/Home'
-import { LoginForm } from 'components/LoginForm/LoginForm'
 import { shallow } from 'enzyme'
 
 describe('(Component) Home', () => {
-  let props, spies, wrapper
+  let props, wrapper
 
   describe('when !isAuthenticated', () => {
     beforeEach(() => {
@@ -25,7 +23,6 @@ describe('(Component) Home', () => {
     });
 
     // todo: test onPostForm prop & call
-
   });
 
   describe('when isAuthenticated', () => {
@@ -47,7 +44,5 @@ describe('(Component) Home', () => {
     // it should call props.onAuthCheck
 
     // should change browserHistory
-
   });
-  
-})
+});

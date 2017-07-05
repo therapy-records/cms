@@ -24,36 +24,34 @@ describe('(Component) NewsPostForm', () => {
   });
 
   describe('form fields', () => {
-
     it('should render a mainImageUrl field', () => {
       const actual = wrapper.containsMatchingElement(
-        <Field name="mainImageUrl"
+        <Field name='mainImageUrl'
                component={renderDropzoneInput} />
       );
-      expect(actual).to.equal(true);      
+      expect(actual).to.equal(true);
     });
 
     it('should render a title field', () => {
       const actual = wrapper.containsMatchingElement(
-        <Field name="title"
+        <Field name='title'
                component={textInput}
-               type="text"
-               placeholder="Hello World"
-               label="Title"
+               type='text'
+               placeholder='Hello World'
+               label='Title'
                validate={required} />
       );
-      expect(actual).to.equal(true);      
+      expect(actual).to.equal(true);
     });
 
     it('should render a bodyMain field', () => {
       const actual = wrapper.containsMatchingElement(
-        <Field name="bodyMain"
+        <Field name='bodyMain'
                component={bodyMainRTE}
                validate={required} />
       );
-      expect(actual).to.equal(true);      
+      expect(actual).to.equal(true)
     });
-
   });
 
   it('should render an error', () => {
@@ -70,7 +68,6 @@ describe('(Component) NewsPostForm', () => {
   });
 
   describe('submit button', () => {
- 
     it('should render a button', () => {
       props = {
         onSubmit: () => {},
@@ -80,7 +77,7 @@ describe('(Component) NewsPostForm', () => {
       }
       const buttonWrapper = shallow(<NewsPostForm {...props} />);
       const actual = buttonWrapper.containsMatchingElement(
-        <button type="submit" disabled={false}>Submit</button>
+        <button type='submit' disabled={false}>Submit</button>
       );
       expect(actual).to.equal(true);
     });
@@ -97,7 +94,5 @@ describe('(Component) NewsPostForm', () => {
       button.simulate('click');
       props.onSubmit.should.have.been.called;
     });
-    
   });
-
 });

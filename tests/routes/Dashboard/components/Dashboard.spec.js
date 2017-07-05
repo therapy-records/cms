@@ -1,19 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router';
-import { bindActionCreators } from 'redux'
 import { Dashboard } from 'routes/Dashboard/components/Dashboard'
 import { shallow } from 'enzyme'
 
 describe('(Component) Counter', () => {
-  let props, spies, wrapper
+  let props, wrapper
 
   beforeEach(() => {
-    spies = {}
     props = {
-      newsPosts: [ { title: 'test' }, { title: 'testing'} ]
+      newsPosts: [ { title: 'test' }, { title: 'testing' } ]
     }
     wrapper = shallow(<Dashboard {...props} />)
-  })
+  });
 
   it('should render a heading', () => {
     const actual = wrapper.containsMatchingElement(
@@ -41,12 +39,8 @@ describe('(Component) Counter', () => {
       props = {
         onFetchNews: sinon.spy()
       };
-      const wrapperNoNews = shallow(<Dashboard {...props} />);
-      
       props.onFetchNews.should.have.been.called;
     });
   });
-
   // todo: test componentWillUnmount calls resetPromiseState
-
 })

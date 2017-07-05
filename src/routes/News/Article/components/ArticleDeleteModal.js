@@ -10,7 +10,8 @@ class ArticleDeleteModal extends React.Component {
     return (
       <ModalContainer onClose={this.handleModalClose}>
         <ModalDialog onClose={this.handleModalClose}>
-          {deletedState ? ( // eslint:disable-line
+          {/*
+          {deletedState ? (
             <div>
               <h4>Successfully deleted!</h4>
               <p>redirecting..</p>
@@ -19,10 +20,13 @@ class ArticleDeleteModal extends React.Component {
             <div>
               <h4>Are you sure you want to delete this post?</h4>
               <p>It will be gone forever!</p>
-              {/* <button className='btn' onClick={() => { this.props.onDeleteArticle(article._id) }}>Delete post</button> */}
-              <button className='btn' onClick={this.handleModalClose}>Cancel</button>
+              <button className='btn' onClick={() => {
+                this.props.onDeleteArticle(article._id)
+              }}>Delete post</button>
             </div>
           )}
+          */}
+          <p>are you sure you want to delete?...</p>
         </ModalDialog>
       </ModalContainer>
     )
@@ -32,7 +36,7 @@ class ArticleDeleteModal extends React.Component {
 ArticleDeleteModal.propTypes = {
   isDeleted: PropTypes.bool,
   handleModalClose: PropTypes.func.isRequired,
-  onDeleteArticle: PropTypes.func.isRequired  
+  onDeleteArticle: PropTypes.func.isRequired
 }
 
 export default ArticleDeleteModal

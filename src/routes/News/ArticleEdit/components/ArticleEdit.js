@@ -13,7 +13,7 @@ class ArticleEdit extends React.Component {
   }
 
   render() {
-    const { 
+    const {
       article,
       promiseLoading,
       promiseSuccess,
@@ -48,7 +48,7 @@ class ArticleEdit extends React.Component {
             <hr />
             <br />
             <br />
-            <NewsPostForm 
+            <NewsPostForm
               post={article}
               location={location}
               onSubmit={() => this.props.onPostForm(article)}

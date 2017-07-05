@@ -1,14 +1,13 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import Header from 'components/Header/Header'
-import { IndexLink, Link } from 'react-router'
+import { Link } from 'react-router'
 import { shallow } from 'enzyme'
 
 describe('(Component) Header', () => {
   let wrapper, props;
 
   describe('when !isAuthenticated', () => {
-
     beforeEach(() => {
       wrapper = shallow(<Header {...props} />)
     });
@@ -26,11 +25,9 @@ describe('(Component) Header', () => {
       );
       expect(actual).to.equal(true);
     });
-
   });
 
   describe('when isAuthenticated', () => {
-
     beforeEach(() => {
       props = {
         isAuthenticated: true
@@ -42,7 +39,7 @@ describe('(Component) Header', () => {
       const actual1 = wrapper.containsMatchingElement(
         <Link to='/dashboard' activeClassName='route--active'>
           Dashboard
-        </Link>  
+        </Link>
       );
       expect(actual1).to.equal(true);
       const actual2 = wrapper.containsMatchingElement(
@@ -60,15 +57,13 @@ describe('(Component) Header', () => {
     });
 
     describe('logout link', () => {
-      
-      
       it('should be rendered', () => {
         const actual = wrapper.containsMatchingElement(
-          <button className="btn-logout">Log out</button>
+          <button className='btn-logout'>Log out</button>
         );
         expect(actual).to.equal(true);
       });
-      
+
       it('should call dispatch and onLogout on click', () => {
         let spies = {};
         props = {
@@ -84,8 +79,6 @@ describe('(Component) Header', () => {
         spies.dispatch.should.have.been.called;
         spies.onLogout.should.have.been.called;
       });
-
     });
-    
   });
 })

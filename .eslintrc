@@ -26,6 +26,8 @@
     "semi": 0,
     "space-before-function-paren": ["error", "never"],
     "react/jsx-indent-props": 0,
-    "operator-linebreak": 0
+    "operator-linebreak": 0,
+    "one-var": 0,
+    "indent": 0
   }
 }

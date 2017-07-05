@@ -2,20 +2,20 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { Link } from 'react-router'
 import ArticleCreate from 'routes/News/ArticleCreate/components/ArticleCreate'
-import NewsPostForm  from 'components/NewsPostForm'
+import NewsPostForm from 'components/NewsPostForm'
 
 describe('(Component) News - ArticleCreate', () => {
-  let wrapper, 
+  let wrapper,
       props,
       baseProps = {
         onPostNews: () => {}
       };
-  
+
   it('should render a NewsPostForm', () => {
     props = baseProps;
     wrapper = shallow(<ArticleCreate {...props} />);
     const actual = wrapper.containsMatchingElement(
-      <NewsPostForm onSubmit={props.onPostNews}/>
+      <NewsPostForm onSubmit={props.onPostNews} />
     );
     expect(actual).to.equal(true);
   });
@@ -43,7 +43,7 @@ describe('(Component) News - ArticleCreate', () => {
     });
     it('should show success message and link', () => {
       const actual = wrapper.containsAllMatchingElements([
-        <h2>Successfully posted! <br/><br/>🚀</h2>,
+        <h2>Successfully posted! <br /><br />🚀</h2>,
         <Link to='news' className='news-link'>Go to news</Link>
       ]);
       expect(actual).to.equal(true);
@@ -65,5 +65,4 @@ describe('(Component) News - ArticleCreate', () => {
       expect(actual).to.equal(true);
     });
   });
-
 });

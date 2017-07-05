@@ -1,6 +1,4 @@
 import 'core-js';
-import axios from 'axios';
-import configureMockStore from 'redux-mock-store';
 import {
   UISTATE_PROMISE_LOADING,
   UISTATE_PROMISE_SUCCESS,
@@ -12,17 +10,6 @@ import {
   resetPromiseState,
   default as uiStateReducer
 } from 'reducers/uiState';
-
-const mockStore = configureMockStore();
-const mockState = {
-  uiState: {
-    promiseLoading: false,
-    promiseSuccess: false,
-    promiseError: false
-  }
-};
-
-const store = mockStore(mockState);
 
 describe('(Redux Module) uiState', () => {
   it('Should export a constant UISTATE_PROMISE_LOADING', () => {
@@ -45,9 +32,9 @@ describe('(Redux Module) uiState', () => {
     it('Should initialize with correct fields', () => {
       const state = uiStateReducer(undefined, {});
       expect(state).to.deep.equal({
-          promiseLoading: false,
-          promiseSuccess: false,
-          promiseError: false
+        promiseLoading: false,
+        promiseSuccess: false,
+        promiseError: false
       });
     });
   });
@@ -151,6 +138,4 @@ describe('(Redux Module) uiState', () => {
       });
     });
   });
-
-
 });

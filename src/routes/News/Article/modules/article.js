@@ -35,7 +35,7 @@ function deleteError() {
 
 export const fetchNewsPost = (postId) => {
   return (dispatch) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       fetch(API_ROOT + NEWS + '/' + postId)
         .then(res => res.json())
         .then((data) => {
@@ -57,7 +57,7 @@ export const deleteNewsPost = (postId) => {
     const postHeaders = new Headers();
     postHeaders.set('Content-Type', 'application/json');
     postHeaders.set('Authorization', localStorage.getItem('token'));
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       fetch(API_ROOT + NEWS + '/' + postId, {
         method: 'DELETE',
         header: postHeaders
@@ -69,7 +69,7 @@ export const deleteNewsPost = (postId) => {
             resolve()
           } else {
             dispatch(deleteError())
-            resolve()
+            reject()
           }
         }
       );

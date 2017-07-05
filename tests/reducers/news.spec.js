@@ -3,7 +3,6 @@ import axios from 'axios';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
-import { _axios } from 'reducers/news';
 import {
   FETCH_NEWS_POSTS_SUCCESS,
   POST_NEWS_FORM_SUCCESS,
@@ -11,9 +10,10 @@ import {
   fetchNews,
   postNews,
   editNews,
+  _axios,
   default as newsReducer
 } from 'reducers/news';
-import { 
+import {
   UISTATE_PROMISE_LOADING,
   UISTATE_PROMISE_SUCCESS,
   UISTATE_PROMISE_ERROR
@@ -30,7 +30,7 @@ const mockStore = configureMockStore(middlewares);
 const mock = {
   getNewsResponse: {
     data: [
-      { title: 'do something' }, 
+      { title: 'do something' },
       { title: 'do something else' }
     ]
   },
@@ -42,7 +42,7 @@ const mock = {
   }
 };
 const mockState = {
-  news: { 
+  news: {
     posts: mock.getNewsResponse.data
   },
   form: {
@@ -125,13 +125,13 @@ describe('(Redux Module) news', () => {
       axios.get = sinon.stub().returns(Promise.resolve(mock.getNewsResponse));
       nock(API_ROOT + NEWS)
         .get('/news')
-        .reply(200, mock.getNewsResponse.data );
+        .reply(200, mock.getNewsResponse.data);
 
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: FETCH_NEWS_POSTS_SUCCESS, payload: mock.getNewsResponse.data },
         { type: UISTATE_PROMISE_LOADING, payload: false },
-        { type: UISTATE_PROMISE_SUCCESS, payload: true },
+        { type: UISTATE_PROMISE_SUCCESS, payload: true }
       ];
 
       return store.dispatch(fetchNews()).then(() => {
@@ -141,7 +141,7 @@ describe('(Redux Module) news', () => {
       });
     });
   });
-  
+
   describe('(Thunk) postNews', () => {
     afterEach(() => {
       nock.cleanAll();
@@ -153,7 +153,7 @@ describe('(Redux Module) news', () => {
     it('should return a function', () => {
       expect(postNews()).to.be.a('function');
     });
-    
+
     it('should dispatch the correct actions on success', () => {
       _axios.post = sinon.stub().returns(Promise.resolve(mock.newsPost));
       nock(API_ROOT + NEWS_CREATE)
@@ -163,7 +163,7 @@ describe('(Redux Module) news', () => {
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
-        { type: UISTATE_PROMISE_SUCCESS, payload: true },
+        { type: UISTATE_PROMISE_SUCCESS, payload: true }
       ];
 
       return store.dispatch(postNews(mock.newsPost)).then(() => {
@@ -173,7 +173,7 @@ describe('(Redux Module) news', () => {
       });
     });
     it('should dispatch the correct actions on error', () => {
-      _axios.post = sinon.stub().returns(Promise.reject({ error: true}));
+      _axios.post = sinon.stub().returns(Promise.reject({ error: true }));
       nock(API_ROOT + NEWS_CREATE)
         .post(NEWS_CREATE, mock.newsPost);
 
@@ -212,7 +212,7 @@ describe('(Redux Module) news', () => {
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
-        { type: UISTATE_PROMISE_SUCCESS, payload: true },
+        { type: UISTATE_PROMISE_SUCCESS, payload: true }
       ];
 
       store.clearActions();
@@ -222,9 +222,9 @@ describe('(Redux Module) news', () => {
         store.clearActions();
       });
     });
-    
+
     it('should dispatch the correct actions on error', () => {
-      _axios.put = sinon.stub().returns(Promise.reject({ error: true}));
+      _axios.put = sinon.stub().returns(Promise.reject({ error: true }));
       nock(API_ROOT + NEWS + 'asdf1234')
         .put(`${NEWS}asdf1234`, {})
         .reply(500);
@@ -242,5 +242,4 @@ describe('(Redux Module) news', () => {
       });
     });
   });
-
 });
