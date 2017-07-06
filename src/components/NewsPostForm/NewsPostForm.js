@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import RichTextEditor from '../RichTextEditor'
@@ -15,13 +15,22 @@ import {
 import './NewsPostForm.scss';
 import DropzoneImageUpload from './DropzoneImageUpload';
 
-const textInput = ({ input, label, type, placeholder, props, meta: { touched, error } }) => (
+export const textInput = ({ input, label, type, placeholder, props, meta: { touched, error } }) => (
   <div>
     <label>{label}</label>
     <input {...input} placeholder={placeholder} type={type} {...props} />
     {touched && error && <span>{label} is {error}</span>}
   </div>
 );
+
+textInput.propTypes = {
+  input: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
+  props: PropTypes.object,
+  meta: PropTypes.object.isRequired
+}
 
 export const bodyMainRTE = ({ input, onChange, props, meta: { touched, error } }) => (
   <div>
@@ -30,6 +39,13 @@ export const bodyMainRTE = ({ input, onChange, props, meta: { touched, error } }
     <RichTextEditor value={input.value} onChange={e => { input.onChange(e) }} {...props} />
   </div>
 );
+
+bodyMainRTE.propTypes = {
+  input: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
+  props: PropTypes.object,
+  meta: PropTypes.object.isRequired
+}
 
 export const required = value => value ? undefined : 'required';
 
@@ -134,6 +150,14 @@ export class NewsPostForm extends React.Component {
   }
 }
 
+NewsPostForm.propTypes = {
+  error: PropTypes.string,
+  pristine: PropTypes.bool,
+  submitting: PropTypes.bool,
+  onSubmit: PropTypes.func,
+  location: PropTypes.object.isRequired
+};
+
 let InitFromStateForm = reduxForm({
   form: 'NEWS_POST_FORM',
   enableReinitialize : true
@@ -154,4 +178,3 @@ InitFromStateForm = connect(
 )(InitFromStateForm);
 
 export default InitFromStateForm;
-/* eslint-enable react/prop-types */

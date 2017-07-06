@@ -1,4 +1,3 @@
-
 import React from 'react';
 import PropTypes from 'prop-types'
 import Dropzone from 'react-dropzone';
@@ -110,7 +109,7 @@ export class DropzoneImageUpload extends React.Component {
 }
 
 DropzoneImageUpload.propTypes = {
-  input: PropTypes.string.isRequired,
+  input: PropTypes.object.isRequired,
   title: PropTypes.string,
   multiple: PropTypes.bool
 };

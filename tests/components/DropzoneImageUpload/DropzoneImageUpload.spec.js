@@ -1,5 +1,6 @@
 import React from 'react'
 import DropzoneImageUpload from 'components/DropzoneImageUpload/DropzoneImageUpload'
+import Dropzone from 'react-dropzone';
 import { shallow } from 'enzyme'
 
 describe('(Component) DropzoneImageUpload', () => {
