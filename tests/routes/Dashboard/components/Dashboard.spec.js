@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { Dashboard } from 'routes/Dashboard/components/Dashboard'
 import { shallow } from 'enzyme'
 
-describe('(Component) Counter', () => {
+describe('(Component) Dashboard', () => {
   let props, wrapper
 
   beforeEach(() => {
@@ -39,6 +39,7 @@ describe('(Component) Counter', () => {
       props = {
         onFetchNews: sinon.spy()
       };
+      const noNewsWrapper = shallow(<Dashboard {...props} />)
       props.onFetchNews.should.have.been.called;
     });
   });

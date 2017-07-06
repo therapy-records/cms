@@ -1,4 +1,4 @@
-const argv = require('yargs').argv
+// const argv = require('yargs').argv
 const webpack = require('webpack')
 const cssnano = require('cssnano')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -69,19 +69,19 @@ webpackConfig.plugins = [
 
 // Ensure that the compiler exits on errors during testing so that
 // they do not get skipped and misreported.
-if (__TEST__ && !argv.watch) {
-  webpackConfig.plugins.push(function() {
-    this.plugin('done', function(stats) {
-      if (stats.compilation.errors.length) {
-        // Pretend no assets were generated. This prevents the tests
-        // from running making it clear that there were warnings.
-        throw new Error(
-          stats.compilation.errors.map(err => err.message || err)
-        )
-      }
-    })
-  })
-}
+// if (__TEST__ && !argv.watch) {
+//   webpackConfig.plugins.push(function() {
+//     this.plugin('done', function(stats) {
+//       if (stats.compilation.errors.length) {
+//         // Pretend no assets were generated. This prevents the tests
+//         // from running making it clear that there were warnings.
+//         throw new Error(
+//           stats.compilation.errors.map(err => err.message || err)
+//         )
+//       }
+//     })
+//   })
+// }
 
 if (__DEV__) {
   debug('Enabling plugins for live development (HMR, NoErrors).')

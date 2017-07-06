@@ -1,7 +1,7 @@
 import React from 'react'
 import { browserHistory } from 'react-router'
 
-class ErrorComponent extends React.Component {
+export class ErrorComponent extends React.Component {
 
   redirectToHome() {
     browserHistory.push('/');

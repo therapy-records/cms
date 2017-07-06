@@ -1,33 +1,49 @@
-import React from 'react'
+import React from 'react';
 import { Field } from 'redux-form';
 import {
   NewsPostForm,
-  renderDropzoneInput,
   textInput,
   required,
   bodyMainRTE
-} from 'components/NewsPostForm/NewsPostForm'
+} from 'components/NewsPostForm/NewsPostForm';
+import DropzoneImageUpload from 'components/NewsPostForm/DropzoneImageUpload';
 import { shallow } from 'enzyme'
 
 describe('(Component) NewsPostForm', () => {
-  let wrapper, props;
+  let wrapper,
+      props;
 
-  beforeEach(() => {
-    wrapper = shallow(<NewsPostForm {...props} />);
+  it('should render a `Create` heading', () => {
+    props = { location: { pathname: 'test/create' } };
+    const createWrapper = shallow(
+      <NewsPostForm {...props} />
+    );
+    const actual = createWrapper.containsMatchingElement(
+      <h2>Create post</h2>
+    );
+    expect(actual).to.equal(true);
   });
 
-  it('should render a heading', () => {
-    const actual = wrapper.containsMatchingElement(
-      <h2>Create/edit post</h2>
+  it('should render an `Edit` heading', () => {
+    props = { location: { pathname: 'test/edit' } };
+    const editWrapper = shallow(
+      <NewsPostForm {...props} />
+    );
+    const actual = editWrapper.containsMatchingElement(
+      <h2>Edit post</h2>
     );
     expect(actual).to.equal(true);
   });
 
   describe('form fields', () => {
+    beforeEach(() => {
+      wrapper = shallow(<NewsPostForm {...props} />);
+    });
     it('should render a mainImageUrl field', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='mainImageUrl'
-               component={renderDropzoneInput} />
+               title='Main image'
+               component={DropzoneImageUpload} />
       );
       expect(actual).to.equal(true);
     });
