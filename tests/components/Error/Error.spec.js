@@ -1,4 +1,6 @@
-/*import React from 'react'
+/*
+
+import React from 'react'
 import ErrorComponent from 'components/Error/Error'
 import { shallow } from 'enzyme'
 
@@ -22,4 +24,5 @@ describe('(Component) ErrorComponent', () => {
     expect(actual).to.equal(true);
   });
 });
+
 */

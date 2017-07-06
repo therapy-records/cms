@@ -4,7 +4,10 @@ import { LoginForm, textInput, required } from 'components/LoginForm/LoginForm'
 import { shallow } from 'enzyme'
 
 describe('(Component) LoginForm', () => {
-  let wrapper, props;
+  let wrapper,
+      props = {
+        onSubmit: () => {}
+      };
 
   beforeEach(() => {
     wrapper = shallow(<LoginForm {...props} />);
@@ -43,6 +46,7 @@ describe('(Component) LoginForm', () => {
 
   it('should render an error', () => {
     props = {
+      onSubmit: () => {},
       error: 'Something is wrong'
     }
     const errorWrapper = shallow(

@@ -4,11 +4,18 @@ import { Dashboard } from 'routes/Dashboard/components/Dashboard'
 import { shallow } from 'enzyme'
 
 describe('(Component) Dashboard', () => {
-  let props, wrapper
+  let props,
+      wrapper,
+      mockNewsPosts = [
+        { title: 'test' },
+        { title: 'testing' }
+      ];
 
   beforeEach(() => {
     props = {
-      newsPosts: [ { title: 'test' }, { title: 'testing' } ]
+      newsPosts: mockNewsPosts,
+      onFetchNews: () => mockNewsPosts,
+      resetPromiseState: () => {}
     }
     wrapper = shallow(<Dashboard {...props} />)
   });
@@ -39,7 +46,6 @@ describe('(Component) Dashboard', () => {
       props = {
         onFetchNews: sinon.spy()
       };
-      const noNewsWrapper = shallow(<Dashboard {...props} />)
       props.onFetchNews.should.have.been.called;
     });
   });

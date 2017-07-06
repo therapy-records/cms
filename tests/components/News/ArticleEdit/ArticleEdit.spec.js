@@ -8,7 +8,10 @@ describe('(Component) News - ArticleEdit', () => {
       props,
       baseProps = {
         onPostForm: () => {},
-        article: { title: 'test' }
+        article: { title: 'test' },
+        location: {
+          pathname: 'article/edit'
+        }
       };
 
   it('should render editing title', () => {
@@ -53,9 +56,7 @@ describe('(Component) News - ArticleEdit', () => {
   describe('when promise errors', () => {
     beforeEach(() => {
       props = baseProps;
-      props.promiseError = {
-        message: 'api error'
-      };
+      props.promiseError = true;
       wrapper = shallow(<ArticleEdit {...props} />);
     });
     it('should show error message', () => {

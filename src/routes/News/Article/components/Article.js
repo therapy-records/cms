@@ -112,7 +112,10 @@ class Article extends React.Component {
         }
 
         {this.state.isShowingModal &&
-          <ArticleDeleteModal deleted={deletedState} />
+          <ArticleDeleteModal
+            deleted={deletedState}
+            handleModalClose={() => {}}
+            onDeleteArticle={() => {}} />
         }
       </article>
     )
