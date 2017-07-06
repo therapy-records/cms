@@ -1,14 +1,16 @@
-/* eslint-disable react/prop-types, react/jsx-no-bind, */
+
 import React from 'react';
+import PropTypes from 'prop-types'
 import Dropzone from 'react-dropzone';
 import request from 'superagent';
 
 const CLOUDINARY_UPLOAD_PRESET_ID = 'gflm7wbr';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dpv2k0qsj/upload';
 
-export class DropzoneNew extends React.Component {
+export class DropzoneImageUpload extends React.Component {
   constructor(props) {
     super(props);
+    this.handleBla = this.handleBla.bind(this);
     this.state = {
       items: [],
       singleItem: ''
@@ -46,6 +48,10 @@ export class DropzoneNew extends React.Component {
     files.forEach((f) => this.uploadSingleImage(f));
   }
 
+  handleOnDrop(files) {
+    this.handleImageUpload(files)
+  }
+
   render() {
     const {
       input,
@@ -64,7 +70,7 @@ export class DropzoneNew extends React.Component {
           <div className={multiple && 'col-1'}>
             <Dropzone
               name={input.name}
-              onDrop={this.handleImageUpload.bind(this)}
+              onDrop={this.handleOnDrop}
               className='dropzone'
               activeClassName='dropzone-active'
               multiple={multiple}
@@ -103,5 +109,10 @@ export class DropzoneNew extends React.Component {
   }
 }
 
-export default DropzoneNew;
-/* eslint-enable react/prop-types, react/jsx-no-bind, */
+DropzoneImageUpload.propTypes = {
+  input: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  multiple: PropTypes.bool
+};
+
+export default DropzoneImageUpload;

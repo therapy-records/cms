@@ -44,7 +44,7 @@ export class NewsPostForm extends React.Component {
     } = this.props;
 
     let isEditForm;
-    if (location.pathname.includes('edit')) {
+    if (location && location.pathname.includes('edit')) {
       isEditForm = true;
     } else {
       isEditForm = false;

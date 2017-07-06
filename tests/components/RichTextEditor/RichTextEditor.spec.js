@@ -1,16 +1,16 @@
 import React from 'react'
-import _RichTextEditor from 'components/RichTextEditor/RichTextEditor'
+import RichTextEditor from 'components/RichTextEditor/RichTextEditor'
 import { shallow } from 'enzyme'
 
 describe('(Component) RichTextEditor', () => {
-  let wrapper, 
+  let wrapper,
       props = {
         onChange: () => {},
         value: '<div><p>test</p></div><p>hello</p>'
       }
 
   beforeEach(() => {
-    wrapper = shallow(<_RichTextEditor {...props} />)
+    wrapper = shallow(<RichTextEditor {...props} />)
   });
 
   it('should render <RichTextEditor /> with correct props', () => {
