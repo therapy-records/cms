@@ -1,5 +1,6 @@
 import 'core-js';
-import _axiosAuthHeaders from 'utils/axios'
+import axios from 'axios';
+import _axiosAuthHeaders, { headers } from 'utils/axios'
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
@@ -62,10 +63,10 @@ describe('(Actions) auth', () => {
     });
 
     it('should dispatch the correct actions on auth success', () => {
-      _axiosAuthHeaders.get = sinon.stub().returns(Promise.resolve(mock.authResponseSuccess.data));
+      axios.create({ headers: headers }).get = sinon.stub().returns(Promise.resolve(mock.authResponseSuccess));
       nock(API_ROOT + AUTH_LOGIN)
         .get('/login')
-        .reply(200, mock.authResponseSuccess.data);
+        .reply(200, mock.authResponseSuccess);
 
       const expectedActions = [
         { type: USER_AUTH_SUCCESS, payload: { isAuth: true } }

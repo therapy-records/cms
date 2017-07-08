@@ -1,4 +1,5 @@
-import _axiosAuthHeaders from '../utils/axios'
+import axios from 'axios'
+import _axiosAuthHeaders, { headers } from '../utils/axios'
 import {
   authSuccess,
   authError
@@ -19,14 +20,17 @@ const getUserObj = (state) => {
   }
 }
 
+const axiosAuthCheck = axios.create({
+  headers: headers
+});
+
 export const authCheck = () => {
   return (dispatch, getState) => {
-    return _axiosAuthHeaders.get(
-      API_ROOT + AUTH_LOGIN,
-      getUserObj(getState())
+    return _axiosAuthHeaders.post(
+      API_ROOT + AUTH_LOGIN
     ).then((data) => {
-      if (data.success === true) {
-        localStorage.setItem('token', data.token)
+      if (data.data.success === true) {
+        localStorage.setItem('token', data.data.token)
         dispatch(authSuccess())
       } else {
         localStorage.removeItem('token')
@@ -38,12 +42,18 @@ export const authCheck = () => {
 
 export const routeAuthCheck = (store, nextState, replace, cb) => {
   return (nextState, replace, cb) => {
-    return _axiosAuthHeaders.post(
-      API_ROOT + AUTH
+    return axios.create({
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': localStorage.getItem('token')
+        }
+      }).post(
+      API_ROOT + AUTH,
+      {},
+      headers
     )
-    // .then(res => res.json())
     .then((data) => {
-      if (data.success === true) {
+      if (data.data.success === true) {
         if (typeof nextState === 'object' &&
             nextState.location.pathname === '/') {
           replace('/dashboard');

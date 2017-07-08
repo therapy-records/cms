@@ -11,9 +11,7 @@ export class Home extends React.Component {
     }
   }
   redirectToDashboard() {
-    setTimeout(() => {
-      browserHistory.push('/dashboard');
-    }, 10);
+    browserHistory.push('/dashboard');
   }
 
   render() {

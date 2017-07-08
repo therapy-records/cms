@@ -12,7 +12,7 @@ export const textInput = ({ input, label, type, meta: { touched, error } }) => (
 )
 
 textInput.propTypes = {
-  input: PropTypes.string,
+  input: PropTypes.object,
   label: PropTypes.string,
   meta: PropTypes.object,
   type: PropTypes.string

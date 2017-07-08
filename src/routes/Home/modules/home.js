@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {
   API_ROOT,
   AUTH_LOGIN
@@ -29,6 +30,13 @@ export function authError() {
   }
 }
 
+const axiosUserLogin = axios.create({
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': localStorage.getItem('token')
+  }
+});
+
 export const userLogin = () => {
   return (dispatch, getState) => {
     const userObj = () => {
@@ -40,28 +48,18 @@ export const userLogin = () => {
         return null;
       }
     }
-    const postHeaders = new Headers();
-    postHeaders.set('Content-Type', 'application/json');
-    return new Promise((resolve) => {
-      fetch(API_ROOT + AUTH_LOGIN, {
-        method: 'POST',
-        headers: postHeaders,
-        body: userObj()
-      })
-        .then(res => res.json())
-        .then((data) => {
-          if (data.success === true) {
-            localStorage.setItem('token', data.token)
-            dispatch(authSuccess())
-            resolve()
-          } else {
-            localStorage.removeItem('token')
-            dispatch(authError())
-            resolve()
-          }
-        }
-      );
-    })
+    return axiosUserLogin.post(
+      API_ROOT + AUTH_LOGIN,
+      userObj()
+    ).then((data) => {
+      if (data.data.success === true) {
+        localStorage.setItem('token', data.data.token)
+        dispatch(authSuccess())
+      } else {
+        localStorage.removeItem('token')
+        dispatch(authError())
+      }
+    });
   }
 }
 
