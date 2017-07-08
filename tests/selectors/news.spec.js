@@ -1,4 +1,3 @@
-import { createSelector } from 'reselect'
 import { 
   selectNewsPostsPost,
   selectNewsPostsPostTitle,
@@ -9,7 +8,6 @@ import {
   selectNewsPostsPostMiniGallery,
   selectNewsPostsPostVideoEmbed
 } from 'selectors/news';
-import newsReducer from 'reducers/news';
 
 const mockState = {
   news: {
@@ -77,7 +75,6 @@ describe('(Selectors) news', () => {
     });
   });
 
-
   describe('selectNewsPostsPostTicketsLink', () => {
     it('should return bodyMain', () => {
       const actual = selectNewsPostsPostTicketsLink(mockState, postId);
@@ -85,7 +82,6 @@ describe('(Selectors) news', () => {
       expect(actual).to.equal(expected);
     });
   });
-
 
   describe('selectNewsPostsPostVenueLink', () => {
     it('should return bodyMain', () => {
@@ -95,7 +91,6 @@ describe('(Selectors) news', () => {
     });
   });
 
-
   describe('selectNewsPostsPostMiniGallery', () => {
     it('should return bodyMain', () => {
       const actual = selectNewsPostsPostMiniGallery(mockState, postId);
@@ -104,7 +99,6 @@ describe('(Selectors) news', () => {
     });
   });
 
-
   describe('selectNewsPostsPostVideoEmbed', () => {
     it('should return bodyMain', () => {
       const actual = selectNewsPostsPostVideoEmbed(mockState, postId);
@@ -112,7 +106,4 @@ describe('(Selectors) news', () => {
       expect(actual).to.equal(expected);
     });
   });
-
-
-
 });
