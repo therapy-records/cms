@@ -1,10 +1,10 @@
-import { combineReducers } from 'redux'
-import locationReducer from './location'
+import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
+import locationReducer from './location';
 import uiStateReducer from '../reducers/uiState';
 import homeReducer from '../routes/Home/modules/home';
 import newsReducer from '../reducers/news';
-import selectedNewsPostReducer from '../routes/News/Article/modules/article';
-import { reducer as formReducer } from 'redux-form';
+import selectedNewsPostReducer from '../reducers/newsPost';
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({

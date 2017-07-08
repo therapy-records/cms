@@ -11,7 +11,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state, props) => ({
-  article: selectNewsPostsPost(state, props.params.id)[0] || {},
+  article: selectNewsPostsPost(state, props.params.id) || {},
   promiseLoading: state.uiState.promiseLoading,
   promiseSuccess: state.uiState.promiseSuccess,
   promiseError: state.uiState.promiseError,

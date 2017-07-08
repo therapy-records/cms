@@ -1,4 +1,4 @@
-import { 
+import {
   filterNewsPostsPost,
   selectNewsPostsPost,
   selectNewsPostsPostTitle,

@@ -21,5 +21,4 @@ describe('(Component) News - ArticleDeleteModal', () => {
     );
     expect(actual).to.equal(true);
   });
-  
 });

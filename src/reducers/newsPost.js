@@ -1,7 +1,7 @@
 import {
   API_ROOT,
   NEWS
-} from '../../../../constants'
+} from '../constants'
 export const FETCH_SELECTED_NEWS_POST_SUCCESS = 'FETCH_SELECTED_NEWS_POST_SUCCESS'
 export const FETCH_SELECTED_NEWS_POST_ERROR = 'FETCH_SELECTED_NEWS_POST_ERROR'
 export const DESTROY_SELECTED_NEWS_POST = 'DESTROY_SELECTED_NEWS_POST';
