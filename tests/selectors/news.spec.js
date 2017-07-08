@@ -1,4 +1,5 @@
 import { 
+  filterNewsPostsPost,
   selectNewsPostsPost,
   selectNewsPostsPostTitle,
   selectNewsPostsPostBodyMain,
@@ -40,13 +41,21 @@ describe('(Selectors) news', () => {
       newsPost;
   beforeEach(() => {
     _newsPost = selectNewsPostsPost(mockState, postId);
-    newsPost = _newsPost[0];
+    newsPost = _newsPost;
+  });
+
+  describe('filterNewsPostsPost', () => {
+    it('should return a post in array', () => {
+      const actual = filterNewsPostsPost(mockState, postId);
+      const expected = [newsPost];
+      expect(actual).to.deep.equal(expected);
+    });
   });
 
   describe('selectNewsPostsPost', () => {
     it('should return a newsPost', () => {
       const actual = selectNewsPostsPost(mockState, postId);
-      const expected = [newsPost];
+      const expected = newsPost;
       expect(actual).to.deep.equal(expected);
     });
   });

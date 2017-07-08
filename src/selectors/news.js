@@ -1,40 +1,45 @@
 import { createSelector } from 'reselect'
 
-export const selectNewsPostsPost = (state, id) => state.news.posts.filter((p) => p._id === id);
+export const filterNewsPostsPost = (state, id) => state.news.posts.filter((p) => p._id === id);
+
+export const selectNewsPostsPost = createSelector(
+  filterNewsPostsPost,
+  (postArr) => postArr && postArr[0]
+);
 
 export const selectNewsPostsPostTitle = createSelector(
   selectNewsPostsPost,
-  (post) => post[0] && post[0].title
+  (post) => post && post.title
 );
 
 export const selectNewsPostsPostBodyMain = createSelector(
   selectNewsPostsPost,
-  (post) => post[0] && post[0].bodyMain
+  (post) => post && post.bodyMain
 );
 
 export const selectNewsPostsPostMainImageUrl = createSelector(
   selectNewsPostsPost,
-  (post) => post[0] && post[0].mainImageUrl
+  (post) => post && post.mainImageUrl
 );
 
 export const selectNewsPostsPostTicketsLink = createSelector(
   selectNewsPostsPost,
-  (post) => post[0] && post[0].ticketsLink
+  (post) => post && post.ticketsLink
 );
 
 export const selectNewsPostsPostVenueLink = createSelector(
   selectNewsPostsPost,
-  (post) => post[0] && post[0].venueLink
+  (post) => post && post.venueLink
 );
 
 export const selectNewsPostsPostMiniGallery = createSelector(
   selectNewsPostsPost,
-  (post) => post[0] && post[0].miniGallery
+  (post) => post && post.miniGallery
 );
 
 export const selectNewsPostsPostVideoEmbed = createSelector(
   selectNewsPostsPost,
-  (post) => post[0] && post[0].videoEmbed
+  (post) => post && post.videoEmbed
 );
 
 export const selectedNewsPostSelector = (state) => state.selectedNewsPost;
