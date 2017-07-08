@@ -44,10 +44,13 @@ describe('(Component) Dashboard', () => {
   describe('when there are no newsPosts in props', () => {
     it('should call onFetchNews', () => {
       props = {
+        newsPosts: [],
         onFetchNews: sinon.spy()
       };
-      props.onFetchNews.should.have.been.called;
+      shallow(<Dashboard {...props} />)
+      expect(props.onFetchNews).to.have.been.called;
     });
   });
+
   // todo: test componentWillUnmount calls resetPromiseState
-})
+});

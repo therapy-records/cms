@@ -1,5 +1,6 @@
 import 'core-js';
 import axios from 'axios';
+import _axiosAuthHeaders from 'utils/axios'
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
@@ -10,7 +11,6 @@ import {
   fetchNews,
   postNews,
   editNews,
-  _axios,
   default as newsReducer
 } from 'reducers/news';
 import {
@@ -133,7 +133,7 @@ describe('(Redux Module) news', () => {
         { type: UISTATE_PROMISE_LOADING, payload: false },
         { type: UISTATE_PROMISE_SUCCESS, payload: true }
       ];
-
+      store.clearActions();
       return store.dispatch(fetchNews()).then(() => {
         const storeActions = store.getActions();
         expect(storeActions).to.deep.equal(expectedActions);
@@ -155,7 +155,7 @@ describe('(Redux Module) news', () => {
     });
 
     it('should dispatch the correct actions on success', () => {
-      _axios.post = sinon.stub().returns(Promise.resolve(mock.newsPost));
+      _axiosAuthHeaders.post = sinon.stub().returns(Promise.resolve(mock.newsPost));
       nock(API_ROOT + NEWS_CREATE)
         .post(NEWS_CREATE, mock.newsPost)
         .reply(200, mock.newsPost);
@@ -173,7 +173,7 @@ describe('(Redux Module) news', () => {
       });
     });
     it('should dispatch the correct actions on error', () => {
-      _axios.post = sinon.stub().returns(Promise.reject({ error: true }));
+      _axiosAuthHeaders.post = sinon.stub().returns(Promise.reject({ error: true }));
       nock(API_ROOT + NEWS_CREATE)
         .post(NEWS_CREATE, mock.newsPost);
 
@@ -204,7 +204,7 @@ describe('(Redux Module) news', () => {
     });
 
     it('should dispatch the correct actions on success', () => {
-      _axios.put = sinon.stub().returns(Promise.resolve(mock.newsPost));
+      _axiosAuthHeaders.put = sinon.stub().returns(Promise.resolve(mock.newsPost));
       nock(API_ROOT + NEWS + 'asdf1234')
         .put(`${NEWS}asdf1234`, {})
         .reply(200, mock.newsPost);
@@ -224,7 +224,7 @@ describe('(Redux Module) news', () => {
     });
 
     it('should dispatch the correct actions on error', () => {
-      _axios.put = sinon.stub().returns(Promise.reject({ error: true }));
+      _axiosAuthHeaders.put = sinon.stub().returns(Promise.reject({ error: true }));
       nock(API_ROOT + NEWS + 'asdf1234')
         .put(`${NEWS}asdf1234`, {})
         .reply(500);

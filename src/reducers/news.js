@@ -1,4 +1,5 @@
 import axios from 'axios';
+import _axiosAuthHeaders from '../utils/axios'
 import {
   API_ROOT,
   NEWS,
@@ -12,13 +13,6 @@ import {
 
 export const FETCH_NEWS_POSTS_SUCCESS = 'FETCH_NEWS_POSTS_SUCCESS';
 export const POST_NEWS_FORM_SUCCESS = 'POST_NEWS_FORM_SUCCESS';
-
-export const _axios = axios.create({
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': localStorage.getItem('token')
-  }
-});
 
 // ------------------------------------
 // Actions
@@ -60,7 +54,7 @@ export const postNews = () => {
         return null;
       }
     }
-    return _axios.post(
+    return _axiosAuthHeaders.post(
       API_ROOT + NEWS_CREATE,
       getFormObj()
     ).then(
@@ -90,7 +84,7 @@ export const editNews = (editedPost) => {
     editedPost.title = reduxFormObj.title;
     editedPost.bodyMain = reduxFormObj.bodyMain;
 
-    return _axios.put(
+    return _axiosAuthHeaders.put(
       API_ROOT + NEWS + '/' + editedPost._id,
       JSON.stringify(editedPost)
     ).then(

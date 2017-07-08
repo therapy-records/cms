@@ -1,3 +1,4 @@
+import _axiosAuthHeaders from '../utils/axios'
 import {
   authSuccess,
   authError
@@ -8,70 +9,53 @@ import {
   AUTH_LOGIN
 } from '../constants'
 
+const getUserObj = (state) => {
+  if (state.form &&
+      state.form.LOGIN_FORM &&
+      state.form.LOGIN_FORM.values) {
+    return JSON.stringify(state.form.LOGIN_FORM.values)
+  } else {
+    return null;
+  }
+}
+
 export const authCheck = () => {
   return (dispatch, getState) => {
-    const userObj = () => {
-      if (getState().form &&
-          getState().form.LOGIN_FORM &&
-          getState().form.LOGIN_FORM.values) {
-        return JSON.stringify(getState().form.LOGIN_FORM.values)
+    return _axiosAuthHeaders.get(
+      API_ROOT + AUTH_LOGIN,
+      getUserObj(getState())
+    ).then((data) => {
+      if (data.success === true) {
+        localStorage.setItem('token', data.token)
+        dispatch(authSuccess())
       } else {
-        return null;
+        localStorage.removeItem('token')
+        dispatch(authError())
       }
-    }
-    const postHeaders = new Headers();
-    postHeaders.set('Content-Type', 'application/json');
-    return new Promise((resolve) => {
-      fetch(API_ROOT + AUTH_LOGIN, {
-        method: 'POST',
-        headers: postHeaders,
-        body: userObj()
-      })
-        .then(res => res.json())
-        .then((data) => {
-          if (data.success === true) {
-            localStorage.setItem('token', data.token)
-            dispatch(authSuccess())
-            resolve()
-          } else {
-            localStorage.removeItem('token')
-            dispatch(authError())
-            resolve()
-          }
-        }
-      );
-    })
+    });
   }
 }
 
 export const routeAuthCheck = (store, nextState, replace, cb) => {
   return (nextState, replace, cb) => {
-    const token = localStorage.getItem('token');
-    const postHeaders = new Headers();
-    postHeaders.set('Content-Type', 'application/json');
-    postHeaders.set('Authorization', token);
-    return new Promise((resolve, reject) => {
-      fetch(API_ROOT + AUTH, {
-        method: 'POST',
-        headers: postHeaders
-      })
-        .then(res => res.json())
-        .then((data) => {
-          if (data.success === true) {
-            if (nextState.location.pathname === '/') {
-              replace('/dashboard');
-            }
-            store.dispatch(authSuccess());
-            resolve();
-            cb();
-          } else {
-            postHeaders.set('Authorization', localStorage.removeItem('token'));
-            store.dispatch(authError())
-            replace('/');
-            cb();
-          }
+    return _axiosAuthHeaders.post(
+      API_ROOT + AUTH
+    )
+    // .then(res => res.json())
+    .then((data) => {
+      if (data.success === true) {
+        if (typeof nextState === 'object' &&
+            nextState.location.pathname === '/') {
+          replace('/dashboard');
         }
-      );
-    })
-  };
+        store.dispatch(authSuccess());
+        cb();
+      } else {
+        localStorage.removeItem('token');
+        store.dispatch(authError())
+        replace('/');
+        cb();
+      }
+    });
+  }
 }
