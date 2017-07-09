@@ -6,6 +6,7 @@ import {
   required,
   bodyMainRTE
 } from 'components/NewsPostForm/NewsPostForm';
+import Datepicker from 'components/Datepicker/Datepicker';
 import ArticlePreview from 'components/ArticlePreview/ArticlePreview.container';
 import DropzoneImageUpload from 'components/NewsPostForm/DropzoneImageUpload';
 import { shallow } from 'enzyme'
@@ -107,6 +108,20 @@ describe('(Component) NewsPostForm', () => {
     );
     const actual = errorWrapper.containsMatchingElement(
       <strong>{props.error}</strong>
+    );
+    expect(actual).to.equal(true);
+  });
+
+  it('should render <DatePicker />', () => {
+    props = {
+      onSubmit: () => {},
+      error: false,
+      pristine: false,
+      submitting: false
+    }
+    const datepickerWrapper = shallow(<NewsPostForm {...props} />);
+    const actual = datepickerWrapper.containsMatchingElement(
+      <DatePicker />
     );
     expect(actual).to.equal(true);
   });

@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
@@ -14,6 +15,7 @@ import {
 } from '../../selectors/news';
 import './NewsPostForm.scss';
 import DropzoneImageUpload from './DropzoneImageUpload';
+import Datepicker from '../Datepicker/Datepicker';
 import ArticlePreview from '../ArticlePreview/ArticlePreview.container';
 
 export const textInput = ({ input, label, type, placeholder, props, meta: { touched, error } }) => (
@@ -144,6 +146,10 @@ export class NewsPostForm extends React.Component {
           {error && <strong>{error}</strong>}
 
           <br />
+
+          <Field name='scheduledTime'
+                 component={Datepicker}
+                 title='Schedule Time' />
 
           <div>
             <button type='submit'
