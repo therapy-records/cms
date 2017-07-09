@@ -30,7 +30,7 @@ export function authError() {
   }
 }
 
-const axiosUserLogin = axios.create({
+export const axiosUserLogin = axios.create({
   headers: {
     'Content-Type': 'application/json',
     'Authorization': localStorage.getItem('token')

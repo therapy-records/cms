@@ -11,7 +11,7 @@ export const makeRootReducer = (asyncReducers) => {
     location: locationReducer,
     uiState: uiStateReducer,
     form: formReducer,
-    user: homeReducer,
+    user: userReducer,
     news: newsReducer,
     selectedNewsPost: selectedNewsPostReducer,
     ...asyncReducers
