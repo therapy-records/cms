@@ -18,7 +18,7 @@ export default (store) => ({
       /*  Webpack - use require callback to define
           dependencies for bundling   */
       const Home = require('./containers/HomeContainer').default
-      const reducer = require('./modules/home').default
+      const reducer = require('../../reducers/user').default
 
       /*  Add the reducer to the store on key 'newsPost'  */
       injectReducer(store, { key: 'user', reducer })

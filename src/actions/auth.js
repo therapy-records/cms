@@ -4,7 +4,7 @@ import _axiosAuthHeaders, { headers } from '../utils/axios'
 import {
   authSuccess,
   authError
-} from '../routes/Home/modules/home'
+} from '../reducers/user'
 import {
   API_ROOT,
   AUTH,

@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import locationReducer from './location';
 import uiStateReducer from '../reducers/uiState';
-import homeReducer from '../routes/Home/modules/home';
+import userReducer from '../reducers/user';
 import newsReducer from '../reducers/news';
 import selectedNewsPostReducer from '../reducers/newsPost';
 

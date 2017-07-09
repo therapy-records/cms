@@ -2,11 +2,11 @@ import axios from 'axios';
 import {
   API_ROOT,
   AUTH_LOGIN
-} from '../../../constants'
+} from '../constants/index'
 import {
   USER_AUTH_SUCCESS,
   USER_AUTH_ERROR
-} from '../../../constants/actions'
+} from '../constants/actions'
 
 // ------------------------------------
 // Actions

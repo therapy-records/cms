@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { userLogin } from '../modules/home'
 import Home from '../components/Home'
+import { userLogin } from '../../../reducers/user'
 import { authCheck } from '../../../actions/auth';
 
 const mapDispatchToProps = {

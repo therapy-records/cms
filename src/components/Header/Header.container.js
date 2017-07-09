@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { userLogout } from '../../routes/Home/modules/home'
+import { userLogout } from '../../reducers/user'
 
 import Header from './Header'
 
