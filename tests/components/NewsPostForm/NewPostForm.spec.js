@@ -6,6 +6,7 @@ import {
   required,
   bodyMainRTE
 } from 'components/NewsPostForm/NewsPostForm';
+import ArticlePreview from 'components/ArticlePreview/ArticlePreview.container';
 import DropzoneImageUpload from 'components/NewsPostForm/DropzoneImageUpload';
 import { shallow } from 'enzyme'
 
@@ -34,6 +35,18 @@ describe('(Component) NewsPostForm', () => {
     );
     expect(actual).to.equal(true);
   });
+
+  it('should render <ArticlePreview />', () => {
+    props = { location: { pathname: 'test/create' } };
+    const createWrapper = shallow(
+      <NewsPostForm {...props} />
+    );
+    const actual = createWrapper.containsMatchingElement(
+      <ArticlePreview />
+    );
+    expect(actual).to.equal(true);
+  });
+
 
   describe('form fields', () => {
     beforeEach(() => {

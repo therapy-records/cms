@@ -72,7 +72,7 @@ export class NewsPostForm extends React.Component {
       <section className='news-post-form'>
         <h2>{isEditForm ? 'Edit post' : 'Create post'}</h2>
 
-        <ArticlePreview post={post} />
+        <ArticlePreview />
 
         <form onSubmit={(e) => e.preventDefault()} encType='multipart/form-data'>
 

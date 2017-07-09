@@ -8,8 +8,8 @@ class ArticleDeleteModal extends React.Component {
     //   isDeleted
     // } = this.props;
     return (
-      <ModalContainer onClose={this.handleModalClose}>
-        <ModalDialog onClose={this.handleModalClose}>
+      <ModalContainer onClose={() => {}}>
+        <ModalDialog onClose={() => {}}>
           {/*
           {deletedState ? (
             <div>
