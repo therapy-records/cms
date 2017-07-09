@@ -1,4 +1,5 @@
 import axios from 'axios'
+import httpAdapter from 'axios/lib/adapters/http'
 import _axiosAuthHeaders, { headers } from '../utils/axios'
 import {
   authSuccess,

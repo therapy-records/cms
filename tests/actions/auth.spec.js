@@ -63,9 +63,9 @@ describe('(Actions) auth', () => {
     });
 
     it('should dispatch the correct actions on auth success', () => {
-      axios.create({ headers: headers }).get = sinon.stub().returns(Promise.resolve(mock.authResponseSuccess));
+      _axiosAuthHeaders.post = sinon.stub().returns(Promise.resolve(mock.authResponseSuccess));
       nock(API_ROOT + AUTH_LOGIN)
-        .get('/login')
+        .post('/login')
         .reply(200, mock.authResponseSuccess);
 
       const expectedActions = [
@@ -80,10 +80,10 @@ describe('(Actions) auth', () => {
     });
 
     it('should dispatch the correct actions on auth error', () => {
-      _axiosAuthHeaders.get = sinon.stub().returns(Promise.resolve(mock.authResponseError.data));
+      _axiosAuthHeaders.post = sinon.stub().returns(Promise.resolve(mock.authResponseError));
       nock(API_ROOT + AUTH_LOGIN)
-        .get('/login')
-        .reply(200, mock.authResponseError.data);
+        .post('/login')
+        .reply(200, mock.authResponseError);
 
       const expectedActions = [
         { type: USER_AUTH_ERROR, payload: { isAuth: false } }
@@ -110,10 +110,10 @@ describe('(Actions) auth', () => {
       expect(routeAuthCheck()).to.be.a('function');
     });
 
-    // todo: how to get routing params/store.dispatch to work?
+    // todo: why getting 'network error' issues with nock/axios?
 
     // it('should dispatch the correct actions on auth success', () => {
-    //   _axiosAuthHeaders.post = sinon.stub().returns(Promise.resolve(mock.authResponseSuccess.data));
+    //   axios.create().post = sinon.stub().returns(Promise.resolve(mock.authResponseSuccess));
     //   nock(API_ROOT + AUTH)
     //     .post('/auth')
     //     .reply(200, mock.authResponseSuccess.data);
