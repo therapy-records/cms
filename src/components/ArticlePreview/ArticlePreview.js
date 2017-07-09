@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-class NewsPostPreview extends React.Component {
+class ArticlePreview extends React.Component {
   render(){
     const {
       post
@@ -14,8 +14,8 @@ class NewsPostPreview extends React.Component {
   }
 }
 
-NewsPostPreview.propTypes = {
+ArticlePreview.propTypes = {
   post: PropTypes.object.isRequired
 }
 
-export default NewsPostPreview;
+export default ArticlePreview;

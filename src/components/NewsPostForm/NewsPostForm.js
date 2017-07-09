@@ -14,6 +14,7 @@ import {
 } from '../../selectors/news';
 import './NewsPostForm.scss';
 import DropzoneImageUpload from './DropzoneImageUpload';
+import ArticlePreview from '../ArticlePreview/ArticlePreview.container';
 
 export const textInput = ({ input, label, type, placeholder, props, meta: { touched, error } }) => (
   <div>
@@ -52,6 +53,7 @@ export const required = value => value ? undefined : 'required';
 export class NewsPostForm extends React.Component {
   render() {
     const {
+      post,
       error,
       pristine,
       submitting,
@@ -69,6 +71,8 @@ export class NewsPostForm extends React.Component {
     return (
       <section className='news-post-form'>
         <h2>{isEditForm ? 'Edit post' : 'Create post'}</h2>
+
+        <ArticlePreview post={post} />
 
         <form onSubmit={(e) => e.preventDefault()} encType='multipart/form-data'>
 
@@ -151,6 +155,7 @@ export class NewsPostForm extends React.Component {
 }
 
 NewsPostForm.propTypes = {
+  post: PropTypes.object,
   error: PropTypes.string,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
