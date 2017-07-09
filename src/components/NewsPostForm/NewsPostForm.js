@@ -1,5 +1,4 @@
 import React from 'react'
-import moment from 'moment'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
@@ -153,7 +152,7 @@ export class NewsPostForm extends React.Component {
                   togglePicker
                   title='Schedule Time' />
           }
-          
+
           <br />
           <br />
 
@@ -161,7 +160,6 @@ export class NewsPostForm extends React.Component {
                   disabled={error || pristine || submitting || error || invalid}
                   onClick={() => onSubmit()}>Submit
           </button>
-
 
         </form>
       </section>

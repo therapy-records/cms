@@ -1,5 +1,4 @@
 import React from 'react'
-import moment from 'moment'
 import { shallow } from 'enzyme'
 import InputMoment from 'input-moment'
 import Datepicker from 'components/Datepicker/Datepicker'
@@ -28,14 +27,14 @@ describe('(Component) Datepicker', () => {
     it('should render button if togglePicker prop', () => {
       props.togglePicker = true;
       const toggleWrapper = shallow(<Datepicker {...props} />);
-      const button = toggleWrapper.find('button');;
+      const button = toggleWrapper.find('button');
       button.simulate('click');
       expect(toggleWrapper.find(InputMoment).length).to.equal(1);
     });
     it('should not render <InputMoment /> after toggle', () => {
       props.togglePicker = true;
       const toggleWrapper2 = shallow(<Datepicker {...props} />);
-      const button = toggleWrapper2.find('button');;
+      const button = toggleWrapper2.find('button');
       button.simulate('click');
       expect(toggleWrapper2.find(InputMoment).length).to.equal(1);
       button.simulate('click');
@@ -43,9 +42,7 @@ describe('(Component) Datepicker', () => {
       button.simulate('click');
       expect(toggleWrapper2.find(InputMoment).length).to.equal(1);
     });
-    
+
     // todo: should call prop with moment formatting
-
   });
-
 });

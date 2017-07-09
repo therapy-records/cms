@@ -28,42 +28,39 @@ export class Datepicker extends React.Component {
   render() {
     const {
       input,
-      props,
-      meta: { touched, error },
       togglePicker
     } = this.props;
 
     const {
       pickerActive
     } = this.state;
-    
+
     return (
       <div>
-      {togglePicker ? (
-        <div>
-          <button onClick={this.handleTogglePicker}
-                  className='btn-sm'
-                  style={{ width: 'auto' }}>Schedule post
-          </button>
-          <br />
-          <br />
-          {(
-            pickerActive &&
-              <InputMoment
-                {...input}
-                moment={moment()}
-                onChange={e => { input.onChange(moment(e).format()) }}
-              />
-          )}
-        </div>
-      ) : (
-        <InputMoment
-          {...input}
-          moment={moment()}
-          onChange={e => { input.onChange(moment(e).format()) }}
-        />
-      )}
-        
+        {togglePicker ? (
+          <div>
+            <button onClick={this.handleTogglePicker}
+                    className='btn-sm'
+                    style={{ width: 'auto' }}>Schedule post
+            </button>
+            <br />
+            <br />
+            {(
+              pickerActive &&
+                <InputMoment
+                  {...input}
+                  moment={moment()}
+                  onChange={e => { input.onChange(moment(e).format()) }}
+                />
+            )}
+          </div>
+        ) : (
+          <InputMoment
+            {...input}
+            moment={moment()}
+            onChange={e => { input.onChange(moment(e).format()) }}
+          />
+        )}
       </div>
     );
   };
@@ -71,9 +68,8 @@ export class Datepicker extends React.Component {
 
 Datepicker.propTypes = {
   input: PropTypes.object.isRequired,
-  props: PropTypes.object,
-  meta: PropTypes.object.isRequired,
-  togglePicker: PropTypes.bool
+  togglePicker: PropTypes.bool,
+  pickerActive: PropTypes.bool
 }
 
 export default Datepicker;

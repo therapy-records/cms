@@ -102,7 +102,7 @@ describe('(Component) NewsPostForm', () => {
       const datepickerWrapper = shallow(<NewsPostForm {...props} />);
       const actual = datepickerWrapper.containsMatchingElement(
         <Field name='scheduledTime'
-               component={Datepicker} 
+               component={Datepicker}
                title='Schedule Time' />
       );
       expect(actual).to.equal(true);
@@ -112,12 +112,11 @@ describe('(Component) NewsPostForm', () => {
       const datepickerWrapperEdit = shallow(<NewsPostForm {...props} />);
       const actual = datepickerWrapperEdit.containsMatchingElement(
         <Field name='scheduledTime'
-               component={Datepicker} 
+               component={Datepicker}
                title='Schedule Time' />
       );
       expect(actual).to.equal(false);
     });
-
   });
 
   it('should render an error', () => {
