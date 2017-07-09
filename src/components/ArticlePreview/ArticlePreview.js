@@ -17,11 +17,16 @@ class ArticlePreview extends React.Component {
 
   render() {
     const {
-      post
+      post,
+      disabled
     } = this.props;
     return (
       <div>
-        <button onClick={this.handleModalOpen} className='btn-sm btn-width-auto btn-preview'>Preview</button>
+        <button
+          onClick={this.handleModalOpen}
+          disabled={disabled}
+          className='btn-sm btn-width-auto btn-preview'>Preview
+        </button>
         {this.state.isShowingModal &&
           <ModalContainer onClose={this.handleModalClose}>
             <ModalDialog onClose={this.handleModalClose} className='modal-dialog-large'>
@@ -35,7 +40,8 @@ class ArticlePreview extends React.Component {
 }
 
 ArticlePreview.propTypes = {
-  post: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired,
+  disabled: PropTypes.bool
 }
 
 export default ArticlePreview;

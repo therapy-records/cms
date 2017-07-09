@@ -6,3 +6,8 @@ export const selectNewsPostFormValues = createSelector(
   selectNewsPostForm,
   (form) => form.values
 );
+
+export const selectNewsPostFormSyncErrors = createSelector(
+  selectNewsPostForm,
+  (form) => form.syncErrors && form.syncErrors || false
+);

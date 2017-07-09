@@ -145,3 +145,7 @@ ol {
 .ButtonWrap__root___1EO_R {
   z-index: 1 !important; // maybe unsafe, without there is overflow/z-index issue
 }
+
+button[disabled] {
+  opacity: .6;
+}

@@ -25,7 +25,7 @@ export const textInput = ({ input, label, type, placeholder, props, meta: { touc
 );
 
 textInput.propTypes = {
-  input: PropTypes.string.isRequired,
+  input: PropTypes.object.isRequired,
   label: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
@@ -57,6 +57,7 @@ export class NewsPostForm extends React.Component {
       pristine,
       submitting,
       onSubmit,
+      invalid,
       location
     } = this.props;
 
@@ -145,7 +146,10 @@ export class NewsPostForm extends React.Component {
           <br />
 
           <div>
-            <button type='submit' disabled={error || pristine || submitting} onClick={() => onSubmit()}>Submit</button>
+            <button type='submit'
+                    disabled={error || pristine || submitting || error || invalid}
+                    onClick={() => onSubmit()}>Submit
+            </button>
           </div>
 
         </form>
@@ -159,6 +163,7 @@ NewsPostForm.propTypes = {
   error: PropTypes.string,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
+  invalid: PropTypes.bool,
   onSubmit: PropTypes.func,
   location: PropTypes.object.isRequired
 };

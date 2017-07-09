@@ -47,6 +47,22 @@ describe('(Component) NewsPostForm', () => {
     expect(actual).to.equal(true);
   });
 
+  it('should not render <ArticlePreview /> with disabled prop, with correct conditions', () => {
+    const _location = { pathname: 'test/create' };
+    props = { location: _location, invalid: true };
+    const createWrapper = shallow(<NewsPostForm {...props} />);
+    const actual = createWrapper.containsMatchingElement(<ArticlePreview />);
+    expect(actual).to.equal(true);
+    props = { location: _location, error: true };
+    const createWrapperError = shallow(<NewsPostForm {...props} />);
+    const actualError = createWrapperError.containsMatchingElement(<ArticlePreview />);
+    expect(actualError).to.equal(true);
+    props = { location: _location, pristine: true };
+    const createWrapperPristine = shallow(<NewsPostForm {...props} />);
+    const actualPristine = createWrapperPristine.containsMatchingElement(<ArticlePreview />);
+    expect(actualPristine).to.equal(true);
+  });
+
   describe('form fields', () => {
     beforeEach(() => {
       wrapper = shallow(<NewsPostForm {...props} />);
