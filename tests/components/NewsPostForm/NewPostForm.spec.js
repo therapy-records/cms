@@ -47,7 +47,6 @@ describe('(Component) NewsPostForm', () => {
     expect(actual).to.equal(true);
   });
 
-
   describe('form fields', () => {
     beforeEach(() => {
       wrapper = shallow(<NewsPostForm {...props} />);

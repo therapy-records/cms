@@ -1,4 +1,4 @@
-.news-post-form {
+.root {
   max-width: 800px;
   margin: 0 auto;
   text-align: left;
@@ -9,6 +9,12 @@
     display: block;
     margin: 0 auto;
   }
+}
+
+.heading {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
 }
 
 .col-1 {

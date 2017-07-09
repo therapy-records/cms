@@ -9,7 +9,7 @@ import {
   selectNewsPostsPostMainImageUrl,
   selectNewsPostsPostTicketsLink,
   selectNewsPostsPostVenueLink,
-  selectNewsPostsPostMiniGallery,
+  selectNewsPostsPostMiniGalleryImages,
   selectNewsPostsPostVideoEmbed
 } from '../../selectors/news';
 import './NewsPostForm.scss';
@@ -53,7 +53,6 @@ export const required = value => value ? undefined : 'required';
 export class NewsPostForm extends React.Component {
   render() {
     const {
-      post,
       error,
       pristine,
       submitting,
@@ -69,10 +68,11 @@ export class NewsPostForm extends React.Component {
     }
 
     return (
-      <section className='news-post-form'>
-        <h2>{isEditForm ? 'Edit post' : 'Create post'}</h2>
-
-        <ArticlePreview />
+      <section className='root'>
+        <div className='heading'>
+          <h2>{isEditForm ? 'Edit post' : 'Create post'}</h2>
+          <ArticlePreview />
+        </div>
 
         <form onSubmit={(e) => e.preventDefault()} encType='multipart/form-data'>
 
@@ -176,7 +176,7 @@ InitFromStateForm = connect(
       mainImageUrl: props.post && selectNewsPostsPostMainImageUrl(state, props.post._id),
       ticketsLink: props.post && selectNewsPostsPostTicketsLink(state, props.post._id),
       venueLink: props.post && selectNewsPostsPostVenueLink(state, props.post._id),
-      miniGallery: props.post && selectNewsPostsPostMiniGallery(state, props.post._id),
+      miniGalleryImages: props.post && selectNewsPostsPostMiniGalleryImages(state, props.post._id),
       videoEmbed: props.post && selectNewsPostsPostVideoEmbed(state, props.post_id)
     }
   })

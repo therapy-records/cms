@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router'
 import moment from 'moment';
-import './Article.scss'
 import ArticleDeleteModal from './ArticleDeleteModal';
 
 class Article extends React.Component {
@@ -55,9 +54,9 @@ class Article extends React.Component {
         }
 
         {(promiseSuccess && article && article.title) &&
-          <div className='flex-root'>
+          <div className='article-flex-root'>
 
-            <div className='col-1'>
+            <div className='article-col-1'>
               <h2>{article.title}</h2>
               <div dangerouslySetInnerHTML={this.renderHtml(article.bodyMain)} />
               <br />
@@ -68,9 +67,9 @@ class Article extends React.Component {
               {article.miniGalleryImages && article.miniGalleryImages.length ?
                 <div>
                   <h3>Mini gallery images</h3>
-                  <ul className='gallery-flex-root'>
+                  <ul className='article-gallery-flex-root'>
                     {article.miniGalleryImages.map((i) => (
-                      <li key={i} className='col-50 no-list-style gallery-item'>
+                      <li key={i} className='article-col-50 no-list-style article-gallery-item'>
                         <img src={i} />
                       </li>
                     ))}
@@ -80,9 +79,9 @@ class Article extends React.Component {
 
             </div>
 
-            <div className='col-2'>
-              <div className='summary-box'>
-                <div className='summary-box-inner'>
+            <div className='article-col-2'>
+              <div className='article-summary-box'>
+                <div className='article-summary-box-inner'>
                   {/* <p><a href={`http://fionaross.co.uk/news/${article._id}`}>View live post</a></p> */}
                   <p><a href={`http://fionaross.co.uk/news`} target='blank'>View live post</a></p>
                   <p>Created {moment(article.createdAt).fromNow()}

@@ -32,9 +32,9 @@ export const selectNewsPostsPostVenueLink = createSelector(
   (post) => post && post.venueLink
 );
 
-export const selectNewsPostsPostMiniGallery = createSelector(
+export const selectNewsPostsPostMiniGalleryImages = createSelector(
   selectNewsPostsPost,
-  (post) => post && post.miniGallery
+  (post) => post && post.miniGalleryImages
 );
 
 export const selectNewsPostsPostVideoEmbed = createSelector(

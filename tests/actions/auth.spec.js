@@ -1,6 +1,5 @@
 import 'core-js';
-import axios from 'axios';
-import _axiosAuthHeaders, { headers } from 'utils/axios'
+import _axiosAuthHeaders from 'utils/axios'
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';

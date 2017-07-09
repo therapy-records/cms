@@ -1,5 +1,4 @@
 import axios from 'axios'
-import httpAdapter from 'axios/lib/adapters/http'
 import _axiosAuthHeaders, { headers } from '../utils/axios'
 import {
   authSuccess,
@@ -10,20 +9,6 @@ import {
   AUTH,
   AUTH_LOGIN
 } from '../constants'
-
-const getUserObj = (state) => {
-  if (state.form &&
-      state.form.LOGIN_FORM &&
-      state.form.LOGIN_FORM.values) {
-    return JSON.stringify(state.form.LOGIN_FORM.values)
-  } else {
-    return null;
-  }
-}
-
-const axiosAuthCheck = axios.create({
-  headers: headers
-});
 
 export const authCheck = () => {
   return (dispatch, getState) => {

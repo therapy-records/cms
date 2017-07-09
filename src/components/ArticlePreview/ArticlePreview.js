@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { ModalContainer, ModalDialog } from 'react-modal-dialog';
+import ArticleLive from '../ArticleLive/ArticleLive'
+import './ArticlePreview.scss'
 
 class ArticlePreview extends React.Component {
   constructor(props) {
@@ -13,19 +15,17 @@ class ArticlePreview extends React.Component {
   handleModalOpen = () => this.setState({ isShowingModal: true })
   handleModalClose = () => this.setState({ isShowingModal: false })
 
-  render(){
+  render() {
     const {
       post
     } = this.props;
     return (
       <div>
-        <button onClick={this.handleModalOpen}>Preview post</button>
+        <button onClick={this.handleModalOpen} className='btn-sm btn-width-auto btn-preview'>Preview</button>
         {this.state.isShowingModal &&
           <ModalContainer onClose={this.handleModalClose}>
-            <ModalDialog onClose={this.handleModalClose}>
-              <h3>{post.title}</h3>
-              <img src={post.mainImageUrl} />
-              <p>full article template here...</p>
+            <ModalDialog onClose={this.handleModalClose} className='modal-dialog-large'>
+              <ArticleLive article={post} />
             </ModalDialog>
           </ModalContainer>
         }

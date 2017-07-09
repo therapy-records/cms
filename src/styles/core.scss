@@ -74,6 +74,8 @@ ol {
   padding:0;
 }
 
+/* temp styles */
+
 .cols-container {
   display: flex;
 }
@@ -89,4 +91,57 @@ ol {
 .main-container {
   margin: 0;
   width: 100%;
+}
+
+.modal-dialog-large {
+  min-width: 800px;
+  max-width: 800px;
+  top: 80px !important;
+}
+
+.article-flex-root {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.article-gallery-flex-root {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+
+.article-gallery-item {
+  flex: 1 0 33%;
+  max-width: 33%;
+}
+
+.article-col-1,
+.article-col-2 {
+  flex:1 200px;
+}
+
+.article-col-1 {
+  text-align: left;
+  padding-right:2em;
+}
+
+.article-col-2 {
+  text-align: right;
+  padding-left: 2em;
+}
+
+.article-summary-box {
+  display:flex;
+  justify-content: flex-end;
+}
+
+.article-summary-box-inner {
+  padding: 1em;
+  background: #EEE;
+}
+
+.ButtonWrap__root___1EO_R {
+  z-index: 1 !important; // maybe unsafe, without there is overflow/z-index issue
 }

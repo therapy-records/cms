@@ -2,10 +2,7 @@ import 'core-js';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
-import _axiosAuthHeaders, { headers } from 'utils/axios'
 import {
-  authSuccess,
-  authError,
   userLogin,
   userLogout,
   axiosUserLogin,
@@ -16,7 +13,7 @@ import {
   // AUTH,
   AUTH_LOGIN
 } from 'constants';
-import { 
+import {
   USER_AUTH_SUCCESS,
   USER_AUTH_ERROR
 } from 'constants/actions'
@@ -112,9 +109,8 @@ describe('(Redux Module) user', () => {
 
     it('should dispatch the correct actions', () => {
       const expectedActions = [
-        { type: USER_AUTH_ERROR, payload: { isAuth: false} }
+        { type: USER_AUTH_ERROR, payload: { isAuth: false } }
       ];
-
       return store.dispatch(userLogout()).then(() => {
         const storeActions = store.getActions();
         expect(storeActions).to.deep.equal(expectedActions);
@@ -122,5 +118,4 @@ describe('(Redux Module) user', () => {
       });
     });
   });
-
 });

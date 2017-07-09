@@ -6,7 +6,7 @@ import {
   selectNewsPostsPostMainImageUrl,
   selectNewsPostsPostTicketsLink,
   selectNewsPostsPostVenueLink,
-  selectNewsPostsPostMiniGallery,
+  selectNewsPostsPostMiniGalleryImages,
   selectNewsPostsPostVideoEmbed
 } from 'selectors/news';
 
@@ -17,19 +17,22 @@ const mockState = {
         _id: 'xcxcxcxcxccx1234',
         title: 'hello',
         createdAt: new Date(),
-        mainBody: '<p>test</p>'
+        mainBody: '<p>test</p>',
+        miniGallery: ['asdf', 'asdf', 'asdf']
       },
       {
         _id: 'asdf1234',
         title: 'hi',
         createdAt: new Date(),
-        mainBody: '<p>hello world</p>'
+        mainBody: '<p>hello world</p>',
+        miniGallery: ['asdf', 'asdf', 'asdf']
       },
       {
         _id: 'zxcv789',
         title: 'crazy',
         createdAt: new Date(),
-        mainBody: '<p>testing</p>'
+        mainBody: '<p>testing</p>',
+        miniGallery: ['asdf', 'asdf', 'asdf']
       }
     ]
   }
@@ -100,10 +103,10 @@ describe('(Selectors) news', () => {
     });
   });
 
-  describe('selectNewsPostsPostMiniGallery', () => {
+  describe('selectNewsPostsPostMiniGalleryImages', () => {
     it('should return bodyMain', () => {
-      const actual = selectNewsPostsPostMiniGallery(mockState, postId);
-      const expected = newsPost.miniGallery;
+      const actual = selectNewsPostsPostMiniGalleryImages(mockState, postId);
+      const expected = newsPost.miniGalleryImages;
       expect(actual).to.deep.equal(expected);
     });
   });

@@ -1,5 +1,6 @@
 import React from 'react'
 import ArticlePreview from 'components/ArticlePreview/ArticlePreview'
+import ArticleLive from 'components/ArticleLive/ArticleLive'
 import { ModalContainer, ModalDialog } from 'react-modal-dialog';
 import { shallow } from 'enzyme'
 
@@ -15,7 +16,7 @@ describe('(Component) ArticlePreview', () => {
   it('should render a button', () => {
     wrapper = shallow(<ArticlePreview {...props} />);
     const actual = wrapper.containsMatchingElement(
-      <button>Preview post</button>
+      <button>Preview</button>
     );
     expect(actual).to.equal(true);
   });
@@ -24,25 +25,21 @@ describe('(Component) ArticlePreview', () => {
     const actual = wrapper.containsMatchingElement(
       <ModalContainer>
         <ModalDialog>
-          <h3>{props.post.title}</h3>
-          <img src={props.post.mainImageUrl} />
-          <p>full article template here...</p>
+          <ArticleLive article={props.post} />
         </ModalDialog>
       </ModalContainer>
     );
     expect(actual).to.equal(false);
   });
 
-  it('should render <ModalContainer /> on button click', () => {
+  it('should render <ModalContainer /> with <ArticleLive /> on button click', () => {
     wrapper = shallow(<ArticlePreview {...props} />);
     const button = wrapper.find('button');
     button.simulate('click');
     const actual = wrapper.containsMatchingElement(
       <ModalContainer>
         <ModalDialog>
-          <h3>{props.post.title}</h3>
-          <img src={props.post.mainImageUrl} />
-          <p>full article template here...</p>
+          <ArticleLive article={props.post} />
         </ModalDialog>
       </ModalContainer>
     );
