@@ -147,16 +147,21 @@ export class NewsPostForm extends React.Component {
 
           <br />
 
-          <Field name='scheduledTime'
-                 component={Datepicker}
-                 title='Schedule Time' />
+          {!isEditForm &&
+            <Field name='scheduledTime'
+                  component={Datepicker}
+                  togglePicker
+                  title='Schedule Time' />
+          }
+          
+          <br />
+          <br />
 
-          <div>
-            <button type='submit'
-                    disabled={error || pristine || submitting || error || invalid}
-                    onClick={() => onSubmit()}>Submit
-            </button>
-          </div>
+          <button type='submit'
+                  disabled={error || pristine || submitting || error || invalid}
+                  onClick={() => onSubmit()}>Submit
+          </button>
+
 
         </form>
       </section>

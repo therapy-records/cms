@@ -5,28 +5,75 @@ import InputMoment from 'input-moment'
 import './InputMoment.scss'
 
 export class Datepicker extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pickerActive: props.pickerActive
+    }
+  }
+
+  handleTogglePicker = () => {
+    this.setState({
+      pickerActive: !this.state.pickerActive
+    });
+  }
+
+  componentDidUpdate() {
+    // ensure we send empty string back to form
+    if (this.state.pickerActive === false) {
+      this.props.input.onChange('');
+    }
+  }
+
   render() {
     const {
       input,
-      type,
       props,
-      meta: { touched, error }
+      meta: { touched, error },
+      togglePicker
     } = this.props;
+
+    const {
+      pickerActive
+    } = this.state;
+    
     return (
-      <InputMoment
-        {...input}
-        moment={moment()}
-        onChange={e => { input.onChange(moment(e).format()) }}
-      />
+      <div>
+      {togglePicker ? (
+        <div>
+          <button onClick={this.handleTogglePicker}
+                  className='btn-sm'
+                  style={{ width: 'auto' }}>Schedule post
+          </button>
+          <br />
+          <br />
+          {(
+            pickerActive &&
+              <InputMoment
+                {...input}
+                moment={moment()}
+                onChange={e => { input.onChange(moment(e).format()) }}
+              />
+          )}
+        </div>
+      ) : (
+        <InputMoment
+          {...input}
+          moment={moment()}
+          onChange={e => { input.onChange(moment(e).format()) }}
+        />
+      )}
+        
+      </div>
     );
   };
 }
 
 Datepicker.propTypes = {
   input: PropTypes.object.isRequired,
-  type: PropTypes.string.isRequired,
   props: PropTypes.object,
-  meta: PropTypes.object.isRequired
+  meta: PropTypes.object.isRequired,
+  togglePicker: PropTypes.bool
 }
 
 export default Datepicker;

@@ -97,6 +97,27 @@ describe('(Component) NewsPostForm', () => {
       );
       expect(actual).to.equal(true)
     });
+
+    it('should render scheduledTime field if !isEditForm', () => {
+      const datepickerWrapper = shallow(<NewsPostForm {...props} />);
+      const actual = datepickerWrapper.containsMatchingElement(
+        <Field name='scheduledTime'
+               component={Datepicker} 
+               title='Schedule Time' />
+      );
+      expect(actual).to.equal(true);
+    });
+    it('should not render scheduledTime field if isEditForm', () => {
+      props = { location: { pathname: 'test/edit' } };
+      const datepickerWrapperEdit = shallow(<NewsPostForm {...props} />);
+      const actual = datepickerWrapperEdit.containsMatchingElement(
+        <Field name='scheduledTime'
+               component={Datepicker} 
+               title='Schedule Time' />
+      );
+      expect(actual).to.equal(false);
+    });
+
   });
 
   it('should render an error', () => {
@@ -112,20 +133,6 @@ describe('(Component) NewsPostForm', () => {
     expect(actual).to.equal(true);
   });
 
-  it('should render <DatePicker />', () => {
-    props = {
-      onSubmit: () => {},
-      error: false,
-      pristine: false,
-      submitting: false
-    }
-    const datepickerWrapper = shallow(<NewsPostForm {...props} />);
-    const actual = datepickerWrapper.containsMatchingElement(
-      <DatePicker />
-    );
-    expect(actual).to.equal(true);
-  });
-
   describe('submit button', () => {
     it('should render a button', () => {
       props = {
@@ -136,7 +143,7 @@ describe('(Component) NewsPostForm', () => {
       }
       const buttonWrapper = shallow(<NewsPostForm {...props} />);
       const actual = buttonWrapper.containsMatchingElement(
-        <button type='submit' disabled={false}>Submit</button>
+        <button type='submit'>Submit</button>
       );
       expect(actual).to.equal(true);
     });
