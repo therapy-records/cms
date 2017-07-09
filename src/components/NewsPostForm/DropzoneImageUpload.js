@@ -9,7 +9,6 @@ const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dpv2k0qsj/upload'
 export class DropzoneImageUpload extends React.Component {
   constructor(props) {
     super(props);
-    this.handleBla = this.handleBla.bind(this);
     this.state = {
       items: [],
       singleItem: ''
