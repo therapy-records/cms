@@ -59,7 +59,7 @@ class News extends React.Component {
 
 News.propTypes = {
   onFetchNews: PropTypes.func.isRequired,
-  newsPosts: PropTypes.array.isRequired,
+  newsPosts: PropTypes.array,
   resetPromiseState: PropTypes.func
 }
 

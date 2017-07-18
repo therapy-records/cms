@@ -4,7 +4,7 @@ export const selectNewsPostForm = (state) => state.form.NEWS_POST_FORM;
 
 export const selectNewsPostFormValues = createSelector(
   selectNewsPostForm,
-  (form) => form.values
+  (form) => form && form.values
 );
 
 export const selectNewsPostFormSyncErrors = createSelector(

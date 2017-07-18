@@ -31,7 +31,11 @@ class ArticleCreate extends React.Component {
           </div>
         }
         {!promiseLoading && !promiseSuccess &&
-          <NewsPostForm onSubmit={this.props.onPostNews} location={location} />
+          <NewsPostForm
+            onPostQueueNews={this.props.onPostQueueNews}
+            onPostNews={this.props.onPostNews}
+            location={location}
+          />
         }
       </div>
     )
@@ -40,6 +44,7 @@ class ArticleCreate extends React.Component {
 
 ArticleCreate.propTypes = {
   onPostNews: PropTypes.func.isRequired,
+  onPostQueueNews: PropTypes.func.isRequired,
   promiseLoading: PropTypes.bool,
   promiseSuccess: PropTypes.bool,
   promiseError: PropTypes.object,

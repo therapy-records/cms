@@ -7,9 +7,11 @@ import nock from 'nock';
 import {
   FETCH_NEWS_POSTS_SUCCESS,
   POST_NEWS_FORM_SUCCESS,
+  POST_NEWS_FORM_QUEUE_SUCCESS,
   fetchSuccess,
   fetchNews,
   postNews,
+  postNewsQueue,
   editNews,
   default as newsReducer
 } from 'reducers/news';
@@ -21,11 +23,28 @@ import {
 import {
   API_ROOT,
   NEWS,
-  NEWS_CREATE
+  NEWS_CREATE,
+  NEWS_QUEUE
 } from 'constants';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
+let mockNewsPost = {
+  _id: 'xcxcxcxcxccx1234',
+  title: 'hello',
+  createdAt: new Date(),
+  bodyMain: '<p>test</p>',
+  mainImageUrl: '',
+  ticketsLink: '',
+  venueLink: '',
+  miniGalleryImages: [
+    'asdf.jpg', 'qweqwe.jpg'
+  ],
+  videoEmbed: 'http://asdf.com/dfdf'
+};
+
+const mockNewsPostQueue = mockNewsPost;
+mockNewsPostQueue.scheduledTime = new Date();
 
 const mock = {
   getNewsResponse: {
@@ -34,20 +53,8 @@ const mock = {
       { title: 'do something else' }
     ]
   },
-  newsPost: {
-    _id: 'xcxcxcxcxccx1234',
-    title: 'hello',
-    createdAt: new Date(),
-    bodyMain: '<p>test</p>',
-    mainImageUrl: '',
-    ticketsLink: '',
-    venueLink: '',
-    miniGalleryImages: [
-      'asdf.jpg', 'qweqwe.jpg'
-    ],
-    videoEmbed: 'http://asdf.com/dfdf',
-    scheduledTime: new Date()
-  }
+  newsPost: mockNewsPost,
+  newsPostQueue: mockNewsPostQueue
 };
 
 const mockState = {
@@ -70,6 +77,10 @@ describe('(Redux Module) news', () => {
 
   it('Should export a constant POST_NEWS_FORM_SUCCESS', () => {
     expect(POST_NEWS_FORM_SUCCESS).to.equal('POST_NEWS_FORM_SUCCESS')
+  });
+
+  it('Should export a constant POST_NEWS_FORM_QUEUE_SUCCESS', () => {
+    expect(POST_NEWS_FORM_QUEUE_SUCCESS).to.equal('POST_NEWS_FORM_QUEUE_SUCCESS')
   });
 
   describe('(Reducer)', () => {
@@ -155,6 +166,7 @@ describe('(Redux Module) news', () => {
     afterEach(() => {
       nock.cleanAll();
     });
+
     it('should be exported as a function', () => {
       expect(postNews).to.be.a('function');
     });
@@ -172,15 +184,18 @@ describe('(Redux Module) news', () => {
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
+        { type: POST_NEWS_FORM_SUCCESS, payload: mock.newsPost },
         { type: UISTATE_PROMISE_SUCCESS, payload: true }
       ];
 
+      store.clearActions();
       return store.dispatch(postNews(mock.newsPost)).then(() => {
         const storeActions = store.getActions();
         expect(storeActions).to.deep.equal(expectedActions);
         store.clearActions();
       });
     });
+
     it('should dispatch the correct actions on error', () => {
       _axiosAuthHeaders.post = sinon.stub().returns(Promise.reject({ error: true }));
       nock(API_ROOT + NEWS_CREATE)
@@ -192,7 +207,61 @@ describe('(Redux Module) news', () => {
         { type: UISTATE_PROMISE_ERROR, payload: { error: true } }
       ];
 
+      store.clearActions();
       return store.dispatch(postNews(mock.newsPost)).then(() => {
+        const storeActions = store.getActions();
+        expect(storeActions).to.deep.equal(expectedActions);
+        store.clearActions();
+      });
+    });
+  });
+
+  describe('(Thunk) postNewsQueue', () => {
+    afterEach(() => {
+      nock.cleanAll();
+    });
+    it('should be exported as a function', () => {
+      expect(postNewsQueue).to.be.a('function');
+    });
+
+    it('should return a function', () => {
+      expect(postNewsQueue()).to.be.a('function');
+    });
+
+    it('should dispatch the correct actions on success', () => {
+      _axiosAuthHeaders.post = sinon.stub().returns(Promise.resolve(mock.newsPostQueue));
+      nock(API_ROOT + NEWS_QUEUE)
+        .post(NEWS_QUEUE, mock.newsPostQueue)
+        .reply(200, mock.newsPostQueue);
+
+      const expectedActions = [
+        { type: UISTATE_PROMISE_LOADING, payload: true },
+        { type: UISTATE_PROMISE_LOADING, payload: false },
+        { type: UISTATE_PROMISE_SUCCESS, payload: true },
+        { type: POST_NEWS_FORM_QUEUE_SUCCESS, payload:  }
+      ];
+
+      store.clearActions();
+      return store.dispatch(postNewsQueue(mock.newsPostQueue)).then(() => {
+        const storeActions = store.getActions();
+        expect(storeActions).to.deep.equal(expectedActions);
+        store.clearActions();
+      });
+    });
+
+    it('should dispatch the correct actions on error', () => {
+      _axiosAuthHeaders.post = sinon.stub().returns(Promise.reject({ error: true }));
+      nock(API_ROOT + NEWS_QUEUE)
+        .post(NEWS_QUEUE, mock.newsPostQueue);
+
+      const expectedActions = [
+        { type: UISTATE_PROMISE_LOADING, payload: true },
+        { type: UISTATE_PROMISE_LOADING, payload: false },
+        { type: UISTATE_PROMISE_ERROR, payload: { error: true } }
+      ];
+
+      store.clearActions();
+      return store.dispatch(postNewsQueue(mock.newsPostQueue)).then(() => {
         const storeActions = store.getActions();
         expect(storeActions).to.deep.equal(expectedActions);
         store.clearActions();

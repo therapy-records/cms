@@ -13,6 +13,7 @@ import {
 
 export const FETCH_NEWS_POSTS_SUCCESS = 'FETCH_NEWS_POSTS_SUCCESS';
 export const POST_NEWS_FORM_SUCCESS = 'POST_NEWS_FORM_SUCCESS';
+export const POST_NEWS_FORM_QUEUE_SUCCESS = 'POST_NEWS_FORM_QUEUE_SUCCESS';
 
 // ------------------------------------
 // Actions
@@ -22,6 +23,20 @@ export function fetchSuccess(data) {
   return {
     type: FETCH_NEWS_POSTS_SUCCESS,
     payload: data
+  }
+}
+
+export function postNewsSuccess(data) {
+  return {
+    type: POST_NEWS_FORM_SUCCESS,
+    payload: data
+  }
+}
+
+export function postNewsQueueSuccess() {
+  return {
+    type: POST_NEWS_FORM_QUEUE_SUCCESS,
+    payload: []
   }
 }
 
@@ -61,6 +76,34 @@ export const postNews = () => {
       (data) => {
         dispatch(promiseLoading(false));
         dispatch(promiseSuccess(true));
+        dispatch(postNewsSuccess(data));
+      }, (err) => {
+        dispatch(promiseLoading(false));
+        dispatch(promiseError(err));
+      }
+    );
+  }
+}
+
+export const postNewsQueue = () => {
+  return (dispatch, getState) => {
+    dispatch(promiseLoading(true));
+    const getFormObj = () => {
+      if (getState().form.NEWS_POST_FORM &&
+          getState().form.NEWS_POST_FORM.values) {
+        return JSON.stringify(getState().form.NEWS_POST_FORM.values);
+      } else {
+        return null;
+      }
+    }
+    return _axiosAuthHeaders.post(
+      API_ROOT + NEWS_CREATE,
+      getFormObj()
+    ).then(
+      (data) => {
+        dispatch(promiseLoading(false));
+        dispatch(promiseSuccess(true));
+        dispatch(postNewsQueueSuccess());
       }, (err) => {
         dispatch(promiseLoading(false));
         dispatch(promiseError(err));
@@ -102,6 +145,7 @@ export const editNews = (editedPost) => {
 export const actions = {
   fetchNews,
   postNews,
+  postNewsQueue,
   editNews
 }
 
@@ -113,7 +157,8 @@ const ACTION_HANDLERS = {
   [FETCH_NEWS_POSTS_SUCCESS] : (state, action) => {
     return { ...state, posts: action.payload }
   },
-  [POST_NEWS_FORM_SUCCESS] : (state, action) => state = action.payload
+  [POST_NEWS_FORM_SUCCESS] : (state, action) => state = action.payload,
+  [POST_NEWS_FORM_QUEUE_SUCCESS] : (state, action) => state = action.payload
 }
 /* eslint-enable no-return-assign */
 

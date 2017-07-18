@@ -8,14 +8,18 @@ describe('(Component) News - ArticleCreate', () => {
   let wrapper,
       props,
       baseProps = {
-        onPostNews: () => {}
+        onPostNews: () => {},
+        onPostQueueNews: () => {}
       };
 
   it('should render a NewsPostForm', () => {
     props = baseProps;
     wrapper = shallow(<ArticleCreate {...props} />);
     const actual = wrapper.containsMatchingElement(
-      <NewsPostForm onSubmit={props.onPostNews} />
+      <NewsPostForm
+        onPostQueueNews={props.onPostQueueNews}
+        onPostNews={props.onPostNews}
+      />
     );
     expect(actual).to.equal(true);
   });

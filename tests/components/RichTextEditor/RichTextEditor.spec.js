@@ -19,6 +19,7 @@ describe('(Component) RichTextEditor', () => {
     );
     expect(actual).to.equal(true);
   });
+
   it('should render a link to home', () => {
     const actual = wrapper.containsMatchingElement(
       <button>Go home</button>

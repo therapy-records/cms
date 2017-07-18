@@ -13,6 +13,7 @@ import {
   selectNewsPostsPostVideoEmbed,
   selectNewsPostsPostScheduledTime
 } from '../../selectors/news';
+import { selectNewsPostFormValues } from '../../selectors/form';
 import './NewsPostForm.scss';
 import DropzoneImageUpload from './DropzoneImageUpload';
 import Datepicker from '../Datepicker/Datepicker';
@@ -53,12 +54,20 @@ bodyMainRTE.propTypes = {
 export const required = value => value ? undefined : 'required';
 
 export class NewsPostForm extends React.Component {
+
+  handleSubmit() {
+    if (this.props.formValues.scheduledTime) {
+      this.props.onPostQueueNews();
+    } else {
+      this.props.onPostNews();
+    }
+  }
+
   render() {
     const {
       error,
       pristine,
       submitting,
-      onSubmit,
       invalid,
       location
     } = this.props;
@@ -159,7 +168,7 @@ export class NewsPostForm extends React.Component {
 
           <button type='submit'
                   disabled={error || pristine || submitting || error || invalid}
-                  onClick={() => onSubmit()}>Submit
+                  onClick={() => this.handleSubmit()}>Submit
           </button>
 
         </form>
@@ -174,7 +183,9 @@ NewsPostForm.propTypes = {
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
   invalid: PropTypes.bool,
-  onSubmit: PropTypes.func,
+  formValues: PropTypes.object,
+  onPostNews: PropTypes.func.isRequired,
+  onPostQueueNews: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired
 };
 
@@ -198,4 +209,8 @@ InitFromStateForm = connect(
   })
 )(InitFromStateForm);
 
-export default InitFromStateForm;
+const mapStateToProps = (state) => ({
+  formValues: selectNewsPostFormValues(state)
+});
+
+export default connect(mapStateToProps, {})(InitFromStateForm)
