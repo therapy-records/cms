@@ -38,9 +38,18 @@ const mock = {
     _id: 'xcxcxcxcxccx1234',
     title: 'hello',
     createdAt: new Date(),
-    mainBody: '<p>test</p>'
+    bodyMain: '<p>test</p>',
+    mainImageUrl: '',
+    ticketsLink: '',
+    venueLink: '',
+    miniGalleryImages: [
+      'asdf.jpg', 'qweqwe.jpg'
+    ],
+    videoEmbed: 'http://asdf.com/dfdf',
+    scheduledTime: new Date()
   }
 };
+
 const mockState = {
   news: {
     posts: mock.getNewsResponse.data

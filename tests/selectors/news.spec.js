@@ -7,7 +7,8 @@ import {
   selectNewsPostsPostTicketsLink,
   selectNewsPostsPostVenueLink,
   selectNewsPostsPostMiniGalleryImages,
-  selectNewsPostsPostVideoEmbed
+  selectNewsPostsPostVideoEmbed,
+  selectNewsPostsPostScheduledTime
 } from 'selectors/news';
 
 const mockState = {
@@ -115,6 +116,14 @@ describe('(Selectors) news', () => {
     it('should return bodyMain', () => {
       const actual = selectNewsPostsPostVideoEmbed(mockState, postId);
       const expected = newsPost.videoEmbed;
+      expect(actual).to.equal(expected);
+    });
+  });
+
+  describe('selectNewsPostsPostScheduledTime', () => {
+    it('should return scheduledTime', () => {
+      const actual = selectNewsPostsPostScheduledTime(mockState, postId);
+      const expected = newsPost.scheduledTime;
       expect(actual).to.equal(expected);
     });
   });

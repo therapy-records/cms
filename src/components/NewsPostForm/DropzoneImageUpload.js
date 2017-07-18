@@ -42,12 +42,8 @@ export class DropzoneImageUpload extends React.Component {
     });
   }
 
-  handleImageUpload(files) {
-    files.forEach((f) => this.uploadSingleImage(f));
-  }
-
   handleOnDrop(files) {
-    this.handleImageUpload(files)
+    files.forEach((f) => this.uploadSingleImage(f));
   }
 
   render() {
@@ -68,7 +64,7 @@ export class DropzoneImageUpload extends React.Component {
           <div className={multiple && 'col-1'}>
             <Dropzone
               name={input.name}
-              onDrop={this.handleOnDrop}
+              onDrop={this.handleOnDrop.bind(this)} // eslint-disable-line
               className='dropzone'
               activeClassName='dropzone-active'
               multiple={multiple}

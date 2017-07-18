@@ -42,4 +42,9 @@ export const selectNewsPostsPostVideoEmbed = createSelector(
   (post) => post && post.videoEmbed
 );
 
+export const selectNewsPostsPostScheduledTime = createSelector(
+  selectNewsPostsPost,
+  (post) => post && post.scheduledTime
+)
+
 export const selectedNewsPostSelector = (state) => state.selectedNewsPost;

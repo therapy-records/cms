@@ -10,7 +10,8 @@ import {
   selectNewsPostsPostTicketsLink,
   selectNewsPostsPostVenueLink,
   selectNewsPostsPostMiniGalleryImages,
-  selectNewsPostsPostVideoEmbed
+  selectNewsPostsPostVideoEmbed,
+  selectNewsPostsPostScheduledTime
 } from '../../selectors/news';
 import './NewsPostForm.scss';
 import DropzoneImageUpload from './DropzoneImageUpload';
@@ -191,7 +192,8 @@ InitFromStateForm = connect(
       ticketsLink: props.post && selectNewsPostsPostTicketsLink(state, props.post._id),
       venueLink: props.post && selectNewsPostsPostVenueLink(state, props.post._id),
       miniGalleryImages: props.post && selectNewsPostsPostMiniGalleryImages(state, props.post._id),
-      videoEmbed: props.post && selectNewsPostsPostVideoEmbed(state, props.post_id)
+      videoEmbed: props.post && selectNewsPostsPostVideoEmbed(state, props.post_id),
+      scheduledTime: props.post && selectNewsPostsPostScheduledTime(state, props.post_id)
     }
   })
 )(InitFromStateForm);
