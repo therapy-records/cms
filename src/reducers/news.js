@@ -3,7 +3,8 @@ import _axiosAuthHeaders from '../utils/axios'
 import {
   API_ROOT,
   NEWS,
-  NEWS_CREATE
+  NEWS_CREATE,
+  NEWS_QUEUE
 } from '../constants';
 import {
   promiseLoading,
@@ -97,7 +98,7 @@ export const postNewsQueue = () => {
       }
     }
     return _axiosAuthHeaders.post(
-      API_ROOT + NEWS_CREATE,
+      API_ROOT + NEWS_QUEUE,
       getFormObj()
     ).then(
       (data) => {
