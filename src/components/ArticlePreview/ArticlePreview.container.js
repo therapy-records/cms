@@ -5,9 +5,18 @@ import {
   selectNewsPostFormSyncErrors
 } from '../../selectors/form';
 
-const mapStateToProps = (state) => ({
-  post: selectNewsPostFormValues(state),
-  disabled: !selectNewsPostFormValues(state) || selectNewsPostFormSyncErrors(state)
-});
+const mapStateToProps = (state) => {
+  const formValues = selectNewsPostFormValues(state);
+  const formErrors = selectNewsPostFormSyncErrors(state);
+  const isDisabled = !formValues.title ||
+                     !formValues.bodyMain ||
+                     formErrors.title ||
+                     formErrors.bodyMain;
+
+  return {
+    post: selectNewsPostFormValues(state),
+    disabled: !!selectNewsPostFormValues(state) || isDisabled
+  }
+};
 
 export default connect(mapStateToProps, {})(ArticlePreview)

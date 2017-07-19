@@ -27,7 +27,7 @@ class _RichTextEditor extends React.Component {
 
 _RichTextEditor.propTypes = {
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.value
+  value: PropTypes.string
 }
 
 export default _RichTextEditor;

@@ -46,7 +46,7 @@ export const bodyMainRTE = ({ input, onChange, props, meta: { touched, error } }
 
 bodyMainRTE.propTypes = {
   input: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   props: PropTypes.object,
   meta: PropTypes.object.isRequired
 }
@@ -186,7 +186,7 @@ NewsPostForm.propTypes = {
   formValues: PropTypes.object,
   onPostNews: PropTypes.func.isRequired,
   onPostQueueNews: PropTypes.func.isRequired,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object
 };
 
 let InitFromStateForm = reduxForm({
