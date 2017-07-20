@@ -238,7 +238,7 @@ describe('(Redux Module) news', () => {
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
         { type: UISTATE_PROMISE_SUCCESS, payload: true },
-        { type: POST_NEWS_FORM_QUEUE_SUCCESS, payload:  }
+        { type: POST_NEWS_FORM_QUEUE_SUCCESS, payload: [] }
       ];
 
       store.clearActions();
