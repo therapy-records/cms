@@ -184,8 +184,8 @@ describe('(Redux Module) news', () => {
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
-        { type: POST_NEWS_FORM_SUCCESS, payload: mock.newsPost },
-        { type: UISTATE_PROMISE_SUCCESS, payload: true }
+        { type: UISTATE_PROMISE_SUCCESS, payload: true },
+        { type: POST_NEWS_FORM_SUCCESS, payload: mock.newsPost }
       ];
 
       store.clearActions();
