@@ -8,15 +8,22 @@ export class Datepicker extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pickerActive: props.pickerActive
+      pickerActive: props.pickerActive,
+      moment: moment()
     }
   }
 
   handleTogglePicker = () => {
     this.setState({
-      pickerActive: !this.state.pickerActive
+      pickerActive: !this.state.pickerActive,
+      moment: this.state.moment
     });
   }
+
+  handleChange = e => {
+    this.setState({ moment: e });
+    this.props.input.onChange(moment(e).format())
+  };
 
   componentDidUpdate() {
     // ensure we send empty string back to form
@@ -32,11 +39,13 @@ export class Datepicker extends React.Component {
     } = this.props;
 
     const {
+      moment,
       pickerActive
     } = this.state;
 
     return (
       <div>
+
         {togglePicker ? (
           <div>
             <button onClick={this.handleTogglePicker}
@@ -49,16 +58,16 @@ export class Datepicker extends React.Component {
               pickerActive &&
                 <InputMoment
                   {...input}
-                  moment={moment()}
-                  onChange={e => { input.onChange(moment(e).format()) }}
+                  moment={moment}
+                  onChange={this.handleChange}
                 />
             )}
           </div>
         ) : (
           <InputMoment
             {...input}
-            moment={moment()}
-            onChange={e => { input.onChange(moment(e).format()) }}
+            moment={moment}
+            onChange={this.handleChange}
           />
         )}
       </div>
