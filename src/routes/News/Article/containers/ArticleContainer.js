@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import { resetPromiseState } from '../../../../reducers/uiState';
-import { fetchNews } from '../../../../reducers/news';
+import { fetchNewsPosts } from '../../../../reducers/news';
 import { selectNewsPostsPost } from '../../../../selectors/news';
 import { deleteNewsPost } from '../../../../reducers/newsPost';
 import Article from '../components/Article'
 
 const mapDispatchToProps = {
-  onFetchNews: () => fetchNews(),
+  onFetchNewsPosts: () => fetchNewsPosts(),
   onDeleteArticle: (id) => deleteNewsPost(id),
   resetPromiseState: () => resetPromiseState()
 }

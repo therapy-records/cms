@@ -14,7 +14,7 @@ describe('(Component) Dashboard', () => {
   beforeEach(() => {
     props = {
       newsPosts: mockNewsPosts,
-      onFetchNews: () => mockNewsPosts,
+      onFetchNewsPosts: () => mockNewsPosts,
       resetPromiseState: () => {}
     }
     wrapper = shallow(<Dashboard {...props} />)
@@ -42,13 +42,13 @@ describe('(Component) Dashboard', () => {
   });
 
   describe('when there are no newsPosts in props', () => {
-    it('should call onFetchNews', () => {
+    it('should call onFetchNewsPosts', () => {
       props = {
         newsPosts: [],
-        onFetchNews: sinon.spy()
+        onFetchNewsPosts: sinon.spy()
       };
       shallow(<Dashboard {...props} />)
-      expect(props.onFetchNews).to.have.been.called;
+      expect(props.onFetchNewsPosts).to.have.been.called;
     });
   });
 

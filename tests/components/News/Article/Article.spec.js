@@ -14,7 +14,7 @@ describe('(Component) News - Article', () => {
         createdAt: new Date()
       },
       baseProps = {
-        onFetchNews: () => {},
+        onFetchNewsPosts: () => {},
         onDeleteArticle: () => {}
       };
 

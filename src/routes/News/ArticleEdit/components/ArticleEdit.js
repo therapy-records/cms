@@ -61,7 +61,6 @@ class ArticleEdit extends React.Component {
 }
 
 ArticleEdit.propTypes = {
-  onFetchNews: PropTypes.func.isRequired,
   onPostForm: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,

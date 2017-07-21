@@ -15,7 +15,7 @@ class Article extends React.Component {
 
   componentWillMount() {
     if (!this.props.newsArticles) {
-      this.props.onFetchNews();
+      this.props.onFetchNewsPosts();
     }
   }
 
@@ -129,7 +129,7 @@ Article.propTypes = {
   promiseError: PropTypes.bool,
   resetPromiseState: PropTypes.func.isRequired,
   newsArticles: PropTypes.func,
-  onFetchNews: PropTypes.func.isRequired
+  onFetchNewsPosts: PropTypes.func.isRequired
 }
 
 export default Article

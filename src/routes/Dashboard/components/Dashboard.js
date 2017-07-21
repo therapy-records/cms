@@ -14,7 +14,7 @@ export class Dashboard extends React.Component {
     } = this.props;
 
     if (!newsPosts || !newsPosts.length) {
-      this.props.onFetchNews();
+      this.props.onFetchNewsPosts();
     }
 
     return (
@@ -40,7 +40,7 @@ export class Dashboard extends React.Component {
 
 Dashboard.propTypes = {
   newsPosts: PropTypes.array,
-  onFetchNews: PropTypes.func.isRequired,
+  onFetchNewsPosts: PropTypes.func.isRequired,
   resetPromiseState: PropTypes.func.isRequired
 }
 
