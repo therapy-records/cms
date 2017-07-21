@@ -6,13 +6,22 @@ import './News.scss'
 
 class News extends React.Component {
   componentWillMount() {
-    if (!this.props.newsPosts || !this.props.newsPosts.length) {
-      this.props.onFetchNews();
+    if (!this.props.postsQueue ||
+        !this.props.postsQueue.length) {
+     this.props.onFetchNewsQueuePosts();
+    }
+    if (!this.props.newsPosts ||
+        !this.props.newsPosts.length) {
+      this.props.onFetchNewsPosts();
     }
   }
 
   componentWillUnmount() {
     this.props.resetPromiseState();
+  }
+
+  getCombinedPosts(queueFeed, newsFeed) {
+    return [...queueFeed, ...newsFeed];
   }
 
   renderPost(p) {
@@ -31,25 +40,27 @@ class News extends React.Component {
 
   render() {
     const {
+      postsQueue,
       newsPosts
     } = this.props;
 
-    if (!newsPosts) {
-      return null;
-    }
-
+    let _combinedPosts = this.getCombinedPosts(postsQueue, newsPosts);
     return (
       <div>
         <div className='news-feed-header'>
           <Link to='news/create'>Create a new post</Link>
         </div>
         <br />
-        {!this.props.newsPosts || !this.props.newsPosts.length && (
+
+        {/*
+          !_combinedPosts || !_combinedPosts.length && (
           <p>Unable to fetch news posts :(</p>
-        )}
-        {this.props.newsPosts &&
+        )
+        */}
+
+        {_combinedPosts &&
           <div className='flex-root'>
-            {this.props.newsPosts.map((p) => this.renderPost(p))}
+            {_combinedPosts.map((p) => this.renderPost(p))}
           </div>
         }
       </div>
@@ -58,8 +69,11 @@ class News extends React.Component {
 }
 
 News.propTypes = {
-  onFetchNews: PropTypes.func.isRequired,
+  onFetchNewsPosts: PropTypes.func.isRequired,
+  onFetchNewsQueuePosts: PropTypes.func.isRequired,
+  postsQueue: PropTypes.array,
   newsPosts: PropTypes.array,
+  combinedPosts: PropTypes.array,
   resetPromiseState: PropTypes.func
 }
 
