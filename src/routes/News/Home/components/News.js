@@ -29,6 +29,12 @@ class News extends React.Component {
       <div key={p._id} className='news-card'>
         <div className='bg-inner' style={{ backgroundImage: `url('${p.mainImageUrl}')` }} />
         <div className='inner'>
+          {p.scheduledTime &&
+            <p
+              style={{ background: '#333', padding: '0.5em', fontSize: '0.8em', display: 'inline-flex' }}>
+              Scheduled for {moment(p.scheduledTime).format('DD/mm/YYYY')}
+            </p>
+          }
           <h3>{p.title}</h3>
           {p.createdAt && <p>{moment(p.createdAt).fromNow()}</p>}
           <Link to={`news/${p._id}`} className='btn'>View</Link>
