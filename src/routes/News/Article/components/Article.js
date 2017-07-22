@@ -7,8 +7,7 @@ import ArticleDeleteModal from './ArticleDeleteModal';
 class Article extends React.Component {
 
   state = {
-    isShowingModal: false,
-    clickedEditButton: false
+    isShowingModal: false
   }
 
   handleModalOpen = () => this.setState({ isShowingModal: true })
@@ -16,16 +15,11 @@ class Article extends React.Component {
 
   componentWillUnmount() {
     this.props.resetPromiseState();
-    if (!this.state.clickedEditButton) {
-      this.props.onDestroyNews();
-    }
   }
 
   renderHtml(data) {
     return { __html: data }
   }
-
-  handleEditClick = () => this.setState({ clickedEditButton: true });
 
   render() {
     const {
@@ -93,7 +87,6 @@ class Article extends React.Component {
                   }
 
                   <Link
-                    onClick={this.handleEditClick}
                     to={`/news/${article._id}/edit`}
                     className='btn btn-edit'
                   >Edit post
@@ -131,8 +124,7 @@ Article.propTypes = {
   promiseLoading: PropTypes.bool,
   promiseError: PropTypes.bool,
   onFetchNewsPosts: PropTypes.func.isRequired,
-  resetPromiseState: PropTypes.func.isRequired,
-  onDestroyNews: PropTypes.func.isRequired
+  resetPromiseState: PropTypes.func.isRequired
 }
 
 export default Article

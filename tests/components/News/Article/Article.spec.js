@@ -17,17 +17,16 @@ describe('(Component) News - Article', () => {
       baseProps = {
         onFetchNewsPosts: () => {},
         onDeleteArticle: () => {},
-        onDestroyNews: () => {},
         resetPromiseState: () => {}
       };
 
-  it('should call onDestroyNews on componentWillUnmount', () => {
+  it('should call resetPromiseState on componentWillUnmount', () => {
     let props = baseProps;
-    props.onDestroyNews = sinon.spy();
+    props.resetPromiseState = sinon.spy();
     wrapper = shallow(<Article {...props} />);
     wrapper.unmount();
-    expect(props.onDestroyNews).to.have.been.called;
-    expect(props.onDestroyNews).to.have.been.called.once;
+    expect(props.resetPromiseState).to.have.been.called;
+    expect(props.resetPromiseState).to.have.been.called.once;
   });
 
   describe('when promise is loading', () => {
@@ -82,19 +81,9 @@ describe('(Component) News - Article', () => {
   describe('edit post button', () => {
     it('should be rendered', () => {
       let props = baseProps;
-      props.destroySelectedNewsPost = sinon.spy();
       wrapper = shallow(<Article {...props} />);
       const editButton = wrapper.find(Link);
       expect(editButton.length).to.equal(1);
-    });
-    it('should not call destroySelectedNewsPost on click', () => {
-      let props = baseProps;
-      props.destroySelectedNewsPost = sinon.spy();
-      wrapper = shallow(<Article {...props} />);
-      const editButton = wrapper.find('.btn-edit');
-      editButton.simulate('click');
-      wrapper.unmount();
-      expect(props.destroySelectedNewsPost).to.not.have.been.called;
     });
   });
 

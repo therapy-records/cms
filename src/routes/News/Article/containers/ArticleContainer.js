@@ -13,8 +13,7 @@ import Article from '../components/Article'
 const mapDispatchToProps = {
   onFetchNewsPosts: () => fetchNewsPosts(),
   onDeleteArticle: (id) => deleteNewsPost(id),
-  resetPromiseState: () => resetPromiseState(),
-  onDestroyNews: () => destroySelectedNewsPost()
+  resetPromiseState: () => resetPromiseState()
 }
 
 const mapStateToProps = (state, props) => ({
