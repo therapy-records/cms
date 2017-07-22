@@ -10,11 +10,21 @@ describe('(Component) News - ArticleEdit', () => {
       baseProps = {
         onEditNews: () => {},
         onEditQueueNews: () => {},
+        resetPromiseState: () => {},
         article: { title: 'test' },
         location: {
           pathname: 'article/edit'
         }
       };
+
+  it('should call onDestroyNews on componentWillUnmount', () => {
+    let props = baseProps;
+    props.onDestroyNews = sinon.spy();
+    wrapper = shallow(<ArticleEdit {...props} />);
+    wrapper.unmount();
+    expect(props.onDestroyNews).to.have.been.called;
+    expect(props.onDestroyNews).to.have.been.called.once;
+  });
 
   it('should render editing title', () => {
     props = baseProps;

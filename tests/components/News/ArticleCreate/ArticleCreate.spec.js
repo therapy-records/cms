@@ -9,8 +9,18 @@ describe('(Component) News - ArticleCreate', () => {
       props,
       baseProps = {
         onPostNews: () => {},
-        onPostQueueNews: () => {}
+        onPostQueueNews: () => {},
+        resetPromiseState: () => {}
       };
+
+  it('should call resetPromiseState on componentWillUnmount', () => {
+    let props = baseProps;
+    props.resetPromiseState = sinon.spy();
+    wrapper = shallow(<ArticleCreate {...props} />);
+    wrapper.unmount();
+    expect(props.resetPromiseState).to.have.been.called;
+    expect(props.resetPromiseState).to.have.been.called.once;
+  });
 
   it('should render a NewsPostForm', () => {
     props = baseProps;

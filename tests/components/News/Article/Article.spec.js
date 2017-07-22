@@ -17,9 +17,18 @@ describe('(Component) News - Article', () => {
       baseProps = {
         onFetchNewsPosts: () => {},
         onDeleteArticle: () => {},
-        destroySelectedNewsPost: () => {},
+        onDestroyNews: () => {},
         resetPromiseState: () => {}
       };
+
+  it('should call onDestroyNews on componentWillUnmount', () => {
+    let props = baseProps;
+    props.onDestroyNews = sinon.spy();
+    wrapper = shallow(<Article {...props} />);
+    wrapper.unmount();
+    expect(props.onDestroyNews).to.have.been.called;
+    expect(props.onDestroyNews).to.have.been.called.once;
+  });
 
   describe('when promise is loading', () => {
     beforeEach(() => {
@@ -70,15 +79,6 @@ describe('(Component) News - Article', () => {
     });
   });
 
-  it('should call destroySelectedNewsPost click on componentWillUnmount', () => {
-    let props = baseProps;
-    props.destroySelectedNewsPost = sinon.spy();
-    wrapper = shallow(<Article {...props} />);
-    wrapper.unmount();
-    expect(props.destroySelectedNewsPost).to.have.been.called;
-    expect(props.destroySelectedNewsPost).to.have.been.called.once;
-  });
-  
   describe('edit post button', () => {
     it('should be rendered', () => {
       let props = baseProps;

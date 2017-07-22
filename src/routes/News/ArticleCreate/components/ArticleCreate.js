@@ -49,8 +49,7 @@ ArticleCreate.propTypes = {
   promiseSuccess: PropTypes.bool,
   promiseError: PropTypes.object,
   location: PropTypes.object,
-  resetPromiseState: PropTypes.func,
-  destroySelectedNewsPost: PropTypes.func
+  resetPromiseState: PropTypes.func
 }
 
 export default ArticleCreate

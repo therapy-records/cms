@@ -17,7 +17,7 @@ class Article extends React.Component {
   componentWillUnmount() {
     this.props.resetPromiseState();
     if (!this.state.clickedEditButton) {
-      this.props.destroySelectedNewsPost();
+      this.props.onDestroyNews();
     }
   }
 
@@ -132,7 +132,7 @@ Article.propTypes = {
   promiseError: PropTypes.bool,
   onFetchNewsPosts: PropTypes.func.isRequired,
   resetPromiseState: PropTypes.func.isRequired,
-  destroySelectedNewsPost: PropTypes.func.isRequired
+  onDestroyNews: PropTypes.func.isRequired
 }
 
 export default Article

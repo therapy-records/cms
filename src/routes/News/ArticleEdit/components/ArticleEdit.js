@@ -6,6 +6,7 @@ import NewsPostForm from '../../../../components/NewsPostForm'
 class ArticleEdit extends React.Component {
   componentWillUnmount() {
     this.props.resetPromiseState();
+    this.props.onDestroyNews();
   }
 
   renderHtml(data) {
@@ -49,7 +50,6 @@ class ArticleEdit extends React.Component {
             <br />
             <br />
             <NewsPostForm
-              // onSubmit={() => this.props.onPostForm(article)}
               onSubmitForm={() => this.props.onEditNews(article)}
               onSubmitFormQueue={() => this.props.onEditQueueNews(article)}
               location={location}
@@ -64,12 +64,12 @@ class ArticleEdit extends React.Component {
 ArticleEdit.propTypes = {
   onEditNews: PropTypes.func.isRequired,
   onEditQueueNews: PropTypes.func.isRequired,
+  onDestroyNews: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
   promiseSuccess: PropTypes.bool,
   promiseError: PropTypes.bool,
   resetPromiseState: PropTypes.func.isRequired,
-  destroySelectedNewsPost: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired
 }
 

@@ -5,12 +5,13 @@ import {
   editNews,
   editNewsQueue
 } from '../../../../reducers/news';
-import ArticleEdit from '../components/ArticleEdit'
+import { destroySelectedNewsPost } from '../../../../reducers/newsPost';
+import ArticleEdit from '../components/ArticleEdit';
 
 const mapDispatchToProps = {
-  // onPostForm: (post) => editNews(post),
-  onEditNews: () => editNews(),
-  onEditQueueNews: () => editNewsQueue(),
+  onEditNews: (post) => editNews(post),
+  onEditQueueNews: (post) => editNewsQueue(post),
+  onDestroyNews: () => destroySelectedNewsPost(),
   resetPromiseState: () => resetPromiseState()
 }
 

@@ -14,7 +14,7 @@ const mapDispatchToProps = {
   onFetchNewsPosts: () => fetchNewsPosts(),
   onDeleteArticle: (id) => deleteNewsPost(id),
   resetPromiseState: () => resetPromiseState(),
-  destroySelectedNewsPost: () => destroySelectedNewsPost()
+  onDestroyNews: () => destroySelectedNewsPost()
 }
 
 const mapStateToProps = (state, props) => ({
