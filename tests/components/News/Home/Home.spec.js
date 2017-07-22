@@ -54,12 +54,24 @@ describe('(Component) News - Home', () => {
   });
 
   describe('post', () => {
-    it('should call onSetSelectedNewsPost on button click', () => {
+    it('should call onSetSelectedNewsPost on `view` button click', () => {
       let _props = baseProps;
       _props.onSetSelectedNewsPost = sinon.spy();
       wrapper = shallow(<News {..._props} />);
       const lastPost = wrapper.find('.news-card').last();
       const lastPostButton = lastPost.find(Link).first();
+      lastPostButton.simulate('click');
+      expect(_props.onSetSelectedNewsPost).to.have.been.called;
+      const expectedPost = mockNewsPosts[mockNewsPosts.length - 1];
+      expect(_props.onSetSelectedNewsPost).to.have.been.calledWith(expectedPost);
+    });
+
+    it('should call onSetSelectedNewsPost on `edit` button click', () => {
+      let _props = baseProps;
+      _props.onSetSelectedNewsPost = sinon.spy();
+      wrapper = shallow(<News {..._props} />);
+      const lastPost = wrapper.find('.news-card').last();
+      const lastPostButton = lastPost.find(Link).last();
       lastPostButton.simulate('click');
       expect(_props.onSetSelectedNewsPost).to.have.been.called;
       const expectedPost = mockNewsPosts[mockNewsPosts.length - 1];

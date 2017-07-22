@@ -49,9 +49,10 @@ class ArticleEdit extends React.Component {
             <br />
             <br />
             <NewsPostForm
-              post={article}
+              // onSubmit={() => this.props.onPostForm(article)}
+              onSubmitForm={() => this.props.onEditNews(article)}
+              onSubmitFormQueue={() => this.props.onEditQueueNews(article)}
               location={location}
-              onSubmit={() => this.props.onPostForm(article)}
             />
           </div>
         }
@@ -61,12 +62,14 @@ class ArticleEdit extends React.Component {
 }
 
 ArticleEdit.propTypes = {
-  onPostForm: PropTypes.func.isRequired,
+  onEditNews: PropTypes.func.isRequired,
+  onEditQueueNews: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
   promiseSuccess: PropTypes.bool,
   promiseError: PropTypes.bool,
   resetPromiseState: PropTypes.func.isRequired,
+  destroySelectedNewsPost: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired
 }
 

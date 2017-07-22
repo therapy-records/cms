@@ -16,6 +16,8 @@ export const FETCH_NEWS_POSTS_SUCCESS = 'FETCH_NEWS_POSTS_SUCCESS';
 export const FETCH_NEWS_POSTS_QUEUE_SUCCESS = 'FETCH_NEWS_POSTS_QUEUE_SUCCESS';
 export const POST_NEWS_FORM_SUCCESS = 'POST_NEWS_FORM_SUCCESS';
 export const POST_NEWS_FORM_QUEUE_SUCCESS = 'POST_NEWS_FORM_QUEUE_SUCCESS';
+export const EDIT_NEWS_SUCCESS = 'EDIT_NEWS_SUCCESS';
+export const EDIT_NEWS_QUEUE_SUCCESS = 'EDIT_NEWS_QUEUE_SUCCESS';
 
 // ------------------------------------
 // Actions
@@ -47,6 +49,14 @@ export function postNewsQueueSuccess() {
     type: POST_NEWS_FORM_QUEUE_SUCCESS,
     payload: []
   }
+}
+
+export function editNewsSuccess() {
+  return { type: EDIT_NEWS_SUCCESS }
+}
+
+export function editNewsQueueSuccess() {
+  return { type: EDIT_NEWS_QUEUE_SUCCESS }
 }
 
 export const fetchNewsPosts = () => {
@@ -139,7 +149,7 @@ export const postNewsQueue = () => {
   }
 }
 
-export const editNews = (editedPost) => {
+export const editNews = (postToEdit) => {
   return (dispatch, getState) => {
     dispatch(promiseLoading(true));
     let getFormValues = () => {
@@ -151,16 +161,50 @@ export const editNews = (editedPost) => {
       }
     }
     const reduxFormObj = getFormValues();
-    editedPost.title = reduxFormObj.title;
-    editedPost.bodyMain = reduxFormObj.bodyMain;
+    postToEdit.title = reduxFormObj.title;
+    postToEdit.bodyMain = reduxFormObj.bodyMain;
+    postToEdit.scheduledTime = reduxFormObj.scheduledTime;
 
     return _axiosAuthHeaders.put(
-      API_ROOT + NEWS + '/' + editedPost._id,
-      JSON.stringify(editedPost)
+      API_ROOT + NEWS + '/' + postToEdit._id,
+      JSON.stringify(postToEdit)
     ).then(
       (data) => {
         dispatch(promiseLoading(false));
         dispatch(promiseSuccess(true));
+        dispatch(editNewsSuccess());
+      }, (err) => {
+        dispatch(promiseLoading(false));
+        dispatch(promiseError(err));
+      }
+    );
+  }
+}
+
+export const editNewsQueue = (postToEdit) => {
+  return (dispatch, getState) => {
+    dispatch(promiseLoading(true));
+    let getFormValues = () => {
+      if (getState().form.NEWS_POST_FORM &&
+          getState().form.NEWS_POST_FORM.values) {
+        return getState().form.NEWS_POST_FORM.values;
+      } else {
+        return null;
+      }
+    }
+    const reduxFormObj = getFormValues();
+    postToEdit.title = reduxFormObj.title;
+    postToEdit.bodyMain = reduxFormObj.bodyMain;
+    postToEdit.scheduledTime = reduxFormObj.scheduledTime;
+
+    return _axiosAuthHeaders.put(
+      API_ROOT + NEWS_QUEUE + '/' + postToEdit._id,
+      JSON.stringify(postToEdit)
+    ).then(
+      (data) => {
+        dispatch(promiseLoading(false));
+        dispatch(promiseSuccess(true));
+        dispatch(editNewsQueueSuccess());
       }, (err) => {
         dispatch(promiseLoading(false));
         dispatch(promiseError(err));
@@ -174,7 +218,8 @@ export const actions = {
   fetchNewsQueuePosts,
   postNews,
   postNewsQueue,
-  editNews
+  editNews,
+  editNewsQueue
 }
 
 // ------------------------------------

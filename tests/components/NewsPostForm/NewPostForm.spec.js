@@ -147,9 +147,9 @@ describe('(Component) NewsPostForm', () => {
       expect(actual).to.equal(true);
     });
 
-    it('should call onPostNews prop onClick', () => {
+    it('should call onSubmitForm prop onClick', () => {
       props = {
-        onPostNews: sinon.spy(),
+        onSubmitForm: sinon.spy(),
         error: false,
         pristine: false,
         submitting: false,
@@ -158,12 +158,12 @@ describe('(Component) NewsPostForm', () => {
       const buttonWrapper = shallow(<NewsPostForm {...props} />);
       const button = buttonWrapper.find('button');
       button.simulate('click');
-      props.onPostNews.should.have.been.called;
+      props.onSubmitForm.should.have.been.called;
     });
 
-    it('should call onPostQueueNews prop onClick if scheduledTime', () => {
+    it('should call onSubmitFormQueue prop onClick if scheduledTime', () => {
       props = {
-        onPostQueueNews: sinon.spy(),
+        onSubmitFormQueue: sinon.spy(),
         error: false,
         pristine: false,
         submitting: false,
@@ -174,7 +174,7 @@ describe('(Component) NewsPostForm', () => {
       const buttonWrapper = shallow(<NewsPostForm {...props} />);
       const button = buttonWrapper.find('button');
       button.simulate('click');
-      props.onPostQueueNews.should.have.been.called;
+      props.onSubmitFormQueue.should.have.been.called;
     });
   });
 });

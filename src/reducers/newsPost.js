@@ -29,13 +29,6 @@ function selectedNewsPost(post) {
   }
 }
 
-function destroySelectedNewsPost(post) {
-  return {
-    type: DESTROY_SELECTED_NEWS_POST,
-    payload: {}
-  }
-}
-
 function deleteSuccess(data) {
   return {
     type: DELETE_SINGLE_NEWS_POST_SUCCESS,
@@ -100,7 +93,7 @@ export const deleteNewsPost = (postId) => {
   }
 }
 
-export const destroyNewsPost = () => {
+export const destroySelectedNewsPost = () => {
   return (dispatch) => {
     dispatch({
       type: DESTROY_SELECTED_NEWS_POST,
@@ -112,7 +105,6 @@ export const destroyNewsPost = () => {
 export const actions = {
   fetchNewsPost,
   deleteNewsPost,
-  destroyNewsPost,
   setSelectedNewsPost,
   destroySelectedNewsPost
 }

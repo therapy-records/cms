@@ -1,44 +1,45 @@
 import {
   filterNewsPostsPost,
-  selectNewsPostsPost,
-  selectNewsPostsPostTitle,
-  selectNewsPostsPostBodyMain,
-  selectNewsPostsPostMainImageUrl,
-  selectNewsPostsPostTicketsLink,
-  selectNewsPostsPostVenueLink,
-  selectNewsPostsPostMiniGalleryImages,
-  selectNewsPostsPostVideoEmbed,
-  selectNewsPostsPostScheduledTime,
-  selectSelectedNewsPost
+  selectSelectedNewsPost,
+  selectSelectedNewsPostTitle,
+  selectSelectedNewsPostBodyMain,
+  selectSelectedNewsPostMainImageUrl,
+  selectSelectedNewsPostTicketsLink,
+  selectSelectedNewsPostVenueLink,
+  selectSelectedNewsPostMiniGalleryImages,
+  selectSelectedNewsPostVideoEmbed,
+  selectSelectedNewsPostScheduledTime
 } from 'selectors/news';
+
+const mockPosts = [
+  {
+    _id: 'xcxcxcxcxccx1234',
+    title: 'hello',
+    createdAt: new Date(),
+    mainBody: '<p>test</p>',
+    miniGallery: ['asdf', 'asdf', 'asdf']
+  },
+  {
+    _id: 'asdf1234',
+    title: 'hi',
+    createdAt: new Date(),
+    mainBody: '<p>hello world</p>',
+    miniGallery: ['asdf', 'asdf', 'asdf']
+  },
+  {
+    _id: 'zxcv789',
+    title: 'crazy',
+    createdAt: new Date(),
+    mainBody: '<p>testing</p>',
+    miniGallery: ['asdf', 'asdf', 'asdf']
+  }
+];
 
 const mockState = {
   news: {
-    posts: [
-      {
-        _id: 'xcxcxcxcxccx1234',
-        title: 'hello',
-        createdAt: new Date(),
-        mainBody: '<p>test</p>',
-        miniGallery: ['asdf', 'asdf', 'asdf']
-      },
-      {
-        _id: 'asdf1234',
-        title: 'hi',
-        createdAt: new Date(),
-        mainBody: '<p>hello world</p>',
-        miniGallery: ['asdf', 'asdf', 'asdf']
-      },
-      {
-        _id: 'zxcv789',
-        title: 'crazy',
-        createdAt: new Date(),
-        mainBody: '<p>testing</p>',
-        miniGallery: ['asdf', 'asdf', 'asdf']
-      }
-    ]
+    posts: mockPosts
   },
-  selectedNewsPost: {}
+  selectedNewsPost: mockPosts[1]
 };
 
 describe('(Selectors) news', () => {
@@ -48,7 +49,7 @@ describe('(Selectors) news', () => {
       newsPost,
       mockSelectedNewsPost;
   beforeEach(() => {
-    _newsPost = selectNewsPostsPost(mockState, postId);
+    _newsPost = selectSelectedNewsPost(mockState, postId);
     _selectedNewsPost = selectSelectedNewsPost(mockState)
     newsPost = _newsPost;
     mockSelectedNewsPost = _selectedNewsPost
@@ -62,82 +63,74 @@ describe('(Selectors) news', () => {
     });
   });
 
-  describe('selectNewsPostsPost', () => {
-    it('should return a newsPost', () => {
-      const actual = selectNewsPostsPost(mockState, postId);
-      const expected = newsPost;
-      expect(actual).to.deep.equal(expected);
+  describe('selectSelectedNewsPost', () => {
+    it('should return selectedNewsPost', () => {
+      const actual = selectSelectedNewsPost(mockState);
+      const expected = mockSelectedNewsPost;
+      expect(actual).to.equal(expected);
     });
   });
 
-  describe('selectNewsPostsPostTitle', () => {
+  describe('selectSelectedNewsPostTitle', () => {
     it('should return a title', () => {
-      const actual = selectNewsPostsPostTitle(mockState, postId);
+      const actual = selectSelectedNewsPostTitle(mockState, postId);
       const expected = newsPost.title;
       expect(actual).to.equal(expected);
     });
   });
 
-  describe('selectNewsPostsPostBodyMain', () => {
+  describe('selectSelectedNewsPostBodyMain', () => {
     it('should return bodyMain', () => {
-      const actual = selectNewsPostsPostBodyMain(mockState, postId);
+      const actual = selectSelectedNewsPostBodyMain(mockState, postId);
       const expected = newsPost.bodyMain;
       expect(actual).to.deep.equal(expected);
     });
   });
 
-  describe('selectNewsPostsPostMainImageUrl', () => {
+  describe('selectSelectedNewsPostMainImageUrl', () => {
     it('should return bodyMain', () => {
-      const actual = selectNewsPostsPostMainImageUrl(mockState, postId);
+      const actual = selectSelectedNewsPostMainImageUrl(mockState, postId);
       const expected = newsPost.mainImageUrl;
       expect(actual).to.equal(expected);
     });
   });
 
-  describe('selectNewsPostsPostTicketsLink', () => {
+  describe('selectSelectedNewsPostTicketsLink', () => {
     it('should return bodyMain', () => {
-      const actual = selectNewsPostsPostTicketsLink(mockState, postId);
+      const actual = selectSelectedNewsPostTicketsLink(mockState, postId);
       const expected = newsPost.ticketsLink;
       expect(actual).to.equal(expected);
     });
   });
 
-  describe('selectNewsPostsPostVenueLink', () => {
+  describe('selectSelectedNewsPostVenueLink', () => {
     it('should return bodyMain', () => {
-      const actual = selectNewsPostsPostVenueLink(mockState, postId);
+      const actual = selectSelectedNewsPostVenueLink(mockState, postId);
       const expected = newsPost.venueLink;
       expect(actual).to.equal(expected);
     });
   });
 
-  describe('selectNewsPostsPostMiniGalleryImages', () => {
+  describe('selectSelectedNewsPostMiniGalleryImages', () => {
     it('should return bodyMain', () => {
-      const actual = selectNewsPostsPostMiniGalleryImages(mockState, postId);
+      const actual = selectSelectedNewsPostMiniGalleryImages(mockState, postId);
       const expected = newsPost.miniGalleryImages;
       expect(actual).to.deep.equal(expected);
     });
   });
 
-  describe('selectNewsPostsPostVideoEmbed', () => {
+  describe('selectSelectedNewsPostVideoEmbed', () => {
     it('should return bodyMain', () => {
-      const actual = selectNewsPostsPostVideoEmbed(mockState, postId);
+      const actual = selectSelectedNewsPostVideoEmbed(mockState, postId);
       const expected = newsPost.videoEmbed;
       expect(actual).to.equal(expected);
     });
   });
 
-  describe('selectNewsPostsPostScheduledTime', () => {
+  describe('selectSelectedNewsPostScheduledTime', () => {
     it('should return scheduledTime', () => {
-      const actual = selectNewsPostsPostScheduledTime(mockState, postId);
+      const actual = selectSelectedNewsPostScheduledTime(mockState, postId);
       const expected = newsPost.scheduledTime;
-      expect(actual).to.equal(expected);
-    });
-  });
-
-  describe('selectSelectedNewsPost', () => {
-    it('should return selectedNewsPost', () => {
-      const actual = selectSelectedNewsPost(mockState);
-      const expected = mockSelectedNewsPost;
       expect(actual).to.equal(expected);
     });
   });

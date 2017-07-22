@@ -32,8 +32,8 @@ class ArticleCreate extends React.Component {
         }
         {!promiseLoading && !promiseSuccess &&
           <NewsPostForm
-            onPostQueueNews={this.props.onPostQueueNews}
-            onPostNews={this.props.onPostNews}
+            onSubmitForm={this.props.onPostNews}
+            onSubmitFormQueue={this.props.onPostQueueNews}
             location={location}
           />
         }
@@ -49,7 +49,8 @@ ArticleCreate.propTypes = {
   promiseSuccess: PropTypes.bool,
   promiseError: PropTypes.object,
   location: PropTypes.object,
-  resetPromiseState: PropTypes.func
+  resetPromiseState: PropTypes.func,
+  destroySelectedNewsPost: PropTypes.func
 }
 
 export default ArticleCreate

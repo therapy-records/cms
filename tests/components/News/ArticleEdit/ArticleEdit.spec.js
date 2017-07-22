@@ -2,12 +2,14 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { Link } from 'react-router'
 import ArticleEdit from 'routes/News/ArticleEdit/components/ArticleEdit'
+import NewsPostForm from 'components/NewsPostForm'
 
 describe('(Component) News - ArticleEdit', () => {
   let wrapper,
       props,
       baseProps = {
-        onPostForm: () => {},
+        onEditNews: () => {},
+        onEditQueueNews: () => {},
         article: { title: 'test' },
         location: {
           pathname: 'article/edit'
@@ -21,6 +23,13 @@ describe('(Component) News - ArticleEdit', () => {
       <p>editing <br />{props.article.title}</p>
     );
     expect(actual).to.equal(true);
+  });
+
+  it('should render a NewsPostForm', () => {
+    props = baseProps;
+    wrapper = shallow(<ArticleEdit {...props} />);
+    const form = wrapper.find(NewsPostForm);
+    expect(form.length).to.equal(1);
   });
 
   describe('when promise is loading', () => {

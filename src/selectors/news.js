@@ -7,44 +7,44 @@ export const selectNewsPostsPost = createSelector(
   (postArr) => postArr && postArr[0]
 );
 
-export const selectNewsPostsPostTitle = createSelector(
-  selectNewsPostsPost,
+export const selectSelectedNewsPost = (state) => state.selectedNewsPost;
+
+export const selectSelectedNewsPostTitle = createSelector(
+  selectSelectedNewsPost,
   (post) => post && post.title
 );
 
-export const selectNewsPostsPostBodyMain = createSelector(
-  selectNewsPostsPost,
+export const selectSelectedNewsPostBodyMain = createSelector(
+  selectSelectedNewsPost,
   (post) => post && post.bodyMain
 );
 
-export const selectNewsPostsPostMainImageUrl = createSelector(
-  selectNewsPostsPost,
+export const selectSelectedNewsPostMainImageUrl = createSelector(
+  selectSelectedNewsPost,
   (post) => post && post.mainImageUrl
 );
 
-export const selectNewsPostsPostTicketsLink = createSelector(
-  selectNewsPostsPost,
+export const selectSelectedNewsPostTicketsLink = createSelector(
+  selectSelectedNewsPost,
   (post) => post && post.ticketsLink
 );
 
-export const selectNewsPostsPostVenueLink = createSelector(
-  selectNewsPostsPost,
+export const selectSelectedNewsPostVenueLink = createSelector(
+  selectSelectedNewsPost,
   (post) => post && post.venueLink
 );
 
-export const selectNewsPostsPostMiniGalleryImages = createSelector(
-  selectNewsPostsPost,
+export const selectSelectedNewsPostMiniGalleryImages = createSelector(
+  selectSelectedNewsPost,
   (post) => post && post.miniGalleryImages
 );
 
-export const selectNewsPostsPostVideoEmbed = createSelector(
-  selectNewsPostsPost,
+export const selectSelectedNewsPostVideoEmbed = createSelector(
+  selectSelectedNewsPost,
   (post) => post && post.videoEmbed
 );
 
-export const selectNewsPostsPostScheduledTime = createSelector(
-  selectNewsPostsPost,
+export const selectSelectedNewsPostScheduledTime = createSelector(
+  selectSelectedNewsPost,
   (post) => post && post.scheduledTime
-)
-
-export const selectSelectedNewsPost = (state) => state.selectedNewsPost;
+);

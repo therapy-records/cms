@@ -42,13 +42,19 @@ class News extends React.Component {
           <h3>{p.title}</h3>
           {p.createdAt && <p>{moment(p.createdAt).fromNow()}</p>}
           <Link
+            onClick={() => this.handleButtonClick(p)}
             to={`news/${p._id}`}
             className='btn'
-            onClick={() => this.handleButtonClick(p)}
           >
             View
           </Link>
-          <Link to={`news/${p._id}/edit`} className='btn'>Edit</Link>
+          <Link
+            onClick={() => this.handleButtonClick(p)}
+            to={`news/${p._id}/edit`}
+            className='btn'
+          >
+            Edit
+          </Link>
         </div>
       </div>
     );

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 import Article from 'routes/News/Article/components/Article'
 import ArticleDeleteModal from 'routes/News/Article/components/ArticleDeleteModal'
 import { shallow } from 'enzyme'
@@ -15,7 +16,9 @@ describe('(Component) News - Article', () => {
       },
       baseProps = {
         onFetchNewsPosts: () => {},
-        onDeleteArticle: () => {}
+        onDeleteArticle: () => {},
+        destroySelectedNewsPost: () => {},
+        resetPromiseState: () => {}
       };
 
   describe('when promise is loading', () => {
@@ -64,6 +67,34 @@ describe('(Component) News - Article', () => {
         <img src={props.article.mainImageUrl} />
       );
       expect(actual).to.equal(true);
+    });
+  });
+
+  it('should call destroySelectedNewsPost click on componentWillUnmount', () => {
+    let props = baseProps;
+    props.destroySelectedNewsPost = sinon.spy();
+    wrapper = shallow(<Article {...props} />);
+    wrapper.unmount();
+    expect(props.destroySelectedNewsPost).to.have.been.called;
+    expect(props.destroySelectedNewsPost).to.have.been.called.once;
+  });
+  
+  describe('edit post button', () => {
+    it('should be rendered', () => {
+      let props = baseProps;
+      props.destroySelectedNewsPost = sinon.spy();
+      wrapper = shallow(<Article {...props} />);
+      const editButton = wrapper.find(Link);
+      expect(editButton.length).to.equal(1);
+    });
+    it('should not call destroySelectedNewsPost on click', () => {
+      let props = baseProps;
+      props.destroySelectedNewsPost = sinon.spy();
+      wrapper = shallow(<Article {...props} />);
+      const editButton = wrapper.find('.btn-edit');
+      editButton.simulate('click');
+      wrapper.unmount();
+      expect(props.destroySelectedNewsPost).to.not.have.been.called;
     });
   });
 

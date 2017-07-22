@@ -4,14 +4,14 @@ import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import RichTextEditor from '../RichTextEditor'
 import {
-  selectNewsPostsPostTitle,
-  selectNewsPostsPostBodyMain,
-  selectNewsPostsPostMainImageUrl,
-  selectNewsPostsPostTicketsLink,
-  selectNewsPostsPostVenueLink,
-  selectNewsPostsPostMiniGalleryImages,
-  selectNewsPostsPostVideoEmbed,
-  selectNewsPostsPostScheduledTime
+  selectSelectedNewsPostTitle,
+  selectSelectedNewsPostBodyMain,
+  selectSelectedNewsPostMainImageUrl,
+  selectSelectedNewsPostTicketsLink,
+  selectSelectedNewsPostVenueLink,
+  selectSelectedNewsPostMiniGalleryImages,
+  selectSelectedNewsPostVideoEmbed,
+  selectSelectedNewsPostScheduledTime
 } from '../../selectors/news';
 import { selectNewsPostFormValues } from '../../selectors/form';
 import './NewsPostForm.scss';
@@ -57,9 +57,9 @@ export class NewsPostForm extends React.Component {
 
   handleSubmit() {
     if (this.props.formValues.scheduledTime) {
-      this.props.onPostQueueNews();
+      this.props.onSubmitFormQueue();
     } else {
-      this.props.onPostNews();
+      this.props.onSubmitForm();
     }
   }
 
@@ -178,14 +178,13 @@ export class NewsPostForm extends React.Component {
 }
 
 NewsPostForm.propTypes = {
-  post: PropTypes.object,
   error: PropTypes.string,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
   invalid: PropTypes.bool,
   formValues: PropTypes.object,
-  onPostNews: PropTypes.func.isRequired,
-  onPostQueueNews: PropTypes.func.isRequired,
+  onSubmitForm: PropTypes.func.isRequired,
+  onSubmitFormQueue: PropTypes.func.isRequired,
   location: PropTypes.object
 };
 
@@ -197,14 +196,14 @@ let InitFromStateForm = reduxForm({
 InitFromStateForm = connect(
   (state, props) => ({
     initialValues: {
-      title: props.post && selectNewsPostsPostTitle(state, props.post._id),
-      bodyMain: props.post && selectNewsPostsPostBodyMain(state, props.post._id),
-      mainImageUrl: props.post && selectNewsPostsPostMainImageUrl(state, props.post._id),
-      ticketsLink: props.post && selectNewsPostsPostTicketsLink(state, props.post._id),
-      venueLink: props.post && selectNewsPostsPostVenueLink(state, props.post._id),
-      miniGalleryImages: props.post && selectNewsPostsPostMiniGalleryImages(state, props.post._id),
-      videoEmbed: props.post && selectNewsPostsPostVideoEmbed(state, props.post_id),
-      scheduledTime: props.post && selectNewsPostsPostScheduledTime(state, props.post_id)
+      title: selectSelectedNewsPostTitle(state),
+      bodyMain: selectSelectedNewsPostBodyMain(state),
+      mainImageUrl: selectSelectedNewsPostMainImageUrl(state),
+      ticketsLink: selectSelectedNewsPostTicketsLink(state),
+      venueLink: selectSelectedNewsPostVenueLink(state),
+      videoEmbed: selectSelectedNewsPostVideoEmbed(state),
+      miniGalleryImages: selectSelectedNewsPostMiniGalleryImages(state),
+      scheduledTime: selectSelectedNewsPostScheduledTime(state)
     }
   })
 )(InitFromStateForm);
