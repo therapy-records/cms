@@ -8,7 +8,8 @@ import {
   selectNewsPostsPostVenueLink,
   selectNewsPostsPostMiniGalleryImages,
   selectNewsPostsPostVideoEmbed,
-  selectNewsPostsPostScheduledTime
+  selectNewsPostsPostScheduledTime,
+  selectSelectedNewsPost
 } from 'selectors/news';
 
 const mockState = {
@@ -36,16 +37,21 @@ const mockState = {
         miniGallery: ['asdf', 'asdf', 'asdf']
       }
     ]
-  }
+  },
+  selectedNewsPost: {}
 };
 
 describe('(Selectors) news', () => {
   const postId = 'asdf1234';
   let _newsPost,
-      newsPost;
+      _selectedNewsPost,
+      newsPost,
+      mockSelectedNewsPost;
   beforeEach(() => {
     _newsPost = selectNewsPostsPost(mockState, postId);
+    _selectedNewsPost = selectSelectedNewsPost(mockState)
     newsPost = _newsPost;
+    mockSelectedNewsPost = _selectedNewsPost
   });
 
   describe('filterNewsPostsPost', () => {
@@ -124,6 +130,14 @@ describe('(Selectors) news', () => {
     it('should return scheduledTime', () => {
       const actual = selectNewsPostsPostScheduledTime(mockState, postId);
       const expected = newsPost.scheduledTime;
+      expect(actual).to.equal(expected);
+    });
+  });
+
+  describe('selectSelectedNewsPost', () => {
+    it('should return selectedNewsPost', () => {
+      const actual = selectSelectedNewsPost(mockState);
+      const expected = mockSelectedNewsPost;
       expect(actual).to.equal(expected);
     });
   });

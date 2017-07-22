@@ -13,12 +13,6 @@ class Article extends React.Component {
   handleModalOpen = () => this.setState({ isShowingModal: true })
   handleModalClose = () => this.setState({ isShowingModal: false })
 
-  componentWillMount() {
-    if (!this.props.newsArticles) {
-      this.props.onFetchNewsPosts();
-    }
-  }
-
   componentWillUnmount() {
     this.props.resetPromiseState();
   }
@@ -31,7 +25,6 @@ class Article extends React.Component {
     const {
       article,
       promiseLoading,
-      promiseSuccess,
       promiseError
     } = this.props;
     let deletedState = false;
@@ -53,7 +46,7 @@ class Article extends React.Component {
           <h1>loading...</h1>
         }
 
-        {(promiseSuccess && article && article.title) &&
+        {(article && article.title) &&
           <div className='article-flex-root'>
 
             <div className='article-col-1'>
@@ -125,10 +118,8 @@ Article.propTypes = {
   onDeleteArticle: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
-  promiseSuccess: PropTypes.bool,
   promiseError: PropTypes.bool,
   resetPromiseState: PropTypes.func.isRequired,
-  newsArticles: PropTypes.func,
   onFetchNewsPosts: PropTypes.func.isRequired
 }
 

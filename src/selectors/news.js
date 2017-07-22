@@ -47,4 +47,4 @@ export const selectNewsPostsPostScheduledTime = createSelector(
   (post) => post && post.scheduledTime
 )
 
-export const selectedNewsPostSelector = (state) => state.selectedNewsPost;
+export const selectSelectedNewsPost = (state) => state.selectedNewsPost;

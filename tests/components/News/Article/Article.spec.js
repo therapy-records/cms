@@ -50,7 +50,6 @@ describe('(Component) News - Article', () => {
     beforeEach(() => {
       props = baseProps;
       props.article = mockArticle;
-      props.promiseSuccess = true;
       wrapper = shallow(<Article {...props} />);
     });
     it('should render a title', () => {
@@ -71,7 +70,6 @@ describe('(Component) News - Article', () => {
   describe('delete post button', () => {
     beforeEach(() => {
       props = baseProps;
-      props.promiseSuccess = true;
       props.handleModalOpen = sinon.spy();
       props.handleModalClose = () => {};
       wrapper = shallow(<Article {...props} />);

@@ -24,6 +24,10 @@ class News extends React.Component {
     return [...queueFeed, ...newsFeed];
   }
 
+  handleButtonClick(postObj) {
+    this.props.onSetSelectedNewsPost(postObj);
+  }
+
   renderPost(p) {
     return (
       <div key={p._id} className='news-card'>
@@ -37,7 +41,13 @@ class News extends React.Component {
           }
           <h3>{p.title}</h3>
           {p.createdAt && <p>{moment(p.createdAt).fromNow()}</p>}
-          <Link to={`news/${p._id}`} className='btn'>View</Link>
+          <Link
+            to={`news/${p._id}`}
+            className='btn'
+            onClick={() => this.handleButtonClick(p)}
+          >
+            View
+          </Link>
           <Link to={`news/${p._id}/edit`} className='btn'>Edit</Link>
         </div>
       </div>
@@ -77,6 +87,7 @@ class News extends React.Component {
 News.propTypes = {
   onFetchNewsPosts: PropTypes.func.isRequired,
   onFetchNewsQueuePosts: PropTypes.func.isRequired,
+  onSetSelectedNewsPost: PropTypes.func.isRequired,
   postsQueue: PropTypes.array,
   newsPosts: PropTypes.array,
   combinedPosts: PropTypes.array,

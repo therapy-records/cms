@@ -15,6 +15,7 @@ describe('(Component) News - Home', () => {
       baseProps = {
         onFetchNewsPosts: () => {},
         onFetchNewsQueuePosts: () => {},
+        onSetSelectedNewsPost: () => {},
         newsPosts: mockNewsPosts,
         postsQueue: mockNewsPosts
       };
@@ -50,6 +51,20 @@ describe('(Component) News - Home', () => {
     expect(child1).to.equal(true);
     const child2 = wrapper.containsMatchingElement(renderNewsPost(2));
     expect(child2).to.equal(true);
+  });
+
+  describe('post', () => {
+    it('should call onSetSelectedNewsPost on button click', () => {
+      let _props = baseProps;
+      _props.onSetSelectedNewsPost = sinon.spy();
+      wrapper = shallow(<News {..._props} />);
+      const lastPost = wrapper.find('.news-card').last();
+      const lastPostButton = lastPost.find(Link).first();
+      lastPostButton.simulate('click');
+      expect(_props.onSetSelectedNewsPost).to.have.been.called;
+      const expectedPost = mockNewsPosts[mockNewsPosts.length - 1];
+      expect(_props.onSetSelectedNewsPost).to.have.been.calledWith(expectedPost);
+    });
   });
 
   // it('should render an error', () => {
