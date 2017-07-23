@@ -104,7 +104,8 @@ describe('(Component) NewsPostForm', () => {
       const actual = datepickerWrapper.containsMatchingElement(
         <Field name='scheduledTime'
                component={Datepicker}
-               title='Schedule Time'
+               title='Scheduler (optional)'
+               titleSub='Post live on a date of choosing' 
                initTime={props.formValues.scheduledTime} />
       );
       expect(actual).to.equal(true);

@@ -159,7 +159,8 @@ export class NewsPostForm extends React.Component {
           <Field name='scheduledTime'
                 component={Datepicker}
                 initTime={this.props.formValues && this.props.formValues.scheduledTime}
-                title='Schedule Time' />
+                title='Scheduler (optional)'
+                titleSub='Post live on a date of choosing' />
 
           <br />
           <br />

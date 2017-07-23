@@ -13,7 +13,9 @@ describe('(Component) Datepicker', () => {
         input: {
           onChange: () => {}
         },
-        initTime: new Date()
+        initTime: new Date(),
+        title: 'my datepicker',
+        titleSub: 'all the things'
       };
 
   beforeEach(() => {
@@ -22,6 +24,20 @@ describe('(Component) Datepicker', () => {
 
   it('should render <InputMoment /> by default', () => {
     expect(wrapper.find(InputMoment).length).to.equal(1);
+  });
+
+  it('should render a title', () => {
+    const actual = wrapper.containsMatchingElement(
+      <p><strong>{props.title}</strong></p>
+    );
+    expect(actual).to.equal(true);
+  });
+
+  it('should render a titleSub', () => {
+    const actual = wrapper.containsMatchingElement(
+      <p>{props.titleSub}</p>
+    );
+    expect(actual).to.equal(true);
   });
 
   describe('with togglePicker', () => {

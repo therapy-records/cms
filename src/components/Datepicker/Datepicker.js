@@ -36,7 +36,9 @@ export class Datepicker extends React.Component {
     const {
       input,
       togglePicker,
-      initTime
+      initTime,
+      title,
+      titleSub
     } = this.props;
 
     const {
@@ -48,6 +50,9 @@ export class Datepicker extends React.Component {
 
     return (
       <div>
+        <p><strong>{title}</strong></p>
+        <p>{titleSub}</p>
+        <p><small>Note: Time of posting is not exact and could be offset by X hours</small></p>
 
         {togglePicker ? (
           <div>
@@ -82,7 +87,9 @@ Datepicker.propTypes = {
   input: PropTypes.object.isRequired,
   togglePicker: PropTypes.bool,
   pickerActive: PropTypes.bool,
-  initTime: PropTypes.string
+  initTime: PropTypes.string,
+  title: PropTypes.string,
+  titleSub: PropTypes.string
 }
 
 export default Datepicker;
