@@ -9,19 +9,19 @@ export class Datepicker extends React.Component {
     super(props);
     this.state = {
       pickerActive: props.pickerActive,
-      moment: props.initTime && moment(props.initTime) || moment()
+      m: props.initTime && moment(props.initTime) || moment()
     }
   }
 
   handleTogglePicker = () => {
     this.setState({
       pickerActive: !this.state.pickerActive,
-      moment: this.props.initTime && moment(this.props.initTime) || this.state.moment
+      m: this.props.initTime && moment(this.props.initTime) || this.state.moment
     });
   }
 
   handleChange = e => {
-    this.setState({ moment: e });
+    this.setState({ m: e });
     this.props.input.onChange(moment(e).format())
   };
 
@@ -35,13 +35,16 @@ export class Datepicker extends React.Component {
   render() {
     const {
       input,
-      togglePicker
+      togglePicker,
+      initTime
     } = this.props;
 
     const {
-      moment,
+      m,
       pickerActive
     } = this.state;
+
+    const _moment = m;
 
     return (
       <div>
@@ -58,7 +61,7 @@ export class Datepicker extends React.Component {
               pickerActive &&
                 <InputMoment
                   {...input}
-                  moment={moment}
+                  moment={_moment}
                   onChange={this.handleChange}
                 />
             )}
@@ -66,7 +69,7 @@ export class Datepicker extends React.Component {
         ) : (
           <InputMoment
             {...input}
-            moment={moment}
+            moment={initTime ? moment(initTime) : _moment}
             onChange={this.handleChange}
           />
         )}

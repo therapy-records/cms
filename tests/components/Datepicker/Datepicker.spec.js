@@ -24,24 +24,31 @@ describe('(Component) Datepicker', () => {
     expect(wrapper.find(InputMoment).length).to.equal(1);
   });
 
-  describe('toggle', () => {
-    it('should render button if togglePicker prop', () => {
+  describe('with togglePicker', () => {
+    it('should render button', () => {
       props.togglePicker = true;
-      const toggleWrapper = shallow(<Datepicker {...props} />);
-      const button = toggleWrapper.find('button');
+      wrapper = shallow(<Datepicker {...props} />);
+      const button = wrapper.find('button');
       button.simulate('click');
-      expect(toggleWrapper.find(InputMoment).length).to.equal(1);
+      expect(wrapper.find(InputMoment).length).to.equal(1);
     });
+
+    it('should not render <InputMoment /> by default', () => {
+      props.togglePicker = true;
+      wrapper = shallow(<Datepicker {...props} />);
+      expect(wrapper.find(InputMoment).length).to.equal(0);
+    });
+    
     it('should not render <InputMoment /> after toggle', () => {
       props.togglePicker = true;
-      const toggleWrapper2 = shallow(<Datepicker {...props} />);
-      const button = toggleWrapper2.find('button');
+      wrapper = shallow(<Datepicker {...props} />);
+      const button = wrapper.find('button');
       button.simulate('click');
-      expect(toggleWrapper2.find(InputMoment).length).to.equal(1);
+      expect(wrapper.find(InputMoment).length).to.equal(1);
       button.simulate('click');
-      expect(toggleWrapper2.find(InputMoment).length).to.equal(0);
+      expect(wrapper.find(InputMoment).length).to.equal(0);
       button.simulate('click');
-      expect(toggleWrapper2.find(InputMoment).length).to.equal(1);
+      expect(wrapper.find(InputMoment).length).to.equal(1);
     });
 
     // todo: should call prop with moment formatting
