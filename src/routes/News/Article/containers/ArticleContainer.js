@@ -5,8 +5,7 @@ import {
   selectSelectedNewsPost
 } from '../../../../selectors/news';
 import {
-  deleteNewsPost,
-  destroySelectedNewsPost
+  deleteNewsPost
 } from '../../../../reducers/newsPost';
 import Article from '../components/Article'
 

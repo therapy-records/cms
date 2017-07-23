@@ -149,3 +149,10 @@ ol {
 button[disabled] {
   opacity: .6;
 }
+
+.m-calendar .current-day {
+  border-color: #1385e5 !important;
+  background: #1385e5 !important;
+  color: #FFF !important;
+  font-weight: normal !important;
+}

@@ -156,12 +156,11 @@ export class NewsPostForm extends React.Component {
 
           <br />
 
-          {!isEditForm &&
-            <Field name='scheduledTime'
-                  component={Datepicker}
-                  togglePicker
-                  title='Schedule Time' />
-          }
+          <Field name='scheduledTime'
+                component={Datepicker}
+                togglePicker
+                initTime={this.props.formValues && this.props.formValues.scheduledTime}
+                title='Schedule Time' />
 
           <br />
           <br />

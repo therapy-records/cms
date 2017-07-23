@@ -98,24 +98,16 @@ describe('(Component) NewsPostForm', () => {
       expect(actual).to.equal(true)
     });
 
-    it('should render scheduledTime field if !isEditForm', () => {
+    it('should render scheduledTime field', () => {
+      const props = { formValues: { scheduledTime: new Date() } };
       const datepickerWrapper = shallow(<NewsPostForm {...props} />);
       const actual = datepickerWrapper.containsMatchingElement(
         <Field name='scheduledTime'
                component={Datepicker}
-               title='Schedule Time' />
+               title='Schedule Time'
+               initTime={props.formValues.scheduledTime} />
       );
       expect(actual).to.equal(true);
-    });
-    it('should not render scheduledTime field if isEditForm', () => {
-      props = { location: { pathname: 'test/edit' } };
-      const datepickerWrapperEdit = shallow(<NewsPostForm {...props} />);
-      const actual = datepickerWrapperEdit.containsMatchingElement(
-        <Field name='scheduledTime'
-               component={Datepicker}
-               title='Schedule Time' />
-      );
-      expect(actual).to.equal(false);
     });
   });
 

@@ -12,7 +12,8 @@ describe('(Component) Datepicker', () => {
         },
         input: {
           onChange: () => {}
-        }
+        },
+        initTime: new Date()
       };
 
   beforeEach(() => {

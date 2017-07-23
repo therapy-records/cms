@@ -9,14 +9,14 @@ export class Datepicker extends React.Component {
     super(props);
     this.state = {
       pickerActive: props.pickerActive,
-      moment: moment()
+      moment: props.initTime && moment(props.initTime) || moment()
     }
   }
 
   handleTogglePicker = () => {
     this.setState({
       pickerActive: !this.state.pickerActive,
-      moment: this.state.moment
+      moment: this.props.initTime && moment(this.props.initTime) || this.state.moment
     });
   }
 
@@ -78,7 +78,8 @@ export class Datepicker extends React.Component {
 Datepicker.propTypes = {
   input: PropTypes.object.isRequired,
   togglePicker: PropTypes.bool,
-  pickerActive: PropTypes.bool
+  pickerActive: PropTypes.bool,
+  initTime: PropTypes.string
 }
 
 export default Datepicker;
