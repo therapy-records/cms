@@ -10,18 +10,17 @@ export class Home extends React.Component {
       this.props.onAuthCheck();
     }
   }
-  redirectToDashboard() {
-    browserHistory.push('/dashboard');
+
+  componentWillReceiveProps(props) {
+    if (props.isAuthenticated === true) {
+      browserHistory.push('/dashboard');
+    }
   }
 
   render() {
     const {
       isAuthenticated
     } = this.props;
-
-    if (isAuthenticated) {
-      this.redirectToDashboard();
-    }
 
     return (
       <div>
