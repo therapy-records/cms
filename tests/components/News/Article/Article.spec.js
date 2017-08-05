@@ -47,10 +47,12 @@ describe('(Component) News - Article', () => {
   describe('when article is deleted', () => {
     beforeEach(() => {
       props = baseProps;
-      props.isDeleted = true;
+      const deletedArticle = { isDeleted: true };
+      props.article = deletedArticle;
       wrapper = shallow(<Article {...props} />);
     });
-    it('should show correct copy', () => {
+
+    it('should have correct copy', () => {
       const actual = wrapper.containsMatchingElement(
         <div>
           <h4>Successfully deleted!</h4>
