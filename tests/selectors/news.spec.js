@@ -1,4 +1,8 @@
 import {
+  selectNewsPosts,
+  selectNewsPostsReverse,
+  selectNewsPostsQueue,
+  selectNewsPostsQueueReverse,
   filterNewsPostsPost,
   selectSelectedNewsPost,
   selectSelectedNewsPostTitle,
@@ -37,7 +41,8 @@ const mockPosts = [
 
 const mockState = {
   news: {
-    posts: mockPosts
+    posts: mockPosts,
+    postsQueue: mockPosts
   },
   selectedNewsPost: mockPosts[1]
 };
@@ -53,6 +58,38 @@ describe('(Selectors) news', () => {
     _selectedNewsPost = selectSelectedNewsPost(mockState)
     newsPost = _newsPost;
     mockSelectedNewsPost = _selectedNewsPost
+  });
+
+  describe('selectNewsPostsQueue', () => {
+    it('should return news posts', () => {
+      const actual = selectNewsPostsQueue(mockState);
+      const expected = mockPosts;
+      expect(actual).to.deep.equal(expected);
+    });
+  });
+
+  describe('selectNewsPostsQueueReverse', () => {
+    it('should return news posts', () => {
+      const actual = selectNewsPostsQueueReverse(mockState);
+      const expected = mockPosts.reverse();
+      expect(actual).to.deep.equal(expected);
+    });
+  });
+
+  describe('selectNewsPosts', () => {
+    it('should return news posts', () => {
+      const actual = selectNewsPosts(mockState);
+      const expected = mockPosts;
+      expect(actual).to.deep.equal(expected);
+    });
+  });
+
+  describe('selectNewsPostsReverse', () => {
+    it('should return news posts', () => {
+      const actual = selectNewsPostsReverse(mockState);
+      const expected = mockPosts.reverse();
+      expect(actual).to.deep.equal(expected);
+    });
   });
 
   describe('filterNewsPostsPost', () => {

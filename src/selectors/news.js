@@ -1,11 +1,37 @@
 import { createSelector } from 'reselect'
 
+/*
+state.news.postsQueue
+*/
+
+export const selectNewsPostsQueue = (state) => state.news.postsQueue;
+
+export const selectNewsPostsQueueReverse = createSelector(
+  selectNewsPostsQueue,
+  (postsQueue) => postsQueue.reverse()
+);
+
+/*
+state.news.posts
+*/
+
+export const selectNewsPosts = (state) => state.news.posts;
+
+export const selectNewsPostsReverse = createSelector(
+  selectNewsPosts,
+  (posts) => posts.reverse()
+);
+
 export const filterNewsPostsPost = (state, id) => state.news.posts.filter((p) => p._id === id);
 
 export const selectNewsPostsPost = createSelector(
   filterNewsPostsPost,
   (postArr) => postArr && postArr[0]
 );
+
+/*
+state.news.selectedNewsPost
+*/
 
 export const selectSelectedNewsPost = (state) => state.selectedNewsPost;
 
