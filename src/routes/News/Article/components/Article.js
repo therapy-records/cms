@@ -21,6 +21,14 @@ class Article extends React.Component {
     return { __html: data }
   }
 
+  handleOnDeleteArticle(article) {
+    if (article.scheduledTime) {
+      this.props.onDeleteScheduledArticle(article._id)
+    } else {
+      this.props.onDeleteArticle(article._id)
+    }
+  }
+
   render() {
     const {
       article,
@@ -97,6 +105,7 @@ class Article extends React.Component {
                     onClick={this.handleModalOpen}
                     style={{ width: 'auto', background: 'darkred', color: '#fff' }}>Delete post
                   </button>
+
                 </div>
               </div>
             </div>
@@ -110,9 +119,10 @@ class Article extends React.Component {
         {this.state.isShowingModal &&
           <ArticleDeleteModal
             deleted={deletedState}
-            handleModalClose={() => {}}
-            onDeleteArticle={() => {}} />
+            handleModalClose={this.handleModalClose}
+            onDeleteArticle={this.handleOnDeleteArticle(article)} />
         }
+
       </article>
     )
   }
@@ -120,6 +130,7 @@ class Article extends React.Component {
 
 Article.propTypes = {
   onDeleteArticle: PropTypes.func.isRequired,
+  onDeleteScheduledArticle: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
   promiseError: PropTypes.bool,

@@ -17,6 +17,7 @@ describe('(Component) News - Article', () => {
       baseProps = {
         onFetchNewsPosts: () => {},
         onDeleteArticle: () => {},
+        onDeleteScheduledArticle: () => {},
         resetPromiseState: () => {}
       };
 
@@ -90,6 +91,7 @@ describe('(Component) News - Article', () => {
   describe('delete post button', () => {
     beforeEach(() => {
       props = baseProps;
+      props.article = mockArticle;
       props.handleModalOpen = sinon.spy();
       props.handleModalClose = () => {};
       wrapper = shallow(<Article {...props} />);

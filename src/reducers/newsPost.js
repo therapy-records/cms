@@ -1,7 +1,10 @@
 import {
   API_ROOT,
-  NEWS
+  NEWS,
+  NEWS_QUEUE
 } from '../constants'
+import _axiosAuthHeaders from '../utils/axios'
+
 export const FETCH_SELECTED_NEWS_POST_SUCCESS = 'FETCH_SELECTED_NEWS_POST_SUCCESS'
 export const FETCH_SELECTED_NEWS_POST_ERROR = 'FETCH_SELECTED_NEWS_POST_ERROR'
 
@@ -10,6 +13,9 @@ export const DESTROY_SELECTED_NEWS_POST = 'DESTROY_SELECTED_NEWS_POST';
 
 export const DELETE_SINGLE_NEWS_POST_SUCCESS = 'DELETE_SINGLE_NEWS_POST_SUCCESS';
 export const DELETE_SINGLE_NEWS_POST_ERROR = 'DELETE_SINGLE_NEWS_POST_ERROR';
+
+export const DELETE_SINGLE_NEWS_QUEUE_POST_SUCCESS = 'DELETE_SINGLE_NEWS_QUEUE_POST_SUCCESS';
+export const DELETE_SINGLE_NEWS_QUEUE_POST_ERROR = 'DELETE_SINGLE_NEWS_QUEUE_POST_ERROR';
 
 // ------------------------------------
 // Actions
@@ -33,6 +39,20 @@ function deleteSuccess(data) {
   return {
     type: DELETE_SINGLE_NEWS_POST_SUCCESS,
     payload: data
+  }
+}
+
+function deleteQueuePostSuccess(data) {
+  return {
+    type: DELETE_SINGLE_NEWS_QUEUE_POST_SUCCESS,
+    payload: data
+  }
+}
+
+function deleteQueuePostError(data) {
+  return {
+    type: DELETE_SINGLE_NEWS_QUEUE_POST_ERROR,
+    payload: { error: true }
   }
 }
 
@@ -74,11 +94,7 @@ export const deleteNewsPost = (postId) => {
     postHeaders.set('Content-Type', 'application/json');
     postHeaders.set('Authorization', localStorage.getItem('token'));
     return new Promise((resolve, reject) => {
-      fetch(API_ROOT + NEWS + '/' + postId, {
-        method: 'DELETE',
-        header: postHeaders
-      })
-        .then(res => res.json())
+      return _axiosAuthHeaders.delete(API_ROOT + NEWS + '/' + postId)
         .then((data) => {
           if (data) {
             dispatch(deleteSuccess(data));
@@ -89,6 +105,26 @@ export const deleteNewsPost = (postId) => {
           }
         }
       );
+    })
+  }
+}
+
+export const deleteScheduledArticle = (postId) => {
+  return (dispatch) => {
+    const postHeaders = new Headers();
+    postHeaders.set('Content-Type', 'application/json');
+    postHeaders.set('Authorization', localStorage.getItem('token'));
+    return new Promise((resolve, reject) => {
+      return _axiosAuthHeaders.delete(API_ROOT + NEWS_QUEUE + '/' + postId)
+        .then((data) => {
+          if (data) {
+            dispatch(deleteQueuePostSuccess(data));
+            resolve()
+          } else {
+            dispatch(deleteQueuePostError())
+            reject()
+          }
+        });
     })
   }
 }
@@ -106,7 +142,8 @@ export const actions = {
   fetchNewsPost,
   deleteNewsPost,
   setSelectedNewsPost,
-  destroySelectedNewsPost
+  destroySelectedNewsPost,
+  deleteScheduledArticle
 }
 
 // ------------------------------------
@@ -121,7 +158,10 @@ const ACTION_HANDLERS = {
   [DESTROY_SELECTED_NEWS_POST] : (state, action) => state = action.payload,
 
   [DELETE_SINGLE_NEWS_POST_SUCCESS] : (state, action) => state = action.payload,
-  [DELETE_SINGLE_NEWS_POST_ERROR] :  (state, action) => state = action.payload
+  [DELETE_SINGLE_NEWS_POST_ERROR] :  (state, action) => state = action.payload,
+
+  [DELETE_SINGLE_NEWS_QUEUE_POST_SUCCESS] : (state, action) => state = action.payload,
+  [DELETE_SINGLE_NEWS_QUEUE_POST_ERROR] : (state, action) => state = action.payload
 
 }
 /* eslint-enable no-return-assign */
