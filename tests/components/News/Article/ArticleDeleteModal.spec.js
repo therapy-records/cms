@@ -15,7 +15,11 @@ describe('(Component) News - ArticleDeleteModal', () => {
     const actual = wrapper.containsMatchingElement(
       <ModalContainer>
         <ModalDialog>
-          <p>are you sure you want to delete?...</p>
+          <div>
+            <h4>Are you sure you want to delete this post?</h4>
+            <p>It will be gone forever!</p>
+            <button onClick={props.onDeleteArticle}>Delete post</button>
+          </div>
         </ModalDialog>
       </ModalContainer>
     );

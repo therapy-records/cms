@@ -44,6 +44,23 @@ describe('(Component) News - Article', () => {
     });
   });
 
+  describe('when article is deleted', () => {
+    beforeEach(() => {
+      props = baseProps;
+      props.isDeleted = true;
+      wrapper = shallow(<Article {...props} />);
+    });
+    it('should show correct copy', () => {
+      const actual = wrapper.containsMatchingElement(
+        <div>
+          <h4>Successfully deleted!</h4>
+          <p>redirecting...</p>
+        </div>
+      );
+      expect(actual).to.equal(true);
+    });
+  });
+
   describe('when promise errors', () => {
     beforeEach(() => {
       props = baseProps;
@@ -94,6 +111,7 @@ describe('(Component) News - Article', () => {
       props.article = mockArticle;
       props.handleModalOpen = sinon.spy();
       props.handleModalClose = () => {};
+      props.promiseLoading = false;
       wrapper = shallow(<Article {...props} />);
     });
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router'
+import { Link, browserHistory } from 'react-router'
 import moment from 'moment';
 import ArticleDeleteModal from './ArticleDeleteModal';
 
@@ -10,7 +10,10 @@ class Article extends React.Component {
     isShowingModal: false
   }
 
-  handleModalOpen = () => this.setState({ isShowingModal: true })
+  handleModalOpen = () => {
+    console.log('MODAL OPEN ! ');
+    this.setState({ isShowingModal: true });
+  }
   handleModalClose = () => this.setState({ isShowingModal: false })
 
   componentWillUnmount() {
@@ -35,18 +38,12 @@ class Article extends React.Component {
       promiseLoading,
       promiseError
     } = this.props;
-    let deletedState = false;
 
-    // todo: fix me so that promise success for deletion is seen via
-    // state.uiState. or similar.
-    // this logic is based on previous approach of 'selecteNewsPost' in store.
-
-    // if (article.message && article.message === 'Post deleted') {
-    //   deletedState = true;
-    //   setTimeout(() => {
-    //     browserHistory.push('/news');
-    //   }, 1000)
-    // }
+    if (article && article.isDeleted) {
+      setTimeout(() => {
+        browserHistory.push('/news');
+      }, 1000)
+    }
 
     return (
       <article>
@@ -54,7 +51,14 @@ class Article extends React.Component {
           <h1>loading...</h1>
         }
 
-        {(article && article.title) &&
+        {article && article.isDeleted &&
+          <div style={{ textAlign: 'center' }}>
+            <h4>Successfully deleted!</h4>
+            <p>redirecting...</p>
+          </div>
+        }
+
+        {(article && article.title && !article.isDeleted) &&
           <div className='article-flex-root'>
 
             <div className='article-col-1'>
@@ -116,11 +120,11 @@ class Article extends React.Component {
           <p>error fetching news post :(</p>
         }
 
-        {this.state.isShowingModal &&
+        {(!promiseLoading && this.state.isShowingModal) &&
           <ArticleDeleteModal
-            deleted={deletedState}
             handleModalClose={this.handleModalClose}
-            onDeleteArticle={this.handleOnDeleteArticle(article)} />
+            onDeleteArticle={() => { this.handleOnDeleteArticle(article); this.handleModalClose() }}
+          />
         }
 
       </article>
