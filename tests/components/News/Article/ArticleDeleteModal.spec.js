@@ -16,9 +16,9 @@ describe('(Component) News - ArticleDeleteModal', () => {
       <ModalContainer onClose={props.handleModalClose}>
         <ModalDialog onClose={props.handleModalClose}>
           <div>
-            <h4>Are you sure you want to delete this post?</h4>
+            <h4>Are you sure you want to delete this article?</h4>
             <p>It will be gone forever!</p>
-            <button onClick={props.onDeleteArticle}>Delete post</button>
+            <button onClick={props.onDeleteArticle}>Delete article</button>
           </div>
         </ModalDialog>
       </ModalContainer>
@@ -37,5 +37,4 @@ describe('(Component) News - ArticleDeleteModal', () => {
       expect(buttonProps.onDeleteArticle).to.have.been.called.once;
     });
   });
-
 });

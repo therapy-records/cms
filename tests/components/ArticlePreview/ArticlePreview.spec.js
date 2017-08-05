@@ -7,7 +7,7 @@ import { shallow } from 'enzyme'
 describe('(Component) ArticlePreview', () => {
   let wrapper,
       props = {
-        post: {
+        article: {
           title: 'asdfasdfasdf',
           mainImageUrl: 'http://something.png'
         }
@@ -25,7 +25,7 @@ describe('(Component) ArticlePreview', () => {
     const actual = wrapper.containsMatchingElement(
       <ModalContainer>
         <ModalDialog>
-          <ArticleLive article={props.post} />
+          <ArticleLive article={props.article} />
         </ModalDialog>
       </ModalContainer>
     );
@@ -39,7 +39,7 @@ describe('(Component) ArticlePreview', () => {
     const actual = wrapper.containsMatchingElement(
       <ModalContainer>
         <ModalDialog>
-          <ArticleLive article={props.post} />
+          <ArticleLive article={props.article} />
         </ModalDialog>
       </ModalContainer>
     );

@@ -58,7 +58,7 @@ export class Datepicker extends React.Component {
           <div>
             <button onClick={this.handleTogglePicker}
                     className='btn-sm'
-                    style={{ width: 'auto' }}>Schedule post
+                    style={{ width: 'auto' }}>Schedule article
             </button>
             <br />
             <br />

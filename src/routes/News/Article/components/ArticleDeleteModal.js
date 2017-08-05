@@ -14,12 +14,12 @@ class ArticleDeleteModal extends React.Component {
         <ModalDialog onClose={handleModalClose}>
 
           <div>
-            <h4>Are you sure you want to delete this post?</h4>
+            <h4>Are you sure you want to delete this article?</h4>
             <p>It will be gone forever!</p>
             <button
               className='btn'
               onClick={onDeleteArticle}
-            >Delete post</button>
+            >Delete article</button>
           </div>
 
         </ModalDialog>

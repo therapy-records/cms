@@ -2,14 +2,14 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { Link } from 'react-router'
 import ArticleCreate from 'routes/News/ArticleCreate/components/ArticleCreate'
-import NewsPostForm from 'components/NewsPostForm'
+import NewsArticleForm from 'components/NewsArticleForm'
 
 describe('(Component) News - ArticleCreate', () => {
   let wrapper,
       props,
       baseProps = {
-        onPostNews: () => {},
-        onPostQueueNews: () => {},
+        onPostArticle: () => {},
+        onPostArticleQueue: () => {},
         resetPromiseState: () => {}
       };
 
@@ -22,13 +22,13 @@ describe('(Component) News - ArticleCreate', () => {
     expect(props.resetPromiseState).to.have.been.called.once;
   });
 
-  it('should render a NewsPostForm', () => {
+  it('should render a NewsArticleForm', () => {
     props = baseProps;
     wrapper = shallow(<ArticleCreate {...props} />);
     const actual = wrapper.containsMatchingElement(
-      <NewsPostForm
-        onSubmitForm={props.onPostNews}
-        onSubmitFormQueue={props.onPostQueueNews}
+      <NewsArticleForm
+        onSubmitForm={props.onPostArticle}
+        onSubmitFormQueue={props.onPostArticleQueue}
       />
     );
     expect(actual).to.equal(true);
@@ -74,7 +74,7 @@ describe('(Component) News - ArticleCreate', () => {
     });
     it('should show error message', () => {
       const actual = wrapper.containsMatchingElement(
-        <p>error posting :( {props.promiseError.message}</p>
+        <p>error posting article :( {props.promiseError.message}</p>
       );
       expect(actual).to.equal(true);
     });

@@ -1,76 +1,76 @@
 import { createSelector } from 'reselect'
 
 /*
-state.news.postsQueue
+state.news.articlesQueue
 */
 
-export const selectNewsPostsQueue = (state) => state.news.postsQueue;
+export const selectNewsArticlesQueue = (state) => state.news.articlesQueue;
 
-export const selectNewsPostsQueueReverse = createSelector(
-  selectNewsPostsQueue,
-  (postsQueue) => postsQueue.reverse()
+export const selectNewsArticlesQueueReverse = createSelector(
+  selectNewsArticlesQueue,
+  (articlesQueue) => articlesQueue.reverse()
 );
 
 /*
-state.news.posts
+state.news.articles
 */
 
-export const selectNewsPosts = (state) => state.news.posts;
+export const selectNewsArticles = (state) => state.news.articles;
 
-export const selectNewsPostsReverse = createSelector(
-  selectNewsPosts,
-  (posts) => posts.reverse()
+export const selectNewsArticlesReverse = createSelector(
+  selectNewsArticles,
+  (articles) => articles.reverse()
 );
 
-export const filterNewsPostsPost = (state, id) => state.news.posts.filter((p) => p._id === id);
+export const filterNewsArticlesArticle = (state, id) => state.news.articles.filter((p) => p._id === id);
 
-export const selectNewsPostsPost = createSelector(
-  filterNewsPostsPost,
-  (postArr) => postArr && postArr[0]
+export const selectNewsArticlesArticle = createSelector(
+  filterNewsArticlesArticle,
+  (articlesArr) => articlesArr && articlesArr[0]
 );
 
 /*
-state.news.selectedNewsPost
+state.news.selectedNewsArticle
 */
 
-export const selectSelectedNewsPost = (state) => state.selectedNewsPost;
+export const selectSelectedNewsArticle = (state) => state.selectedNewsArticle;
 
-export const selectSelectedNewsPostTitle = createSelector(
-  selectSelectedNewsPost,
-  (post) => post && post.title
+export const selectSelectedNewsArticleTitle = createSelector(
+  selectSelectedNewsArticle,
+  (article) => article && article.title
 );
 
-export const selectSelectedNewsPostBodyMain = createSelector(
-  selectSelectedNewsPost,
-  (post) => post && post.bodyMain
+export const selectSelectedNewsArticleBodyMain = createSelector(
+  selectSelectedNewsArticle,
+  (article) => article && article.bodyMain
 );
 
-export const selectSelectedNewsPostMainImageUrl = createSelector(
-  selectSelectedNewsPost,
-  (post) => post && post.mainImageUrl
+export const selectSelectedNewsArticleMainImageUrl = createSelector(
+  selectSelectedNewsArticle,
+  (article) => article && article.mainImageUrl
 );
 
-export const selectSelectedNewsPostTicketsLink = createSelector(
-  selectSelectedNewsPost,
-  (post) => post && post.ticketsLink
+export const selectSelectedNewsArticleTicketsLink = createSelector(
+  selectSelectedNewsArticle,
+  (article) => article && article.ticketsLink
 );
 
-export const selectSelectedNewsPostVenueLink = createSelector(
-  selectSelectedNewsPost,
-  (post) => post && post.venueLink
+export const selectSelectedNewsArticleVenueLink = createSelector(
+  selectSelectedNewsArticle,
+  (article) => article && article.venueLink
 );
 
-export const selectSelectedNewsPostMiniGalleryImages = createSelector(
-  selectSelectedNewsPost,
-  (post) => post && post.miniGalleryImages
+export const selectSelectedNewsArticleMiniGalleryImages = createSelector(
+  selectSelectedNewsArticle,
+  (article) => article && article.miniGalleryImages
 );
 
-export const selectSelectedNewsPostVideoEmbed = createSelector(
-  selectSelectedNewsPost,
-  (post) => post && post.videoEmbed
+export const selectSelectedNewsArticleVideoEmbed = createSelector(
+  selectSelectedNewsArticle,
+  (article) => article && article.videoEmbed
 );
 
-export const selectSelectedNewsPostScheduledTime = createSelector(
-  selectSelectedNewsPost,
-  (post) => post && post.scheduledTime
+export const selectSelectedNewsArticleScheduledTime = createSelector(
+  selectSelectedNewsArticle,
+  (article) => article && article.scheduledTime
 );

@@ -54,7 +54,7 @@ describe('(Component) Datepicker', () => {
       wrapper = shallow(<Datepicker {...props} />);
       expect(wrapper.find(InputMoment).length).to.equal(0);
     });
-    
+
     it('should not render <InputMoment /> after toggle', () => {
       props.togglePicker = true;
       wrapper = shallow(<Datepicker {...props} />);

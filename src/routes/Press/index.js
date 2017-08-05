@@ -9,8 +9,6 @@ export default (store) => ({
           dependencies for bundling   */
       const Press = require('./containers/PressContainer').default
 
-      /*  Add the reducer to the store on key 'newsPost'  */
-
       /*  Return getComponent   */
       cb(null, Press)
 

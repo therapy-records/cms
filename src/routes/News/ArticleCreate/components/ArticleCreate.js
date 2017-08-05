@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router'
-import NewsPostForm from '../../../../components/NewsPostForm'
+import NewsArticleForm from '../../../../components/NewsArticleForm'
 
 class ArticleCreate extends React.Component {
   componentWillUnmount() {
@@ -22,7 +22,7 @@ class ArticleCreate extends React.Component {
           <p>loading...</p>
         }
         {promiseError &&
-          <p>error posting :( {promiseError.message}</p>
+          <p>error posting article :( {promiseError.message}</p>
         }
         {!promiseLoading && promiseSuccess &&
           <div>
@@ -31,9 +31,9 @@ class ArticleCreate extends React.Component {
           </div>
         }
         {!promiseLoading && !promiseSuccess &&
-          <NewsPostForm
-            onSubmitForm={this.props.onPostNews}
-            onSubmitFormQueue={this.props.onPostQueueNews}
+          <NewsArticleForm
+            onSubmitForm={this.props.onPostArticle}
+            onSubmitFormQueue={this.props.onPostArticleQueue}
             location={location}
           />
         }
@@ -43,8 +43,8 @@ class ArticleCreate extends React.Component {
 }
 
 ArticleCreate.propTypes = {
-  onPostNews: PropTypes.func.isRequired,
-  onPostQueueNews: PropTypes.func.isRequired,
+  onPostArticle: PropTypes.func.isRequired,
+  onPostArticleQueue: PropTypes.func.isRequired,
   promiseLoading: PropTypes.bool,
   promiseSuccess: PropTypes.bool,
   promiseError: PropTypes.object,

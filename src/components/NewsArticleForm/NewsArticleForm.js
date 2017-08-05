@@ -4,17 +4,17 @@ import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import RichTextEditor from '../RichTextEditor'
 import {
-  selectSelectedNewsPostTitle,
-  selectSelectedNewsPostBodyMain,
-  selectSelectedNewsPostMainImageUrl,
-  selectSelectedNewsPostTicketsLink,
-  selectSelectedNewsPostVenueLink,
-  selectSelectedNewsPostMiniGalleryImages,
-  selectSelectedNewsPostVideoEmbed,
-  selectSelectedNewsPostScheduledTime
+  selectSelectedNewsArticleTitle,
+  selectSelectedNewsArticleBodyMain,
+  selectSelectedNewsArticleMainImageUrl,
+  selectSelectedNewsArticleTicketsLink,
+  selectSelectedNewsArticleVenueLink,
+  selectSelectedNewsArticleMiniGalleryImages,
+  selectSelectedNewsArticleVideoEmbed,
+  selectSelectedNewsArticleScheduledTime
 } from '../../selectors/news';
-import { selectNewsPostFormValues } from '../../selectors/form';
-import './NewsPostForm.scss';
+import { selectNewsArticleFormValues } from '../../selectors/form';
+import './NewsArticleForm.scss';
 import DropzoneImageUpload from './DropzoneImageUpload';
 import Datepicker from '../Datepicker/Datepicker';
 import ArticlePreview from '../ArticlePreview/ArticlePreview.container';
@@ -53,7 +53,7 @@ bodyMainRTE.propTypes = {
 
 export const required = value => value ? undefined : 'required';
 
-export class NewsPostForm extends React.Component {
+export class NewsArticleForm extends React.Component {
 
   handleSubmit() {
     if (this.props.formValues.scheduledTime) {
@@ -82,7 +82,7 @@ export class NewsPostForm extends React.Component {
     return (
       <section className='root'>
         <div className='heading'>
-          <h2>{isEditForm ? 'Edit post' : 'Create post'}</h2>
+          <h2>{isEditForm ? 'Edit article' : 'Create article'}</h2>
           <ArticlePreview />
         </div>
 
@@ -176,7 +176,7 @@ export class NewsPostForm extends React.Component {
   }
 }
 
-NewsPostForm.propTypes = {
+NewsArticleForm.propTypes = {
   error: PropTypes.string,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
@@ -188,27 +188,27 @@ NewsPostForm.propTypes = {
 };
 
 let InitFromStateForm = reduxForm({
-  form: 'NEWS_POST_FORM',
+  form: 'NEWS_ARTICLE_FORM',
   enableReinitialize : true
-})(NewsPostForm);
+})(NewsArticleForm);
 
 InitFromStateForm = connect(
   (state, props) => ({
     initialValues: {
-      title: selectSelectedNewsPostTitle(state),
-      bodyMain: selectSelectedNewsPostBodyMain(state),
-      mainImageUrl: selectSelectedNewsPostMainImageUrl(state),
-      ticketsLink: selectSelectedNewsPostTicketsLink(state),
-      venueLink: selectSelectedNewsPostVenueLink(state),
-      videoEmbed: selectSelectedNewsPostVideoEmbed(state),
-      miniGalleryImages: selectSelectedNewsPostMiniGalleryImages(state),
-      scheduledTime: selectSelectedNewsPostScheduledTime(state)
+      title: selectSelectedNewsArticleTitle(state),
+      bodyMain: selectSelectedNewsArticleBodyMain(state),
+      mainImageUrl: selectSelectedNewsArticleMainImageUrl(state),
+      ticketsLink: selectSelectedNewsArticleTicketsLink(state),
+      venueLink: selectSelectedNewsArticleVenueLink(state),
+      videoEmbed: selectSelectedNewsArticleVideoEmbed(state),
+      miniGalleryImages: selectSelectedNewsArticleMiniGalleryImages(state),
+      scheduledTime: selectSelectedNewsArticleScheduledTime(state)
     }
   })
 )(InitFromStateForm);
 
 const mapStateToProps = (state) => ({
-  formValues: selectNewsPostFormValues(state)
+  formValues: selectNewsArticleFormValues(state)
 });
 
 export default connect(mapStateToProps, {})(InitFromStateForm)

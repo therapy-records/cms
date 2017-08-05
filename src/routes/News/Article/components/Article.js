@@ -87,8 +87,8 @@ class Article extends React.Component {
             <div className='article-col-2'>
               <div className='article-summary-box'>
                 <div className='article-summary-box-inner'>
-                  {/* <p><a href={`http://fionaross.co.uk/news/${article._id}`}>View live post</a></p> */}
-                  <p><a href={`http://fionaross.co.uk/news`} target='blank'>View live post</a></p>
+                  {/* <p><a href={`http://fionaross.co.uk/news/${article._id}`}>View live article</a></p> */}
+                  <p><a href={`http://fionaross.co.uk/news`} target='blank'>View live article</a></p>
                   <p>Created {moment(article.createdAt).fromNow()}
                     <small>{moment(article.createdAt).format('DD/mm/YYYY')}</small>
                   </p>
@@ -101,13 +101,13 @@ class Article extends React.Component {
                   <Link
                     to={`/news/${article._id}/edit`}
                     className='btn btn-edit'
-                  >Edit post
+                  >Edit article
                   </Link>
 
                   <button
                     className='btn'
                     onClick={this.handleModalOpen}
-                    style={{ width: 'auto', background: 'darkred', color: '#fff' }}>Delete post
+                    style={{ width: 'auto', background: 'darkred', color: '#fff' }}>Delete article
                   </button>
 
                 </div>
@@ -117,7 +117,7 @@ class Article extends React.Component {
         }
 
         {promiseError &&
-          <p>error fetching news post :(</p>
+          <p>error fetching news article :(</p>
         }
 
         {(!promiseLoading && this.state.isShowingModal) &&
@@ -138,7 +138,7 @@ Article.propTypes = {
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
   promiseError: PropTypes.bool,
-  onFetchNewsPosts: PropTypes.func.isRequired,
+  onFetchNewsArticles: PropTypes.func.isRequired,
   resetPromiseState: PropTypes.func.isRequired
 }
 

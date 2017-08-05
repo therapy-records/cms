@@ -6,15 +6,15 @@ import { shallow } from 'enzyme'
 describe('(Component) Dashboard', () => {
   let props,
       wrapper,
-      mockNewsPosts = [
+      mockNewsArticles = [
         { title: 'test' },
         { title: 'testing' }
       ];
 
   beforeEach(() => {
     props = {
-      newsPosts: mockNewsPosts,
-      onFetchNewsPosts: () => mockNewsPosts,
+      newsArticles: mockNewsArticles,
+      onFetchNewsArticles: () => mockNewsArticles,
       resetPromiseState: () => {}
     }
     wrapper = shallow(<Dashboard {...props} />)
@@ -27,28 +27,28 @@ describe('(Component) Dashboard', () => {
     expect(actual).to.be.true;
   });
 
-  it('should render a link to create a news post', () => {
+  it('should render a link to create a news article', () => {
     const actual = wrapper.containsMatchingElement(
-      <Link to='news/create'>Create a new post</Link>
+      <Link to='news/create'>Create a new article</Link>
     );
     expect(actual).to.be.true;
   });
 
-  it('should render a total amount of news posts', () => {
+  it('should render a total amount of news articles', () => {
     const actual = wrapper.containsMatchingElement(
-      <p>News posts: {props.newsPosts.length}</p>
+      <p>News articles: {props.newsArticles.length}</p>
     );
     expect(actual).to.be.true;
   });
 
-  describe('when there are no newsPosts in props', () => {
-    it('should call onFetchNewsPosts', () => {
+  describe('when there are no newsArticles in props', () => {
+    it('should call onFetchNewsArticles', () => {
       props = {
-        newsPosts: [],
-        onFetchNewsPosts: sinon.spy()
+        newsArticles: [],
+        onFetchNewsArticles: sinon.spy()
       };
       shallow(<Dashboard {...props} />)
-      expect(props.onFetchNewsPosts).to.have.been.called;
+      expect(props.onFetchNewsArticles).to.have.been.called;
     });
   });
 

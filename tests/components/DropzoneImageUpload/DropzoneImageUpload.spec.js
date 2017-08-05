@@ -1,7 +1,7 @@
 /*
 
 import React from 'react'
-import { DropzoneImageUpload } from 'components/NewsPostForm/DropzoneImageUpload'
+import { DropzoneImageUpload } from 'components/NewsArticleForm/DropzoneImageUpload'
 import Dropzone from 'react-dropzone';
 import { shallow } from 'enzyme'
 

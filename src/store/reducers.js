@@ -4,7 +4,7 @@ import locationReducer from './location';
 import uiStateReducer from '../reducers/uiState';
 import userReducer from '../reducers/user';
 import newsReducer from '../reducers/news';
-import selectedNewsPostReducer from '../reducers/newsPost';
+import selectedNewsArticleReducer from '../reducers/newsArticle';
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
@@ -13,7 +13,7 @@ export const makeRootReducer = (asyncReducers) => {
     form: formReducer,
     user: userReducer,
     news: newsReducer,
-    selectedNewsPost: selectedNewsPostReducer,
+    selectedNewsArticle: selectedNewsArticleReducer,
     ...asyncReducers
   })
 }

@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router'
-import NewsPostForm from '../../../../components/NewsPostForm'
+import NewsArticleForm from '../../../../components/NewsArticleForm'
 
 class ArticleEdit extends React.Component {
   componentWillUnmount() {
     this.props.resetPromiseState();
-    this.props.onDestroyNews();
+    this.props.onDestroyArticle();
   }
 
   renderHtml(data) {
@@ -33,7 +33,7 @@ class ArticleEdit extends React.Component {
         }
 
         {promiseError &&
-          <p>error updating news post :( {promiseError.message}</p>
+          <p>error updating news article :( {promiseError.message}</p>
         }
         {(!promiseLoading && promiseSuccess) &&
           <div>
@@ -49,9 +49,9 @@ class ArticleEdit extends React.Component {
             <hr />
             <br />
             <br />
-            <NewsPostForm
-              onSubmitForm={() => this.props.onEditNews(article)}
-              onSubmitFormQueue={() => this.props.onEditQueueNews(article)}
+            <NewsArticleForm
+              onSubmitForm={() => this.props.onEditArticle(article)}
+              onSubmitFormQueue={() => this.props.onEditArticleQueue(article)}
               location={location}
             />
           </div>
@@ -62,9 +62,9 @@ class ArticleEdit extends React.Component {
 }
 
 ArticleEdit.propTypes = {
-  onEditNews: PropTypes.func.isRequired,
-  onEditQueueNews: PropTypes.func.isRequired,
-  onDestroyNews: PropTypes.func.isRequired,
+  onEditArticle: PropTypes.func.isRequired,
+  onEditArticleQueue: PropTypes.func.isRequired,
+  onDestroyArticle: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
   promiseSuccess: PropTypes.bool,

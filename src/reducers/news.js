@@ -12,8 +12,8 @@ import {
   promiseError
 } from './uiState';
 
-export const FETCH_NEWS_POSTS_SUCCESS = 'FETCH_NEWS_POSTS_SUCCESS';
-export const FETCH_NEWS_POSTS_QUEUE_SUCCESS = 'FETCH_NEWS_POSTS_QUEUE_SUCCESS';
+export const FETCH_NEWS_ARTICLES_SUCCESS = 'FETCH_NEWS_ARTICLES_SUCCESS';
+export const FETCH_NEWS_ARTICLES_QUEUE_SUCCESS = 'FETCH_NEWS_ARTICLES_QUEUE_SUCCESS';
 export const POST_NEWS_FORM_SUCCESS = 'POST_NEWS_FORM_SUCCESS';
 export const POST_NEWS_FORM_QUEUE_SUCCESS = 'POST_NEWS_FORM_QUEUE_SUCCESS';
 export const EDIT_NEWS_SUCCESS = 'EDIT_NEWS_SUCCESS';
@@ -23,16 +23,16 @@ export const EDIT_NEWS_QUEUE_SUCCESS = 'EDIT_NEWS_QUEUE_SUCCESS';
 // Actions
 // ------------------------------------
 
-export function fetchPostsSuccess(data) {
+export function fetchArticlesSuccess(data) {
   return {
-    type: FETCH_NEWS_POSTS_SUCCESS,
+    type: FETCH_NEWS_ARTICLES_SUCCESS,
     payload: data
   }
 }
 
 export function fetchQueueSuccess(data) {
   return {
-    type: FETCH_NEWS_POSTS_QUEUE_SUCCESS,
+    type: FETCH_NEWS_ARTICLES_QUEUE_SUCCESS,
     payload: data
   }
 }
@@ -59,13 +59,13 @@ export function editNewsQueueSuccess() {
   return { type: EDIT_NEWS_QUEUE_SUCCESS }
 }
 
-export const fetchNewsPosts = () => {
+export const fetchNewsArticles = () => {
   return (dispatch, getState) => {
     dispatch(promiseLoading(true));
     return axios.get(API_ROOT + NEWS)
       .then(
         (res) => {
-          dispatch(fetchPostsSuccess(res.data));
+          dispatch(fetchArticlesSuccess(res.data));
           dispatch(promiseLoading(false));
           dispatch(promiseSuccess(true));
         },
@@ -77,7 +77,7 @@ export const fetchNewsPosts = () => {
   }
 }
 
-export const fetchNewsQueuePosts = () => {
+export const fetchNewsQueueArticles = () => {
   return (dispatch, getState) => {
     dispatch(promiseLoading(true));
     return _axiosAuthHeaders.get(API_ROOT + NEWS_QUEUE)
@@ -214,8 +214,8 @@ export const editNewsQueue = (postToEdit) => {
 }
 
 export const actions = {
-  fetchNewsPosts,
-  fetchNewsQueuePosts,
+  fetchNewsArticles,
+  fetchNewsQueueArticles,
   postNews,
   postNewsQueue,
   editNews,
@@ -227,11 +227,11 @@ export const actions = {
 // ------------------------------------
 /* eslint-disable no-return-assign */
 const ACTION_HANDLERS = {
-  [FETCH_NEWS_POSTS_SUCCESS] : (state, action) => {
-    return { ...state, posts: action.payload }
+  [FETCH_NEWS_ARTICLES_SUCCESS] : (state, action) => {
+    return { ...state, articles: action.payload }
   },
-  [FETCH_NEWS_POSTS_QUEUE_SUCCESS] : (state, action) => {
-    return { ...state, postsQueue: action.payload }
+  [FETCH_NEWS_ARTICLES_QUEUE_SUCCESS] : (state, action) => {
+    return { ...state, articlesQueue: action.payload }
   },
   [POST_NEWS_FORM_SUCCESS] : (state, action) => state = action.payload,
   [POST_NEWS_FORM_QUEUE_SUCCESS] : (state, action) => state = action.payload
@@ -242,8 +242,8 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = {
-  posts: [],
-  postsQueue: []
+  articles: [],
+  articlesQueue: []
 };
 export default function newsReducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]

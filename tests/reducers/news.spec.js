@@ -4,19 +4,20 @@ import _axiosAuthHeaders from 'utils/axios'
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
+
 import {
-  FETCH_NEWS_POSTS_SUCCESS,
-  FETCH_NEWS_POSTS_QUEUE_SUCCESS,
+  FETCH_NEWS_ARTICLES_SUCCESS,
+  FETCH_NEWS_ARTICLES_QUEUE_SUCCESS,
   POST_NEWS_FORM_SUCCESS,
   POST_NEWS_FORM_QUEUE_SUCCESS,
   EDIT_NEWS_SUCCESS,
   EDIT_NEWS_QUEUE_SUCCESS,
-  fetchPostsSuccess,
+  fetchArticlesSuccess,
   // fetchQueueSuccess,
   // postNewsSuccess,
   // postNewsQueueSucces,
-  fetchNewsPosts,
-  fetchNewsQueuePosts,
+  fetchNewsArticles,
+  fetchNewsQueueArticles,
   postNews,
   postNewsQueue,
   editNews,
@@ -37,7 +38,7 @@ import {
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
-let mockNewsPost = {
+let mockNewsArticle = {
   _id: 'xcxcxcxcxccx1234',
   title: 'hello',
   createdAt: new Date(),
@@ -51,8 +52,8 @@ let mockNewsPost = {
   videoEmbed: 'http://asdf.com/dfdf'
 };
 
-const mockNewsPostQueue = mockNewsPost;
-mockNewsPostQueue.scheduledTime = new Date();
+const mockNewsArticleQueue = mockNewsArticle;
+mockNewsArticleQueue.scheduledTime = new Date();
 
 const mock = {
   getNewsResponse: {
@@ -61,18 +62,18 @@ const mock = {
       { title: 'do something else' }
     ]
   },
-  newsPost: mockNewsPost,
-  newsPostQueue: mockNewsPostQueue
+  newsArticle: mockNewsArticle,
+  newsArticleQueue: mockNewsArticleQueue
 };
 
 const mockState = {
   news: {
-    posts: mock.getNewsResponse.data,
-    postsQueue: mock.getNewsResponse.data
+    articles: mock.getNewsResponse.data,
+    articlesQueue: mock.getNewsResponse.data
   },
   form: {
     NEWS_POST_FORM: {
-      values: mock.newsPost
+      values: mock.newsArticle
     }
   }
 };
@@ -80,12 +81,12 @@ const mockState = {
 const store = mockStore(mockState);
 
 describe('(Redux Module) news', () => {
-  it('Should export a constant FETCH_NEWS_POSTS_SUCCESS', () => {
-    expect(FETCH_NEWS_POSTS_SUCCESS).to.equal('FETCH_NEWS_POSTS_SUCCESS')
+  it('Should export a constant FETCH_NEWS_ARTICLES_SUCCESS', () => {
+    expect(FETCH_NEWS_ARTICLES_SUCCESS).to.equal('FETCH_NEWS_ARTICLES_SUCCESS')
   });
 
-  it('Should export a constant FETCH_NEWS_POSTS_SUCCESS', () => {
-    expect(FETCH_NEWS_POSTS_QUEUE_SUCCESS).to.equal('FETCH_NEWS_POSTS_QUEUE_SUCCESS')
+  it('Should export a constant FETCH_NEWS_ARTICLES_QUEUE_SUCCESS', () => {
+    expect(FETCH_NEWS_ARTICLES_QUEUE_SUCCESS).to.equal('FETCH_NEWS_ARTICLES_QUEUE_SUCCESS')
   });
 
   it('Should export a constant POST_NEWS_FORM_SUCCESS', () => {
@@ -109,53 +110,53 @@ describe('(Redux Module) news', () => {
       expect(newsReducer).to.be.a('function')
     });
 
-    it('Should initialize with an empty array of posts', () => {
+    it('Should initialize with correct empty arrays', () => {
       const state = newsReducer(undefined, {});
       expect(state).to.deep.equal(
-        { posts: [], postsQueue: [] }
+        { articles: [], articlesQueue: [] }
       );
     });
   });
 
-  describe('(Action) fetchPostsSuccess', () => {
+  describe('(Action) fetchArticlesSuccess', () => {
     afterEach(() => {
       nock.cleanAll()
     });
 
     it('should be exported as a function', () => {
-      expect(fetchPostsSuccess).to.be.a('function');
+      expect(fetchArticlesSuccess).to.be.a('function');
     });
 
-    it('should return an action with type FETCH_NEWS_POSTS_SUCCESS', () => {
-      expect(fetchPostsSuccess()).to.have.property('type', FETCH_NEWS_POSTS_SUCCESS);
+    it('should return an action with type FETCH_NEWS_ARTICLES_SUCCESS', () => {
+      expect(fetchArticlesSuccess()).to.have.property('type', FETCH_NEWS_ARTICLES_SUCCESS);
     });
 
     it('should assign the first argument to the payload property', () => {
       const mockData = [ { title: 'something' }, { title: 'test' } ];
-      expect(fetchPostsSuccess(mockData)).to.have.property('payload', mockData);
+      expect(fetchArticlesSuccess(mockData)).to.have.property('payload', mockData);
     });
 
     it('should update state', () => {
       const mockData1 = [ { title: 'something' }, { title: 'test' } ];
       const mockData2 = [ { title: 'hello' }, { title: 'bonjour' } ];
-      let state = newsReducer(state, fetchPostsSuccess(mockData1));
-      expect(state.posts).to.deep.equal(mockData1);
-      state = newsReducer(state, fetchPostsSuccess(mockData2))
-      expect(state.posts).to.deep.equal(mockData2);
+      let state = newsReducer(state, fetchArticlesSuccess(mockData1));
+      expect(state.articles).to.deep.equal(mockData1);
+      state = newsReducer(state, fetchArticlesSuccess(mockData2))
+      expect(state.articles).to.deep.equal(mockData2);
     });
   });
 
-  describe('(Thunk) fetchNewsPosts', () => {
+  describe('(Thunk) fetchNewsArticles', () => {
     afterEach(() => {
       nock.cleanAll();
     });
 
     it('should be exported as a function', () => {
-      expect(fetchNewsPosts).to.be.a('function');
+      expect(fetchNewsArticles).to.be.a('function');
     });
 
     it('should return a function', () => {
-      expect(fetchNewsPosts()).to.be.a('function');
+      expect(fetchNewsArticles()).to.be.a('function');
     });
 
     it('should dispatch the correct actions', () => {
@@ -166,12 +167,12 @@ describe('(Redux Module) news', () => {
 
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
-        { type: FETCH_NEWS_POSTS_SUCCESS, payload: mock.getNewsResponse.data },
+        { type: FETCH_NEWS_ARTICLES_SUCCESS, payload: mock.getNewsResponse.data },
         { type: UISTATE_PROMISE_LOADING, payload: false },
         { type: UISTATE_PROMISE_SUCCESS, payload: true }
       ];
       store.clearActions();
-      return store.dispatch(fetchNewsPosts()).then(() => {
+      return store.dispatch(fetchNewsArticles()).then(() => {
         const storeActions = store.getActions();
         expect(storeActions).to.deep.equal(expectedActions);
         store.clearActions();
@@ -179,17 +180,17 @@ describe('(Redux Module) news', () => {
     });
   });
 
-  describe('(Thunk) fetchNewsQueuePosts', () => {
+  describe('(Thunk) fetchNewsQueueArticles', () => {
     afterEach(() => {
       nock.cleanAll();
     });
 
     it('should be exported as a function', () => {
-      expect(fetchNewsQueuePosts).to.be.a('function');
+      expect(fetchNewsQueueArticles).to.be.a('function');
     });
 
     it('should return a function', () => {
-      expect(fetchNewsQueuePosts()).to.be.a('function');
+      expect(fetchNewsQueueArticles()).to.be.a('function');
     });
 
     it('should dispatch the correct actions', () => {
@@ -202,10 +203,10 @@ describe('(Redux Module) news', () => {
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
         { type: UISTATE_PROMISE_SUCCESS, payload: true },
-        { type: FETCH_NEWS_POSTS_QUEUE_SUCCESS, payload: mock.getNewsResponse.data }
+        { type: FETCH_NEWS_ARTICLES_QUEUE_SUCCESS, payload: mock.getNewsResponse.data }
       ];
       store.clearActions();
-      return store.dispatch(fetchNewsQueuePosts()).then(() => {
+      return store.dispatch(fetchNewsQueueArticles()).then(() => {
         const storeActions = store.getActions();
         expect(storeActions).to.deep.equal(expectedActions);
         store.clearActions();
@@ -227,20 +228,20 @@ describe('(Redux Module) news', () => {
     });
 
     it('should dispatch the correct actions on success', () => {
-      _axiosAuthHeaders.post = sinon.stub().returns(Promise.resolve(mock.newsPost));
+      _axiosAuthHeaders.post = sinon.stub().returns(Promise.resolve(mock.newsArticle));
       nock(API_ROOT + NEWS_CREATE)
-        .post(NEWS_CREATE, mock.newsPost)
-        .reply(200, mock.newsPost);
+        .post(NEWS_CREATE, mock.newsArticle)
+        .reply(200, mock.newsArticle);
 
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
         { type: UISTATE_PROMISE_SUCCESS, payload: true },
-        { type: POST_NEWS_FORM_SUCCESS, payload: mock.newsPost }
+        { type: POST_NEWS_FORM_SUCCESS, payload: mock.newsArticle }
       ];
 
       store.clearActions();
-      return store.dispatch(postNews(mock.newsPost)).then(() => {
+      return store.dispatch(postNews(mock.newsArticle)).then(() => {
         const storeActions = store.getActions();
         expect(storeActions).to.deep.equal(expectedActions);
         store.clearActions();
@@ -250,7 +251,7 @@ describe('(Redux Module) news', () => {
     it('should dispatch the correct actions on error', () => {
       _axiosAuthHeaders.post = sinon.stub().returns(Promise.reject({ error: true }));
       nock(API_ROOT + NEWS_CREATE)
-        .post(NEWS_CREATE, mock.newsPost);
+        .post(NEWS_CREATE, mock.newsArticle);
 
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
@@ -259,7 +260,7 @@ describe('(Redux Module) news', () => {
       ];
 
       store.clearActions();
-      return store.dispatch(postNews(mock.newsPost)).then(() => {
+      return store.dispatch(postNews(mock.newsArticle)).then(() => {
         const storeActions = store.getActions();
         expect(storeActions).to.deep.equal(expectedActions);
         store.clearActions();
@@ -280,10 +281,10 @@ describe('(Redux Module) news', () => {
     });
 
     it('should dispatch the correct actions on success', () => {
-      _axiosAuthHeaders.post = sinon.stub().returns(Promise.resolve(mock.newsPostQueue));
+      _axiosAuthHeaders.post = sinon.stub().returns(Promise.resolve(mock.newsArticleQueue));
       nock(API_ROOT + NEWS_QUEUE)
-        .post(NEWS_QUEUE, mock.newsPostQueue)
-        .reply(200, mock.newsPostQueue);
+        .post(NEWS_QUEUE, mock.newsArticleQueue)
+        .reply(200, mock.newsArticleQueue);
 
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
@@ -293,7 +294,7 @@ describe('(Redux Module) news', () => {
       ];
 
       store.clearActions();
-      return store.dispatch(postNewsQueue(mock.newsPostQueue)).then(() => {
+      return store.dispatch(postNewsQueue(mock.newsArticleQueue)).then(() => {
         const storeActions = store.getActions();
         expect(storeActions).to.deep.equal(expectedActions);
         store.clearActions();
@@ -303,7 +304,7 @@ describe('(Redux Module) news', () => {
     it('should dispatch the correct actions on error', () => {
       _axiosAuthHeaders.post = sinon.stub().returns(Promise.reject({ error: true }));
       nock(API_ROOT + NEWS_QUEUE)
-        .post(NEWS_QUEUE, mock.newsPostQueue);
+        .post(NEWS_QUEUE, mock.newsArticleQueue);
 
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
@@ -312,7 +313,7 @@ describe('(Redux Module) news', () => {
       ];
 
       store.clearActions();
-      return store.dispatch(postNewsQueue(mock.newsPostQueue)).then(() => {
+      return store.dispatch(postNewsQueue(mock.newsArticleQueue)).then(() => {
         const storeActions = store.getActions();
         expect(storeActions).to.deep.equal(expectedActions);
         store.clearActions();
@@ -333,10 +334,10 @@ describe('(Redux Module) news', () => {
     });
 
     it('should dispatch the correct actions on success', () => {
-      _axiosAuthHeaders.put = sinon.stub().returns(Promise.resolve(mock.newsPost));
+      _axiosAuthHeaders.put = sinon.stub().returns(Promise.resolve(mock.newsArticle));
       nock(API_ROOT + NEWS + 'asdf1234')
         .put(`${NEWS}asdf1234`, {})
-        .reply(200, mock.newsPost);
+        .reply(200, mock.newsArticle);
 
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
@@ -346,7 +347,7 @@ describe('(Redux Module) news', () => {
       ];
 
       store.clearActions();
-      return store.dispatch(editNews(mock.newsPost)).then(() => {
+      return store.dispatch(editNews(mock.newsArticle)).then(() => {
         const storeActions = store.getActions();
         expect(storeActions).to.deep.equal(expectedActions);
         store.clearActions();
@@ -386,10 +387,10 @@ describe('(Redux Module) news', () => {
     });
 
     it('should dispatch the correct actions on success', () => {
-      _axiosAuthHeaders.put = sinon.stub().returns(Promise.resolve(mock.newsPost));
+      _axiosAuthHeaders.put = sinon.stub().returns(Promise.resolve(mock.newsArticle));
       nock(API_ROOT + NEWS_QUEUE + 'asdf1234')
         .put(`${NEWS_QUEUE}asdf1234`, {})
-        .reply(200, mock.newsPost);
+        .reply(200, mock.newsArticle);
 
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
@@ -399,7 +400,7 @@ describe('(Redux Module) news', () => {
       ];
 
       store.clearActions();
-      return store.dispatch(editNewsQueue(mock.newsPost)).then(() => {
+      return store.dispatch(editNewsQueue(mock.newsArticle)).then(() => {
         const storeActions = store.getActions();
         expect(storeActions).to.deep.equal(expectedActions);
         store.clearActions();

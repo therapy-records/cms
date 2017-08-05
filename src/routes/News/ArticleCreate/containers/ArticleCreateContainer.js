@@ -4,8 +4,8 @@ import { resetPromiseState } from '../../../../reducers/uiState'
 import ArticleCreate from '../components/ArticleCreate'
 
 const mapDispatchToProps = {
-  onPostNews: () => postNews(),
-  onPostQueueNews: () => postNewsQueue(),
+  onPostArticle: () => postNews(),
+  onPostArticleQueue: () => postNewsQueue(),
   resetPromiseState: () => resetPromiseState()
 }
 

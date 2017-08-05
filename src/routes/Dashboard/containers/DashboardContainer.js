@@ -1,15 +1,15 @@
 import { connect } from 'react-redux'
 import Dashboard from '../components/Dashboard'
-import { fetchNewsPosts } from '../../../reducers/news'
+import { fetchNewsArticles } from '../../../reducers/news'
 import { resetPromiseState } from '../../../reducers/uiState'
-import { selectNewsPosts } from '../../../selectors/news'
+import { selectNewsArticles } from '../../../selectors/news'
 
 const mapStateToProps = (state) => ({
-  newsPosts : selectNewsPosts(state)
+  newsArticles : selectNewsArticles(state)
 })
 
 const mapDispatchToProps = {
-  onFetchNewsPosts: () => fetchNewsPosts(),
+  onFetchNewsArticles: () => fetchNewsArticles(),
   resetPromiseState: () => resetPromiseState()
 }
 

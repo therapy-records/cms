@@ -15,7 +15,7 @@ describe('(Component) News - Article', () => {
         createdAt: new Date()
       },
       baseProps = {
-        onFetchNewsPosts: () => {},
+        onFetchNewsArticles: () => {},
         onDeleteArticle: () => {},
         onDeleteScheduledArticle: () => {},
         resetPromiseState: () => {}
@@ -71,7 +71,7 @@ describe('(Component) News - Article', () => {
     });
     it('should show loading', () => {
       const actual = wrapper.containsMatchingElement(
-        <p>error fetching news post :(</p>
+        <p>error fetching news article :(</p>
       );
       expect(actual).to.equal(true);
     });
@@ -98,7 +98,7 @@ describe('(Component) News - Article', () => {
     });
   });
 
-  describe('edit post button', () => {
+  describe('edit article button', () => {
     it('should be rendered', () => {
       let props = baseProps;
       wrapper = shallow(<Article {...props} />);
@@ -107,7 +107,7 @@ describe('(Component) News - Article', () => {
     });
   });
 
-  describe('delete post button', () => {
+  describe('delete article button', () => {
     beforeEach(() => {
       props = baseProps;
       props.article = mockArticle;

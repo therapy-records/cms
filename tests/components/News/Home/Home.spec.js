@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import { Link } from 'react-router'
 import News from 'routes/News/Home/components/News'
 
-const mockNewsPosts = [
+const mockNewsArticles = [
   { title: 'test 1', _id: 'asd123' },
   { title: 'test 2', _id: 'asd124' },
   { title: 'test 3', _id: 'asd125' }
@@ -13,27 +13,27 @@ describe('(Component) News - Home', () => {
   let wrapper,
       props,
       baseProps = {
-        onFetchNewsPosts: () => {},
-        onFetchNewsQueuePosts: () => {},
-        onSetSelectedNewsPost: () => {},
-        newsPosts: mockNewsPosts,
-        postsQueue: mockNewsPosts
+        onFetchNewsArticles: () => {},
+        onFetchNewsQueueArticles: () => {},
+        onSetSelectedNewsArticle: () => {},
+        newsArticles: mockNewsArticles,
+        articlesQueue: mockNewsArticles
       };
 
-  it('should render create a new post link', () => {
+  it('should render create a new queue link', () => {
     props = baseProps;
     wrapper = shallow(<News {...props} />);
     const actual = wrapper.containsMatchingElement(
-      <Link to='news/create'>Create a new post</Link>
+      <Link to='news/create'>Create a new article</Link>
     );
     expect(actual).to.equal(true);
   });
 
-  it('should render list of newsPosts', () => {
+  it('should render list of newsArticles', () => {
     props = baseProps;
     wrapper = shallow(<News {...props} />);
-    const renderNewsPost = (key) => {
-      const p = props.newsPosts[key]; // eslint-disable-line
+    const renderNewsArticle = (key) => {
+      const p = props.newsArticles[key]; // eslint-disable-line
       return (
         <div key={p._id} className='news-card'>
           <div className='bg-inner' />
@@ -45,51 +45,51 @@ describe('(Component) News - Home', () => {
         </div>
       )
     };
-    const child0 = wrapper.containsMatchingElement(renderNewsPost(0));
+    const child0 = wrapper.containsMatchingElement(renderNewsArticle(0));
     expect(child0).to.equal(true);
-    const child1 = wrapper.containsMatchingElement(renderNewsPost(1));
+    const child1 = wrapper.containsMatchingElement(renderNewsArticle(1));
     expect(child1).to.equal(true);
-    const child2 = wrapper.containsMatchingElement(renderNewsPost(2));
+    const child2 = wrapper.containsMatchingElement(renderNewsArticle(2));
     expect(child2).to.equal(true);
   });
 
-  describe('post', () => {
-    it('should call onSetSelectedNewsPost on `view` button click', () => {
+  describe('article', () => {
+    it('should call onSetSelectedNewsArticle on `view` button click', () => {
       let _props = baseProps;
-      _props.onSetSelectedNewsPost = sinon.spy();
+      _props.onSetSelectedNewsArticle = sinon.spy();
       wrapper = shallow(<News {..._props} />);
-      const lastPost = wrapper.find('.news-card').last();
-      const lastPostButton = lastPost.find(Link).first();
-      lastPostButton.simulate('click');
-      expect(_props.onSetSelectedNewsPost).to.have.been.called;
-      const expectedPost = mockNewsPosts[mockNewsPosts.length - 1];
-      expect(_props.onSetSelectedNewsPost).to.have.been.calledWith(expectedPost);
+      const lastArticle = wrapper.find('.news-card').last();
+      const lastArticleButton = lastArticle.find(Link).first();
+      lastArticleButton.simulate('click');
+      expect(_props.onSetSelectedNewsArticle).to.have.been.called;
+      const expectedArticle = mockNewsArticles[mockNewsArticles.length - 1];
+      expect(_props.onSetSelectedNewsArticle).to.have.been.calledWith(expectedArticle);
     });
 
-    it('should call onSetSelectedNewsPost on `edit` button click', () => {
+    it('should call onSetSelectedNewsArticle on `edit` button click', () => {
       let _props = baseProps;
-      _props.onSetSelectedNewsPost = sinon.spy();
+      _props.onSetSelectedNewsArticle = sinon.spy();
       wrapper = shallow(<News {..._props} />);
-      const lastPost = wrapper.find('.news-card').last();
-      const lastPostButton = lastPost.find(Link).last();
-      lastPostButton.simulate('click');
-      expect(_props.onSetSelectedNewsPost).to.have.been.called;
-      const expectedPost = mockNewsPosts[mockNewsPosts.length - 1];
-      expect(_props.onSetSelectedNewsPost).to.have.been.calledWith(expectedPost);
+      const lastArticle = wrapper.find('.news-card').last();
+      const lastArticleButton = lastArticle.find(Link).last();
+      lastArticleButton.simulate('click');
+      expect(_props.onSetSelectedNewsArticle).to.have.been.called;
+      const expectedArticle = mockNewsArticles[mockNewsArticles.length - 1];
+      expect(_props.onSetSelectedNewsArticle).to.have.been.calledWith(expectedArticle);
     });
   });
 
   // it('should render an error', () => {
   //   wrapper = shallow(
   //     <News
-  //       newsPosts={[]}
-  //       newsQueuePosts={[]}
-  //       onFetchNewsPosts={() => {}}
-  //       onFetchNewsQueuePosts={() => {}}
+  //       newsArticles={[]}
+  //       newsQueueArticles={[]}
+  //       onFetchNewsArticles={() => {}}
+  //       onFetchNewsQueueArticles={() => {}}
   //     />
   //   );
   //   const actual = wrapper.containsMatchingElement(
-  //     <p>Unable to fetch news posts :(</p>
+  //     <p>Unable to fetch news articles :(</p>
   //   );
   //   expect(actual).to.equal(true);
   // });

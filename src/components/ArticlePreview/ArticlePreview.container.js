@@ -1,21 +1,21 @@
 import { connect } from 'react-redux';
 import ArticlePreview from './ArticlePreview';
 import {
-  selectNewsPostFormValues,
-  selectNewsPostFormSyncErrors
+  selectNewsArticleFormValues,
+  selectNewsArticleFormSyncErrors
 } from '../../selectors/form';
 
 const mapStateToProps = (state) => {
-  const formValues = selectNewsPostFormValues(state);
-  const formErrors = selectNewsPostFormSyncErrors(state);
+  const formValues = selectNewsArticleFormValues(state);
+  const formErrors = selectNewsArticleFormSyncErrors(state);
   const isDisabled = !formValues.title ||
                      !formValues.bodyMain ||
                      formErrors.title ||
                      formErrors.bodyMain;
 
   return {
-    post: selectNewsPostFormValues(state),
-    disabled: !!selectNewsPostFormValues(state) || isDisabled
+    article: selectNewsArticleFormValues(state),
+    disabled: !!selectNewsArticleFormValues(state) || isDisabled
   }
 };
 

@@ -1,13 +1,13 @@
 import { createSelector } from 'reselect'
 
-export const selectNewsPostForm = (state) => state.form.NEWS_POST_FORM;
+export const selectNewsArticleForm = (state) => state.form.NEWS_ARTICLE_FORM;
 
-export const selectNewsPostFormValues = createSelector(
-  selectNewsPostForm,
+export const selectNewsArticleFormValues = createSelector(
+  selectNewsArticleForm,
   (form) => form && form.values
 );
 
-export const selectNewsPostFormSyncErrors = createSelector(
-  selectNewsPostForm,
+export const selectNewsArticleFormSyncErrors = createSelector(
+  selectNewsArticleForm,
   (form) => form.syncErrors && form.syncErrors || false
 );

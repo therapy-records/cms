@@ -2,14 +2,14 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { Link } from 'react-router'
 import ArticleEdit from 'routes/News/ArticleEdit/components/ArticleEdit'
-import NewsPostForm from 'components/NewsPostForm'
+import NewsArticleForm from 'components/NewsArticleForm'
 
 describe('(Component) News - ArticleEdit', () => {
   let wrapper,
       props,
       baseProps = {
-        onEditNews: () => {},
-        onEditQueueNews: () => {},
+        onEditArticle: () => {},
+        onEditArticleQueue: () => {},
         resetPromiseState: () => {},
         article: { title: 'test' },
         location: {
@@ -17,13 +17,13 @@ describe('(Component) News - ArticleEdit', () => {
         }
       };
 
-  it('should call onDestroyNews on componentWillUnmount', () => {
+  it('should call onDestroyArticle on componentWillUnmount', () => {
     let props = baseProps;
-    props.onDestroyNews = sinon.spy();
+    props.onDestroyArticle = sinon.spy();
     wrapper = shallow(<ArticleEdit {...props} />);
     wrapper.unmount();
-    expect(props.onDestroyNews).to.have.been.called;
-    expect(props.onDestroyNews).to.have.been.called.once;
+    expect(props.onDestroyArticle).to.have.been.called;
+    expect(props.onDestroyArticle).to.have.been.called.once;
   });
 
   it('should render editing title', () => {
@@ -35,10 +35,10 @@ describe('(Component) News - ArticleEdit', () => {
     expect(actual).to.equal(true);
   });
 
-  it('should render a NewsPostForm', () => {
+  it('should render a NewsArticleForm', () => {
     props = baseProps;
     wrapper = shallow(<ArticleEdit {...props} />);
-    const form = wrapper.find(NewsPostForm);
+    const form = wrapper.find(NewsArticleForm);
     expect(form.length).to.equal(1);
   });
 
@@ -80,7 +80,7 @@ describe('(Component) News - ArticleEdit', () => {
     });
     it('should show error message', () => {
       const actual = wrapper.containsMatchingElement(
-        <p>error updating news post :( {props.promiseError.message}</p>
+        <p>error updating news article :( {props.promiseError.message}</p>
       );
       expect(actual).to.equal(true);
     });

@@ -10,23 +10,23 @@ export class Dashboard extends React.Component {
 
   render() {
     const {
-      newsPosts
+      newsArticles
     } = this.props;
 
-    if (!newsPosts || !newsPosts.length) {
-      this.props.onFetchNewsPosts();
+    if (!newsArticles || !newsArticles.length) {
+      this.props.onFetchNewsArticles();
     }
 
     return (
       <div>
         <h2>Welcome back</h2>
-        <Link to='news/create'>Create a new post</Link>
+        <Link to='news/create'>Create a new article</Link>
 
         <br />
         <br />
 
         <p>Stats</p>
-        {newsPosts && <p>News posts: {newsPosts.length}</p>}
+        {newsArticles && <p>News articles: {newsArticles.length}</p>}
         {/*
         <p>Press releases: ...</p>
         <p>Collaborators: ...</p>
@@ -39,8 +39,8 @@ export class Dashboard extends React.Component {
 }
 
 Dashboard.propTypes = {
-  newsPosts: PropTypes.array,
-  onFetchNewsPosts: PropTypes.func.isRequired,
+  newsArticles: PropTypes.array,
+  onFetchNewsArticles: PropTypes.func.isRequired,
   resetPromiseState: PropTypes.func.isRequired
 }
 

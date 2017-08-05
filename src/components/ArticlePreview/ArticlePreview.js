@@ -17,7 +17,7 @@ class ArticlePreview extends React.Component {
 
   render() {
     const {
-      post,
+      article,
       disabled
     } = this.props;
     return (
@@ -30,7 +30,7 @@ class ArticlePreview extends React.Component {
         {this.state.isShowingModal &&
           <ModalContainer onClose={this.handleModalClose}>
             <ModalDialog onClose={this.handleModalClose} className='modal-dialog-large'>
-              <ArticleLive article={post} />
+              <ArticleLive article={article} />
             </ModalDialog>
           </ModalContainer>
         }
@@ -40,7 +40,7 @@ class ArticlePreview extends React.Component {
 }
 
 ArticlePreview.propTypes = {
-  post: PropTypes.object.isRequired,
+  article: PropTypes.object.isRequired,
   disabled: PropTypes.bool
 }
 

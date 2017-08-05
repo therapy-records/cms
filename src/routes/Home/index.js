@@ -20,7 +20,7 @@ export default (store) => ({
       const Home = require('./containers/HomeContainer').default
       const reducer = require('../../reducers/user').default
 
-      /*  Add the reducer to the store on key 'newsPost'  */
+      /*  Add the reducer to the store on key 'user'  */
       injectReducer(store, { key: 'user', reducer })
 
       /*  Return getComponent   */

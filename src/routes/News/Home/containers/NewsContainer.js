@@ -1,23 +1,23 @@
 import { connect } from 'react-redux'
-import { fetchNewsPosts, fetchNewsQueuePosts } from '../../../../reducers/news'
-import { setSelectedNewsPost } from '../../../../reducers/newsPost'
+import { fetchNewsArticles, fetchNewsQueueArticles } from '../../../../reducers/news'
+import { setSelectedNewsArticle } from '../../../../reducers/newsArticle'
 import { resetPromiseState } from '../../../../reducers/uiState'
 import {
-  selectNewsPostsReverse,
-  selectNewsPostsQueueReverse
+  selectNewsArticlesReverse,
+  selectNewsArticlesQueueReverse
 } from '../../../../selectors/news'
 import News from '../components/News'
 
 const mapDispatchToProps = {
-  onFetchNewsPosts: () => fetchNewsPosts(),
-  onFetchNewsQueuePosts: () => fetchNewsQueuePosts(),
-  onSetSelectedNewsPost: (post) => setSelectedNewsPost(post),
+  onFetchNewsArticles: () => fetchNewsArticles(),
+  onFetchNewsQueueArticles: () => fetchNewsQueueArticles(),
+  onSetSelectedNewsArticle: (article) => setSelectedNewsArticle(article),
   resetPromiseState: () => resetPromiseState()
 }
 
 const mapStateToProps = (state) => ({
-  newsPosts: selectNewsPostsReverse(state),
-  postsQueue : selectNewsPostsQueueReverse(state)
+  newsArticles: selectNewsArticlesReverse(state),
+  articlesQueue : selectNewsArticlesQueueReverse(state)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(News)

@@ -1,51 +1,51 @@
 import 'core-js';
-import _axiosAuthHeaders from 'utils/axios'
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
+// import _axiosAuthHeaders from 'utils/axios'
+// import configureMockStore from 'redux-mock-store';
+// import thunk from 'redux-thunk';
 import nock from 'nock';
-import {
-  API_ROOT,
-  AUTH
+// import {
+  // API_ROOT,
+  // AUTH
   // AUTH_LOGIN
-} from 'constants';
-import {
-  USER_AUTH_SUCCESS,
-  USER_AUTH_ERROR
-} from 'constants/actions'
+// } from 'constants';
+// import {
+//   USER_AUTH_SUCCESS,
+//   USER_AUTH_ERROR
+// } from 'constants/actions'
 import { authCheck, routeAuthCheck } from 'actions/auth';
 
-const middlewares = [thunk];
-const mockStore = configureMockStore(middlewares);
+// const middlewares = [thunk];
+// const mockStore = configureMockStore(middlewares);
 
-const mock = {
-  authResponseSuccess: {
-    data: {
-      success: true
-    }
-  },
-  authResponseError: {
-    data: {
-      success: false
-    }
-  },
-  loginForm: {
-    username: 'admin',
-    password: 'password'
-  }
-};
-const mockState = {
-  form: {
-    LOGIN_FORM: {
-      values: mock.loginForm
-    }
-  }
-};
-const mockDispatch = {
-  authSuccess: () => {},
-  authError: () => {}
-}
+// const mock = {
+//   authResponseSuccess: {
+//     data: {
+//       success: true
+//     }
+//   },
+//   authResponseError: {
+//     data: {
+//       success: false
+//     }
+//   },
+//   loginForm: {
+//     username: 'admin',
+//     password: 'password'
+//   }
+// };
+// const mockState = {
+//   form: {
+//     LOGIN_FORM: {
+//       values: mock.loginForm
+//     }
+//   }
+// };
+// const mockDispatch = {
+//   authSuccess: () => {},
+//   authError: () => {}
+// }
 
-const store = mockStore(mockState, mockDispatch);
+// const store = mockStore(mockState, mockDispatch);
 
 describe('(Actions) auth', () => {
   describe('(Thunk) authCheck', () => {

@@ -6,13 +6,13 @@ import './News.scss'
 
 class News extends React.Component {
   componentWillMount() {
-    if (!this.props.postsQueue ||
-        !this.props.postsQueue.length) {
-     this.props.onFetchNewsQueuePosts();
+    if (!this.props.articlesQueue ||
+        !this.props.articlesQueue.length) {
+     this.props.onFetchNewsQueueArticles();
     }
-    if (!this.props.newsPosts ||
-        !this.props.newsPosts.length) {
-      this.props.onFetchNewsPosts();
+    if (!this.props.newsArticles ||
+        !this.props.newsArticles.length) {
+      this.props.onFetchNewsArticles();
     }
   }
 
@@ -20,12 +20,12 @@ class News extends React.Component {
     this.props.resetPromiseState();
   }
 
-  getCombinedPosts(queueFeed, newsFeed) {
+  getCombinedArticles(queueFeed, newsFeed) {
     return [...queueFeed, ...newsFeed];
   }
 
   handleButtonClick(postObj) {
-    this.props.onSetSelectedNewsPost(postObj);
+    this.props.onSetSelectedNewsArticle(postObj);
   }
 
   renderPost(p) {
@@ -62,27 +62,27 @@ class News extends React.Component {
 
   render() {
     const {
-      postsQueue,
-      newsPosts
+      articlesQueue,
+      newsArticles
     } = this.props;
 
-    let _combinedPosts = this.getCombinedPosts(postsQueue, newsPosts);
+    let _combinedArticles = this.getCombinedArticles(articlesQueue, newsArticles);
     return (
       <div>
         <div className='news-feed-header'>
-          <Link to='news/create'>Create a new post</Link>
+          <Link to='news/create'>Create a new article</Link>
         </div>
         <br />
 
         {/*
-          !_combinedPosts || !_combinedPosts.length && (
-          <p>Unable to fetch news posts :(</p>
+          !_combinedArticles || !_combinedArticles.length && (
+          <p>Unable to fetch news article :(</p>
         )
         */}
 
-        {_combinedPosts &&
+        {_combinedArticles &&
           <div className='flex-root'>
-            {_combinedPosts.map((p) => this.renderPost(p))}
+            {_combinedArticles.map((p) => this.renderPost(p))}
           </div>
         }
       </div>
@@ -91,12 +91,12 @@ class News extends React.Component {
 }
 
 News.propTypes = {
-  onFetchNewsPosts: PropTypes.func.isRequired,
-  onFetchNewsQueuePosts: PropTypes.func.isRequired,
-  onSetSelectedNewsPost: PropTypes.func.isRequired,
-  postsQueue: PropTypes.array,
-  newsPosts: PropTypes.array,
-  combinedPosts: PropTypes.array,
+  onFetchNewsArticles: PropTypes.func.isRequired,
+  onFetchNewsQueueArticles: PropTypes.func.isRequired,
+  onSetSelectedNewsArticle: PropTypes.func.isRequired,
+  articlesQueue: PropTypes.array,
+  newsArticles: PropTypes.array,
+  combinedArticles: PropTypes.array,
   resetPromiseState: PropTypes.func
 }
 
