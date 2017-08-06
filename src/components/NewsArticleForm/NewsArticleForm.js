@@ -56,12 +56,23 @@ export const required = value => value ? undefined : 'required';
 
 export class NewsArticleForm extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      showSecondaryImageField: false
+    };
+  }
+
   handleSubmit() {
     if (this.props.formValues.scheduledTime) {
       this.props.onSubmitFormQueue();
     } else {
       this.props.onSubmitForm();
     }
+  }
+
+  handleSecondaryImageToggle = () => {
+    this.setState({ showSecondaryImageField: !this.state.showSecondaryImageField })
   }
 
   render() {
@@ -72,6 +83,10 @@ export class NewsArticleForm extends React.Component {
       invalid,
       location
     } = this.props;
+
+    const {
+      showSecondaryImageField
+    } = this.state;
 
     let isEditForm;
     if (location && location.pathname.includes('edit')) {
@@ -107,6 +122,24 @@ export class NewsArticleForm extends React.Component {
               <Field name='mainImageUrl'
                     component={DropzoneImageUpload}
                     title='Main image' />
+
+              <br />
+
+              <button
+                onClick={this.handleSecondaryImageToggle}
+                className='btn-sm secondary-img-toggle'
+                style={{ width: 'auto' }}
+              >
+                {showSecondaryImageField ?
+                  'Remove secondary featured image' :
+                  'Add secondary featured image'
+                }
+              </button>
+              {showSecondaryImageField &&
+                <Field name='secondaryImageUrl'
+                      component={DropzoneImageUpload}
+                      title='Secondary featured image' />
+              }
 
             </div>
 

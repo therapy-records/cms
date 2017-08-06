@@ -51,6 +51,7 @@ class ArticleLive extends React.Component {
 
         {(article.miniGalleryImages && article.miniGalleryImages.length) &&
           <div>
+            <p><i>Images to display as a gallery when live</i></p>
             <ul className='article-gallery-flex-root'>
               {article.miniGalleryImages.map((i) => (
                 <li key={i} className='article-col-50 no-list-style article-gallery-item'>
