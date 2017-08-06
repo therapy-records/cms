@@ -69,6 +69,18 @@ class Article extends React.Component {
               <br />
               <br />
 
+              {article.ticketsLink && <a href={article.ticketsLink} target='_blank'>Get tickets</a>}
+              {article.venueLink && <a href={article.venueLink} target='_blank'>Venue</a>}
+
+              {article.videoEmbed &&
+                <iframe
+                  width='560'
+                  src={article.videoEmbed}
+                  frameBorder='0'
+                  allowFullscreen
+                />
+              }
+
               {article.miniGalleryImages && article.miniGalleryImages.length ?
                 <div>
                   <h3>Mini gallery images</h3>

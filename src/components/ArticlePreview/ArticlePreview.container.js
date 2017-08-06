@@ -15,7 +15,7 @@ const mapStateToProps = (state) => {
 
   return {
     article: selectNewsArticleFormValues(state),
-    disabled: !!selectNewsArticleFormValues(state) || isDisabled
+    disabled: isDisabled
   }
 };
 

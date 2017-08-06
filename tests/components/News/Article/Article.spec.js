@@ -12,7 +12,15 @@ describe('(Component) News - Article', () => {
         title: 'hello world',
         bodyMain: '<p>dummy copy</p><div>something<h2>title</h2></div>',
         mainImageUrl: 'http://test.com/hi.jpg',
-        createdAt: new Date()
+        createdAt: new Date(),
+        ticketsLink: 'http://test.com',
+        venueLink: 'http://test.com',
+        videoEmbed: 'http://youtube.com/something',
+        miniGalleryImages: [
+          'http://image1.com',
+          'http://image2.com',
+          'http://image3.com'
+        ]
       },
       baseProps = {
         onFetchNewsArticles: () => {},
@@ -93,6 +101,58 @@ describe('(Component) News - Article', () => {
     it('should render an image', () => {
       const actual = wrapper.containsMatchingElement(
         <img src={props.article.mainImageUrl} />
+      );
+      expect(actual).to.equal(true);
+    });
+
+    it('should render ticketsLink', () => {
+      const actual = wrapper.containsMatchingElement(
+        <a href={props.article.ticketsLink} target='_blank'>Get tickets</a>
+      );
+      expect(actual).to.equal(true);
+    });
+
+    it('should render venueLink', () => {
+      const actual = wrapper.containsMatchingElement(
+        <a href={props.article.venueLink} target='_blank'>Venue</a>
+      );
+      expect(actual).to.equal(true);
+    });
+
+    describe('miniGalleryImages', () => {
+      it('should render a heading', () => {
+        const actual = wrapper.containsMatchingElement(
+          <h3>Mini gallery images</h3>
+        );
+        expect(actual).to.equal(true);
+      });
+
+      it('should render a list of images', () => {
+        const actual = wrapper.containsAllMatchingElements([
+          <li><img src={props.article.miniGalleryImages[0]} /></li>,
+          <li><img src={props.article.miniGalleryImages[1]} /></li>,
+          <li><img src={props.article.miniGalleryImages[2]} /></li>
+        ])
+        expect(actual).to.equal(true);
+      });
+    });
+
+    it('should render miniGalleryImages', () => {
+      const actual = wrapper.containsMatchingElement(
+        <a href={props.article.venueLink} target='_blank'>Venue</a>
+      );
+      expect(actual).to.equal(true);
+    });
+
+
+    it('should render videoEmbed', () => {
+      const actual = wrapper.containsMatchingElement(
+        <iframe
+          width='560'
+          src={props.article.videoEmbed}
+          frameBorder='0'
+          allowFullscreen
+        />
       );
       expect(actual).to.equal(true);
     });
