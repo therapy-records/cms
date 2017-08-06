@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 class ArticleLive extends React.Component {
   renderHtml(data) {
@@ -17,12 +18,33 @@ class ArticleLive extends React.Component {
         </div>
 
         <h2>{article.title}</h2>
+        {moment(article.createdAt).format('DD MMM YYYY')}
 
         <div dangerouslySetInnerHTML={this.renderHtml(article.bodyMain)} />
 
         <br />
 
-        <img src={article.mainImageUrl} />
+        <div className='cols-container'>
+
+          {article.mainImageUrl &&
+            <div>
+              <img
+                src={article.mainImageUrl}
+                alt={`Fiona Ross - ${article.title}`}
+              />
+            </div>
+          }
+
+          {article.secondaryImageUrl &&
+            <div>
+              <img
+                src={article.secondaryImageUrl}
+                alt={`Fiona Ross - ${article.title}`}
+              />
+            </div>
+          }
+
+        </div>
 
         <br />
         <br />

@@ -8,6 +8,7 @@ import {
   selectSelectedNewsArticleTitle,
   selectSelectedNewsArticleBodyMain,
   selectSelectedNewsArticleMainImageUrl,
+  selectSelectedNewsArticleSecondaryImageUrl,
   selectSelectedNewsArticleTicketsLink,
   selectSelectedNewsArticleVenueLink,
   selectSelectedNewsArticleMiniGalleryImages,
@@ -127,6 +128,14 @@ describe('(Selectors) news', () => {
   describe('selectSelectedNewsArticleMainImageUrl', () => {
     it('should return bodyMain', () => {
       const actual = selectSelectedNewsArticleMainImageUrl(mockState, postId);
+      const expected = newsArticle.mainImageUrl;
+      expect(actual).to.equal(expected);
+    });
+  });
+
+  describe('selectSelectedNewsArticleSecondaryImageUrl', () => {
+    it('should return bodyMain', () => {
+      const actual = selectSelectedNewsArticleSecondaryImageUrl(mockState, postId);
       const expected = newsArticle.mainImageUrl;
       expect(actual).to.equal(expected);
     });

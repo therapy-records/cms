@@ -50,6 +50,11 @@ export const selectSelectedNewsArticleMainImageUrl = createSelector(
   (article) => article && article.mainImageUrl
 );
 
+export const selectSelectedNewsArticleSecondaryImageUrl = createSelector(
+  selectSelectedNewsArticle,
+  (article) => article && article.secondaryImageUrl
+);
+
 export const selectSelectedNewsArticleTicketsLink = createSelector(
   selectSelectedNewsArticle,
   (article) => article && article.ticketsLink

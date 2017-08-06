@@ -68,19 +68,38 @@ class Article extends React.Component {
             <div className='article-col-1'>
               <h2>{article.title}</h2>
               <div dangerouslySetInnerHTML={this.renderHtml(article.bodyMain)} />
+
               <br />
-              {article.mainImageUrl &&
-                <img
-                  src={article.mainImageUrl}
-                  alt={`Fiona Ross - ${article.title}`}
-                />
-              }
+
+              <div className='cols-container'>
+
+                {article.mainImageUrl &&
+                  <div>
+                    <img
+                      src={article.mainImageUrl}
+                      alt={`Fiona Ross - ${article.title}`}
+                    />
+                  </div>
+                }
+
+                {article.secondaryImageUrl &&
+                  <div>
+                    <img
+                      src={article.secondaryImageUrl}
+                      alt={`Fiona Ross - ${article.title}`}
+                    />
+                  </div>
+                }
+
+              </div>
 
               <br />
               <br />
 
               {article.ticketsLink && <a href={article.ticketsLink} target='_blank'>Get tickets</a>}
+              <br />
               {article.venueLink && <a href={article.venueLink} target='_blank'>Venue</a>}
+              <br />
 
               {article.videoEmbed &&
                 <iframe
@@ -90,6 +109,8 @@ class Article extends React.Component {
                   allowFullscreen
                 />
               }
+
+              <br />
 
               {articleHasMiniGalleryImages &&
                 <div>
