@@ -39,6 +39,10 @@ class Article extends React.Component {
       promiseError
     } = this.props;
 
+    const articleHasMiniGalleryImages = article &&
+                                        article.miniGalleryImages &&
+                                        article.miniGalleryImages.length;
+
     if (article && article.isDeleted) {
       setTimeout(() => {
         browserHistory.push('/news');
@@ -65,7 +69,13 @@ class Article extends React.Component {
               <h2>{article.title}</h2>
               <div dangerouslySetInnerHTML={this.renderHtml(article.bodyMain)} />
               <br />
-              <img src={article.mainImageUrl} />
+              {article.mainImageUrl &&
+                <img
+                  src={article.mainImageUrl}
+                  alt={`Fiona Ross - ${article.title}`}
+                />
+              }
+
               <br />
               <br />
 
@@ -81,7 +91,7 @@ class Article extends React.Component {
                 />
               }
 
-              {article.miniGalleryImages && article.miniGalleryImages.length ?
+              {articleHasMiniGalleryImages &&
                 <div>
                   <h3>Mini gallery images</h3>
                   <ul className='article-gallery-flex-root'>
@@ -92,7 +102,7 @@ class Article extends React.Component {
                     ))}
                   </ul>
                 </div>
-              : null}
+              }
 
             </div>
 

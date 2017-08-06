@@ -100,7 +100,10 @@ describe('(Component) News - Article', () => {
 
     it('should render an image', () => {
       const actual = wrapper.containsMatchingElement(
-        <img src={props.article.mainImageUrl} />
+        <img
+          src={props.article.mainImageUrl}
+          alt={`Fiona Ross - ${props.article.title}`}
+        />
       );
       expect(actual).to.equal(true);
     });
@@ -143,7 +146,6 @@ describe('(Component) News - Article', () => {
       );
       expect(actual).to.equal(true);
     });
-
 
     it('should render videoEmbed', () => {
       const actual = wrapper.containsMatchingElement(
