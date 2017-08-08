@@ -1,4 +1,3 @@
-// import axios from 'axios'
 import _axiosAuthHeaders from '../utils/axios'
 import {
   authSuccess,
