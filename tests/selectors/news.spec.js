@@ -12,7 +12,9 @@ import {
   selectSelectedNewsArticleVenueLink,
   selectSelectedNewsArticleMiniGalleryImages,
   selectSelectedNewsArticleVideoEmbed,
-  selectSelectedNewsArticleScheduledTime
+  selectSelectedNewsArticleScheduledTime,
+  selectSelectedNewsArticleSocialShare,
+  selectSelectedNewsArticleSocialShareHashtags
 } from 'selectors/news';
 
 const mockArticles = [
@@ -21,21 +23,30 @@ const mockArticles = [
     title: 'hello',
     createdAt: new Date(),
     mainBody: '<p>test</p>',
-    miniGallery: ['asdf', 'asdf', 'asdf']
+    miniGallery: ['asdf', 'asdf', 'asdf'],
+    socialShare: {
+      hashtags: ['something', 'somethingElse']
+    }
   },
   {
     _id: 'asdf1234',
     title: 'hi',
     createdAt: new Date(),
     mainBody: '<p>hello world</p>',
-    miniGallery: ['asdf', 'asdf', 'asdf']
+    miniGallery: ['asdf', 'asdf', 'asdf'],
+    socialShare: {
+      hashtags: ['something', 'somethingElse']
+    }
   },
   {
     _id: 'zxcv789',
     title: 'crazy',
     createdAt: new Date(),
     mainBody: '<p>testing</p>',
-    miniGallery: ['asdf', 'asdf', 'asdf']
+    miniGallery: ['asdf', 'asdf', 'asdf'],
+    socialShare: {
+      hashtags: ['something', 'somethingElse']
+    }
   }
 ];
 
@@ -168,6 +179,22 @@ describe('(Selectors) news', () => {
     it('should return scheduledTime', () => {
       const actual = selectSelectedNewsArticleScheduledTime(mockState, postId);
       const expected = newsArticle.scheduledTime;
+      expect(actual).to.equal(expected);
+    });
+  });
+
+  describe('selectSelectedNewsArticleSocialShare', () => {
+    it('should return scheduledTime', () => {
+      const actual = selectSelectedNewsArticleSocialShare(mockState, postId);
+      const expected = newsArticle.socialShare;
+      expect(actual).to.equal(expected);
+    });
+  });
+
+  describe('selectSelectedNewsArticleSocialShareHashtags', () => {
+    it('should return scheduledTime', () => {
+      const actual = selectSelectedNewsArticleSocialShareHashtags(mockState, postId);
+      const expected = newsArticle.socialShare.hashtags;
       expect(actual).to.equal(expected);
     });
   });

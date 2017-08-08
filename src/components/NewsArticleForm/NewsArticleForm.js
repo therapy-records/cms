@@ -11,7 +11,8 @@ import {
   selectSelectedNewsArticleVenueLink,
   selectSelectedNewsArticleMiniGalleryImages,
   selectSelectedNewsArticleVideoEmbed,
-  selectSelectedNewsArticleScheduledTime
+  selectSelectedNewsArticleScheduledTime,
+  selectSelectedNewsArticleSocialShareHashtags
 } from '../../selectors/news';
 import { selectNewsArticleFormValues } from '../../selectors/form';
 import './NewsArticleForm.scss';
@@ -131,6 +132,12 @@ export class NewsArticleForm extends React.Component {
                     placeholder='https://www.youtube.com/embed/45JLCGLplvk'
                     label='YouTube video link' />
 
+              <Field name='socialShareHashtags'
+                    component={textInput}
+                    type='text'
+                    placeholder='trending, happy, fionaross'
+                    label='Hashtags' />
+
             </div>
 
           </div>
@@ -202,7 +209,8 @@ InitFromStateForm = connect(
       venueLink: selectSelectedNewsArticleVenueLink(state),
       videoEmbed: selectSelectedNewsArticleVideoEmbed(state),
       miniGalleryImages: selectSelectedNewsArticleMiniGalleryImages(state),
-      scheduledTime: selectSelectedNewsArticleScheduledTime(state)
+      scheduledTime: selectSelectedNewsArticleScheduledTime(state),
+      socialShareHashtags: selectSelectedNewsArticleSocialShareHashtags(state)
     }
   })
 )(InitFromStateForm);

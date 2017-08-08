@@ -74,3 +74,14 @@ export const selectSelectedNewsArticleScheduledTime = createSelector(
   selectSelectedNewsArticle,
   (article) => article && article.scheduledTime
 );
+
+export const selectSelectedNewsArticleSocialShare = createSelector(
+  selectSelectedNewsArticle,
+  (article) => article && article.socialShare
+);
+
+export const selectSelectedNewsArticleSocialShareHashtags = createSelector(
+  selectSelectedNewsArticleSocialShare,
+  (socialShare) => socialShare && socialShare.hashtags
+);
+
