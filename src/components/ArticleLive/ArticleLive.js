@@ -38,6 +38,13 @@ class ArticleLive extends React.Component {
             </ul>
           </div>
         }
+
+        <br />
+        <br />
+
+        <button className='btn-sm'>Share on Facebook</button>
+        <button className='btn-sm'>Share on Twitter</button>
+
       </div>
     )
   }

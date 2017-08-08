@@ -99,9 +99,9 @@ export const postNews = () => {
   return (dispatch, getState) => {
     dispatch(promiseLoading(true));
     const getFormObj = () => {
-      if (getState().form.NEWS_POST_FORM &&
-          getState().form.NEWS_POST_FORM.values) {
-        return JSON.stringify(getState().form.NEWS_POST_FORM.values);
+      if (getState().form.NEWS_ARTICLE_FORM &&
+          getState().form.NEWS_ARTICLE_FORM.values) {
+        return JSON.stringify(getState().form.NEWS_ARTICLE_FORM.values);
       } else {
         return null;
       }
@@ -126,9 +126,9 @@ export const postNewsQueue = () => {
   return (dispatch, getState) => {
     dispatch(promiseLoading(true));
     const getFormObj = () => {
-      if (getState().form.NEWS_POST_FORM &&
-          getState().form.NEWS_POST_FORM.values) {
-        return JSON.stringify(getState().form.NEWS_POST_FORM.values);
+      if (getState().form.NEWS_ARTICLE_FORM &&
+          getState().form.NEWS_ARTICLE_FORM.values) {
+        return JSON.stringify(getState().form.NEWS_ARTICLE_FORM.values);
       } else {
         return null;
       }
@@ -153,9 +153,9 @@ export const editNews = (postToEdit) => {
   return (dispatch, getState) => {
     dispatch(promiseLoading(true));
     let getFormValues = () => {
-      if (getState().form.NEWS_POST_FORM &&
-          getState().form.NEWS_POST_FORM.values) {
-        return getState().form.NEWS_POST_FORM.values;
+      if (getState().form.NEWS_ARTICLE_FORM &&
+          getState().form.NEWS_ARTICLE_FORM.values) {
+        return getState().form.NEWS_ARTICLE_FORM.values;
       } else {
         return null;
       }
@@ -185,9 +185,9 @@ export const editNewsQueue = (postToEdit) => {
   return (dispatch, getState) => {
     dispatch(promiseLoading(true));
     let getFormValues = () => {
-      if (getState().form.NEWS_POST_FORM &&
-          getState().form.NEWS_POST_FORM.values) {
-        return getState().form.NEWS_POST_FORM.values;
+      if (getState().form.NEWS_ARTICLE_FORM &&
+          getState().form.NEWS_ARTICLE_FORM.values) {
+        return getState().form.NEWS_ARTICLE_FORM.values;
       } else {
         return null;
       }

@@ -82,6 +82,19 @@ class Article extends React.Component {
                 </div>
               : null}
 
+              {(article.socialShare &&
+                article.socialShare.hashtags &&
+                article.socialShare.hashtags.length) &&
+                <div>
+                  <h3>Hashtags</h3>
+                  <ul>
+                    {article.socialShare.hashtags.map((h) =>
+                      <li key={h}>{h}</li>
+                    )}
+                  </ul>
+                </div>
+              }
+
             </div>
 
             <div className='article-col-2'>

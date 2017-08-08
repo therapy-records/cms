@@ -132,7 +132,7 @@ export class NewsArticleForm extends React.Component {
                     placeholder='https://www.youtube.com/embed/45JLCGLplvk'
                     label='YouTube video link' />
 
-              <Field name='socialShareHashtags'
+              <Field name='socialShare.hashtags'
                     component={textInput}
                     type='text'
                     placeholder='trending, happy, fionaross'
@@ -210,7 +210,9 @@ InitFromStateForm = connect(
       videoEmbed: selectSelectedNewsArticleVideoEmbed(state),
       miniGalleryImages: selectSelectedNewsArticleMiniGalleryImages(state),
       scheduledTime: selectSelectedNewsArticleScheduledTime(state),
-      socialShareHashtags: selectSelectedNewsArticleSocialShareHashtags(state)
+      socialShare: {
+        hashtags: selectSelectedNewsArticleSocialShareHashtags(state)
+      }
     }
   })
 )(InitFromStateForm);

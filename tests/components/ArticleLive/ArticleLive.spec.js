@@ -44,4 +44,13 @@ describe('(Component) ArticleLive', () => {
     ]);
     expect(actual).to.equal(true);
   });
+
+  it('should render 2 dummy social share buttons', () => {
+    const wrapper = shallow(<ArticleLive {...props} />);
+    const actual = wrapper.containsAllMatchingElements([
+      <button>Share on Facebook</button>,
+      <button>Share on Twitter</button>
+    ]);
+    expect(actual).to.equal(true);
+  });
 });

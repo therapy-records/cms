@@ -72,7 +72,7 @@ const mockState = {
     articlesQueue: mock.getNewsResponse.data
   },
   form: {
-    NEWS_POST_FORM: {
+    NEWS_ARTICLE_FORM: {
       values: mock.newsArticle
     }
   }

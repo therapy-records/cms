@@ -12,7 +12,10 @@ describe('(Component) News - Article', () => {
         title: 'hello world',
         bodyMain: '<p>dummy copy</p><div>something<h2>title</h2></div>',
         mainImageUrl: 'http://test.com/hi.jpg',
-        createdAt: new Date()
+        createdAt: new Date(),
+        miniGalleryImages: [
+          'asdf.jpg', 'ewrwer.jpg', '23fdsfjpg'
+        ]
       },
       baseProps = {
         onFetchNewsArticles: () => {},
@@ -94,6 +97,21 @@ describe('(Component) News - Article', () => {
       const actual = wrapper.containsMatchingElement(
         <img src={props.article.mainImageUrl} />
       );
+      expect(actual).to.equal(true);
+    });
+
+    it('should render miniGalleryImages', () => {
+      const actual = wrapper.containsAllMatchingElements([
+        <li>
+          <img src={props.article.miniGalleryImages[0]} />
+        </li>,
+        <li>
+          <img src={props.article.miniGalleryImages[1]} />
+        </li>,
+        <li>
+          <img src={props.article.miniGalleryImages[2]} />
+        </li>
+      ]);
       expect(actual).to.equal(true);
     });
   });
