@@ -12,7 +12,8 @@ import {
 export const authCheck = () => {
   return (dispatch) => {
     const token = localStorage.getItem('token');
-    if (!token) {
+    if (!token || token === 'undefined') {
+      dispatch(authError());
       return _axiosAuthHeaders.post(API_ROOT + AUTH)
         .then((data) => {
           if (data.data.success === true) {
@@ -32,7 +33,8 @@ export const authCheck = () => {
 export const routeAuthCheck = (store, nextState, replace, cb) => {
   return (nextState, replace, cb) => {
     const token = localStorage.getItem('token');
-    if (!token) {
+    if (!token || token === 'undefined') {
+      store.dispatch(authError());
       return _axiosAuthHeaders.post(API_ROOT + AUTH)
         .then((data) => {
           if (data.data.success === true) {
