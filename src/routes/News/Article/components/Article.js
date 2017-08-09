@@ -43,6 +43,19 @@ class Article extends React.Component {
                                         article.miniGalleryImages &&
                                         article.miniGalleryImages.length;
 
+    const articleHasImages = article && article.mainImageUrl || articleHasMiniGalleryImages;
+
+    const articleImg = () => {
+      if (!article) {
+        return null;
+      } else if (article.mainImageUrl) {
+        return article.mainImageUrl;
+      } else if (articleHasMiniGalleryImages) {
+        return article.miniGalleryImages[0];
+      }
+      return null;
+    }
+
     if (article && article.isDeleted) {
       setTimeout(() => {
         browserHistory.push('/news');
@@ -73,10 +86,10 @@ class Article extends React.Component {
 
               <div className='cols-container'>
 
-                {article.mainImageUrl &&
+                {articleHasImages &&
                   <div>
                     <img
-                      src={article.mainImageUrl}
+                      src={articleImg()}
                       alt={`Fiona Ross - ${article.title}`}
                     />
                   </div>

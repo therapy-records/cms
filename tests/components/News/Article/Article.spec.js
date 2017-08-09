@@ -7,6 +7,11 @@ import { shallow } from 'enzyme'
 describe('(Component) News - Article', () => {
   let wrapper,
       props,
+      mockMiniGalleryImages = [
+        'http://image1.com',
+        'http://image2.com',
+        'http://image3.com'
+      ],
       mockArticle = {
         _id: 'asdf1234',
         title: 'hello world',
@@ -16,11 +21,7 @@ describe('(Component) News - Article', () => {
         ticketsLink: 'http://test.com',
         venueLink: 'http://test.com',
         videoEmbed: 'http://youtube.com/something',
-        miniGalleryImages: [
-          'http://image1.com',
-          'http://image2.com',
-          'http://image3.com'
-        ]
+        miniGalleryImages: mockMiniGalleryImages
       },
       baseProps = {
         onFetchNewsArticles: () => {},
@@ -98,14 +99,51 @@ describe('(Component) News - Article', () => {
       expect(actual).to.equal(true);
     });
 
-    it('should render an image', () => {
-      const actual = wrapper.containsMatchingElement(
-        <img
-          src={props.article.mainImageUrl}
-          alt={`Fiona Ross - ${props.article.title}`}
-        />
-      );
-      expect(actual).to.equal(true);
+    describe('main image', () => {
+      it('should render mainImageUrl if it exists', () => {
+        const actual = wrapper.containsMatchingElement(
+          <img
+            src={props.article.mainImageUrl}
+            alt={`Fiona Ross - ${props.article.title}`}
+          />
+        );
+        expect(actual).to.equal(true);
+      });
+
+      it('should render the first image in miniGalleryImages if !mainImageUrl and miniGalleryImages length', () => {
+        props = baseProps;
+        props.article.mainImageUrl = undefined;
+        wrapper = shallow(<Article {...props} />);
+        const actual = wrapper.containsMatchingElement(
+          <img
+            src={props.article.miniGalleryImages[0]}
+            alt={`Fiona Ross - ${props.article.title}`}
+          />
+        );
+        expect(actual).to.equal(true);
+      });
+
+      it('should not render an image if !miniGalleryImages or !mainImageUrl', () => {
+        props = baseProps;
+        props.article.mainImageUrl = undefined;
+        props.article.miniGalleryImages = [];
+        wrapper = shallow(<Article {...props} />);
+        const actualMiniGalleryImages = wrapper.containsMatchingElement(
+          <img
+            src={props.article.miniGalleryImages[0]}
+            alt={`Fiona Ross - ${props.article.title}`}
+          />
+        );
+        expect(actualMiniGalleryImages).to.equal(false);
+
+        const actualMainImageUrl = wrapper.containsMatchingElement(
+          <img
+            src={props.article.mainImageUrl}
+            alt={`Fiona Ross - ${props.article.title}`}
+          />
+        );
+        expect(actualMainImageUrl).to.equal(false);
+      });
     });
 
     it('should render ticketsLink', () => {
@@ -123,6 +161,10 @@ describe('(Component) News - Article', () => {
     });
 
     describe('miniGalleryImages', () => {
+      beforeEach(() => {
+        props.article.miniGalleryImages = mockMiniGalleryImages;
+        wrapper = shallow(<Article {...props} />);
+      });
       it('should render a heading', () => {
         const actual = wrapper.containsMatchingElement(
           <h3>Mini gallery images</h3>
