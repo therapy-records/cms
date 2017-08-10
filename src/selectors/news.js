@@ -8,7 +8,7 @@ export const selectNewsArticlesQueue = (state) => state.news.articlesQueue;
 
 export const selectNewsArticlesQueueReverse = createSelector(
   selectNewsArticlesQueue,
-  (articlesQueue) => articlesQueue.reverse()
+  (articlesQueue) => articlesQueue && articlesQueue.reverse()
 );
 
 /*
@@ -19,7 +19,7 @@ export const selectNewsArticles = (state) => state.news.articles;
 
 export const selectNewsArticlesReverse = createSelector(
   selectNewsArticles,
-  (articles) => articles.reverse()
+  (articles) => articles && articles.reverse()
 );
 
 export const filterNewsArticlesArticle = (state, id) => state.news.articles.filter((p) => p._id === id);

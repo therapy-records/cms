@@ -21,6 +21,11 @@ class News extends React.Component {
   }
 
   getCombinedArticles(queueFeed, newsFeed) {
+    if (!queueFeed) {
+      return newsFeed;
+    } else if (!newsFeed) {
+      return queueFeed;
+    }
     return [...queueFeed, ...newsFeed];
   }
 
@@ -66,7 +71,7 @@ class News extends React.Component {
       newsArticles
     } = this.props;
 
-    let _combinedArticles = this.getCombinedArticles(articlesQueue, newsArticles);
+    let _combinedArticles = (articlesQueue || newsArticles) && this.getCombinedArticles(articlesQueue, newsArticles);
     return (
       <div>
         <div className='news-feed-header'>
