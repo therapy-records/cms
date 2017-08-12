@@ -69,7 +69,7 @@ class Article extends React.Component {
               <br />
               <br />
 
-              {article.miniGalleryImages && article.miniGalleryImages.length ?
+              {(article.miniGalleryImages && article.miniGalleryImages.length) &&
                 <div>
                   <h3>Mini gallery images</h3>
                   <ul className='article-gallery-flex-root'>
@@ -80,7 +80,7 @@ class Article extends React.Component {
                     ))}
                   </ul>
                 </div>
-              : null}
+              }
 
               {(article.socialShare &&
                 article.socialShare.hashtags &&
