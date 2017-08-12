@@ -14,7 +14,7 @@
 .heading {
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
 }
 
 .col-1 {
@@ -24,6 +24,13 @@
 .col-2 {
   flex: 1 200px;
   justify-content: flex-end;
+}
+
+.gallery-images-col-2 {
+  font-size: 0.1em; // hide mysterious counter ('0') from react-dropzone
+}
+.gallery-images-flex-root {
+  font-size: 30px; // counter mysterious counter ('0') from react-dropzone
 }
 
 .dropzone {
@@ -36,6 +43,7 @@
   justify-content: center;
   margin-bottom:1em;
   transition: all 0.2s ease;
+  font-size: 0.1em; // hide mysterious counter ('0') from react-dropzone
   &.large {
     min-width:350px;
   }
@@ -43,10 +51,12 @@
 
 .dropzone-cta {
   position: absolute;
-  z-index:1;
+  z-index: 1;
   transition: all 0.2s ease;
+  text-shadow: 0 6px 6px #000;
+  color: #FFF;
+  font-size: 30px; // counter mysterious counter ('0') from react-dropzone
 }
-
 
 .dropzone-active {
   background:#FDFDFD;
