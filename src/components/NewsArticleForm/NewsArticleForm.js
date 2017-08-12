@@ -70,7 +70,8 @@ export class NewsArticleForm extends React.Component {
       pristine,
       submitting,
       invalid,
-      location
+      location,
+      formValues
     } = this.props;
 
     let isEditForm;
@@ -106,8 +107,8 @@ export class NewsArticleForm extends React.Component {
 
               <Field name='mainImageUrl'
                     component={DropzoneImageUpload}
-                    title='Main image' />
-
+                    title='Main image'
+                    existingImage={formValues && formValues.mainImageUrl} />
             </div>
 
             <div className='col-2'>
@@ -152,10 +153,20 @@ export class NewsArticleForm extends React.Component {
           <br />
           <br />
 
+          {isEditForm &&
+            <div>
+              <br />
+              <br />
+              <p>NOTE: Any images previously uploaded will <b>not be overriden</b></p>
+              <p><small>To remove previous images contact admin</small></p>
+            </div>
+          }
+
           <Field name='miniGalleryImages'
                 component={DropzoneImageUpload}
                 title='Mini gallery images'
-                multiple />
+                multiple
+                existingMiniGalleryImages={formValues && formValues.miniGalleryImages} />
 
           <br />
 
@@ -165,7 +176,7 @@ export class NewsArticleForm extends React.Component {
 
           <Field name='scheduledTime'
                 component={Datepicker}
-                initTime={this.props.formValues && this.props.formValues.scheduledTime}
+                initTime={formValues && formValues.scheduledTime}
                 title='Scheduler (optional)'
                 titleSub='Post live on a date of choosing' />
 

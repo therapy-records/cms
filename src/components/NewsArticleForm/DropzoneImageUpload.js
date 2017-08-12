@@ -15,6 +15,19 @@ export class DropzoneImageUpload extends React.Component {
     };
   }
 
+  componentWillReceiveProps(props) {
+    if (props.existingImage) {
+      this.setState({
+        singleItem: props.existingImage
+      });
+    }
+    if (props.existingMiniGalleryImages) {
+      this.setState({
+        items: props.existingMiniGalleryImages
+      });
+    }
+  }
+
   // todo: redux, promisify
   uploadSingleImage(file) {
     let upload = request.post(CLOUDINARY_UPLOAD_URL)
@@ -52,8 +65,10 @@ export class DropzoneImageUpload extends React.Component {
       title,
       multiple
     } = this.props;
+
     const {
-      items
+      items,
+      singleItem
     } = this.state;
 
     return (
@@ -74,11 +89,15 @@ export class DropzoneImageUpload extends React.Component {
                   <span>Drag &amp; drop</span>
                 </div>
               }
+
               {multiple &&
                 <div className='dropzone-cta'>
                   <span>Drag &amp; drop  multiple images</span>
                 </div>
               }
+
+              {singleItem && <img src={singleItem} />}
+
               {(!multiple && items.length) &&
                 <img src={items[0]} />
               }
@@ -106,7 +125,9 @@ export class DropzoneImageUpload extends React.Component {
 DropzoneImageUpload.propTypes = {
   input: PropTypes.object.isRequired,
   title: PropTypes.string,
-  multiple: PropTypes.bool
+  multiple: PropTypes.bool,
+  existingImage: PropTypes.string,
+  existingMiniGalleryImages: PropTypes.array
 };
 
 export default DropzoneImageUpload;
