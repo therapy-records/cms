@@ -1,20 +1,22 @@
 import { connect } from 'react-redux';
 import { resetPromiseState } from '../../../../reducers/uiState';
 import { fetchNewsArticles } from '../../../../reducers/news';
-import {
-  selectSelectedNewsArticle
-} from '../../../../selectors/news';
+import { selectSelectedNewsArticle } from '../../../../selectors/news';
 import {
   deleteNewsArticle,
-  deleteScheduledArticle
+  deleteScheduledArticle,
+  fetchSingleNewsArticle,
+  destroySelectedNewsArticle
 } from '../../../../reducers/newsArticle';
 import Article from '../components/Article'
 
 const mapDispatchToProps = {
+  onFetchSingleNewsArticle: (id) => fetchSingleNewsArticle(id),
   onFetchNewsArticles: () => fetchNewsArticles(),
   onDeleteArticle: (id) => deleteNewsArticle(id),
   onDeleteScheduledArticle: (id) => deleteScheduledArticle(id),
-  resetPromiseState: () => resetPromiseState()
+  resetPromiseState: () => resetPromiseState(),
+  onDestroyArticle: () => destroySelectedNewsArticle()
 }
 
 const mapStateToProps = (state, props) => ({

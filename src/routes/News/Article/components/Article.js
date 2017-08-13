@@ -10,14 +10,25 @@ class Article extends React.Component {
     isShowingModal: false
   }
 
-  handleModalOpen = () => {
-    console.log('MODAL OPEN ! ');
-    this.setState({ isShowingModal: true });
-  }
+  handleModalOpen = () => this.setState({ isShowingModal: true })
   handleModalClose = () => this.setState({ isShowingModal: false })
+
+  componentWillMount() {
+    const propsArticle = this.props.article;
+    const paramsId = this.props.params.id;
+    const noArticle = !propsArticle ||
+                      !propsArticle._id ||
+                      !paramsId;
+
+    const articleMatches = !noArticle && propsArticle._id === paramsId;
+    if (noArticle || !articleMatches) {
+      this.props.onFetchSingleNewsArticle(paramsId);
+    }
+  }
 
   componentWillUnmount() {
     this.props.resetPromiseState();
+    this.props.onDestroyArticle();
   }
 
   renderHtml(data) {
@@ -151,8 +162,10 @@ Article.propTypes = {
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
   promiseError: PropTypes.bool,
-  onFetchNewsArticles: PropTypes.func.isRequired,
-  resetPromiseState: PropTypes.func.isRequired
+  onFetchSingleNewsArticle: PropTypes.func.isRequired,
+  resetPromiseState: PropTypes.func.isRequired,
+  onDestroyArticle: PropTypes.func.isRequired,
+  params: PropTypes.object
 }
 
 export default Article

@@ -21,16 +21,29 @@ describe('(Component) News - Article', () => {
         onFetchNewsArticles: () => {},
         onDeleteArticle: () => {},
         onDeleteScheduledArticle: () => {},
-        resetPromiseState: () => {}
+        resetPromiseState: () => {},
+        onDestroyArticle: () => {},
+        onFetchSingleNewsArticle: () => {},
+        params: { id: 123 }
       };
 
-  it('should call resetPromiseState on componentWillUnmount', () => {
-    let props = baseProps;
-    props.resetPromiseState = sinon.spy();
-    wrapper = shallow(<Article {...props} />);
-    wrapper.unmount();
-    expect(props.resetPromiseState).to.have.been.called;
-    expect(props.resetPromiseState).to.have.been.called.once;
+  describe('on componentWillUnmount', () => {
+    it('should call resetPromiseState', () => {
+      let props = baseProps;
+      props.resetPromiseState = sinon.spy();
+      wrapper = shallow(<Article {...props} />);
+      wrapper.unmount();
+      expect(props.resetPromiseState).to.have.been.called;
+      expect(props.resetPromiseState).to.have.been.called.once;
+    });
+    it('should call onDestroyArticle', () => {
+      let props = baseProps;
+      props.onDestroyArticle = sinon.spy();
+      wrapper = shallow(<Article {...props} />);
+      wrapper.unmount();
+      expect(props.onDestroyArticle).to.have.been.called;
+      expect(props.onDestroyArticle).to.have.been.called.once;
+    });
   });
 
   describe('when promise is loading', () => {
@@ -77,6 +90,43 @@ describe('(Component) News - Article', () => {
         <p>error fetching news article :(</p>
       );
       expect(actual).to.equal(true);
+    });
+  });
+
+  describe('when an article does not exist / article._id is undefined', () => {
+    beforeEach(() => {
+      props = baseProps;
+      props.article = {};
+      props.onFetchSingleNewsArticle = sinon.spy();
+      wrapper = shallow(<Article {...props} />);
+    });
+    it('should call onFetchSingleNewsArticle', () => {
+      expect(props.onFetchSingleNewsArticle).to.have.been.called;
+      expect(props.onFetchSingleNewsArticle).to.have.been.called.once;
+    });
+  });
+
+  describe('when an article id does not match param ID', () => {
+    it('should call onFetchSingleNewsArticle', () => {
+      props = baseProps;
+      props.article = { _id: 456 };
+      props.params = { id: 123 };
+      props.onFetchSingleNewsArticle = sinon.spy();
+      wrapper = shallow(<Article {...props} />);
+      expect(props.onFetchSingleNewsArticle).to.have.been.called;
+      expect(props.onFetchSingleNewsArticle).to.have.been.called.once;
+    });
+  });
+
+  describe('when there is no param ID', () => {
+    it('should call onFetchSingleNewsArticle', () => {
+      props = baseProps;
+      props.article = { _id: 456 };
+      props.params = { };
+      props.onFetchSingleNewsArticle = sinon.spy();
+      wrapper = shallow(<Article {...props} />);
+      expect(props.onFetchSingleNewsArticle).to.have.been.called;
+      expect(props.onFetchSingleNewsArticle).to.have.been.called.once;
     });
   });
 

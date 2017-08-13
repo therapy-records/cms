@@ -1,3 +1,4 @@
+import axios from 'axios';
 import _axiosAuthHeaders from '../utils/axios'
 import {
   API_ROOT,
@@ -9,9 +10,6 @@ import {
   promiseSuccess,
   promiseError
 } from './uiState';
-
-export const FETCH_SELECTED_NEWS_ARTICLE_SUCCESS = 'FETCH_SELECTED_NEWS_ARTICLE_SUCCESS'
-export const FETCH_SELECTED_NEWS_ARTICLE_ERROR = 'FETCH_SELECTED_NEWS_ARTICLE_ERROR'
 
 export const SET_SELECTED_NEWS_ARTICLE = 'SET_SELECTED_NEWS_ARTICLE';
 export const SET_SELECTED_NEWS_ARTICLE_DELETED = 'SET_SELECTED_NEWS_ARTICLE_DELETED';
@@ -26,13 +24,6 @@ export const DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR = 'DELETE_SINGLE_NEWS_QUEUE_
 // ------------------------------------
 // Actions
 // ------------------------------------
-
-function success(data) {
-  return {
-    type: FETCH_SELECTED_NEWS_ARTICLE_SUCCESS,
-    payload: data
-  }
-}
 
 function selectedNewsArticle(article) {
   return {
@@ -84,20 +75,19 @@ export const setSelectedNewsArticle = (article) => {
 
 export const fetchSingleNewsArticle = (articleId) => {
   return (dispatch) => {
-    return new Promise((resolve, reject) => {
-      fetch(API_ROOT + NEWS + '/' + articleId)
-        .then(res => res.json())
-        .then((data) => {
-          if (data) {
-            dispatch(success(data));
-            resolve()
-          } else {
-            dispatch(deleteError())
-            reject()
-          }
+    dispatch(promiseLoading(true));
+    return axios.get(API_ROOT + NEWS + '/' + articleId)
+      .then(
+        (res) => {
+          dispatch(promiseLoading(false));
+          dispatch(promiseSuccess(true));
+          dispatch(selectedNewsArticle(res.data));
+        },
+        (err) => {
+          dispatch(promiseLoading(false));
+          dispatch(promiseError(err));
         }
-      );
-    })
+      )
   }
 }
 
@@ -177,9 +167,6 @@ export const actions = {
 // ------------------------------------
 /* eslint-disable no-return-assign */
 const ACTION_HANDLERS = {
-  [FETCH_SELECTED_NEWS_ARTICLE_SUCCESS] : (state, action) => state = action.payload,
-  [FETCH_SELECTED_NEWS_ARTICLE_ERROR] : (state, action) => state = action.payload,
-
   [SET_SELECTED_NEWS_ARTICLE] : (state, action) => state = action.payload,
   [SET_SELECTED_NEWS_ARTICLE_DELETED] : (state, action) => state = action.payload,
   [DESTROY_SELECTED_NEWS_ARTICLE] : (state, action) => state = action.payload,
