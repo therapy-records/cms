@@ -52,7 +52,13 @@ class Article extends React.Component {
 
     const articleHasMiniGalleryImages = article &&
                                         article.miniGalleryImages &&
-                                        article.miniGalleryImages.length;
+                                        article.miniGalleryImages.length &&
+                                        article.miniGalleryImages.length > 0;
+
+    const articleHasHashtags = article.socialShare &&
+                               article.socialShare.hashtags &&
+                               article.socialShare.hashtags.length &&
+                               article.socialShare.hashtags.length > 0;
 
     const articleHasImages = article && article.mainImageUrl || articleHasMiniGalleryImages;
 
@@ -86,7 +92,7 @@ class Article extends React.Component {
           </div>
         }
 
-        {(article && article.title && !article.isDeleted) &&
+        {(article && article.title && !article.isDeleted) && (
           <div className='article-flex-root'>
 
             <div className='article-col-1'>
@@ -97,14 +103,14 @@ class Article extends React.Component {
 
               <div className='cols-container'>
 
-                {articleHasImages &&
+                {articleHasImages ?
                   <div>
                     <img
                       src={articleImg()}
                       alt={`Fiona Ross - ${article.title}`}
                     />
                   </div>
-                }
+                : null}
 
                 {article.secondaryImageUrl &&
                   <div>
@@ -136,7 +142,7 @@ class Article extends React.Component {
 
               <br />
 
-              {articleHasMiniGalleryImages &&
+              {articleHasMiniGalleryImages ?
                 <div>
                   <h3>Mini gallery images</h3>
                   <ul className='article-gallery-flex-root'>
@@ -147,11 +153,9 @@ class Article extends React.Component {
                     ))}
                   </ul>
                 </div>
-              }
+              : null}
 
-              {(article.socialShare &&
-                article.socialShare.hashtags &&
-                article.socialShare.hashtags.length) &&
+              {articleHasHashtags ?
                 <div>
                   <h3>Hashtags</h3>
                   <ul>
@@ -160,7 +164,7 @@ class Article extends React.Component {
                     )}
                   </ul>
                 </div>
-              }
+              : null}
 
             </div>
 
@@ -194,7 +198,7 @@ class Article extends React.Component {
               </div>
             </div>
           </div>
-        }
+        )}
 
         {promiseError &&
           <p>error fetching news article :(</p>

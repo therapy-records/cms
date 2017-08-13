@@ -11,6 +11,12 @@ class ArticleLive extends React.Component {
     const {
       article
     } = this.props;
+
+    const articleHasMiniGalleryImages = article &&
+                                        article.miniGalleryImages &&
+                                        article.miniGalleryImages.length &&
+                                        article.miniGalleryImages.length > 0;
+
     return (
       <div>
         <div className='site-header' style={{ background: '#000', color: '#FFF', padding: 10 }}>
@@ -26,14 +32,14 @@ class ArticleLive extends React.Component {
 
         <div className='cols-container'>
 
-          {article.mainImageUrl &&
+          {article.mainImageUrl ?
             <div>
               <img
                 src={article.mainImageUrl}
                 alt={`Fiona Ross - ${article.title}`}
               />
             </div>
-          }
+          : null}
 
           {article.secondaryImageUrl &&
             <div>
@@ -49,7 +55,7 @@ class ArticleLive extends React.Component {
         <br />
         <br />
 
-        {(article.miniGalleryImages && article.miniGalleryImages.length) &&
+        {articleHasMiniGalleryImages ?
           <div>
             <p><i>Images to display as a gallery when live</i></p>
             <ul className='article-gallery-flex-root'>
@@ -60,7 +66,7 @@ class ArticleLive extends React.Component {
               ))}
             </ul>
           </div>
-        }
+        : null}
 
         <br />
         <br />

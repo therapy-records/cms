@@ -125,7 +125,6 @@ export class NewsArticleForm extends React.Component {
                     component={DropzoneImageUpload}
                     title='Main image'
                     existingImage={formValues && formValues.mainImageUrl} />
-                    title='Main image' />
 
               <br />
 
