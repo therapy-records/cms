@@ -50,6 +50,23 @@ class Article extends React.Component {
       promiseError
     } = this.props;
 
+    const articleHasMiniGalleryImages = article &&
+                                        article.miniGalleryImages &&
+                                        article.miniGalleryImages.length;
+
+    const articleHasImages = article && article.mainImageUrl || articleHasMiniGalleryImages;
+
+    const articleImg = () => {
+      if (!article) {
+        return null;
+      } else if (article.mainImageUrl) {
+        return article.mainImageUrl;
+      } else if (articleHasMiniGalleryImages) {
+        return article.miniGalleryImages[0];
+      }
+      return null;
+    }
+
     if (article && article.isDeleted) {
       setTimeout(() => {
         browserHistory.push('/news');
@@ -75,12 +92,51 @@ class Article extends React.Component {
             <div className='article-col-1'>
               <h2>{article.title}</h2>
               <div dangerouslySetInnerHTML={this.renderHtml(article.bodyMain)} />
+
               <br />
-              <img src={article.mainImageUrl} />
+
+              <div className='cols-container'>
+
+                {articleHasImages &&
+                  <div>
+                    <img
+                      src={articleImg()}
+                      alt={`Fiona Ross - ${article.title}`}
+                    />
+                  </div>
+                }
+
+                {article.secondaryImageUrl &&
+                  <div>
+                    <img
+                      src={article.secondaryImageUrl}
+                      alt={`Fiona Ross - ${article.title}`}
+                    />
+                  </div>
+                }
+
+              </div>
+
               <br />
               <br />
 
-              {(article.miniGalleryImages && article.miniGalleryImages.length) &&
+              {article.ticketsLink && <a href={article.ticketsLink} target='_blank'>Get tickets</a>}
+              <br />
+              {article.venueLink && <a href={article.venueLink} target='_blank'>Venue</a>}
+              <br />
+
+              {article.videoEmbed &&
+                <iframe
+                  width='560'
+                  src={article.videoEmbed}
+                  frameBorder='0'
+                  allowFullscreen
+                />
+              }
+
+              <br />
+
+              {articleHasMiniGalleryImages &&
                 <div>
                   <h3>Mini gallery images</h3>
                   <ul className='article-gallery-flex-root'>

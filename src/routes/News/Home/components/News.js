@@ -34,9 +34,18 @@ class News extends React.Component {
   }
 
   renderPost(p) {
+    const articleImg = () => {
+      if (p.mainImageUrl) {
+        return p.mainImageUrl;
+      } else if (p.miniGalleryImages && p.miniGalleryImages.length) {
+        return p.miniGalleryImages[0];
+      }
+      return null;
+    }
     return (
       <div key={p._id} className='news-card'>
-        <div className='bg-inner' style={{ backgroundImage: `url('${p.mainImageUrl}')` }} />
+        <div className='bg-inner'
+             style={{ backgroundImage: `url('${articleImg()}')` }} />
         <div className='inner'>
           {p.scheduledTime &&
             <p
@@ -72,6 +81,7 @@ class News extends React.Component {
     } = this.props;
 
     let _combinedArticles = (articlesQueue || newsArticles) && this.getCombinedArticles(articlesQueue, newsArticles);
+
     return (
       <div>
         <div className='news-feed-header'>

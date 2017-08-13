@@ -7,6 +7,7 @@ import {
   selectSelectedNewsArticleTitle,
   selectSelectedNewsArticleBodyMain,
   selectSelectedNewsArticleMainImageUrl,
+  selectSelectedNewsArticleSecondaryImageUrl,
   selectSelectedNewsArticleTicketsLink,
   selectSelectedNewsArticleVenueLink,
   selectSelectedNewsArticleMiniGalleryImages,
@@ -56,12 +57,23 @@ export const required = value => value ? undefined : 'required';
 
 export class NewsArticleForm extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      showSecondaryImageField: false
+    };
+  }
+
   handleSubmit() {
     if (this.props.formValues.scheduledTime) {
       this.props.onSubmitFormQueue();
     } else {
       this.props.onSubmitForm();
     }
+  }
+
+  handleSecondaryImageToggle = () => {
+    this.setState({ showSecondaryImageField: !this.state.showSecondaryImageField })
   }
 
   render() {
@@ -73,6 +85,10 @@ export class NewsArticleForm extends React.Component {
       location,
       formValues
     } = this.props;
+
+    const {
+      showSecondaryImageField
+    } = this.state;
 
     let isEditForm;
     if (location && location.pathname.includes('edit')) {
@@ -109,6 +125,26 @@ export class NewsArticleForm extends React.Component {
                     component={DropzoneImageUpload}
                     title='Main image'
                     existingImage={formValues && formValues.mainImageUrl} />
+                    title='Main image' />
+
+              <br />
+
+              <button
+                onClick={this.handleSecondaryImageToggle}
+                className='btn-sm secondary-img-toggle'
+                style={{ width: 'auto' }}
+              >
+                {showSecondaryImageField ?
+                  'Remove secondary featured image' :
+                  'Add secondary featured image'
+                }
+              </button>
+              {showSecondaryImageField &&
+                <Field name='secondaryImageUrl'
+                      component={DropzoneImageUpload}
+                      title='Secondary featured image' />
+              }
+
             </div>
 
             <div className='col-2'>
@@ -216,6 +252,7 @@ InitFromStateForm = connect(
       title: selectSelectedNewsArticleTitle(state),
       bodyMain: selectSelectedNewsArticleBodyMain(state),
       mainImageUrl: selectSelectedNewsArticleMainImageUrl(state),
+      secondaryImageUrl: selectSelectedNewsArticleSecondaryImageUrl(state),
       ticketsLink: selectSelectedNewsArticleTicketsLink(state),
       venueLink: selectSelectedNewsArticleVenueLink(state),
       videoEmbed: selectSelectedNewsArticleVideoEmbed(state),
