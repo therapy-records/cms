@@ -1,5 +1,6 @@
 @import 'base';
 @import '~normalize.css/normalize';
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,600');
 
 // Some best-practice CSS that's useful for most apps
 // Just remove them if they're not what you want
@@ -12,6 +13,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+  font-family: 'Raleway';
 }
 
 *,
@@ -56,8 +58,9 @@ button {
 }
 
 h1,h2,h3,h4,h5,h6 {
-  margin-top:0;
-  margin-bottom:0.5em;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-weight: 600;
 }
 
 img {
@@ -150,9 +153,25 @@ button[disabled] {
   opacity: .6;
 }
 
+button,
+.btn,
+a,
+label {
+  font-weight: 600;
+}
+
 .m-calendar .current-day {
   border-color: #1385e5 !important;
-  background: #1385e5 !important;
+  background: #1284E5 !important;
   color: #FFF !important;
   font-weight: normal !important;
+}
+
+h5,
+label {
+  font-size: 1.5em;
+}
+
+.label-small {
+  font-size: 1.2em;
 }

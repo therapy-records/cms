@@ -21,7 +21,8 @@ describe('(Component) News - Article', () => {
         ticketsLink: 'http://test.com',
         venueLink: 'http://test.com',
         videoEmbed: 'http://youtube.com/something',
-        miniGalleryImages: mockMiniGalleryImages
+        miniGalleryImages: mockMiniGalleryImages,
+        socialShare: {}
       },
       baseProps = {
         onFetchNewsArticles: () => {},

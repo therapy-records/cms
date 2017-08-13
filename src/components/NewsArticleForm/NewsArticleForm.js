@@ -21,9 +21,9 @@ import DropzoneImageUpload from './DropzoneImageUpload';
 import Datepicker from '../Datepicker/Datepicker';
 import ArticlePreview from '../ArticlePreview/ArticlePreview.container';
 
-export const textInput = ({ input, label, type, placeholder, props, meta: { touched, error } }) => (
+export const textInput = ({ input, label, type, placeholder, smallLabelSize, props, meta: { touched, error } }) => (
   <div>
-    <label>{label}</label>
+    <label className={smallLabelSize && 'label-small'}>{label}</label>
     <input {...input} placeholder={placeholder} type={type} {...props} />
     {touched && error && <span>{label} is {error}</span>}
   </div>
@@ -35,12 +35,13 @@ textInput.propTypes = {
   type: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   props: PropTypes.object,
+  smallLabelSize: PropTypes.bool,
   meta: PropTypes.object.isRequired
 }
 
 export const bodyMainRTE = ({ input, onChange, props, meta: { touched, error } }) => (
   <div>
-    <p><strong>Main content</strong></p>
+    <h5>Main content</h5>
     {touched && error && (<p>Main content is {error}</p>)}
     <RichTextEditor value={input.value} onChange={e => { input.onChange(e) }} {...props} />
   </div>
@@ -106,78 +107,45 @@ export class NewsArticleForm extends React.Component {
 
         <form onSubmit={(e) => e.preventDefault()} encType='multipart/form-data'>
 
-          <div className='cols-container'>
+          <div className='col-clear' />
 
-            <div className='col-1'>
+          <Field name='title'
+                component={textInput}
+                type='text'
+                placeholder='Hello World'
+                label='Title'
+                validate={required} />
 
-              <div className='col-clear' />
+          <br />
+          <br />
+          <br />
 
-              <Field name='title'
-                    component={textInput}
-                    type='text'
-                    placeholder='Hello World'
-                    label='Title'
-                    validate={required} />
+          <Field name='mainImageUrl'
+                component={DropzoneImageUpload}
+                title='Main image'
+                existingImage={formValues && formValues.mainImageUrl} />
 
-              <br />
+          <br />
+          <br />
+          <br />
 
-              <Field name='mainImageUrl'
-                    component={DropzoneImageUpload}
-                    title='Main image'
-                    existingImage={formValues && formValues.mainImageUrl} />
+          <button
+            onClick={this.handleSecondaryImageToggle}
+            className='btn-sm secondary-img-toggle'
+            style={{ width: 'auto' }}
+          >
+            {showSecondaryImageField ?
+              'Remove secondary featured image' :
+              'Add secondary featured image'
+            }
+          </button>
+          {showSecondaryImageField &&
+            <Field name='secondaryImageUrl'
+                  component={DropzoneImageUpload}
+                  title='Secondary featured image' />
+          }
 
-              <br />
-
-              <button
-                onClick={this.handleSecondaryImageToggle}
-                className='btn-sm secondary-img-toggle'
-                style={{ width: 'auto' }}
-              >
-                {showSecondaryImageField ?
-                  'Remove secondary featured image' :
-                  'Add secondary featured image'
-                }
-              </button>
-              {showSecondaryImageField &&
-                <Field name='secondaryImageUrl'
-                      component={DropzoneImageUpload}
-                      title='Secondary featured image' />
-              }
-
-            </div>
-
-            <div className='col-2'>
-
-              <Field name='ticketsLink'
-                    component={textInput}
-                    type='text'
-                    placeholder='http://www...'
-                    label='Link to get tickets ' />
-
-              <br />
-
-              <Field name='venueLink'
-                    component={textInput}
-                    type='text'
-                    placeholder='http://www...'
-                    label='Link to venue' />
-
-              <Field name='videoEmbed'
-                    component={textInput}
-                    type='text'
-                    placeholder='https://www.youtube.com/embed/45JLCGLplvk'
-                    label='YouTube video link' />
-
-              <Field name='socialShare.hashtags'
-                    component={textInput}
-                    type='text'
-                    placeholder='trending, happy, fionaross'
-                    label='Hashtags' />
-
-            </div>
-
-          </div>
-
+          <br />
           <br />
           <br />
 
@@ -185,6 +153,7 @@ export class NewsArticleForm extends React.Component {
                 component={bodyMainRTE}
                 validate={required} />
 
+          <br />
           <br />
           <br />
 
@@ -204,9 +173,54 @@ export class NewsArticleForm extends React.Component {
                 existingMiniGalleryImages={formValues && formValues.miniGalleryImages} />
 
           <br />
+          <br />
+          <br />
 
-          {error && <strong>{error}</strong>}
+          <div>
+            <h5>Links to...</h5>
+            <br />
+            <div className='cols-container links-cols-container'>
+              <div className='col-50'>
+                <Field name='ticketsLink'
+                      component={textInput}
+                      type='text'
+                      placeholder='http://www...'
+                      label='Tickets '
+                      smallLabelSize />
 
+                <br />
+
+                <Field name='venueLink'
+                      component={textInput}
+                      type='text'
+                      placeholder='http://www...'
+                      label='Venue'
+                      smallLabelSize />
+              </div>
+
+              <div className='col-50'>
+                <Field name='videoEmbed'
+                      component={textInput}
+                      type='text'
+                      placeholder='https://www.youtube.com/embed/45JLCGLplvk'
+                      label='YouTube video'
+                      smallLabelSize />
+
+                <br />
+
+                <Field name='socialShare.hashtags'
+                      component={textInput}
+                      type='text'
+                      placeholder='trending, happy, fionaross'
+                      label='Hashtags'
+                      smallLabelSize />
+              </div>
+            </div>
+
+          </div>
+
+          <br />
+          <br />
           <br />
 
           <Field name='scheduledTime'
@@ -215,6 +229,8 @@ export class NewsArticleForm extends React.Component {
                 title='Scheduler (optional)'
                 titleSub='Post live on a date of choosing' />
 
+          {error && <strong>{error}</strong>}
+
           <br />
           <br />
 
@@ -222,6 +238,9 @@ export class NewsArticleForm extends React.Component {
                   disabled={error || pristine || submitting || error || invalid}
                   onClick={() => this.handleSubmit()}>Submit
           </button>
+
+          <br />
+          <br />
 
         </form>
       </section>

@@ -73,7 +73,7 @@ export class DropzoneImageUpload extends React.Component {
 
     return (
       <div>
-        <p><b>{title}</b></p>
+        <h5>{title}</h5>
         <div className={multiple && 'cols-container'}>
 
           <div className={multiple && 'col-1'}>

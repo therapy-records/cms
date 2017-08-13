@@ -55,7 +55,8 @@ class Article extends React.Component {
                                         article.miniGalleryImages.length &&
                                         article.miniGalleryImages.length > 0;
 
-    const articleHasHashtags = article.socialShare &&
+    const articleHasHashtags = article &&
+                               article.socialShare &&
                                article.socialShare.hashtags &&
                                article.socialShare.hashtags.length &&
                                article.socialShare.hashtags.length > 0;

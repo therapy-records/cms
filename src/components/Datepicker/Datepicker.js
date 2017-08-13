@@ -49,35 +49,38 @@ export class Datepicker extends React.Component {
     const _moment = m;
 
     return (
-      <div>
-        <p><strong>{title}</strong></p>
-        <p>{titleSub}</p>
-        <p><small>Note: Time of posting is not exact and could be offset by X hours</small></p>
-
-        {togglePicker ? (
-          <div>
-            <button onClick={this.handleTogglePicker}
-                    className='btn-sm'
-                    style={{ width: 'auto' }}>Schedule article
-            </button>
-            <br />
-            <br />
-            {(
-              pickerActive &&
-                <InputMoment
-                  {...input}
-                  moment={_moment}
-                  onChange={this.handleChange}
-                />
-            )}
-          </div>
-        ) : (
-          <InputMoment
-            {...input}
-            moment={initTime ? moment(initTime) : _moment}
-            onChange={this.handleChange}
-          />
-        )}
+      <div className='cols-container'>
+        <div>
+          <h5>{title}</h5>
+          <p>{titleSub}</p>
+          <p><small>Note: Time of posting is not exact and could be offset by X hours</small></p>
+        </div>
+        <div>
+          {togglePicker ? (
+            <div>
+              <button onClick={this.handleTogglePicker}
+                      className='btn-sm'
+                      style={{ width: 'auto' }}>Schedule article
+              </button>
+              <br />
+              <br />
+              {(
+                pickerActive &&
+                  <InputMoment
+                    {...input}
+                    moment={_moment}
+                    onChange={this.handleChange}
+                  />
+              )}
+            </div>
+          ) : (
+            <InputMoment
+              {...input}
+              moment={initTime ? moment(initTime) : _moment}
+              onChange={this.handleChange}
+            />
+          )}
+        </div>
       </div>
     );
   };

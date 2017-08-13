@@ -18,11 +18,11 @@
 }
 
 .col-1 {
-  flex: 1 500px;
+  flex: 1 550px;
   padding-right: 3em;
 }
 .col-2 {
-  flex: 1 200px;
+  flex: 1 250px;
   justify-content: flex-end;
 }
 
@@ -53,7 +53,7 @@
   position: absolute;
   z-index: 1;
   transition: all 0.2s ease;
-  text-shadow: 0 6px 6px #000;
+  text-shadow: 0 3px 6px #000;
   color: #FFF;
   font-size: 30px; // counter mysterious counter ('0') from react-dropzone
 }
@@ -67,5 +67,16 @@
   .dropzone-cta {
     font-size:1.1em;
     opacity:0.6;
+  }
+}
+
+
+.links-cols-container > div {
+  flex: 0 1 50%;
+  &:first-child {
+    padding-right:1em;
+  }
+  &:last-child {
+    padding-left:1em;
   }
 }

@@ -28,7 +28,7 @@ describe('(Component) Datepicker', () => {
 
   it('should render a title', () => {
     const actual = wrapper.containsMatchingElement(
-      <p><strong>{props.title}</strong></p>
+      <h5>{props.title}</h5>
     );
     expect(actual).to.equal(true);
   });
