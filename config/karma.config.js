@@ -21,6 +21,7 @@ const karmaConfig = {
     [`${project.dir_test}/test-bundler.js`] : ['webpack']
   },
   browsers : ['PhantomJS'],
+  transports: ['polling'],
   webpack  : {
     devtool : 'cheap-module-source-map',
     resolve : Object.assign({}, webpackConfig.resolve, {
