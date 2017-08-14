@@ -7,8 +7,7 @@ describe('(Component) ArticleLive', () => {
     article: {
       title: 'asdfasdfasdf',
       mainImage: {
-        url: 'http://something.png',
-        externalLink: 'test.com'
+        url: 'http://something.png'
       },
       secondaryImageUrl: 'http://somethingElse.png',
       miniGalleryImages: [
@@ -31,6 +30,21 @@ describe('(Component) ArticleLive', () => {
       <img src={props.article.mainImage.url} />
     );
     expect(actual).to.equal(true);
+  });
+
+  it('should render an image inside a link if mainImage.externalLink', () => {
+    props.article.mainImage.externalLink = 'testing.com';
+    const wrapper = shallow(<ArticleLive {...props} />);
+    const actualMiniGalleryImages = wrapper.containsMatchingElement(
+      <a href={props.article.mainImage.externalLink}
+         target='_blank'>
+        <img
+          src={props.article.miniGalleryImages[0]}
+          alt={`Fiona Ross - ${props.article.title}`}
+        />
+      </a>
+    );
+    expect(actualMiniGalleryImages).to.equal(false);
   });
 
   it('should render an image with secondaryImageUrl', () => {

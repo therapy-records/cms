@@ -34,10 +34,19 @@ class ArticleLive extends React.Component {
 
           {article.mainImage.url ?
             <div>
-              <img
-                src={article.mainImage.url}
-                alt={`Fiona Ross - ${article.title}`}
-              />
+              {article.mainImage && article.mainImage.externalLink ?
+                <a href={article.mainImage.externalLink}
+                  target='_blank'>
+                  <img
+                    src={article.mainImage.url}
+                    alt={`Fiona Ross - ${article.title}`}
+                  />
+                </a>
+              : <img
+                  src={article.mainImage.url}
+                  alt={`Fiona Ross - ${article.title}`}
+                />
+              }
             </div>
           : null}
 

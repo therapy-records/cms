@@ -107,10 +107,18 @@ class Article extends React.Component {
 
                 {articleHasImages ?
                   <div>
-                    <img
-                      src={articleImg()}
-                      alt={`Fiona Ross - ${article.title}`}
-                    />
+                    {article.mainImage && article.mainImage.externalLink ?
+                      <a href={article.mainImage.externalLink}
+                         target='_blank'>
+                        <img
+                          src={articleImg()}
+                          alt={`Fiona Ross - ${article.title}`}
+                        />
+                      </a>
+                    : <img
+                        src={articleImg()}
+                        alt={`Fiona Ross - ${article.title}`}
+                      />}
                   </div>
                 : null}
 

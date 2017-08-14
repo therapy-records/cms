@@ -17,8 +17,7 @@ describe('(Component) News - Article', () => {
         title: 'hello world',
         bodyMain: '<p>dummy copy</p><div>something<h2>title</h2></div>',
         mainImage: {
-          url: 'http://test.com/hi.jpg',
-          externalLink: 'test.com'
+          url: 'http://test.com/hi.jpg'
         },
         createdAt: new Date(),
         ticketsLink: 'http://test.com',
@@ -197,6 +196,23 @@ describe('(Component) News - Article', () => {
           />
         );
         expect(actualMainImageUrl).to.equal(false);
+      });
+
+      it('should render inside a link if mainImage.externalLink', () => {
+        props = baseProps;
+        props.article = mockArticle;
+        props.article.mainImage.externalLink = 'testing.com';
+        wrapper = shallow(<Article {...props} />);
+        const actualMiniGalleryImages = wrapper.containsMatchingElement(
+          <a href={mockArticle.mainImage.externalLink}
+             target='_blank'>
+            <img
+              src={props.article.miniGalleryImages[0]}
+              alt={`Fiona Ross - ${props.article.title}`}
+            />
+          </a>
+        );
+        expect(actualMiniGalleryImages).to.equal(false);
       });
     });
 
