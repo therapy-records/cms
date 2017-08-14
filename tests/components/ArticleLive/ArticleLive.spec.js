@@ -6,7 +6,10 @@ describe('(Component) ArticleLive', () => {
   let props = {
     article: {
       title: 'asdfasdfasdf',
-      mainImageUrl: 'http://something.png',
+      mainImage: {
+        url: 'http://something.png',
+        externalLink: 'test.com'
+      },
       secondaryImageUrl: 'http://somethingElse.png',
       miniGalleryImages: [
         'asdf.jpg', 'ewrwer.jpg', '23fdsfjpg'
@@ -22,10 +25,10 @@ describe('(Component) ArticleLive', () => {
     expect(actual).to.equal(true);
   });
 
-  it('should render an image with mainImageUrl', () => {
+  it('should render an image with mainImage.url', () => {
     const wrapper = shallow(<ArticleLive {...props} />);
     const actual = wrapper.containsMatchingElement(
-      <img src={props.article.mainImageUrl} />
+      <img src={props.article.mainImage.url} />
     );
     expect(actual).to.equal(true);
   });

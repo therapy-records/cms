@@ -7,6 +7,7 @@ import {
   selectSelectedNewsArticleTitle,
   selectSelectedNewsArticleBodyMain,
   selectSelectedNewsArticleMainImageUrl,
+  selectSelectedNewsArticleMainImageExternalLink,
   selectSelectedNewsArticleSecondaryImageUrl,
   selectSelectedNewsArticleTicketsLink,
   selectSelectedNewsArticleVenueLink,
@@ -120,10 +121,20 @@ export class NewsArticleForm extends React.Component {
           <br />
           <br />
 
-          <Field name='mainImageUrl'
+          <Field name='mainImage.url'
                 component={DropzoneImageUpload}
                 title='Main image'
                 existingImage={formValues && formValues.mainImageUrl} />
+
+          <br />
+          <br />
+
+          <Field name='mainImage.externalLink'
+                 component={textInput}
+                 type='url'
+                 title='Main image link'
+                 label='Main image link'
+                 placeholder='http://bbc.co.uk/fiona-ross' />
 
           <br />
           <br />
@@ -139,12 +150,17 @@ export class NewsArticleForm extends React.Component {
               'Add secondary featured image'
             }
           </button>
+
           {showSecondaryImageField &&
-            <Field name='secondaryImageUrl'
-                  component={DropzoneImageUpload}
-                  title='Secondary featured image' />
+            <div>
+              <br />
+              <Field name='secondaryImageUrl'
+                    component={DropzoneImageUpload}
+                    title='Secondary featured image' />
+            </div>
           }
 
+          <br />
           <br />
           <br />
           <br />
@@ -269,7 +285,10 @@ InitFromStateForm = connect(
     initialValues: {
       title: selectSelectedNewsArticleTitle(state),
       bodyMain: selectSelectedNewsArticleBodyMain(state),
-      mainImageUrl: selectSelectedNewsArticleMainImageUrl(state),
+      mainImage: {
+        url: selectSelectedNewsArticleMainImageUrl(state),
+        externalLink: selectSelectedNewsArticleMainImageExternalLink(state)
+      },
       secondaryImageUrl: selectSelectedNewsArticleSecondaryImageUrl(state),
       ticketsLink: selectSelectedNewsArticleTicketsLink(state),
       venueLink: selectSelectedNewsArticleVenueLink(state),

@@ -43,7 +43,10 @@ let mockNewsArticle = {
   title: 'hello',
   createdAt: new Date(),
   bodyMain: '<p>test</p>',
-  mainImageUrl: '',
+  mainImage: {
+    url: 'http://image.com',
+    externalLink: 'test.com'
+  },
   ticketsLink: '',
   venueLink: '',
   miniGalleryImages: [

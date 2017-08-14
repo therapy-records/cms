@@ -45,9 +45,19 @@ export const selectSelectedNewsArticleBodyMain = createSelector(
   (article) => article && article.bodyMain
 );
 
-export const selectSelectedNewsArticleMainImageUrl = createSelector(
+export const selectSelectedNewsArticleMainImage = createSelector(
   selectSelectedNewsArticle,
-  (article) => article && article.mainImageUrl
+  (article) => article && article.mainImage && article.mainImage
+);
+
+export const selectSelectedNewsArticleMainImageUrl = createSelector(
+  selectSelectedNewsArticleMainImage,
+  (mainImage) => mainImage && mainImage.url
+);
+
+export const selectSelectedNewsArticleMainImageExternalLink = createSelector(
+  selectSelectedNewsArticleMainImage,
+  (mainImage) => mainImage && mainImage.externalLink
 );
 
 export const selectSelectedNewsArticleSecondaryImageUrl = createSelector(

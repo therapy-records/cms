@@ -8,6 +8,7 @@ import {
   selectSelectedNewsArticleTitle,
   selectSelectedNewsArticleBodyMain,
   selectSelectedNewsArticleMainImageUrl,
+  selectSelectedNewsArticleMainImageExternalLink,
   selectSelectedNewsArticleSecondaryImageUrl,
   selectSelectedNewsArticleTicketsLink,
   selectSelectedNewsArticleVenueLink,
@@ -37,6 +38,10 @@ const mockArticles = [
     miniGallery: ['asdf', 'asdf', 'asdf'],
     socialShare: {
       hashtags: ['something', 'somethingElse']
+    },
+    mainImage: {
+      url: 'http://something/test.jpg',
+      externalLink: 'http://google.com'
     }
   },
   {
@@ -139,7 +144,15 @@ describe('(Selectors) news', () => {
   describe('selectSelectedNewsArticleMainImageUrl', () => {
     it('should return bodyMain', () => {
       const actual = selectSelectedNewsArticleMainImageUrl(mockState, postId);
-      const expected = newsArticle.mainImageUrl;
+      const expected = newsArticle.mainImage.url;
+      expect(actual).to.equal(expected);
+    });
+  });
+
+  describe('selectSelectedNewsArticleMainImageExternalLink', () => {
+    it('should return bodyMain', () => {
+      const actual = selectSelectedNewsArticleMainImageExternalLink(mockState, postId);
+      const expected = newsArticle.mainImage.externalLink;
       expect(actual).to.equal(expected);
     });
   });

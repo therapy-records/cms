@@ -16,7 +16,10 @@ describe('(Component) News - Article', () => {
         _id: 'asdf1234',
         title: 'hello world',
         bodyMain: '<p>dummy copy</p><div>something<h2>title</h2></div>',
-        mainImageUrl: 'http://test.com/hi.jpg',
+        mainImage: {
+          url: 'http://test.com/hi.jpg',
+          externalLink: 'test.com'
+        },
         createdAt: new Date(),
         ticketsLink: 'http://test.com',
         venueLink: 'http://test.com',
@@ -151,19 +154,19 @@ describe('(Component) News - Article', () => {
     });
 
     describe('main image', () => {
-      it('should render mainImageUrl if it exists', () => {
+      it('should render mainImage.url if it exists', () => {
         const actual = wrapper.containsMatchingElement(
           <img
-            src={props.article.mainImageUrl}
+            src={props.article.mainImage.url}
             alt={`Fiona Ross - ${props.article.title}`}
           />
         );
         expect(actual).to.equal(true);
       });
 
-      it('should render the first image in miniGalleryImages if !mainImageUrl and miniGalleryImages length', () => {
+      it('should render the first image in miniGalleryImages if !mainImage.url and miniGalleryImages length', () => {
         props = baseProps;
-        props.article.mainImageUrl = undefined;
+        props.article.mainImage.url = undefined;
         wrapper = shallow(<Article {...props} />);
         const actual = wrapper.containsMatchingElement(
           <img
@@ -174,9 +177,9 @@ describe('(Component) News - Article', () => {
         expect(actual).to.equal(true);
       });
 
-      it('should not render an image if !miniGalleryImages or !mainImageUrl', () => {
+      it('should not render an image if !miniGalleryImages or !mainImage.url', () => {
         props = baseProps;
-        props.article.mainImageUrl = undefined;
+        props.article.mainImage.url = undefined;
         props.article.miniGalleryImages = [];
         wrapper = shallow(<Article {...props} />);
         const actualMiniGalleryImages = wrapper.containsMatchingElement(
@@ -189,7 +192,7 @@ describe('(Component) News - Article', () => {
 
         const actualMainImageUrl = wrapper.containsMatchingElement(
           <img
-            src={props.article.mainImageUrl}
+            src={props.article.mainImage.url}
             alt={`Fiona Ross - ${props.article.title}`}
           />
         );

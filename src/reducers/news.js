@@ -163,7 +163,7 @@ export const editNews = (postToEdit) => {
     const reduxFormObj = getFormValues();
     postToEdit.title = reduxFormObj.title;
     postToEdit.bodyMain = reduxFormObj.bodyMain;
-    postToEdit.mainImageUrl = reduxFormObj.mainImageUrl;
+    postToEdit.mainImage = reduxFormObj.mainImage;
     postToEdit.scheduledTime = reduxFormObj.scheduledTime;
 
     return _axiosAuthHeaders.put(

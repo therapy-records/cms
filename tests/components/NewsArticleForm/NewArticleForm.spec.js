@@ -68,11 +68,23 @@ describe('(Component) NewsArticleForm', () => {
     beforeEach(() => {
       wrapper = shallow(<NewsArticleForm {...props} />);
     });
-    it('should render a mainImageUrl field', () => {
+    it('should render a mainImage.url field', () => {
       const actual = wrapper.containsMatchingElement(
-        <Field name='mainImageUrl'
+        <Field name='mainImage.url'
                title='Main image'
                component={DropzoneImageUpload} />
+      );
+      expect(actual).to.equal(true);
+    });
+
+    it('should render a mainImage.externalLink field', () => {
+      const actual = wrapper.containsMatchingElement(
+        <Field name='mainImage.externalLink'
+               type='url'
+               title='Main image link'
+               label='Main image link'
+               placeholder='http://bbc.co.uk/fiona-ross'
+               component={textInput} />
       );
       expect(actual).to.equal(true);
     });

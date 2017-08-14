@@ -61,13 +61,14 @@ class Article extends React.Component {
                                article.socialShare.hashtags.length &&
                                article.socialShare.hashtags.length > 0;
 
-    const articleHasImages = article && article.mainImageUrl || articleHasMiniGalleryImages;
+    const articleHasMainImage = article && article.mainImage && article.mainImage.url;
+    const articleHasImages = article && articleHasMainImage || articleHasMiniGalleryImages;
 
     const articleImg = () => {
       if (!article) {
         return null;
-      } else if (article.mainImageUrl) {
-        return article.mainImageUrl;
+      } else if (article.mainImage.url) {
+        return article.mainImage.url;
       } else if (articleHasMiniGalleryImages) {
         return article.miniGalleryImages[0];
       }

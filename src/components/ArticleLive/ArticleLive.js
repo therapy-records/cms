@@ -32,10 +32,10 @@ class ArticleLive extends React.Component {
 
         <div className='cols-container'>
 
-          {article.mainImageUrl ?
+          {article.mainImage.url ?
             <div>
               <img
-                src={article.mainImageUrl}
+                src={article.mainImage.url}
                 alt={`Fiona Ross - ${article.title}`}
               />
             </div>
