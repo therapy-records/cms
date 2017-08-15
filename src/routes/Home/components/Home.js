@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { browserHistory } from 'react-router';
 import LoginForm from '../../../components/LoginForm'
+import './Home.scss';
 
 export class Home extends React.Component {
 
@@ -23,7 +24,7 @@ export class Home extends React.Component {
     } = this.props;
 
     return (
-      <div>
+      <div className='home-root'>
         {!isAuthenticated ? (
           <LoginForm onSubmit={() => { this.props.onPostForm(); }} isAuthenticated={this.props.isAuthenticated} />
         ) : (
