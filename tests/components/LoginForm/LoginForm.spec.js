@@ -59,7 +59,7 @@ describe('(Component) LoginForm', () => {
       }
       const buttonWrapper = shallow(<LoginForm {...props} />);
       const actual = buttonWrapper.containsMatchingElement(
-        <button type='submit' disabled={false}>Submit</button>
+        <button type='submit' disabled={false}>Login</button>
       );
       expect(actual).to.equal(true);
     });
