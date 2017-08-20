@@ -26,7 +26,7 @@ export const textInput = ({ input, label, type, placeholder, smallLabelSize, pro
   <div>
     <label className={smallLabelSize && 'label-small'}>{label}</label>
     <input {...input} placeholder={placeholder} type={type} {...props} />
-    {touched && error && <span>{label} is {error}</span>}
+    {touched && error && <span className='form-error'>{label} is {error}</span>}
   </div>
 );
 

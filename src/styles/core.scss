@@ -35,6 +35,11 @@ textarea {
   margin-bottom: 1em;
 }
 
+.form-error {
+  color: darkred;
+  font-weight: bold;
+}
+
 textarea {
   max-width: 1005;
 }
@@ -42,15 +47,20 @@ textarea {
 button {
   width: 100%;
   padding: 2em;
-  background: #bada55;
+  background: #111;
+  color: #FFF;
   border: 0 none;
+  font-weight: 300;
   appearance: none;
+  transition:all 0.2s ease;
 }
 
 .btn {
-  background: #bada55;
+  background: #111;
   color: #000;
+  color: #FFF;
   margin-right: 0.5em;
+  font-weight: 300;
 }
 
 .btn-width-auto {
@@ -145,12 +155,10 @@ ol {
 }
 
 button[disabled] {
-  opacity: .6;
+  opacity: .8;
+  color: #AAA;
 }
 
-button,
-.btn,
-a,
 label {
   font-weight: 600;
 }

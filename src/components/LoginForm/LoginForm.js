@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import './LoginForm.scss'
 
-export const textInput = ({ input, label, type, meta: { touched, error } }) => (
+export const textInput = ({ input, label, placeholder, type, meta: { touched, error } }) => (
   <div>
-    <label>{label}</label>
-    <input {...input} placeholder={label} type={type} />
-    {touched && error && <span>{label} is {error}</span>}
+    {label && <label>{label}</label>}
+    <input {...input} placeholder={placeholder} type={type} />
+    {touched && error && <span className='form-error'>{label} is {error}</span>}
   </div>
 )
 
@@ -15,7 +15,8 @@ textInput.propTypes = {
   input: PropTypes.object,
   label: PropTypes.string,
   meta: PropTypes.object,
-  type: PropTypes.string
+  type: PropTypes.string,
+  placeholder: PropTypes.string
 };
 
 export const required = value => value ? undefined : 'required';
@@ -26,14 +27,12 @@ export class LoginForm extends React.Component {
 
     return (
       <section className='login-form'>
-        <h2>Login</h2>
         <form onSubmit={(e) => e.preventDefault()}>
 
           <Field name='username'
                  component={textInput}
                  type='text'
-                 placeholder='username'
-                 label='Username'
+                 placeholder='Username'
                  validate={required} />
 
           <br />
@@ -41,8 +40,7 @@ export class LoginForm extends React.Component {
           <Field name='password'
                  component={textInput}
                  type='password'
-                 placeholder='password'
-                 label='Password'
+                 placeholder='Password'
                  validate={required} />
 
           {error && <strong>{error}</strong>}
@@ -53,7 +51,7 @@ export class LoginForm extends React.Component {
             <button
               type='submit'
               disabled={error || pristine || submitting}
-              onClick={() => onSubmit()}>Submit
+              onClick={() => onSubmit()}>Login
             </button>
           </div>
 

@@ -13,20 +13,12 @@ describe('(Component) LoginForm', () => {
     wrapper = shallow(<LoginForm {...props} />);
   });
 
-  it('should render a title', () => {
-    const actual = wrapper.containsMatchingElement(
-      <h2>Login</h2>
-    );
-    expect(actual).to.equal(true);
-  });
-
   it('should render a username field', () => {
     const actual = wrapper.containsMatchingElement(
       <Field name='username'
              component={textInput}
              type='text'
-             placeholder='username'
-             label='Username'
+             placeholder='Username'
              validate={required} />
     );
     expect(actual).to.equal(true);
@@ -37,8 +29,7 @@ describe('(Component) LoginForm', () => {
       <Field name='password'
              component={textInput}
              type='password'
-             placeholder='password'
-             label='Password'
+             placeholder='Password'
              validate={required} />
     );
     expect(actual).to.equal(true);
