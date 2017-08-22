@@ -19,6 +19,13 @@ describe('(Component) Quotes', () => {
     expect(actual).to.equal(true);
   });
 
+  it('add more button', () => {
+    const actual = wrapper.containsMatchingElement(
+      <button>Add another quote</button>
+    );
+    expect(actual).to.equal(true);
+  });
+
   describe('by default', () => {
     it('should render 3 empty list items with inputs', () => {
       const listItems = wrapper.find('li');
@@ -76,6 +83,20 @@ describe('(Component) Quotes', () => {
       inputCopy.simulate('change', mockEv);
       props.input.onChange.should.have.been.called;
       props.input.onChange.should.have.been.calledWith(expectedQuotes);
+    });
+  });
+
+  describe('onClick add more button', () => {
+    it('should add a quotes/items field', () => {
+      let listItems = wrapper.find('li');
+      expect(listItems.length).to.equal(3);
+      const button = wrapper.find('button');
+      button.simulate('click');
+      listItems = wrapper.find('li');
+      expect(listItems.length).to.equal(4);
+      button.simulate('click');
+      listItems = wrapper.find('li');
+      expect(listItems.length).to.equal(5);
     });
   });
 });

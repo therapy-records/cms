@@ -33,6 +33,12 @@ export class Quotes extends React.Component {
     this.props.input.onChange(filteredQuotes);
   }
 
+  onAddQuote = () => {
+    this.setState({
+      items: [...this.state.items, {}]
+    });
+  }
+
   render() {
     const {
       items
@@ -51,6 +57,10 @@ export class Quotes extends React.Component {
             )
           })}
         </ul>
+        <button onClick={this.onAddQuote}
+                className='btn-sm'
+                style={{ width: 'auto' }}
+        >Add another quote</button>
       </div>
     )
   }
