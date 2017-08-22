@@ -5,6 +5,7 @@ import { Field, reduxForm } from 'redux-form'
 import RichTextEditor from '../RichTextEditor'
 import {
   selectSelectedNewsArticleTitle,
+  selectSelectedNewsArticleQuotes,
   selectSelectedNewsArticleBodyMain,
   selectSelectedNewsArticleMainImageUrl,
   selectSelectedNewsArticleMainImageExternalLink,
@@ -20,6 +21,7 @@ import { selectNewsArticleFormValues } from '../../selectors/form';
 import './NewsArticleForm.scss';
 import DropzoneImageUpload from './DropzoneImageUpload';
 import Datepicker from '../Datepicker/Datepicker';
+import Quotes from './Quotes';
 import ArticlePreview from '../ArticlePreview/ArticlePreview.container';
 
 export const textInput = ({ input, label, type, placeholder, smallLabelSize, props, meta: { touched, error } }) => (
@@ -166,8 +168,15 @@ export class NewsArticleForm extends React.Component {
           <br />
 
           <Field name='bodyMain'
-                component={bodyMainRTE}
-                validate={required} />
+                 component={bodyMainRTE}
+                 validate={required} />
+
+          <br />
+          <br />
+          <br />
+
+          <Field name='quotes'
+                 component={Quotes} />
 
           <br />
           <br />
@@ -285,6 +294,7 @@ InitFromStateForm = connect(
     initialValues: {
       title: selectSelectedNewsArticleTitle(state),
       bodyMain: selectSelectedNewsArticleBodyMain(state),
+      quotes: selectSelectedNewsArticleQuotes(state),
       mainImage: {
         url: selectSelectedNewsArticleMainImageUrl(state),
         externalLink: selectSelectedNewsArticleMainImageExternalLink(state)
