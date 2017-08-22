@@ -67,7 +67,7 @@ class Article extends React.Component {
     const articleImg = () => {
       if (!article) {
         return null;
-      } else if (article.mainImage.url) {
+      } else if (article.mainImage && article.mainImage.url) {
         return article.mainImage.url;
       } else if (articleHasMiniGalleryImages) {
         return article.miniGalleryImages[0];

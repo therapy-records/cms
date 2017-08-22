@@ -156,7 +156,14 @@ describe('(Component) NewsArticleForm', () => {
     });
 
     it('should render scheduledTime field', () => {
-      const props = { formValues: { scheduledTime: new Date() } };
+      const props = {
+        formValues: {
+          scheduledTime: new Date(),
+          mainImage: {
+            url: 'test.com'
+          }
+        }
+      };
       const datepickerWrapper = shallow(<NewsArticleForm {...props} />);
       const actual = datepickerWrapper.containsMatchingElement(
         <Field name='scheduledTime'
@@ -203,7 +210,7 @@ describe('(Component) NewsArticleForm', () => {
         error: false,
         pristine: false,
         submitting: false,
-        formValues: {}
+        formValues: { mainImage: { url: 'test.com' } }
       }
       const buttonWrapper = shallow(<NewsArticleForm {...props} />);
       const button = buttonWrapper.find('button[type="submit"]');
@@ -218,7 +225,8 @@ describe('(Component) NewsArticleForm', () => {
         pristine: false,
         submitting: false,
         formValues: {
-          scheduledTime: new Date()
+          scheduledTime: new Date(),
+          mainImage: { url: 'test.com' }
         }
       }
       const buttonWrapper = shallow(<NewsArticleForm {...props} />);
