@@ -32,8 +32,8 @@ describe('(Component) Quotes', () => {
       expect(listItems.length).to.equal(3);
       const actual = wrapper.containsMatchingElement(
         <li>
-          <input type='text' placeholder='Quote' />
-          <input type='text' placeholder='Author' />
+          <input type='text' placeholder='Amazing performance!' />
+          <input type='text' placeholder='Joe Bloggs' />
         </li>
       );
       expect(actual).to.equal(true);

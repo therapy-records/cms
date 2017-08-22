@@ -51,8 +51,8 @@ export class Quotes extends React.Component {
           {items.map((i, index) => {
             return (
               <li key={index} className='quotes-list-item'>
-                <input type='text' placeholder='Quote' onChange={(e) => this.handleInputChange(e, index, 'copy')} />
-                <input type='text' placeholder='Author' onChange={(e) => this.handleInputChange(e, index, 'author')} />
+                <input type='text' placeholder='Amazing performance!' onChange={(e) => this.handleInputChange(e, index, 'copy')} />
+                <input type='text' placeholder='Joe Bloggs' onChange={(e) => this.handleInputChange(e, index, 'author')} />
               </li>
             )
           })}
