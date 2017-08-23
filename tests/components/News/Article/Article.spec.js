@@ -19,6 +19,12 @@ describe('(Component) News - Article', () => {
         mainImage: {
           url: 'http://test.com/hi.jpg'
         },
+        quotes:[
+          { copy: 'asdfasdf', author: 'rtrtrtrt' },
+          { copy: 'qweqweqwe', author: 'asdf' },
+          { copy: 'uiouio', author: 'nbvbnvbnvb' },
+          { copy: '123', author: 'dfdfdf' }
+        ],
         createdAt: new Date(),
         ticketsLink: 'http://test.com',
         venueLink: 'http://test.com',
@@ -149,6 +155,17 @@ describe('(Component) News - Article', () => {
       const actual = wrapper.containsMatchingElement(
         <h2>{props.article.title}</h2>
       );
+      expect(actual).to.equal(true);
+    });
+
+    it('should render a list of quotes', () => {
+      const quotes = props.article.quotes;
+      const actual = wrapper.containsAllMatchingElements([
+        <li><i>&quot;{quotes[0].copy}&quot;</i> - {quotes[0].author}</li>,
+        <li><i>&quot;{quotes[1].copy}&quot;</i> - {quotes[1].author}</li>,
+        <li><i>&quot;{quotes[2].copy}&quot;</i> - {quotes[2].author}</li>,
+        <li><i>&quot;{quotes[3].copy}&quot;</i> - {quotes[3].author}</li>
+      ]);
       expect(actual).to.equal(true);
     });
 
