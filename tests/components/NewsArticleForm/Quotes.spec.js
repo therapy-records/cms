@@ -4,7 +4,16 @@ import { shallow } from 'enzyme'
 
 describe('(Component) Quotes', () => {
   let wrapper,
-      props;
+      props = {
+        input: {
+        }
+      },
+      mockInputValue = [
+        { copy: 'asdfasdf', author: 'rtrtrtrt' },
+        { copy: 'qweqweqwe', author: 'asdf' },
+        { copy: 'uiouio', author: 'nbvbnvbnvb' },
+        { copy: '123', author: 'dfdfdf' }
+      ];
 
   beforeEach(() => {
     wrapper = shallow(
@@ -19,7 +28,7 @@ describe('(Component) Quotes', () => {
     expect(actual).to.equal(true);
   });
 
-  it('add more button', () => {
+  it('should render an add more button', () => {
     const actual = wrapper.containsMatchingElement(
       <button>Add another quote</button>
     );
@@ -37,6 +46,35 @@ describe('(Component) Quotes', () => {
         </li>
       );
       expect(actual).to.equal(true);
+    });
+  });
+
+  describe('with quotes in props', () => {
+    const props = { input: { value: mockInputValue } };
+    beforeEach(() => {
+      wrapper = shallow(
+        <Quotes {...props} />
+      );
+    });
+
+    it('should render list items with correct input values', () => {
+      const listItems = wrapper.find('li');
+      expect(listItems.length).to.equal(4);
+      const actual0 = wrapper.containsMatchingElement(
+        <li>
+          <input
+            type='text'
+            placeholder={props.input.value[0].copy}
+            value={props.input.value[0].copy}
+          />
+          <input
+            type='text'
+            placeholder={props.input.value[0].author}
+            value={props.input.value[0].author}
+          />
+        </li>
+      );
+      expect(actual0).to.equal(true);
     });
   });
 

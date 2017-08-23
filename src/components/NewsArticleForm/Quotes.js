@@ -39,6 +39,15 @@ export class Quotes extends React.Component {
     });
   }
 
+  componentWillMount() {
+    if (this.props.input.value &&
+        this.props.input.value.length > 0) {
+      this.setState({
+        items: [...this.props.input.value]
+      });
+    }
+  }
+
   render() {
     const {
       items
@@ -51,8 +60,18 @@ export class Quotes extends React.Component {
           {items.map((i, index) => {
             return (
               <li key={index} className='quotes-list-item'>
-                <input type='text' placeholder='Amazing performance!' onChange={(e) => this.handleInputChange(e, index, 'copy')} />
-                <input type='text' placeholder='Joe Bloggs' onChange={(e) => this.handleInputChange(e, index, 'author')} />
+                <input
+                  value={i.copy}
+                  type='text'
+                  placeholder={i.copy || 'Amazing performance!'}
+                  onChange={(e) => this.handleInputChange(e, index, 'copy')}
+                />
+                <input
+                  value={i.author}
+                  type='text'
+                  placeholder={i.author || 'Joe Bloggs'}
+                  onChange={(e) => this.handleInputChange(e, index, 'author')}
+                />
               </li>
             )
           })}
