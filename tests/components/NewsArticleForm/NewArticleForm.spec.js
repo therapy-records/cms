@@ -9,6 +9,7 @@ import {
 import Datepicker from 'components/Datepicker/Datepicker';
 import ArticlePreview from 'components/ArticlePreview/ArticlePreview.container';
 import DropzoneImageUpload from 'components/NewsArticleForm/DropzoneImageUpload';
+import Quotes from 'components/NewsArticleForm/Quotes';
 import { shallow } from 'enzyme'
 
 describe('(Component) NewsArticleForm', () => {
@@ -151,6 +152,14 @@ describe('(Component) NewsArticleForm', () => {
         <Field name='bodyMain'
                component={bodyMainRTE}
                validate={required} />
+      );
+      expect(actual).to.equal(true)
+    });
+
+    it('should render a quotes field', () => {
+      const actual = wrapper.containsMatchingElement(
+        <Field name='quotes'
+               component={Quotes} />
       );
       expect(actual).to.equal(true)
     });
