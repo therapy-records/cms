@@ -22,7 +22,7 @@ export class Datepicker extends React.Component {
 
   handleChange = e => {
     this.setState({ m: e });
-    this.props.input.onChange(moment(e).format())
+    this.props.input.onChange(moment(e).toISOString())
   };
 
   componentDidUpdate() {

@@ -58,7 +58,7 @@ class News extends React.Component {
           {p.scheduledTime &&
             <p
               style={{ background: '#333', padding: '0.5em', fontSize: '0.8em', display: 'inline-flex' }}>
-              Scheduled for {moment(p.scheduledTime).format('DD/mm/YYYY')}
+              Scheduled for {moment(p.scheduledTime).format('Do MMM \'YY')}
             </p>
           }
           <h3>{p.title}</h3>
