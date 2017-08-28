@@ -113,20 +113,20 @@ export class NewsArticleForm extends React.Component {
           <div className='col-clear' />
 
           <Field name='title'
-                component={textInput}
-                type='text'
-                placeholder='Hello World'
-                label='Title'
-                validate={required} />
+                 component={textInput}
+                 type='text'
+                 placeholder='Hello World'
+                 label='Title'
+                 validate={required} />
 
           <br />
           <br />
           <br />
 
           <Field name='mainImage.url'
-                component={DropzoneImageUpload}
-                title='Main image'
-                existingImage={formValues && formValues.mainImage.url} />
+                 component={DropzoneImageUpload}
+                 title='Main image'
+                 existingImage={formValues && formValues.mainImage.url} />
 
           <br />
           <br />
