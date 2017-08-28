@@ -43,8 +43,8 @@ class News extends React.Component {
 
   renderPost(p) {
     const articleImg = () => {
-      if (p.mainImageUrl) {
-        return p.mainImageUrl;
+      if (p.mainImage && p.mainImage.url) {
+        return p.mainImage.url;
       } else if (p.miniGalleryImages && p.miniGalleryImages.length) {
         return p.miniGalleryImages[0];
       }
@@ -52,31 +52,31 @@ class News extends React.Component {
     }
     return (
       <div key={p._id} className='news-card'>
-        <div className='bg-inner'
-             style={{ backgroundImage: `url('${articleImg()}')` }} />
-        <div className='inner'>
-          {p.scheduledTime &&
-            <p
-              style={{ background: '#333', padding: '0.5em', fontSize: '0.8em', display: 'inline-flex' }}>
-              Scheduled for {moment(p.scheduledTime).format('Do MMM \'YY')}
-            </p>
-          }
-          <h3>{p.title}</h3>
-          {p.createdAt && <p>{moment(p.createdAt).fromNow()}</p>}
-          <Link
-            onClick={() => this.handleButtonClick(p)}
-            to={`news/${p._id}`}
-            className='btn'
-          >
-            View
-          </Link>
-          <Link
-            onClick={() => this.handleButtonClick(p)}
-            to={`news/${p._id}/edit`}
-            className='btn'
-          >
-            Edit
-          </Link>
+        <div className='card-inner'>
+          <div className='bg-inner' style={{ backgroundImage: `url('${articleImg()}')` }} />
+          <div className='inner'>
+            {p.scheduledTime &&
+              <p
+                style={{ background: '#333', padding: '0.5em', fontSize: '0.8em', display: 'inline-flex' }}>
+                Scheduled for {moment(p.scheduledTime).format('Do MMM \'YY')}
+              </p>
+            }
+            <h3>{p.title} {p.createdAt && <p className='created-at'>{moment(p.createdAt).fromNow()}</p>}</h3>
+            <Link
+              onClick={() => this.handleButtonClick(p)}
+              to={`news/${p._id}`}
+              className='btn btn-sm'
+            >
+              View
+            </Link>
+            <Link
+              onClick={() => this.handleButtonClick(p)}
+              to={`news/${p._id}/edit`}
+              className='btn btn-sm'
+            >
+              Edit
+            </Link>
+          </div>
         </div>
       </div>
     );

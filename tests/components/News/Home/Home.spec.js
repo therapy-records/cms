@@ -37,12 +37,13 @@ describe('(Component) News - Home', () => {
       const p = props.newsArticles[key]; // eslint-disable-line
       return (
         <div key={p._id} className='news-card'>
-          <div className='bg-inner' />
-          <div className='inner'>
-            <h3>{p.title}</h3>
-            {p.createdAt && <p>{moment(p.createdAt).fromNow()}</p>}
-            <Link to={`news/${p._id}`} className='btn'>View</Link>
-            <Link to={`news/${p._id}/edit`} className='btn'>Edit</Link>
+          <div className='card-inner'>
+            <div className='bg-inner' />
+            <div className='inner'>
+              <h3>{p.title} {p.createdAt && <p className='created-at'>{moment(p.createdAt).fromNow()}</p>}</h3>
+              <Link to={`news/${p._id}`} className='btn btn-sm'>View</Link>
+              <Link to={`news/${p._id}/edit`} className='btn btn-sm'>Edit</Link>
+            </div>
           </div>
         </div>
       )

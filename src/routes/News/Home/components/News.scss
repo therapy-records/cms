@@ -40,16 +40,20 @@
     min-height: 190px;
     transition: all .3s ease;
   }
+  .card-inner {
+    position: relative;
+  }
   .inner {
     position: absolute;
-    bottom: 1em;
+    bottom: 0;
     left: 0;
     width: 100%;
-    padding: 0 2em 1em 2em;
+    padding: 1em;
+    background: rgba(0, 0, 0, 0.31);
   }
   &:hover {
     .bg-inner {
-      opacity: .7;
+      opacity: .75;
     }
   }
   h3,
@@ -58,7 +62,27 @@
   }
   h3 {
     margin-top:0;
-    margin-bottom:0;
     letter-spacing:0.5px;
+    font-size: 1em;
+    .created-at {
+      font-weight: normal;
+      font-size: .7em;
+      display: inline-flex;
+      margin: 0;
+      margin-left: .5em;
+      color: #EEE;
+      background: #000;
+      padding: .1em .2em;
+    }
+  }
+
+  .btn-wrap {
+    background: rgba(0, 0, 0, 0.43);
+    padding: .5em;
+  }
+  .btn:hover,
+  .btn:focus {
+    color: #FFF;
+    text-decoration: underline;
   }
 }
