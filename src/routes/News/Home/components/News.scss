@@ -20,13 +20,16 @@
   color:#FFF;
   @media(min-width: 768px) {
     flex: 1 0 50%;
+    max-width: 50%;
     margin-bottom: 1em;
   }
   @media(min-width: 990px) {
     flex: 1 0 33%;
+    max-width: 33%;
   }
   @media(min-width: 1100px) {
     flex: 1 0 25%;
+    max-width: 25%;
   }
   .bg-inner {
     opacity: .5;

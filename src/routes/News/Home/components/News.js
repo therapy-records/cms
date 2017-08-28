@@ -1,8 +1,12 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Link } from 'react-router'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router';
 import moment from 'moment';
-import './News.scss'
+import './News.scss';
+
+const dateIsBefore = (a, b) => {
+  return new Date(b.createdAt) - new Date(a.createdAt)
+};
 
 class News extends React.Component {
   componentWillMount() {
@@ -20,13 +24,17 @@ class News extends React.Component {
     this.props.resetPromiseState();
   }
 
+  orderArticles(articles) {
+    return articles.sort(dateIsBefore);
+  }
+
   getCombinedArticles(queueFeed, newsFeed) {
     if (!queueFeed) {
-      return newsFeed;
+      return this.orderArticles([...newsFeed]);
     } else if (!newsFeed) {
-      return queueFeed;
+      return this.orderArticles([...queueFeed]);
     }
-    return [...queueFeed, ...newsFeed];
+    return this.orderArticles([...queueFeed, ...newsFeed]);
   }
 
   handleButtonClick(postObj) {
@@ -89,11 +97,11 @@ class News extends React.Component {
         </div>
         <br />
 
-        {/*
+        {
           !_combinedArticles || !_combinedArticles.length && (
-          <p>Unable to fetch news article :(</p>
-        )
-        */}
+          <p>Unable to fetch articles :(</p>
+          )
+        }
 
         {_combinedArticles &&
           <div className='flex-root'>

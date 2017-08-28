@@ -1,7 +1,8 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-import { Link } from 'react-router'
-import News from 'routes/News/Home/components/News'
+import React from 'react';
+import { shallow } from 'enzyme';
+import { Link } from 'react-router';
+import moment from 'moment';
+import News from 'routes/News/Home/components/News';
 
 const mockNewsArticles = [
   { title: 'test 1', _id: 'asd123' },
@@ -39,6 +40,7 @@ describe('(Component) News - Home', () => {
           <div className='bg-inner' />
           <div className='inner'>
             <h3>{p.title}</h3>
+            {p.createdAt && <p>{moment(p.createdAt).fromNow()}</p>}
             <Link to={`news/${p._id}`} className='btn'>View</Link>
             <Link to={`news/${p._id}/edit`} className='btn'>Edit</Link>
           </div>
@@ -79,18 +81,18 @@ describe('(Component) News - Home', () => {
     });
   });
 
-  // it('should render an error', () => {
-  //   wrapper = shallow(
-  //     <News
-  //       newsArticles={[]}
-  //       newsQueueArticles={[]}
-  //       onFetchNewsArticles={() => {}}
-  //       onFetchNewsQueueArticles={() => {}}
-  //     />
-  //   );
-  //   const actual = wrapper.containsMatchingElement(
-  //     <p>Unable to fetch news articles :(</p>
-  //   );
-  //   expect(actual).to.equal(true);
-  // });
+  it('should render an error if no new articles length', () => {
+    const wrapper = shallow(
+      <News
+        newsArticles={[]}
+        newsQueueArticles={[]}
+        onFetchNewsArticles={() => {}}
+        onFetchNewsQueueArticles={() => {}}
+      />
+    );
+    const actual = wrapper.containsMatchingElement(
+      <p>Unable to fetch articles :(</p>
+    );
+    expect(actual).to.equal(true);
+  });
 });
