@@ -16,12 +16,15 @@ export const authCheck = () => {
       return _axiosAuthHeaders.post(API_ROOT + AUTH)
         .then((data) => {
           if (data.data.success === true) {
-            localStorage.setItem('token', data.data.token)
+            localStorage.setItem('token', data.data.token);
             dispatch(authSuccess());
           } else {
-            localStorage.removeItem('token')
+            localStorage.removeItem('token');
             dispatch(authError());
           }
+        }, () => {
+          localStorage.removeItem('token');
+          dispatch(authError());
         });
     } else {
       dispatch(authSuccess());
@@ -55,7 +58,6 @@ export const routeAuthCheck = (store, nextState, replace, cb) => {
           cb();
         });
     } else {
-      store.dispatch(authSuccess());
       cb();
     }
   }

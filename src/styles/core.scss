@@ -33,6 +33,10 @@ textarea {
   width: 100%;
   padding: 0.5em;
   margin-bottom: 1em;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: solid 1px #b7b7b7;
 }
 
 .form-error {
@@ -51,8 +55,8 @@ button {
   color: #FFF;
   border: 0 none;
   font-weight: 300;
-  appearance: none;
   transition:all 0.2s ease;
+  appearance: none;
 }
 
 .btn {

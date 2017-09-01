@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import TestUtils from 'react-addons-test-utils'
 import CoreLayout from 'layouts/CoreLayout/CoreLayout'
 import Header from 'components/Header/Header.container'
+import Unauthorised from 'components/Unauthorised/Unauthorised'
 
 function shallowRender(component) {
   const renderer = TestUtils.createRenderer()
@@ -55,4 +56,81 @@ describe('(Layout) Core', () => {
       expect(actual).to.eq(true);
     });
   });
-})
+
+  describe('when isAuthenticated', () => {
+    const props = {
+      isAuthenticated: true,
+      children: <div><p>testing</p></div>
+    }
+    beforeEach(() => {
+      component = shallow(<CoreLayout {...props} />);
+    });
+    it('should render children', () => {
+      const actual = component.containsMatchingElement(
+        props.children
+      );
+      expect(actual).to.equal(true);
+    });
+  });
+
+  describe('when isAuthenticated', () => {
+    const props = {
+      isAuthenticated: true,
+      children: <div><p>test</p></div>
+    }
+    beforeEach(() => {
+      component = shallow(<CoreLayout {...props} />);
+    });
+    it('should render children', () => {
+      const actual = component.containsMatchingElement(
+        props.children
+      );
+      expect(actual).to.equal(true);
+    });
+  });
+
+  describe('when !isAuthenticated and route is an allowed unauth route', () => {
+    const props = {
+      isAuthenticated: false,
+      children: <div><p>hello</p></div>,
+      location: {
+        pathname: '/'
+      }
+    }
+    beforeEach(() => {
+      component = shallow(<CoreLayout {...props} />);
+    });
+    it('should render children', () => {
+      const actual = component.containsMatchingElement(
+        props.children
+      );
+      expect(actual).to.equal(true);
+    });
+  });
+
+  describe('when !isAuthenticated and route is not an allowed route', () => {
+    const props = {
+      isAuthenticated: false,
+      children: <div><p>hello</p></div>,
+      location: {
+        pathname: '/something'
+      }
+    }
+    beforeEach(() => {
+      component = shallow(<CoreLayout {...props} />);
+    });
+    it('should not render children', () => {
+      const actual = component.containsMatchingElement(
+        props.children
+      );
+      expect(actual).to.equal(false);
+    });
+
+    it('should render Unauthorised component', () => {
+      const actual = component.containsMatchingElement(
+        <Unauthorised />
+      );
+      expect(actual).to.equal(true);
+    });
+  });
+});

@@ -1,21 +1,26 @@
+import { browserHistory } from 'react-router'
 import { applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
-import { browserHistory } from 'react-router'
+// import { createEpicMiddleware } from 'redux-observable'
+// import rootEpic from '../epics'
 import makeRootReducer from './reducers'
 import { updateLocation } from './location'
+
+// const epicMiddleware = createEpicMiddleware(rootEpic);
 
 export default (initialState = {}) => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
-  const middleware = [thunk]
+
+  const middleware = [thunk];
 
   // ======================================================
   // Store Enhancers
   // ======================================================
-  const enhancers = []
+  const enhancers = [];
 
-  let composeEnhancers = compose
+  let composeEnhancers = compose;
 
   if (__DEV__) {
     const composeWithDevToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
