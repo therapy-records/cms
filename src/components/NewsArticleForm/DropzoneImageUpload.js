@@ -29,7 +29,7 @@ export class DropzoneImageUpload extends React.Component {
   }
 
   handleImageResponseUrl(url) {
-    return url.replace(/upload/, 'upload/w_650');
+    return url.replace(/upload/, 'upload/c_limit,w_650');
   }
 
   // todo: redux, promisify
