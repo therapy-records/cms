@@ -1,5 +1,21 @@
 .home-root {
   height: 100%;
+  padding: 1em;
   background: url('../assets/home-bg2.jpg') no-repeat;
   background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 9em;
+  @media(min-width: 768px) {
+    align-items: center;
+    padding-top: 0;
+  }
+  > div {
+    width: 100%;
+    max-width: 300px;
+    @media(min-width: 768px) {
+      margin-top: -5em;
+    }
+  }
 }

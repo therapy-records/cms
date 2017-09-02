@@ -48,37 +48,43 @@ class News extends React.Component {
       } else if (p.miniGalleryImages && p.miniGalleryImages.length) {
         return p.miniGalleryImages[0];
       }
-      return null;
+      return 'http://via.placeholder.com/100x137/C8C8C8/777?text=No+image&color=EEEEEE';
     }
     return (
-      <div key={p._id} className='news-card'>
-        <div className='card-inner'>
-          <div className='bg-inner' style={{ backgroundImage: `url('${articleImg()}')` }} />
-          <div className='inner'>
-            {p.scheduledTime &&
-              <p
-                style={{ background: '#333', padding: '0.5em', fontSize: '0.8em', display: 'inline-flex' }}>
-                Scheduled for {moment(p.scheduledTime).format('Do MMM \'YY')}
-              </p>
-            }
-            <h3>{p.title} {p.createdAt && <p className='created-at'>{moment(p.createdAt).fromNow()}</p>}</h3>
+      <li key={p._id} className='news-item'>
+        <img src={articleImg()} />
+        <div>
+          {p.scheduledTime &&
+            <p
+              className='small-tab'>
+              Scheduled for {moment(p.scheduledTime).format('Do MMM \'YY')}
+            </p>
+          }
+          {(!p.scheduledTime && p.createdAt) && <p className='small-tab'>{moment(p.createdAt).fromNow()}</p>}
+          <h3>
             <Link
               onClick={() => this.handleButtonClick(p)}
               to={`news/${p._id}`}
-              className='btn btn-sm'
-            >
-              View
+            >{p.title}
             </Link>
-            <Link
-              onClick={() => this.handleButtonClick(p)}
-              to={`news/${p._id}/edit`}
-              className='btn btn-sm'
-            >
-              Edit
-            </Link>
-          </div>
+          </h3>
+
+          <Link
+            onClick={() => this.handleButtonClick(p)}
+            to={`news/${p._id}`}
+            className='btn btn-sm'
+          >
+            View
+          </Link>
+          <Link
+            onClick={() => this.handleButtonClick(p)}
+            to={`news/${p._id}/edit`}
+            className='btn btn-sm'
+          >
+            Edit
+          </Link>
         </div>
-      </div>
+      </li>
     );
   }
 
@@ -97,10 +103,8 @@ class News extends React.Component {
           <p>Loading...</p> :
           <div>
             <div className='news-feed-header'>
-              <Link to='news/create'>Create a new article</Link>
+              <Link to='news/create' className='btn'>Create a new article</Link>
             </div>
-            <br />
-
             {
               !_combinedArticles || !_combinedArticles.length && (
               <p>Unable to fetch articles :(</p>
@@ -108,9 +112,9 @@ class News extends React.Component {
             }
 
             {_combinedArticles &&
-              <div className='flex-root'>
+              <ul>
                 {_combinedArticles.map((p) => this.renderPost(p))}
-              </div>
+              </ul>
             }
           </div>
         }

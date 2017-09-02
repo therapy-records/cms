@@ -123,7 +123,7 @@ class Article extends React.Component {
                   <div>
                     {article.mainImage && article.mainImage.externalLink ?
                       <a href={article.mainImage.externalLink}
-                         target='_blank'>
+                        target='_blank'>
                         <img
                           src={articleImg()}
                           alt={`Fiona Ross - ${article.title}`}
@@ -234,7 +234,6 @@ class Article extends React.Component {
             onDeleteArticle={() => { this.handleOnDeleteArticle(article); this.handleModalClose() }}
           />
         }
-
       </article>
     )
   }

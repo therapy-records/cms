@@ -61,10 +61,21 @@ button {
 
 .btn {
   background: #111;
-  color: #000;
   color: #FFF;
-  margin-right: 0.5em;
   font-weight: 300;
+  margin: 0 0 1.5em 0;
+  padding: 7px 20px;
+  @media(min-width: 600px) {
+    padding: 5px 15px;
+  }
+  + .btn {
+    margin-left: 1.5em;
+  }
+  &:hover,
+  &:focus {
+    color: #FFF;
+    text-decoration: underline;
+  }
 }
 
 .btn-width-auto {

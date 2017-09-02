@@ -7,24 +7,24 @@ import '../../styles/core.scss'
 
 export const CoreLayout = ({ children, location, isAuthenticated }) => {
   const isHomePage = location && location.pathname === '/';
-  const isFullScreenView = isHomePage;
   const allowedUnAuthRoute = isHomePage;
+  const isFullScreenRoute = isHomePage;
 
   return (
-    <div className={isFullScreenView ?
-                    'container core-layout-main-container cancel-padding' :
-                    'container core-layout-main-container'
-                   }
-    >
+    <div className='container core-layout-main-container'>
 
       <Header />
 
-      <div className={allowedUnAuthRoute ? 'core-layout-full-screen' : 'core-layout'}>
+      <div className={isFullScreenRoute ? 'core-layout core-layout-full-screen' : 'core-layout'}>
+        <div className={isFullScreenRoute ? '' : 'main-content-wrapper'}>
+          <div className='main-content'>
 
-        {(isAuthenticated || !isAuthenticated && allowedUnAuthRoute) && children}
+            {(isAuthenticated || !isAuthenticated && allowedUnAuthRoute) && children}
 
-        {(!isAuthenticated && !allowedUnAuthRoute) && <Unauthorised /> }
+            {(!isAuthenticated && !allowedUnAuthRoute) && <Unauthorised /> }
 
+          </div>
+        </div>
       </div>
     </div>
   )

@@ -45,16 +45,15 @@ describe('(Component) News - Home', () => {
     const renderNewsArticle = (key) => {
       const p = props.newsArticles[key]; // eslint-disable-line
       return (
-        <div key={p._id} className='news-card'>
-          <div className='card-inner'>
-            <div className='bg-inner' />
-            <div className='inner'>
-              <h3>{p.title} {p.createdAt && <p className='created-at'>{moment(p.createdAt).fromNow()}</p>}</h3>
-              <Link to={`news/${p._id}`} className='btn btn-sm'>View</Link>
-              <Link to={`news/${p._id}/edit`} className='btn btn-sm'>Edit</Link>
-            </div>
+        <li key={p._id} className='news-item'>
+          <img />
+          <div>
+            {(!p.scheduledTime && p.createdAt) && <p className='created-at'>{moment(p.createdAt).fromNow()}</p>}
+            <h3><Link to={`news/${p._id}`}>{p.title}</Link></h3>
+            <Link to={`news/${p._id}`} className='btn btn-sm'>View</Link>
+            <Link to={`news/${p._id}/edit`} className='btn btn-sm'>Edit</Link>
           </div>
-        </div>
+        </li>
       )
     };
     const child0 = wrapper.containsMatchingElement(renderNewsArticle(0));
@@ -70,7 +69,7 @@ describe('(Component) News - Home', () => {
       let _props = baseProps;
       _props.onSetSelectedNewsArticle = sinon.spy();
       wrapper = shallow(<News {..._props} />);
-      const lastArticle = wrapper.find('.news-card').last();
+      const lastArticle = wrapper.find('.news-item').last();
       const lastArticleButton = lastArticle.find(Link).first();
       lastArticleButton.simulate('click');
       expect(_props.onSetSelectedNewsArticle).to.have.been.called;
@@ -82,7 +81,7 @@ describe('(Component) News - Home', () => {
       let _props = baseProps;
       _props.onSetSelectedNewsArticle = sinon.spy();
       wrapper = shallow(<News {..._props} />);
-      const lastArticle = wrapper.find('.news-card').last();
+      const lastArticle = wrapper.find('.news-item').last();
       const lastArticleButton = lastArticle.find(Link).last();
       lastArticleButton.simulate('click');
       expect(_props.onSetSelectedNewsArticle).to.have.been.called;

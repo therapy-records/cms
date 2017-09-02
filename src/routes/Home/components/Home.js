@@ -17,7 +17,7 @@ export class Home extends React.Component {
       browserHistory.push('/dashboard');
     }
   }
-
+center
   render() {
     const {
       isAuthenticated
@@ -25,11 +25,13 @@ export class Home extends React.Component {
 
     return (
       <div className='home-root'>
-        {!isAuthenticated ? (
-          <LoginForm onSubmit={() => { this.props.onPostForm(); }} isAuthenticated={this.props.isAuthenticated} />
-        ) : (
-          <p>already logged in, redirecting...</p>
-        )}
+        <div>
+          {!isAuthenticated ? (
+            <LoginForm onSubmit={() => { this.props.onPostForm(); }} isAuthenticated={this.props.isAuthenticated} />
+          ) : (
+            <p>already logged in, redirecting...</p>
+          )}
+        </div>
       </div>
     )
   }
