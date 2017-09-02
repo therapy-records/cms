@@ -28,6 +28,10 @@ export class DropzoneImageUpload extends React.Component {
     }
   }
 
+  handleImageResponseUrl(url) {
+    return url.replace(/upload/, 'upload/w_650');
+  }
+
   // todo: redux, promisify
   uploadSingleImage(file) {
     let upload = request.post(CLOUDINARY_UPLOAD_URL)
@@ -37,12 +41,15 @@ export class DropzoneImageUpload extends React.Component {
       if (response.body.secure_url !== '') {
         if (this.props.multiple === true) {
           this.setState({
-            items: [ ...this.state.items, ...[response.body.secure_url] ]
+            items: [
+              ...this.state.items,
+              ...[this.handleImageResponseUrl(response.body.secure_url)]
+            ]
           });
           this.props.input.onChange(this.state.items);
         } else {
           this.setState({
-            singleItem: response.body.secure_url
+            singleItem: this.handleImageResponseUrl(response.body.secure_url)
           });
           this.props.input.onChange(this.state.singleItem);
         }
