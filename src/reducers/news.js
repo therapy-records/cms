@@ -77,10 +77,17 @@ export const fetchNewsArticles = () => {
   }
 }
 
+export const axiosNewsQueueArticles = axios.create({
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': localStorage.getItem('token')
+  }
+});
+
 export const fetchNewsQueueArticles = () => {
   return (dispatch, getState) => {
     dispatch(promiseLoading(true));
-    return _axiosAuthHeaders.get(API_ROOT + NEWS_QUEUE)
+      return axiosNewsQueueArticles.get(API_ROOT + NEWS_QUEUE)
       .then(
         (res) => {
           dispatch(promiseLoading(false));

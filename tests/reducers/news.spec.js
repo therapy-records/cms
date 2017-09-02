@@ -17,6 +17,7 @@ import {
   // postNewsSuccess,
   // postNewsQueueSucces,
   fetchNewsArticles,
+  axiosNewsQueueArticles,
   fetchNewsQueueArticles,
   postNews,
   postNewsQueue,
@@ -197,7 +198,7 @@ describe('(Redux Module) news', () => {
     });
 
     it('should dispatch the correct actions', () => {
-      _axiosAuthHeaders.get = sinon.stub().returns(Promise.resolve(mock.getNewsResponse));
+      axiosNewsQueueArticles.get = sinon.stub().returns(Promise.resolve(mock.getNewsResponse));
       nock(API_ROOT + NEWS_QUEUE)
         .get('/news')
         .reply(200, mock.getNewsResponse.data);
