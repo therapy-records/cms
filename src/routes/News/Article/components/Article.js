@@ -160,7 +160,7 @@ class Article extends React.Component {
                   width='560'
                   src={article.videoEmbed}
                   frameBorder='0'
-                  allowFullscreen
+                  allowFullScreen
                 />
               }
 
@@ -192,7 +192,7 @@ class Article extends React.Component {
 
             </div>
 
-            <div className='article-col-2'>
+            <div className='article-sidebar'>
               <div className='article-summary-box'>
                 <div className='article-summary-box-inner'>
                   {/* <p><a href={`http://fionaross.co.uk/news/${article._id}`}>View live article</a></p> */}

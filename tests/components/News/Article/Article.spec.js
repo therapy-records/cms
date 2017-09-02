@@ -282,7 +282,7 @@ describe('(Component) News - Article', () => {
           width='560'
           src={props.article.videoEmbed}
           frameBorder='0'
-          allowFullscreen
+          allowFullScreen
         />
       );
       expect(actual).to.equal(true);
