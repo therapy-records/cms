@@ -21,6 +21,15 @@ describe('(Component) News - Home', () => {
         articlesQueue: mockNewsArticles
       };
 
+  it('should render a loading message if promiseLoading', () => {
+    props = { ...baseProps, promiseLoading: true };
+    wrapper = shallow(<News {...props} />);
+    const actual = wrapper.containsMatchingElement(
+      <p>Loading...</p>
+    );
+    expect(actual).to.equal(true);
+  });
+
   it('should render create a new queue link', () => {
     props = baseProps;
     wrapper = shallow(<News {...props} />);

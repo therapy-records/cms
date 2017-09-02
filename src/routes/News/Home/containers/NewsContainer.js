@@ -16,6 +16,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
+  promiseLoading: state.uiState.promiseLoading,
   newsArticles: selectNewsArticlesReverse(state),
   articlesQueue : selectNewsArticlesQueueReverse(state)
 })

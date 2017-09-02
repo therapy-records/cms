@@ -84,6 +84,7 @@ class News extends React.Component {
 
   render() {
     const {
+      promiseLoading,
       articlesQueue,
       newsArticles
     } = this.props;
@@ -92,20 +93,25 @@ class News extends React.Component {
 
     return (
       <div>
-        <div className='news-feed-header'>
-          <Link to='news/create'>Create a new article</Link>
-        </div>
-        <br />
+        {promiseLoading ?
+          <p>Loading...</p> :
+          <div>
+            <div className='news-feed-header'>
+              <Link to='news/create'>Create a new article</Link>
+            </div>
+            <br />
 
-        {
-          !_combinedArticles || !_combinedArticles.length && (
-          <p>Unable to fetch articles :(</p>
-          )
-        }
+            {
+              !_combinedArticles || !_combinedArticles.length && (
+              <p>Unable to fetch articles :(</p>
+              )
+            }
 
-        {_combinedArticles &&
-          <div className='flex-root'>
-            {_combinedArticles.map((p) => this.renderPost(p))}
+            {_combinedArticles &&
+              <div className='flex-root'>
+                {_combinedArticles.map((p) => this.renderPost(p))}
+              </div>
+            }
           </div>
         }
       </div>
@@ -114,6 +120,7 @@ class News extends React.Component {
 }
 
 News.propTypes = {
+  promiseLoading: PropTypes.bool,
   onFetchNewsArticles: PropTypes.func.isRequired,
   onFetchNewsQueueArticles: PropTypes.func.isRequired,
   onSetSelectedNewsArticle: PropTypes.func.isRequired,
