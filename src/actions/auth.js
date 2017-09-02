@@ -58,6 +58,7 @@ export const routeAuthCheck = (store, nextState, replace, cb) => {
           cb();
         });
     } else {
+      store.dispatch(authSuccess());
       cb();
     }
   }
