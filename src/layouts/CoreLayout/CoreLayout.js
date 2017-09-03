@@ -5,8 +5,10 @@ import Unauthorised from '../../components/Unauthorised/Unauthorised'
 import './CoreLayout.scss'
 import '../../styles/core.scss'
 
-export const CoreLayout = ({ children, location, isAuthenticated }) => {
+export const CoreLayout = ({ children, location, isAuthenticated, routes }) => {
   const isHomePage = location && location.pathname === '/';
+  const isErrorPage = routes && routes.find(r => r.status === 404);
+
   const allowedUnAuthRoute = isHomePage;
   const isFullScreenRoute = isHomePage;
 
@@ -19,9 +21,17 @@ export const CoreLayout = ({ children, location, isAuthenticated }) => {
         <div className={isFullScreenRoute ? '' : 'main-content-wrapper'}>
           <div className='main-content'>
 
-            {(isAuthenticated || !isAuthenticated && allowedUnAuthRoute) && children}
+            {(isAuthenticated ||
+              !isAuthenticated && allowedUnAuthRoute ||
+              isErrorPage) &&
+              children
+            }
 
-            {(!isAuthenticated && !allowedUnAuthRoute) && <Unauthorised /> }
+            {(!isAuthenticated &&
+              !allowedUnAuthRoute &&
+              !isErrorPage) &&
+              <Unauthorised />
+            }
 
           </div>
         </div>
@@ -33,7 +43,8 @@ export const CoreLayout = ({ children, location, isAuthenticated }) => {
 CoreLayout.propTypes = {
   children: PropTypes.any,
   location: PropTypes.object,
-  isAuthenticated: PropTypes.bool
+  isAuthenticated: PropTypes.bool,
+  routes: PropTypes.array
 }
 
 export default CoreLayout

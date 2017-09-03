@@ -10,8 +10,12 @@ export class ErrorComponent extends React.Component {
   render() {
     return (
       <div>
-        <h3>Oh no, 404 :(</h3>
-        <button onClick={() => this.redirectToHome()} className='btn-logout'>Go home</button>
+        <h3>Oh no :(</h3>
+        <p>Sorry, we couldn't find that page.</p>
+        <br />
+        <button className='btn btn-logout'
+                onClick={() => this.redirectToHome()}>Go home
+        </button>
       </div>
     )
   }
