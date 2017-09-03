@@ -28,7 +28,9 @@ class Article extends React.Component {
 
   componentWillUnmount() {
     this.props.resetPromiseState();
-    this.props.onDestroyArticle();
+    if (!this.props.location.pathname.includes('/edit')) {
+      this.props.onDestroyArticle();
+    }
   }
 
   renderHtml(data) {
@@ -238,6 +240,7 @@ class Article extends React.Component {
 }
 
 Article.propTypes = {
+  location: PropTypes.object.isRequired,
   onDeleteArticle: PropTypes.func.isRequired,
   onDeleteScheduledArticle: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,

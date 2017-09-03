@@ -83,9 +83,9 @@ export const fetchSingleNewsArticle = (articleId) => {
           dispatch(promiseSuccess(true));
           dispatch(selectedNewsArticle(res.data));
         },
-        (err) => {
+        () => {
           dispatch(promiseLoading(false));
-          dispatch(promiseError(err));
+          dispatch(promiseError(true));
         }
       )
   }

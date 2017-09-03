@@ -33,31 +33,47 @@ describe('(Component) News - Article', () => {
         socialShare: {}
       },
       baseProps = {
-        onFetchNewsArticles: () => {},
-        onDeleteArticle: () => {},
-        onDeleteScheduledArticle: () => {},
-        resetPromiseState: () => {},
-        onDestroyArticle: () => {},
-        onFetchSingleNewsArticle: () => {},
-        params: { id: 123 }
+        onFetchNewsArticles: sinon.spy(),
+        onDeleteArticle: sinon.spy(),
+        onDeleteScheduledArticle: sinon.spy(),
+        resetPromiseState: sinon.spy(),
+        onDestroyArticle: sinon.spy(),
+        onFetchSingleNewsArticle: sinon.spy(),
+        params: { id: 123 },
+        location : {
+          pathname: 'news/123456789'
+        }
       };
 
   describe('on componentWillUnmount', () => {
-    it('should call resetPromiseState', () => {
-      let props = baseProps;
-      props.resetPromiseState = sinon.spy();
+    let props,
+        wrapper;
+    beforeEach(() => {
+      props = {
+        ...baseProps,
+        resetPromiseState: sinon.spy(),
+        onDestroyArticle: sinon.spy()
+      }
       wrapper = shallow(<Article {...props} />);
+    });
+    it('should call resetPromiseState', () => {
       wrapper.unmount();
       expect(props.resetPromiseState).to.have.been.called;
       expect(props.resetPromiseState).to.have.been.called.once;
     });
-    it('should call onDestroyArticle', () => {
-      let props = baseProps;
-      props.onDestroyArticle = sinon.spy();
-      wrapper = shallow(<Article {...props} />);
+    it('should call onDestroyArticle if location.pathname does not include edit', () => {
       wrapper.unmount();
       expect(props.onDestroyArticle).to.have.been.called;
       expect(props.onDestroyArticle).to.have.been.called.once;
+    });
+
+    it('should not call onDestroyArticle if location.pathname includes edit', () => {
+      props.location = {
+        pathname: 'news/123456789/edit'
+      };
+      wrapper = shallow(<Article {...props} />);
+      wrapper.unmount();
+      expect(props.onDestroyArticle).not.to.have.been.called;
     });
   });
 
