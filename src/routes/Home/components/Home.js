@@ -10,6 +10,9 @@ export class Home extends React.Component {
     if (!this.props.isAuthenticated && this.props.onAuthCheck) {
       this.props.onAuthCheck();
     }
+    if (this.props.isAuthenticated === true) {
+      browserHistory.push('/dashboard');
+    }
   }
 
   componentWillReceiveProps(props) {
@@ -17,7 +20,7 @@ export class Home extends React.Component {
       browserHistory.push('/dashboard');
     }
   }
-center
+
   render() {
     const {
       isAuthenticated
