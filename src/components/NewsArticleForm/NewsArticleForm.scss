@@ -18,12 +18,16 @@
 }
 
 .col-1 {
-  flex: 1 550px;
-  padding-right: 3em;
+  @media(min-width: 600px) {
+    flex: 1 550px;
+    padding-right: 3em;
+  }
 }
 .col-2 {
-  flex: 1 250px;
-  justify-content: flex-end;
+  @media(min-width: 600px) {
+    flex: 1 250px;
+    justify-content: flex-end;
+  }
 }
 
 .gallery-images-col-2 {
@@ -72,11 +76,13 @@
 
 
 .links-cols-container > div {
-  flex: 0 1 50%;
-  &:first-child {
-    padding-right:1em;
-  }
-  &:last-child {
-    padding-left:1em;
+  @media(min-width: 600px) {
+    flex: 0 1 50%;
+    &:first-child {
+      padding-right:1em;
+    }
+    &:last-child {
+      padding-left:1em;
+    }
   }
 }

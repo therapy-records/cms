@@ -115,6 +115,10 @@ ol {
 
 .cols-container {
   display: flex;
+  flex-direction: column;
+  @media(min-width: 600px) {
+    flex-direction: row;
+  }
 }
 
 .col-clear {
@@ -218,11 +222,25 @@ label {
   font-weight: 600;
 }
 
-.m-calendar .current-day {
-  border-color: #1385e5 !important;
-  background: #1284E5 !important;
-  color: #FFF !important;
-  font-weight: normal !important;
+.m-calendar {
+  .current-day {
+    border-color: #000 !important;
+    background: #000 !important;
+    color: #FFF !important;
+    font-weight: normal !important;
+  }
+  .ion-ios-arrow-right::before,
+  .ion-ios-arrow-left::before {
+    display: block;
+    font-size: 0.8em;
+    font-weight: 300;
+  }
+  .ion-ios-arrow-right::before {
+    content: '>';
+  }
+  .ion-ios-arrow-left::before {
+    content: '<';
+  }
 }
 
 h5,
