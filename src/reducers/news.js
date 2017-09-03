@@ -69,9 +69,9 @@ export const fetchNewsArticles = () => {
           dispatch(promiseLoading(false));
           dispatch(promiseSuccess(true));
         },
-        (err) => {
+        () => {
           dispatch(promiseLoading(false));
-          dispatch(promiseError(err));
+          dispatch(promiseError(true));
         }
       )
   }
@@ -94,9 +94,9 @@ export const fetchNewsQueueArticles = () => {
           dispatch(promiseSuccess(true));
           dispatch(fetchQueueSuccess(res.data));
         },
-        (err) => {
+        () => {
           dispatch(promiseLoading(false));
-          dispatch(promiseError(err));
+          dispatch(promiseError(true));
         }
       )
   }
@@ -123,7 +123,7 @@ export const postNews = () => {
         dispatch(postNewsSuccess(data));
       }, (err) => {
         dispatch(promiseLoading(false));
-        dispatch(promiseError(err));
+        dispatch(promiseError(true));
       }
     );
   }
@@ -148,9 +148,9 @@ export const postNewsQueue = () => {
         dispatch(promiseLoading(false));
         dispatch(promiseSuccess(true));
         dispatch(postNewsQueueSuccess());
-      }, (err) => {
+      }, () => {
         dispatch(promiseLoading(false));
-        dispatch(promiseError(err));
+        dispatch(promiseError(true));
       }
     );
   }
@@ -181,9 +181,9 @@ export const editNews = (postToEdit) => {
         dispatch(promiseLoading(false));
         dispatch(promiseSuccess(true));
         dispatch(editNewsSuccess());
-      }, (err) => {
+      }, () => {
         dispatch(promiseLoading(false));
-        dispatch(promiseError(err));
+        dispatch(promiseError(true));
       }
     );
   }
@@ -213,9 +213,9 @@ export const editNewsQueue = (postToEdit) => {
         dispatch(promiseLoading(false));
         dispatch(promiseSuccess(true));
         dispatch(editNewsQueueSuccess());
-      }, (err) => {
+      }, () => {
         dispatch(promiseLoading(false));
-        dispatch(promiseError(err));
+        dispatch(promiseError(true));
       }
     );
   }

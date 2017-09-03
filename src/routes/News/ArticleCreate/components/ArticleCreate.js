@@ -47,7 +47,7 @@ ArticleCreate.propTypes = {
   onPostArticleQueue: PropTypes.func.isRequired,
   promiseLoading: PropTypes.bool,
   promiseSuccess: PropTypes.bool,
-  promiseError: PropTypes.object,
+  promiseError: PropTypes.bool,
   location: PropTypes.object,
   resetPromiseState: PropTypes.func
 }
