@@ -30,7 +30,7 @@
   font-size: 0.1em; // hide mysterious counter ('0') from react-dropzone
 }
 .gallery-images-flex-root {
-  font-size: 30px; // counter mysterious counter ('0') from react-dropzone
+  font-size: 25px; // counter mysterious counter ('0') from react-dropzone
 }
 
 .dropzone {
@@ -53,9 +53,9 @@
   position: absolute;
   z-index: 1;
   transition: all 0.2s ease;
-  text-shadow: 0 3px 6px #000;
-  color: #FFF;
-  font-size: 30px; // counter mysterious counter ('0') from react-dropzone
+  text-shadow: 0 3px 6px #FFF;
+  color: #000;
+  font-size: 25px; // counter mysterious counter ('0') from react-dropzone
 }
 
 .dropzone-active {

@@ -36,7 +36,11 @@
 }
 
 .header-nav {
-  color: #666;
+  display: none;
+  @media(min-width: 600px) {
+    display: block;
+    color: #666;
+  }
 }
 
 .btn-logout {

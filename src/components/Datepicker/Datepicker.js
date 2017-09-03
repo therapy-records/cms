@@ -53,7 +53,7 @@ export class Datepicker extends React.Component {
         <div>
           <h5>{title}</h5>
           <p>{titleSub}</p>
-          <p><small>Note: Time of posting is not exact and could be offset by X hours</small></p>
+          <p><small>Note: This is an alpha version. <br />Time of posting is not exact and could be offset.</small></p>
         </div>
         <div>
           {togglePicker ? (

@@ -150,9 +150,9 @@ class Article extends React.Component {
               <br />
               <br />
 
-              {article.ticketsLink && <a href={article.ticketsLink} target='_blank'>Get tickets</a>}
+              {article.ticketsLink && <a className='btn' href={article.ticketsLink} target='_blank'>Get tickets</a>}
               <br />
-              {article.venueLink && <a href={article.venueLink} target='_blank'>Venue</a>}
+              {article.venueLink && <a className='btn' href={article.venueLink} target='_blank'>Venue</a>}
               <br />
 
               {article.videoEmbed &&
@@ -197,9 +197,7 @@ class Article extends React.Component {
                 <div className='article-summary-box-inner'>
                   {/* <p><a href={`http://fionaross.co.uk/news/${article._id}`}>View live article</a></p> */}
                   <p><a href={`http://fionaross.co.uk/news`} target='blank'>View live article</a></p>
-                  <p>Created {moment(article.createdAt).fromNow()}
-                    <small>{moment(article.createdAt).format('DD/mm/YYYY')}</small>
-                  </p>
+                  <p>Created {moment(article.createdAt).fromNow()}</p>
                   {article.editedAt &&
                     <p>Last modified {moment(article.editedAt).fromNow()}
                       <small>{moment(article.editedAt).format('DD/mm/YYYY')}</small>
@@ -215,7 +213,7 @@ class Article extends React.Component {
                   <button
                     className='btn'
                     onClick={this.handleModalOpen}
-                    style={{ width: 'auto', background: 'darkred', color: '#fff' }}>Delete article
+                    style={{ background: 'darkred', color: '#fff' }}>Delete article
                   </button>
 
                 </div>

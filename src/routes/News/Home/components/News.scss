@@ -19,6 +19,9 @@
       max-width: 100px;
       margin-right: 1em;
     }
+    @media(min-width: 600px) {
+      margin-right: 2em;
+    }
   }
   h3 {
     margin-top:0;

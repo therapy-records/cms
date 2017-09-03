@@ -20,12 +20,14 @@ export class Dashboard extends React.Component {
     return (
       <div>
         <h2>Welcome back</h2>
-        <Link to='news/create'>Create a new article</Link>
+        <Link to='news/create' className='btn'>Create a new article</Link>
 
         <br />
         <br />
+        <br />
+        <br />
 
-        <p>Stats</p>
+        <p style={{ textDecoration: 'underline' }}><strong>Stats</strong></p>
         {newsArticles && <p>News articles: {newsArticles.length}</p>}
         {/*
         <p>Press releases: ...</p>

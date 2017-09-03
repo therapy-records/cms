@@ -3,4 +3,9 @@
 
 .cols-container > div {
   width: 50%;
+  &:first-child {
+    @media(min-width: 600px) {
+      padding-right: 1em;
+    }
+  }
 }
