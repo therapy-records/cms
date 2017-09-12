@@ -18,7 +18,7 @@ class Header extends React.Component {
     return (
       <div className='header'>
         <h1>
-          <Link to='/' activeClassName='route--active'>Mini cms</Link>
+          <Link to='/' activeClassName='route--active'>Fiona Ross CMS</Link>
         </h1>
         {isAuthenticated ? (
           <div className='header-nav'>
