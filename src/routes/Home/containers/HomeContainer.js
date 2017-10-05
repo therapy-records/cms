@@ -9,7 +9,8 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  isAuthenticated : state.user.isAuth
+  isAuthenticated : state.user.isAuth,
+  authError: state.user.authError
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

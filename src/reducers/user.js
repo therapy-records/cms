@@ -21,11 +21,12 @@ export function authSuccess(data) {
   }
 }
 
-export function authError() {
+export function authError(err) {
   return {
     type: USER_AUTH_ERROR,
     payload: {
-      isAuth: false
+      isAuth: false,
+      authError: err
     }
   }
 }
@@ -52,13 +53,15 @@ export const userLogin = () => {
       API_ROOT + AUTH_LOGIN,
       userObj()
     ).then((data) => {
-      if (data.data.success === true) {
+      if (data && data.data.success === true) {
         localStorage.setItem('token', data.data.token)
         dispatch(authSuccess())
       } else {
-        localStorage.removeItem('token')
-        dispatch(authError())
+        localStorage.removeItem('token');
+        dispatch(authError(data && data.data.message || 'Sorry, something is wrong.'));
       }
+    }, () => {
+      dispatch(authError('Sorry, something is wrong.'));
     });
   }
 }
@@ -90,8 +93,11 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = {};
-export default function homeReducer(state = initialState, action) {
+const initialState = {
+  isAuth: false,
+  authError: undefined
+};
+export default function userReducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state

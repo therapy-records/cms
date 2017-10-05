@@ -22,7 +22,13 @@ export const required = value => value ? undefined : 'required';
 
 export class LoginForm extends React.Component {
   render() {
-    const { error, pristine, submitting, onSubmit } = this.props
+    const {
+      error,
+      pristine,
+      submitting,
+      onSubmit,
+      authError
+    } = this.props
 
     return (
       <section className='login-form'>
@@ -42,7 +48,9 @@ export class LoginForm extends React.Component {
                  placeholder='Password'
                  validate={required} />
 
-          {error && <strong>{error}</strong>}
+          {error && <p className='form-error'>{error}</p>}
+
+          {authError && <p className='form-error'>{authError}</p>}
 
           <br />
 
@@ -64,7 +72,8 @@ LoginForm.propTypes = {
   error: PropTypes.string,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  authError: PropTypes.string
 }
 
 export default reduxForm({

@@ -28,7 +28,8 @@ const mock = {
   },
   authResponseError: {
     data: {
-      success: false
+      success: false,
+      message: 'whoops!'
     }
   },
   loginForm: {
@@ -56,9 +57,12 @@ describe('(Redux Module) user', () => {
       expect(userReducer).to.be.a('function')
     });
 
-    it('Should initialize with empty object', () => {
+    it('Should initialize with correc state', () => {
       const state = userReducer(undefined, {});
-      expect(state).to.deep.equal({ });
+      expect(state).to.deep.equal({
+        isAuth: false,
+        authError: undefined
+      });
     });
   });
 
@@ -91,7 +95,7 @@ describe('(Redux Module) user', () => {
         .reply(200, mock.authResponseError);
 
       const expectedActions = [
-        { type: USER_AUTH_ERROR, payload: { isAuth: false } }
+        { type: USER_AUTH_ERROR, payload: { isAuth: false, authError: mock.authResponseError.data.message } }
       ];
 
       return store.dispatch(userLogin()).then(() => {
@@ -100,6 +104,24 @@ describe('(Redux Module) user', () => {
         store.clearActions();
       });
     });
+
+    it('should dispatch the correct actions and message on auth error and with no data message', () => {
+      axiosUserLogin.post = sinon.stub().returns(Promise.resolve());
+      nock(API_ROOT + AUTH_LOGIN)
+        .post('/login')
+        .reply(401, mock.authResponseError);
+
+      const expectedActions = [
+        { type: USER_AUTH_ERROR, payload: { isAuth: false, authError: 'Sorry, something is wrong.' } }
+      ];
+
+      return store.dispatch(userLogin()).then(() => {
+        const storeActions = store.getActions();
+        expect(storeActions).to.deep.equal(expectedActions);
+        store.clearActions();
+      });
+    });
+
   });
 
   describe('(Action) userLogout', () => {
@@ -109,7 +131,7 @@ describe('(Redux Module) user', () => {
 
     it('should dispatch the correct actions', () => {
       const expectedActions = [
-        { type: USER_AUTH_ERROR, payload: { isAuth: false } }
+        { type: USER_AUTH_ERROR, payload: { isAuth: false, authError: undefined } }
       ];
       return store.dispatch(userLogout()).then(() => {
         const storeActions = store.getActions();

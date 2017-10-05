@@ -44,10 +44,25 @@ describe('(Component) LoginForm', () => {
       <LoginForm {...props} />
     );
     const actual = errorWrapper.containsMatchingElement(
-      <strong>{props.error}</strong>
+      <p>{props.error}</p>
     );
     expect(actual).to.equal(true);
   });
+
+  it('should render an authError', () => {
+    props = {
+      onSubmit: () => {},
+      authError: 'oh no!'
+    }
+    const authErrorWrapper = shallow(
+      <LoginForm {...props} />
+    );
+    const actual = authErrorWrapper.containsMatchingElement(
+      <p>{props.authError}</p>
+    );
+    expect(actual).to.equal(true);
+  });
+
 
   describe('submit button', () => {
     it('should render a button', () => {

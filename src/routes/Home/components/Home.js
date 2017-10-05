@@ -23,14 +23,20 @@ export class Home extends React.Component {
 
   render() {
     const {
-      isAuthenticated
+      onPostForm,
+      isAuthenticated,
+      authError
     } = this.props;
 
     return (
       <div className='home-root'>
         <div>
           {!isAuthenticated ? (
-            <LoginForm onSubmit={() => { this.props.onPostForm(); }} isAuthenticated={this.props.isAuthenticated} />
+            <LoginForm
+              onSubmit={() => { onPostForm(); }}
+              isAuthenticated={isAuthenticated}
+              authError={authError}
+            />
           ) : (
             <p>already logged in, redirecting...</p>
           )}
@@ -43,8 +49,8 @@ export class Home extends React.Component {
 Home.propTypes = {
   isAuthenticated: PropTypes.bool,
   onPostForm: PropTypes.func,
-  onAuthCheck: PropTypes.func.isRequired
-
+  onAuthCheck: PropTypes.func.isRequired,
+  authError: PropTypes.string
 }
 
 export default Home

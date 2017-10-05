@@ -26,7 +26,8 @@ const mock = {
   },
   authResponseError: {
     data: {
-      success: false
+      success: false,
+      message: 'oh no!'
     }
   },
   loginForm: {
@@ -71,7 +72,7 @@ describe('(Actions) auth', () => {
         .reply(200, mock.authResponseSuccess);
 
       const expectedActions = [
-        { type: USER_AUTH_ERROR, payload: { isAuth: false } },
+        { type: USER_AUTH_ERROR, payload: { isAuth: false, authError: undefined } },
         { type: USER_AUTH_SUCCESS, payload: { isAuth: true } }
       ];
 
@@ -89,8 +90,8 @@ describe('(Actions) auth', () => {
         .reply(200, mock.authResponseError);
 
       const expectedActions = [
-        { type: USER_AUTH_ERROR, payload: { isAuth: false } },
-        { type: USER_AUTH_ERROR, payload: { isAuth: false } }
+        { type: USER_AUTH_ERROR, payload: { isAuth: false, authError: undefined } },
+        { type: USER_AUTH_ERROR, payload: { isAuth: false, authError: undefined } }
       ];
 
       return store.dispatch(authCheck()).then(() => {

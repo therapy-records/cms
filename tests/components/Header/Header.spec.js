@@ -14,7 +14,7 @@ describe('(Component) Header', () => {
 
     it('should render a title', () => {
       const actual = wrapper.containsMatchingElement(
-        <Link to='/' activeClassName='route--active'>Mini cms</Link>
+        <Link to='/' activeClassName='route--active'>Fiona Ross CMS</Link>
       );
       expect(actual).to.equal(true);
     });
