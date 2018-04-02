@@ -2,6 +2,11 @@
 
 A small CMS to manage artist albums, news, bookings, releases and more.
 
+Supported features:
+- Dashboard summary
+- Create, view, edit and delete news articles
+
+
 Boilerplate from [React Redux Starter Kit](https://github.com/davezuko/react-redux-starter-kit)
 
 ## Requirements
