@@ -27,9 +27,9 @@ class Article extends React.Component {
 
   componentWillUnmount() {
     this.props.resetPromiseState();
-    if (!this.props.location.pathname.includes('/edit')) {
-      this.props.onDestroyArticle();
-    }
+    // if (!this.props.location.pathname.includes('/edit')) {
+    //   this.props.onDestroyArticle();
+    // }
   }
 
   renderHtml(data) {
@@ -37,11 +37,7 @@ class Article extends React.Component {
   }
 
   handleOnDeleteArticle(article) {
-    if (article.scheduledTime) {
-      this.props.onDeleteScheduledArticle(article._id)
-    } else {
-      this.props.onDeleteArticle(article._id)
-    }
+    this.props.onDeleteArticle(article._id)
   }
 
   render() {
@@ -135,9 +131,8 @@ class Article extends React.Component {
 }
 
 Article.propTypes = {
-  location: PropTypes.object.isRequired,
+  // location: PropTypes.object.isRequired,
   onDeleteArticle: PropTypes.func.isRequired,
-  onDeleteScheduledArticle: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
   promiseError: PropTypes.bool,
@@ -148,6 +143,3 @@ Article.propTypes = {
 }
 
 export default Article
-
-onFetchSingleNewsArticle
-onFetchSingleNewsArticle

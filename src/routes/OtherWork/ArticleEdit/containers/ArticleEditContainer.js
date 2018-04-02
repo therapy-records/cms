@@ -1,22 +1,18 @@
 import { connect } from 'react-redux'
-import { selectSelectedNewsArticle } from '../../../../selectors/news';
-// import { resetPromiseState } from '../../../../reducers/uiState';
-// import {
-//   editNews,
-//   editNewsQueue
-// } from '../../../../reducers/news';
-// import { destroySelectedNewsArticle } from '../../../../reducers/newsArticle';
+import { resetPromiseState } from '../../../../reducers/uiState';
+import { editOtherWork } from '../../../../reducers/otherWorkArticle';
+import { destroySelectedOtherWorkArticle } from '../../../../reducers/otherWork';
+import { selectSelectedOtherWorkArticle } from '../../../../selectors/otherWork';
 import ArticleEdit from '../components/ArticleEdit';
 
 const mapDispatchToProps = {
-  // onEditArticle: (article) => editNews(article),
-  // onEditArticleQueue: (article) => editNewsQueue(article),
-  // onDestroyArticle: () => destroySelectedNewsArticle(),
-  // resetPromiseState: () => resetPromiseState()
+  onEditArticle: (article) => editOtherWork(article),
+  onDestroyArticle: () => destroySelectedOtherWorkArticle(),
+  resetPromiseState: () => resetPromiseState()
 }
 
 const mapStateToProps = (state, props) => ({
-  article: selectSelectedNewsArticle(state),
+  article: selectSelectedOtherWorkArticle(state),
   promiseLoading: state.uiState.promiseLoading,
   promiseSuccess: state.uiState.promiseSuccess,
   promiseError: state.uiState.promiseError,

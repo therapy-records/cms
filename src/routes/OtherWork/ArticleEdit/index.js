@@ -1,4 +1,4 @@
-// import { injectReducer } from '../../../store/reducers'
+import { injectReducer } from '../../../store/reducers'
 
 export default (store) => ({
   path : 'other-work/:id/edit',
@@ -10,10 +10,10 @@ export default (store) => ({
       /*  Webpack - use require callback to define
           dependencies for bundling   */
       const OtherWorkArticleEdit = require('./containers/ArticleEditContainer').default
-      // const reducer = require('../../../reducers/otherWorkArticle').default
+      const reducer = require('../../../reducers/otherWorkArticle').default
 
       /*  Add the reducer to the store on key 'selectedOtherWorkArticle'  */
-      // injectReducer(store, { key: 'selectedOtherWorkArticle', reducer })
+      injectReducer(store, { key: 'selectedOtherWorkArticle', reducer })
 
       /*  Return getComponent   */
       cb(null, OtherWorkArticleEdit)
