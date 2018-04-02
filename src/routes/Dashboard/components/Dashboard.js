@@ -27,13 +27,10 @@ export class Dashboard extends React.Component {
         <br />
         <br />
 
-        <p style={{ textDecoration: 'underline' }}><strong>Stats</strong></p>
+        <h3><strong>Stats</strong></h3>
         {newsArticles && <p>News articles: {newsArticles.length}</p>}
-        {/*
-        <p>Press releases: ...</p>
-        <p>Collaborators: ...</p>
-        <p>Gallery pics: ...</p>
-        */}
+        <p>Press releases: Coming soon...</p>
+        <p>Other Work articles: Coming soon...</p>
       </div>
     )
   }
