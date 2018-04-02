@@ -71,9 +71,13 @@ class Article extends React.Component {
 
             <div className='article-col-1'>
               <h2>{article.title}</h2>
-              <div dangerouslySetInnerHTML={this.renderHtml(article.bodyMain)} />
+              <p>{article.copy}</p>
 
               <br />
+
+              <p>Links to: {article.externalLink}</p>
+              <p>Release date: {moment(article.releaseDate).fromNow()}</p>
+              <p>Links to: <a href={article.externalLink} target="_blank">{article.externalLink}</a></p>
 
               <div className='cols-container'>
 

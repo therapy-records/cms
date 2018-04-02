@@ -11,7 +11,7 @@ import {
 import Article from '../components/Article'
 
 const mapDispatchToProps = {
-  onFetchSingleNewsArticle: (id) => fetchSingleNewsArticle(id),
+  onFetchArticle: (id) => fetchSingleNewsArticle(id),
   onFetchNewsArticles: () => fetchNewsArticles(),
   onDeleteArticle: (id) => deleteNewsArticle(id),
   onDeleteScheduledArticle: (id) => deleteScheduledArticle(id),

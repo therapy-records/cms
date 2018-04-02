@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
-// import { postNews } from '../../../../reducers/news'
-// import { resetPromiseState } from '../../../../reducers/uiState'
+import { postOtherWork } from '../../../../reducers/otherWork'
+import { resetPromiseState } from '../../../../reducers/uiState'
 import ArticleCreate from '../components/ArticleCreate'
 
 const mapDispatchToProps = {
-  // onPostArticle: () => postNews(),
-  // resetPromiseState: () => resetPromiseState()
+  onPostArticle: () => postOtherWork(),
+  resetPromiseState: () => resetPromiseState()
 }
 
 const mapStateToProps = (state) => ({

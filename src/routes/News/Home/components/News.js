@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import moment from 'moment';
-import './News.scss';
 
 const dateIsBefore = (a, b) => {
   return new Date(b.createdAt) - new Date(a.createdAt)
@@ -51,7 +50,7 @@ class News extends React.Component {
       return 'http://via.placeholder.com/100x137/C8C8C8/777?text=No+image&color=EEEEEE';
     }
     return (
-      <li key={p._id} className='news-item'>
+      <li key={p._id} className='article-card'>
         <img src={articleImg()} />
         <div>
           {p.scheduledTime &&

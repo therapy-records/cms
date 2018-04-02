@@ -7,7 +7,7 @@ import { selectOtherWorkArticles } from '../../../../selectors/otherWork'
 
 const mapDispatchToProps = {
   onFetchOtherWorkArticles: () => fetchOtherWorkArticles(),
-  onSetSelectedNewsArticle: (article) => setSelectedOtherWorkArticle(article),
+  onSetSelectedOtherWorkArticle: (article) => setSelectedOtherWorkArticle(article),
   resetPromiseState: () => resetPromiseState()
 };
 

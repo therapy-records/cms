@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import { resetPromiseState } from '../../../../reducers/uiState';
-import { editOtherWork } from '../../../../reducers/otherWorkArticle';
-import { destroySelectedOtherWorkArticle } from '../../../../reducers/otherWork';
+import { editOtherWork, destroySelectedOtherWorkArticle } from '../../../../reducers/otherWorkArticle';
 import { selectSelectedOtherWorkArticle } from '../../../../selectors/otherWork';
 import ArticleEdit from '../components/ArticleEdit';
 

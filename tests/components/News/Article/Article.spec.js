@@ -41,7 +41,7 @@ describe('(Component) News - Article', () => {
         onDeleteScheduledArticle: sinon.spy(),
         resetPromiseState: sinon.spy(),
         onDestroyArticle: sinon.spy(),
-        onFetchSingleNewsArticle: sinon.spy(),
+        onFetchArticle: sinon.spy(),
         params: { id: 123 },
         location : {
           pathname: 'news/123456789'
@@ -131,36 +131,36 @@ describe('(Component) News - Article', () => {
     beforeEach(() => {
       props = baseProps;
       props.article = {};
-      props.onFetchSingleNewsArticle = sinon.spy();
+      props.onFetchArticle = sinon.spy();
       wrapper = shallow(<Article {...props} />);
     });
-    it('should call onFetchSingleNewsArticle', () => {
-      expect(props.onFetchSingleNewsArticle).to.have.been.called;
-      expect(props.onFetchSingleNewsArticle).to.have.been.called.once;
+    it('should call onFetchArticle', () => {
+      expect(props.onFetchArticle).to.have.been.called;
+      expect(props.onFetchArticle).to.have.been.called.once;
     });
   });
 
   describe('when an article id does not match param ID', () => {
-    it('should call onFetchSingleNewsArticle', () => {
+    it('should call onFetchArticle', () => {
       props = baseProps;
       props.article = { _id: 456 };
       props.params = { id: 123 };
-      props.onFetchSingleNewsArticle = sinon.spy();
+      props.onFetchArticle = sinon.spy();
       wrapper = shallow(<Article {...props} />);
-      expect(props.onFetchSingleNewsArticle).to.have.been.called;
-      expect(props.onFetchSingleNewsArticle).to.have.been.called.once;
+      expect(props.onFetchArticle).to.have.been.called;
+      expect(props.onFetchArticle).to.have.been.called.once;
     });
   });
 
   describe('when there is no param ID', () => {
-    it('should call onFetchSingleNewsArticle', () => {
+    it('should call onFetchArticle', () => {
       props = baseProps;
       props.article = { _id: 456 };
       props.params = { };
-      props.onFetchSingleNewsArticle = sinon.spy();
+      props.onFetchArticle = sinon.spy();
       wrapper = shallow(<Article {...props} />);
-      expect(props.onFetchSingleNewsArticle).to.have.been.called;
-      expect(props.onFetchSingleNewsArticle).to.have.been.called.once;
+      expect(props.onFetchArticle).to.have.been.called;
+      expect(props.onFetchArticle).to.have.been.called.once;
     });
   });
 

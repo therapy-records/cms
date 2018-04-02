@@ -20,12 +20,12 @@ class OtherWorkHome extends React.Component {
   }
 
   handleButtonClick(postObj) {
-    this.props.onSetSelectedNewsArticle(postObj);
+    this.props.onSetSelectedOtherWorkArticle(postObj);
   }
 
   renderArticle(p) {
     return (
-      <li key={p._id} className='news-item'>
+      <li key={p._id} className='article-card'>
         <img src={p.mainImageUrl} />
         <div>
           <h3>
@@ -98,6 +98,7 @@ class OtherWorkHome extends React.Component {
 OtherWorkHome.propTypes = {
   promiseLoading: PropTypes.bool,
   onFetchOtherWorkArticles: PropTypes.func.isRequired,
+  onSetSelectedOtherWorkArticle: PropTypes.func.isRequired,
   articles: PropTypes.array,
   resetPromiseState: PropTypes.func
 }

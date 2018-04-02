@@ -22,7 +22,7 @@ class Article extends React.Component {
 
     const articleMatches = !noArticle && propsArticle._id === paramsId;
     if (noArticle || !articleMatches) {
-      this.props.onFetchSingleNewsArticle(paramsId);
+      this.props.onFetchArticle(paramsId);
     }
   }
 
@@ -246,7 +246,7 @@ Article.propTypes = {
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
   promiseError: PropTypes.bool,
-  onFetchSingleNewsArticle: PropTypes.func.isRequired,
+  onFetchArticle: PropTypes.func.isRequired,
   resetPromiseState: PropTypes.func.isRequired,
   onDestroyArticle: PropTypes.func.isRequired,
   params: PropTypes.object
