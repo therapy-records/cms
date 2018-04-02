@@ -34,6 +34,10 @@ class Header extends React.Component {
               Press
             </Link>
             {' | '}
+            <Link to='/other-work' activeClassName='route--active'>
+              Other Work
+            </Link>
+            {' | '}
             <button onClick={() => { onLogout(); this.redirectToHome(); }} className='btn-logout'>Log out</button>
           </div>
         ) : (

@@ -4,7 +4,7 @@ class Press extends React.Component {
   render() {
     return (
       <div>
-        <p>Coming soon...</p>
+        <p>Press Coming soon...</p>
       </div>
     )
   }
