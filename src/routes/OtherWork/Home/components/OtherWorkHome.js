@@ -1,6 +1,6 @@
 import React from 'react'
 
-class OtherWork extends React.Component {
+class OtherWorkHome extends React.Component {
   render() {
     return (
       <div>
@@ -11,4 +11,4 @@ class OtherWork extends React.Component {
 
 }
 
-export default OtherWork
+export default OtherWorkHome

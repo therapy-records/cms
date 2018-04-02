@@ -8,7 +8,7 @@ import ArticleCreateRoute from './News/ArticleCreate'
 import ArticleRoute from './News/Article'
 import ArticleEditRoute from './News/ArticleEdit'
 import PressRoute from './Press';
-import OtherWorkRoute from './OtherWork';
+import OtherWorkHomeRoute from './OtherWork/Home';
 import { routeAuthCheck } from '../actions/auth';
 export const createRoutes = (store) => {
   return ({
@@ -25,7 +25,7 @@ export const createRoutes = (store) => {
           ArticleRoute(store),
           ArticleEditRoute(store),
           PressRoute(store),
-          OtherWorkRoute(store)
+          OtherWorkHomeRoute(store)
         ]
       },
       {
