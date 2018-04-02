@@ -2,14 +2,24 @@
 import CoreLayout from '../layouts/CoreLayout/CoreLayout.container'
 import Home from './Home'
 import DashboardRoute from './Dashboard'
-import NewsHomeRoute from './News/Home'
 import ErrorComponent from '../components/Error/Error'
+import { routeAuthCheck } from '../actions/auth';
+
+// news
+import NewsHomeRoute from './News/Home'
 import ArticleCreateRoute from './News/ArticleCreate'
 import ArticleRoute from './News/Article'
 import ArticleEditRoute from './News/ArticleEdit'
+
+// press
 import PressRoute from './Press';
+
+// other-work
 import OtherWorkHomeRoute from './OtherWork/Home';
-import { routeAuthCheck } from '../actions/auth';
+import OtherWorkArticleCreateRoute from './OtherWork/ArticleCreate'
+import OtherWorkArticleRoute from './OtherWork/Article'
+import OtherWorkArticleEditRoute from './OtherWork/ArticleEdit'
+
 export const createRoutes = (store) => {
   return ({
     path        : '/',
@@ -25,7 +35,10 @@ export const createRoutes = (store) => {
           ArticleRoute(store),
           ArticleEditRoute(store),
           PressRoute(store),
-          OtherWorkHomeRoute(store)
+          OtherWorkHomeRoute(store),
+          OtherWorkArticleCreateRoute(store),
+          OtherWorkArticleRoute(store),
+          OtherWorkArticleEditRoute(store)
         ]
       },
       {
