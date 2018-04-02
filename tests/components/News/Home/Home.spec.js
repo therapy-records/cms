@@ -1,8 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import { Link } from 'react-router';
 import moment from 'moment';
 import News from 'routes/News/Home/components/News';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 const mockNewsArticles = [
   { title: 'test 1', _id: 'asd123' },

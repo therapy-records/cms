@@ -1,7 +1,10 @@
 import React from 'react'
-import { shallow } from 'enzyme'
-import InputMoment from 'input-moment'
-import Datepicker from 'components/Datepicker/Datepicker'
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import InputMoment from 'input-moment';
+import Datepicker from 'components/Datepicker/Datepicker';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) Datepicker', () => {
   let wrapper,

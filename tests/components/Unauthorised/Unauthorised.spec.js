@@ -1,7 +1,10 @@
 import React from 'react'
 import Unauthorised from 'components/Unauthorised/Unauthorised'
 import { Link } from 'react-router'
-import { shallow } from 'enzyme'
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) Unauthorised', () => {
   let wrapper;

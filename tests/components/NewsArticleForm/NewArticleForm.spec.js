@@ -10,7 +10,10 @@ import Datepicker from 'components/Datepicker/Datepicker';
 import ArticlePreview from 'components/ArticlePreview/ArticlePreview.container';
 import DropzoneImageUpload from 'components/NewsArticleForm/DropzoneImageUpload';
 import Quotes from 'components/NewsArticleForm/Quotes';
-import { shallow } from 'enzyme'
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) NewsArticleForm', () => {
   let wrapper,

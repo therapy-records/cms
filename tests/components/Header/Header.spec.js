@@ -2,7 +2,10 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import Header from 'components/Header/Header'
 import { Link } from 'react-router'
-import { shallow } from 'enzyme'
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) Header', () => {
   let wrapper, props;

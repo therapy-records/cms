@@ -2,7 +2,10 @@ import React from 'react'
 import { Link } from 'react-router'
 import Article from 'routes/News/Article/components/Article'
 import ArticleDeleteModal from 'routes/News/Article/components/ArticleDeleteModal'
-import { shallow } from 'enzyme'
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) News - Article', () => {
   let wrapper,

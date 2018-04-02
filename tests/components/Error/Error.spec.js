@@ -2,7 +2,10 @@
 
 import React from 'react'
 import ErrorComponent from 'components/Error/Error'
-import { shallow } from 'enzyme'
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) ErrorComponent', () => {
   let wrapper, props;

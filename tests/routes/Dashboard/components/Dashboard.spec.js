@@ -1,7 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router';
 import { Dashboard } from 'routes/Dashboard/components/Dashboard'
-import { shallow } from 'enzyme'
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) Dashboard', () => {
   let props,

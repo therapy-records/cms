@@ -1,7 +1,10 @@
 import React from 'react'
 import { Field } from 'redux-form';
 import { LoginForm, textInput, required } from 'components/LoginForm/LoginForm'
-import { shallow } from 'enzyme'
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) LoginForm', () => {
   let wrapper,

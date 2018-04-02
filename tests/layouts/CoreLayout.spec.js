@@ -1,8 +1,11 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import CoreLayout from 'layouts/CoreLayout/CoreLayout'
 import Header from 'components/Header/Header.container'
 import Unauthorised from 'components/Unauthorised/Unauthorised'
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Layout) Core', () => {
   let component,

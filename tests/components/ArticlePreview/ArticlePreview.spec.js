@@ -2,7 +2,10 @@ import React from 'react'
 import ArticlePreview from 'components/ArticlePreview/ArticlePreview'
 import ArticleLive from 'components/ArticleLive/ArticleLive'
 import { ModalContainer, ModalDialog } from 'react-modal-dialog';
-import { shallow } from 'enzyme'
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) ArticlePreview', () => {
   let wrapper,

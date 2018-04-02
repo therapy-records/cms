@@ -1,8 +1,11 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import { Link } from 'react-router'
 import ArticleCreate from 'routes/News/ArticleCreate/components/ArticleCreate'
 import NewsArticleForm from 'components/NewsArticleForm'
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) News - ArticleCreate', () => {
   let wrapper,
