@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, browserHistory } from 'react-router'
 import moment from 'moment';
+import ArticleDeleteModal from '../../../../components/ArticleDeleteModal'
 
 class Article extends React.Component {
 
@@ -127,7 +128,10 @@ class Article extends React.Component {
         }
 
         {(!promiseLoading && this.state.isShowingModal) &&
-          <p>delete modal here</p>
+          <ArticleDeleteModal
+            handleModalClose={this.handleModalClose}
+            onDeleteArticle={() => { this.handleOnDeleteArticle(article); this.handleModalClose() }}
+          />
         }
       </article>
     )

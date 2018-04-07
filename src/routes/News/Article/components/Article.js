@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, browserHistory } from 'react-router'
 import moment from 'moment';
-import ArticleDeleteModal from './ArticleDeleteModal';
+import ArticleDeleteModal from '../../../../components/ArticleDeleteModal'
 
 class Article extends React.Component {
 
