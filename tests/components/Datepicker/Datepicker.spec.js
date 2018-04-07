@@ -18,7 +18,8 @@ describe('(Component) Datepicker', () => {
         },
         initTime: new Date(),
         title: 'my datepicker',
-        titleSub: 'all the things'
+        titleSub: 'all the things',
+        titleSub2: 'testing'
       };
 
   beforeEach(() => {
@@ -39,6 +40,13 @@ describe('(Component) Datepicker', () => {
   it('should render a titleSub', () => {
     const actual = wrapper.containsMatchingElement(
       <p>{props.titleSub}</p>
+    );
+    expect(actual).to.equal(true);
+  });
+
+  it('should render titleSub2', () => {
+    const actual = wrapper.containsMatchingElement(
+      <p>{props.titleSub2}</p>
     );
     expect(actual).to.equal(true);
   });

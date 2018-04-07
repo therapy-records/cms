@@ -38,7 +38,8 @@ export class Datepicker extends React.Component {
       togglePicker,
       initTime,
       title,
-      titleSub
+      titleSub,
+      titleSub2
     } = this.props;
 
     const {
@@ -47,13 +48,14 @@ export class Datepicker extends React.Component {
     } = this.state;
 
     const _moment = m;
+    const renderColLayout = titleSub && titleSub2;
 
     return (
-      <div className='cols-container'>
+      <div className={renderColLayout ? 'cols-container' : 'max-width-50'}>
         <div>
           <h5>{title}</h5>
-          <p>{titleSub}</p>
-          <p><small>Note: This is an alpha version. <br />Time of posting is not exact and could be offset.</small></p>
+          {titleSub && <p>{titleSub}</p>}
+          {titleSub2 && <p>{titleSub2}</p>}
         </div>
         <div>
           {togglePicker ? (
@@ -92,7 +94,8 @@ Datepicker.propTypes = {
   pickerActive: PropTypes.bool,
   initTime: PropTypes.string,
   title: PropTypes.string,
-  titleSub: PropTypes.string
+  titleSub: PropTypes.string,
+  titleSub2: PropTypes.string
 }
 
 export default Datepicker;

@@ -180,9 +180,10 @@ describe('(Component) NewsArticleForm', () => {
       const actual = datepickerWrapper.containsMatchingElement(
         <Field name='scheduledTime'
                component={Datepicker}
+               initTime={props.formValues.scheduledTime}
                title='Scheduler (optional)'
                titleSub='Post live on a date of choosing'
-               initTime={props.formValues.scheduledTime} />
+               titleSub2='NOTE: This is an alpha version. <br />Time of posting is not exact and could be offset.' />
       );
       expect(actual).to.equal(true);
     });

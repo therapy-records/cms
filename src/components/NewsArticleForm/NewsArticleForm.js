@@ -235,7 +235,8 @@ export class NewsArticleForm extends React.Component {
                 component={Datepicker}
                 initTime={formValues && formValues.scheduledTime}
                 title='Scheduler (optional)'
-                titleSub='Post live on a date of choosing' />
+                titleSub='Post live on a date of choosing'
+                titleSub2='NOTE: This is an alpha version. Time of posting is not exact and could be offset.' />
 
           {error && <strong>{error}</strong>}
 
