@@ -23,24 +23,7 @@ import DropzoneImageUpload from './DropzoneImageUpload';
 import Datepicker from '../Datepicker/Datepicker';
 import Quotes from './Quotes';
 import ArticlePreview from '../ArticlePreview/ArticlePreview.container';
-
-export const textInput = ({ input, label, type, placeholder, smallLabelSize, props, meta: { touched, error } }) => (
-  <div>
-    <label className={smallLabelSize && 'label-small'}>{label}</label>
-    <input {...input} placeholder={placeholder} type={type} {...props} />
-    {touched && error && <span className='form-error'>{label} is {error}</span>}
-  </div>
-);
-
-textInput.propTypes = {
-  input: PropTypes.object.isRequired,
-  label: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
-  props: PropTypes.object,
-  smallLabelSize: PropTypes.bool,
-  meta: PropTypes.object.isRequired
-}
+import TextInput from '../../components/TextInput';
 
 export const bodyMainRTE = ({ input, onChange, props, meta: { touched, error } }) => (
   <div>
@@ -113,7 +96,7 @@ export class NewsArticleForm extends React.Component {
           <div className='col-clear' />
 
           <Field name='title'
-                 component={textInput}
+                 component={TextInput}
                  type='text'
                  placeholder='Hello World'
                  label='Title'
@@ -132,7 +115,7 @@ export class NewsArticleForm extends React.Component {
           <br />
 
           <Field name='mainImage.externalLink'
-                 component={textInput}
+                 component={TextInput}
                  type='url'
                  title='Main image link'
                  label='Main image link'
@@ -207,7 +190,7 @@ export class NewsArticleForm extends React.Component {
             <div className='cols-container links-cols-container'>
               <div className='col-50'>
                 <Field name='ticketsLink'
-                      component={textInput}
+                      component={TextInput}
                       type='text'
                       placeholder='http://www...'
                       label='Tickets '
@@ -216,7 +199,7 @@ export class NewsArticleForm extends React.Component {
                 <br />
 
                 <Field name='venueLink'
-                      component={textInput}
+                      component={TextInput}
                       type='text'
                       placeholder='http://www...'
                       label='Venue'
@@ -225,7 +208,7 @@ export class NewsArticleForm extends React.Component {
 
               <div className='col-50'>
                 <Field name='videoEmbed'
-                      component={textInput}
+                      component={TextInput}
                       type='text'
                       placeholder='https://www.youtube.com/embed/45JLCGLplvk'
                       label='YouTube video'
@@ -234,7 +217,7 @@ export class NewsArticleForm extends React.Component {
                 <br />
 
                 <Field name='socialShare.hashtags'
-                      component={textInput}
+                      component={TextInput}
                       type='text'
                       placeholder='trending, happy, fionaross'
                       label='Hashtags'
