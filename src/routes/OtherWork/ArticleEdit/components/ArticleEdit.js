@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router'
+import OtherWorkArticleForm from 'components/OtherWorkArticleForm';
 
 class ArticleEdit extends React.Component {
   componentWillUnmount() {
@@ -47,7 +48,11 @@ class ArticleEdit extends React.Component {
             <hr />
             <br />
             <br />
-            <p>edit form goes here</p>
+            <OtherWorkArticleForm
+              onSubmitForm={() => this.props.onEditArticle(article)}
+              location={location}
+            />
+
           </div>
         }
       </article>

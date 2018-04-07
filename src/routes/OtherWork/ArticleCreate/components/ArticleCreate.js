@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router'
-import OtherWorkArticleForm from './OtherWorkArticleForm'
+import OtherWorkArticleForm from 'components/OtherWorkArticleForm'
 
 class ArticleCreate extends React.Component {
   componentWillUnmount() {

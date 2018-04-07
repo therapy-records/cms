@@ -1,7 +1,8 @@
 import { connect } from 'react-redux'
-import { resetPromiseState } from '../../../../reducers/uiState';
-import { editOtherWork, destroySelectedOtherWorkArticle } from '../../../../reducers/otherWorkArticle';
-import { selectSelectedOtherWorkArticle } from '../../../../selectors/otherWork';
+import { resetPromiseState } from 'reducers/uiState';
+import { destroySelectedOtherWorkArticle } from 'reducers/otherWorkArticle';
+import { editOtherWork } from 'reducers/otherWork';
+import { selectSelectedOtherWorkArticle } from 'selectors/otherWork';
 import ArticleEdit from '../components/ArticleEdit';
 
 const mapDispatchToProps = {

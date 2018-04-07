@@ -5,7 +5,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import TextInput from 'components/TextInput';
 import Datepicker from 'components/Datepicker';
 import OtherWorkArticleForm from 'components/OtherWorkArticleForm/OtherWorkArticleForm';
-import DropzoneImageUpload from 'components/OtherWorkArticleForm/DropzoneImageUpload';
+import DropzoneImageUpload from 'components/NewsArticleForm/DropzoneImageUpload';
 import { required } from 'utils/form';
 
 Enzyme.configure({ adapter: new Adapter() });
