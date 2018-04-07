@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router'
+import OtherWorkArticleForm from './OtherWorkArticleForm'
 
 class ArticleCreate extends React.Component {
   componentWillUnmount() {
@@ -32,8 +33,11 @@ class ArticleCreate extends React.Component {
         }
 
         {!promiseLoading && !promiseSuccess &&
-          <p>form goes here</p>
-        }
+          <OtherWorkArticleForm
+            onSubmitForm={this.props.onPostArticle}
+            location={location}
+          />
+      }
 
       </div>
     )

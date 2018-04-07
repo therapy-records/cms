@@ -80,6 +80,7 @@ export const postOtherWork = () => {
       }, (err) => {
         dispatch(promiseLoading(false));
         dispatch(promiseError(true));
+        return err;
       }
     );
   }
@@ -98,9 +99,8 @@ export const editOtherWork = (postToEdit) => {
     }
     const reduxFormObj = getFormValues();
     postToEdit.title = reduxFormObj.title;
-    postToEdit.bodyMain = reduxFormObj.bodyMain;
-    postToEdit.mainImage = reduxFormObj.mainImage;
-    postToEdit.scheduledTime = reduxFormObj.scheduledTime;
+    postToEdit.copy = reduxFormObj.copy;
+    postToEdit.mainImageUrl = reduxFormObj.mainImageUrl;
 
     return _axiosAuthHeaders.put(
       API_ROOT + OTHER_WORK + '/' + postToEdit._id,

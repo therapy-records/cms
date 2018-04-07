@@ -9,7 +9,7 @@ export const NEWS_CREATE = 'news/create';
 export const NEWS_QUEUE = 'news/queue';
 
 export const OTHER_WORK = 'other-work';
-export const OTHER_WORK_CREATE = 'other-work/create';
+export const OTHER_WORK_CREATE = OTHER_WORK;
 
 export const AUTH = 'auth';
 export const AUTH_LOGIN = AUTH + '/login';

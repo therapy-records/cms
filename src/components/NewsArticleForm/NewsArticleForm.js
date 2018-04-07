@@ -24,6 +24,7 @@ import Datepicker from '../Datepicker/Datepicker';
 import Quotes from './Quotes';
 import ArticlePreview from '../ArticlePreview/ArticlePreview.container';
 import TextInput from '../../components/TextInput';
+import { required } from '../../utils/form';
 
 export const bodyMainRTE = ({ input, onChange, props, meta: { touched, error } }) => (
   <div>
@@ -39,8 +40,6 @@ bodyMainRTE.propTypes = {
   props: PropTypes.object,
   meta: PropTypes.object.isRequired
 }
-
-export const required = value => value ? undefined : 'required';
 
 export class NewsArticleForm extends React.Component {
 

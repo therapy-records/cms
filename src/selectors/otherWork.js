@@ -29,7 +29,22 @@ export const selectSelectedOtherWorkArticleTitle = createSelector(
   (article) => article && article.title
 );
 
-export const selectSelectedOtherWorkArticleBodyMain = createSelector(
+export const selectSelectedOtherWorkArticleCopy = createSelector(
   selectSelectedOtherWorkArticle,
-  (article) => article && article.bodyMain
+  (article) => article && article.copy
+);
+
+export const selectSelectedOtherWorkArticleMainImageExternalLink = createSelector(
+  selectSelectedOtherWorkArticle,
+  (article) => article && article.externalLink
+);
+
+export const selectSelectedOtherWorkArticleMainImageUrl = createSelector(
+  selectSelectedOtherWorkArticle,
+  (article) => article && article.mainImageUrl
+);
+
+export const selectSelectedOtherWorkArticleReleaseDate = createSelector(
+  selectSelectedOtherWorkArticle,
+  (article) => article && article.releaseDate
 );

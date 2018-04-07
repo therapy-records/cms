@@ -78,7 +78,7 @@ class Article extends React.Component {
 
               <p>Links to: {article.externalLink}</p>
               <p>Release date: {moment(article.releaseDate).fromNow()}</p>
-              <p>Links to: <a href={article.externalLink} target="_blank">{article.externalLink}</a></p>
+              <p>Links to: <a href={article.externalLink} target='_blank'>{article.externalLink}</a></p>
 
               <div className='cols-container'>
 

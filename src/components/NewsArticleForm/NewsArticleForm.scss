@@ -37,44 +37,6 @@
   font-size: 25px; // counter mysterious counter ('0') from react-dropzone
 }
 
-.dropzone {
-  width: 100%;
-  min-height: 200px;
-  border: dashed 5px #CCC;
-  background:#EEE;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom:1em;
-  transition: all 0.2s ease;
-  font-size: 0.1em; // hide mysterious counter ('0') from react-dropzone
-  &.large {
-    min-width:350px;
-  }
-}
-
-.dropzone-cta {
-  position: absolute;
-  z-index: 1;
-  transition: all 0.2s ease;
-  text-shadow: 0 3px 6px #FFF;
-  color: #000;
-  font-size: 25px; // counter mysterious counter ('0') from react-dropzone
-}
-
-.dropzone-active {
-  background:#FDFDFD;
-  border-color:#EEE;
-  img {
-    opacity:0.4;
-  }
-  .dropzone-cta {
-    font-size:1.1em;
-    opacity:0.6;
-  }
-}
-
-
 .links-cols-container > div {
   @media(min-width: 600px) {
     flex: 0 1 50%;

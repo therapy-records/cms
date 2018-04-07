@@ -66,7 +66,6 @@ describe('(Component) LoginForm', () => {
     expect(actual).to.equal(true);
   });
 
-
   describe('submit button', () => {
     it('should render a button', () => {
       props = {

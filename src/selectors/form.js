@@ -11,3 +11,16 @@ export const selectNewsArticleFormSyncErrors = createSelector(
   selectNewsArticleForm,
   (form) => form.syncErrors && form.syncErrors || false
 );
+
+export const selectOtherWorkArticleFormValues = (state) => state.form.OTHER_WORK_ARTICLE_FORM;
+
+export const selectOtherWorkArticleFormValuesValues = createSelector(
+  selectOtherWorkArticleFormValues,
+  (form) => form && form.values
+);
+
+export const selectOtherWorkArticleFormValuesSyncErrors = createSelector(
+  selectOtherWorkArticleFormValues,
+  (form) => form.syncErrors && form.syncErrors || false
+);
+

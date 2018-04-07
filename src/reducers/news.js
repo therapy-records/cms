@@ -124,6 +124,7 @@ export const postNews = () => {
       }, (err) => {
         dispatch(promiseLoading(false));
         dispatch(promiseError(true));
+        return err;
       }
     );
   }

@@ -121,7 +121,6 @@ describe('(Redux Module) user', () => {
         store.clearActions();
       });
     });
-
   });
 
   describe('(Action) userLogout', () => {
