@@ -25,6 +25,7 @@ import Quotes from './Quotes';
 import ArticlePreview from '../ArticlePreview/ArticlePreview.container';
 import TextInput from '../../components/TextInput';
 import { required } from '../../utils/form';
+import { NEWS_ARTICLE_FORM } from 'constants';
 
 export const bodyMainRTE = ({ input, onChange, props, meta: { touched, error } }) => (
   <div>
@@ -267,7 +268,7 @@ NewsArticleForm.propTypes = {
 };
 
 let InitFromStateForm = reduxForm({
-  form: 'NEWS_ARTICLE_FORM',
+  form: NEWS_ARTICLE_FORM,
   enableReinitialize : true
 })(NewsArticleForm);
 

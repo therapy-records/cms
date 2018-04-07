@@ -13,3 +13,5 @@ export const OTHER_WORK_CREATE = OTHER_WORK;
 
 export const AUTH = 'auth';
 export const AUTH_LOGIN = AUTH + '/login';
+
+export const NEWS_ARTICLE_FORM = 'NEWS_ARTICLE_FORM';

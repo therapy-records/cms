@@ -14,6 +14,7 @@ import Datepicker from 'components/Datepicker/Datepicker';
 import DropzoneImageUpload from 'components/NewsArticleForm/DropzoneImageUpload';
 import TextInput from 'components/TextInput';
 import { required } from 'utils/form';
+import { OTHER_WORK_ARTICLE_FORM } from 'constants';
 
 export class OtherWorkArticleForm extends React.Component {
   handleSubmit() {
@@ -133,7 +134,7 @@ OtherWorkArticleForm.propTypes = {
 };
 
 let InitFromStateForm = reduxForm({
-  form: 'OTHER_WORK_ARTICLE_FORM',
+  form: OTHER_WORK_ARTICLE_FORM,
   enableReinitialize: true
 })(OtherWorkArticleForm);
 
