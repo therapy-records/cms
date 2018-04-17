@@ -9,6 +9,7 @@ import {
   promiseSuccess,
   promiseError
 } from './uiState';
+import { fetchOtherWorkArticles } from './otherWork';
 
 export const SET_SELECTED_OTHER_WORK_ARTICLE = 'SET_SELECTED_OTHER_WORK_ARTICLE';
 export const SET_SELECTED_OTHER_WORK_ARTICLE_DELETED = 'SET_SELECTED_OTHER_WORK_ARTICLE_DELETED';
@@ -87,6 +88,7 @@ export const deleteOtherWorkArticle = (articleId) => {
             dispatch(promiseSuccess(true));
             dispatch(deleteSuccess(data));
             dispatch(selectedOtherWorkArticleDeleted());
+            dispatch(fetchOtherWorkArticles());
             resolve()
           } else {
             dispatch(promiseLoading(false));
