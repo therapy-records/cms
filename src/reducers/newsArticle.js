@@ -10,6 +10,10 @@ import {
   promiseSuccess,
   promiseError
 } from './uiState';
+import {
+  fetchNewsArticles,
+  fetchNewsQueueArticles
+} from './news';
 
 export const SET_SELECTED_NEWS_ARTICLE = 'SET_SELECTED_NEWS_ARTICLE';
 export const SET_SELECTED_NEWS_ARTICLE_DELETED = 'SET_SELECTED_NEWS_ARTICLE_DELETED';
@@ -105,6 +109,8 @@ export const deleteNewsArticle = (articleId) => {
             dispatch(promiseSuccess(true));
             dispatch(deleteSuccess(data));
             dispatch(selectedNewsArticleDeleted());
+            dispatch(fetchNewsArticles());
+            dispatch(fetchNewsQueueArticles());
             resolve()
           } else {
             dispatch(promiseLoading(false));

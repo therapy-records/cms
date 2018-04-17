@@ -197,6 +197,7 @@ describe('(Redux Module) news', () => {
       expect(fetchNewsQueueArticles()).to.be.a('function');
     });
 
+    // TODO: it should dispatch fetchNewsArticles, fetchNewsQueueArticles
     it('should dispatch the correct actions', () => {
       axiosNewsQueueArticles.get = sinon.stub().returns(Promise.resolve(mock.getNewsResponse));
       nock(API_ROOT + NEWS_QUEUE)
