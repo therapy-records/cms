@@ -49,46 +49,49 @@ export class OtherWorkArticleForm extends React.Component {
           <div className='col-clear' />
 
           <Field name='title'
-            component={TextInput}
-            type='text'
-            placeholder='Hello World'
-            label='Title'
-            validate={required} />
+                 component={TextInput}
+                 type='text'
+                 placeholder='Hello World'
+                 label='Title'
+                 validate={required} />
 
           <br />
 
           <Field name='copy'
-            component={TextInput}
-            type='text'
-            placeholder='Short excerpt'
-            label='Copy'
-            validate={required} />
+                 component={TextInput}
+                 type='text'
+                 placeholder='Short excerpt'
+                 label='Copy'
+                 validate={required} />
 
           <br />
 
           <Field name='externalLink'
-            component={TextInput}
-            type='url'
-            title='Link to article'
-            label='Link to article'
-            placeholder='http://bbc.co.uk/fiona-ross' />
+                 component={TextInput}
+                 type='url'
+                 title='Link to article'
+                 label='Link to article'
+                 placeholder='http://bbc.co.uk/fiona-ross'
+                 validate={required} />
 
           <br />
           <br />
 
           <Field name='mainImageUrl'
-            component={DropzoneImageUpload}
-            title='Main image'
-            existingImage={formValues && formValues.mainImageUrl} />
+                 component={DropzoneImageUpload}
+                 title='Main image'
+                 existingImage={formValues && formValues.mainImageUrl}
+                 validate={required} />
 
           <br />
           <br />
           <br />
 
           <Field name='releaseDate'
-            component={Datepicker}
-            initTime={formValues && formValues.releaseDate}
-            title='Release date' />
+                 component={Datepicker}
+                 initTime={formValues && formValues.releaseDate}
+                 title='Release date'
+                 validate={required} />
 
           <br />
           <br />
