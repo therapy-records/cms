@@ -20,7 +20,7 @@ describe('(Component) OtherWorkArticleForm', () => {
       <OtherWorkArticleForm {...props} />
     );
     const actual = createWrapper.containsMatchingElement(
-      <h2>Create article</h2>
+      <h2>Create other-work article</h2>
     );
     expect(actual).to.equal(true);
   });
@@ -31,7 +31,7 @@ describe('(Component) OtherWorkArticleForm', () => {
       <OtherWorkArticleForm {...props} />
     );
     const actual = editWrapper.containsMatchingElement(
-      <h2>Edit article</h2>
+      <h2>Edit other-work article</h2>
     );
     expect(actual).to.equal(true);
   });

@@ -41,7 +41,7 @@ export class OtherWorkArticleForm extends React.Component {
     return (
       <section className='root'>
         <div className='heading'>
-          <h2>{isEditForm ? 'Edit article' : 'Create article'}</h2>
+          <h2>{isEditForm ? 'Edit other-work article' : 'Create other-work article'}</h2>
         </div>
 
         <form onSubmit={(e) => e.preventDefault()} encType='multipart/form-data'>

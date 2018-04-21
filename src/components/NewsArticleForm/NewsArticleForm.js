@@ -87,7 +87,7 @@ export class NewsArticleForm extends React.Component {
     return (
       <section className='root'>
         <div className='heading'>
-          <h2>{isEditForm ? 'Edit article' : 'Create article'}</h2>
+          <h2>{isEditForm ? 'Edit news article' : 'Create news article'}</h2>
           <ArticlePreview />
         </div>
 
