@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Home from './routes/Home';
+import Dashboard from './routes/Dashboard';
+import Press from './routes/Press';
+import NewsHome from './routes/News/Home';
+import NewsArticle from './routes/News/Article';
+import NewsArticleEdit from './routes/News/ArticleEdit';
+import NewsArticleCreate from './routes/News/ArticleCreate';
+
 import './index.css';
 
 const TestComponent = () => {
@@ -22,7 +30,15 @@ class Router extends Component {
 
           <div className="main-container">
             <Switch>
+              <Route path="/" component={Home} />
               <Route path="/test" component={TestComponent} />
+              <Route path="/dashboard" component={Dashboard} />
+              <Route path="/press" component={Press} />
+
+              <Route path="/news" component={NewsHome} />
+              <Route path="/news/:id" component={NewsArticle} />
+              <Route path="/news/:id/edit" component={NewsArticleEdit} />
+              <Route path="/news/create" component={NewsArticleCreate} />
             </Switch>
           </div>
 
