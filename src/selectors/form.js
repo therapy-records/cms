@@ -1,3 +1,5 @@
+/* eslint-disable no-mixed-operators */
+
 import { createSelector } from 'reselect'
 
 export const selectNewsArticleForm = (state) => state.form.NEWS_ARTICLE_FORM;
@@ -24,3 +26,4 @@ export const selectOtherWorkArticleFormValuesSyncErrors = createSelector(
   (form) => form.syncErrors && form.syncErrors || false
 );
 
+/* eslint-enable no-mixed-operators */

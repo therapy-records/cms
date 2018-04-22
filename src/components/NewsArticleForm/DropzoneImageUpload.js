@@ -103,10 +103,10 @@ export class DropzoneImageUpload extends React.Component {
                 </div>
               }
 
-              {singleItem && <img src={singleItem} />}
+              {singleItem && <img src={singleItem} alt='Upload preview' />}
 
               {(!multiple && items.length) &&
-                <img src={items[0]} />
+                <img src={items[0]} /> // eslint-disable-line
               }
 
             </Dropzone>
@@ -118,7 +118,7 @@ export class DropzoneImageUpload extends React.Component {
                 <ul className='flex-root gallery-images-flex-root'>
                   {items.map((i) => (
                     <li key={i} className='col-50 no-list-style gallery-image-upload-item'>
-                      <img src={i} />
+                      <img src={i} alt={`gallery ITEM ${i + 1}`} />
                     </li>
                   ))}
                 </ul>

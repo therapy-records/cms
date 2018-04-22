@@ -7,16 +7,18 @@ import './InputMoment.scss'
 export class Datepicker extends React.Component {
   constructor(props) {
     super(props);
+    const initTime = props.initTime && moment(props.initTime);
     this.state = {
       pickerActive: props.pickerActive,
-      m: props.initTime && moment(props.initTime) || moment()
+      m: initTime || moment()
     }
   }
 
   handleTogglePicker = () => {
+    const initTime = this.props.initTime && moment(this.props.initTime);
     this.setState({
       pickerActive: !this.state.pickerActive,
-      m: this.props.initTime && moment(this.props.initTime) || this.state.moment
+      m: initTime || this.state.moment
     });
   }
 

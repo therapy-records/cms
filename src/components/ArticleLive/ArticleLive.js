@@ -84,7 +84,7 @@ class ArticleLive extends React.Component {
             <ul className='article-gallery-flex-root'>
               {article.miniGalleryImages.map((i) => (
                 <li key={i} className='article-col-50 no-list-style article-gallery-item'>
-                  <img src={i} />
+                  <img src={i} alt='gallery shot' />
                 </li>
               ))}
             </ul>

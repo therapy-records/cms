@@ -74,7 +74,7 @@ class Article extends React.Component {
                                article.socialShare.hashtags.length > 0;
 
     const articleHasMainImage = article && article.mainImage && article.mainImage.url;
-    const articleHasImages = article && articleHasMainImage || articleHasMiniGalleryImages;
+    const articleHasImages = article && articleHasMainImage || articleHasMiniGalleryImages; // eslint-disable-line
 
     const articleImg = () => {
       if (!article) {
@@ -172,6 +172,7 @@ class Article extends React.Component {
                 <iframe
                   width='560'
                   src={article.videoEmbed}
+                  title={`Video of ${article.title}`}
                   frameBorder='0'
                   allowFullScreen
                 />
@@ -185,7 +186,7 @@ class Article extends React.Component {
                   <ul className='article-gallery-flex-root'>
                     {article.miniGalleryImages.map((i) => (
                       <li key={i} className='article-col-50 no-list-style article-gallery-item'>
-                        <img src={i} />
+                        <img src={i} alt='gallery shot' />
                       </li>
                     ))}
                   </ul>

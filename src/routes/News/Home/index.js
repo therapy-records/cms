@@ -60,7 +60,7 @@ class News extends React.Component {
     }
     return (
       <li key={p._id} className='article-card'>
-        <img src={articleImg()} />
+        <img src={articleImg()} alt={p.title} />
         <div>
           {p.scheduledTime &&
             <p
@@ -105,6 +105,8 @@ class News extends React.Component {
 
     let _combinedArticles = (articlesQueue || newsArticles) && this.getCombinedArticles(articlesQueue, newsArticles);
 
+    const hasCombinedArticles = _combinedArticles && _combinedArticles.length;
+
     return (
       <div>
         {promiseLoading ?
@@ -114,16 +116,15 @@ class News extends React.Component {
               <Link to='news/create' className='btn'>Create a new article</Link>
             </div>
             {
-              !_combinedArticles || !_combinedArticles.length && (
+              !hasCombinedArticles ? (
                 <p>Unable to fetch articles :(</p>
+              ) : (
+                <ul>
+                  {_combinedArticles.map((p) => this.renderPost(p))}
+                </ul>
               )
             }
 
-            {_combinedArticles &&
-              <ul>
-                {_combinedArticles.map((p) => this.renderPost(p))}
-              </ul>
-            }
           </div>
         }
       </div>

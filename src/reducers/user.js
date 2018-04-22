@@ -58,7 +58,8 @@ export const userLogin = () => {
         dispatch(authSuccess())
       } else {
         localStorage.removeItem('token');
-        dispatch(authError(data && data.data.message || 'Sorry, something is wrong.'));
+        const dataMessage = data && data.data.message;
+        dispatch(authError(dataMessage || 'Sorry, something is wrong.'));
       }
     }, () => {
       dispatch(authError('Sorry, something is wrong.'));
