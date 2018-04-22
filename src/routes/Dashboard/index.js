@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { fetchNewsArticles } from '../../reducers/news';
 import { resetPromiseState } from '../../reducers/uiState';
-// import { selectNewsArticles } from '../../selectors/news';
+import { selectNewsArticles } from '../../selectors/news';
 import './styles.scss';
 
 export class Dashboard extends React.Component {
@@ -48,14 +48,14 @@ Dashboard.propTypes = {
 }
 
 
-// const mapStateToProps = (state) => ({
-//   newsArticles: selectNewsArticles(state)
-// })
+const mapStateToProps = (state) => ({
+  newsArticles: selectNewsArticles(state)
+})
 
 const mapDispatchToProps = {
   onFetchNewsArticles: () => fetchNewsArticles(),
   resetPromiseState: () => resetPromiseState()
 }
 
-export default connect(null, mapDispatchToProps)(Dashboard)
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
 

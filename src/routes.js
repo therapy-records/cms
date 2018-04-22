@@ -30,15 +30,15 @@ class Router extends Component {
 
           <div className="main-container">
             <Switch>
-              <Route path="/" component={Home} />
-              <Route path="/test" component={TestComponent} />
-              <Route path="/dashboard" component={Dashboard} />
-              <Route path="/press" component={Press} />
+              <Route path="/" component={Home} exact />
+              <Route path="/test" component={TestComponent} exact />
+              <Route path="/dashboard" component={Dashboard} exact />
+              <Route path="/press" component={Press} exact />
 
-              <Route path="/news" component={NewsHome} />
-              <Route path="/news/:id" component={NewsArticle} />
-              <Route path="/news/:id/edit" component={NewsArticleEdit} />
-              <Route path="/news/create" component={NewsArticleCreate} />
+              <Route path="/news" component={NewsHome} exact />
+              <Route path="/news/:id" component={NewsArticle} exact />
+              <Route path="/news/:id/edit" component={NewsArticleEdit} exact />
+              <Route path="/news/create" component={NewsArticleCreate} exact />
             </Switch>
           </div>
 

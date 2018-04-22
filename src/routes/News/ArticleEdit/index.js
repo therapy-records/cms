@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import { selectSelectedNewsArticle } from '../../../selectors/news';
+import { selectSelectedNewsArticle } from '../../../selectors/news';
 import { resetPromiseState } from '../../../reducers/uiState';
 import {
   editNews,
@@ -89,7 +89,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state, props) => ({
-  // article: selectSelectedNewsArticle(state),
+  article: selectSelectedNewsArticle(state),
   promiseLoading: state.uiState.promiseLoading,
   promiseSuccess: state.uiState.promiseSuccess,
   promiseError: state.uiState.promiseError,

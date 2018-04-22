@@ -6,7 +6,7 @@ import moment from 'moment';
 import { fetchOtherWorkArticles } from '../../../reducers/otherWork';
 import { setSelectedOtherWorkArticle } from '../../../reducers/otherWorkArticle';
 import { resetPromiseState } from '../../../reducers/uiState';
-// import { selectOtherWorkArticles } from '../../../selectors/otherWork'
+import { selectOtherWorkArticles } from '../../../selectors/otherWork'
 
 
 class OtherWorkHome extends React.Component {
@@ -116,7 +116,7 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = (state) => ({
-  // articles: selectOtherWorkArticles(state)
+  articles: selectOtherWorkArticles(state)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(OtherWorkHome);

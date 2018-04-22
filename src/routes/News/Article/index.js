@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { resetPromiseState } from '../../../reducers/uiState';
 import { fetchNewsArticles } from '../../../reducers/news';
-// import { selectSelectedNewsArticle } from '../../../selectors/news';
+import { selectSelectedNewsArticle } from '../../../selectors/news';
 import {
   deleteNewsArticle,
   deleteScheduledArticle,
@@ -273,7 +273,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state, props) => ({
-  // article: selectSelectedNewsArticle(state),
+  article: selectSelectedNewsArticle(state),
   promiseLoading: state.uiState.promiseLoading,
   promiseSuccess: state.uiState.promiseSuccess,
   promiseError: state.uiState.promiseError,

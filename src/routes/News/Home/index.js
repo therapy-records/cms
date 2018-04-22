@@ -6,10 +6,10 @@ import moment from 'moment';
 import { fetchNewsArticles, fetchNewsQueueArticles } from '../../../reducers/news';
 import { setSelectedNewsArticle } from '../../../reducers/newsArticle';
 import { resetPromiseState } from '../../../reducers/uiState';
-// import {
-//   selectNewsArticlesReverse,
-//   selectNewsArticlesQueueReverse
-// } from '../../../selectors/news';
+import {
+  selectNewsArticlesReverse,
+  selectNewsArticlesQueueReverse
+} from '../../../selectors/news';
 
 
 const dateIsBefore = (a, b) => {
@@ -151,9 +151,9 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  promiseLoading: state.uiState.promiseLoading
-  // newsArticles: selectNewsArticlesReverse(state),
-  // articlesQueue: selectNewsArticlesQueueReverse(state)
+  promiseLoading: state.uiState.promiseLoading,
+  newsArticles: selectNewsArticlesReverse(state),
+  articlesQueue: selectNewsArticlesQueueReverse(state)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(News)

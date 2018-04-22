@@ -2,14 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
-// import {
-//   selectSelectedOtherWorkArticleTitle,
-//   selectSelectedOtherWorkArticleCopy,
-//   selectSelectedOtherWorkArticleMainImageExternalLink,
-//   selectSelectedOtherWorkArticleMainImageUrl,
-//   selectSelectedOtherWorkArticleReleaseDate
-// } from 'selectors/otherWork';
-// import { selectOtherWorkArticleFormValues } from 'selectors/form';
+import {
+  selectSelectedOtherWorkArticleTitle,
+  selectSelectedOtherWorkArticleCopy,
+  selectSelectedOtherWorkArticleMainImageExternalLink,
+  selectSelectedOtherWorkArticleMainImageUrl,
+  selectSelectedOtherWorkArticleReleaseDate
+} from 'selectors/otherWork';
+import { selectOtherWorkArticleFormValues } from 'selectors/form';
 import Datepicker from 'components/Datepicker/Datepicker';
 import DropzoneImageUpload from 'components/NewsArticleForm/DropzoneImageUpload';
 import TextInput from 'components/TextInput';
@@ -141,11 +141,11 @@ let InitFromStateForm = reduxForm({
 InitFromStateForm = connect(
   (state, props) => ({
     initialValues: {
-      // title: selectSelectedOtherWorkArticleTitle(state),
-      // copy: selectSelectedOtherWorkArticleCopy(state),
-      // externalLink: selectSelectedOtherWorkArticleMainImageExternalLink(state),
-      // mainImageUrl: selectSelectedOtherWorkArticleMainImageUrl(state),
-      // releaseDate: selectSelectedOtherWorkArticleReleaseDate(state)
+      title: selectSelectedOtherWorkArticleTitle(state),
+      copy: selectSelectedOtherWorkArticleCopy(state),
+      externalLink: selectSelectedOtherWorkArticleMainImageExternalLink(state),
+      mainImageUrl: selectSelectedOtherWorkArticleMainImageUrl(state),
+      releaseDate: selectSelectedOtherWorkArticleReleaseDate(state)
     }
   })
 )(InitFromStateForm);

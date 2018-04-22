@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { resetPromiseState } from 'reducers/uiState';
 import { destroySelectedOtherWorkArticle } from 'reducers/otherWorkArticle';
 import { editOtherWork } from 'reducers/otherWork';
-// import { selectSelectedOtherWorkArticle } from 'selectors/otherWork';
+import { selectSelectedOtherWorkArticle } from 'selectors/otherWork';
 
 import OtherWorkArticleForm from 'components/OtherWorkArticleForm';
 
@@ -84,7 +84,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state, props) => ({
-  // article: selectSelectedOtherWorkArticle(state),
+  article: selectSelectedOtherWorkArticle(state),
   promiseLoading: state.uiState.promiseLoading,
   promiseSuccess: state.uiState.promiseSuccess,
   promiseError: state.uiState.promiseError,
