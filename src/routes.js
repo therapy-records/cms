@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Home from './routes/Home';
 import Dashboard from './routes/Dashboard';
 import Press from './routes/Press';
@@ -9,19 +9,24 @@ import NewsHome from './routes/News/Home';
 import NewsArticle from './routes/News/Article';
 import NewsArticleEdit from './routes/News/ArticleEdit';
 import NewsArticleCreate from './routes/News/ArticleCreate';
-
 import './index.css';
 
-const TestComponent = () => {
-  return (
-    <div>
-    test component
-    </div>
-  )
-};
+const ProtectedRoute = ({ component: Component, isAuth, ...rest }) => (
+  <Route {...rest} render={props => (
+    isAuth ? (
+      <Component {...props} />
+    ) : (
+        <Redirect to={{
+          pathname: '/login',
+          state: { from: props.location }
+        }} />
+      )
+  )} />
+);
 
 class Router extends Component {
   render() {
+    const { isAuth } = this.props;
     return (
       <BrowserRouter>
         <div>
@@ -31,14 +36,13 @@ class Router extends Component {
           <div className="main-container">
             <Switch>
               <Route path="/" component={Home} exact />
-              <Route path="/test" component={TestComponent} exact />
-              <Route path="/dashboard" component={Dashboard} exact />
-              <Route path="/press" component={Press} exact />
+              <ProtectedRoute path="/dashboard" component={Dashboard} isAuth={isAuth} exact />
+              <ProtectedRoute path="/press" component={Press} isAuth={isAuth} exact />
 
-              <Route path="/news" component={NewsHome} exact />
-              <Route path="/news/:id" component={NewsArticle} exact />
-              <Route path="/news/:id/edit" component={NewsArticleEdit} exact />
-              <Route path="/news/create" component={NewsArticleCreate} exact />
+              <ProtectedRoute path="/news" component={NewsHome} isAuth={isAuth} exact />
+              <ProtectedRoute path="/news/:id" component={NewsArticle} isAuth={isAuth} exact />
+              <ProtectedRoute path="/news/:id/edit" component={NewsArticleEdit} isAuth={isAuth} exact />
+              <ProtectedRoute path="/news/create" component={NewsArticleCreate} isAuth={isAuth} exact />
             </Switch>
           </div>
 
@@ -48,13 +52,12 @@ class Router extends Component {
   }
 }
 
-// const mapStateToProps = (state) => ({
-//   isAuth: state.user.isAuth,
-//   showSubscriptionModal: state.uiState.subscriptionModal.show
-// })
+const mapStateToProps = (state) => ({
+  isAuth: state.user.isAuth
+})
 
 const ConnectedRouter = connect(
-  null,
+  mapStateToProps,
   null
 )(Router);
 
@@ -69,4 +72,3 @@ Routes.propTypes = {
 };
 
 export default Routes;
-
