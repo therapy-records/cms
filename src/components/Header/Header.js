@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link, browserHistory } from 'react-router'
+import { Link } from 'react-router-dom'
 import './Header.scss'
 
 class Header extends React.Component {
 
-  redirectToHome() {
-    browserHistory.push('/');
-  }
+  // redirectToHome() {
+  //   browserHistory.push('/');
+  // }
 
   render() {
     const {

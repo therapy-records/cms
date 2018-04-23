@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import Header from './components/Header/Header.container';
 import Home from './routes/Home';
 import Dashboard from './routes/Dashboard';
 import Press from './routes/Press';
@@ -9,20 +10,23 @@ import NewsHome from './routes/News/Home';
 import NewsArticle from './routes/News/Article';
 import NewsArticleEdit from './routes/News/ArticleEdit';
 import NewsArticleCreate from './routes/News/ArticleCreate';
+import { authCheck } from './actions/auth';
 import './index.css';
 
-const ProtectedRoute = ({ component: Component, isAuth, ...rest }) => (
-  <Route {...rest} render={props => (
-    isAuth ? (
-      <Component {...props} />
-    ) : (
-        <Redirect to={{
-          pathname: '/login',
-          state: { from: props.location }
-        }} />
-      )
-  )} />
-);
+const ProtectedRoute = ({ component: Component, isAuth, location, ...rest }) => {
+  return (
+    <Route {...rest} render={props => (
+      isAuth ? (
+        <Component {...props} />
+      ) : (
+          <Redirect to={{
+            pathname: '/not-auth',
+            state: { from: props.location }
+          }} />
+        )
+    )} />
+  )
+}
 
 class Router extends Component {
   render() {
@@ -31,7 +35,7 @@ class Router extends Component {
       <BrowserRouter>
         <div>
 
-          <p>header here</p>
+          <Header />
 
           <div className="main-container">
             <Switch>
@@ -56,9 +60,13 @@ const mapStateToProps = (state) => ({
   isAuth: state.user.isAuth
 })
 
+const mapDispatchToProps = {
+  onAuthCheck: () => authCheck()
+}
+
 const ConnectedRouter = connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Router);
 
 const Routes = ({ store }) => (

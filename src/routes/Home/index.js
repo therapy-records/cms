@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { browserHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LoginForm from '../../components/LoginForm'
 
@@ -15,15 +14,17 @@ export class Home extends React.Component {
       this.props.onAuthCheck();
     }
     if (this.props.isAuthenticated === true) {
-      console.log('TODO: go to dashboard');
-      // browserHistory.push('/dashboard');
+      this.props.history.push({
+        pathname: '/dashboard'
+      });
     }
   }
 
   componentWillReceiveProps(props) {
     if (props.isAuthenticated === true) {
-      console.log('TODO: go to dashboard');
-      // browserHistory.push('/dashboard');
+      props.history.push({
+        pathname: '/dashboard'
+      });
     }
   }
 
