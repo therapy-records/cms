@@ -18,7 +18,7 @@ import {
   selectSelectedNewsArticleSocialShareHashtags
 } from '../../selectors/news';
 import { selectNewsArticleFormValues } from '../../selectors/form';
-import './NewsArticleForm.scss';
+import './NewsArticleForm.css';
 import DropzoneImageUpload from './DropzoneImageUpload';
 import Datepicker from '../Datepicker/Datepicker';
 import Quotes from './Quotes';

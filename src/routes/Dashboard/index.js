@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { fetchNewsArticles } from '../../reducers/news';
 import { resetPromiseState } from '../../reducers/uiState';
 import { selectNewsArticles } from '../../selectors/news';
-import './styles.scss';
+import './styles.css';
 
 export class Dashboard extends React.Component {
   componentWillUnmount() {

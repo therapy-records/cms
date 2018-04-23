@@ -5,7 +5,7 @@ import LoginForm from '../../components/LoginForm'
 
 import { userLogin } from '../../reducers/user'
 import { authCheck } from '../../actions/auth';
-import './styles.scss';
+import './styles.css';
 
 export class Home extends React.Component {
 

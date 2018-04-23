@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Quotes.scss';
+import './Quotes.css';
 
 const isEmptyObj = (obj) => {
   for (var x in obj) {

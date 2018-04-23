@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import { userLogout } from '../../reducers/user'
-
-import Header from './Header'
+import Header from './Header';
 
 const mapDispatchToProps = {
   onLogout : () => userLogout()
