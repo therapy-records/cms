@@ -1,5 +1,7 @@
 import React from 'react';
-import { expect } from 'chai';
+import chai, { expect } from 'chai';
+import sinon from 'sinon';
+import sinonChai from 'sinon-chai';
 import { Field } from 'redux-form';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
@@ -11,8 +13,10 @@ import {
 } from './NewsArticleForm';
 import Datepicker from '../Datepicker/Datepicker';
 import ArticlePreview from '../ArticlePreview/ArticlePreview.container';
-import DropzoneImageUpload from '../DropzoneImageUpload/DropzoneImageUpload';
+import DropzoneImageUpload from './DropzoneImageUpload';
 import Quotes from './Quotes';
+
+chai.use(sinonChai);
 
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -185,7 +189,7 @@ describe('(Component) NewsArticleForm', () => {
                initTime={props.formValues.scheduledTime}
                title='Scheduler (optional)'
                titleSub='Post live on a date of choosing'
-               titleSub2='NOTE: This is an alpha version. <br />Time of posting is not exact and could be offset.' />
+               titleSub2='NOTE: This is an alpha version. Time of posting is not exact and could be offset.' />
       );
       expect(actual).to.equal(true);
     });
@@ -230,7 +234,7 @@ describe('(Component) NewsArticleForm', () => {
       const buttonWrapper = shallow(<NewsArticleForm {...props} />);
       const button = buttonWrapper.find('button[type="submit"]');
       button.simulate('click');
-      props.onSubmitForm.should.have.been.called;
+      expect(props.onSubmitForm.calledOnce).to.eq(true);
     });
 
     it('should call onSubmitFormQueue prop onClick if scheduledTime', () => {
@@ -247,7 +251,7 @@ describe('(Component) NewsArticleForm', () => {
       const buttonWrapper = shallow(<NewsArticleForm {...props} />);
       const button = buttonWrapper.find('button[type="submit"]');
       button.simulate('click');
-      props.onSubmitFormQueue.should.have.been.called;
+      expect(props.onSubmitFormQueue.calledOnce).to.eq(true);
     });
   });
 });

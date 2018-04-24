@@ -22,6 +22,7 @@ export class Quotes extends React.Component {
   }
 
   handleInputChange = (ev, index, property) => {
+    const { onChange } = this.props.input;
     let quotes = [ ...this.state.items ];
     quotes[index][property] = ev.target.value;
     this.setState({ items: quotes });
@@ -30,7 +31,7 @@ export class Quotes extends React.Component {
       return !isEmptyObj(i);
     });
 
-    this.props.input.onChange(filteredQuotes);
+    onChange && onChange(filteredQuotes);
   }
 
   onAddQuote = () => {

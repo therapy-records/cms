@@ -1,5 +1,6 @@
 import React from 'react';
 import { expect } from 'chai';
+import sinon from 'sinon';
 import Quotes from './Quotes';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
@@ -102,15 +103,13 @@ describe('(Component) Quotes', () => {
         target: { value: 'testingA' }
       };
       inputCopy.simulate('change', mockEv);
-      props.input.onChange.should.have.been.called;
-      props.input.onChange.should.have.been.called.once;
+      expect(props.input.onChange.calledOnce).to.eq(true);
 
       mockEv = {
         target: { value: 'testingB' }
       };
       inputAuthor.simulate('change', mockEv);
-      props.input.onChange.should.have.been.called;
-      props.input.onChange.should.have.been.called.once;
+      expect(props.input.onChange.callCount).to.eq(2);
     });
     it('should call props.input.onChange with no empty objects', () => {
       const firstListItem = wrapper.find('li').first();
@@ -123,8 +122,8 @@ describe('(Component) Quotes', () => {
         { copy: mockEv.target.value }
       ];
       inputCopy.simulate('change', mockEv);
-      props.input.onChange.should.have.been.called;
-      props.input.onChange.should.have.been.calledWith(expectedQuotes);
+      expect(props.input.onChange.calledOnce).to.eq(true);
+      expect(props.input.onChange.calledWith(expectedQuotes)).to.eq(true);
     });
   });
 

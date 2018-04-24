@@ -1,10 +1,14 @@
 import React from 'react'
-import { expect } from 'chai';
+import chai, { expect } from 'chai';
+import sinon from 'sinon';
+import sinonChai from 'sinon-chai';
 import { bindActionCreators } from 'redux'
 import Header from './Header'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
+
+chai.use(sinonChai);
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -69,19 +73,16 @@ describe('(Component) Header', () => {
       });
 
       it('should call dispatch and onLogout on click', () => {
-        let spies = {};
+        const onLogoutSpy = sinon.spy();
         props = {
           isAuthenticated: true,
-          ...bindActionCreators({
-            onLogout: (spies.onLogout = sinon.spy())
-          }, spies.dispatch = sinon.spy())
+          onLogout: onLogoutSpy
         }
         const buttonWrapper = shallow(<Header {...props} />)
-        spies.dispatch.should.have.not.been.called
+        expect(onLogoutSpy.calledOnce).to.eq(false);
         const button = buttonWrapper.find('button');
         button.simulate('click');
-        spies.dispatch.should.have.been.called;
-        spies.onLogout.should.have.been.called;
+        expect(onLogoutSpy.calledOnce).to.eq(true);
       });
     });
   });

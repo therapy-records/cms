@@ -9,6 +9,10 @@ class Header extends React.Component {
   //   browserHistory.push('/');
   // }
 
+  redirectToHome() {
+    return {};
+  }
+
   render() {
     const {
       isAuthenticated,
