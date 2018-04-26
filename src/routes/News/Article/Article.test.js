@@ -3,16 +3,16 @@ import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import { Link } from 'react-router'
-import Article from './index'
-import ArticleDeleteModal from 'components/ArticleDeleteModal'
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
+import { Article } from './index'
+import ArticleDeleteModal from '../../../components/ArticleDeleteModal'
 
 chai.use(sinonChai);
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('(Component) News - Article', () => {
+describe.only('(Component) News - Article', () => {
   let wrapper,
       props,
       mockMiniGalleryImages = [
@@ -66,13 +66,11 @@ describe('(Component) News - Article', () => {
     });
     it('should call resetPromiseState', () => {
       wrapper.unmount();
-      expect(props.resetPromiseState).to.have.been.called;
-      expect(props.resetPromiseState).to.have.been.called.once;
+      expect(props.resetPromiseState.calledOnce).to.eq(true);
     });
     it('should call onDestroyArticle if location.pathname does not include edit', () => {
       wrapper.unmount();
-      expect(props.onDestroyArticle).to.have.been.called;
-      expect(props.onDestroyArticle).to.have.been.called.once;
+      expect(props.onDestroyArticle.calledOnce).to.eq(true);
     });
 
     it('should not call onDestroyArticle if location.pathname includes edit', () => {
@@ -81,7 +79,7 @@ describe('(Component) News - Article', () => {
       };
       wrapper = shallow(<Article {...props} />);
       wrapper.unmount();
-      expect(props.onDestroyArticle).not.to.have.been.called;
+      expect(props.onDestroyArticle.calledOnce).to.eq(false);
     });
   });
 
@@ -140,8 +138,7 @@ describe('(Component) News - Article', () => {
       wrapper = shallow(<Article {...props} />);
     });
     it('should call onFetchArticle', () => {
-      expect(props.onFetchArticle).to.have.been.called;
-      expect(props.onFetchArticle).to.have.been.called.once;
+      expect(props.onFetchArticle.calledOnce).to.eq(true);
     });
   });
 
@@ -152,8 +149,7 @@ describe('(Component) News - Article', () => {
       props.params = { id: 123 };
       props.onFetchArticle = sinon.spy();
       wrapper = shallow(<Article {...props} />);
-      expect(props.onFetchArticle).to.have.been.called;
-      expect(props.onFetchArticle).to.have.been.called.once;
+      expect(props.onFetchArticle.calledOnce).to.eq(true);
     });
   });
 
@@ -164,8 +160,7 @@ describe('(Component) News - Article', () => {
       props.params = { };
       props.onFetchArticle = sinon.spy();
       wrapper = shallow(<Article {...props} />);
-      expect(props.onFetchArticle).to.have.been.called;
-      expect(props.onFetchArticle).to.have.been.called.once;
+      expect(props.onFetchArticle.calledOnce).to.eq(true);
     });
   });
 

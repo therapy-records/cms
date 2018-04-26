@@ -14,7 +14,7 @@ import {
 } from '../../../reducers/newsArticle';
 import ArticleDeleteModal from '../../../components/ArticleDeleteModal';
 
-class Article extends React.Component {
+export class Article extends React.Component {
 
   state = {
     isShowingModal: false
