@@ -1,7 +1,7 @@
 import React from 'react'
 import { expect } from 'chai';
 import ArticlePreview from './ArticlePreview'
-import ArticleLive from 'components/ArticleLive/ArticleLive'
+import ArticleLive from '../ArticleLive/ArticleLive'
 import { ModalContainer, ModalDialog } from 'react-modal-dialog';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';

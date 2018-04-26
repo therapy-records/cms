@@ -8,13 +8,13 @@ import {
   selectSelectedOtherWorkArticleMainImageExternalLink,
   selectSelectedOtherWorkArticleMainImageUrl,
   selectSelectedOtherWorkArticleReleaseDate
-} from 'selectors/otherWork';
-import { selectOtherWorkArticleFormValues } from 'selectors/form';
-import Datepicker from 'components/Datepicker/Datepicker';
-import DropzoneImageUpload from 'components/NewsArticleForm/DropzoneImageUpload';
-import TextInput from 'components/TextInput';
-import { required } from 'utils/form';
-import { OTHER_WORK_ARTICLE_FORM } from 'constants';
+} from '../../selectors/otherWork';
+import { selectOtherWorkArticleFormValues } from '../../selectors/form';
+import Datepicker from '../Datepicker/Datepicker';
+import DropzoneImageUpload from '../NewsArticleForm/DropzoneImageUpload';
+import TextInput from '../TextInput';
+import { required } from '../../utils/form';
+import { OTHER_WORK_ARTICLE_FORM } from '../../constants';
 
 export class OtherWorkArticleForm extends React.Component {
   handleSubmit() {
@@ -41,7 +41,7 @@ export class OtherWorkArticleForm extends React.Component {
     return (
       <section className='root'>
         <div className='heading'>
-          <h2>{isEditForm ? 'Edit article' : 'Create article'}</h2>
+          <h2>{isEditForm ? 'Edit other-work article' : 'Create other-work article'}</h2>
         </div>
 
         <form onSubmit={(e) => e.preventDefault()} encType='multipart/form-data'>

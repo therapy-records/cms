@@ -1,4 +1,3 @@
-/*
 import React from 'react'
 import { expect } from 'chai';
 import ErrorComponent from './Error'
@@ -14,10 +13,11 @@ describe('(Component) ErrorComponent', () => {
     wrapper = shallow(<ErrorComponent {...props} />)
   });
 
-  it('should render a heading', () => {
-    const actual = wrapper.containsMatchingElement(
-      <h3>Oh no, 404 :(</h3>
-    );
+  it('should render error copy', () => {
+    const actual = wrapper.containsAllMatchingElements([
+      <h3>Oh no :(</h3>,
+      <p>Sorry, we couldn't find that page.</p>
+    ]);
     expect(actual).to.equal(true);
   });
   it('should render a link to home', () => {
@@ -27,5 +27,3 @@ describe('(Component) ErrorComponent', () => {
     expect(actual).to.equal(true);
   });
 });
-
-*/

@@ -1,5 +1,6 @@
 import React from 'react'
 import { expect } from 'chai';
+import sinon from 'sinon';
 import { Field } from 'redux-form';
 import { LoginForm, textInput, required } from './LoginForm'
 import Enzyme, { shallow } from 'enzyme';
@@ -71,7 +72,7 @@ describe('(Component) LoginForm', () => {
     it('should render a button', () => {
       props = {
         onSubmit: () => {},
-        error: false,
+        error: undefined,
         pristine: false,
         submitting: false
       }
@@ -85,14 +86,14 @@ describe('(Component) LoginForm', () => {
     it('should call onSubmit prop onClick', () => {
       props = {
         onSubmit: sinon.spy(),
-        error: false,
+        error: undefined,
         pristine: false,
         submitting: false
       };
       const buttonWrapper = shallow(<LoginForm {...props} />);
       const button = buttonWrapper.find('button');
       button.simulate('click');
-      props.onSubmit.should.have.been.called;
+      expect(props.onSubmit.calledOnce).to.eq(true);
     });
   });
 });

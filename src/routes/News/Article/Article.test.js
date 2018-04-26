@@ -3,7 +3,7 @@ import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import { Link } from 'react-router'
-import Article from './Article'
+import Article from './index'
 import ArticleDeleteModal from 'components/ArticleDeleteModal'
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';

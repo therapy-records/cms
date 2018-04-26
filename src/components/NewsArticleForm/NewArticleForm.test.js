@@ -23,10 +23,15 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) NewsArticleForm', () => {
   let wrapper,
-      props;
+      props,
+      baseProps = {
+        handleModalClose: () => {},
+        onSubmitFormQueue: () => {},
+        onSubmitForm: () => {}
+      }
 
   it('should render a `Create` heading', () => {
-    props = { location: { pathname: 'test/create' } };
+    props = { ...baseProps, location: { pathname: 'test/create' } };
     const createWrapper = shallow(
       <NewsArticleForm {...props} />
     );
@@ -37,7 +42,7 @@ describe('(Component) NewsArticleForm', () => {
   });
 
   it('should render an `Edit` heading', () => {
-    props = { location: { pathname: 'test/edit' } };
+    props = { ...baseProps, location: { pathname: 'test/edit' } };
     const editWrapper = shallow(
       <NewsArticleForm {...props} />
     );
@@ -48,7 +53,7 @@ describe('(Component) NewsArticleForm', () => {
   });
 
   it('should render <ArticlePreview />', () => {
-    props = { location: { pathname: 'test/create' } };
+    props = { ...baseProps, location: { pathname: 'test/create' } };
     const createWrapper = shallow(
       <NewsArticleForm {...props} />
     );
@@ -60,11 +65,11 @@ describe('(Component) NewsArticleForm', () => {
 
   it('should not render <ArticlePreview /> with disabled prop, with correct conditions', () => {
     const _location = { pathname: 'test/create' };
-    props = { location: _location, invalid: true };
+    props = { ...baseProps, location: _location, invalid: true };
     const createWrapper = shallow(<NewsArticleForm {...props} />);
     const actual = createWrapper.containsMatchingElement(<ArticlePreview />);
     expect(actual).to.equal(true);
-    props = { location: _location, error: true };
+    props = { location: _location, error: 'an error' };
     const createWrapperError = shallow(<NewsArticleForm {...props} />);
     const actualError = createWrapperError.containsMatchingElement(<ArticlePreview />);
     expect(actualError).to.equal(true);
@@ -175,6 +180,7 @@ describe('(Component) NewsArticleForm', () => {
 
     it('should render scheduledTime field', () => {
       const props = {
+        ...baseProps,
         formValues: {
           scheduledTime: new Date(),
           mainImage: {
@@ -197,6 +203,7 @@ describe('(Component) NewsArticleForm', () => {
 
   it('should render an error', () => {
     props = {
+      ...baseProps,
       error: 'Something is wrong'
     }
     const errorWrapper = shallow(
@@ -211,8 +218,9 @@ describe('(Component) NewsArticleForm', () => {
   describe('submit button', () => {
     it('should render a button', () => {
       props = {
+        ...baseProps,
         onSubmit: () => {},
-        error: false,
+        error: undefined,
         pristine: false,
         submitting: false
       }
@@ -225,8 +233,9 @@ describe('(Component) NewsArticleForm', () => {
 
     it('should call onSubmitForm prop onClick', () => {
       props = {
+        ...baseProps,
         onSubmitForm: sinon.spy(),
-        error: false,
+        error: undefined,
         pristine: false,
         submitting: false,
         formValues: { mainImage: { url: 'test.com' } }
@@ -239,8 +248,9 @@ describe('(Component) NewsArticleForm', () => {
 
     it('should call onSubmitFormQueue prop onClick if scheduledTime', () => {
       props = {
+        ...baseProps,
         onSubmitFormQueue: sinon.spy(),
-        error: false,
+        error: undefined,
         pristine: false,
         submitting: false,
         formValues: {

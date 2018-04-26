@@ -1,13 +1,14 @@
 import React from 'react';
 import { expect } from 'chai';
+import sinon from 'sinon'
 import { Field } from 'redux-form';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import TextInput from '../TextInput/TextInput';
 import Datepicker from '../Datepicker/Datepicker';
-import OtherWorkArticleForm from '../OtherWorkArticleForm';
+import { OtherWorkArticleForm } from './OtherWorkArticleForm';
 import DropzoneImageUpload from '../NewsArticleForm/DropzoneImageUpload';
-import { required } from 'utils/form';
+import { required } from '../../utils/form';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -135,7 +136,7 @@ describe('(Component) OtherWorkArticleForm', () => {
       const buttonWrapper = shallow(<OtherWorkArticleForm {...props} />);
       const button = buttonWrapper.find('button[type="submit"]');
       button.simulate('click');
-      props.onSubmitForm.should.have.been.called;
+      expect(props.onSubmitForm.calledOnce).to.eq(true);
     });
   });
 });

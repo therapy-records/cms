@@ -42,7 +42,7 @@ describe('(Component) News - ArticleDeleteModal', () => {
       const buttonWrapper = shallow(<ArticleDeleteModal {...buttonProps} />);
       const button = buttonWrapper.find('button');
       button.simulate('click');
-      expect(buttonProps.onDeleteArticle).to.have.been.called.once;
+      expect(buttonProps.onDeleteArticle.calledOnce).to.eq(true);
     });
   });
 });
