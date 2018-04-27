@@ -4,9 +4,9 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
-import { Link } from 'react-router';
-import ArticleEdit from './index';
-import NewsArticleForm from 'components/NewsArticleForm';
+import { Link } from 'react-router-dom';
+import { ArticleEdit } from './index';
+import NewsArticleForm from '../../../components/NewsArticleForm';
 
 chai.use(sinonChai);
 
@@ -31,7 +31,7 @@ describe('(Component) News - ArticleEdit', () => {
     wrapper = shallow(<ArticleEdit {...props} />);
     wrapper.unmount();
     expect(props.onDestroyArticle).to.have.been.called;
-    expect(props.onDestroyArticle).to.have.been.called.once;
+    expect(props.onDestroyArticle).to.have.been.calledOnce;
   });
 
   it('should render editing title', () => {

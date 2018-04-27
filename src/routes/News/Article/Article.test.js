@@ -2,7 +2,7 @@ import React from 'react'
 import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import { Article } from './index'

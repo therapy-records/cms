@@ -6,7 +6,7 @@ import { postNews, postNewsQueue } from '../../../reducers/news';
 import { resetPromiseState } from '../../../reducers/uiState';
 import NewsArticleForm from '../../../components/NewsArticleForm';
 
-class ArticleCreate extends React.Component {
+export class ArticleCreate extends React.Component {
   componentWillUnmount() {
     this.props.resetPromiseState();
   }

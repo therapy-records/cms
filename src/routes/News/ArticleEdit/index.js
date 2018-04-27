@@ -11,7 +11,7 @@ import {
 import { destroySelectedNewsArticle } from '../../../reducers/newsArticle';
 import NewsArticleForm from '../../../components/NewsArticleForm';
 
-class ArticleEdit extends React.Component {
+export class ArticleEdit extends React.Component {
   componentWillUnmount() {
     this.props.resetPromiseState();
     this.props.onDestroyArticle();

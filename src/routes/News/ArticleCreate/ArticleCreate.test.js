@@ -4,9 +4,9 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
-import { Link } from 'react-router'
-import ArticleCreate from './index'
-import NewsArticleForm from 'components/NewsArticleForm'
+import { Link } from 'react-router-dom'
+import { ArticleCreate } from './index'
+import NewsArticleForm from '../../../components/NewsArticleForm'
 
 chai.use(sinonChai);
 
