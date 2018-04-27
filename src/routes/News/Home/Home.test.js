@@ -4,9 +4,9 @@ import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import Adapter from 'enzyme-adapter-react-15';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
-import News from './index';
+import { News } from './index';
 
 chai.use(sinonChai);
 
@@ -38,7 +38,7 @@ describe('(Component) News - Home', () => {
     expect(actual).to.equal(true);
   });
 
-  it('should render create a new queue link', () => {
+  it('should render create a new article link', () => {
     props = baseProps;
     wrapper = shallow(<News {...props} />);
     const actual = wrapper.containsMatchingElement(
@@ -53,10 +53,10 @@ describe('(Component) News - Home', () => {
     const renderNewsArticle = (key) => {
       const p = props.newsArticles[key]; // eslint-disable-line
       return (
-        <li key={p._id} className='news-item'>
+        <li key={p._id} className='article-card'>
           <img />
           <div>
-            {(!p.scheduledTime && p.createdAt) && <p className='created-at'>{moment(p.createdAt).fromNow()}</p>}
+            {(!p.scheduledTime && p.createdAt) && <p className='small-tab'>{moment(p.createdAt).fromNow()}</p>}
             <h3><Link to={`news/${p._id}`}>{p.title}</Link></h3>
             <Link to={`news/${p._id}`} className='btn btn-sm'>View</Link>
             <Link to={`news/${p._id}/edit`} className='btn btn-sm'>Edit</Link>
@@ -77,7 +77,7 @@ describe('(Component) News - Home', () => {
       let _props = baseProps;
       _props.onSetSelectedNewsArticle = sinon.spy();
       wrapper = shallow(<News {..._props} />);
-      const lastArticle = wrapper.find('.news-item').last();
+      const lastArticle = wrapper.find('.article-card').last();
       const lastArticleButton = lastArticle.find(Link).first();
       lastArticleButton.simulate('click');
       expect(_props.onSetSelectedNewsArticle).to.have.been.called;
@@ -89,7 +89,7 @@ describe('(Component) News - Home', () => {
       let _props = baseProps;
       _props.onSetSelectedNewsArticle = sinon.spy();
       wrapper = shallow(<News {..._props} />);
-      const lastArticle = wrapper.find('.news-item').last();
+      const lastArticle = wrapper.find('.article-card').last();
       const lastArticleButton = lastArticle.find(Link).last();
       lastArticleButton.simulate('click');
       expect(_props.onSetSelectedNewsArticle).to.have.been.called;

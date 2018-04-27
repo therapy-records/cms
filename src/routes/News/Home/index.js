@@ -16,7 +16,7 @@ const dateIsBefore = (a, b) => {
   return new Date(b.createdAt) - new Date(a.createdAt)
 };
 
-class News extends React.Component {
+export class News extends React.Component {
   componentWillMount() {
     if (!this.props.articlesQueue ||
       !this.props.articlesQueue.length) {
