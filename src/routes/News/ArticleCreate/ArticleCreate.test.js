@@ -27,7 +27,7 @@ describe('(Component) News - ArticleCreate', () => {
     wrapper = shallow(<ArticleCreate {...props} />);
     wrapper.unmount();
     expect(props.resetPromiseState).to.have.been.called;
-    expect(props.resetPromiseState).to.have.been.called.once;
+    expect(props.resetPromiseState).to.have.been.calledOnce;
   });
 
   it('should render a NewsArticleForm', () => {

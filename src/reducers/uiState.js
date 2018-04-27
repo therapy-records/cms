@@ -56,7 +56,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = {
+export const initialState = {
   promiseLoading: false,
   promiseSuccess: false,
   promiseError: false
