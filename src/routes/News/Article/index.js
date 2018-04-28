@@ -25,7 +25,7 @@ export class Article extends React.Component {
 
   componentWillMount() {
     const propsArticle = this.props.article;
-    const paramsId = this.props.params.id;
+    const paramsId = this.props.match.params.id;
     const noArticle = !propsArticle ||
                       !propsArticle._id ||
                       !paramsId;
@@ -38,7 +38,7 @@ export class Article extends React.Component {
 
   componentWillUnmount() {
     this.props.resetPromiseState();
-    if (!this.props.location.pathname.includes('/edit')) {
+    if (!this.props.history.location.pathname.includes('/edit')) {
       this.props.onDestroyArticle();
     }
   }
@@ -90,8 +90,9 @@ export class Article extends React.Component {
 
     if (article && article.isDeleted) {
       setTimeout(() => {
-        console.log('TODO: browserHistory');
-        // browserHistory.push('/news');
+        this.props.history.push({
+          pathname: '/news'
+        });
       }, 1000)
     }
 
@@ -253,7 +254,8 @@ export class Article extends React.Component {
 }
 
 Article.propTypes = {
-  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
   onDeleteArticle: PropTypes.func.isRequired,
   onDeleteScheduledArticle: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
@@ -278,8 +280,7 @@ const mapStateToProps = (state, props) => ({
   article: selectSelectedNewsArticle(state),
   promiseLoading: state.uiState.promiseLoading,
   promiseSuccess: state.uiState.promiseSuccess,
-  promiseError: state.uiState.promiseError,
-  location: state.location
+  promiseError: state.uiState.promiseError
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Article)

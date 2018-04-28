@@ -48,8 +48,15 @@ describe.only('(Component) News - Article', () => {
         onDestroyArticle: sinon.spy(),
         onFetchArticle: sinon.spy(),
         params: { id: 123 },
-        location : {
-          pathname: 'news/123456789'
+        history: {
+          location: {
+            pathname: 'news/123456789'
+          }
+        },
+        match: {
+          params: {
+            id: 1234
+          }
         },
         article: mockArticle
       };
@@ -74,9 +81,11 @@ describe.only('(Component) News - Article', () => {
       expect(props.onDestroyArticle.calledOnce).to.eq(true);
     });
 
-    it('should not call onDestroyArticle if location.pathname includes edit', () => {
-      props.location = {
-        pathname: 'news/123456789/edit'
+    it('should not call onDestroyArticle if history.location.pathname includes edit', () => {
+      props.history = {
+        location: {
+          pathname: 'news/123456789/edit'
+        }
       };
       wrapper = shallow(<Article {...props} />);
       wrapper.unmount();

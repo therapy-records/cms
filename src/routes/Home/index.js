@@ -21,9 +21,10 @@ export class Home extends React.Component {
   }
 
   componentWillReceiveProps(props) {
+    const fromPath = (props.location.state && props.location.state.from.pathname) || '/dashboard';
     if (props.isAuthenticated === true) {
       props.history.push({
-        pathname: '/dashboard'
+        pathname: fromPath
       });
     }
   }
