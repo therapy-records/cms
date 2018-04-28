@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import './Header.css';
 
 class Header extends React.Component {
@@ -22,30 +22,30 @@ class Header extends React.Component {
     return (
       <div className='header'>
         <h1>
-          <Link to='/' activeClassName='route--active'>Fiona Ross CMS</Link>
+          <NavLink to='/' activeClassName='route--active'>Fiona Ross CMS</NavLink>
         </h1>
         {isAuthenticated ? (
           <div className='header-nav'>
-            <Link to='/dashboard' activeClassName='route--active'>
+            <NavLink to='/dashboard' activeClassName='route--active'>
               Dashboard
-            </Link>
+            </NavLink>
             {' | '}
-            <Link to='/news' activeClassName='route--active'>
+            <NavLink to='/news' activeClassName='route--active'>
               News
-            </Link>
+            </NavLink>
             {' | '}
-            <Link to='/press' activeClassName='route--active'>
+            <NavLink to='/press' activeClassName='route--active'>
               Press
-            </Link>
+            </NavLink>
             {' | '}
-            <Link to='/other-work' activeClassName='route--active'>
+            <NavLink to='/other-work' activeClassName='route--active'>
               Other Work
-            </Link>
+            </NavLink>
             {' | '}
             <button onClick={() => { onLogout(); this.redirectToHome(); }} className='btn-logout'>Log out</button>
           </div>
         ) : (
-          <Link to='/' activeClassName='route--active'>Log in</Link>
+          <NavLink to='/' activeClassName='route--active'>Log in</NavLink>
         )}
       </div>
     )

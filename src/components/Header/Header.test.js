@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import { bindActionCreators } from 'redux'
 import Header from './Header'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 
@@ -25,14 +25,14 @@ describe('(Component) Header', () => {
 
     it('should render a title', () => {
       const actual = wrapper.containsMatchingElement(
-        <Link to='/' activeClassName='route--active'>Fiona Ross CMS</Link>
+        <NavLink to='/' activeClassName='route--active'>Fiona Ross CMS</NavLink>
       );
       expect(actual).to.equal(true);
     });
 
     it('should render a login link', () => {
       const actual = wrapper.containsMatchingElement(
-        <Link to='/' activeClassName='route--active'>Log in</Link>
+        <NavLink to='/' activeClassName='route--active'>Log in</NavLink>
       );
       expect(actual).to.equal(true);
     });
@@ -49,21 +49,21 @@ describe('(Component) Header', () => {
 
     it('should render auth only links', () => {
       const actual1 = wrapper.containsMatchingElement(
-        <Link to='/dashboard' activeClassName='route--active'>
+        <NavLink to='/dashboard' activeClassName='route--active'>
           Dashboard
-        </Link>
+        </NavLink>
       );
       expect(actual1).to.equal(true);
       const actual2 = wrapper.containsMatchingElement(
-        <Link to='/news' activeClassName='route--active'>
+        <NavLink to='/news' activeClassName='route--active'>
           News
-        </Link>
+        </NavLink>
       );
       expect(actual2).to.equal(true);
       const actual3 = wrapper.containsMatchingElement(
-        <Link to='/press' activeClassName='route--active'>
+        <NavLink to='/press' activeClassName='route--active'>
           Press
-        </Link>
+        </NavLink>
       );
       expect(actual3).to.equal(true);
     });
