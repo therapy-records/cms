@@ -15,15 +15,17 @@ Enzyme.configure({ adapter: new Adapter() });
 describe('(Component) Dashboard', () => {
   let props,
       wrapper,
-      mockNewsArticles = [
+      mockArticles = [
         { title: 'test' },
         { title: 'testing' }
-      ];
+      ]
 
   beforeEach(() => {
     props = {
-      newsArticles: mockNewsArticles,
-      onFetchNewsArticles: () => mockNewsArticles,
+      newsArticles: mockArticles,
+      otherWorkArticles: mockArticles,
+      onFetchNewsArticles: () => mockArticles,
+      onFetchOtherWorkArticles: () => mockArticles,
       resetPromiseState: () => {}
     }
     wrapper = shallow(<Dashboard {...props} />)
@@ -50,17 +52,33 @@ describe('(Component) Dashboard', () => {
     expect(actual).to.be.true;
   });
 
-  describe('when there are no newsArticles in props', () => {
+  it('should render a total amount of other-work articles', () => {
+    const actual = wrapper.containsMatchingElement(
+      <p>Other-work articles: {props.otherWorkArticles.length}</p>
+    );
+    expect(actual).to.be.true;
+  });
+
+  describe('when there are no newsArticles', () => {
     it('should call onFetchNewsArticles', () => {
-      props = {
-        newsArticles: [],
-        onFetchNewsArticles: sinon.spy(),
-        resetPromiseState: () => {}
-      };
+      props.newsArticles = [];
+      props.onFetchNewsArticles = sinon.spy();
+      props.resetPromiseState = () => {};
       shallow(<Dashboard {...props} />)
       expect(props.onFetchNewsArticles).to.have.been.called;
     });
   });
+
+  describe('when there are no otherWorkArticles', () => {
+    it('should call onFetchOtherWorkArticles', () => {
+      props.otherWorkArticles = [];
+      props.onFetchOtherWorkArticles = sinon.spy();
+      props.resetPromiseState = () => { };
+      shallow(<Dashboard {...props} />)
+      expect(props.onFetchOtherWorkArticles).to.have.been.called;
+    });
+  });
+  
 
   // todo: test componentWillUnmount calls resetPromiseState
 });

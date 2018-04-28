@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { fetchNewsArticles } from '../../reducers/news';
+import { fetchOtherWorkArticles } from '../../reducers/otherWork';
 import { resetPromiseState } from '../../reducers/uiState';
 import { selectNewsArticles } from '../../selectors/news';
+import { selectOtherWorkArticles } from '../../selectors/otherWork';
 import './styles.css';
 
 export class Dashboard extends React.Component {
@@ -14,12 +16,18 @@ export class Dashboard extends React.Component {
 
   render() {
     const {
-      newsArticles
+      newsArticles,
+      otherWorkArticles
     } = this.props;
 
     if (!newsArticles || !newsArticles.length) {
       this.props.onFetchNewsArticles();
     }
+
+    if (!otherWorkArticles || !otherWorkArticles.length) {
+      this.props.onFetchOtherWorkArticles();
+    }
+
 
     return (
       <div>
@@ -33,8 +41,8 @@ export class Dashboard extends React.Component {
 
         <h3><strong>Stats</strong></h3>
         {newsArticles && <p>News articles: {newsArticles.length}</p>}
+        {otherWorkArticles && <p>Other-work articles: {otherWorkArticles.length}</p>}
         <p>Press releases: Coming soon...</p>
-        <p>Other Work articles: Coming soon...</p>
       </div>
     )
   }
@@ -49,11 +57,13 @@ Dashboard.propTypes = {
 
 
 const mapStateToProps = (state) => ({
-  newsArticles: selectNewsArticles(state)
+  newsArticles: selectNewsArticles(state),
+  otherWorkArticles: selectOtherWorkArticles(state)
 })
 
 const mapDispatchToProps = {
   onFetchNewsArticles: () => fetchNewsArticles(),
+  onFetchOtherWorkArticles: () => fetchOtherWorkArticles(),
   resetPromiseState: () => resetPromiseState()
 }
 
