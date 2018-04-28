@@ -18,7 +18,6 @@ import Quotes from './Quotes';
 
 chai.use(sinonChai);
 
-
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) NewsArticleForm', () => {
