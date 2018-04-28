@@ -26,7 +26,7 @@ body {
 
 .main-container {
   margin: 0;
-  padding: 5em 0 0; }
+  padding: 5em 1em 0; }
 
 .core-layout {
   height: 100%; }
@@ -90,19 +90,22 @@ button {
   cursor: pointer; }
 
 .btn {
+  display: inline-block;
   background: #111;
   color: #FFF;
   font-weight: 300;
-  margin: 0 0 1em 0;
+  margin: 0 0 .5em 0;
   padding: 7px 20px;
   width: 100%; }
   @media (min-width: 600px) {
     .btn {
       width: auto;
-      margin-bottom: 1.5em;
       padding: 5px 15px; } }
   .btn + .btn {
     margin-left: 1.5em; }
+    @media (min-width: 600px) {
+      .btn + .btn {
+        margin-left: 0; } }
   .btn:hover, .btn:focus {
     color: #FFF;
     text-decoration: underline; }
@@ -193,18 +196,8 @@ ol {
   width: 100%;
   max-width: 250px;
   font-size: .95em; }
-  .article-summary-box .btn {
-    font-size: 1em; }
-    @media (min-width: 600px) {
-      .article-summary-box .btn {
-        margin-bottom: 0; } }
-    .article-summary-box .btn + .btn {
-      margin-left: 0; }
-      @media (min-width: 600px) {
-        .article-summary-box .btn + .btn {
-          margin-left: 1em; } }
-    .article-summary-box .btn:last-child {
-      margin-bottom: 0; }
+  .article-summary-box .btn + .btn {
+    margin-bottom: 0; }
 
 .article-summary-box-inner {
   width: 100%;
