@@ -11,6 +11,13 @@ import NewsHome from './routes/News/Home';
 import NewsArticle from './routes/News/Article';
 import NewsArticleEdit from './routes/News/ArticleEdit';
 import NewsArticleCreate from './routes/News/ArticleCreate';
+
+import OtherWorkHome from './routes/OtherWork/Home';
+import OtherWorkArticle from './routes/OtherWork/Article';
+import OtherWorkArticleEdit from './routes/OtherWork/ArticleEdit';
+import OtherWorkArticleCreate from './routes/OtherWork/ArticleCreate';
+
+
 import { authCheck } from './actions/auth';
 import './index.css';
 
@@ -26,6 +33,7 @@ class Router extends Component {
 
           <div className="main-container">
             <Switch>
+
               <Route path="/" component={Home} exact />
               <ProtectedRoute path="/dashboard" component={Dashboard} isAuth={isAuth} exact />
               <ProtectedRoute path="/press" component={Press} isAuth={isAuth} exact />
@@ -34,6 +42,12 @@ class Router extends Component {
               <ProtectedRoute path="/news/:id" component={NewsArticle} isAuth={isAuth} exact />
               <ProtectedRoute path="/news/:id/edit" component={NewsArticleEdit} isAuth={isAuth} exact />
               <ProtectedRoute path="/news/create" component={NewsArticleCreate} isAuth={isAuth} exact />
+
+              <ProtectedRoute path="/other-work" component={OtherWorkHome} isAuth={isAuth} exact />
+              <ProtectedRoute path="/other-work/:id" component={OtherWorkArticle} isAuth={isAuth} exact />
+              <ProtectedRoute path="/other-work/:id/edit" component={OtherWorkArticleEdit} isAuth={isAuth} exact />
+              <ProtectedRoute path="/other-work/create" component={OtherWorkArticleCreate} isAuth={isAuth} exact />
+
             </Switch>
           </div>
 

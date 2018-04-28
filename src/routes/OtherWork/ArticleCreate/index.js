@@ -15,7 +15,8 @@ class ArticleCreate extends React.Component {
     const {
       promiseLoading,
       promiseSuccess,
-      promiseError
+      promiseError,
+      location
     } = this.props;
 
     return (

@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { resetPromiseState } from 'reducers/uiState';
-import { destroySelectedOtherWorkArticle } from 'reducers/otherWorkArticle';
-import { editOtherWork } from 'reducers/otherWork';
-import { selectSelectedOtherWorkArticle } from 'selectors/otherWork';
+import { resetPromiseState } from '../../../reducers/uiState';
+import { destroySelectedOtherWorkArticle } from '../../../reducers/otherWorkArticle';
+import { editOtherWork } from '../../../reducers/otherWork';
+import { selectSelectedOtherWorkArticle } from '../../../selectors/otherWork';
 
-import OtherWorkArticleForm from 'components/OtherWorkArticleForm';
+import OtherWorkArticleForm from '../../../components/OtherWorkArticleForm';
 
 class ArticleEdit extends React.Component {
   componentWillUnmount() {
@@ -24,7 +24,8 @@ class ArticleEdit extends React.Component {
       article,
       promiseLoading,
       promiseSuccess,
-      promiseError
+      promiseError,
+      location
     } = this.props;
 
     if (!article || !article.title) {

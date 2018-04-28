@@ -32,7 +32,7 @@ class OtherWorkHome extends React.Component {
   renderArticle(p) {
     return (
       <li key={p._id} className='article-card'>
-        <img src={p.mainImageUrl} />
+        <img src={p.mainImageUrl} alt="" />
         <div>
           <h3>
             <Link
@@ -73,6 +73,8 @@ class OtherWorkHome extends React.Component {
       articles
     } = this.props;
 
+    const hasArticles = articles && articles.length;
+
     return (
       <div>
         {promiseLoading ?
@@ -81,17 +83,12 @@ class OtherWorkHome extends React.Component {
             <div className='news-feed-header'>
               <Link to='other-work/create' className='btn'>Create a new article</Link>
             </div>
-            {
-              !articles || !articles.length && (
-                <p>Unable to fetch articles :(</p>
-              )
-            }
 
-            {articles &&
+            {hasArticles ?
               <ul>
                 {articles.map((p) => this.renderArticle(p))}
               </ul>
-            }
+            : <p>Unable to fetch articles :(</p>}
           </div>
         }
 
