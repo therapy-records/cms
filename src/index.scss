@@ -10,13 +10,12 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
-  font-family: 'Raleway';
+  font-family: 'Raleway', sans-serif;
 }
 
 body {
   margin: 0;
-  padding: 1em;
-  font-family: sans-serif;
+  padding: 0;
 }
 
 *,
@@ -25,11 +24,15 @@ body {
   box-sizing: inherit;
 }
 
-.main-container {
+.main-container,
+.main-container-inner {
   width: 100%;
   height: 100%;
+}
+
+.main-container {
   margin: 0;
-  padding: 0;
+  padding: 5em 0 0;
 }
 
 .core-layout {
@@ -105,6 +108,7 @@ button {
   font-size: 1em;
   transition:all 0.2s ease;
   appearance: none;
+  cursor: pointer;
 }
 
 .btn {
@@ -136,7 +140,14 @@ button {
 h1,h2,h3,h4,h5,h6 {
   margin-top: 0;
   margin-bottom: 0.5em;
-  font-weight: 600;
+  font: {
+    weight: 600;
+    size: 1em;
+  }
+}
+
+h1 {
+  font-size: 1.5em;
 }
 
 img {
@@ -332,9 +343,6 @@ iframe {
     font-size: 1.3em;
     @media(min-width: 600px) {
       font-size: 1.5em;
-    }
-    @media(min-width: 768px) {
-      font-size: 2em;
     }
     a {
       color: #000;
