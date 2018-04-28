@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import InputMoment from 'input-moment';
+import moment from 'moment';
 import Datepicker from './Datepicker';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -17,7 +18,7 @@ describe('(Component) Datepicker', () => {
         input: {
           onChange: () => {}
         },
-        initTime: new Date(),
+        initTime: moment.now(),
         title: 'my datepicker',
         titleSub: 'all the things',
         titleSub2: 'testing'

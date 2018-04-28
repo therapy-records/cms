@@ -7,10 +7,10 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import {
   NewsArticleForm,
-  textInput,
   required,
   bodyMainRTE
 } from './NewsArticleForm';
+import TextInput from '../TextInput';
 import Datepicker from '../Datepicker/Datepicker';
 import ArticlePreview from '../ArticlePreview/ArticlePreview.container';
 import DropzoneImageUpload from './DropzoneImageUpload';
@@ -69,11 +69,11 @@ describe('(Component) NewsArticleForm', () => {
     const createWrapper = shallow(<NewsArticleForm {...props} />);
     const actual = createWrapper.containsMatchingElement(<ArticlePreview />);
     expect(actual).to.equal(true);
-    props = { location: _location, error: 'an error' };
+    props = { ...baseProps, location: _location, error: 'an error' };
     const createWrapperError = shallow(<NewsArticleForm {...props} />);
     const actualError = createWrapperError.containsMatchingElement(<ArticlePreview />);
     expect(actualError).to.equal(true);
-    props = { location: _location, pristine: true };
+    props = { ...baseProps, location: _location, pristine: true };
     const createWrapperPristine = shallow(<NewsArticleForm {...props} />);
     const actualPristine = createWrapperPristine.containsMatchingElement(<ArticlePreview />);
     expect(actualPristine).to.equal(true);
@@ -99,7 +99,7 @@ describe('(Component) NewsArticleForm', () => {
                title='Main image link'
                label='Main image link'
                placeholder='http://bbc.co.uk/fiona-ross'
-               component={textInput} />
+               component={TextInput} />
       );
       expect(actual).to.equal(true);
     });
@@ -152,7 +152,7 @@ describe('(Component) NewsArticleForm', () => {
     it('should render a title field', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='title'
-               component={textInput}
+               component={TextInput}
                type='text'
                placeholder='Hello World'
                label='Title'

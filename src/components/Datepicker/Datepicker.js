@@ -94,7 +94,7 @@ Datepicker.propTypes = {
   input: PropTypes.object.isRequired,
   togglePicker: PropTypes.bool,
   pickerActive: PropTypes.bool,
-  initTime: PropTypes.string,
+  initTime: PropTypes.any,
   title: PropTypes.string,
   titleSub: PropTypes.string,
   titleSub2: PropTypes.string

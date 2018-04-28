@@ -14,10 +14,13 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) OtherWorkArticleForm', () => {
   let wrapper,
-    props;
+      props,
+      baseProps = {
+        onSubmitForm: () => {}
+    }  
 
   it('should render a `Create` heading', () => {
-    props = { location: { pathname: 'test/create' } };
+    props = { ...baseProps, location: { pathname: 'test/create' } };
     const createWrapper = shallow(
       <OtherWorkArticleForm {...props} />
     );
@@ -28,7 +31,7 @@ describe('(Component) OtherWorkArticleForm', () => {
   });
 
   it('should render an `Edit` heading', () => {
-    props = { location: { pathname: 'test/edit' } };
+    props = { ...baseProps, location: { pathname: 'test/edit' } };
     const editWrapper = shallow(
       <OtherWorkArticleForm {...props} />
     );
@@ -82,6 +85,7 @@ describe('(Component) OtherWorkArticleForm', () => {
 
     it('should render releaseDate field', () => {
       const props = {
+        ...baseProps,
         formValues: {
           releaseDate: new Date()
         }
@@ -99,6 +103,7 @@ describe('(Component) OtherWorkArticleForm', () => {
 
   it('should render an error', () => {
     props = {
+      ...baseProps,
       error: 'Something is wrong'
     }
     const errorWrapper = shallow(
@@ -113,8 +118,7 @@ describe('(Component) OtherWorkArticleForm', () => {
   describe('submit button', () => {
     it('should render a button', () => {
       props = {
-        onSubmit: () => { },
-        error: false,
+        onSubmitForm: () => { },
         pristine: false,
         submitting: false
       }
@@ -128,7 +132,6 @@ describe('(Component) OtherWorkArticleForm', () => {
     it('should call onSubmitForm prop onClick', () => {
       props = {
         onSubmitForm: sinon.spy(),
-        error: false,
         pristine: false,
         submitting: false,
         formValues: { mainImage: { url: 'test.com' } }

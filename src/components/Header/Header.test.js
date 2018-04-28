@@ -13,7 +13,10 @@ chai.use(sinonChai);
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) Header', () => {
-  let wrapper, props;
+  let wrapper,
+      props = {
+        onLogout: () => {}
+      };
 
   describe('when !isAuthenticated', () => {
     beforeEach(() => {
@@ -38,7 +41,8 @@ describe('(Component) Header', () => {
   describe('when isAuthenticated', () => {
     beforeEach(() => {
       props = {
-        isAuthenticated: true
+        isAuthenticated: true,
+        onLogout: () => {}
       }
       wrapper = shallow(<Header {...props} />)
     });

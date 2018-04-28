@@ -53,6 +53,7 @@ export class Article extends React.Component {
     } else {
       this.props.onDeleteArticle(article._id)
     }
+    this.handleModalClose();
   }
 
   render() {
@@ -243,7 +244,7 @@ export class Article extends React.Component {
         {(!promiseLoading && this.state.isShowingModal) &&
           <ArticleDeleteModal
             handleModalClose={this.handleModalClose}
-            onDeleteArticle={() => { this.handleOnDeleteArticle(article); this.handleModalClose() }}
+            onDeleteArticle={this.handleOnDeleteArticle}
           />
         }
       </article>

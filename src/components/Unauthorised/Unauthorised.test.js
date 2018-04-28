@@ -1,7 +1,7 @@
 import React from 'react'
 import { expect } from 'chai';
 import Unauthorised from './Unauthorised'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 

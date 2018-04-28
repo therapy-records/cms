@@ -50,7 +50,8 @@ describe.only('(Component) News - Article', () => {
         params: { id: 123 },
         location : {
           pathname: 'news/123456789'
-        }
+        },
+        article: mockArticle
       };
 
   describe('on componentWillUnmount', () => {
@@ -344,7 +345,10 @@ describe.only('(Component) News - Article', () => {
 
     it('should not render <ArticleDeleteModal /> by default', () => {
       const actual = wrapper.containsMatchingElement(
-        <ArticleDeleteModal />
+        <ArticleDeleteModal
+          handleModalClose={wrapper.instance().handleModalClose}
+          onDeleteArticle={wrapper.instance().handleOnDeleteArticle}
+        />
       );
       expect(actual).to.equal(false);
     });
@@ -353,7 +357,10 @@ describe.only('(Component) News - Article', () => {
       const button = wrapper.find('button');
       button.simulate('click');
       const actual = wrapper.containsMatchingElement(
-        <ArticleDeleteModal />
+        <ArticleDeleteModal
+          handleModalClose={wrapper.instance().handleModalClose}
+          onDeleteArticle={wrapper.instance().handleOnDeleteArticle}
+        />
       );
       expect(actual).to.equal(true);
     });

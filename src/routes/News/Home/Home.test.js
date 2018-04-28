@@ -105,6 +105,7 @@ describe('(Component) News - Home', () => {
         newsQueueArticles={[]}
         onFetchNewsArticles={() => {}}
         onFetchNewsQueueArticles={() => {}}
+        onSetSelectedNewsArticle={() => {}}
       />
     );
     const actual = wrapper.containsMatchingElement(
