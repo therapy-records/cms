@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import ProtectedRoute from './components/ProtectedRoute';
 import Header from './components/Header/Header.container';
 import Home from './routes/Home';
 import Dashboard from './routes/Dashboard';
@@ -12,21 +13,6 @@ import NewsArticleEdit from './routes/News/ArticleEdit';
 import NewsArticleCreate from './routes/News/ArticleCreate';
 import { authCheck } from './actions/auth';
 import './index.css';
-
-const ProtectedRoute = ({ component: Component, isAuth, location, ...rest }) => {
-  return (
-    <Route {...rest} render={props => (
-      isAuth ? (
-        <Component {...props} />
-      ) : (
-          <Redirect to={{
-            pathname: '/not-auth',
-            state: { from: props.location }
-          }} />
-        )
-    )} />
-  )
-}
 
 class Router extends Component {
   render() {

@@ -37,6 +37,7 @@ describe('(Component) News - ArticleDeleteModal', () => {
   describe('delete button', () => {
     it('should call props.onDeleteArticle onClick', () => {
       const buttonProps = {
+        ...props,
         onDeleteArticle: sinon.spy()
       };
       const buttonWrapper = shallow(<ArticleDeleteModal {...buttonProps} />);
