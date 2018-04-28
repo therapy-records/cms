@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import Header from './components/Header/Header.container';
 import Home from './routes/Home';
 import Dashboard from './routes/Dashboard';
@@ -17,6 +17,7 @@ import './index.css';
 class Router extends Component {
   render() {
     const { isAuth } = this.props;
+
     return (
       <BrowserRouter>
         <div>
