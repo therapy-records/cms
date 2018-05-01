@@ -11,7 +11,7 @@ export const selectNewsArticleFormValues = createSelector(
 
 export const selectNewsArticleFormSyncErrors = createSelector(
   selectNewsArticleForm,
-  (form) => form.syncErrors && form.syncErrors || false
+  (form) => form && form.syncErrors && form.syncErrors || false
 );
 
 export const selectOtherWorkArticleFormValues = (state) => state.form.OTHER_WORK_ARTICLE_FORM;
@@ -23,7 +23,7 @@ export const selectOtherWorkArticleFormValuesValues = createSelector(
 
 export const selectOtherWorkArticleFormValuesSyncErrors = createSelector(
   selectOtherWorkArticleFormValues,
-  (form) => form.syncErrors && form.syncErrors || false
+  (form) => form && form.syncErrors && form.syncErrors || false
 );
 
 /* eslint-enable no-mixed-operators */

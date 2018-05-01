@@ -8,7 +8,8 @@ import {
 const mapStateToProps = (state) => {
   const formValues = selectNewsArticleFormValues(state);
   const formErrors = selectNewsArticleFormSyncErrors(state);
-  const isDisabled = !formValues.title ||
+  const isDisabled = !formValues ||
+                     !formValues.title ||
                      !formValues.bodyMain ||
                      formErrors.title ||
                      formErrors.bodyMain;
