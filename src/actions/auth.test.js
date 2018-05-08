@@ -16,7 +16,7 @@ import {
   USER_AUTH_SUCCESS,
   USER_AUTH_ERROR
 } from '../constants/actions'
-import { authCheck, routeAuthCheck } from '../actions/auth';
+import { authCheck } from '../actions/auth';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -105,55 +105,4 @@ describe('(Actions) auth', () => {
     });
   });
 
-  describe('(Thunk) routeAuthCheck', () => {
-    afterEach(() => {
-      nock.cleanAll()
-    });
-
-    it('should be exported as a function', () => {
-      expect(routeAuthCheck).to.be.a('function');
-    });
-
-    it('should return a function', () => {
-      expect(routeAuthCheck()).to.be.a('function');
-    });
-
-    // todo: how to get store/disaptch working with routeAuthCheck?
-
-    // it('should dispatch the correct actions on auth success', () => {
-    //   axios.create().post = sinon.stub().returns(Promise.resolve(mock.authResponseSuccess));
-    //   nock(API_ROOT + AUTH)
-    //     .post('/auth')
-    //     .reply(200, mock.authResponseSuccess.data);
-
-    //   const expectedActions = [
-    //     { type: USER_AUTH_ERROR, payload: { isAuth: true } },
-    //     { type: USER_AUTH_SUCCESS, payload: { isAuth: true } }
-    //   ];
-
-    //   const callRouteAuthCheck = routeAuthCheck(mockStore, mockState, () => {}, () => {});
-    //   return store.dispatch(callRouteAuthCheck()).then(() => {
-    //     const storeActions = store.getActions();
-    //     expect(storeActions).to.deep.equal(expectedActions);
-    //     store.clearActions();
-    //   });
-    // });
-
-    // it('should dispatch the correct actions on auth error', () => {
-    //   _axiosAuthHeaders.post = sinon.stub().returns(Promise.resolve(mock.authResponseError.data));
-    //   nock(API_ROOT + AUTH)
-    //     .post('/auth')
-    //     .reply(200, mock.authResponseError.data);
-
-    //   const expectedActions = [
-    //     { type: USER_AUTH_ERROR, payload: { isAuth: false } }
-    //   ];
-
-    //   return store.dispatch(routeAuthCheck()).then(() => {
-    //     const storeActions = store.getActions();
-    //     expect(storeActions).to.deep.equal(expectedActions);
-    //     store.clearActions();
-    //   });
-    // });
-  });
 });
