@@ -16,10 +16,10 @@ import OtherWorkHome from './routes/OtherWork/Home';
 import OtherWorkArticle from './routes/OtherWork/Article';
 import OtherWorkArticleEdit from './routes/OtherWork/ArticleEdit';
 import OtherWorkArticleCreate from './routes/OtherWork/ArticleCreate';
-
-
 import { authCheck } from './actions/auth';
 import './index.css';
+
+const NotFound = () => <p>Page not found :(</p>;
 
 class Router extends Component {
   render() {
@@ -47,6 +47,8 @@ class Router extends Component {
               <ProtectedRoute path="/other-work/:id" component={OtherWorkArticle} isAuth={isAuth} exact />
               <ProtectedRoute path="/other-work/:id/edit" component={OtherWorkArticleEdit} isAuth={isAuth} exact />
               <ProtectedRoute path="/other-work/create" component={OtherWorkArticleCreate} isAuth={isAuth} exact />
+
+              <Route path="/" component={NotFound} />
 
             </Switch>
           </div>
