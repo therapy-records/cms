@@ -18,15 +18,16 @@ import {
   default as otherWorkReducer
 } from './otherWork';
 import {
-  UISTATE_PROMISE_LOADING,
-  UISTATE_PROMISE_SUCCESS,
-  UISTATE_PROMISE_ERROR
-} from './uiState'
-import {
   API_ROOT,
   OTHER_WORK,
   OTHER_WORK_CREATE
 } from '../constants';
+import {
+  UISTATE_PROMISE_LOADING,
+  UISTATE_PROMISE_SUCCESS,
+  UISTATE_PROMISE_ERROR,
+  UISTATE_PROMISE_SUCCESS_RESET
+} from '../constants/actions';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

@@ -26,16 +26,17 @@ import {
   default as newsReducer
 } from '../reducers/news';
 import {
-  UISTATE_PROMISE_LOADING,
-  UISTATE_PROMISE_SUCCESS,
-  UISTATE_PROMISE_ERROR
-} from '../reducers/uiState'
-import {
   API_ROOT,
   NEWS,
   NEWS_CREATE,
   NEWS_QUEUE
 } from '../constants';
+import {
+  UISTATE_PROMISE_LOADING,
+  UISTATE_PROMISE_SUCCESS,
+  UISTATE_PROMISE_ERROR,
+  UISTATE_PROMISE_SUCCESS_RESET
+} from '../constants/actions';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

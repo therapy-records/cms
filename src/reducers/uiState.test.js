@@ -4,16 +4,18 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import {
   initialState,
-  UISTATE_PROMISE_LOADING,
-  UISTATE_PROMISE_SUCCESS,
-  UISTATE_PROMISE_ERROR,
-  UISTATE_PROMISE_SUCCESS_RESET,
   promiseLoading,
   promiseSuccess,
   promiseError,
   resetPromiseState,
   default as uiStateReducer
 } from './uiState';
+import {
+  UISTATE_PROMISE_LOADING,
+  UISTATE_PROMISE_SUCCESS,
+  UISTATE_PROMISE_ERROR,
+  UISTATE_PROMISE_SUCCESS_RESET
+} from  '../constants/actions';
 
 describe('(Redux Module) uiState', () => {
   it('Should export a constant UISTATE_PROMISE_LOADING', () => {
