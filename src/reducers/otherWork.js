@@ -50,9 +50,9 @@ export const fetchOtherWorkArticles = () => {
           dispatch(promiseLoading(false));
           dispatch(promiseSuccess(true));
         },
-        () => {
+        (err) => {
           dispatch(promiseLoading(false));
-          dispatch(promiseError(true));
+          dispatch(promiseError(err.response && err.response.status));
         }
       )
   }
@@ -79,7 +79,7 @@ export const postOtherWork = () => {
         dispatch(postOtherWorkSuccess(data));
       }, (err) => {
         dispatch(promiseLoading(false));
-        dispatch(promiseError(true));
+        dispatch(promiseError(err.response && err.response.status));
         return err;
       }
     );
@@ -110,9 +110,9 @@ export const editOtherWork = (postToEdit) => {
         dispatch(promiseLoading(false));
         dispatch(promiseSuccess(true));
         dispatch(editOtherWorkSuccess());
-      }, () => {
+      }, (err) => {
         dispatch(promiseLoading(false));
-        dispatch(promiseError(true));
+        dispatch(promiseError(err.response && err.response.status));
       }
     );
   }

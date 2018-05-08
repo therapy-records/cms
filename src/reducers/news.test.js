@@ -16,9 +16,6 @@ import {
   EDIT_NEWS_SUCCESS,
   EDIT_NEWS_QUEUE_SUCCESS,
   fetchArticlesSuccess,
-  // fetchQueueSuccess,
-  // postNewsSuccess,
-  // postNewsQueueSucces,
   fetchNewsArticles,
   axiosNewsQueueArticles,
   fetchNewsQueueArticles,
@@ -83,6 +80,10 @@ const mockState = {
       values: mock.newsArticle
     }
   }
+};
+
+const mockErrorResponse = {
+  response: { status: 404 }
 };
 
 const store = mockStore(mockState);
@@ -257,14 +258,14 @@ describe('(Redux Module) news', () => {
     });
 
     it('should dispatch the correct actions on error', () => {
-      _axiosAuthHeaders.post = sinon.stub().returns(Promise.reject({ error: true }));
+      _axiosAuthHeaders.post = sinon.stub().returns(Promise.reject(mockErrorResponse));
       nock(API_ROOT + NEWS_CREATE)
         .post(NEWS_CREATE, mock.newsArticle);
 
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
-        { type: UISTATE_PROMISE_ERROR, payload: true }
+        { type: UISTATE_PROMISE_ERROR, payload: mockErrorResponse.response.status }
       ];
 
       store.clearActions();
@@ -310,14 +311,14 @@ describe('(Redux Module) news', () => {
     });
 
     it('should dispatch the correct actions on error', () => {
-      _axiosAuthHeaders.post = sinon.stub().returns(Promise.reject({ error: true }));
+      _axiosAuthHeaders.post = sinon.stub().returns(Promise.reject(mockErrorResponse));
       nock(API_ROOT + NEWS_QUEUE)
         .post(NEWS_QUEUE, mock.newsArticleQueue);
 
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
-        { type: UISTATE_PROMISE_ERROR, payload: true }
+        { type: UISTATE_PROMISE_ERROR, payload: mockErrorResponse.response.status }
       ];
 
       store.clearActions();
@@ -363,7 +364,7 @@ describe('(Redux Module) news', () => {
     });
 
     it('should dispatch the correct actions on error', () => {
-      _axiosAuthHeaders.put = sinon.stub().returns(Promise.reject({ error: true }));
+      _axiosAuthHeaders.put = sinon.stub().returns(Promise.reject(mockErrorResponse));
       nock(API_ROOT + NEWS + 'asdf1234')
         .put(`${NEWS}asdf1234`, {})
         .reply(500);
@@ -371,7 +372,7 @@ describe('(Redux Module) news', () => {
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
-        { type: UISTATE_PROMISE_ERROR, payload: true }
+        { type: UISTATE_PROMISE_ERROR, payload: mockErrorResponse.response.status }
       ];
 
       return store.dispatch(editNews({})).then(() => {
@@ -416,7 +417,7 @@ describe('(Redux Module) news', () => {
     });
 
     it('should dispatch the correct actions on error', () => {
-      _axiosAuthHeaders.put = sinon.stub().returns(Promise.reject({ error: true }));
+      _axiosAuthHeaders.put = sinon.stub().returns(Promise.reject(mockErrorResponse));
       nock(API_ROOT + NEWS + 'asdf1234')
         .put(`${NEWS}asdf1234`, {})
         .reply(500);
@@ -424,7 +425,7 @@ describe('(Redux Module) news', () => {
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
-        { type: UISTATE_PROMISE_ERROR, payload: true }
+        { type: UISTATE_PROMISE_ERROR, payload: mockErrorResponse.response.status }
       ];
 
       return store.dispatch(editNewsQueue({})).then(() => {

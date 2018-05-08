@@ -32,6 +32,9 @@ export const authCheck = () => {
   }
 }
 
+ // TODO: remove me?
+
+/*
 export const routeAuthCheck = (store, nextState, replace, cb) => {
   return (nextState, replace, cb) => {
     const token = localStorage.getItem('token');
@@ -63,3 +66,4 @@ export const routeAuthCheck = (store, nextState, replace, cb) => {
     }
   }
 }
+*/

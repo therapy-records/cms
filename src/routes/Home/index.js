@@ -10,9 +10,6 @@ import './styles.css';
 export class Home extends React.Component {
 
   componentWillMount() {
-    if (!this.props.isAuthenticated && this.props.onAuthCheck) {
-      this.props.onAuthCheck();
-    }
     if (this.props.isAuthenticated === true) {
       this.props.history.push({
         pathname: '/dashboard'
@@ -60,7 +57,6 @@ Home.propTypes = {
   onAuthCheck: PropTypes.func.isRequired,
   authError: PropTypes.string
 }
-
 
 const mapDispatchToProps = {
   onAuthCheck: () => authCheck(),

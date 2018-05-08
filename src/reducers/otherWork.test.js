@@ -60,6 +60,10 @@ const mockState = {
   }
 };
 
+const mockErrorResponse = {
+  response: { status: 404 }
+};
+
 const store = mockStore(mockState);
 
 describe('(Redux Module) news', () => {
@@ -185,14 +189,14 @@ describe('(Redux Module) news', () => {
     });
 
     it('should dispatch the correct actions on error', () => {
-      _axiosAuthHeaders.post = sinon.stub().returns(Promise.reject({ error: true }));
+      _axiosAuthHeaders.post = sinon.stub().returns(Promise.reject(mockErrorResponse));
       nock(API_ROOT + OTHER_WORK_CREATE)
         .post(OTHER_WORK_CREATE, mock.article);
 
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
-        { type: UISTATE_PROMISE_ERROR, payload: true }
+        { type: UISTATE_PROMISE_ERROR, payload: mockErrorResponse.response.status }
       ];
 
       store.clearActions();

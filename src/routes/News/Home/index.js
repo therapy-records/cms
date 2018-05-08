@@ -19,12 +19,14 @@ const dateIsBefore = (a, b) => {
 export class News extends React.Component {
   componentWillMount() {
     if (!this.props.articlesQueue ||
-      !this.props.articlesQueue.length) {
+        !this.props.articlesQueue.length ||
+        this.props.articlesQueue.length === 0) {
       this.props.onFetchNewsQueueArticles();
     }
     if (!this.props.newsArticles ||
-      !this.props.newsArticles.length) {
-      this.props.onFetchNewsArticles();
+        !this.props.newsArticles.length ||
+        this.props.newsArticles.length !== 0) {
+        this.props.onFetchNewsArticles();
     }
   }
 
