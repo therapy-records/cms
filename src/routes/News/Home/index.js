@@ -25,7 +25,7 @@ export class News extends React.Component {
     }
     if (!this.props.newsArticles ||
         !this.props.newsArticles.length ||
-        this.props.newsArticles.length !== 0) {
+        this.props.newsArticles.length === 0) {
         this.props.onFetchNewsArticles();
     }
   }

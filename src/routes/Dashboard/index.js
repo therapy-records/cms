@@ -20,11 +20,11 @@ export class Dashboard extends React.Component {
       otherWorkArticles
     } = this.props;
 
-    if (!newsArticles || !newsArticles.length) {
+    if (!newsArticles.length) {
       this.props.onFetchNewsArticles();
     }
 
-    if (!otherWorkArticles || !otherWorkArticles.length) {
+    if (!otherWorkArticles.length) {
       this.props.onFetchOtherWorkArticles();
     }
 
