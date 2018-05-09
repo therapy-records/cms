@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { withRouter } from 'react-router';
 import { NavLink } from 'react-router-dom'
 import './Header.css';
 
-class Header extends React.Component {
+export class Header extends React.Component {
 
   // redirectToHome() {
   //   browserHistory.push('/');
@@ -16,8 +17,11 @@ class Header extends React.Component {
   render() {
     const {
       isAuthenticated,
-      onLogout
+      onLogout,
+      location
     } = this.props;
+
+    const isLoginPage = location && location.pathname === '/';
 
     return (
       <div className='header'>
@@ -41,11 +45,17 @@ class Header extends React.Component {
             <NavLink to='/other-work' activeClassName='route--active'>
               Other Work
             </NavLink>
+            
             {' | '}
             <button onClick={() => { onLogout(); this.redirectToHome(); }} className='btn-logout'>Log out</button>
+        }
           </div>
         ) : (
-          <NavLink to='/' activeClassName='route--active'>Log in</NavLink>
+          <div>
+            {!isLoginPage &&
+              <NavLink to='/' activeClassName='route--active'>Log in</NavLink>
+            }
+          </div>
         )}
       </div>
     )
@@ -57,4 +67,4 @@ Header.propTypes = {
   onLogout: PropTypes.func.isRequired
 };
 
-export default Header;
+export default withRouter(Header);

@@ -3,7 +3,7 @@ import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import { bindActionCreators } from 'redux'
-import Header from './Header'
+import { Header } from './Header'
 import { NavLink } from 'react-router-dom'
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
@@ -35,6 +35,18 @@ describe('(Component) Header', () => {
         <NavLink to='/' activeClassName='route--active'>Log in</NavLink>
       );
       expect(actual).to.equal(true);
+    });
+  });
+
+  describe('when isLoginPage', () => {
+    it('should not render a login link', () => {
+      wrapper.setProps({
+        location: { pathname: '/' }
+      });
+      const actual = wrapper.containsMatchingElement(
+        <NavLink to='/' activeClassName='route--active'>Log in</NavLink>
+      );
+      expect(actual).to.equal(false);
     });
   });
 
