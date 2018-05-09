@@ -118,7 +118,7 @@ export class DropzoneImageUpload extends React.Component {
                 <ul className='flex-root gallery-images-flex-root'>
                   {items.map((i) => (
                     <li key={i} className='col-50 no-list-style gallery-image-upload-item'>
-                      <img src={i} alt={`gallery ITEM ${i + 1}`} />
+                      <img src={i} alt={`gallery item ${i + 1}`} />
                     </li>
                   ))}
                 </ul>
