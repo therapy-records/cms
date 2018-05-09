@@ -39,14 +39,14 @@ class Router extends Component {
               <ProtectedRoute path="/press" component={Press} isAuth={isAuth} exact />
 
               <ProtectedRoute path="/news" component={NewsHome} isAuth={isAuth} exact />
+              <ProtectedRoute path="/news/create" component={NewsArticleCreate} isAuth={isAuth} exact />
               <ProtectedRoute path="/news/:id" component={NewsArticle} isAuth={isAuth} exact />
               <ProtectedRoute path="/news/:id/edit" component={NewsArticleEdit} isAuth={isAuth} exact />
-              <ProtectedRoute path="/news/create" component={NewsArticleCreate} isAuth={isAuth} exact />
 
               <ProtectedRoute path="/other-work" component={OtherWorkHome} isAuth={isAuth} exact />
+              <ProtectedRoute path="/other-work/create" component={OtherWorkArticleCreate} isAuth={isAuth} exact />
               <ProtectedRoute path="/other-work/:id" component={OtherWorkArticle} isAuth={isAuth} exact />
               <ProtectedRoute path="/other-work/:id/edit" component={OtherWorkArticleEdit} isAuth={isAuth} exact />
-              <ProtectedRoute path="/other-work/create" component={OtherWorkArticleCreate} isAuth={isAuth} exact />
 
               <Route path="/" component={NotFound} />
 
