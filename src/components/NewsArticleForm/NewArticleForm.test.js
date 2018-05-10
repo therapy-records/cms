@@ -8,7 +8,8 @@ import Adapter from 'enzyme-adapter-react-15';
 import {
   NewsArticleForm,
   required,
-  bodyMainRTE
+  bodyMainRTE,
+  NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS
 } from './NewsArticleForm';
 import TextInput from '../TextInput';
 import Datepicker from '../Datepicker/Datepicker';
@@ -86,7 +87,9 @@ describe('(Component) NewsArticleForm', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='mainImage.url'
                title='Main image'
-               component={DropzoneImageUpload} />
+               component={DropzoneImageUpload}
+               minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
+        />
       );
       expect(actual).to.equal(true);
     });
