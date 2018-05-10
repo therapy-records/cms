@@ -31,20 +31,31 @@ describe('(Component) Dashboard', () => {
     wrapper = shallow(<Dashboard {...props} />)
   });
 
-  it('should render a heading', () => {
-    const actual = wrapper.containsMatchingElement(
+  it('should render a heading with `create...` copy', () => {
+    const heading = wrapper.containsMatchingElement(
       <h2>Welcome back</h2>
     );
-    expect(actual).to.be.true;
+    expect(heading).to.be.true;
+    const copy = wrapper.containsMatchingElement(
+      <p>Create a new...</p>
+    );
+    expect(copy).to.be.true;
   });
 
   it('should render a link to create a news article', () => {
     const actual = wrapper.containsMatchingElement(
-      <Link to='news/create'>Create a new article</Link>
+      <Link to='news/create'>News article</Link>
     );
     expect(actual).to.be.true;
   });
 
+  it('should render a link to create a other-work article', () => {
+    const actual = wrapper.containsMatchingElement(
+      <Link to='other-work/create'>Other Work article</Link>
+    );
+    expect(actual).to.be.true;
+  });
+ 
   it('should render a total amount of news articles', () => {
     const actual = wrapper.containsMatchingElement(
       <p>News articles: {props.newsArticles.length}</p>

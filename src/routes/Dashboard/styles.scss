@@ -1,1 +1,7 @@
-
+.container-dashboard {
+  .btn {
+    @media(min-width: 600px) {
+      margin-right: .5em;
+    }
+  }
+}

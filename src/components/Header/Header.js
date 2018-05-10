@@ -26,7 +26,7 @@ export class Header extends React.Component {
     return (
       <div className='header'>
         <h1>
-          <NavLink to='/' activeClassName='route--active'>Fiona Ross CMS</NavLink>
+          <NavLink to='/' activeClassName='route--active'>FR-CMS</NavLink>
         </h1>
         {isAuthenticated ? (
           <div className='header-nav'>

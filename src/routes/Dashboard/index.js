@@ -30,9 +30,11 @@ export class Dashboard extends React.Component {
 
 
     return (
-      <div>
+      <div className="container-dashboard">
         <h2>Welcome back</h2>
-        <Link to='news/create' className='btn'>Create a new article</Link>
+        <p>Create a new...</p>
+        <Link to='news/create' className='btn'>News article</Link>
+        <Link to='other-work/create' className='btn'>Other Work article</Link>
 
         <br />
         <br />

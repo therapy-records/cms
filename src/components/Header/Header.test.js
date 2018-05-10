@@ -25,7 +25,7 @@ describe('(Component) Header', () => {
 
     it('should render a title', () => {
       const actual = wrapper.containsMatchingElement(
-        <NavLink to='/' activeClassName='route--active'>Fiona Ross CMS</NavLink>
+        <NavLink to='/' activeClassName='route--active'>FR-CMS</NavLink>
       );
       expect(actual).to.equal(true);
     });
