@@ -11,7 +11,8 @@ export class DropzoneImageUpload extends React.Component {
     super(props);
     this.state = {
       items: [],
-      singleItem: ''
+      singleItem: '',
+      invalidDimensions: []
     };
   }
 
@@ -32,6 +33,16 @@ export class DropzoneImageUpload extends React.Component {
     return url.replace(/upload/, 'upload/c_limit,q_100,w_650');
   }
 
+  validMinimumImageDimensions(image) {
+    const { width, height } = image;
+    const { minImageDimensions } = this.props;
+    if (width >= minImageDimensions.width &&
+       height >= minImageDimensions.height) {
+          return true;
+    }
+    return false;
+  }
+
   // todo: redux, promisify
   uploadSingleImage(file) {
     let upload = request.post(CLOUDINARY_UPLOAD_URL)
@@ -39,19 +50,37 @@ export class DropzoneImageUpload extends React.Component {
                         .field('file', file);
     upload.end((err, response) => {
       if (response.body.secure_url !== '') {
-        if (this.props.multiple === true) {
+        
+        if (this.validMinimumImageDimensions(response.body)) {
+         
+          if (this.props.multiple === true) {
+            this.setState({
+              items: [
+                ...this.state.items,
+                ...[this.handleImageResponseUrl(response.body.secure_url)]
+              ]
+            });
+            this.props.input.onChange(this.state.items);
+          } else {
+            this.setState({
+              singleItem: this.handleImageResponseUrl(response.body.secure_url)
+            });
+            this.props.input.onChange(this.state.singleItem);
+          }
+
+        } else {
+          const message = {
+            tooSmall: `Image too small (width: ${response.body.width} height: ${response.body.height})`,
+            widthShouldBe: `Min width: ${this.props.minImageDimensions.width}`,
+            heightShouldBe: `Min height: ${this.props.minImageDimensions.height}`
+          };
           this.setState({
-            items: [
-              ...this.state.items,
-              ...[this.handleImageResponseUrl(response.body.secure_url)]
+            invalidDimensions: [
+              message.tooSmall,
+              message.widthShouldBe,
+              message.heightShouldBe
             ]
           });
-          this.props.input.onChange(this.state.items);
-        } else {
-          this.setState({
-            singleItem: this.handleImageResponseUrl(response.body.secure_url)
-          });
-          this.props.input.onChange(this.state.singleItem);
         }
       }
       if (err) {
@@ -75,7 +104,8 @@ export class DropzoneImageUpload extends React.Component {
 
     const {
       items,
-      singleItem
+      singleItem,
+      invalidDimensions
     } = this.state;
 
     return (
@@ -112,6 +142,19 @@ export class DropzoneImageUpload extends React.Component {
             </Dropzone>
           </div>
 
+          {invalidDimensions.length ?
+            <ul className="dropzone-dimensions-messages">
+              {invalidDimensions.map((message, index) =>
+                <li
+                  key={index}
+                  className={index === 0 && 'form-error'}
+                >
+                  {message}
+                </li>
+              )}
+            </ul>
+          : null}
+
           {multiple &&
             <div className='col-2 gallery-images-col-2'>
               {(multiple && items && items.length) &&
@@ -137,7 +180,8 @@ DropzoneImageUpload.propTypes = {
   title: PropTypes.string,
   multiple: PropTypes.bool,
   existingImage: PropTypes.string,
-  existingMiniGalleryImages: PropTypes.array
+  existingMiniGalleryImages: PropTypes.array,
+  minImageDimensions: PropTypes.object.isRequired
 };
 
 export default DropzoneImageUpload;

@@ -27,6 +27,11 @@ import TextInput from '../../components/TextInput';
 import { required } from '../../utils/form';
 import { NEWS_ARTICLE_FORM } from '../../constants';
 
+export const NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS = {
+  width: 450,
+  height: 450
+};
+
 export const bodyMainRTE = ({ input, onChange, props, meta: { touched, error } }) => (
   <div>
     <h5>Main content</h5>
@@ -109,7 +114,8 @@ export class NewsArticleForm extends React.Component {
           <Field name='mainImage.url'
                  component={DropzoneImageUpload}
                  title='Main image'
-                 existingImage={formValues && formValues.mainImage.url} />
+                 existingImage={formValues && formValues.mainImage.url}
+                 minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS} />
 
           <br />
           <br />
@@ -244,6 +250,7 @@ export class NewsArticleForm extends React.Component {
           <br />
 
           <button type='submit'
+                  className='btn-lg'
                   disabled={error || pristine || submitting || error || invalid}
                   onClick={() => this.handleSubmit()}>Submit
           </button>

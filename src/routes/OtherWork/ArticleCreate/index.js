@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { postOtherWork } from '../../../reducers/otherWork';
 import { resetPromiseState } from '../../../reducers/uiState';
-import OtherWorkArticleForm from './OtherWorkArticleForm';
+import OtherWorkArticleForm from '../../../components/OtherWorkArticleForm';
 
 class ArticleCreate extends React.Component {
   componentWillUnmount() {
