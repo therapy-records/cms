@@ -34,7 +34,7 @@ export const selectSelectedOtherWorkArticleCopy = createSelector(
   (article) => article && article.copy
 );
 
-export const selectSelectedOtherWorkArticleMainImageExternalLink = createSelector(
+export const selectSelectedOtherWorkArticleExternalLink = createSelector(
   selectSelectedOtherWorkArticle,
   (article) => article && article.externalLink
 );

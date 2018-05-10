@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form'
 import {
   selectSelectedOtherWorkArticleTitle,
   selectSelectedOtherWorkArticleCopy,
-  selectSelectedOtherWorkArticleMainImageExternalLink,
+  selectSelectedOtherWorkArticleExternalLink,
   selectSelectedOtherWorkArticleMainImageUrl,
   selectSelectedOtherWorkArticleReleaseDate
 } from '../../selectors/otherWork';
@@ -15,6 +15,11 @@ import DropzoneImageUpload from '../NewsArticleForm/DropzoneImageUpload';
 import TextInput from '../TextInput';
 import { required } from '../../utils/form';
 import { OTHER_WORK_ARTICLE_FORM } from '../../constants';
+
+export const OTHER_WORK_ARTICLE_MIN_IMAGE_DIMENSIONS = {
+  width: 500,
+  height: 500
+};
 
 export class OtherWorkArticleForm extends React.Component {
   handleSubmit() {
@@ -68,8 +73,7 @@ export class OtherWorkArticleForm extends React.Component {
 
           <Field name='externalLink'
                  component={TextInput}
-                 type='url'
-                 title='Link to article'
+                 type='Link to article'
                  label='Link to article'
                  placeholder='http://bbc.co.uk/fiona-ross'
                  validate={required} />
@@ -81,7 +85,8 @@ export class OtherWorkArticleForm extends React.Component {
                  component={DropzoneImageUpload}
                  title='Main image'
                  existingImage={formValues && formValues.mainImageUrl}
-                 validate={required} />
+                 validate={required}
+                 minImageDimensions={OTHER_WORK_ARTICLE_MIN_IMAGE_DIMENSIONS} />
 
           <br />
           <br />
@@ -113,8 +118,9 @@ export class OtherWorkArticleForm extends React.Component {
           <br />
 
           <button type='submit'
-            disabled={error || pristine || submitting || error || invalid}
-            onClick={() => this.handleSubmit()}>Submit
+                  className='btn-lg'
+                  disabled={error || pristine || submitting || error || invalid}
+                  onClick={() => this.handleSubmit()}>Submit
           </button>
 
           <br />
@@ -146,7 +152,7 @@ InitFromStateForm = connect(
     initialValues: {
       title: selectSelectedOtherWorkArticleTitle(state),
       copy: selectSelectedOtherWorkArticleCopy(state),
-      externalLink: selectSelectedOtherWorkArticleMainImageExternalLink(state),
+      externalLink: selectSelectedOtherWorkArticleExternalLink(state),
       mainImageUrl: selectSelectedOtherWorkArticleMainImageUrl(state),
       releaseDate: selectSelectedOtherWorkArticleReleaseDate(state)
     }

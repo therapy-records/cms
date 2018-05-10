@@ -6,7 +6,7 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import TextInput from '../TextInput/TextInput';
 import Datepicker from '../Datepicker/Datepicker';
-import { OtherWorkArticleForm } from './OtherWorkArticleForm';
+import { OtherWorkArticleForm, OTHER_WORK_ARTICLE_MIN_IMAGE_DIMENSIONS } from './OtherWorkArticleForm';
 import DropzoneImageUpload from '../NewsArticleForm/DropzoneImageUpload';
 import { required } from '../../utils/form';
 
@@ -48,8 +48,10 @@ describe('(Component) OtherWorkArticleForm', () => {
     it('should render a mainImageUrl field', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='mainImageUrl'
-          title='Main image'
-          component={DropzoneImageUpload} />
+               title='Main image'
+               component={DropzoneImageUpload}
+               minImageDimensions={OTHER_WORK_ARTICLE_MIN_IMAGE_DIMENSIONS}
+        />
       );
       expect(actual).to.equal(true);
     });
@@ -57,11 +59,12 @@ describe('(Component) OtherWorkArticleForm', () => {
     it('should render a title field', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='title'
-          component={TextInput}
-          type='text'
-          placeholder='Hello World'
-          label='Title'
-          validate={required} />
+               component={TextInput}
+               type='text'
+               placeholder='Hello World'
+               label='Title'
+               validate={required}
+         />
       );
       expect(actual).to.equal(true);
     });
