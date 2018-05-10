@@ -57,6 +57,7 @@ export class LoginForm extends React.Component {
           <div>
             <button
               type='submit'
+              className='btn-lg'
               disabled={error || pristine || submitting}
               onClick={() => onSubmit()}>Login
             </button>

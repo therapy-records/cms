@@ -113,6 +113,11 @@ button {
   cursor: pointer;
 }
 
+button:disabled,
+button[disabled] {
+  cursor: default;
+}
+
 .btn {
   display: inline-block;
   background: #111;
@@ -136,6 +141,10 @@ button {
     color: #FFF;
     text-decoration: underline;
   }
+}
+
+.btn-lg {
+  padding: 1.5em 2em;
 }
 
 .btn-width-auto {

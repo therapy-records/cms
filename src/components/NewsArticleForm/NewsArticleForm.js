@@ -250,6 +250,7 @@ export class NewsArticleForm extends React.Component {
           <br />
 
           <button type='submit'
+                  className='btn-lg'
                   disabled={error || pristine || submitting || error || invalid}
                   onClick={() => this.handleSubmit()}>Submit
           </button>
