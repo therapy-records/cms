@@ -5,6 +5,7 @@ import sinonChai from 'sinon-chai';
 import { Field } from 'redux-form';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
+
 import DropzoneImageUpload from './DropzoneImageUpload';
 
 chai.use(sinonChai);
@@ -17,22 +18,23 @@ describe('(Component) DropzoneImageUpload', () => {
             input: {
                 onChange: () => {}
             },
-            title: 'hello test'
-        }
+            title: 'hello test',
+            minImageDimensions: {
+                width: 400,
+                height: 400,
+            }
+        };
 
-    it('should render a title', () => {
-        const wrapper = shallow(
+    beforeEach(() => {
+        wrapper = shallow(
             <DropzoneImageUpload {...props} />
         );
+    });
+
+    it('should render a title', () => {
         const actual = wrapper.containsMatchingElement(
             <h5>{props.title}</h5>
         );
         expect(actual).to.equal(true);
     });
-
-    // describe('with invalidDimensions', () => {
-    //    it('should render messages', () => {
-           
-    //    });
-    // });
 });

@@ -80,7 +80,7 @@ export class DropzoneImageUpload extends React.Component {
               message.widthShouldBe,
               message.heightShouldBe
             ]
-          })
+          });
         }
       }
       if (err) {
@@ -180,7 +180,8 @@ DropzoneImageUpload.propTypes = {
   title: PropTypes.string,
   multiple: PropTypes.bool,
   existingImage: PropTypes.string,
-  existingMiniGalleryImages: PropTypes.array
+  existingMiniGalleryImages: PropTypes.array,
+  minImageDimensions: PropTypes.object.isRequired
 };
 
 export default DropzoneImageUpload;
