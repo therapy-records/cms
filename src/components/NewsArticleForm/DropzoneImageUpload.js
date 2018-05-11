@@ -99,7 +99,8 @@ export class DropzoneImageUpload extends React.Component {
     const {
       input,
       title,
-      multiple
+      multiple,
+      minImageDimensions
     } = this.props;
 
     const {
@@ -111,6 +112,11 @@ export class DropzoneImageUpload extends React.Component {
     return (
       <div>
         <h5>{title}</h5>
+
+        {minImageDimensions &&
+          <p>Image must be at least {minImageDimensions.width}px x {minImageDimensions.height}</p>
+        }
+
         <div className={multiple && 'cols-container'}>
 
           <div className={multiple && 'col-1'}>
