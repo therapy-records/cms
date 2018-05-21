@@ -45,6 +45,9 @@ export class DropzoneImageUpload extends React.Component {
 
   // todo: redux, promisify
   uploadSingleImage(file) {
+    this.setState({
+      invalidDimensions: []
+    });
     let upload = request.post(CLOUDINARY_UPLOAD_URL)
                         .field('upload_preset', CLOUDINARY_UPLOAD_PRESET_ID)
                         .field('file', file);
