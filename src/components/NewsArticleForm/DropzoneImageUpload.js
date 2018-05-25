@@ -117,7 +117,7 @@ export class DropzoneImageUpload extends React.Component {
         <h5>{title}</h5>
 
         {minImageDimensions &&
-          <p>Image must be at least {minImageDimensions.width}px x {minImageDimensions.height}</p>
+          <p>Image must be at least {minImageDimensions.width}px x {minImageDimensions.height}px</p>
         }
 
         <div className={multiple && 'cols-container'}>
