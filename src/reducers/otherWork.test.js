@@ -68,27 +68,27 @@ const mockErrorResponse = {
 const store = mockStore(mockState);
 
 describe('(Redux Module) news', () => {
-  it('Should export a constant FETCH_OTHER_WORK_ARTICLES_SUCCESS', () => {
+  it('should export a constant FETCH_OTHER_WORK_ARTICLES_SUCCESS', () => {
     expect(FETCH_OTHER_WORK_ARTICLES_SUCCESS).to.equal('FETCH_OTHER_WORK_ARTICLES_SUCCESS')
   });
 
-  it('Should export a constant POST_OTHER_WORK_FORM_SUCCESS', () => {
+  it('should export a constant POST_OTHER_WORK_FORM_SUCCESS', () => {
     expect(POST_OTHER_WORK_FORM_SUCCESS).to.equal('POST_OTHER_WORK_FORM_SUCCESS')
   });
 
-  it('Should export a constant EDIT_OTHER_WORK_SUCCESS', () => {
+  it('should export a constant EDIT_OTHER_WORK_SUCCESS', () => {
     expect(EDIT_OTHER_WORK_SUCCESS).to.equal('EDIT_OTHER_WORK_SUCCESS')
   });
 
   describe('(Reducer)', () => {
-    it('Should be a function', () => {
+    it('should be a function', () => {
       expect(otherWorkReducer).to.be.a('function')
     });
 
-    it('Should initialize with correct empty arrays', () => {
+    it('should initialize with correct state', () => {
       const state = otherWorkReducer(undefined, {});
       expect(state).to.deep.equal(
-        { articles: [] }
+        { articles: null }
       );
     });
   });

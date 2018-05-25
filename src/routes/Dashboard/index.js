@@ -20,14 +20,13 @@ export class Dashboard extends React.Component {
       otherWorkArticles
     } = this.props;
 
-    if (!newsArticles.length) {
+    if (newsArticles === null) {
       this.props.onFetchNewsArticles();
     }
 
-    if (!otherWorkArticles.length) {
+    if (otherWorkArticles === null) {
       this.props.onFetchOtherWorkArticles();
     }
-
 
     return (
       <div className="container-dashboard">

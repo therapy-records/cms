@@ -98,7 +98,7 @@ describe('(Component) News - Home', () => {
     });
   });
 
-  it('should render an error if no new articles length', () => {
+  it('should render an error if no new articles', () => {
     const wrapper = shallow(
       <News
         newsArticles={[]}
@@ -109,7 +109,7 @@ describe('(Component) News - Home', () => {
       />
     );
     const actual = wrapper.containsMatchingElement(
-      <p>Unable to fetch articles :(</p>
+      <p>No articles yet.</p>
     );
     expect(actual).to.equal(true);
   });

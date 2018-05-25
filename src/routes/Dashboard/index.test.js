@@ -70,9 +70,9 @@ describe('(Component) Dashboard', () => {
     expect(actual).to.be.true;
   });
 
-  describe('when there are no newsArticles', () => {
+  describe('when newsArticles === null', () => {
     it('should call onFetchNewsArticles', () => {
-      props.newsArticles = [];
+      props.newsArticles = null;
       props.onFetchNewsArticles = sinon.spy();
       props.resetPromiseState = () => {};
       shallow(<Dashboard {...props} />)
@@ -80,13 +80,33 @@ describe('(Component) Dashboard', () => {
     });
   });
 
-  describe('when there are no otherWorkArticles', () => {
+  describe('when newsArticles is empty array', () => {
+    it('should not call onFetchNewsArticles', () => {
+      props.newsArticles = [];
+      props.onFetchNewsArticles = sinon.spy();
+      props.resetPromiseState = () => { };
+      shallow(<Dashboard {...props} />)
+      expect(props.onFetchNewsArticles).to.not.have.been.called;
+    });
+  });
+
+  describe('when otherWorkArticles === null', () => {
     it('should call onFetchOtherWorkArticles', () => {
-      props.otherWorkArticles = [];
+      props.otherWorkArticles = null;
       props.onFetchOtherWorkArticles = sinon.spy();
       props.resetPromiseState = () => { };
       shallow(<Dashboard {...props} />)
       expect(props.onFetchOtherWorkArticles).to.have.been.called;
+    });
+  });
+
+  describe('when otherWorkArticles is empty array', () => {
+    it('should not call onFetchOtherWorkArticles', () => {
+      props.otherWorkArticles = [];
+      props.onFetchOtherWorkArticles = sinon.spy();
+      props.resetPromiseState = () => { };
+      shallow(<Dashboard {...props} />)
+      expect(props.onFetchOtherWorkArticles).to.not.have.been.called;
     });
   });
   

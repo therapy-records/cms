@@ -140,7 +140,7 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = {
-  articles: []
+  articles: null
 };
 export default function newsReducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]

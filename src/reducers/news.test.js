@@ -90,39 +90,39 @@ const mockErrorResponse = {
 const store = mockStore(mockState);
 
 describe('(Redux Module) news', () => {
-  it('Should export a constant FETCH_NEWS_ARTICLES_SUCCESS', () => {
+  it('should export a constant FETCH_NEWS_ARTICLES_SUCCESS', () => {
     expect(FETCH_NEWS_ARTICLES_SUCCESS).to.equal('FETCH_NEWS_ARTICLES_SUCCESS')
   });
 
-  it('Should export a constant FETCH_NEWS_ARTICLES_QUEUE_SUCCESS', () => {
+  it('should export a constant FETCH_NEWS_ARTICLES_QUEUE_SUCCESS', () => {
     expect(FETCH_NEWS_ARTICLES_QUEUE_SUCCESS).to.equal('FETCH_NEWS_ARTICLES_QUEUE_SUCCESS')
   });
 
-  it('Should export a constant POST_NEWS_FORM_SUCCESS', () => {
+  it('should export a constant POST_NEWS_FORM_SUCCESS', () => {
     expect(POST_NEWS_FORM_SUCCESS).to.equal('POST_NEWS_FORM_SUCCESS')
   });
 
-  it('Should export a constant POST_NEWS_FORM_QUEUE_SUCCESS', () => {
+  it('should export a constant POST_NEWS_FORM_QUEUE_SUCCESS', () => {
     expect(POST_NEWS_FORM_QUEUE_SUCCESS).to.equal('POST_NEWS_FORM_QUEUE_SUCCESS')
   });
 
-  it('Should export a constant EDIT_NEWS_SUCCESS', () => {
+  it('should export a constant EDIT_NEWS_SUCCESS', () => {
     expect(EDIT_NEWS_SUCCESS).to.equal('EDIT_NEWS_SUCCESS')
   });
 
-  it('Should export a constant EDIT_NEWS_QUEUE_SUCCESS', () => {
+  it('should export a constant EDIT_NEWS_QUEUE_SUCCESS', () => {
     expect(EDIT_NEWS_QUEUE_SUCCESS).to.equal('EDIT_NEWS_QUEUE_SUCCESS')
   });
 
   describe('(Reducer)', () => {
-    it('Should be a function', () => {
+    it('should be a function', () => {
       expect(newsReducer).to.be.a('function')
     });
 
-    it('Should initialize with correct empty arrays', () => {
+    it('should initialize with correct state', () => {
       const state = newsReducer(undefined, {});
       expect(state).to.deep.equal(
-        { articles: [], articlesQueue: [] }
+        { articles: null, articlesQueue: null }
       );
     });
   });

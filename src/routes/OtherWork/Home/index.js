@@ -11,9 +11,8 @@ import { selectOtherWorkArticles } from '../../../selectors/otherWork'
 
 class OtherWorkHome extends React.Component {
   componentWillMount() {
-    if (!this.props.articles ||
-      !this.props.articles.length) {
-      this.props.onFetchOtherWorkArticles();
+    if (this.props.articles === null) {
+        this.props.onFetchOtherWorkArticles();
     }
   }
 
@@ -88,7 +87,7 @@ class OtherWorkHome extends React.Component {
               <ul>
                 {articles.map((p) => this.renderArticle(p))}
               </ul>
-            : <p>Unable to fetch articles :(</p>}
+            : <p>No articles yet.</p>}
           </div>
         }
 

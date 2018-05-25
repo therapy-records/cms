@@ -11,21 +11,16 @@ import {
   selectNewsArticlesQueueReverse
 } from '../../../selectors/news';
 
-
 const dateIsBefore = (a, b) => {
   return new Date(b.createdAt) - new Date(a.createdAt)
 };
 
 export class News extends React.Component {
   componentWillMount() {
-    if (!this.props.articlesQueue ||
-        !this.props.articlesQueue.length ||
-        this.props.articlesQueue.length === 0) {
+    if (this.props.articlesQueue === null) {
       this.props.onFetchNewsQueueArticles();
     }
-    if (!this.props.newsArticles ||
-        !this.props.newsArticles.length ||
-        this.props.newsArticles.length === 0) {
+    if (this.props.newsArticles === null) {
         this.props.onFetchNewsArticles();
     }
   }
@@ -107,7 +102,7 @@ export class News extends React.Component {
 
     let _combinedArticles = (articlesQueue || newsArticles) && this.getCombinedArticles(articlesQueue, newsArticles);
 
-    const hasCombinedArticles = _combinedArticles && _combinedArticles.length;
+    const hasCombinedArticles = (_combinedArticles !== null) && (_combinedArticles && _combinedArticles.length);
 
     return (
       <div>
@@ -118,12 +113,12 @@ export class News extends React.Component {
               <Link to='news/create' className='btn'>Create a new article</Link>
             </div>
             {
-              !hasCombinedArticles ? (
-                <p>Unable to fetch articles :(</p>
-              ) : (
+              hasCombinedArticles ? (
                 <ul>
                   {_combinedArticles.map((p) => this.renderPost(p))}
                 </ul>
+              ) : (
+                <p>No articles yet.</p>
               )
             }
 
