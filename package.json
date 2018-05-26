@@ -2,6 +2,19 @@
   "name": "therapy-records-cms",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start-js": "react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
+    "build-js": "react-scripts build",
+    "build": "npm-run-all build-css build-js",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
+    "precommit": "npm test-coverage",
+    "prepush": "npm test-coverage",
+    "test-coverage": "npm test -- --coverage"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "enzyme": "^3.3.0",
@@ -28,18 +41,6 @@
     "rxjs": "5.5.10",
     "superagent": "^3.8.2"
   },
-  "scripts": {
-    "start-js": "react-scripts start",
-    "start": "npm-run-all -p watch-css start-js",
-    "build-js": "react-scripts build",
-    "build": "npm-run-all build-css build-js",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
-    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
-    "precommit": "npm test -- --coverage",
-    "prepush": "npm test -- --coverage"
-  },
   "devDependencies": {
     "chai": "^4.1.2",
     "husky": "^0.14.3",
@@ -47,5 +48,19 @@
     "redux-mock-store": "^1.5.1",
     "sinon": "^4.5.0",
     "sinon-chai": "^3.0.0"
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 50,
+        "functions": 50,
+        "lines": 50,
+        "statements": 50
+      }
+    },
+    "coveragePathIgnorePatterns": [
+      "src/index.js",
+      "src/registerServiceWorker.js"
+    ]
   }
 }
