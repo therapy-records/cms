@@ -19,9 +19,9 @@ import OtherWorkArticleCreate from './routes/OtherWork/ArticleCreate';
 import { authCheck } from './actions/auth';
 import './index.css';
 
-const NotFound = () => <div className='container'><p>Page not found :(</p></div>;
+export const NotFound = () => <div className='container'><p>Page not found :(</p></div>;
 
-class Router extends Component {
+export class Router extends Component {
   render() {
     const { isAuth } = this.props;
 
@@ -61,13 +61,13 @@ class Router extends Component {
 
 const mapStateToProps = (state) => ({
   isAuth: state.user.isAuth
-})
+});
 
 const mapDispatchToProps = {
   onAuthCheck: () => authCheck()
-}
+};
 
-const ConnectedRouter = connect(
+export const ConnectedRouter = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Router);

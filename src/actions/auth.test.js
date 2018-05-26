@@ -101,6 +101,24 @@ describe('(Actions) auth', () => {
         store.clearActions();
       });
     });
-  });
 
+    it('should dispatch the correct actions on promise error', () => {
+      _axiosAuthHeaders.post = sinon.stub().returns(Promise.reject(mock.authResponseError));
+      nock(API_ROOT + AUTH)
+        .post('/auth')
+        .reply(200, mock.authResponseError);
+
+      const expectedActions = [
+        { type: USER_AUTH_ERROR, payload: { isAuth: false, authError: undefined } },
+        { type: USER_AUTH_ERROR, payload: { isAuth: false, authError: undefined } }
+      ];
+
+      return store.dispatch(authCheck()).then(() => {
+        const storeActions = store.getActions();
+        expect(storeActions).to.deep.equal(expectedActions);
+        store.clearActions();
+      });
+    });
+
+  });
 });

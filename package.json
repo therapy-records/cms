@@ -129,7 +129,8 @@
     },
     "coveragePathIgnorePatterns": [
       "src/index.js",
-      "src/registerServiceWorker.js"
+      "src/registerServiceWorker.js",
+      "src/components/ProtectedRoute"
     ]
   },
   "babel": {

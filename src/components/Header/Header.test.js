@@ -2,7 +2,6 @@ import React from 'react'
 import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
-import { bindActionCreators } from 'redux'
 import { Header } from './Header'
 import { NavLink } from 'react-router-dom'
 import Enzyme, { shallow } from 'enzyme';

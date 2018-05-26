@@ -29,42 +29,42 @@ export const DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR = 'DELETE_SINGLE_NEWS_QUEUE_
 // Actions
 // ------------------------------------
 
-function selectedNewsArticle(article) {
+export function selectedNewsArticle(article) {
   return {
     type: SET_SELECTED_NEWS_ARTICLE,
     payload: article
   }
 }
 
-function selectedNewsArticleDeleted() {
+export function selectedNewsArticleDeleted() {
   return {
     type: SET_SELECTED_NEWS_ARTICLE_DELETED,
     payload: { isDeleted: true }
   }
 }
 
-function deleteSuccess(data) {
+export function deleteSuccess(data) {
   return {
     type: DELETE_SINGLE_NEWS_ARTICLE_SUCCESS,
     payload: data
   }
 }
 
-function deleteQueueArticleSuccess() {
+export function deleteQueueArticleSuccess() {
   return {
     type: DELETE_SINGLE_NEWS_QUEUE_ARTICLE_SUCCESS,
     payload: {}
   }
 }
 
-function deleteQueueArticleError(data) {
+export function deleteQueueArticleError(data) {
   return {
     type: DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR,
     payload: { error: true }
   }
 }
 
-function deleteError() {
+export function deleteError() {
   return {
     type: DELETE_SINGLE_NEWS_ARTICLE_ERROR,
     payload: { error: true }
