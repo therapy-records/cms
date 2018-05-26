@@ -5,6 +5,7 @@ import { Field } from 'redux-form';
 import { LoginForm, textInput, required } from './LoginForm'
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -16,6 +17,18 @@ describe('(Component) LoginForm', () => {
 
   beforeEach(() => {
     wrapper = shallow(<LoginForm {...props} />);
+  });
+
+  it('should render <LoadingSpinner />', () => {
+    props.promiseLoading = true;
+    wrapper = shallow(<LoginForm {...props} />);
+    const actual = wrapper.containsMatchingElement(
+      <LoadingSpinner
+        active={props.promiseLoading}
+        fullScreen
+      />
+    );
+    expect(actual).to.equal(true);
   });
 
   it('should render a username field', () => {

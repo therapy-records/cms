@@ -48,7 +48,6 @@ export class Header extends React.Component {
             
             {' | '}
             <button onClick={() => { onLogout(); this.redirectToHome(); }} className='btn-logout'>Log out</button>
-        )}
           </div>
         ) : (
           <div>

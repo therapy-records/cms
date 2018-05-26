@@ -30,7 +30,8 @@ export class Home extends React.Component {
     const {
       onPostForm,
       isAuthenticated,
-      authError
+      authError,
+      promiseLoading
     } = this.props;
 
     return (
@@ -41,6 +42,7 @@ export class Home extends React.Component {
               onSubmit={() => { onPostForm(); }}
               isAuthenticated={isAuthenticated}
               authError={authError}
+              promiseLoading={promiseLoading}
             />
           ) : (
               <p>already logged in, redirecting...</p>
@@ -65,6 +67,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.user.isAuth,
+  promiseLoading: state.uiState.promiseLoading,
   authError: state.user.authError
 })
 

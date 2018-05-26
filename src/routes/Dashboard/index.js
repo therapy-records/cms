@@ -8,6 +8,7 @@ import { resetPromiseState } from '../../reducers/uiState';
 import { selectNewsArticles } from '../../selectors/news';
 import { selectOtherWorkArticles } from '../../selectors/otherWork';
 import './styles.css';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 export class Dashboard extends React.Component {
   componentWillUnmount() {
@@ -17,7 +18,8 @@ export class Dashboard extends React.Component {
   render() {
     const {
       newsArticles,
-      otherWorkArticles
+      otherWorkArticles,
+      promiseLoading
     } = this.props;
 
     if (newsArticles === null) {
@@ -30,6 +32,11 @@ export class Dashboard extends React.Component {
 
     return (
       <div className='container container-dashboard'>
+        <LoadingSpinner
+          active={promiseLoading}
+          fullScreen
+        />
+
         <h2>Welcome back</h2>
         <p>Create a new...</p>
         <Link to='news/create' className='btn'>News article</Link>
@@ -56,10 +63,10 @@ Dashboard.propTypes = {
   resetPromiseState: PropTypes.func.isRequired
 }
 
-
 const mapStateToProps = (state) => ({
   newsArticles: selectNewsArticles(state),
-  otherWorkArticles: selectOtherWorkArticles(state)
+  otherWorkArticles: selectOtherWorkArticles(state),
+  promiseLoading: state.uiState.promiseLoading,
 })
 
 const mapDispatchToProps = {

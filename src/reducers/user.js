@@ -7,6 +7,9 @@ import {
   USER_AUTH_SUCCESS,
   USER_AUTH_ERROR
 } from '../constants/actions'
+import {
+  promiseLoading
+} from './uiState';
 
 // ------------------------------------
 // Actions
@@ -40,6 +43,7 @@ export const axiosUserLogin = axios.create({
 
 export const userLogin = () => {
   return (dispatch, getState) => {
+    dispatch(promiseLoading(true));
     const userObj = () => {
       if (getState().form &&
           getState().form.LOGIN_FORM &&
@@ -55,15 +59,19 @@ export const userLogin = () => {
     ).then((data) => {
       if (data && data.data.success === true) {
         localStorage.setItem('token', data.data.token)
+        dispatch(promiseLoading(false));
         return dispatch(authSuccess())
       } else {
         localStorage.removeItem('token');
+        dispatch(promiseLoading(false));
         return dispatch(authError(data.data.message));
       }
     }).catch((error) => {
       if (error.response) {
+        dispatch(promiseLoading(false));
         dispatch(authError(error.response.data.message))
       } else if (error.request) {
+        dispatch(promiseLoading(false));
         dispatch(authError('Sorry, something has gone wrong'));
       }
     });

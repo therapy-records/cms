@@ -30,11 +30,14 @@ describe('(Component) News - Home', () => {
         articlesQueue: mockNewsArticles
       };
 
-  it('should render a loading message if promiseLoading', () => {
+  it('should render <LoadingSpinner />', () => {
     props = { ...baseProps, promiseLoading: true };
     wrapper = shallow(<News {...props} />);
     const actual = wrapper.containsMatchingElement(
-      <LoadingSpinner />
+      <LoadingSpinner
+        active={props.promiseLoading}
+        fullScreen
+      />
     );
     expect(actual).to.equal(true);
   });

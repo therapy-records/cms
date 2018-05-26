@@ -107,8 +107,12 @@ export class News extends React.Component {
 
     return (
       <div className='container'>
-        {promiseLoading ?
-          <LoadingSpinner /> :
+        <LoadingSpinner
+          active={promiseLoading}
+          fullScreen
+        />
+
+        {!promiseLoading &&
           <div>
             <div className='news-feed-header'>
               <Link to='news/create' className='btn'>Create a new article</Link>

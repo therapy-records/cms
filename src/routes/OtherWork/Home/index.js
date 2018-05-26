@@ -76,8 +76,12 @@ class OtherWorkHome extends React.Component {
 
     return (
       <div className='container'>
-        {promiseLoading ?
-          <LoadingSpinner /> :
+        <LoadingSpinner
+          active={promiseLoading}
+          fullScreen
+        />
+
+        {!promiseLoading &&
           <div>
             <div className='news-feed-header'>
               <Link to='other-work/create' className='btn'>Create a new article</Link>

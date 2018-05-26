@@ -18,7 +18,8 @@ import {
 } from '../constants';
 import {
   USER_AUTH_SUCCESS,
-  USER_AUTH_ERROR
+  USER_AUTH_ERROR,
+  UISTATE_PROMISE_LOADING
 } from '../constants/actions';
 
 const middlewares = [thunk];
@@ -82,6 +83,8 @@ describe('(Redux Module) user', () => {
         .reply(200, mock.authResponseSuccess);
 
       const expectedActions = [
+        { type: UISTATE_PROMISE_LOADING, payload: true },
+        { type: UISTATE_PROMISE_LOADING, payload: false },
         { type: USER_AUTH_SUCCESS, payload: { isAuth: true } }
       ];
 
@@ -99,6 +102,8 @@ describe('(Redux Module) user', () => {
         .reply(200, mock.authResponseError);
 
       const expectedActions = [
+        { type: UISTATE_PROMISE_LOADING, payload: true },
+        { type: UISTATE_PROMISE_LOADING, payload: false },
         { type: USER_AUTH_ERROR, payload: { isAuth: false, authError: mock.authResponseError.data.message } }
       ];
 
@@ -121,6 +126,8 @@ describe('(Redux Module) user', () => {
         .reply(401, mock.authResponseError);
 
       const expectedActions = [
+        { type: UISTATE_PROMISE_LOADING, payload: true },
+        { type: UISTATE_PROMISE_LOADING, payload: false },
         { type: USER_AUTH_ERROR, payload: { isAuth: false, authError: mockPromiseError.response.data.message } }
       ];
 
@@ -139,6 +146,8 @@ describe('(Redux Module) user', () => {
         .reply(401, mock.authResponseError);
 
       const expectedActions = [
+        { type: UISTATE_PROMISE_LOADING, payload: true },
+        { type: UISTATE_PROMISE_LOADING, payload: false },
         { type: USER_AUTH_ERROR, payload: { isAuth: false, authError: 'Sorry, something has gone wrong' } }
       ];
 

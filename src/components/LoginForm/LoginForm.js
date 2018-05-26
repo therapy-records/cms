@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
+import LoadingSpinner from '../LoadingSpinner';
 
 export const textInput = ({ input, label, placeholder, autoFocus, type, meta: { touched, error } }) => (
   <div>
@@ -27,11 +28,18 @@ export class LoginForm extends React.Component {
       pristine,
       submitting,
       onSubmit,
-      authError
+      authError,
+      promiseLoading
     } = this.props
 
     return (
       <section className='login-form'>
+
+        <LoadingSpinner
+          active={promiseLoading}
+          fullScreen
+        />
+
         <form onSubmit={(e) => e.preventDefault()}>
 
           <Field name='username'
