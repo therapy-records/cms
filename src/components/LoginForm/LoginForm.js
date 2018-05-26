@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 
-export const textInput = ({ input, label, placeholder, type, meta: { touched, error } }) => (
+export const textInput = ({ input, label, placeholder, autoFocus, type, meta: { touched, error } }) => (
   <div>
     {label && <label>{label}</label>}
-    <input {...input} placeholder={placeholder} type={type} />
+    <input {...input} placeholder={placeholder} type={type} autoFocus={autoFocus} />
     {touched && error && <span className='form-error'>{label} is {error}</span>}
   </div>
 )
@@ -38,7 +38,9 @@ export class LoginForm extends React.Component {
                  component={textInput}
                  type='text'
                  placeholder='Username'
-                 validate={required} />
+                 validate={required}
+                 autoFocus
+          />
 
           <br />
 
@@ -46,7 +48,8 @@ export class LoginForm extends React.Component {
                  component={textInput}
                  type='password'
                  placeholder='Password'
-                 validate={required} />
+                 validate={required}
+          />
 
           {error && <p className='form-error'>{error}</p>}
 

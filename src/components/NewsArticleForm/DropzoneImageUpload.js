@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import Dropzone from 'react-dropzone';
 import request from 'superagent';
+import LoadingSpinner from '../LoadingSpinner';
+import './styles.css';
 
 const CLOUDINARY_UPLOAD_PRESET_ID = 'gflm7wbr';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dpv2k0qsj/upload';
@@ -12,7 +14,8 @@ export class DropzoneImageUpload extends React.Component {
     this.state = {
       items: [],
       singleItem: '',
-      invalidDimensions: []
+      invalidDimensions: [],
+      isLoading: false
     };
   }
 
@@ -46,7 +49,8 @@ export class DropzoneImageUpload extends React.Component {
   // todo: redux, promisify
   uploadSingleImage(file) {
     this.setState({
-      invalidDimensions: []
+      invalidDimensions: [],
+      isLoading: true
     });
     let upload = request.post(CLOUDINARY_UPLOAD_URL)
                         .field('upload_preset', CLOUDINARY_UPLOAD_PRESET_ID)
@@ -61,12 +65,14 @@ export class DropzoneImageUpload extends React.Component {
               items: [
                 ...this.state.items,
                 ...[this.handleImageResponseUrl(response.body.secure_url)]
-              ]
+              ],
+              isLoading: false
             });
             this.props.input.onChange(this.state.items);
           } else {
             this.setState({
-              singleItem: this.handleImageResponseUrl(response.body.secure_url)
+              singleItem: this.handleImageResponseUrl(response.body.secure_url),
+              isLoading: false
             });
             this.props.input.onChange(this.state.singleItem);
           }
@@ -82,7 +88,8 @@ export class DropzoneImageUpload extends React.Component {
               message.tooSmall,
               message.widthShouldBe,
               message.heightShouldBe
-            ]
+            ],
+            isLoading: false
           });
         }
       }
@@ -109,7 +116,8 @@ export class DropzoneImageUpload extends React.Component {
     const {
       items,
       singleItem,
-      invalidDimensions
+      invalidDimensions,
+      isLoading
     } = this.state;
 
     return (
@@ -126,21 +134,27 @@ export class DropzoneImageUpload extends React.Component {
             <Dropzone
               name={input.name}
               onDrop={this.handleOnDrop.bind(this)} // eslint-disable-line
-              className='dropzone'
+              className={isLoading ? 'dropzone dropzone-active' : 'dropzone'}
               activeClassName='dropzone-active'
               multiple={multiple}
             >
-              {(!multiple && !items.length) &&
+              {(!multiple && !items.length) ?
                 <div className='dropzone-cta'>
                   <span>Drag &amp; drop</span>
+                  <div className={isLoading ? 'dropzone-loading dropzone-loading-active' : 'dropzone-loading'}>
+                    <LoadingSpinner />
+                  </div>
                 </div>
-              }
+              : null}
 
-              {multiple &&
+              {multiple ?
                 <div className='dropzone-cta'>
                   <span>Drag &amp; drop  multiple images</span>
+                  <div className={isLoading ? 'dropzone-loading dropzone-loading-active' : 'dropzone-loading'}>
+                    <LoadingSpinner />
+                  </div>
                 </div>
-              }
+              : null}
 
               {singleItem && <img src={singleItem} alt='Upload preview' />}
 
@@ -166,7 +180,7 @@ export class DropzoneImageUpload extends React.Component {
 
           {multiple &&
             <div className='col-2 gallery-images-col-2'>
-              {(multiple && items && items.length) &&
+              {(multiple && items && items.length) ?
                 <ul className='flex-root gallery-images-flex-root'>
                   {items.map((i) => (
                     <li key={i} className='col-50 no-list-style gallery-image-upload-item'>
@@ -174,7 +188,7 @@ export class DropzoneImageUpload extends React.Component {
                     </li>
                   ))}
                 </ul>
-              }
+              : null}
             </div>
           }
 
@@ -190,7 +204,11 @@ DropzoneImageUpload.propTypes = {
   multiple: PropTypes.bool,
   existingImage: PropTypes.string,
   existingMiniGalleryImages: PropTypes.array,
-  minImageDimensions: PropTypes.object.isRequired
+  minImageDimensions: PropTypes.object
+};
+
+DropzoneImageUpload.defaultProps = {
+  minImageDimensions: {}
 };
 
 export default DropzoneImageUpload;
