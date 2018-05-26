@@ -55,14 +55,17 @@ export const userLogin = () => {
     ).then((data) => {
       if (data && data.data.success === true) {
         localStorage.setItem('token', data.data.token)
-        dispatch(authSuccess())
+        return dispatch(authSuccess())
       } else {
         localStorage.removeItem('token');
-        const dataMessage = data && data.data.message;
-        dispatch(authError(dataMessage || 'Sorry, something is wrong.'));
+        return dispatch(authError(data.data.message));
       }
-    }, () => {
-      dispatch(authError('Sorry, something is wrong.'));
+    }).catch((error) => {
+      if (error.response) {
+        dispatch(authError(error.response.data.message))
+      } else if (error.request) {
+        dispatch(authError('Sorry, something has gone wrong'));
+      }
     });
   }
 }

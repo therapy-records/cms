@@ -109,14 +109,37 @@ describe('(Redux Module) user', () => {
       });
     });
 
-    it('should dispatch the correct actions and message on auth error and with no data message', () => {
-      axiosUserLogin.post = sinon.stub().returns(Promise.resolve());
+    it('should dispatch the correct actions and message on promise error', () => {
+      const mockPromiseError = {
+        response: {
+          ...mock.authResponseError
+        }
+      };
+      axiosUserLogin.post = sinon.stub().returns(Promise.reject(mockPromiseError));
       nock(API_ROOT + AUTH_LOGIN)
         .post('/login')
         .reply(401, mock.authResponseError);
 
       const expectedActions = [
-        { type: USER_AUTH_ERROR, payload: { isAuth: false, authError: 'Sorry, something is wrong.' } }
+        { type: USER_AUTH_ERROR, payload: { isAuth: false, authError: mockPromiseError.response.data.message } }
+      ];
+
+      return store.dispatch(userLogin()).then(() => {
+        const storeActions = store.getActions();
+        expect(storeActions).to.deep.equal(expectedActions);
+        store.clearActions();
+      });
+    });
+
+    it('should dispatch the correct actions and message on promise error with alternative response object', () => {
+      const mockPromiseError = { request: {} };
+      axiosUserLogin.post = sinon.stub().returns(Promise.reject(mockPromiseError));
+      nock(API_ROOT + AUTH_LOGIN)
+        .post('/login')
+        .reply(401, mock.authResponseError);
+
+      const expectedActions = [
+        { type: USER_AUTH_ERROR, payload: { isAuth: false, authError: 'Sorry, something has gone wrong' } }
       ];
 
       return store.dispatch(userLogin()).then(() => {
