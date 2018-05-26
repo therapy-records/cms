@@ -3,7 +3,7 @@ import { Provider, connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
-import Header from './components/Header/Header.container';
+import Sidebar from './components/Sidebar/Sidebar';
 import Home from './routes/Home';
 import Dashboard from './routes/Dashboard';
 import Press from './routes/Press';
@@ -11,7 +11,6 @@ import NewsHome from './routes/News/Home';
 import NewsArticle from './routes/News/Article';
 import NewsArticleEdit from './routes/News/ArticleEdit';
 import NewsArticleCreate from './routes/News/ArticleCreate';
-
 import OtherWorkHome from './routes/OtherWork/Home';
 import OtherWorkArticle from './routes/OtherWork/Article';
 import OtherWorkArticleEdit from './routes/OtherWork/ArticleEdit';
@@ -29,28 +28,36 @@ export class Router extends Component {
       <BrowserRouter>
         <div>
 
-          <Header />
+          {/*<Header />*/}
 
           <div className="main-container">
-            <Switch>
 
-              <Route path="/" component={Home} exact />
-              <ProtectedRoute path="/dashboard" component={Dashboard} isAuth={isAuth} exact />
-              <ProtectedRoute path="/press" component={Press} isAuth={isAuth} exact />
+            <div className='col-first'>
+              <Sidebar />
+            </div>
 
-              <ProtectedRoute path="/news" component={NewsHome} isAuth={isAuth} exact />
-              <ProtectedRoute path="/news/create" component={NewsArticleCreate} isAuth={isAuth} exact />
-              <ProtectedRoute path="/news/:id" component={NewsArticle} isAuth={isAuth} exact />
-              <ProtectedRoute path="/news/:id/edit" component={NewsArticleEdit} isAuth={isAuth} exact />
+            <div className='col-last'>
+              <Switch>
 
-              <ProtectedRoute path="/other-work" component={OtherWorkHome} isAuth={isAuth} exact />
-              <ProtectedRoute path="/other-work/create" component={OtherWorkArticleCreate} isAuth={isAuth} exact />
-              <ProtectedRoute path="/other-work/:id" component={OtherWorkArticle} isAuth={isAuth} exact />
-              <ProtectedRoute path="/other-work/:id/edit" component={OtherWorkArticleEdit} isAuth={isAuth} exact />
+                <Route path="/" component={Home} exact />
+                <ProtectedRoute path="/dashboard" component={Dashboard} isAuth={isAuth} exact />
+                <ProtectedRoute path="/press" component={Press} isAuth={isAuth} exact />
 
-              <Route path="/" component={NotFound} />
+                <ProtectedRoute path="/news" component={NewsHome} isAuth={isAuth} exact />
+                <ProtectedRoute path="/news/create" component={NewsArticleCreate} isAuth={isAuth} exact />
+                <ProtectedRoute path="/news/:id" component={NewsArticle} isAuth={isAuth} exact />
+                <ProtectedRoute path="/news/:id/edit" component={NewsArticleEdit} isAuth={isAuth} exact />
 
-            </Switch>
+                <ProtectedRoute path="/other-work" component={OtherWorkHome} isAuth={isAuth} exact />
+                <ProtectedRoute path="/other-work/create" component={OtherWorkArticleCreate} isAuth={isAuth} exact />
+                <ProtectedRoute path="/other-work/:id" component={OtherWorkArticle} isAuth={isAuth} exact />
+                <ProtectedRoute path="/other-work/:id/edit" component={OtherWorkArticleEdit} isAuth={isAuth} exact />
+
+                <Route path="/" component={NotFound} />
+
+              </Switch>
+            </div>
+
           </div>
 
         </div>

@@ -34,14 +34,24 @@ body {
 
 .main-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  > .col-first {
+    width: 12%;
+    max-width: 150px;
+  }
+  > .col-last {
+    width: 88%;
+  }
 }
 
 .container {
   max-width: 1000px;
-  padding: 4.8em 1em 0;
+  padding: 1em;
   @media(min-width: 600px) {
-    padding-top: 6.8em;
+    padding-top: 4em;
+    padding-left: 4em;
   }
 }
 

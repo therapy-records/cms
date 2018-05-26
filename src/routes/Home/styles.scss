@@ -1,4 +1,8 @@
 .container.home-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
   height: 100%;
   height: calc(100% + 1em);
   width: 100%;

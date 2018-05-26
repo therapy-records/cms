@@ -8,8 +8,8 @@ import { Route } from 'react-router-dom';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import Routes, { Router, ConnectedRouter, NotFound } from './routes';
-import Header from './components/Header/Header.container';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import Sidebar from './components/Sidebar/Sidebar';
 import Home from './routes/Home';
 import Dashboard from './routes/Dashboard';
 import Press from './routes/Press';
@@ -47,9 +47,11 @@ describe('Router', () => {
     wrapper = shallow(<Router {...props} />);
   });
 
-  it('should render Header', () => {
+  Sidebar
+
+  it('should render <Sidebar />', () => {
     const actual = wrapper.containsMatchingElement(
-      <Header />
+      <Sidebar />
     );
     expect(actual).to.equal(true);
   });
