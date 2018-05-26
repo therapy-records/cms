@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import LoadingSpinner from '../LoadingSpinner';
 
-export const textInput = ({ input, label, placeholder, autoFocus, type, meta: { touched, error } }) => (
+export const textInput = ({ input, label, placeholder, hideLabel, autoFocus, type, meta: { touched, error } }) => (
   <div>
-    {label && <label>{label}</label>}
+    {(label && !hideLabel) && <label>{label}</label>}
     <input {...input} placeholder={placeholder} type={type} autoFocus={autoFocus} />
     {touched && error && <span className='form-error'>{label} is {error}</span>}
   </div>
-)
+);
 
 textInput.propTypes = {
   input: PropTypes.object,
@@ -46,7 +46,9 @@ export class LoginForm extends React.Component {
                  component={textInput}
                  type='text'
                  placeholder='Username'
+                 label='Username'
                  validate={required}
+                 hideLabel
                  autoFocus
           />
 
@@ -56,7 +58,9 @@ export class LoginForm extends React.Component {
                  component={textInput}
                  type='password'
                  placeholder='Password'
+                 label='Password'
                  validate={required}
+                 hideLabel
           />
 
           {error && <p className='form-error'>{error}</p>}
