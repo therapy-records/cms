@@ -7,6 +7,7 @@ import Adapter from 'enzyme-adapter-react-15';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { News } from './index';
+import LoadingSpinner from '../../../components/LoadingSpinner';
 
 chai.use(sinonChai);
 
@@ -33,7 +34,7 @@ describe('(Component) News - Home', () => {
     props = { ...baseProps, promiseLoading: true };
     wrapper = shallow(<News {...props} />);
     const actual = wrapper.containsMatchingElement(
-      <p>Loading...</p>
+      <LoadingSpinner />
     );
     expect(actual).to.equal(true);
   });

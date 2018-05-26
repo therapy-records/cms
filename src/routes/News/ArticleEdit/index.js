@@ -10,6 +10,7 @@ import {
 } from '../../../reducers/news';
 import { destroySelectedNewsArticle } from '../../../reducers/newsArticle';
 import NewsArticleForm from '../../../components/NewsArticleForm';
+import LoadingSpinner from '../../../components/LoadingSpinner';
 
 export class ArticleEdit extends React.Component {
   componentWillUnmount() {
@@ -37,7 +38,7 @@ export class ArticleEdit extends React.Component {
     return (
       <article className='container'>
         {promiseLoading &&
-          <p>loading...</p>
+          <LoadingSpinner />
         }
 
         {promiseError &&

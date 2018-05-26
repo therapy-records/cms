@@ -10,6 +10,7 @@ import {
   selectNewsArticlesReverse,
   selectNewsArticlesQueueReverse
 } from '../../../selectors/news';
+import LoadingSpinner from '../../../components/LoadingSpinner';
 
 const dateIsBefore = (a, b) => {
   return new Date(b.createdAt) - new Date(a.createdAt)
@@ -107,7 +108,7 @@ export class News extends React.Component {
     return (
       <div className='container'>
         {promiseLoading ?
-          <p>Loading...</p> :
+          <LoadingSpinner /> :
           <div>
             <div className='news-feed-header'>
               <Link to='news/create' className='btn'>Create a new article</Link>

@@ -7,7 +7,7 @@ import { fetchOtherWorkArticles } from '../../../reducers/otherWork';
 import { setSelectedOtherWorkArticle } from '../../../reducers/otherWorkArticle';
 import { resetPromiseState } from '../../../reducers/uiState';
 import { selectOtherWorkArticles } from '../../../selectors/otherWork'
-
+import LoadingSpinner from '../../../components/LoadingSpinner';
 
 class OtherWorkHome extends React.Component {
   componentWillMount() {
@@ -77,7 +77,7 @@ class OtherWorkHome extends React.Component {
     return (
       <div className='container'>
         {promiseLoading ?
-          <p>Loading...</p> :
+          <LoadingSpinner /> :
           <div>
             <div className='news-feed-header'>
               <Link to='other-work/create' className='btn'>Create a new article</Link>

@@ -6,8 +6,8 @@ import { resetPromiseState } from '../../../reducers/uiState';
 import { destroySelectedOtherWorkArticle } from '../../../reducers/otherWorkArticle';
 import { editOtherWork } from '../../../reducers/otherWork';
 import { selectSelectedOtherWorkArticle } from '../../../selectors/otherWork';
-
 import OtherWorkArticleForm from '../../../components/OtherWorkArticleForm';
+import LoadingSpinner from '../../../components/LoadingSpinner';
 
 class ArticleEdit extends React.Component {
   componentWillUnmount() {
@@ -35,7 +35,7 @@ class ArticleEdit extends React.Component {
     return (
       <article className='container'>
         {promiseLoading &&
-          <p>loading...</p>
+          <LoadingSpinner />
         }
 
         {promiseError &&

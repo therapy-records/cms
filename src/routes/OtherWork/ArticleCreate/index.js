@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { postOtherWork } from '../../../reducers/otherWork';
 import { resetPromiseState } from '../../../reducers/uiState';
 import OtherWorkArticleForm from '../../../components/OtherWorkArticleForm';
+import LoadingSpinner from '../../../components/LoadingSpinner';
 
 class ArticleCreate extends React.Component {
   componentWillUnmount() {
@@ -22,7 +23,7 @@ class ArticleCreate extends React.Component {
     return (
       <div className='container'>
         {promiseLoading &&
-          <p>loading...</p>
+          <LoadingSpinner />
         }
 
         {promiseError &&

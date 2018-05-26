@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { postNews, postNewsQueue } from '../../../reducers/news';
 import { resetPromiseState } from '../../../reducers/uiState';
 import NewsArticleForm from '../../../components/NewsArticleForm';
+import LoadingSpinner from '../../../components/LoadingSpinner';
 
 export class ArticleCreate extends React.Component {
   componentWillUnmount() {
@@ -22,7 +23,7 @@ export class ArticleCreate extends React.Component {
     return (
       <div className='container'>
         {promiseLoading &&
-          <p>loading...</p>
+          <LoadingSpinner />
         }
         {promiseError &&
           <p>error posting article :( {promiseError.message}</p>

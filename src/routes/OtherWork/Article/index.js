@@ -10,8 +10,8 @@ import {
   fetchSingleOtherWorkArticle,
   destroySelectedOtherWorkArticle
 } from '../../../reducers/otherWorkArticle';
-
 import ArticleDeleteModal from '../../../components/ArticleDeleteModal'
+import LoadingSpinner from '../../../components/LoadingSpinner';
 
 class Article extends React.Component {
 
@@ -70,7 +70,7 @@ class Article extends React.Component {
     return (
       <article className='container'>
         {promiseLoading &&
-          <h1>loading...</h1>
+          <LoadingSpinner />
         }
 
         {article && article.isDeleted &&

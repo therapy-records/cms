@@ -91,10 +91,11 @@ textarea {
 }
 
 .form-error {
-  background: darkred;
+  background: $color-red-1;
   color: #FFF;
   padding: 7px 20px;
   font-weight: 300;
+  transition:all 0.3s ease;
   @media(min-width: 600px) {
     padding: 5px 15px;
   }

@@ -7,6 +7,7 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import { Article } from './index'
 import ArticleDeleteModal from '../../../components/ArticleDeleteModal'
+import LoadingSpinner from '../../../components/LoadingSpinner';
 
 chai.use(sinonChai);
 
@@ -101,7 +102,7 @@ describe.only('(Component) News - Article', () => {
     });
     it('should show loading', () => {
       const actual = wrapper.containsMatchingElement(
-        <h1>loading...</h1>
+        <LoadingSpinner />
       );
       expect(actual).to.equal(true);
     });

@@ -13,6 +13,7 @@ import {
   destroySelectedNewsArticle
 } from '../../../reducers/newsArticle';
 import ArticleDeleteModal from '../../../components/ArticleDeleteModal';
+import LoadingSpinner from '../../../components/LoadingSpinner';
 
 export class Article extends React.Component {
 
@@ -99,7 +100,7 @@ export class Article extends React.Component {
     return (
       <article className='container'>
         {promiseLoading &&
-          <h1>loading...</h1>
+          <LoadingSpinner />
         }
 
         {article && article.isDeleted &&

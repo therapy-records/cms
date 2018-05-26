@@ -7,6 +7,7 @@ import Adapter from 'enzyme-adapter-react-15';
 import { Link } from 'react-router-dom'
 import { ArticleCreate } from './index'
 import NewsArticleForm from '../../../components/NewsArticleForm'
+import LoadingSpinner from '../../../components/LoadingSpinner';
 
 chai.use(sinonChai);
 
@@ -50,7 +51,7 @@ describe('(Component) News - ArticleCreate', () => {
     });
     it('should show loading', () => {
       const actual = wrapper.containsMatchingElement(
-        <p>loading...</p>
+        <LoadingSpinner />
       );
       expect(actual).to.equal(true);
     });
