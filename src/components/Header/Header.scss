@@ -6,10 +6,12 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 1em 0 ;
   background:#111;
 
   h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 0;
     padding-left:0;
     a {
@@ -25,6 +27,7 @@
     text-decoration: none;
     padding: 0.5em;
     transition: all 0.3s ease;
+    margin-bottom: 0;
     &.route--active,
     &:hover,
     &:focus {
@@ -38,8 +41,14 @@
 .header-nav {
   display: none;
   @media(min-width: 600px) {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: #666;
+    margin-right: .5em;
+  }
+  a {
+    padding: 0.3em 0.5em;
   }
 }
 

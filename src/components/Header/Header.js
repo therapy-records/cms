@@ -50,7 +50,7 @@ export class Header extends React.Component {
             <button onClick={() => { onLogout(); this.redirectToHome(); }} className='btn-logout'>Log out</button>
           </div>
         ) : (
-          <div>
+          <div className='header-nav'>
             {!isLoginPage &&
               <NavLink to='/' activeClassName='route--active'>Log in</NavLink>
             }
