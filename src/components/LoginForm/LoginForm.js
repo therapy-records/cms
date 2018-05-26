@@ -2,22 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import LoadingSpinner from '../LoadingSpinner';
-
-export const textInput = ({ input, label, placeholder, hideLabel, autoFocus, type, meta: { touched, error } }) => (
-  <div>
-    {(label && !hideLabel) && <label>{label}</label>}
-    <input {...input} placeholder={placeholder} type={type} autoFocus={autoFocus} />
-    {touched && error && <span className='form-error'>{label} is {error}</span>}
-  </div>
-);
-
-textInput.propTypes = {
-  input: PropTypes.object,
-  label: PropTypes.string,
-  meta: PropTypes.object,
-  type: PropTypes.string,
-  placeholder: PropTypes.string
-};
+import TextInput from '../TextInput';
 
 export const required = value => value ? undefined : 'required';
 
@@ -43,7 +28,7 @@ export class LoginForm extends React.Component {
         <form onSubmit={(e) => e.preventDefault()}>
 
           <Field name='username'
-                 component={textInput}
+            component={TextInput}
                  type='text'
                  placeholder='Username'
                  label='Username'
@@ -55,7 +40,7 @@ export class LoginForm extends React.Component {
           <br />
 
           <Field name='password'
-                 component={textInput}
+                 component={TextInput}
                  type='password'
                  placeholder='Password'
                  label='Password'

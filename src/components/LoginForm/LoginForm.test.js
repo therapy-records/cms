@@ -2,9 +2,10 @@ import React from 'react'
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { Field } from 'redux-form';
-import { LoginForm, textInput, required } from './LoginForm'
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
+import { LoginForm, required } from './LoginForm';
+import TextInput from '../../components/TextInput';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -34,7 +35,7 @@ describe('(Component) LoginForm', () => {
   it('should render a username field', () => {
     const actual = wrapper.containsMatchingElement(
       <Field name='username'
-             component={textInput}
+             component={TextInput}
              type='text'
              placeholder='Username'
              validate={required} />
@@ -45,7 +46,7 @@ describe('(Component) LoginForm', () => {
   it('should render a password field', () => {
     const actual = wrapper.containsMatchingElement(
       <Field name='password'
-             component={textInput}
+             component={TextInput}
              type='password'
              placeholder='Password'
              validate={required} />
