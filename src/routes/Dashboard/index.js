@@ -29,7 +29,7 @@ export class Dashboard extends React.Component {
     }
 
     return (
-      <div className="container-dashboard">
+      <div className='container container-dashboard'>
         <h2>Welcome back</h2>
         <p>Create a new...</p>
         <Link to='news/create' className='btn'>News article</Link>
@@ -40,7 +40,7 @@ export class Dashboard extends React.Component {
         <br />
         <br />
 
-        <h3><strong>Stats</strong></h3>
+        <h3>Stats</h3>
         {newsArticles && <p>News articles: {newsArticles.length}</p>}
         {otherWorkArticles && <p>Other-work articles: {otherWorkArticles.length}</p>}
         <p>Press releases: Coming soon...</p>

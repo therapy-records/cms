@@ -34,7 +34,7 @@ export class Home extends React.Component {
     } = this.props;
 
     return (
-      <div className='home-root'>
+      <div className='container home-container'>
         <div>
           {!isAuthenticated ? (
             <LoginForm

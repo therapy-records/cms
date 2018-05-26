@@ -60,7 +60,7 @@ export class LoginForm extends React.Component {
           <div>
             <button
               type='submit'
-              className='btn-lg'
+              className='btn-lg btn-submit'
               disabled={error || pristine || submitting}
               onClick={() => onSubmit()}>Login
             </button>

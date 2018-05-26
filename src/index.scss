@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,600');
+@import url('https://fonts.googleapis.com/css?family=Rubik:400,500,700');
+@import 'styles/variables.scss';
 
 html {
   box-sizing: border-box;
@@ -10,7 +11,7 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
-  font-family: 'Raleway', sans-serif;
+  font-family: $font-main;
 }
 
 body {
@@ -24,6 +25,7 @@ body {
   box-sizing: inherit;
 }
 
+.container,
 .main-container,
 .main-container-inner {
   width: 100%;
@@ -31,10 +33,16 @@ body {
 }
 
 .main-container {
-  margin: 0;
-  padding: 4.8em 1em 0;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
   max-width: 1000px;
-  margin: 0 auto;
+  padding: 4.8em 1em 0;
+  @media(min-width: 600px) {
+    padding-top: 6.8em;
+  }
 }
 
 .core-layout {
@@ -65,9 +73,6 @@ body {
 }
 
 
-
-
-
 label {
   display: block;
   text-align: left;
@@ -90,27 +95,13 @@ textarea {
   color: #FFF;
   padding: 7px 20px;
   font-weight: 300;
-  border-radius: 3px;
   @media(min-width: 600px) {
     padding: 5px 15px;
   }
 }
 
 textarea {
-  max-width: 1005;
-}
-
-button {
-  width: 100%;
-  padding: .5em;
-  background: #111;
-  color: #FFF;
-  border: 0 none;
-  font-weight: 300;
-  font-size: 1em;
-  transition:all 0.2s ease;
-  appearance: none;
-  cursor: pointer;
+  max-width: 100%;
 }
 
 button:disabled,
@@ -118,17 +109,25 @@ button[disabled] {
   cursor: default;
 }
 
+button,
 .btn {
+  border: 0 none;
   display: inline-block;
-  background: #111;
+  background: $color-blue-1;
   color: #FFF;
   font-weight: 300;
   margin: 0 0 .5em 0;
   padding: .5em;
   width: 100%;
+  font-size: 1em;
+  text-decoration: none;
+  appearance: none;
+  cursor: pointer;
+  transition:all 0.3s ease;
+  font-family: $font-main;
   @media(min-width: 600px) {
     width: auto;
-    padding: 5px 15px;
+    padding: .8em 1em;
   }
   + .btn {
     margin-left: 1.5em;
@@ -139,29 +138,64 @@ button[disabled] {
   &:hover,
   &:focus {
     color: #FFF;
-    text-decoration: underline;
+    background: $color-blue-2;
+    text-decoration: none;
   }
 }
 
+button[disabled] {
+  opacity: .7;
+  &:hover,
+  &:focus {
+    background: $color-blue-1;
+  }
+}
+
+// .btn-submit,
+// input[type="submit"] {
+// }
+
 .btn-lg {
   padding: 1.5em 2em;
+  width: 100%;
 }
 
 .btn-width-auto {
   width: auto;
 }
 
+.btn + .btn {
+  margin-bottom: 0;
+  @media(min-width: 600px) {
+    margin-left: 1em;
+  }
+}
+
 h1,h2,h3,h4,h5,h6 {
   margin-top: 0;
   margin-bottom: 0.5em;
   font: {
-    weight: 600;
+    weight: 500;
     size: 1em;
+  }
+  a {
+    color: #000;
   }
 }
 
 h1 {
   font-size: 1.5em;
+}
+
+h2 {
+  font-size: 2em;
+  @media(min-width: 600px) {
+    font-size: 2.5em;
+  }
+}
+
+h3 {
+  font-size: 1.8em;
 }
 
 img {
@@ -253,9 +287,6 @@ ol {
   width: 100%;
   max-width: 250px;
   font-size: .95em;
-  .btn + .btn {
-    margin-bottom: 0;
-  }
   // .btn {
   //   font-size: 1em;
   //   @media(min-width: 600px) {
@@ -283,13 +314,8 @@ ol {
   z-index: 1 !important; // maybe unsafe, without there is overflow/z-index issue
 }
 
-button[disabled] {
-  opacity: .8;
-  color: #AAA;
-}
-
 label {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .m-calendar {
@@ -357,13 +383,6 @@ iframe {
     margin-top:0;
     margin-bottom: 0.7em;
     letter-spacing:0.5px;
-    font-size: 1.3em;
-    @media(min-width: 600px) {
-      font-size: 1.5em;
-    }
-    a {
-      color: #000;
-    }
   }
   .btn {
     width: 30%;
@@ -383,7 +402,6 @@ iframe {
     padding: .4em .5em;
     background: #E3E3E3;
     color: #878787;
-    font-weight: bold;
     font-size: .8em;
     border-radius: 3px;
     opacity: .6;

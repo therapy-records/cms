@@ -97,7 +97,7 @@ export class Article extends React.Component {
     }
 
     return (
-      <article>
+      <article className='container'>
         {promiseLoading &&
           <h1>loading...</h1>
         }

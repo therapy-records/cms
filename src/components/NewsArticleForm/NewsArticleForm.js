@@ -244,13 +244,13 @@ export class NewsArticleForm extends React.Component {
                 titleSub='Post live on a date of choosing'
                 titleSub2='NOTE: This is an alpha version. Time of posting is not exact and could be offset.' />
 
-          {error && <strong>{error}</strong>}
+          {error && <p>{error}</p>}
 
           <br />
           <br />
 
           <button type='submit'
-                  className='btn-lg'
+                  className='btn-lg btn-submit'
                   disabled={error || pristine || submitting || error || invalid}
                   onClick={() => this.handleSubmit()}>Submit
           </button>

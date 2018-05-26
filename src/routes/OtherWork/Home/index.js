@@ -75,7 +75,7 @@ class OtherWorkHome extends React.Component {
     const hasArticles = articles && articles.length;
 
     return (
-      <div>
+      <div className='container'>
         {promiseLoading ?
           <p>Loading...</p> :
           <div>

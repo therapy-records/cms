@@ -35,7 +35,7 @@ export class ArticleEdit extends React.Component {
     }
 
     return (
-      <article>
+      <article className='container'>
         {promiseLoading &&
           <p>loading...</p>
         }

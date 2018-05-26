@@ -105,7 +105,7 @@ export class News extends React.Component {
     const hasCombinedArticles = (_combinedArticles !== null) && (_combinedArticles && _combinedArticles.length);
 
     return (
-      <div>
+      <div className='container'>
         {promiseLoading ?
           <p>Loading...</p> :
           <div>

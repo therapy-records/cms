@@ -212,7 +212,7 @@ describe('(Component) NewsArticleForm', () => {
       <NewsArticleForm {...props} />
     );
     const actual = errorWrapper.containsMatchingElement(
-      <strong>{props.error}</strong>
+      <p>{props.error}</p>
     );
     expect(actual).to.equal(true);
   });

@@ -112,13 +112,13 @@ export class OtherWorkArticleForm extends React.Component {
             </div>
           */}
 
-          {error && <strong>{error}</strong>}
+          {error && <p>{error}</p>}
 
           <br />
           <br />
 
           <button type='submit'
-                  className='btn-lg'
+                  className='btn-lg btn-submit'
                   disabled={error || pristine || submitting || error || invalid}
                   onClick={() => this.handleSubmit()}>Submit
           </button>

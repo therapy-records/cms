@@ -20,7 +20,7 @@ class ArticleCreate extends React.Component {
     } = this.props;
 
     return (
-      <div>
+      <div className='container'>
         {promiseLoading &&
           <p>loading...</p>
         }
