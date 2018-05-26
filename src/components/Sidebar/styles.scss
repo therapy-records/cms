@@ -5,14 +5,18 @@
   z-index: 2;
   background: #111;
   height: 100%;
+  width: 100%;
   padding: 1em 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   max-width: 150px;
-  a {
+  a,
+  button {
+    background: none;
     text-decoration: none;
     padding: .6em 1em;
+    text-align: left;
     width: 100%;
     color: #FFF;
     opacity: .6;
@@ -20,6 +24,7 @@
     &:hover,
     &:focus,
     &.route--active {
+      background: none;
       opacity: 1;
     }
   }

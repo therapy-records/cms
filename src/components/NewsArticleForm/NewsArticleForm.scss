@@ -1,7 +1,11 @@
 .heading {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 2em;
+  h2 + div {
+    margin-left: 1em;
+  }
 }
 
 .col-1 {
