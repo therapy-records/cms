@@ -88,4 +88,13 @@ describe('(Component) News - ArticleCreate', () => {
       expect(actual).to.equal(true);
     });
   });
+
+  describe('componentWillUnmount', () => {
+    it('should call resetPromiseState', () => {
+      props.resetPromiseState = sinon.spy();
+      wrapper = shallow(<ArticleCreate {...props} />);
+      wrapper.instance().componentWillUnmount();
+      expect(props.resetPromiseState).to.have.been.called;
+    });
+  });
 });

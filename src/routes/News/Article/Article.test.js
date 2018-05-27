@@ -13,7 +13,7 @@ chai.use(sinonChai);
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe.only('(Component) News - Article', () => {
+describe('(Component) News - Article', () => {
   let wrapper,
       props,
       mockMiniGalleryImages = [
@@ -373,6 +373,15 @@ describe.only('(Component) News - Article', () => {
         />
       );
       expect(actual).to.equal(true);
+    });
+  });
+
+  describe('componentWillUnmount', () => {
+    it('should call resetPromiseState', () => {
+      props.resetPromiseState = sinon.spy();
+      wrapper = shallow(<Article {...props} />);
+      wrapper.instance().componentWillUnmount();
+      expect(props.resetPromiseState).to.have.been.called;
     });
   });
 });
