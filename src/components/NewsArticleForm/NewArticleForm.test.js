@@ -26,7 +26,7 @@ describe('(Component) NewsArticleForm', () => {
       props,
       baseProps = {
         handleModalClose: () => {},
-        onSubmitFormQueue: () => {},
+        // onSubmitFormQueue: () => {},
         onSubmitForm: () => {}
       }
 
@@ -248,22 +248,22 @@ describe('(Component) NewsArticleForm', () => {
       expect(props.onSubmitForm.calledOnce).to.eq(true);
     });
 
-    it('should call onSubmitFormQueue prop onClick if scheduledTime', () => {
-      props = {
-        ...baseProps,
-        onSubmitFormQueue: sinon.spy(),
-        error: undefined,
-        pristine: false,
-        submitting: false,
-        formValues: {
-          scheduledTime: new Date(),
-          mainImage: { url: 'test.com' }
-        }
-      }
-      const buttonWrapper = shallow(<NewsArticleForm {...props} />);
-      const button = buttonWrapper.find('button[type="submit"]');
-      button.simulate('click');
-      expect(props.onSubmitFormQueue.calledOnce).to.eq(true);
-    });
+    // it('should call onSubmitFormQueue prop onClick if scheduledTime', () => {
+    //   props = {
+    //     ...baseProps,
+    //     onSubmitFormQueue: sinon.spy(),
+    //     error: undefined,
+    //     pristine: false,
+    //     submitting: false,
+    //     formValues: {
+    //       scheduledTime: new Date(),
+    //       mainImage: { url: 'test.com' }
+    //     }
+    //   }
+    //   const buttonWrapper = shallow(<NewsArticleForm {...props} />);
+    //   const button = buttonWrapper.find('button[type="submit"]');
+    //   button.simulate('click');
+    //   expect(props.onSubmitFormQueue.calledOnce).to.eq(true);
+    // });
   });
 });

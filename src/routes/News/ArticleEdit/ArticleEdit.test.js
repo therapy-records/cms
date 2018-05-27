@@ -18,7 +18,7 @@ describe('(Component) News - ArticleEdit', () => {
       props,
       baseProps = {
         onEditArticle: () => {},
-        onEditArticleQueue: () => {},
+        // onEditArticleQueue: () => {},
         resetPromiseState: () => {},
         article: { title: 'test' },
         location: {

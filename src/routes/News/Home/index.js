@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import moment from 'moment';
-import { fetchNewsArticles, fetchNewsQueueArticles } from '../../../reducers/news';
+// import { fetchNewsArticles, fetchNewsQueueArticles } from '../../../reducers/news';
+import { fetchNewsArticles } from '../../../reducers/news';
 import { setSelectedNewsArticle } from '../../../reducers/newsArticle';
 import { resetPromiseState } from '../../../reducers/uiState';
 import {
-  selectNewsArticlesReverse,
-  selectNewsArticlesQueueReverse
+  selectNewsArticlesReverse
+  // selectNewsArticlesQueueReverse
 } from '../../../selectors/news';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
@@ -18,9 +19,9 @@ const dateIsBefore = (a, b) => {
 
 export class News extends React.Component {
   componentWillMount() {
-    if (this.props.articlesQueue === null) {
-      this.props.onFetchNewsQueueArticles();
-    }
+    // if (this.props.articlesQueue === null) {
+    //   this.props.onFetchNewsQueueArticles();
+    // }
     if (this.props.newsArticles === null) {
         this.props.onFetchNewsArticles();
     }
@@ -97,11 +98,12 @@ export class News extends React.Component {
   render() {
     const {
       promiseLoading,
-      articlesQueue,
+      // articlesQueue,
       newsArticles
     } = this.props;
 
-    let _combinedArticles = (articlesQueue || newsArticles) && this.getCombinedArticles(articlesQueue, newsArticles);
+    // let _combinedArticles = (articlesQueue || newsArticles) && this.getCombinedArticles(articlesQueue, newsArticles);
+    let _combinedArticles = newsArticles && this.getCombinedArticles(newsArticles);
 
     const hasCombinedArticles = (_combinedArticles !== null) && (_combinedArticles && _combinedArticles.length);
 
@@ -137,7 +139,7 @@ export class News extends React.Component {
 News.propTypes = {
   promiseLoading: PropTypes.bool,
   onFetchNewsArticles: PropTypes.func.isRequired,
-  onFetchNewsQueueArticles: PropTypes.func.isRequired,
+  // onFetchNewsQueueArticles: PropTypes.func.isRequired,
   onSetSelectedNewsArticle: PropTypes.func.isRequired,
   articlesQueue: PropTypes.array,
   newsArticles: PropTypes.array,
@@ -148,15 +150,15 @@ News.propTypes = {
 
 const mapDispatchToProps = {
   onFetchNewsArticles: () => fetchNewsArticles(),
-  onFetchNewsQueueArticles: () => fetchNewsQueueArticles(),
+  // onFetchNewsQueueArticles: () => fetchNewsQueueArticles(),
   onSetSelectedNewsArticle: (article) => setSelectedNewsArticle(article),
   resetPromiseState: () => resetPromiseState()
 }
 
 const mapStateToProps = (state) => ({
   promiseLoading: state.uiState.promiseLoading,
-  newsArticles: selectNewsArticlesReverse(state),
-  articlesQueue: selectNewsArticlesQueueReverse(state)
+  newsArticles: selectNewsArticlesReverse(state)
+  // articlesQueue: selectNewsArticlesQueueReverse(state)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(News)

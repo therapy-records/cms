@@ -5,8 +5,8 @@ import sinonChai from 'sinon-chai';
 import {
   selectNewsArticles,
   selectNewsArticlesReverse,
-  selectNewsArticlesQueue,
-  selectNewsArticlesQueueReverse,
+  // selectNewsArticlesQueue,
+  // selectNewsArticlesQueueReverse,
   filterNewsArticlesArticle,
   selectSelectedNewsArticle,
   selectSelectedNewsArticleTitle,
@@ -96,21 +96,21 @@ describe('(Selectors) news', () => {
     mockSelectedNewsArticle = _mockSelectedNewsArticle
   });
 
-  describe('selectNewsArticlesQueue', () => {
-    it('should return news articles', () => {
-      const actual = selectNewsArticlesQueue(mockState);
-      const expected = mockArticles;
-      expect(actual).to.deep.equal(expected);
-    });
-  });
+  // describe('selectNewsArticlesQueue', () => {
+  //   it('should return news articles', () => {
+  //     const actual = selectNewsArticlesQueue(mockState);
+  //     const expected = mockArticles;
+  //     expect(actual).to.deep.equal(expected);
+  //   });
+  // });
 
-  describe('selectNewsArticlesQueueReverse', () => {
-    it('should return news articles', () => {
-      const actual = selectNewsArticlesQueueReverse(mockState);
-      const expected = mockArticles.reverse();
-      expect(actual).to.deep.equal(expected);
-    });
-  });
+  // describe('selectNewsArticlesQueueReverse', () => {
+  //   it('should return news articles', () => {
+  //     const actual = selectNewsArticlesQueueReverse(mockState);
+  //     const expected = mockArticles.reverse();
+  //     expect(actual).to.deep.equal(expected);
+  //   });
+  // });
 
   describe('selectNewsArticles', () => {
     it('should return news articles', () => {

@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { selectSelectedNewsArticle } from '../../../selectors/news';
 import { resetPromiseState } from '../../../reducers/uiState';
 import {
-  editNews,
-  editNewsQueue
+  editNews
+  // editNewsQueue
 } from '../../../reducers/news';
 import { destroySelectedNewsArticle } from '../../../reducers/newsArticle';
 import NewsArticleForm from '../../../components/NewsArticleForm';
@@ -58,9 +58,9 @@ export class ArticleEdit extends React.Component {
             <hr />
             <br />
             <br />
+            {/*onSubmitFormQueue={() => this.props.onEditArticleQueue(article)}*/}
             <NewsArticleForm
               onSubmitForm={() => this.props.onEditArticle(article)}
-              onSubmitFormQueue={() => this.props.onEditArticleQueue(article)}
               location={location}
             />
           </div>
@@ -72,7 +72,7 @@ export class ArticleEdit extends React.Component {
 
 ArticleEdit.propTypes = {
   onEditArticle: PropTypes.func.isRequired,
-  onEditArticleQueue: PropTypes.func.isRequired,
+  // onEditArticleQueue: PropTypes.func.isRequired,
   onDestroyArticle: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
@@ -84,7 +84,7 @@ ArticleEdit.propTypes = {
 
 const mapDispatchToProps = {
   onEditArticle: (article) => editNews(article),
-  onEditArticleQueue: (article) => editNewsQueue(article),
+  // onEditArticleQueue: (article) => editNewsQueue(article),
   onDestroyArticle: () => destroySelectedNewsArticle(),
   resetPromiseState: () => resetPromiseState()
 }

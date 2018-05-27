@@ -18,7 +18,7 @@ describe('(Component) News - ArticleCreate', () => {
       props,
       baseProps = {
         onPostArticle: () => {},
-        onPostArticleQueue: () => {},
+        // onPostArticleQueue: () => {},
         resetPromiseState: () => {}
       };
 
@@ -37,7 +37,6 @@ describe('(Component) News - ArticleCreate', () => {
     const actual = wrapper.containsMatchingElement(
       <NewsArticleForm
         onSubmitForm={props.onPostArticle}
-        onSubmitFormQueue={props.onPostArticleQueue}
       />
     );
     expect(actual).to.equal(true);

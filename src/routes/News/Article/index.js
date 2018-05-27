@@ -8,7 +8,7 @@ import { fetchNewsArticles } from '../../../reducers/news';
 import { selectSelectedNewsArticle } from '../../../selectors/news';
 import {
   deleteNewsArticle,
-  deleteScheduledArticle,
+  // deleteScheduledArticle,
   fetchSingleNewsArticle,
   destroySelectedNewsArticle
 } from '../../../reducers/newsArticle';
@@ -49,11 +49,12 @@ export class Article extends React.Component {
   }
 
   handleOnDeleteArticle(article) {
-    if (article.scheduledTime) {
-      this.props.onDeleteScheduledArticle(article._id)
-    } else {
-      this.props.onDeleteArticle(article._id)
-    }
+    // if (article.scheduledTime) {
+    //   this.props.onDeleteScheduledArticle(article._id)
+    // } else {
+    //   this.props.onDeleteArticle(article._id)
+    // }
+    this.props.onDeleteArticle(article._id)
     this.handleModalClose();
   }
 
@@ -258,7 +259,7 @@ Article.propTypes = {
   history: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   onDeleteArticle: PropTypes.func.isRequired,
-  onDeleteScheduledArticle: PropTypes.func.isRequired,
+  // onDeleteScheduledArticle: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
   promiseError: PropTypes.bool,
@@ -272,7 +273,7 @@ const mapDispatchToProps = {
   onFetchArticle: (id) => fetchSingleNewsArticle(id),
   onFetchNewsArticles: () => fetchNewsArticles(),
   onDeleteArticle: (id) => deleteNewsArticle(id),
-  onDeleteScheduledArticle: (id) => deleteScheduledArticle(id),
+  // onDeleteScheduledArticle: (id) => deleteScheduledArticle(id),
   resetPromiseState: () => resetPromiseState(),
   onDestroyArticle: () => destroySelectedNewsArticle()
 }

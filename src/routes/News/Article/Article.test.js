@@ -44,7 +44,7 @@ describe('(Component) News - Article', () => {
       baseProps = {
         onFetchNewsArticles: sinon.spy(),
         onDeleteArticle: sinon.spy(),
-        onDeleteScheduledArticle: sinon.spy(),
+        // onDeleteScheduledArticle: sinon.spy(),
         resetPromiseState: sinon.spy(),
         onDestroyArticle: sinon.spy(),
         onFetchArticle: sinon.spy(),

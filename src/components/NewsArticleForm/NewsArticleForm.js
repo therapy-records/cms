@@ -54,14 +54,16 @@ export class NewsArticleForm extends React.Component {
     this.state = {
       showSecondaryImageField: false
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit() {
-    if (this.props.formValues.scheduledTime) {
-      this.props.onSubmitFormQueue();
-    } else {
-      this.props.onSubmitForm();
-    }
+    // if (this.props.formValues.scheduledTime) {
+    //   this.props.onSubmitFormQueue();
+    // } else {
+    //   this.props.onSubmitForm();
+    // }
+    this.props.onSubmitForm();
   }
 
   handleSecondaryImageToggle = () => {
@@ -96,7 +98,7 @@ export class NewsArticleForm extends React.Component {
           <ArticlePreview />
         </div>
 
-        <form onSubmit={(e) => e.preventDefault()} encType='multipart/form-data'>
+        <form onSubmit={this.handleSubmit} encType='multipart/form-data'>
 
           <div className='col-clear' />
 
@@ -252,7 +254,8 @@ export class NewsArticleForm extends React.Component {
           <button type='submit'
                   className='btn-lg btn-submit'
                   disabled={error || pristine || submitting || error || invalid}
-                  onClick={() => this.handleSubmit()}>Submit
+                  onClick={() => this.handleSubmit()}
+                  >Submit
           </button>
 
           <br />
@@ -271,7 +274,7 @@ NewsArticleForm.propTypes = {
   invalid: PropTypes.bool,
   formValues: PropTypes.object,
   onSubmitForm: PropTypes.func.isRequired,
-  onSubmitFormQueue: PropTypes.func.isRequired,
+  // onSubmitFormQueue: PropTypes.func.isRequired,
   location: PropTypes.object
 };
 

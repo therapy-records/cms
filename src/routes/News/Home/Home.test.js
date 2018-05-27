@@ -24,10 +24,10 @@ describe('(Component) News - Home', () => {
       props,
       baseProps = {
         onFetchNewsArticles: () => {},
-        onFetchNewsQueueArticles: () => {},
+        // onFetchNewsQueueArticles: () => {},
         onSetSelectedNewsArticle: () => {},
         newsArticles: mockNewsArticles,
-        articlesQueue: mockNewsArticles
+        // articlesQueue: mockNewsArticles
       };
 
   it('should render <LoadingSpinner />', () => {
@@ -106,9 +106,9 @@ describe('(Component) News - Home', () => {
     const wrapper = shallow(
       <News
         newsArticles={[]}
-        newsQueueArticles={[]}
+        // newsQueueArticles={[]}
         onFetchNewsArticles={() => {}}
-        onFetchNewsQueueArticles={() => {}}
+        // onFetchNewsQueueArticles={() => {}}
         onSetSelectedNewsArticle={() => {}}
       />
     );

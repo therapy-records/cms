@@ -14,13 +14,13 @@ import {
   DESTROY_SELECTED_NEWS_ARTICLE,
   DELETE_SINGLE_NEWS_ARTICLE_SUCCESS,
   DELETE_SINGLE_NEWS_ARTICLE_ERROR,
-  DELETE_SINGLE_NEWS_QUEUE_ARTICLE_SUCCESS,
-  DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR,
+  // DELETE_SINGLE_NEWS_QUEUE_ARTICLE_SUCCESS,
+  // DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR,
   selectedNewsArticle,
   selectedNewsArticleDeleted,
   deleteSuccess,
-  deleteQueueArticleSuccess,
-  deleteQueueArticleError,
+  // deleteQueueArticleSuccess,
+  // deleteQueueArticleError,
   deleteError,
   setSelectedNewsArticle,
   fetchSingleNewsArticle,
@@ -32,8 +32,8 @@ import {
 import {
   API_ROOT,
   NEWS,
-  NEWS_CREATE,
-  NEWS_QUEUE
+  NEWS_CREATE
+  // NEWS_QUEUE
 } from '../constants';
 import {
   UISTATE_PROMISE_LOADING,
@@ -105,13 +105,13 @@ describe('(Redux Module) newsArticle', () => {
     expect(DELETE_SINGLE_NEWS_ARTICLE_ERROR).to.equal('DELETE_SINGLE_NEWS_ARTICLE_ERROR')
   });
 
-  it('should export a constant DELETE_SINGLE_NEWS_QUEUE_ARTICLE_SUCCESS', () => {
-    expect(DELETE_SINGLE_NEWS_QUEUE_ARTICLE_SUCCESS).to.equal('DELETE_SINGLE_NEWS_QUEUE_ARTICLE_SUCCESS')
-  });
+  // it('should export a constant DELETE_SINGLE_NEWS_QUEUE_ARTICLE_SUCCESS', () => {
+  //   expect(DELETE_SINGLE_NEWS_QUEUE_ARTICLE_SUCCESS).to.equal('DELETE_SINGLE_NEWS_QUEUE_ARTICLE_SUCCESS')
+  // });
 
-  it('should export a constant DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR', () => {
-    expect(DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR).to.equal('DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR')
-  });
+  // it('should export a constant DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR', () => {
+  //   expect(DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR).to.equal('DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR')
+  // });
 
 
   describe('(Reducer)', () => {
@@ -199,44 +199,43 @@ describe('(Redux Module) newsArticle', () => {
     });
   });
 
-  describe('(Action) deleteQueueArticleSuccess', () => {
-    afterEach(() => {
-      nock.cleanAll()
-    });
+  // describe('(Action) deleteQueueArticleSuccess', () => {
+  //   afterEach(() => {
+  //     nock.cleanAll()
+  //   });
 
-    it('should be exported as a function', () => {
-      expect(deleteQueueArticleSuccess).to.be.a('function');
-    });
+  //   it('should be exported as a function', () => {
+  //     expect(deleteQueueArticleSuccess).to.be.a('function');
+  //   });
 
-    it('should return an action with type DELETE_SINGLE_NEWS_QUEUE_ARTICLE_SUCCESS', () => {
-      expect(deleteQueueArticleSuccess()).to.have.property('type', DELETE_SINGLE_NEWS_QUEUE_ARTICLE_SUCCESS);
-    });
+  //   it('should return an action with type DELETE_SINGLE_NEWS_QUEUE_ARTICLE_SUCCESS', () => {
+  //     expect(deleteQueueArticleSuccess()).to.have.property('type', DELETE_SINGLE_NEWS_QUEUE_ARTICLE_SUCCESS);
+  //   });
 
-    it('should update state', () => {
-      let state = newsArticleReducer(mockState, deleteQueueArticleSuccess());
-      expect(state).to.deep.eq({});
-    });
-  });
+  //   it('should update state', () => {
+  //     let state = newsArticleReducer(mockState, deleteQueueArticleSuccess());
+  //     expect(state).to.deep.eq({});
+  //   });
+  // });
 
+  // describe('(Action) deleteQueueArticleError', () => {
+  //   afterEach(() => {
+  //     nock.cleanAll()
+  //   });
 
-  describe('(Action) deleteQueueArticleError', () => {
-    afterEach(() => {
-      nock.cleanAll()
-    });
+  //   it('should be exported as a function', () => {
+  //     expect(deleteQueueArticleError).to.be.a('function');
+  //   });
 
-    it('should be exported as a function', () => {
-      expect(deleteQueueArticleError).to.be.a('function');
-    });
+  //   it('should return an action with type DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR', () => {
+  //     expect(deleteQueueArticleError()).to.have.property('type', DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR);
+  //   });
 
-    it('should return an action with type DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR', () => {
-      expect(deleteQueueArticleError()).to.have.property('type', DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR);
-    });
-
-    it('should update state', () => {
-      let state = newsArticleReducer(mockState, deleteQueueArticleError());
-      expect(state).to.deep.eq({ error: true });
-    });
-  });
+  //   it('should update state', () => {
+  //     let state = newsArticleReducer(mockState, deleteQueueArticleError());
+  //     expect(state).to.deep.eq({ error: true });
+  //   });
+  // });
 
   describe('(Action) deleteError', () => {
     afterEach(() => {
@@ -332,17 +331,17 @@ describe('(Redux Module) newsArticle', () => {
     });
   });
 
-  describe('(Thunk) deleteScheduledArticle', () => {
-    afterEach(() => {
-      nock.cleanAll();
-    });
+  // describe('(Thunk) deleteScheduledArticle', () => {
+  //   afterEach(() => {
+  //     nock.cleanAll();
+  //   });
 
-    it('should be exported as a function', () => {
-      expect(deleteScheduledArticle).to.be.a('function');
-    });
+  //   it('should be exported as a function', () => {
+  //     expect(deleteScheduledArticle).to.be.a('function');
+  //   });
 
-    it('should return a function', () => {
-      expect(deleteScheduledArticle()).to.be.a('function');
-    });
-  });
+  //   it('should return a function', () => {
+  //     expect(deleteScheduledArticle()).to.be.a('function');
+  //   });
+  // });
 });

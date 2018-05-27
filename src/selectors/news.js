@@ -4,12 +4,12 @@ import { createSelector } from 'reselect'
 state.news.articlesQueue
 */
 
-export const selectNewsArticlesQueue = (state) => state.news.articlesQueue;
+// export const selectNewsArticlesQueue = (state) => state.news.articlesQueue;
 
-export const selectNewsArticlesQueueReverse = createSelector(
-  selectNewsArticlesQueue,
-  (articlesQueue) => articlesQueue && articlesQueue.reverse()
-);
+// export const selectNewsArticlesQueueReverse = createSelector(
+//   selectNewsArticlesQueue,
+//   (articlesQueue) => articlesQueue && articlesQueue.reverse()
+// );
 
 /*
 state.news.articles
