@@ -42,15 +42,6 @@ describe('(Component) News - Home', () => {
     expect(actual).to.equal(true);
   });
 
-  it('should render create article link', () => {
-    props = baseProps;
-    wrapper = shallow(<News {...props} />);
-    const actual = wrapper.containsMatchingElement(
-      <Link to='news/create'>Create an article</Link>
-    );
-    expect(actual).to.equal(true);
-  });
-
   it('should render list of newsArticles', () => {
     props = baseProps;
     wrapper = shallow(<News {...props} />);
@@ -110,10 +101,16 @@ describe('(Component) News - Home', () => {
       );
       expect(actual).to.equal(true);
     });
+    it('should render a create button', () => {
+      const actual = wrapper.containsMatchingElement(
+        <Link to='news/create' className='btn btn-sm'>Create</Link>
+      );
+      expect(actual).to.equal(true);
+    });
   });
 
   describe('when no articles', () => {
-    it('should render an error', () => {
+    it('should render a message with button link', () => {
       const wrapper = shallow(
         <News
           newsArticles={[]}
@@ -124,7 +121,7 @@ describe('(Component) News - Home', () => {
         />
       );
       const actual = wrapper.containsMatchingElement(
-        <p>No articles yet.</p>
+        <p>No articles yet. <Link to='news/create'>Create an article</Link></p>
       );
       expect(actual).to.equal(true);
     });

@@ -83,21 +83,20 @@ class OtherWorkHome extends React.Component {
 
         {!promiseLoading &&
           <div>
-            <h2>Other Work</h2>
+            <div className='heading-with-btn'>
+              <h2>Other Work</h2>
+              <Link to='other-work/create' className='btn btn-sm'>Create</Link>
+            </div>
 
             {hasArticles ?
               <div>
-                <div className='news-feed-header'>
-                  <Link to='other-work/create' className='btn'>Create an article</Link>
-                </div>
                 <ul>
                   {articles.map((p) => this.renderArticle(p))}
                 </ul>
               </div>
             : (
               <div>
-                <p>No articles yet.</p>
-                <Link to='other-work/create' className='btn'>Create an article</Link>
+                <p>No articles yet. <Link to='other-work/create'>Create an article</Link></p>
               </div>
             )}
           </div>

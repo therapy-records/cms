@@ -117,21 +117,22 @@ export class News extends React.Component {
 
         {!promiseLoading &&
           <div>
-            <h2>News</h2>
+            <div className='heading-with-btn'>
+              <h2>News</h2>
+              <Link to='news/create' className='btn btn-sm'>Create</Link>
+            </div>
+
             {
               hasCombinedArticles ? (
                 <div>
-                  <div className='news-feed-header'>
-                    <Link to='news/create' className='btn'>Create an article</Link>
-                  </div>  
                   <ul>
                     {_combinedArticles.map((p) => this.renderPost(p))}
                   </ul>
+
                 </div>
               ) : (
                 <div>
-                  <p>No articles yet.</p>
-                  <Link to='news/create' className='btn'>Create an article</Link>
+                  <p>No articles yet. <Link to='news/create'>Create an article</Link></p>
                 </div>
               )
             }
