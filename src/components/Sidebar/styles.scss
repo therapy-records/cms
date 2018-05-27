@@ -1,8 +1,10 @@
+@import 'styles/variables.scss';
+
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 4;
   background: #111;
   height: 100%;
   width: 100%;
@@ -10,7 +12,12 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  max-width: 150px;
+  max-width: $sidebar-width;
+  opacity: 0;
+  left: -$sidebar-width;
+  transition: all .5s ease;
+  overflow-y: auto;
+
   a,
   button {
     background: none;
@@ -41,4 +48,9 @@
         opacity: .2;
     }
   }
+}
+
+.sidebar-active {
+  left: 0;
+  opacity: 1;
 }

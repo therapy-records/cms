@@ -24,12 +24,27 @@ class LoadingSpinner extends PureComponent {
   render() {
     const {
       active,
-      fullScreen
+      fullScreen,
+      fullScreenIgnoreSidebar
     } = this.props;
 
     if (fullScreen) {
       return (
-        <div className={active ? 'loading-spinner-overlay loading-spinner-overlay-active' : 'loading-spinner-overlay'}>
+        <div className={active ?
+            'loading-spinner-overlay loading-spinner-overlay-active' :
+            'loading-spinner-overlay'}
+        >
+          {Spinner()}
+        </div>
+      )
+    }
+
+    if (fullScreenIgnoreSidebar) {
+      return (
+        <div className={active ?
+          'loading-spinner-overlay loading-spinner-overlay-ignore-sidebar loading-spinner-overlay-active' :
+          'loading-spinner-overlay loading-spinner-overlay-ignore-sidebar'}
+        >
           {Spinner()}
         </div>
       )
@@ -42,7 +57,8 @@ class LoadingSpinner extends PureComponent {
 
 LoadingSpinner.propTypes = {
   active: PropTypes.bool,
-  fullScreen: PropTypes.bool
+  fullScreen: PropTypes.bool,
+  fullScreenIgnoreSidebar: PropTypes.bool
 };
 
 export default LoadingSpinner;

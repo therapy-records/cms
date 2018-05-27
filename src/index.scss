@@ -39,7 +39,8 @@ body {
   width: 100%;
   > .col-first {
     width: 12%;
-    max-width: 150px;
+    min-width: $sidebar-width;
+    max-width: $sidebar-width;
   }
   > .col-last {
     width: 88%;

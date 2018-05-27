@@ -26,7 +26,7 @@ describe('(Component) LoginForm', () => {
     const actual = wrapper.containsMatchingElement(
       <LoadingSpinner
         active={props.promiseLoading}
-        fullScreen
+        fullScreenIgnoreSidebar
       />
     );
     expect(actual).to.equal(true);

@@ -28,14 +28,21 @@ describe('(Component) Sidebar', () => {
     expect(actual).to.equal(true);
   });
 
+  it('should render active className', () => {
+    const aside = wrapper.find('aside');
+    expect(aside.prop('className')).to.eq('sidebar sidebar-active');
+  });
+
+
   describe('when isHome', () => {
     beforeEach(() => {
       props.location.pathname = '/';
       wrapper = shallow(<Sidebar {...props} />)
     });
 
-    it('should render null', () => {
-      expect(wrapper.find('div').length).to.equal(0);
+    it('should render className without active', () => {
+      const aside = wrapper.find('aside');
+      expect(aside.prop('className')).to.eq('sidebar');
     });
   });
 

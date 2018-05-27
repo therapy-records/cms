@@ -22,7 +22,7 @@ export class LoginForm extends React.Component {
 
         <LoadingSpinner
           active={promiseLoading}
-          fullScreen
+          fullScreenIgnoreSidebar
         />
 
         <form onSubmit={(e) => e.preventDefault()}>

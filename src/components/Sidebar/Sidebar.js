@@ -10,12 +10,8 @@ export class Sidebar extends React.Component {
   render() {
     const { location, onLogout } = this.props;
 
-    if (location.pathname === '/') {
-      return null;
-    }
-
     return (
-      <aside className='sidebar'>
+      <aside className={location.pathname === '/' ? 'sidebar' : 'sidebar sidebar-active'}>
 
         <h1>
           <NavLink to='/'>FR-CMS</NavLink>
