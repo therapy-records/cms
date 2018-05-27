@@ -14,13 +14,13 @@ import {
   selectSelectedNewsArticleVenueLink,
   selectSelectedNewsArticleMiniGalleryImages,
   selectSelectedNewsArticleVideoEmbed,
-  selectSelectedNewsArticleScheduledTime,
+  // selectSelectedNewsArticleScheduledTime,
   selectSelectedNewsArticleSocialShareHashtags
 } from '../../selectors/news';
 import { selectNewsArticleFormValues } from '../../selectors/form';
 import './NewsArticleForm.css';
 import DropzoneImageUpload from './DropzoneImageUpload';
-import Datepicker from '../Datepicker/Datepicker';
+// import Datepicker from '../Datepicker/Datepicker';
 import Quotes from './Quotes';
 import ArticlePreview from '../ArticlePreview/ArticlePreview.container';
 import TextInput from '../../components/TextInput';
@@ -239,13 +239,14 @@ export class NewsArticleForm extends React.Component {
           <br />
           <br />
 
-          <Field name='scheduledTime'
+          {/*
+            <Field name='scheduledTime'
                 component={Datepicker}
                 initTime={formValues && formValues.scheduledTime}
                 title='Scheduler (optional)'
                 titleSub='Post live on a date of choosing'
                 titleSub2='NOTE: This is an alpha version. Time of posting is not exact and could be offset.' />
-
+          */}
           {error && <p>{error}</p>}
 
           <br />
@@ -298,7 +299,7 @@ InitFromStateForm = connect(
       venueLink: selectSelectedNewsArticleVenueLink(state),
       videoEmbed: selectSelectedNewsArticleVideoEmbed(state),
       miniGalleryImages: selectSelectedNewsArticleMiniGalleryImages(state),
-      scheduledTime: selectSelectedNewsArticleScheduledTime(state),
+      // scheduledTime: selectSelectedNewsArticleScheduledTime(state),
       socialShare: {
         hashtags: selectSelectedNewsArticleSocialShareHashtags(state)
       }

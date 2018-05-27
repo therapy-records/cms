@@ -90,10 +90,10 @@ export const selectSelectedNewsArticleVideoEmbed = createSelector(
   (article) => article && article.videoEmbed
 );
 
-export const selectSelectedNewsArticleScheduledTime = createSelector(
-  selectSelectedNewsArticle,
-  (article) => article && article.scheduledTime
-);
+// export const selectSelectedNewsArticleScheduledTime = createSelector(
+//   selectSelectedNewsArticle,
+//   (article) => article && article.scheduledTime
+// );
 
 export const selectSelectedNewsArticleSocialShare = createSelector(
   selectSelectedNewsArticle,

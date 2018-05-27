@@ -180,27 +180,27 @@ describe('(Component) NewsArticleForm', () => {
       expect(actual).to.equal(true)
     });
 
-    it('should render scheduledTime field', () => {
-      const props = {
-        ...baseProps,
-        formValues: {
-          scheduledTime: new Date(),
-          mainImage: {
-            url: 'test.com'
-          }
-        }
-      };
-      const datepickerWrapper = shallow(<NewsArticleForm {...props} />);
-      const actual = datepickerWrapper.containsMatchingElement(
-        <Field name='scheduledTime'
-               component={Datepicker}
-               initTime={props.formValues.scheduledTime}
-               title='Scheduler (optional)'
-               titleSub='Post live on a date of choosing'
-               titleSub2='NOTE: This is an alpha version. Time of posting is not exact and could be offset.' />
-      );
-      expect(actual).to.equal(true);
-    });
+    // it('should render scheduledTime field', () => {
+    //   const props = {
+    //     ...baseProps,
+    //     formValues: {
+    //       scheduledTime: new Date(),
+    //       mainImage: {
+    //         url: 'test.com'
+    //       }
+    //     }
+    //   };
+    //   const datepickerWrapper = shallow(<NewsArticleForm {...props} />);
+    //   const actual = datepickerWrapper.containsMatchingElement(
+    //     <Field name='scheduledTime'
+    //            component={Datepicker}
+    //            initTime={props.formValues.scheduledTime}
+    //            title='Scheduler (optional)'
+    //            titleSub='Post live on a date of choosing'
+    //            titleSub2='NOTE: This is an alpha version. Time of posting is not exact and could be offset.' />
+    //   );
+    //   expect(actual).to.equal(true);
+    // });
   });
 
   it('should render an error', () => {

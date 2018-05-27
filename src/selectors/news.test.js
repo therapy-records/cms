@@ -224,16 +224,16 @@ describe('(Selectors) news', () => {
     });
   });
 
-  describe('selectSelectedNewsArticleScheduledTime', () => {
-    it('should return scheduledTime', () => {
-      const actual = selectSelectedNewsArticleScheduledTime(mockState, postId);
-      const expected = newsArticle.scheduledTime;
-      expect(actual).to.equal(expected);
-    });
-  });
+  // describe('selectSelectedNewsArticleScheduledTime', () => {
+  //   it('should return scheduledTime', () => {
+  //     const actual = selectSelectedNewsArticleScheduledTime(mockState, postId);
+  //     const expected = newsArticle.scheduledTime;
+  //     expect(actual).to.equal(expected);
+  //   });
+  // });
 
   describe('selectSelectedNewsArticleSocialShare', () => {
-    it('should return scheduledTime', () => {
+    it('should return socialShare', () => {
       const actual = selectSelectedNewsArticleSocialShare(mockState, postId);
       const expected = newsArticle.socialShare;
       expect(actual).to.equal(expected);
@@ -241,7 +241,7 @@ describe('(Selectors) news', () => {
   });
 
   describe('selectSelectedNewsArticleSocialShareHashtags', () => {
-    it('should return scheduledTime', () => {
+    it('should return socialShare.hashtags', () => {
       const actual = selectSelectedNewsArticleSocialShareHashtags(mockState, postId);
       const expected = newsArticle.socialShare.hashtags;
       expect(actual).to.equal(expected);
