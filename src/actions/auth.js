@@ -17,17 +17,28 @@ export const authCheck = () => {
         .then((data) => {
           if (data.data.success === true) {
             localStorage.setItem('token', data.data.token);
-            dispatch(authSuccess());
+            return dispatch(authSuccess());
           } else {
             localStorage.removeItem('token');
-            dispatch(authError());
+            return dispatch(authError());
           }
         }, () => {
           localStorage.removeItem('token');
-          dispatch(authError());
+          return dispatch(authError());
         });
     } else {
-      dispatch(authSuccess());
+      return _axiosAuthHeaders.post(API_ROOT + AUTH)
+        .then((data) => {
+          if (data.data.success === true) {
+            return dispatch(authSuccess());
+          } else {
+            localStorage.removeItem('token');
+            return dispatch(authError());
+          }
+        }, () => {
+          localStorage.removeItem('token');
+          return dispatch(authError());
+        });
     }
   }
 }

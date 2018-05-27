@@ -2,15 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LoginForm from '../../components/LoginForm'
-
 import { userLogin } from '../../reducers/user'
 import { authCheck } from '../../actions/auth';
+import LoadingSpinner from '../../components/LoadingSpinner';
 import './styles.css';
 
 export class Home extends React.Component {
-
   componentWillMount() {
-    if (this.props.isAuthenticated === true) {
+    if (this.props.isAuth === true) {
       this.props.history.push({
         pathname: '/dashboard'
       });
@@ -19,7 +18,7 @@ export class Home extends React.Component {
 
   componentWillReceiveProps(props) {
     const fromPath = (props.location.state && props.location.state.from.pathname) || '/dashboard';
-    if (props.isAuthenticated === true) {
+    if (props.isAuth === true) {
       props.history.push({
         pathname: fromPath
       });
@@ -29,7 +28,7 @@ export class Home extends React.Component {
   render() {
     const {
       onPostForm,
-      isAuthenticated,
+      isAuth,
       authError,
       promiseLoading
     } = this.props;
@@ -37,16 +36,25 @@ export class Home extends React.Component {
     return (
       <div className='container home-container'>
         <div>
-          {!isAuthenticated ? (
-            <LoginForm
-              onSubmit={() => { onPostForm(); }}
-              isAuthenticated={isAuthenticated}
-              authError={authError}
-              promiseLoading={promiseLoading}
-            />
-          ) : (
-              <p>already logged in, redirecting...</p>
-            )}
+          {(isAuth === null ||
+           isAuth === false) &&
+              <LoginForm
+                onSubmit={onPostForm}
+                isAuth={isAuth}
+                authError={authError}
+                promiseLoading={promiseLoading}
+              />
+          }
+
+          {isAuth &&
+            <div>
+              <LoadingSpinner
+                active
+                fullScreenIgnoreSidebar
+              />
+            </div>
+          }
+
         </div>
       </div>
     )
@@ -54,21 +62,20 @@ export class Home extends React.Component {
 }
 
 Home.propTypes = {
-  isAuthenticated: PropTypes.bool,
+  isAuth: PropTypes.bool,
   onPostForm: PropTypes.func,
-  onAuthCheck: PropTypes.func.isRequired,
   authError: PropTypes.string
 }
 
 const mapDispatchToProps = {
-  onAuthCheck: () => authCheck(),
   onPostForm: () => userLogin()
 }
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.user.isAuth,
+  isAuth: state.user.isAuth,
   promiseLoading: state.uiState.promiseLoading,
   authError: state.user.authError
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
+ 

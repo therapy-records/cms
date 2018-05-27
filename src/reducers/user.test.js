@@ -58,14 +58,14 @@ const store = mockStore(mockState, mockDispatch);
 
 describe('(Redux Module) user', () => {
   describe('(Reducer)', () => {
-    it('Should be a function', () => {
+    it('should be a function', () => {
       expect(userReducer).to.be.a('function')
     });
 
-    it('Should initialize with correc state', () => {
+    it('should initialize with correct state', () => {
       const state = userReducer(undefined, {});
       expect(state).to.deep.equal({
-        isAuth: false,
+        isAuth: null,
         authError: undefined
       });
     });

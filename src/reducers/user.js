@@ -106,7 +106,7 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = {
-  isAuth: false,
+  isAuth: null,
   authError: undefined
 };
 export default function userReducer(state = initialState, action) {
