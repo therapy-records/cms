@@ -224,7 +224,9 @@ ol {
   padding:0;
 }
 
-/* temp styles */
+li {
+  margin-bottom: .5em;
+}
 
 .cols-container {
   display: flex;
@@ -299,21 +301,6 @@ ol {
   width: 100%;
   max-width: 250px;
   font-size: .95em;
-  // .btn {
-  //   font-size: 1em;
-  //   @media(min-width: 600px) {
-  //     margin-bottom: 0;
-  //   }
-  //   + .btn {
-  //     margin-left: 0;
-  //     @media(min-width: 600px) {
-  //       margin-left: 1em;
-  //     }
-  //   }
-  //   &:last-child {
-  //     margin-bottom: 0;
-  //   }
-  // }
 }
 
 .article-summary-box-inner {
