@@ -197,7 +197,7 @@ describe('(Redux Module) news', () => {
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
-        { type: UISTATE_PROMISE_ERROR, payload: mockErrorResponse.response.status }
+        { type: UISTATE_PROMISE_ERROR, payload: mockErrorResponse.response.status.toString() }
       ];
 
       store.clearActions();

@@ -71,7 +71,7 @@ export const fetchNewsArticles = () => {
         },
         (err) => {
           dispatch(promiseLoading(false));
-          dispatch(promiseError(err.response && err.response.status));
+          dispatch(promiseError(err.response && err.response.status.toString()));
         }
       )
   }
@@ -96,7 +96,7 @@ export const fetchNewsQueueArticles = () => {
         },
         (err) => {
           dispatch(promiseLoading(false));
-          dispatch(promiseError(err.response && err.response.status));
+          dispatch(promiseError(err.response && err.response.status.toString()));
         }
       )
   }
@@ -123,7 +123,7 @@ export const postNews = () => {
         dispatch(postNewsSuccess(data));
       }, (err) => {
         dispatch(promiseLoading(false));
-        dispatch(promiseError(err.response && err.response.status));
+        dispatch(promiseError(err.response && err.response.status.toString()));
         return err;
       }
     );
@@ -151,7 +151,7 @@ export const postNewsQueue = () => {
         dispatch(postNewsQueueSuccess());
       }, (err) => {
         dispatch(promiseLoading(false));
-        dispatch(promiseError(err.response && err.response.status));
+        dispatch(promiseError(err.response && err.response.status.toString()));
       }
     );
   }
@@ -184,7 +184,7 @@ export const editNews = (postToEdit) => {
         dispatch(editNewsSuccess());
       }, (err) => {
         dispatch(promiseLoading(false));
-        dispatch(promiseError(err.response && err.response.status));
+        dispatch(promiseError(err.response && err.response.status.toString()));
       }
     );
   }
@@ -216,7 +216,7 @@ export const editNewsQueue = (postToEdit) => {
         dispatch(editNewsQueueSuccess());
       }, (err) => {
         dispatch(promiseLoading(false));
-        dispatch(promiseError(err.response && err.response.status));
+        dispatch(promiseError(err.response && err.response.status.toString()));
       }
     );
   }

@@ -26,7 +26,7 @@ const middlewares = [epicMiddleware];
 const mockStore = configureMockStore(middlewares);
 
 const mockErrorResponse = {
-  response: { status: 401 }
+  response: { status: '401' }
 };
 
 const mockState = {
@@ -51,9 +51,9 @@ describe('epics', () => {
 
   describe('authCheckEpic', () => {
 
-    it(`should disaptch correct ${USER_AUTH_ERROR} action`, () => {
+    it(`should dispatch correct ${USER_AUTH_ERROR} action`, () => {
       const expectedActions = [
-        { type: UISTATE_PROMISE_ERROR, payload: mockErrorResponse.response.status },
+        { type: UISTATE_PROMISE_ERROR, payload: mockErrorResponse.response.status.toString() },
         { type: USER_AUTH_ERROR,
           payload: {
             isAuth: false,
