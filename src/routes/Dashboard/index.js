@@ -15,20 +15,28 @@ export class Dashboard extends React.Component {
     this.props.resetPromiseState();
   }
 
+  componentDidMount() {
+    const {
+      newsArticles,
+      otherWorkArticles,
+      onFetchNewsArticles,
+      onFetchOtherWorkArticles
+    } = this.props;
+    if (newsArticles === null) {
+      onFetchNewsArticles();
+    }
+
+    if (otherWorkArticles === null) {
+      onFetchOtherWorkArticles();
+    }
+  }
+
   render() {
     const {
       newsArticles,
       otherWorkArticles,
       promiseLoading
     } = this.props;
-
-    if (newsArticles === null) {
-      this.props.onFetchNewsArticles();
-    }
-
-    if (otherWorkArticles === null) {
-      this.props.onFetchOtherWorkArticles();
-    }
 
     return (
       <div className='container container-dashboard'>

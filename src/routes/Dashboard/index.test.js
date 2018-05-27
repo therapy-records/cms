@@ -123,7 +123,13 @@ describe('(Component) Dashboard', () => {
       expect(props.onFetchOtherWorkArticles).to.not.have.been.called;
     });
   });
-  
 
-  // todo: test componentWillUnmount calls resetPromiseState
+  describe('componentWillUnmount', () => {
+    it('should call resetPromiseState', () => {
+      props.resetPromiseState = sinon.spy();
+      wrapper = shallow(<Dashboard {...props} />);
+      wrapper.instance().componentWillUnmount();
+      expect(props.resetPromiseState).to.have.been.called;
+    });
+  });
 });
