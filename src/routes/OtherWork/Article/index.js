@@ -81,57 +81,47 @@ class Article extends React.Component {
         }
 
         {(article && article.title && !article.isDeleted) && (
-          <div className='article-flex-root'>
+          <div>
 
-            <div className='article-col-1'>
-              <h2>{article.title}</h2>
-              <p>{article.copy}</p>
+            <h2>{article.title}</h2>
 
-              <br />
+            <p>Created {moment(article.createdAt).fromNow()}</p>
+            {article.editedAt &&
+              <p>Last modified {moment(article.editedAt).fromNow()}
+                <small>{moment(article.editedAt).format('DD/mm/YYYY')}</small>
+              </p>
+            }
 
-              <p>Links to: {article.externalLink}</p>
-              <p>Release date: {moment(article.releaseDate).fromNow()}</p>
-              <p>Links to: <a href={article.externalLink} target='_blank'>{article.externalLink}</a></p>
-
-              <div className='cols-container'>
-
-                {article.mainImageUrl &&
-                  <div>
-                    <img
-                      src={article.mainImageUrl}
-                      alt={`Fiona Ross - ${article.title}`}
-                    />
-                  </div>
-                }
-
-              </div>
-            </div>
-
-            <div className='article-sidebar'>
-              <div className='article-summary-box'>
-                <div className='article-summary-box-inner'>
-                  <p><a href={`http://fionaross.co.uk/other-work`} target='blank'>View live article</a></p>
-                  <p>Created {moment(article.createdAt).fromNow()}</p>
-                  {article.editedAt &&
-                    <p>Last modified {moment(article.editedAt).fromNow()}
-                      <small>{moment(article.editedAt).format('DD/mm/YYYY')}</small>
-                    </p>
-                  }
-
-                  <Link
-                    to={`/other-work/${article._id}/edit`}
-                    className='btn btn-edit'
-                  >Edit article
+            <Link
+              to={`/other-work/${article._id}/edit`}
+              className='btn btn-edit'
+            >Edit article
                   </Link>
 
-                  <button
-                    className='btn'
-                    onClick={this.handleModalOpen}
-                    style={{ background: 'darkred', color: '#fff' }}>Delete article
-                  </button>
+            <button
+              className='btn'
+              onClick={this.handleModalOpen}
+              style={{ background: 'darkred', color: '#fff' }}>Delete article
+            </button>
 
+            <p>{article.copy}</p>
+
+            <br />
+
+            <p>Release date: {moment(article.releaseDate).fromNow()}</p>
+            <p>Links to: <a href={article.externalLink} target='_blank'>{article.externalLink}</a></p>
+
+            <div className='cols-container'>
+
+              {article.mainImageUrl &&
+                <div>
+                  <img
+                    src={article.mainImageUrl}
+                    alt={`Fiona Ross - ${article.title}`}
+                  />
                 </div>
-              </div>
+              }
+
             </div>
           </div>
         )}

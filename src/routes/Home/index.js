@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import LoginForm from '../../components/LoginForm'
-import { userLogin } from '../../reducers/user'
-import { authCheck } from '../../actions/auth';
+import LoginForm from '../../components/LoginForm';
+import { userLogin } from '../../reducers/user';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import './styles.css';
 

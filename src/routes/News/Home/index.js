@@ -109,6 +109,7 @@ export class News extends React.Component {
 
     return (
       <div className='container'>
+
         <LoadingSpinner
           active={promiseLoading}
           fullScreen
@@ -116,16 +117,22 @@ export class News extends React.Component {
 
         {!promiseLoading &&
           <div>
-            <div className='news-feed-header'>
-              <Link to='news/create' className='btn'>Create a new article</Link>
-            </div>
+            <h2>News</h2>
             {
               hasCombinedArticles ? (
-                <ul>
-                  {_combinedArticles.map((p) => this.renderPost(p))}
-                </ul>
+                <div>
+                  <div className='news-feed-header'>
+                    <Link to='news/create' className='btn'>Create an article</Link>
+                  </div>  
+                  <ul>
+                    {_combinedArticles.map((p) => this.renderPost(p))}
+                  </ul>
+                </div>
               ) : (
-                <p>No articles yet.</p>
+                <div>
+                  <p>No articles yet.</p>
+                  <Link to='news/create' className='btn'>Create an article</Link>
+                </div>
               )
             }
 

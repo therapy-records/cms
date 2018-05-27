@@ -112,10 +112,30 @@ export class Article extends React.Component {
         }
 
         {(article && article.title && !article.isDeleted) && (
-          <div className='article-flex-root'>
+          <div>
 
-            <div className='article-col-1'>
-              <h2>{article.title}</h2>
+            <h2>{article.title}</h2>
+
+            <p>Created {moment(article.createdAt).fromNow()}</p>
+            {article.editedAt &&
+              <p>Last modified {moment(article.editedAt).fromNow()}
+                <small>{moment(article.editedAt).format('DD/mm/YYYY')}</small>
+              </p>
+            }
+
+            <Link
+              to={`/news/${article._id}/edit`}
+              className='btn btn-edit'
+            >Edit
+            </Link>
+
+            <button
+              className='btn'
+              onClick={this.handleModalOpen}
+              style={{ background: 'darkred', color: '#fff' }}
+            >Delete
+            </button>
+          
               <div dangerouslySetInnerHTML={this.renderHtml(article.bodyMain)} />
 
               <br />
@@ -208,35 +228,6 @@ export class Article extends React.Component {
                 </div>
               : null}
 
-            </div>
-
-            <div className='article-sidebar'>
-              <div className='article-summary-box'>
-                <div className='article-summary-box-inner'>
-                  {/* <p><a href={`http://fionaross.co.uk/news/${article._id}`}>View live article</a></p> */}
-                  <p><a href={`http://fionaross.co.uk/news`} target='blank'>View live article</a></p>
-                  <p>Created {moment(article.createdAt).fromNow()}</p>
-                  {article.editedAt &&
-                    <p>Last modified {moment(article.editedAt).fromNow()}
-                      <small>{moment(article.editedAt).format('DD/mm/YYYY')}</small>
-                    </p>
-                  }
-
-                  <Link
-                    to={`/news/${article._id}/edit`}
-                    className='btn btn-edit'
-                  >Edit article
-                  </Link>
-
-                  <button
-                    className='btn'
-                    onClick={this.handleModalOpen}
-                    style={{ background: 'darkred', color: '#fff' }}>Delete article
-                  </button>
-
-                </div>
-              </div>
-            </div>
           </div>
         )}
 

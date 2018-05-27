@@ -42,11 +42,11 @@ describe('(Component) News - Home', () => {
     expect(actual).to.equal(true);
   });
 
-  it('should render create a new article link', () => {
+  it('should render create article link', () => {
     props = baseProps;
     wrapper = shallow(<News {...props} />);
     const actual = wrapper.containsMatchingElement(
-      <Link to='news/create'>Create a new article</Link>
+      <Link to='news/create'>Create an article</Link>
     );
     expect(actual).to.equal(true);
   });
@@ -102,20 +102,32 @@ describe('(Component) News - Home', () => {
     });
   });
 
-  it('should render an error if no new articles', () => {
-    const wrapper = shallow(
-      <News
-        newsArticles={[]}
-        // newsQueueArticles={[]}
-        onFetchNewsArticles={() => {}}
-        // onFetchNewsQueueArticles={() => {}}
-        onSetSelectedNewsArticle={() => {}}
-      />
-    );
-    const actual = wrapper.containsMatchingElement(
-      <p>No articles yet.</p>
-    );
-    expect(actual).to.equal(true);
+  
+  describe('when promiseLoading is false', () => {
+    it('should render a page title', () => {
+      const actual = wrapper.containsMatchingElement(
+        <h2>News</h2>
+      );
+      expect(actual).to.equal(true);
+    });
+  });
+
+  describe('when no articles', () => {
+    it('should render an error', () => {
+      const wrapper = shallow(
+        <News
+          newsArticles={[]}
+          // newsQueueArticles={[]}
+          onFetchNewsArticles={() => { }}
+          // onFetchNewsQueueArticles={() => {}}
+          onSetSelectedNewsArticle={() => { }}
+        />
+      );
+      const actual = wrapper.containsMatchingElement(
+        <p>No articles yet.</p>
+      );
+      expect(actual).to.equal(true);
+    });
   });
 
   describe('componentWillUnmount', () => {
