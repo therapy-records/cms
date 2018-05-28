@@ -36,7 +36,7 @@ describe('(Component) NewsArticleForm', () => {
       <NewsArticleForm {...props} />
     );
     const actual = createWrapper.containsMatchingElement(
-      <h2>Create news article</h2>
+      <h2>Create News</h2>
     );
     expect(actual).to.equal(true);
   });
@@ -47,7 +47,7 @@ describe('(Component) NewsArticleForm', () => {
       <NewsArticleForm {...props} />
     );
     const actual = editWrapper.containsMatchingElement(
-      <h2>Edit news article</h2>
+      <h2>Edit News</h2>
     );
     expect(actual).to.equal(true);
   });
@@ -86,7 +86,6 @@ describe('(Component) NewsArticleForm', () => {
     it('should render a mainImage.url field', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='mainImage.url'
-               title='Main image'
                component={DropzoneImageUpload}
                minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
         />
@@ -98,8 +97,8 @@ describe('(Component) NewsArticleForm', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='mainImage.externalLink'
                type='url'
-               title='Main image link'
-               label='Main image link'
+               title='Image link'
+               label='Image link'
                placeholder='http://bbc.co.uk/fiona-ross'
                component={TextInput} />
       );

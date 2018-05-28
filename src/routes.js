@@ -18,7 +18,7 @@ import OtherWorkArticleCreate from './routes/OtherWork/ArticleCreate';
 import { authCheck } from './actions/auth';
 import './index.css';
 
-export const NotFound = () => <div className='container'><p>Page not found :(</p></div>;
+export const NotFound = () => <div className='container'><h2>Page not found :(</h2></div>;
 
 export class Router extends Component {
   render() {

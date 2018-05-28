@@ -124,10 +124,6 @@ export class DropzoneImageUpload extends React.Component {
       <div>
         <h5>{title}</h5>
 
-        {minImageDimensions &&
-          <p>Image must be at least {minImageDimensions.width}px x {minImageDimensions.height}px</p>
-        }
-
         <div className={multiple && 'cols-container'}>
 
           <div className={multiple && 'col-1'}>
@@ -140,7 +136,7 @@ export class DropzoneImageUpload extends React.Component {
             >
               {(!multiple && !items.length) ?
                 <div className='dropzone-cta'>
-                  <span>Drag &amp; drop</span>
+                  <span>Drag &amp; drop image</span>
                   <div className={isLoading ? 'dropzone-loading dropzone-loading-active' : 'dropzone-loading'}>
                     <LoadingSpinner />
                   </div>
@@ -163,6 +159,11 @@ export class DropzoneImageUpload extends React.Component {
               }
 
             </Dropzone>
+
+            {minImageDimensions &&
+              <p className='dropzone-image-dimension-notice'>Image must be at least {minImageDimensions.width}px x {minImageDimensions.height}px</p>
+            }
+
           </div>
 
           {invalidDimensions.length ?

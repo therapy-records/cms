@@ -25,11 +25,12 @@ export class Sidebar extends React.Component {
           News
         </NavLink>
 
-        <NavLink to='/press' activeClassName='route--active'>
-          Press
-            </NavLink>
         <NavLink to='/other-work' activeClassName='route--active'>
           Other Work
+        </NavLink>
+
+        <NavLink to='/press' activeClassName='route--active'>
+          Press
         </NavLink>
 
         <button onClick={() => { onLogout(); }} className='btn-logout'>Log out</button>

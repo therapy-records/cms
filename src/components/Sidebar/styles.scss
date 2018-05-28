@@ -51,6 +51,8 @@
 }
 
 .sidebar-active {
-  left: 0;
-  opacity: 1;
+  @media(min-width: 768px) {
+    left: 0;
+    opacity: 1;
+  }
 }

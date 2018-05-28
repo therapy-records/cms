@@ -44,7 +44,6 @@ class OtherWorkHome extends React.Component {
           <div dangerouslySetInnerHTML={this.renderHtml(p.copy)} />
 
           {p.releaseDate && <p className='small-tab'>Released: {moment(p.releaseDate).format('DD MMM YYYY')}</p>}
-          {p.createdAt && <p className='small-tab'>Created: {moment(p.createdAt).fromNow()}</p>}
           <p>Links to: {p.externalLink}</p>
 
           <Link

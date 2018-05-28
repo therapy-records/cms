@@ -220,7 +220,7 @@ describe('Router', () => {
   describe('NotFound', () => {
     wrapper = shallow(<NotFound />);
     const actual = wrapper.containsMatchingElement(
-      <div className='container'><p>Page not found :(</p></div>
+      <div className='container'><h2>Page not found :(</h2></div>
     );
     expect(actual).to.equal(true);
   });

@@ -61,20 +61,24 @@ export class News extends React.Component {
       <li key={p._id} className='article-card'>
         <img src={articleImg()} alt={p.title} />
         <div>
-          {p.scheduledTime &&
-            <p
-              className='small-tab'>
-              Scheduled for {moment(p.scheduledTime).format('Do MMM \'YY')}
-            </p>
-          }
-          {(!p.scheduledTime && p.createdAt) && <p className='small-tab'>{moment(p.createdAt).fromNow()}</p>}
-          <h3>
-            <Link
-              onClick={() => this.handleButtonClick(p)}
-              to={`news/${p._id}`}
-            >{p.title}
-            </Link>
-          </h3>
+          {/*
+            {p.scheduledTime &&
+              <p
+                className='small-tab'>
+                Scheduled for {moment(p.scheduledTime).format('Do MMM \'YY')}
+              </p>
+            }
+          */}
+          <div className='heading-with-btn'>
+            <h3>
+              <Link
+                onClick={() => this.handleButtonClick(p)}
+                to={`news/${p._id}`}
+              >{p.title}
+              </Link>
+            </h3>
+            {p.createdAt && <p className='small-tab'>{moment(p.createdAt).fromNow()}</p>}
+          </div>
 
           <Link
             onClick={() => this.handleButtonClick(p)}

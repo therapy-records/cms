@@ -34,17 +34,27 @@ body {
 
 .main-container {
   display: flex;
-  justify-content: space-between;
-  flex-direction: row;
+  justify-content: flex-start;
+  flex-direction: column;
   width: 100%;
+  @media(min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .col-first,
+  .col-last {
+    width: 100%;
+  }
   > .col-first {
-    width: 12%;
-    min-width: $sidebar-width;
-    max-width: $sidebar-width;
+    @media(min-width: 768px) {
+      width: 12%;
+      min-width: $sidebar-width;
+      max-width: $sidebar-width;
+    }
   }
   > .col-last {
-    width: 88%;
-    @media(min-width: 600px) {
+    @media(min-width: 768px) {
+      width: 88%;
       align-items: center;
       display: flex;
       justify-content: center;
@@ -317,19 +327,22 @@ iframe {
 .heading-with-btn {
   margin-bottom: 4em;
   h2,
+  h3,
+  .small-tab,
   .btn {
     display: inline-block;
     vertical-align: middle;
   }
-  h2 {
+  h2,
+  h3,
+  .small-tab {
     margin-right: .5em;
   }
   .btn {
     position: relative;
-    top: -4px;
+    top: -7px;
   }
 }
-
 
 .article-card {
   display: flex;
@@ -355,6 +368,9 @@ iframe {
     @media(min-width: 600px) {
       margin-right: 2em;
     }
+  }
+  .heading-with-btn {
+    margin-bottom: 0;
   }
   h3 {
     margin-top:0;

@@ -51,14 +51,17 @@ describe('(Component) News - Home', () => {
         <li key={p._id} className='article-card'>
           <img />
           <div>
-            {(!p.scheduledTime && p.createdAt) && <p className='small-tab'>{moment(p.createdAt).fromNow()}</p>}
-            <h3><Link to={`news/${p._id}`}>{p.title}</Link></h3>
+            <div className='heading-with-btn'>
+              {p.createdAt && <p className='small-tab'>{moment(p.createdAt).fromNow()}</p>}
+              <h3><Link to={`news/${p._id}`}>{p.title}</Link></h3>
+            </div>
             <Link to={`news/${p._id}`} className='btn btn-sm'>View</Link>
             <Link to={`news/${p._id}/edit`} className='btn btn-sm'>Edit</Link>
           </div>
         </li>
       )
     };
+
     const child0 = wrapper.containsMatchingElement(renderNewsArticle(0));
     expect(child0).to.equal(true);
     const child1 = wrapper.containsMatchingElement(renderNewsArticle(1));

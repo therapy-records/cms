@@ -45,11 +45,11 @@ export class Dashboard extends React.Component {
           fullScreen
         />
 
-        <h2>Welcome back</h2>
-        <p>Create a new...</p>
+        <h2>Create</h2>
         <Link to='news/create' className='btn'>News article</Link>
         <Link to='other-work/create' className='btn'>Other Work article</Link>
 
+        <br />
         <br />
         <br />
         <br />

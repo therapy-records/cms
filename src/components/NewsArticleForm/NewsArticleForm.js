@@ -34,7 +34,6 @@ export const NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS = {
 
 export const bodyMainRTE = ({ input, onChange, props, meta: { touched, error } }) => (
   <div>
-    <h5>Main content</h5>
     {touched && error && (<p>Main content is {error}</p>)}
     <RichTextEditor value={input.value} onChange={e => { input.onChange(e) }} {...props} />
   </div>
@@ -94,7 +93,7 @@ export class NewsArticleForm extends React.Component {
     return (
       <section className='root'>
         <div className='heading'>
-          <h2>{isEditForm ? 'Edit news article' : 'Create news article'}</h2>
+          <h2>{isEditForm ? 'Edit News' : 'Create News'}</h2>
           <ArticlePreview />
         </div>
 
@@ -113,9 +112,18 @@ export class NewsArticleForm extends React.Component {
           <br />
           <br />
 
+          <Field
+            name='bodyMain'
+            component={bodyMainRTE}
+            validate={required}
+          />
+
+          <br />
+          <br />
+          <br />
+
           <Field name='mainImage.url'
                  component={DropzoneImageUpload}
-                 title='Main image'
                  existingImage={formValues && formValues.mainImage.url}
                  minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS} />
 
@@ -125,8 +133,8 @@ export class NewsArticleForm extends React.Component {
           <Field name='mainImage.externalLink'
                  component={TextInput}
                  type='url'
-                 title='Main image link'
-                 label='Main image link'
+                 title='Image link'
+                 label='Image link'
                  placeholder='http://bbc.co.uk/fiona-ross' />
 
           <br />
@@ -152,15 +160,6 @@ export class NewsArticleForm extends React.Component {
                     title='Secondary featured image' />
             </div>
           }
-
-          <br />
-          <br />
-          <br />
-          <br />
-
-          <Field name='bodyMain'
-                 component={bodyMainRTE}
-                 validate={required} />
 
           <br />
           <br />

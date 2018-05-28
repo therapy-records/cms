@@ -45,15 +45,11 @@ describe('(Component) Dashboard', () => {
     expect(actual).to.equal(true);
   });
 
-  it('should render a heading with `create...` copy', () => {
+  it('should render a heading', () => {
     const heading = wrapper.containsMatchingElement(
-      <h2>Welcome back</h2>
+      <h2>Create</h2>
     );
     expect(heading).to.be.true;
-    const copy = wrapper.containsMatchingElement(
-      <p>Create a new...</p>
-    );
-    expect(copy).to.be.true;
   });
 
   it('should render a link to create a news article', () => {
