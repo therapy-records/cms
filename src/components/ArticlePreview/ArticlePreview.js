@@ -1,10 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { ModalContainer, ModalDialog } from 'react-modal-dialog';
-import ArticleLive from '../ArticleLive/ArticleLive'
-import './ArticlePreview.scss'
+import { connect } from 'react-redux';
+import {
+  selectNewsArticleFormValues,
+  selectNewsArticleFormSyncErrors
+} from '../../selectors/form';
+import ArticleLive from '../ArticleLive/ArticleLive';
+import './ArticlePreview.scss';
 
-class ArticlePreview extends React.Component {
+export class ArticlePreview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,4 +49,19 @@ ArticlePreview.propTypes = {
   disabled: PropTypes.bool
 }
 
-export default ArticlePreview;
+const mapStateToProps = (state) => {
+  const formValues = selectNewsArticleFormValues(state);
+  const formErrors = selectNewsArticleFormSyncErrors(state);
+  const isDisabled = !formValues ||
+    !formValues.title ||
+    !formValues.bodyMain ||
+    formErrors.title ||
+    formErrors.bodyMain;
+
+  return {
+    article: selectNewsArticleFormValues(state),
+    disabled: isDisabled
+  }
+};
+
+export default connect(mapStateToProps, {})(ArticlePreview);

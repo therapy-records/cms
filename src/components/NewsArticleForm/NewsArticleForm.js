@@ -22,7 +22,7 @@ import './NewsArticleForm.css';
 import DropzoneImageUpload from './DropzoneImageUpload';
 // import Datepicker from '../Datepicker/Datepicker';
 import Quotes from './Quotes';
-import ArticlePreview from '../ArticlePreview/ArticlePreview.container';
+import ArticlePreview from '../ArticlePreview/ArticlePreview';
 import TextInput from '../../components/TextInput';
 import { required } from '../../utils/form';
 import { NEWS_ARTICLE_FORM } from '../../constants';

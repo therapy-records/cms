@@ -13,7 +13,7 @@ import {
 } from './NewsArticleForm';
 import TextInput from '../TextInput';
 import Datepicker from '../Datepicker/Datepicker';
-import ArticlePreview from '../ArticlePreview/ArticlePreview.container';
+import ArticlePreview from '../ArticlePreview/ArticlePreview';
 import DropzoneImageUpload from './DropzoneImageUpload';
 import Quotes from './Quotes';
 
