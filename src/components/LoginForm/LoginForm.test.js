@@ -1,12 +1,15 @@
 import React from 'react'
-import { expect } from 'chai';
+import chai, { expect } from 'chai';
 import sinon from 'sinon';
+import sinonChai from 'sinon-chai';
 import { Field } from 'redux-form';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import { LoginForm, required } from './LoginForm';
 import TextInput from '../../components/TextInput';
 import LoadingSpinner from '../../components/LoadingSpinner';
+
+chai.use(sinonChai);
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -108,6 +111,32 @@ describe('(Component) LoginForm', () => {
       const button = buttonWrapper.find('button');
       button.simulate('click');
       expect(props.onSubmit.calledOnce).to.eq(true);
+    });
+  });
+
+  describe('onFormSubmit', () => {
+    it('should call preventDefault()', () => {
+      const prevDefaultSpy = sinon.spy();
+      const mockEv = {
+        preventDefault: prevDefaultSpy
+      }
+      wrapper.instance().onFormSubmit(mockEv);
+      expect(prevDefaultSpy).to.have.been.calledOnce;
+    });
+  });
+
+  describe('required', () => {
+    describe('when there is a value', () => {
+      it('should return undefined string', () => {
+        const result = required('a');
+        expect(result).to.eq(undefined);
+      });
+    });
+    describe('when there is a value', () => {
+      it('should return undefined', () => {
+        const result = required('');
+        expect(result).to.eq('required');
+      });
     });
   });
 });

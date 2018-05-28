@@ -7,6 +7,10 @@ import TextInput from '../TextInput';
 export const required = value => value ? undefined : 'required';
 
 export class LoginForm extends React.Component {
+  onFormSubmit(ev) {
+    ev.preventDefault();
+  }
+
   render() {
     const {
       error,
@@ -25,10 +29,10 @@ export class LoginForm extends React.Component {
           fullScreenIgnoreSidebar
         />
 
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form onSubmit={this.onFormSubmit}>
 
           <Field name='username'
-            component={TextInput}
+                 component={TextInput}
                  type='text'
                  placeholder='Username'
                  label='Username'

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
@@ -26,17 +27,9 @@ describe('(Component) ErrorComponent', () => {
 
   it('should render a link to home', () => {
     const actual = wrapper.containsMatchingElement(
-      <button>Go home</button>
+      <Link to='/'>Go home</Link>
     );
     expect(actual).to.equal(true);
-  });
-
-  it('should call redirectToHome on button click', () => {
-    const button = wrapper.find('button');
-    const redirectToHomeSpy = sinon.spy();
-    wrapper.instance().redirectToHome = redirectToHomeSpy;
-    button.simulate('click');
-    expect(redirectToHomeSpy.calledOnce).to.eq(true);
   });
 
 });

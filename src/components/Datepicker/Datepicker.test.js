@@ -1,10 +1,14 @@
 import React from 'react'
-import { expect } from 'chai';
+import chai, { expect } from 'chai';
+import sinon from 'sinon';
+import sinonChai from 'sinon-chai';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import InputMoment from 'input-moment';
 import moment from 'moment';
 import Datepicker from './Datepicker';
+
+chai.use(sinonChai);
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -81,5 +85,27 @@ describe('(Component) Datepicker', () => {
     });
 
     // todo: should call prop with moment formatting
+  });
+
+  describe('methods', () => {
+    describe('handleChange', () => {
+      it('should update state', () => {
+        wrapper = shallow(<Datepicker {...props} />);
+        wrapper.instance().handleChange('test');
+        expect(wrapper.instance().state.m).to.eq('test');
+      });
+      it('should call input.onChange', () => {
+        wrapper = shallow(<Datepicker {...props} />);
+        const onChangeSpy = sinon.spy();
+        wrapper.setProps({
+          input: {
+            onChange: onChangeSpy
+          }
+        });
+        wrapper.instance().handleChange('test');
+        expect(onChangeSpy).have.been.calledOnce;
+      });
+
+    });
   });
 });
