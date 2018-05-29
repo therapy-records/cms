@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import RichTextEditor from 'react-rte'
-import './RichTextEditor.scss'
+import './RichTextEditor.css'
 
 class _RichTextEditor extends React.Component {
   state = {

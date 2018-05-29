@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 import InputMoment from 'input-moment'
-import './InputMoment.scss'
+import './InputMoment.css'
 
 export class Datepicker extends React.Component {
   constructor(props) {

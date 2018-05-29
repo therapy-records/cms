@@ -7,7 +7,7 @@ import {
   selectNewsArticleFormSyncErrors
 } from '../../selectors/form';
 import ArticleLive from '../ArticleLive/ArticleLive';
-import './ArticlePreview.scss';
+import './ArticlePreview.css';
 
 export class ArticlePreview extends React.Component {
   constructor(props) {
