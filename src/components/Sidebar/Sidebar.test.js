@@ -33,7 +33,6 @@ describe('(Component) Sidebar', () => {
     expect(aside.prop('className')).to.eq('sidebar sidebar-active');
   });
 
-
   describe('when isHome', () => {
     beforeEach(() => {
       props.location.pathname = '/';
@@ -45,6 +44,46 @@ describe('(Component) Sidebar', () => {
       expect(aside.prop('className')).to.eq('sidebar');
     });
   });
+
+  describe('nav items', () => {
+    it('should render a link to dashboard', () => {
+      const actual = wrapper.containsMatchingElement(
+        <NavLink to='/dashboard' activeClassName='route--active'>
+          Dashboard
+        </NavLink>
+      );
+      expect(actual).to.eq(true);
+    });
+
+    it('should render a link to dashboard', () => {
+      const actual = wrapper.containsMatchingElement(
+        <NavLink to='/news' activeClassName='route--active'>
+          News
+        </NavLink>
+      );
+      expect(actual).to.eq(true);
+    });
+
+    it('should render a link to other work', () => {
+      const actual = wrapper.containsMatchingElement(
+        <NavLink to='/other-work' activeClassName='route--active'>
+          Other Work
+        </NavLink>
+      );
+      expect(actual).to.eq(true);
+    });
+
+    it('should render a link to press', () => {
+      const actual = wrapper.containsMatchingElement(
+        <NavLink to='/press' activeClassName='route--active'>
+          Press
+        </NavLink>
+      );
+      expect(actual).to.eq(true);
+    });
+
+  });
+  
 
   describe('logout link', () => {
     beforeEach(() => {
