@@ -5,7 +5,7 @@ export const API_ROOT_PROD = 'https://fr-cms-api.herokuapp.com/api/';
 export const API_ROOT = envProd ? API_ROOT_PROD : API_ROOT_DEV;
 
 export const NEWS = 'news';
-export const NEWS_CREATE = 'news/create';
+export const NEWS_CREATE = NEWS;
 // export const NEWS_QUEUE = 'news/queue';
 
 export const OTHER_WORK = 'other-work';
