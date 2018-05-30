@@ -95,13 +95,12 @@ class Article extends React.Component {
             <Link
               to={`/other-work/${article._id}/edit`}
               className='btn btn-edit'
-            >Edit article
-                  </Link>
+            >Edit</Link>
 
             <button
               className='btn'
               onClick={this.handleModalOpen}
-              style={{ background: 'darkred', color: '#fff' }}>Delete article
+              style={{ background: 'darkred', color: '#fff' }}>Delete
             </button>
 
             <p>{article.copy}</p>

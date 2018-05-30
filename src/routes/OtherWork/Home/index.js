@@ -20,10 +20,6 @@ class OtherWorkHome extends React.Component {
     this.props.resetPromiseState();
   }
 
-  renderHtml(data) {
-    return { __html: data }
-  }
-
   handleButtonClick(postObj) {
     this.props.onSetSelectedOtherWorkArticle(postObj);
   }
@@ -33,6 +29,7 @@ class OtherWorkHome extends React.Component {
       <li key={p._id} className='article-card'>
         <img src={p.mainImageUrl} alt="" />
         <div>
+        <div className='heading-with-btn'>
           <h3>
             <Link
               onClick={() => this.handleButtonClick(p)}
@@ -40,10 +37,9 @@ class OtherWorkHome extends React.Component {
             >{p.title}
             </Link>
           </h3>
+          {p.releaseDate && <p className='small-tab'>{moment(p.releaseDate).format('DD MMM YYYY')}</p>}
+        </div>
 
-          <div dangerouslySetInnerHTML={this.renderHtml(p.copy)} />
-
-          {p.releaseDate && <p className='small-tab'>Released: {moment(p.releaseDate).format('DD MMM YYYY')}</p>}
           <p>Links to: {p.externalLink}</p>
 
           <Link
