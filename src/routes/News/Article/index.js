@@ -99,7 +99,7 @@ export class Article extends React.Component {
     }
 
     return (
-      <article className='container'>
+      <article className='container article'>
         {promiseLoading &&
           <LoadingSpinner />
         }
@@ -114,14 +114,10 @@ export class Article extends React.Component {
         {(article && article.title && !article.isDeleted) && (
           <div>
 
-            <h2>{article.title}</h2>
-
-            <p>Created {moment(article.createdAt).fromNow()}</p>
-            {article.editedAt &&
-              <p>Last modified {moment(article.editedAt).fromNow()}
-                <small>{moment(article.editedAt).format('DD/mm/YYYY')}</small>
-              </p>
-            }
+            <div className='heading-with-btn'>
+              <h2>{article.title}</h2>
+              <p className='small-tab'>{moment(article.createdAt).fromNow()}</p>
+            </div>
 
             <Link
               to={`/news/${article._id}/edit`}
@@ -136,6 +132,13 @@ export class Article extends React.Component {
             >Delete
             </button>
           
+
+            {article.editedAt &&
+              <p>Last modified {moment(article.editedAt).fromNow()}
+                <small>{moment(article.editedAt).format('DD/mm/YYYY')}</small>
+              </p>
+            }
+
               <div dangerouslySetInnerHTML={this.renderHtml(article.bodyMain)} />
 
               <br />

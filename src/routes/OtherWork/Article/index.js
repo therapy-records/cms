@@ -68,7 +68,7 @@ class Article extends React.Component {
     }
 
     return (
-      <article className='container'>
+      <article className='container article'>
         {promiseLoading &&
           <LoadingSpinner />
         }
@@ -83,14 +83,10 @@ class Article extends React.Component {
         {(article && article.title && !article.isDeleted) && (
           <div>
 
-            <h2>{article.title}</h2>
-
-            <p>Created {moment(article.createdAt).fromNow()}</p>
-            {article.editedAt &&
-              <p>Last modified {moment(article.editedAt).fromNow()}
-                <small>{moment(article.editedAt).format('DD/mm/YYYY')}</small>
-              </p>
-            }
+            <div className='heading-with-btn'>
+              <h2>{article.title}</h2>
+              <p className='small-tab'>{moment(article.createdAt).fromNow()}</p>
+            </div>
 
             <Link
               to={`/other-work/${article._id}/edit`}
@@ -102,6 +98,12 @@ class Article extends React.Component {
               onClick={this.handleModalOpen}
               style={{ background: 'darkred', color: '#fff' }}>Delete
             </button>
+
+            {article.editedAt &&
+              <p>Last modified {moment(article.editedAt).fromNow()}
+                <small>{moment(article.editedAt).format('DD/mm/YYYY')}</small>
+              </p>
+            }
 
             <p>{article.copy}</p>
 

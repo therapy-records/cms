@@ -46,6 +46,10 @@
         padding: 0 .6em;
         font-size: .9em;
         opacity: .2;
+        &:hover,
+        &:focus {
+          background: #111;
+        }
     }
   }
 }
