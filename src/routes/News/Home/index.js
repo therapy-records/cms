@@ -121,9 +121,13 @@ export class News extends React.Component {
 
         {!promiseLoading &&
           <div>
-            <div className='heading-with-btn'>
-              <h2>News</h2>
-              <Link to='news/create' className='btn btn-sm'>Create</Link>
+            <div className='heading-action-btns'>
+              <div>
+                <h2>News</h2>
+              </div>
+              <div className='action-btns'>
+                <Link to='news/create' className='btn'>Create</Link>
+              </div>
             </div>
 
             {

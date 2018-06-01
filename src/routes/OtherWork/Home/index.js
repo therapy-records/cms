@@ -78,9 +78,14 @@ class OtherWorkHome extends React.Component {
 
         {!promiseLoading &&
           <div>
-            <div className='heading-with-btn'>
-              <h2>Other Work</h2>
-              <Link to='other-work/create' className='btn btn-sm'>Create</Link>
+
+            <div className='heading-action-btns'>
+              <div>
+                <h2>Other Work</h2>
+              </div>
+              <div className='action-btns'>
+                <Link to='other-work/create' className='btn'>Create</Link>
+              </div>
             </div>
 
             {hasArticles ?

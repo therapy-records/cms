@@ -106,7 +106,7 @@ describe('(Component) News - Home', () => {
     });
     it('should render a create button', () => {
       const actual = wrapper.containsMatchingElement(
-        <Link to='news/create' className='btn btn-sm'>Create</Link>
+        <Link to='news/create' className='btn'>Create</Link>
       );
       expect(actual).to.equal(true);
     });

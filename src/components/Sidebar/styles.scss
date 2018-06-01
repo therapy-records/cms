@@ -30,8 +30,10 @@
     transition: all .3s ease;
     &:hover,
     &:focus,
+    &:visited,
     &.route--active {
       background: #3A3A3A;
+      color: #FFF;
       opacity: 1;
     }
   }

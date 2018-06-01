@@ -114,24 +114,26 @@ export class Article extends React.Component {
         {(article && article.title && !article.isDeleted) && (
           <div>
 
-            <div className='heading-with-btn'>
-              <h2>{article.title}</h2>
-              <p className='small-tab'>{moment(article.createdAt).fromNow()}</p>
+            <div className='heading-action-btns'>
+              <div className='heading-with-btn'>
+                <h2>{article.title}</h2>
+                <p className='small-tab'>{moment(article.createdAt).fromNow()}</p>
+              </div>
+
+              <div className='action-btns'>
+                <button
+                  className='btn btn-danger'
+                  onClick={this.handleModalOpen}
+                >Delete
+                </button>
+                <Link
+                  to={`/news/${article._id}/edit`}
+                  className='btn btn-edit'
+                >Edit
+                </Link>
+              </div>
+
             </div>
-
-            <Link
-              to={`/news/${article._id}/edit`}
-              className='btn btn-edit'
-            >Edit
-            </Link>
-
-            <button
-              className='btn'
-              onClick={this.handleModalOpen}
-              style={{ background: 'darkred', color: '#fff' }}
-            >Delete
-            </button>
-          
 
             {article.editedAt &&
               <p>Last modified {moment(article.editedAt).fromNow()}
@@ -191,7 +193,6 @@ export class Article extends React.Component {
               <br />
 
               {article.ticketsLink && <a className='btn' href={article.ticketsLink} target='_blank'>Get tickets</a>}
-              <br />
               {article.venueLink && <a className='btn' href={article.venueLink} target='_blank'>Venue</a>}
               <br />
 
