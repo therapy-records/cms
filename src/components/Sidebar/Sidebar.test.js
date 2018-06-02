@@ -28,23 +28,104 @@ describe('(Component) Sidebar', () => {
     expect(actual).to.equal(true);
   });
 
-  it('should render active className', () => {
-    const aside = wrapper.find('aside');
-    expect(aside.prop('className')).to.eq('sidebar sidebar-active');
-  });
-
-  describe('when isHome', () => {
+  describe('active className', () => {
     beforeEach(() => {
-      props.location.pathname = '/';
       wrapper = shallow(<Sidebar {...props} />)
     });
-
-    it('should render className without active', () => {
-      const aside = wrapper.find('aside');
-      expect(aside.prop('className')).to.eq('sidebar');
+    describe('when route is not home and window width is >= 768', () => {
+      beforeEach(() => {
+        global.window.innerWidth = 768;
+      });
+      it('should render correct active className', () => {
+        const aside = wrapper.find('aside');
+        expect(aside.prop('className')).to.eq('sidebar sidebar-active');
+      });
     });
+
+    describe('when route is not home and state.isOpen', () => {
+      beforeEach(() => {
+        wrapper.instance().setState({
+          isOpen: true
+        });
+      });
+      it('should render correct active className', () => {
+        const aside = wrapper.find('aside');
+        expect(aside.prop('className')).to.eq('sidebar sidebar-active');
+      });
+    });
+
+    describe('when route is not home and state.isOpen and window width is `not large`', () => {
+      beforeEach(() => {
+        global.window.innerWidth = 400;
+        wrapper.instance().setState({
+          isOpen: true
+        });
+      });
+      it('should render correct active className', () => {
+        const aside = wrapper.find('aside');
+        expect(aside.prop('className')).to.eq('sidebar sidebar-active');
+      });
+    });
+
+    describe('when route is home', () => {
+      beforeEach(() => {
+        wrapper.setProps({
+          location: { pathname: '/' }
+        });
+      });
+      it('should render not render active className', () => {
+        const aside = wrapper.find('aside');
+        expect(aside.prop('className')).to.eq('sidebar');
+        expect(aside.prop('className')).to.not.eq('sidebar sidebar-active');
+      });
+    });    
   });
 
+  describe('methods', () => {
+    beforeEach(() => {
+      wrapper = shallow(<Sidebar {...props} />)
+    });
+    describe('toggleSidebar', () => {
+      it('should update state', () => {
+        wrapper.instance().toggleSidebar();
+        expect(wrapper.instance().state.isOpen).to.eq(true);
+        wrapper.instance().toggleSidebar();
+        expect(wrapper.instance().state.isOpen).to.eq(false);
+        wrapper.instance().toggleSidebar();
+        expect(wrapper.instance().state.isOpen).to.eq(true);
+      });
+    });
+    describe('componentDidMount', () => {
+      it('should call handleResize', () => {
+        const handleResizeSpy = sinon.spy();
+        wrapper.instance().handleResize = handleResizeSpy;
+        wrapper.instance().componentDidMount();
+        expect(handleResizeSpy.calledOnce).to.eq(true);
+      });
+      it('should add window event listener', () => {
+        const addEventListenerSpy = sinon.spy();
+        global.window.addEventListener = addEventListenerSpy;
+        wrapper.instance().componentDidMount();
+        expect(addEventListenerSpy.calledOnce).to.eq(true);
+        expect(addEventListenerSpy).to.have.been.calledWith(
+          'resize', wrapper.instance().handleResize
+        );
+      });
+    });
+    
+    describe('componentWillUnmount', () => {
+      it('should remove window event listener', () => {
+        const removeEventListenerSpy = sinon.spy();
+        global.window.removeEventListener = removeEventListenerSpy;
+        wrapper.instance().componentWillUnmount();
+        expect(removeEventListenerSpy.calledOnce).to.eq(true);
+        expect(removeEventListenerSpy).to.have.been.calledWith(
+          'resize', wrapper.instance().handleResize
+        );
+      });
+    });
+  });
+ 
   describe('nav items', () => {
     it('should render a link to dashboard', () => {
       const actual = wrapper.containsMatchingElement(
@@ -84,7 +165,6 @@ describe('(Component) Sidebar', () => {
 
   });
   
-
   describe('logout link', () => {
     beforeEach(() => {
       props.location.pathname = '/test';
@@ -103,7 +183,7 @@ describe('(Component) Sidebar', () => {
       props.onLogout = onLogoutSpy;
       const buttonWrapper = shallow(<Sidebar {...props} />)
       expect(onLogoutSpy.calledOnce).to.eq(false);
-      const button = buttonWrapper.find('button');
+      const button = buttonWrapper.find('.btn-logout');
       button.simulate('click');
       expect(onLogoutSpy.calledOnce).to.eq(true);
     });
