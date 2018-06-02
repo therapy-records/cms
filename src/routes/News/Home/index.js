@@ -23,7 +23,7 @@ export class News extends React.Component {
     // if (this.props.articlesQueue === null) {
     //   this.props.onFetchNewsQueueArticles();
     // }
-    if (this.props.newsArticles === null) {
+    if (this.props.articles === null) {
         this.props.onFetchNewsArticles();
     }
   }
@@ -73,7 +73,7 @@ export class News extends React.Component {
           <div className='heading-with-btn'>
             <h3>
               <Link
-                onClick={() => this.handleButtonClick(p)}
+                onClick={this.handleButtonClick(p)}
                 to={`news/${p._id}`}
               >{p.title}
               </Link>
@@ -82,14 +82,14 @@ export class News extends React.Component {
           </div>
 
           <Link
-            onClick={() => this.handleButtonClick(p)}
+            onClick={this.handleButtonClick(p)}
             to={`news/${p._id}`}
             className='btn btn-sm'
           >
             View
           </Link>
           <Link
-            onClick={() => this.handleButtonClick(p)}
+            onClick={this.handleButtonClick(p)}
             to={`news/${p._id}/edit`}
             className='btn btn-sm'
           >
@@ -104,11 +104,11 @@ export class News extends React.Component {
     const {
       promiseLoading,
       // articlesQueue,
-      newsArticles
+      articles
     } = this.props;
 
-    // let _combinedArticles = (articlesQueue || newsArticles) && this.getCombinedArticles(articlesQueue, newsArticles);
-    let _combinedArticles = newsArticles && this.getCombinedArticles(newsArticles);
+    // let _combinedArticles = (articlesQueue || articles) && this.getCombinedArticles(articlesQueue, articles);
+    let _combinedArticles = articles && this.getCombinedArticles(articles);
 
     const hasCombinedArticles = (_combinedArticles !== null) && (_combinedArticles && _combinedArticles.length);
 
@@ -159,7 +159,7 @@ News.propTypes = {
   // onFetchNewsQueueArticles: PropTypes.func.isRequired,
   onSetSelectedNewsArticle: PropTypes.func.isRequired,
   articlesQueue: PropTypes.array,
-  newsArticles: PropTypes.array,
+  articles: PropTypes.array,
   combinedArticles: PropTypes.array,
   resetPromiseState: PropTypes.func
 }

@@ -10,7 +10,7 @@ import { selectOtherWorkArticles } from '../../../selectors/otherWork'
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
 
-class OtherWorkHome extends React.Component {
+export class OtherWork extends React.Component {
   componentWillMount() {
     if (this.props.articles === null) {
         this.props.onFetchOtherWorkArticles();
@@ -109,7 +109,7 @@ class OtherWorkHome extends React.Component {
 
 }
 
-OtherWorkHome.propTypes = {
+OtherWork.propTypes = {
   promiseLoading: PropTypes.bool,
   onFetchOtherWorkArticles: PropTypes.func.isRequired,
   onSetSelectedOtherWorkArticle: PropTypes.func.isRequired,
@@ -127,4 +127,4 @@ const mapStateToProps = (state) => ({
   articles: selectOtherWorkArticles(state)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(OtherWorkHome);
+export default connect(mapStateToProps, mapDispatchToProps)(OtherWork);

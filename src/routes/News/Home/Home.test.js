@@ -14,7 +14,7 @@ chai.use(sinonChai);
 
 Enzyme.configure({ adapter: new Adapter() });
 
-const mockNewsArticles = [
+const mockArticles = [
   { title: 'test 1', _id: 'asd123' },
   { title: 'test 2', _id: 'asd124' },
   { title: 'test 3', _id: 'asd125' }
@@ -25,10 +25,8 @@ describe('(Component) News - Home', () => {
       props,
       baseProps = {
         onFetchNewsArticles: () => {},
-        // onFetchNewsQueueArticles: () => {},
         onSetSelectedNewsArticle: () => {},
-        newsArticles: mockNewsArticles,
-        // articlesQueue: mockNewsArticles
+        articles: mockArticles
       };
 
   it('should render <LoadingSpinner />', () => {
@@ -43,11 +41,11 @@ describe('(Component) News - Home', () => {
     expect(actual).to.equal(true);
   });
 
-  it('should render list of newsArticles', () => {
+  it('should render list of articles', () => {
     props = baseProps;
     wrapper = shallow(<News {...props} />);
     const renderNewsArticle = (key) => {
-      const p = props.newsArticles[key]; // eslint-disable-line
+      const p = props.articles[key]; // eslint-disable-line
       return (
         <li key={p._id} className='article-card'>
           <img />
@@ -80,7 +78,7 @@ describe('(Component) News - Home', () => {
       const lastArticleButton = lastArticle.find(Link).first();
       lastArticleButton.simulate('click');
       expect(_props.onSetSelectedNewsArticle).to.have.been.called;
-      const expectedArticle = mockNewsArticles[mockNewsArticles.length - 1];
+      const expectedArticle = mockArticles[mockArticles.length - 1];
       expect(_props.onSetSelectedNewsArticle).to.have.been.calledWith(expectedArticle);
     });
 
@@ -92,7 +90,7 @@ describe('(Component) News - Home', () => {
       const lastArticleButton = lastArticle.find(Link).last();
       lastArticleButton.simulate('click');
       expect(_props.onSetSelectedNewsArticle).to.have.been.called;
-      const expectedArticle = mockNewsArticles[mockNewsArticles.length - 1];
+      const expectedArticle = mockArticles[mockArticles.length - 1];
       expect(_props.onSetSelectedNewsArticle).to.have.been.calledWith(expectedArticle);
     });
   });
@@ -118,9 +116,7 @@ describe('(Component) News - Home', () => {
       const wrapper = shallow(
         <News
           newsArticles={[]}
-          // newsQueueArticles={[]}
           onFetchNewsArticles={() => { }}
-          // onFetchNewsQueueArticles={() => {}}
           onSetSelectedNewsArticle={() => { }}
         />
       );
@@ -128,6 +124,15 @@ describe('(Component) News - Home', () => {
         <EmptyArticlesMessage type='news' />
       );
       expect(actual).to.equal(true);
+    });
+  });
+
+  describe('componentWillMount', () => {
+    it('should call onFetchOtherWorkArticles when articles === null', () => {
+      props.onFetchNewsArticles = sinon.spy();
+      props.articles = null;
+      wrapper = shallow(<News {...props} />);
+      expect(props.onFetchNewsArticles.calledOnce).to.eq(true);
     });
   });
 
