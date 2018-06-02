@@ -42,3 +42,4 @@ describe('(Component) News - ArticleDeleteModal', () => {
     });
   });
 });
+

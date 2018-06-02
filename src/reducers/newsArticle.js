@@ -98,9 +98,9 @@ export const fetchSingleNewsArticle = (articleId) => {
 export const deleteNewsArticle = (articleId) => {
   return (dispatch) => {
     dispatch(promiseLoading(true));
-    const postHeaders = new Headers();
+    const postHeaders = new Headers(); // eslint-disable-line no-undef
     postHeaders.set('Content-Type', 'application/json');
-    postHeaders.set('Authorization', localStorage.getItem('token'));
+    postHeaders.set('Authorization', localStorage.getItem('token')); // eslint-disable-line no-undef
     return new Promise((resolve, reject) => {
       return _axiosAuthHeaders.delete(API_ROOT + NEWS + '/' + articleId)
         .then((data) => {
@@ -111,12 +111,12 @@ export const deleteNewsArticle = (articleId) => {
             dispatch(selectedNewsArticleDeleted());
             dispatch(fetchNewsArticles());
             // dispatch(fetchNewsQueueArticles());
-            resolve()
+            resolve();
           } else {
             dispatch(promiseLoading(false));
             dispatch(promiseError());
-            dispatch(deleteError())
-            reject()
+            dispatch(deleteError());
+            reject(new Error('Unable to delete news article'));
           }
         }
         );

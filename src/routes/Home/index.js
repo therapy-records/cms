@@ -62,8 +62,11 @@ export class Home extends React.Component {
 
 Home.propTypes = {
   isAuth: PropTypes.bool,
+  promiseLoading: PropTypes.bool,
   onPostForm: PropTypes.func,
-  authError: PropTypes.string
+  authError: PropTypes.string,
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired
 }
 
 const mapDispatchToProps = {

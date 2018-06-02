@@ -54,6 +54,8 @@ export class NewsArticleForm extends React.Component {
       showSecondaryImageField: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSecondaryImageToggle = this.handleSecondaryImageToggle.bind(this)
+    
   }
 
   handleSubmit() {
@@ -65,7 +67,7 @@ export class NewsArticleForm extends React.Component {
     this.props.onSubmitForm();
   }
 
-  handleSecondaryImageToggle = () => {
+  handleSecondaryImageToggle() {
     this.setState({ showSecondaryImageField: !this.state.showSecondaryImageField })
   }
 

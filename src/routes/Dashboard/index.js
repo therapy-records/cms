@@ -67,7 +67,10 @@ export class Dashboard extends React.Component {
 Dashboard.propTypes = {
   newsArticles: PropTypes.array,
   onFetchNewsArticles: PropTypes.func.isRequired,
-  resetPromiseState: PropTypes.func.isRequired
+  resetPromiseState: PropTypes.func.isRequired,
+  otherWorkArticles: PropTypes.func.isRequired,
+  onFetchOtherWorkArticles: PropTypes.func.isRequired,
+  promiseLoading: PropTypes.bool
 }
 
 const mapStateToProps = (state) => ({

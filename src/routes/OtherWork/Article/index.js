@@ -15,13 +15,22 @@ import LoadingSpinner from '../../../components/LoadingSpinner';
 import PromiseError from '../../../components/PromiseError';
 
 export class Article extends React.Component {
-
-  state = {
-    isShowingModal: false
+  constructor() {
+    super();
+    this.state = {
+      isShowingModal: false
+    }
+    this.handleModalOpen = this.handleModalOpen.bind(this);
+    this.handleModalClose = this.handleModalClose.bind(this);
   }
 
-  handleModalOpen = () => this.setState({ isShowingModal: true })
-  handleModalClose = () => this.setState({ isShowingModal: false })
+  handleModalOpen() {
+    this.setState({ isShowingModal: true })
+  }
+
+  handleModalClose() {
+    this.setState({ isShowingModal: false })
+  }
 
   componentWillMount() {
     const propsArticle = this.props.article;
@@ -65,7 +74,6 @@ export class Article extends React.Component {
     } = this.props;
 
     if (article && article.isDeleted) {
-      console.log('TODO: redirect');
       setTimeout(() => {
         this.props.history.push({
           pathname: '/other-work'
@@ -160,7 +168,9 @@ Article.propTypes = {
   onFetchArticle: PropTypes.func.isRequired,
   resetPromiseState: PropTypes.func.isRequired,
   onDestroyArticle: PropTypes.func.isRequired,
-  params: PropTypes.object
+  params: PropTypes.object,
+  match: PropTypes.object,
+  history: PropTypes.object
 }
 
 const mapDispatchToProps = {

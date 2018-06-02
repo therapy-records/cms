@@ -17,13 +17,22 @@ import LoadingSpinner from '../../../components/LoadingSpinner';
 import PromiseError from '../../../components/PromiseError';
 
 export class Article extends React.Component {
-
-  state = {
-    isShowingModal: false
+  constructor() {
+    super();
+    this.state = {
+      isShowingModal: false
+    }
+    this.handleModalOpen = this.handleModalOpen.bind(this);
+    this.handleModalClose = this.handleModalClose.bind(this);
   }
 
-  handleModalOpen = () => this.setState({ isShowingModal: true })
-  handleModalClose = () => this.setState({ isShowingModal: false })
+  handleModalOpen() {
+    this.setState({ isShowingModal: true })
+  }
+
+  handleModalClose(){
+    this.setState({ isShowingModal: false })
+  }
 
   componentWillMount() {
     const propsArticle = this.props.article;

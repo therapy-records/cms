@@ -1,7 +1,19 @@
 module.exports = {
-    "extends": "standard",
+    "extends": [
+        "standard",
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
+    "settings": {
+        "react": {
+            "version": "15.6"
+        }
+    },
     "rules": {
         "semi": 0,
-        "space-before-function-paren": ["error", "never"]
+        "space-before-function-paren": ["error", "never"],
+        "react/jsx-uses-react": 1,
+        "react/jsx-uses-vars": 1,
+        "react/prop-types": ["error", { ignore: ['store']}]
     }
 };

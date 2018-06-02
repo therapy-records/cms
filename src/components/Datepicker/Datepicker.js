@@ -12,9 +12,11 @@ export class Datepicker extends React.Component {
       pickerActive: props.pickerActive,
       m: initTime || moment()
     }
+    this.handleTogglePicker = this.handleTogglePicker.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleTogglePicker = () => {
+  handleTogglePicker() {
     const initTime = this.props.initTime && moment(this.props.initTime);
     this.setState({
       pickerActive: !this.state.pickerActive,
@@ -22,10 +24,10 @@ export class Datepicker extends React.Component {
     });
   }
 
-  handleChange = e => {
+  handleChange(e) {
     this.setState({ m: e });
-    this.props.input.onChange(moment(e).toISOString())
-  };
+    this.props.input.onChange(moment(e).toISOString());
+  }
 
   componentDidUpdate() {
     // ensure we send empty string back to form
@@ -62,9 +64,10 @@ export class Datepicker extends React.Component {
         <div>
           {togglePicker ? (
             <div>
-              <button onClick={this.handleTogglePicker}
-                      className='btn-sm'
-                      style={{ width: 'auto' }}>Schedule article
+              <button
+                onClick={this.handleTogglePicker}
+                className='btn-sm'
+                style={{ width: 'auto' }}>Schedule article
               </button>
               <br />
               <br />
@@ -87,7 +90,7 @@ export class Datepicker extends React.Component {
         </div>
       </div>
     );
-  };
+  }
 }
 
 Datepicker.propTypes = {

@@ -21,6 +21,8 @@ describe('(Component) EmptyArticlesMessage', () => {
       <div>
         <p>No articles yet. <Link to={`${props.type}/create`}>Create an article</Link></p>
       </div>
-    )
+    );
+    expect(actual).to.eq(true);
   });
 });
+

@@ -76,10 +76,11 @@ LoginForm.propTypes = {
   error: PropTypes.string,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
+  promiseLoading: PropTypes.bool,
   onSubmit: PropTypes.func.isRequired,
   authError: PropTypes.string
 }
 
 export default reduxForm({
   form: 'LOGIN_FORM'
-})(LoginForm)
+})(LoginForm);

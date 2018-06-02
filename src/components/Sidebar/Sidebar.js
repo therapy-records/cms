@@ -14,6 +14,8 @@ export class Sidebar extends React.PureComponent {
       windowWidth: undefined
     };
     this.toggleSidebar = this.toggleSidebar.bind(this);
+    this.handleResize = this.handleResize.bind(this)
+    
   }
 
   toggleSidebar() {
@@ -22,9 +24,11 @@ export class Sidebar extends React.PureComponent {
     });
   }
 
-  handleResize = () => this.setState({
-    windowWidth: window.innerWidth
-  });
+  handleResize() {
+    this.setState({
+      windowWidth: window.innerWidth
+    });
+  }
 
   componentDidMount() {
     this.handleResize();

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
 class ProtectedRoute extends React.PureComponent {
@@ -30,6 +31,13 @@ class ProtectedRoute extends React.PureComponent {
       )} />
     )
   }
+}
+
+ProtectedRoute.propTypes = {
+  component: PropTypes.any.isRequired,
+  location: PropTypes.object.isRequired,
+  onAuthCheck: PropTypes.func.isRequired,
+  isAuth: PropTypes.bool
 }
 
 export default ProtectedRoute;

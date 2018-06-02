@@ -7,7 +7,7 @@
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "node scripts/build.js",
     "build": "npm-run-all build-css build-js",
-    "lint": "./node_modules/.bin/eslint ./src/. ",
+    "lint": "./node_modules/.bin/eslint --ignore-pattern '/src/**/*.test.js' ./src/. ",
     "test": "node scripts/test.js --env=jsdom",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
