@@ -14,6 +14,7 @@ import {
 } from '../../../reducers/newsArticle';
 import ArticleDeleteModal from '../../../components/ArticleDeleteModal';
 import LoadingSpinner from '../../../components/LoadingSpinner';
+import PromiseError from '../../../components/PromiseError';
 
 export class Article extends React.Component {
 
@@ -236,7 +237,7 @@ export class Article extends React.Component {
         )}
 
         {promiseError &&
-          <p>error fetching news article :(</p>
+          <PromiseError message='fetching news article' />
         }
 
         {(!promiseLoading && this.state.isShowingModal) &&

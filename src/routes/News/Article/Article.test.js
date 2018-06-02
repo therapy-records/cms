@@ -8,6 +8,7 @@ import Adapter from 'enzyme-adapter-react-15';
 import { Article } from './index'
 import ArticleDeleteModal from '../../../components/ArticleDeleteModal'
 import LoadingSpinner from '../../../components/LoadingSpinner';
+import PromiseError from '../../../components/PromiseError';
 
 chai.use(sinonChai);
 
@@ -61,6 +62,7 @@ describe('(Component) News - Article', () => {
         },
         article: mockArticle
       };
+      props = baseProps;
 
   describe('on componentWillUnmount', () => {
     let props,
@@ -92,6 +94,16 @@ describe('(Component) News - Article', () => {
       wrapper.unmount();
       expect(props.onDestroyArticle.calledOnce).to.eq(false);
     });
+  });
+
+  describe('renderHtml', () => {
+    it('should return an object', () => {
+      wrapper = shallow(<Article {...props} />);
+      const actual = wrapper.instance().renderHtml('<p>test</p>');
+      expect(actual).to.deep.eq({
+        __html: '<p>test</p>'
+      });
+    })
   });
 
   describe('when promise is loading', () => {
@@ -135,7 +147,7 @@ describe('(Component) News - Article', () => {
     });
     it('should show loading', () => {
       const actual = wrapper.containsMatchingElement(
-        <p>error fetching news article :(</p>
+        <PromiseError message='fetching news article' />
       );
       expect(actual).to.equal(true);
     });
@@ -299,7 +311,7 @@ describe('(Component) News - Article', () => {
       });
     });
 
-    it('should render miniGalleryImages', () => {
+    it('should render venue link', () => {
       const actual = wrapper.containsMatchingElement(
         <a href={props.article.venueLink} target='_blank'>Venue</a>
       );

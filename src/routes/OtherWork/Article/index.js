@@ -12,8 +12,9 @@ import {
 } from '../../../reducers/otherWorkArticle';
 import ArticleDeleteModal from '../../../components/ArticleDeleteModal'
 import LoadingSpinner from '../../../components/LoadingSpinner';
+import PromiseError from '../../../components/PromiseError';
 
-class Article extends React.Component {
+export class Article extends React.Component {
 
   state = {
     isShowingModal: false
@@ -49,6 +50,11 @@ class Article extends React.Component {
 
   handleOnDeleteArticle(article) {
     this.props.onDeleteArticle(article._id)
+  }
+
+  handleModalOnDelete() {
+    this.handleOnDeleteArticle(this.props.article);
+    this.handleModalClose();
   }
 
   render() {
@@ -131,13 +137,13 @@ class Article extends React.Component {
         )}
 
         {promiseError &&
-          <p>error fetching other-work article :(</p>
+          <PromiseError message='fetching other-work article' />
         }
 
         {(!promiseLoading && this.state.isShowingModal) &&
           <ArticleDeleteModal
             handleModalClose={this.handleModalClose}
-            onDeleteArticle={() => { this.handleOnDeleteArticle(article); this.handleModalClose() }}
+            onDeleteArticle={this.handleModalOnDelete}
           />
         }
       </article>
