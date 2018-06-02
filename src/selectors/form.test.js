@@ -1,13 +1,9 @@
 
-
-
 import {
   selectNewsArticleForm,
   selectNewsArticleFormValues,
   selectNewsArticleFormSyncErrors
 } from './form';
-
-
 
 const mockState = {
   form: {

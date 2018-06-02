@@ -1,12 +1,8 @@
 import React from 'react'
 
-
-
 import LoadingSpinner from './LoadingSpinner'
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
-
-
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -37,7 +33,7 @@ describe('(Component) LoadingSpinner', () => {
         active: true
       });
     });
-    
+
     describe('when active', () => {
       it('should render Spinner with wrapping div and active className ', () => {
         const overlay = wrapper.find('.loading-spinner-overlay .loading-spinner-overlay-active');
@@ -98,5 +94,4 @@ describe('(Component) LoadingSpinner', () => {
       expect(circleElm.length).to.eq(1);
     });
   });
- 
 });

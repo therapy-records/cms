@@ -119,7 +119,7 @@ export const deleteNewsArticle = (articleId) => {
             reject()
           }
         }
-      );
+        );
     })
   }
 }
@@ -173,12 +173,12 @@ export const actions = {
 // ------------------------------------
 /* eslint-disable no-return-assign */
 const ACTION_HANDLERS = {
-  [SET_SELECTED_NEWS_ARTICLE] : (state, action) => state = action.payload,
-  [SET_SELECTED_NEWS_ARTICLE_DELETED] : (state, action) => state = action.payload,
-  [DESTROY_SELECTED_NEWS_ARTICLE] : (state, action) => state = action.payload,
+  [SET_SELECTED_NEWS_ARTICLE]: (state, action) => state = action.payload,
+  [SET_SELECTED_NEWS_ARTICLE_DELETED]: (state, action) => state = action.payload,
+  [DESTROY_SELECTED_NEWS_ARTICLE]: (state, action) => state = action.payload,
 
-  [DELETE_SINGLE_NEWS_ARTICLE_SUCCESS] : (state, action) => state = action.payload,
-  [DELETE_SINGLE_NEWS_ARTICLE_ERROR] :  (state, action) => state = action.payload,
+  [DELETE_SINGLE_NEWS_ARTICLE_SUCCESS]: (state, action) => state = action.payload,
+  [DELETE_SINGLE_NEWS_ARTICLE_ERROR]: (state, action) => state = action.payload
 
   // [DELETE_SINGLE_NEWS_QUEUE_ARTICLE_SUCCESS] : (state, action) => state = action.payload,
   // [DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR] : (state, action) => state = action.payload

@@ -1,24 +1,20 @@
 import React from 'react'
 
-
-
 import { Link } from 'react-router-dom';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import { Dashboard } from './index'
 import LoadingSpinner from '../../components/LoadingSpinner';
 
-
-
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) Dashboard', () => {
   let props,
-      wrapper,
-      mockArticles = [
-        { title: 'test' },
-        { title: 'testing' }
-      ]
+    wrapper,
+    mockArticles = [
+      { title: 'test' },
+      { title: 'testing' }
+    ]
 
   beforeEach(() => {
     props = {
@@ -65,7 +61,7 @@ describe('(Component) Dashboard', () => {
     );
     expect(actual).to.be.true;
   });
- 
+
   it('should render a total amount of news articles', () => {
     const actual = wrapper.containsMatchingElement(
       <p>News articles: {props.newsArticles.length}</p>

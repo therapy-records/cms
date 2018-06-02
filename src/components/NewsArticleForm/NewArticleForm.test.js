@@ -1,7 +1,5 @@
 import React from 'react';
 
-
-
 import { Field } from 'redux-form';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
@@ -17,18 +15,16 @@ import ArticlePreview from '../ArticlePreview/ArticlePreview';
 import DropzoneImageUpload from './DropzoneImageUpload';
 import Quotes from './Quotes';
 
-
-
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) NewsArticleForm', () => {
   let wrapper,
-      props,
-      baseProps = {
-        handleModalClose: () => {},
-        // onSubmitFormQueue: () => {},
-        onSubmitForm: () => {}
-      }
+    props,
+    baseProps = {
+      handleModalClose: () => {},
+      // onSubmitFormQueue: () => {},
+      onSubmitForm: () => {}
+    }
 
   it('should render a `Create` heading', () => {
     props = { ...baseProps, location: { pathname: 'test/create' } };
@@ -86,8 +82,8 @@ describe('(Component) NewsArticleForm', () => {
     it('should render a mainImage.url field', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='mainImage.url'
-               component={DropzoneImageUpload}
-               minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
+          component={DropzoneImageUpload}
+          minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
         />
       );
       expect(actual).to.equal(true);
@@ -96,11 +92,11 @@ describe('(Component) NewsArticleForm', () => {
     it('should render a mainImage.externalLink field', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='mainImage.externalLink'
-               type='url'
-               title='Image link'
-               label='Image link'
-               placeholder='http://bbc.co.uk/fiona-ross'
-               component={TextInput} />
+          type='url'
+          title='Image link'
+          label='Image link'
+          placeholder='http://bbc.co.uk/fiona-ross'
+          component={TextInput} />
       );
       expect(actual).to.equal(true);
     });
@@ -115,8 +111,8 @@ describe('(Component) NewsArticleForm', () => {
       it('should not render a secondaryImageUrl field by default ', () => {
         const actual = wrapper.containsMatchingElement(
           <Field name='secondaryImageUrl'
-                 title='Secondary featured image'
-                 component={DropzoneImageUpload} />
+            title='Secondary featured image'
+            component={DropzoneImageUpload} />
         );
         expect(actual).to.equal(false);
       });
@@ -125,15 +121,15 @@ describe('(Component) NewsArticleForm', () => {
         button.simulate('click');
         let actual = wrapper.containsMatchingElement(
           <Field name='secondaryImageUrl'
-                 title='Secondary featured image'
-                 component={DropzoneImageUpload} />
+            title='Secondary featured image'
+            component={DropzoneImageUpload} />
         );
         expect(actual).to.equal(true);
         button.simulate('click');
         actual = wrapper.containsMatchingElement(
           <Field name='secondaryImageUrl'
-                 title='Secondary featured image'
-                 component={DropzoneImageUpload} />
+            title='Secondary featured image'
+            component={DropzoneImageUpload} />
         );
         expect(actual).to.equal(false);
       });
@@ -153,11 +149,11 @@ describe('(Component) NewsArticleForm', () => {
     it('should render a title field', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='title'
-               component={TextInput}
-               type='text'
-               placeholder='Hello World'
-               label='Title'
-               validate={required} />
+          component={TextInput}
+          type='text'
+          placeholder='Hello World'
+          label='Title'
+          validate={required} />
       );
       expect(actual).to.equal(true);
     });
@@ -165,8 +161,8 @@ describe('(Component) NewsArticleForm', () => {
     it('should render a bodyMain field', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='bodyMain'
-               component={bodyMainRTE}
-               validate={required} />
+          component={bodyMainRTE}
+          validate={required} />
       );
       expect(actual).to.equal(true)
     });
@@ -174,7 +170,7 @@ describe('(Component) NewsArticleForm', () => {
     it('should render a quotes field', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='quotes'
-               component={Quotes} />
+          component={Quotes} />
       );
       expect(actual).to.equal(true)
     });

@@ -62,7 +62,6 @@ export class Dashboard extends React.Component {
       </div>
     )
   }
-
 }
 
 Dashboard.propTypes = {
@@ -74,7 +73,7 @@ Dashboard.propTypes = {
 const mapStateToProps = (state) => ({
   newsArticles: selectNewsArticles(state),
   otherWorkArticles: selectOtherWorkArticles(state),
-  promiseLoading: state.uiState.promiseLoading,
+  promiseLoading: state.uiState.promiseLoading
 })
 
 const mapDispatchToProps = {
@@ -84,4 +83,3 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
-

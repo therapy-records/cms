@@ -1,13 +1,9 @@
 import React from 'react'
 
-
-
 import { Sidebar } from './Sidebar'
 import { NavLink } from 'react-router-dom'
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
-
-
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -78,7 +74,7 @@ describe('(Component) Sidebar', () => {
         expect(aside.prop('className')).to.eq('sidebar');
         expect(aside.prop('className')).to.not.eq('sidebar sidebar-active');
       });
-    });    
+    });
   });
 
   describe('methods', () => {
@@ -112,7 +108,7 @@ describe('(Component) Sidebar', () => {
         );
       });
     });
-    
+
     describe('componentWillUnmount', () => {
       it('should remove window event listener', () => {
         const removeEventListenerSpy = sinon.spy();
@@ -136,7 +132,6 @@ describe('(Component) Sidebar', () => {
     expect(actual).to.eq(true);
   });
 
-
   describe('burger button', () => {
     it('should be rendered', () => {
       const actual = wrapper.containsMatchingElement(
@@ -145,13 +140,12 @@ describe('(Component) Sidebar', () => {
           className='btn-burger'
         >
           &#9776;
-            <span className='sr-only'>Open Menu</span>
+          <span className='sr-only'>Open Menu</span>
         </button>
       );
       expect(actual).to.eq(true);
     });
   });
- 
 
   describe('close button', () => {
     it('should be rendered', () => {
@@ -201,9 +195,8 @@ describe('(Component) Sidebar', () => {
       );
       expect(actual).to.eq(true);
     });
-
   });
-  
+
   describe('logout button', () => {
     beforeEach(() => {
       props.location.pathname = '/test';

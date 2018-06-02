@@ -13,7 +13,7 @@ import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/Empty
 export class OtherWork extends React.Component {
   componentWillMount() {
     if (this.props.articles === null) {
-        this.props.onFetchOtherWorkArticles();
+      this.props.onFetchOtherWorkArticles();
     }
   }
 
@@ -30,16 +30,16 @@ export class OtherWork extends React.Component {
       <li key={p._id} className='article-card'>
         <img src={p.mainImageUrl} alt="" />
         <div>
-        <div className='heading-with-btn'>
-          <h3>
-            <Link
-              onClick={this.handleButtonClick(p)}
-              to={`other-work/${p._id}`}
-            >{p.title}
-            </Link>
-          </h3>
-          {p.releaseDate && <p className='small-tab'>{moment(p.releaseDate).format('DD MMM YYYY')}</p>}
-        </div>
+          <div className='heading-with-btn'>
+            <h3>
+              <Link
+                onClick={this.handleButtonClick(p)}
+                to={`other-work/${p._id}`}
+              >{p.title}
+              </Link>
+            </h3>
+            {p.releaseDate && <p className='small-tab'>{moment(p.releaseDate).format('DD MMM YYYY')}</p>}
+          </div>
 
           <p>Links to: {p.externalLink}</p>
 
@@ -89,24 +89,23 @@ export class OtherWork extends React.Component {
               </div>
             </div>
 
-            {hasArticles ?
-              <div>
+            {hasArticles
+              ? <div>
                 <ul>
                   {articles.map((p) => this.renderArticle(p))}
                 </ul>
               </div>
-            : (
-              <div>
-                <EmptyArticlesMessage type='other-work' />
-              </div>
-            )}
+              : (
+                <div>
+                  <EmptyArticlesMessage type='other-work' />
+                </div>
+              )}
           </div>
         }
 
       </div>
     )
   }
-
 }
 
 OtherWork.propTypes = {

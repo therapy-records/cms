@@ -235,10 +235,10 @@ export const actions = {
 // ------------------------------------
 /* eslint-disable no-return-assign */
 const ACTION_HANDLERS = {
-  [FETCH_NEWS_ARTICLES_SUCCESS] : (state, action) => {
+  [FETCH_NEWS_ARTICLES_SUCCESS]: (state, action) => {
     return { ...state, articles: action.payload }
   },
-  [POST_NEWS_FORM_SUCCESS] : (state, action) => state = action.payload
+  [POST_NEWS_FORM_SUCCESS]: (state, action) => state = action.payload
   // [FETCH_NEWS_ARTICLES_QUEUE_SUCCESS]: (state, action) => {
   //   return { ...state, articlesQueue: action.payload }
   // },
@@ -257,4 +257,3 @@ export default function newsReducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
   return handler ? handler(state, action) : state
 }
-

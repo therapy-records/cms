@@ -14,10 +14,10 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) OtherWorkArticleForm', () => {
   let wrapper,
-      props,
-      baseProps = {
-        onSubmitForm: () => {}
-    }  
+    props,
+    baseProps = {
+      onSubmitForm: () => {}
+    }
 
   it('should render a `Create` heading', () => {
     props = { ...baseProps, location: { pathname: 'test/create' } };
@@ -48,9 +48,9 @@ describe('(Component) OtherWorkArticleForm', () => {
     it('should render a mainImageUrl field', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='mainImageUrl'
-               title='Main image'
-               component={DropzoneImageUpload}
-               minImageDimensions={OTHER_WORK_ARTICLE_MIN_IMAGE_DIMENSIONS}
+          title='Main image'
+          component={DropzoneImageUpload}
+          minImageDimensions={OTHER_WORK_ARTICLE_MIN_IMAGE_DIMENSIONS}
         />
       );
       expect(actual).to.equal(true);
@@ -59,12 +59,12 @@ describe('(Component) OtherWorkArticleForm', () => {
     it('should render a title field', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='title'
-               component={TextInput}
-               type='text'
-               placeholder='Hello World'
-               label='Title'
-               validate={required}
-         />
+          component={TextInput}
+          type='text'
+          placeholder='Hello World'
+          label='Title'
+          validate={required}
+        />
       );
       expect(actual).to.equal(true);
     });
@@ -72,8 +72,8 @@ describe('(Component) OtherWorkArticleForm', () => {
     it('should render a copy field', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='copy'
-               component={TextInput}
-               validate={required} />
+          component={TextInput}
+          validate={required} />
       );
       expect(actual).to.equal(true)
     });
@@ -81,7 +81,7 @@ describe('(Component) OtherWorkArticleForm', () => {
     it('should render an externalLink field', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='externalLink'
-               component={TextInput} />
+          component={TextInput} />
       );
       expect(actual).to.equal(true)
     });

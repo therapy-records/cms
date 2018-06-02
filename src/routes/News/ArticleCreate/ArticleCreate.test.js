@@ -1,7 +1,5 @@
 import React from 'react'
 
-
-
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import { Link } from 'react-router-dom'
@@ -9,18 +7,16 @@ import { ArticleCreate } from './index'
 import NewsArticleForm from '../../../components/NewsArticleForm'
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
-
-
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) News - ArticleCreate', () => {
   let wrapper,
-      props,
-      baseProps = {
-        onPostArticle: () => {},
-        // onPostArticleQueue: () => {},
-        resetPromiseState: () => {}
-      };
+    props,
+    baseProps = {
+      onPostArticle: () => {},
+      // onPostArticleQueue: () => {},
+      resetPromiseState: () => {}
+    };
 
   it('should call resetPromiseState on componentWillUnmount', () => {
     let props = baseProps;

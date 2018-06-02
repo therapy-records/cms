@@ -1,7 +1,4 @@
 
-
-
-
 import {
   selectNewsArticles,
   selectNewsArticlesReverse,
@@ -23,8 +20,6 @@ import {
   selectSelectedNewsArticleSocialShare,
   selectSelectedNewsArticleSocialShareHashtags
 } from './news';
-
-
 
 const mockArticles = [
   {
@@ -86,9 +81,9 @@ const mockState = {
 describe('(Selectors) news', () => {
   const postId = 'asdf1234';
   let _newsArticle,
-      _mockSelectedNewsArticle,
-      newsArticle,
-      mockSelectedNewsArticle;
+    _mockSelectedNewsArticle,
+    newsArticle,
+    mockSelectedNewsArticle;
   beforeEach(() => {
     _newsArticle = selectSelectedNewsArticle(mockState, postId);
     _mockSelectedNewsArticle = selectSelectedNewsArticle(mockState)

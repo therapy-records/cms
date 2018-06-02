@@ -1,8 +1,6 @@
 import React from 'react'
 import moment from 'moment';
 
-
-
 import { Link } from 'react-router-dom'
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
@@ -10,8 +8,6 @@ import { Article } from './index'
 import ArticleDeleteModal from '../../../components/ArticleDeleteModal'
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import PromiseError from '../../../components/PromiseError';
-
-
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -40,7 +36,7 @@ describe('(Component) OtherWork - OtherWork', () => {
         }
       }
     };
-    props = baseProps;
+  props = baseProps;
 
   describe('on componentWillUnmount', () => {
     let props,
@@ -153,7 +149,6 @@ describe('(Component) OtherWork - OtherWork', () => {
       expect(actual).to.equal(true);
     });
 
-  
     describe('main image', () => {
       it('should render mainImageUrl if it exists', () => {
         const actual = wrapper.containsMatchingElement(
@@ -188,11 +183,10 @@ describe('(Component) OtherWork - OtherWork', () => {
       );
       expect(actual).to.equal(true);
     });
-
   });
 
   describe('methods', () => {
-    describe('handleModalOpen/handleModalClose', ( ) => {
+    describe('handleModalOpen/handleModalClose', () => {
       wrapper = shallow(<Article {...props} />);
       expect(wrapper.instance().state.isShowingModal).to.eq(false);
       wrapper.instance().handleModalOpen();
@@ -242,9 +236,8 @@ describe('(Component) OtherWork - OtherWork', () => {
         });
       })
     });
-
   });
-  
+
   describe('edit article button', () => {
     it('should be rendered', () => {
       let props = baseProps;

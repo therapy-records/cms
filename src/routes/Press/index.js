@@ -9,7 +9,6 @@ class Press extends React.Component {
       </div>
     )
   }
-
 }
 
 export default Press

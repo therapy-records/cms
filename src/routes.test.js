@@ -1,7 +1,5 @@
 import React from 'react'
 
-
-
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import { Route } from 'react-router-dom';
@@ -23,8 +21,6 @@ import OtherWorkArticleEdit from './routes/OtherWork/ArticleEdit';
 import OtherWorkArticleCreate from './routes/OtherWork/ArticleCreate';
 import { authCheck } from './actions/auth';
 
-
-
 Enzyme.configure({ adapter: new Adapter() });
 
 const middlewares = [];
@@ -39,9 +35,9 @@ const mockStore = configMockStore(mockState, mockDispatch);
 
 describe('Router', () => {
   let wrapper,
-      props = {
-        isAuth: false
-      };
+    props = {
+      isAuth: false
+    };
 
   beforeEach(() => {
     wrapper = shallow(<Router {...props} />);
@@ -224,5 +220,4 @@ describe('Router', () => {
     );
     expect(actual).to.equal(true);
   });
-
 });

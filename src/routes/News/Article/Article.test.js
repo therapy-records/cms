@@ -1,7 +1,5 @@
 import React from 'react'
 
-
-
 import { Link } from 'react-router-dom'
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
@@ -10,63 +8,61 @@ import ArticleDeleteModal from '../../../components/ArticleDeleteModal'
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import PromiseError from '../../../components/PromiseError';
 
-
-
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) News - Article', () => {
   let wrapper,
-      props,
-      mockMiniGalleryImages = [
-        'http://image1.com',
-        'http://image2.com',
-        'http://image3.com'
-      ],
-      mockArticle = {
-        _id: 'asdf1234',
-        title: 'hello world',
-        bodyMain: '<p>dummy copy</p><div>something<h2>title</h2></div>',
-        mainImage: {
-          url: 'http://test.com/hi.jpg'
-        },
-        quotes:[
-          { copy: 'asdfasdf', author: 'rtrtrtrt' },
-          { copy: 'qweqweqwe', author: 'asdf' },
-          { copy: 'uiouio', author: 'nbvbnvbnvb' },
-          { copy: '123', author: 'dfdfdf' }
-        ],
-        createdAt: new Date(),
-        ticketsLink: 'http://test.com',
-        venueLink: 'http://test.com',
-        videoEmbed: 'http://youtube.com/something',
-        miniGalleryImages: mockMiniGalleryImages,
-        socialShare: {}
+    props,
+    mockMiniGalleryImages = [
+      'http://image1.com',
+      'http://image2.com',
+      'http://image3.com'
+    ],
+    mockArticle = {
+      _id: 'asdf1234',
+      title: 'hello world',
+      bodyMain: '<p>dummy copy</p><div>something<h2>title</h2></div>',
+      mainImage: {
+        url: 'http://test.com/hi.jpg'
       },
-      baseProps = {
-        onFetchNewsArticles: sinon.spy(),
-        onDeleteArticle: sinon.spy(),
-        // onDeleteScheduledArticle: sinon.spy(),
-        resetPromiseState: sinon.spy(),
-        onDestroyArticle: sinon.spy(),
-        onFetchArticle: sinon.spy(),
-        params: { id: 123 },
-        history: {
-          location: {
-            pathname: 'news/123456789'
-          }
-        },
-        match: {
-          params: {
-            id: 1234
-          }
-        },
-        article: mockArticle
-      };
-      props = baseProps;
+      quotes: [
+        { copy: 'asdfasdf', author: 'rtrtrtrt' },
+        { copy: 'qweqweqwe', author: 'asdf' },
+        { copy: 'uiouio', author: 'nbvbnvbnvb' },
+        { copy: '123', author: 'dfdfdf' }
+      ],
+      createdAt: new Date(),
+      ticketsLink: 'http://test.com',
+      venueLink: 'http://test.com',
+      videoEmbed: 'http://youtube.com/something',
+      miniGalleryImages: mockMiniGalleryImages,
+      socialShare: {}
+    },
+    baseProps = {
+      onFetchNewsArticles: sinon.spy(),
+      onDeleteArticle: sinon.spy(),
+      // onDeleteScheduledArticle: sinon.spy(),
+      resetPromiseState: sinon.spy(),
+      onDestroyArticle: sinon.spy(),
+      onFetchArticle: sinon.spy(),
+      params: { id: 123 },
+      history: {
+        location: {
+          pathname: 'news/123456789'
+        }
+      },
+      match: {
+        params: {
+          id: 1234
+        }
+      },
+      article: mockArticle
+    };
+  props = baseProps;
 
   describe('on componentWillUnmount', () => {
     let props,
-        wrapper;
+      wrapper;
     beforeEach(() => {
       props = {
         ...baseProps,
@@ -264,7 +260,7 @@ describe('(Component) News - Article', () => {
         wrapper = shallow(<Article {...props} />);
         const actualMiniGalleryImages = wrapper.containsMatchingElement(
           <a href={mockArticle.mainImage.externalLink}
-             target='_blank'>
+            target='_blank'>
             <img
               src={props.article.miniGalleryImages[0]}
               alt={`Fiona Ross - ${props.article.title}`}

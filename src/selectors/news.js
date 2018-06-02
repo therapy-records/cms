@@ -104,4 +104,3 @@ export const selectSelectedNewsArticleSocialShareHashtags = createSelector(
   selectSelectedNewsArticleSocialShare,
   (socialShare) => socialShare && socialShare.hashtags
 );
-

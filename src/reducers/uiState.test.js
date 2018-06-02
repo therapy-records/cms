@@ -1,7 +1,5 @@
 import 'core-js';
 
-
-
 import {
   initialState,
   promiseLoading,
@@ -15,7 +13,7 @@ import {
   UISTATE_PROMISE_SUCCESS,
   UISTATE_PROMISE_ERROR,
   UISTATE_PROMISE_SUCCESS_RESET
-} from  '../constants/actions';
+} from '../constants/actions';
 
 describe('(Redux Module) uiState', () => {
   it('Should export a constant UISTATE_PROMISE_LOADING', () => {

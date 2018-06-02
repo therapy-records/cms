@@ -1,7 +1,5 @@
 import 'core-js';
 
-
-
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { createEpicMiddleware } from 'redux-observable';
@@ -43,14 +41,12 @@ const mockState = {
 const store = mockStore(mockState, {});
 
 describe('epics', () => {
-
   afterEach(() => {
     nock.cleanAll();
     epicMiddleware.replaceEpic(rootEpic);
   });
 
   describe('authCheckEpic', () => {
-
     it(`should dispatch correct ${USER_AUTH_ERROR} action`, () => {
       const expectedActions = [
         { type: UISTATE_PROMISE_ERROR, payload: mockErrorResponse.response.status.toString() },
@@ -61,12 +57,11 @@ describe('epics', () => {
           }
         }
       ];
-    
+
       store.dispatch(promiseError(mockErrorResponse.response.status));
       const storeActions = store.getActions();
       expect(storeActions).to.deep.equal(expectedActions);
       store.clearActions();
-  
     });
   });
 });

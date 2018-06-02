@@ -31,24 +31,24 @@ export class LoginForm extends React.Component {
         <form onSubmit={this.onFormSubmit}>
 
           <Field name='username'
-                 component={TextInput}
-                 type='text'
-                 placeholder='Username'
-                 label='Username'
-                 validate={required}
-                 hideLabel
-                 autoFocus
+            component={TextInput}
+            type='text'
+            placeholder='Username'
+            label='Username'
+            validate={required}
+            hideLabel
+            autoFocus
           />
 
           <br />
 
           <Field name='password'
-                 component={TextInput}
-                 type='password'
-                 placeholder='Password'
-                 label='Password'
-                 validate={required}
-                 hideLabel
+            component={TextInput}
+            type='password'
+            placeholder='Password'
+            label='Password'
+            validate={required}
+            hideLabel
           />
 
           {error && <p className='form-error'>{error}</p>}

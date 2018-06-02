@@ -54,49 +54,49 @@ export class OtherWorkArticleForm extends React.Component {
           <div className='col-clear' />
 
           <Field name='title'
-                 component={TextInput}
-                 type='text'
-                 placeholder='Hello World'
-                 label='Title'
-                 validate={required} />
+            component={TextInput}
+            type='text'
+            placeholder='Hello World'
+            label='Title'
+            validate={required} />
 
           <br />
 
           <Field name='copy'
-                 component={TextInput}
-                 type='text'
-                 placeholder='Short excerpt'
-                 label='Copy'
-                 validate={required} />
+            component={TextInput}
+            type='text'
+            placeholder='Short excerpt'
+            label='Copy'
+            validate={required} />
 
           <br />
 
           <Field name='externalLink'
-                 component={TextInput}
-                 type='Link to article'
-                 label='Link to article'
-                 placeholder='http://bbc.co.uk/fiona-ross'
-                 validate={required} />
+            component={TextInput}
+            type='Link to article'
+            label='Link to article'
+            placeholder='http://bbc.co.uk/fiona-ross'
+            validate={required} />
 
           <br />
           <br />
 
           <Field name='mainImageUrl'
-                 component={DropzoneImageUpload}
-                 title='Main image'
-                 existingImage={formValues && formValues.mainImageUrl}
-                 validate={required}
-                 minImageDimensions={OTHER_WORK_ARTICLE_MIN_IMAGE_DIMENSIONS} />
+            component={DropzoneImageUpload}
+            title='Main image'
+            existingImage={formValues && formValues.mainImageUrl}
+            validate={required}
+            minImageDimensions={OTHER_WORK_ARTICLE_MIN_IMAGE_DIMENSIONS} />
 
           <br />
           <br />
           <br />
 
           <Field name='releaseDate'
-                 component={Datepicker}
-                 initTime={formValues && formValues.releaseDate}
-                 title='Release date'
-                 validate={required} />
+            component={Datepicker}
+            initTime={formValues && formValues.releaseDate}
+            title='Release date'
+            validate={required} />
 
           <br />
           <br />
@@ -118,9 +118,9 @@ export class OtherWorkArticleForm extends React.Component {
           <br />
 
           <button type='submit'
-                  className='btn-lg btn-submit'
-                  disabled={error || pristine || submitting || error || invalid}
-                  onClick={() => this.handleSubmit()}>Submit
+            className='btn-lg btn-submit'
+            disabled={error || pristine || submitting || error || invalid}
+            onClick={() => this.handleSubmit()}>Submit
           </button>
 
           <br />

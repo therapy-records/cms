@@ -56,7 +56,6 @@ describe('(Component) TextInput', () => {
     )
     expect(actual).to.eq(true);
   });
-  
 
   it('should render an error', () => {
     const mockErrMessage = 'required/missing/something';
@@ -71,5 +70,4 @@ describe('(Component) TextInput', () => {
     )
     expect(actual).to.eq(true);
   });
-
 });

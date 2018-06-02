@@ -1,16 +1,12 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 
-
-
 import Adapter from 'enzyme-adapter-react-15';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { News } from './index';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
-
-
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -22,12 +18,12 @@ const mockArticles = [
 
 describe('(Component) News - Home', () => {
   let wrapper,
-      props,
-      baseProps = {
-        onFetchNewsArticles: () => {},
-        onSetSelectedNewsArticle: () => {},
-        articles: mockArticles
-      };
+    props,
+    baseProps = {
+      onFetchNewsArticles: () => {},
+      onSetSelectedNewsArticle: () => {},
+      articles: mockArticles
+    };
 
   it('should render <LoadingSpinner />', () => {
     props = { ...baseProps, promiseLoading: true };
@@ -95,7 +91,6 @@ describe('(Component) News - Home', () => {
     });
   });
 
-  
   describe('when promiseLoading is false', () => {
     it('should render a page title', () => {
       const actual = wrapper.containsMatchingElement(

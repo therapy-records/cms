@@ -9,7 +9,7 @@ import {
 const authCheckEpic = (action$, store) => {
   return action$
     .filter(action =>
-        action.type === UISTATE_PROMISE_ERROR &&
+      action.type === UISTATE_PROMISE_ERROR &&
         action.payload === '401'
     )
     .mapTo(authError('401'));

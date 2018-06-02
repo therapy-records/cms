@@ -13,7 +13,7 @@ describe('(Component) ArticleLive', () => {
       mainImage: {
         url: 'http://something.png'
       },
-      quotes:[
+      quotes: [
         { copy: 'asdfasdf', author: 'rtrtrtrt' },
         { copy: 'qweqweqwe', author: 'asdf' },
         { copy: 'uiouio', author: 'nbvbnvbnvb' },
@@ -59,7 +59,7 @@ describe('(Component) ArticleLive', () => {
     const wrapper = shallow(<ArticleLive {...props} />);
     const actualMiniGalleryImages = wrapper.containsMatchingElement(
       <a href={props.article.mainImage.externalLink}
-         target='_blank'>
+        target='_blank'>
         <img
           src={props.article.miniGalleryImages[0]}
           alt={`Fiona Ross - ${props.article.title}`}

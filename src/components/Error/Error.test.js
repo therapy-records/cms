@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { expect } from 'chai';
 
-
 import { browserHistory } from 'react-router';
 import ErrorComponent from './Error'
 import Enzyme, { shallow } from 'enzyme';
@@ -31,5 +30,4 @@ describe('(Component) ErrorComponent', () => {
     );
     expect(actual).to.equal(true);
   });
-
 });

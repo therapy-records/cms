@@ -8,9 +8,9 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) PromiseError', () => {
   let wrapper,
-      props = {
-        message: 'fetching something'
-      }
+    props = {
+      message: 'fetching something'
+    }
 
   it('should render a message', () => {
     wrapper = shallow(

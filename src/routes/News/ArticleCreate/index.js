@@ -36,7 +36,7 @@ export class ArticleCreate extends React.Component {
           </div>
         }
 
-        {/*onSubmitFormQueue={this.props.onPostArticleQueue}*/}
+        {/* onSubmitFormQueue={this.props.onPostArticleQueue} */}
 
         {!promiseLoading && !promiseSuccess &&
           <NewsArticleForm

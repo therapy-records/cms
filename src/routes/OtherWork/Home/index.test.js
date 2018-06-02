@@ -1,16 +1,12 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 
-
-
 import Adapter from 'enzyme-adapter-react-15';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { OtherWork } from './index';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
-
-
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -28,7 +24,7 @@ const createOtherWorkArticles = (ids) => {
   return articles;
 }
 
-const mockOtherWorkArticles = createOtherWorkArticles([1,2,3]);
+const mockOtherWorkArticles = createOtherWorkArticles([1, 2, 3]);
 describe('(Component) OtherWork - Home', () => {
   let wrapper,
     props,
@@ -39,7 +35,7 @@ describe('(Component) OtherWork - Home', () => {
       resetPromiseState: sinon.spy(),
       onSetSelectedNewsArticle: sinon.spy()
     };
-    props = baseProps;
+  props = baseProps;
 
   it('should render <LoadingSpinner />', () => {
     wrapper = shallow(<OtherWork {...props} />);
@@ -63,15 +59,15 @@ describe('(Component) OtherWork - Home', () => {
         <li key={p._id} className='article-card'>
           <img src={p.mainImageUrl} />
           <div>
-          <div className='heading-with-btn'>
-            <h3>
-              <Link
-                to={`other-work/${p._id}`}
-              >{p.title}
-              </Link>
-            </h3>
-            {p.releaseDate && <p className='small-tab'>{moment(p.releaseDate).format('DD MMM YYYY')}</p>}
-          </div>
+            <div className='heading-with-btn'>
+              <h3>
+                <Link
+                  to={`other-work/${p._id}`}
+                >{p.title}
+                </Link>
+              </h3>
+              {p.releaseDate && <p className='small-tab'>{moment(p.releaseDate).format('DD MMM YYYY')}</p>}
+            </div>
 
             <p>Links to: {p.externalLink}</p>
 
@@ -124,7 +120,6 @@ describe('(Component) OtherWork - Home', () => {
       expect(_props.onSetSelectedOtherWorkArticle).to.have.been.calledWith(expectedArticle);
     });
   });
-
 
   describe('when promiseLoading is false', () => {
     it('should render a page title', () => {

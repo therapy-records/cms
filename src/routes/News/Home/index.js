@@ -24,7 +24,7 @@ export class News extends React.Component {
     //   this.props.onFetchNewsQueueArticles();
     // }
     if (this.props.articles === null) {
-        this.props.onFetchNewsArticles();
+      this.props.onFetchNewsArticles();
     }
   }
 
@@ -163,7 +163,6 @@ News.propTypes = {
   combinedArticles: PropTypes.array,
   resetPromiseState: PropTypes.func
 }
-
 
 const mapDispatchToProps = {
   onFetchNewsArticles: () => fetchNewsArticles(),

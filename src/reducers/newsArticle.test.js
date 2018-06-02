@@ -1,7 +1,5 @@
 import 'core-js';
 
-
-
 import axios from 'axios';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
@@ -84,7 +82,6 @@ const mockErrorResponse = {
 const store = mockStore(mockState);
 
 describe('(Redux Module) newsArticle', () => {
-
   it('should export a constant SET_SELECTED_NEWS_ARTICLE', () => {
     expect(SET_SELECTED_NEWS_ARTICLE).to.equal('SET_SELECTED_NEWS_ARTICLE')
   });
@@ -112,7 +109,6 @@ describe('(Redux Module) newsArticle', () => {
   // it('should export a constant DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR', () => {
   //   expect(DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR).to.equal('DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR')
   // });
-
 
   describe('(Reducer)', () => {
     it('should be a function', () => {
@@ -142,7 +138,6 @@ describe('(Redux Module) newsArticle', () => {
       const mockData = { title: 'something' };
       expect(selectedNewsArticle(mockData)).to.have.property('payload', mockData);
     });
-
 
     it('should update state', () => {
       const mockData1 = { title: 'hello', imageUrl: 'aurl' };
@@ -190,7 +185,6 @@ describe('(Redux Module) newsArticle', () => {
       const mockData = { title: 'something' };
       expect(deleteSuccess(mockData)).to.have.property('payload', mockData);
     });
-
 
     it('should update state', () => {
       const mockData = { title: 'hello', imageUrl: 'aurl' };
@@ -279,11 +273,9 @@ describe('(Redux Module) newsArticle', () => {
       let state = newsArticleReducer(mockState, destroySelectedNewsArticle());
       expect(state).to.deep.eq({selectedNewsArticle: {}});
     });
-
   });
 
   describe('(Thunk) fetchSingleNewsArticle', () => {
-
     afterEach(() => {
       nock.cleanAll();
     });

@@ -42,7 +42,7 @@ class ArticleCreate extends React.Component {
             onSubmitForm={this.props.onPostArticle}
             location={location}
           />
-      }
+        }
 
       </div>
     )

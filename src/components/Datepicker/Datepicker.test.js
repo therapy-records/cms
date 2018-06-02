@@ -1,32 +1,28 @@
 import React from 'react'
 
-
-
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import InputMoment from 'input-moment';
 import moment from 'moment';
 import Datepicker from './Datepicker';
 
-
-
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) Datepicker', () => {
   let wrapper,
-      props = {
-        meta: {
-          touched: false,
-          error: false
-        },
-        input: {
-          onChange: () => {}
-        },
-        initTime: moment.now(),
-        title: 'my datepicker',
-        titleSub: 'all the things',
-        titleSub2: 'testing'
-      };
+    props = {
+      meta: {
+        touched: false,
+        error: false
+      },
+      input: {
+        onChange: () => {}
+      },
+      initTime: moment.now(),
+      title: 'my datepicker',
+      titleSub: 'all the things',
+      titleSub2: 'testing'
+    };
 
   beforeEach(() => {
     wrapper = shallow(<Datepicker {...props} />)
@@ -105,7 +101,6 @@ describe('(Component) Datepicker', () => {
         wrapper.instance().handleChange('test');
         expect(onChangeSpy).have.been.calledOnce;
       });
-
     });
   });
 });

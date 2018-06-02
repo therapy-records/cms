@@ -1,7 +1,5 @@
 import 'core-js';
 
-
-
 import axios from 'axios';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
@@ -67,7 +65,7 @@ const mock = {
       { title: 'do something else' }
     ]
   },
-  newsArticle: mockNewsArticle,
+  newsArticle: mockNewsArticle
   // newsArticleQueue: mockNewsArticleQueue
 };
 

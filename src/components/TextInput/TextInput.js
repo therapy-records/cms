@@ -14,7 +14,6 @@ const textInput = ({ input, label, placeholder, hideLabel, autoFocus, type, meta
   </div>
 );
 
-
 textInput.propTypes = {
   input: PropTypes.object.isRequired,
   label: PropTypes.string.isRequired,

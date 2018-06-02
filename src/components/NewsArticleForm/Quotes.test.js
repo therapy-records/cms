@@ -9,16 +9,16 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) Quotes', () => {
   let wrapper,
-      props = {
-        input: {
-        }
-      },
-      mockInputValue = [
-        { copy: 'asdfasdf', author: 'rtrtrtrt' },
-        { copy: 'qweqweqwe', author: 'asdf' },
-        { copy: 'uiouio', author: 'nbvbnvbnvb' },
-        { copy: '123', author: 'dfdfdf' }
-      ];
+    props = {
+      input: {
+      }
+    },
+    mockInputValue = [
+      { copy: 'asdfasdf', author: 'rtrtrtrt' },
+      { copy: 'qweqweqwe', author: 'asdf' },
+      { copy: 'uiouio', author: 'nbvbnvbnvb' },
+      { copy: '123', author: 'dfdfdf' }
+    ];
 
   beforeEach(() => {
     wrapper = shallow(

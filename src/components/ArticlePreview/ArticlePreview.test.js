@@ -1,7 +1,5 @@
 import React from 'react'
 
-
-
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import ConnectedArticlePreview, { ArticlePreview } from './ArticlePreview'
@@ -9,8 +7,6 @@ import ArticleLive from '../ArticleLive/ArticleLive'
 import { ModalContainer, ModalDialog } from 'react-modal-dialog';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
-
-
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -30,13 +26,12 @@ const mockStore = configMockStore(mockState, mockDispatch);
 
 describe('(Component) ArticlePreview', () => {
   let wrapper,
-      props = {
-        article: {
-          title: 'asdfasdfasdf',
-          mainImageUrl: 'http://something.png'
-        }
-      };
-
+    props = {
+      article: {
+        title: 'asdfasdfasdf',
+        mainImageUrl: 'http://something.png'
+      }
+    };
 
   beforeEach(() => {
     wrapper = shallow(<ArticlePreview {...props} />);
@@ -74,7 +69,6 @@ describe('(Component) ArticlePreview', () => {
   });
 
   describe('methods', () => {
-    
     describe('handleModalOpen', () => {
       it('should set isShowingModal to true', () => {
         let currentState = wrapper.instance().state;
@@ -99,7 +93,6 @@ describe('(Component) ArticlePreview', () => {
         expect(currentState.isShowingModal).to.eq(false);
       });
     });
-
   });
 
   describe('ConnectedArticlePreview', () => {
@@ -111,5 +104,4 @@ describe('(Component) ArticlePreview', () => {
       expect(connectedArticlePreview.prop('disabled')).to.eq(true);
     });
   });
-
 });

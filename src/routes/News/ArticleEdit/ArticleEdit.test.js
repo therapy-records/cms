@@ -1,7 +1,5 @@
 import React from 'react'
 
-
-
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import { Link } from 'react-router-dom';
@@ -9,22 +7,20 @@ import { ArticleEdit } from './index';
 import NewsArticleForm from '../../../components/NewsArticleForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
-
-
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) News - ArticleEdit', () => {
   let wrapper,
-      props,
-      baseProps = {
-        onEditArticle: () => {},
-        // onEditArticleQueue: () => {},
-        resetPromiseState: () => {},
-        article: { title: 'test' },
-        location: {
-          pathname: 'article/edit'
-        }
-      };
+    props,
+    baseProps = {
+      onEditArticle: () => {},
+      // onEditArticleQueue: () => {},
+      resetPromiseState: () => {},
+      article: { title: 'test' },
+      location: {
+        pathname: 'article/edit'
+      }
+    };
 
   it('should call onDestroyArticle on componentWillUnmount', () => {
     let props = baseProps;

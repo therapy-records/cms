@@ -1,7 +1,5 @@
 import React from 'react'
 
-
-
 import { Field } from 'redux-form';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
@@ -10,15 +8,13 @@ import TextInput from '../../components/TextInput';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import { required } from '../../utils/form';
 
-
-
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) LoginForm', () => {
   let wrapper,
-      props = {
-        onSubmit: () => {}
-      };
+    props = {
+      onSubmit: () => {}
+    };
 
   beforeEach(() => {
     wrapper = shallow(<LoginForm {...props} />);
@@ -39,10 +35,10 @@ describe('(Component) LoginForm', () => {
   it('should render a username field', () => {
     const actual = wrapper.containsMatchingElement(
       <Field name='username'
-             component={TextInput}
-             type='text'
-             placeholder='Username'
-             validate={required} />
+        component={TextInput}
+        type='text'
+        placeholder='Username'
+        validate={required} />
     );
     expect(actual).to.equal(true);
   });
@@ -50,10 +46,10 @@ describe('(Component) LoginForm', () => {
   it('should render a password field', () => {
     const actual = wrapper.containsMatchingElement(
       <Field name='password'
-             component={TextInput}
-             type='password'
-             placeholder='Password'
-             validate={required} />
+        component={TextInput}
+        type='password'
+        placeholder='Password'
+        validate={required} />
     );
     expect(actual).to.equal(true);
   });

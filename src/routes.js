@@ -28,7 +28,7 @@ export class Router extends Component {
       <BrowserRouter>
         <div>
 
-        <div className="main-container">
+          <div className="main-container">
 
             <div className='col-first'>
               <Sidebar />

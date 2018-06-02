@@ -8,10 +8,10 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) News - ArticleDeleteModal', () => {
   let wrapper,
-      props = {
-        handleModalClose: () => {},
-        onDeleteArticle: () => {}
-      }
+    props = {
+      handleModalClose: () => {},
+      onDeleteArticle: () => {}
+    }
 
   it('should render <ModalContainer />', () => {
     wrapper = shallow(<ArticleDeleteModal {...props} />);

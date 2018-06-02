@@ -97,8 +97,8 @@ export const actions = {
 // ------------------------------------
 /* eslint-disable no-return-assign */
 const ACTION_HANDLERS = {
-  [USER_AUTH_SUCCESS] : (state, action) => state = action.payload,
-  [USER_AUTH_ERROR] : (state, action) => state = action.payload
+  [USER_AUTH_SUCCESS]: (state, action) => state = action.payload,
+  [USER_AUTH_ERROR]: (state, action) => state = action.payload
 }
 /* eslint-enable no-return-assign */
 

@@ -41,7 +41,7 @@ export class DropzoneImageUpload extends React.Component {
     const { minImageDimensions } = this.props;
     if (width >= minImageDimensions.width &&
        height >= minImageDimensions.height) {
-          return true;
+      return true;
     }
     return false;
   }
@@ -53,13 +53,11 @@ export class DropzoneImageUpload extends React.Component {
       isLoading: true
     });
     let upload = request.post(CLOUDINARY_UPLOAD_URL)
-                        .field('upload_preset', CLOUDINARY_UPLOAD_PRESET_ID)
-                        .field('file', file);
+      .field('upload_preset', CLOUDINARY_UPLOAD_PRESET_ID)
+      .field('file', file);
     upload.end((err, response) => {
       if (response.body.secure_url !== '') {
-        
         if (this.validMinimumImageDimensions(response.body)) {
-         
           if (this.props.multiple === true) {
             this.setState({
               items: [
@@ -76,7 +74,6 @@ export class DropzoneImageUpload extends React.Component {
             });
             this.props.input.onChange(this.state.singleItem);
           }
-
         } else {
           const message = {
             tooSmall: `Image too small (width: ${response.body.width} height: ${response.body.height})`,
@@ -134,23 +131,23 @@ export class DropzoneImageUpload extends React.Component {
               activeClassName='dropzone-active'
               multiple={multiple}
             >
-              {(!multiple && !items.length) ?
-                <div className='dropzone-cta'>
+              {(!multiple && !items.length)
+                ? <div className='dropzone-cta'>
                   <span>Drag &amp; drop image</span>
                   <div className={isLoading ? 'dropzone-loading dropzone-loading-active' : 'dropzone-loading'}>
                     <LoadingSpinner />
                   </div>
                 </div>
-              : null}
+                : null}
 
-              {multiple ?
-                <div className='dropzone-cta'>
+              {multiple
+                ? <div className='dropzone-cta'>
                   <span>Drag &amp; drop  multiple images</span>
                   <div className={isLoading ? 'dropzone-loading dropzone-loading-active' : 'dropzone-loading'}>
                     <LoadingSpinner />
                   </div>
                 </div>
-              : null}
+                : null}
 
               {singleItem && <img src={singleItem} alt='Upload preview' />}
 
@@ -166,8 +163,8 @@ export class DropzoneImageUpload extends React.Component {
 
           </div>
 
-          {invalidDimensions.length ?
-            <ul className="dropzone-dimensions-messages">
+          {invalidDimensions.length
+            ? <ul className="dropzone-dimensions-messages">
               {invalidDimensions.map((message, index) =>
                 <li
                   key={index}
@@ -177,19 +174,19 @@ export class DropzoneImageUpload extends React.Component {
                 </li>
               )}
             </ul>
-          : null}
+            : null}
 
           {multiple &&
             <div className='col-2 gallery-images-col-2'>
-              {(multiple && items && items.length) ?
-                <ul className='flex-root gallery-images-flex-root'>
+              {(multiple && items && items.length)
+                ? <ul className='flex-root gallery-images-flex-root'>
                   {items.map((i) => (
                     <li key={i} className='col-50 no-list-style gallery-image-upload-item'>
                       <img src={i} alt={`gallery item ${i + 1}`} />
                     </li>
                   ))}
                 </ul>
-              : null}
+                : null}
             </div>
           }
 

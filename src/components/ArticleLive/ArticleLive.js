@@ -30,8 +30,8 @@ class ArticleLive extends React.Component {
 
         <br />
 
-        {article.quotes ?
-          <div>
+        {article.quotes
+          ? <div>
             <ul>
               {article.quotes.map((q) =>
                 <li key={q.author}>
@@ -40,29 +40,29 @@ class ArticleLive extends React.Component {
               )}
             </ul>
           </div>
-        : null}
+          : null}
 
         <br />
 
         <div className='cols-container'>
 
-          {article.mainImage.url ?
-            <div>
-              {article.mainImage && article.mainImage.externalLink ?
-                <a href={article.mainImage.externalLink}
+          {article.mainImage.url
+            ? <div>
+              {article.mainImage && article.mainImage.externalLink
+                ? <a href={article.mainImage.externalLink}
                   target='_blank'>
                   <img
                     src={article.mainImage.url}
                     alt={`Fiona Ross - ${article.title}`}
                   />
                 </a>
-              : <img
+                : <img
                   src={article.mainImage.url}
                   alt={`Fiona Ross - ${article.title}`}
                 />
               }
             </div>
-          : null}
+            : null}
 
           {article.secondaryImageUrl &&
             <div>
@@ -78,8 +78,8 @@ class ArticleLive extends React.Component {
         <br />
         <br />
 
-        {articleHasMiniGalleryImages ?
-          <div>
+        {articleHasMiniGalleryImages
+          ? <div>
             <p><i>Images to display as a gallery when live</i></p>
             <ul className='article-gallery-flex-root'>
               {article.miniGalleryImages.map((i) => (
@@ -89,7 +89,7 @@ class ArticleLive extends React.Component {
               ))}
             </ul>
           </div>
-        : null}
+          : null}
 
         <br />
         <br />

@@ -41,16 +41,16 @@ export const resetPromiseState = () => {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [UISTATE_PROMISE_LOADING] : (state, action) => {
+  [UISTATE_PROMISE_LOADING]: (state, action) => {
     return { ...state, promiseLoading: action.payload }
   },
-  [UISTATE_PROMISE_SUCCESS] : (state, action) => {
+  [UISTATE_PROMISE_SUCCESS]: (state, action) => {
     return { ...state, promiseSuccess: action.payload }
   },
-  [UISTATE_PROMISE_ERROR] : (state, action) => {
+  [UISTATE_PROMISE_ERROR]: (state, action) => {
     return { ...state, promiseError: action.payload }
   },
-  [UISTATE_PROMISE_SUCCESS_RESET] : (state, action) => {
+  [UISTATE_PROMISE_SUCCESS_RESET]: (state, action) => {
     return { ...state, promiseSuccess: action.payload }
   }
 }

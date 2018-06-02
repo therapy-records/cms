@@ -22,11 +22,11 @@ class ProtectedRoute extends React.PureComponent {
         isAuth ? (
           <Component {...props} />
         ) : (
-            <Redirect to={{
-              pathname: '/',
-              state: { from: props.location }
-            }} />
-          )
+          <Redirect to={{
+            pathname: '/',
+            state: { from: props.location }
+          }} />
+        )
       )} />
     )
   }

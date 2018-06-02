@@ -15,10 +15,17 @@ export class ArticlePreview extends React.Component {
     this.state = {
       isShowingModal: false
     }
+    this.handleModalOpen = this.handleModalOpen.bind(this);
+    this.handleModalClose = this.handleModalClose.bind(this);
   }
 
-  handleModalOpen = () => this.setState({ isShowingModal: true })
-  handleModalClose = () => this.setState({ isShowingModal: false })
+  handleModalOpen() {
+    this.setState({ isShowingModal: true })
+  }
+
+  handleModalClose() {
+    this.setState({ isShowingModal: false })
+  }
 
   render() {
     const {

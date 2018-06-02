@@ -1,13 +1,9 @@
 import React from 'react'
 
-
-
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import { Home } from './index'
 import LoadingSpinner from '../../components/LoadingSpinner';
-
-
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -20,7 +16,6 @@ describe('(Component) Home', () => {
     history: []
   };
   let props = baseProps;
-
 
   describe('when isAuth is null', () => {
     beforeEach(() => {
@@ -50,7 +45,6 @@ describe('(Component) Home', () => {
       const reduxFormIsAuth = reduxForm.prop('isAuth');
       expect(reduxFormIsAuth).to.be.false;
     });
-
   });
 
   describe('when isAuth', () => {
@@ -125,7 +119,6 @@ describe('(Component) Home', () => {
           expect(lastHistoryObj.pathname).to.eq('/dashboard');
         });
       });
-
     });
   });
 });

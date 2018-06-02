@@ -58,7 +58,7 @@ export class ArticleEdit extends React.Component {
             <hr />
             <br />
             <br />
-            {/*onSubmitFormQueue={() => this.props.onEditArticleQueue(article)}*/}
+            {/* onSubmitFormQueue={() => this.props.onEditArticleQueue(article)} */}
             <NewsArticleForm
               onSubmitForm={() => this.props.onEditArticle(article)}
               location={location}
