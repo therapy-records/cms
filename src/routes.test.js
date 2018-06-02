@@ -1,7 +1,7 @@
 import React from 'react'
-import chai, { expect } from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
+
+
+
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import { Route } from 'react-router-dom';
@@ -23,7 +23,7 @@ import OtherWorkArticleEdit from './routes/OtherWork/ArticleEdit';
 import OtherWorkArticleCreate from './routes/OtherWork/ArticleCreate';
 import { authCheck } from './actions/auth';
 
-chai.use(sinonChai);
+
 
 Enzyme.configure({ adapter: new Adapter() });
 

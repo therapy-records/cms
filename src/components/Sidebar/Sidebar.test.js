@@ -1,13 +1,13 @@
 import React from 'react'
-import chai, { expect } from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
+
+
+
 import { Sidebar } from './Sidebar'
 import { NavLink } from 'react-router-dom'
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 
-chai.use(sinonChai);
+
 
 Enzyme.configure({ adapter: new Adapter() });
 

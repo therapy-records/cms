@@ -1,13 +1,13 @@
 import React from 'react'
-import chai, { expect } from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
+
+
+
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import { Home } from './index'
 import LoadingSpinner from '../../components/LoadingSpinner';
 
-chai.use(sinonChai);
+
 
 Enzyme.configure({ adapter: new Adapter() });
 

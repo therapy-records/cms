@@ -1,8 +1,8 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
-import chai, { expect } from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
+
+
+
 import Adapter from 'enzyme-adapter-react-15';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
@@ -10,7 +10,7 @@ import { OtherWork } from './index';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
 
-chai.use(sinonChai);
+
 
 Enzyme.configure({ adapter: new Adapter() });
 

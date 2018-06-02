@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { expect } from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
+
+
 import { browserHistory } from 'react-router';
 import ErrorComponent from './Error'
 import Enzyme, { shallow } from 'enzyme';

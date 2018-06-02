@@ -1,6 +1,6 @@
-import chai, { expect } from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
+
+
+
 
 import {
   selectNewsArticles,
@@ -24,7 +24,7 @@ import {
   selectSelectedNewsArticleSocialShareHashtags
 } from './news';
 
-chai.use(sinonChai);
+
 
 const mockArticles = [
   {

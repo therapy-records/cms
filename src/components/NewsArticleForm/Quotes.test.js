@@ -1,6 +1,6 @@
 import React from 'react';
 import { expect } from 'chai';
-import sinon from 'sinon';
+
 import Quotes from './Quotes';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';

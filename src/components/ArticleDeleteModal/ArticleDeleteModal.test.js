@@ -1,13 +1,8 @@
 import React from 'react'
-import chai, { expect } from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
 import ArticleDeleteModal from './ArticleDeleteModal'
 import { ModalContainer, ModalDialog } from 'react-modal-dialog';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
-
-chai.use(sinonChai);
 
 Enzyme.configure({ adapter: new Adapter() });
 
