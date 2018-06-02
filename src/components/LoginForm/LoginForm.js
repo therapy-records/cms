@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import LoadingSpinner from '../LoadingSpinner';
 import TextInput from '../TextInput';
-
-export const required = value => value ? undefined : 'required';
+import { required } from '../../utils/form';
 
 export class LoginForm extends React.Component {
   onFormSubmit(ev) {

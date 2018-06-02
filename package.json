@@ -129,6 +129,7 @@
     },
     "coveragePathIgnorePatterns": [
       "src/index.js",
+      "src/store.js",
       "src/registerServiceWorker.js",
       "src/components/ProtectedRoute"
     ]

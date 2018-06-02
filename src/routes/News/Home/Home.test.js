@@ -15,9 +15,9 @@ chai.use(sinonChai);
 Enzyme.configure({ adapter: new Adapter() });
 
 const mockArticles = [
-  { title: 'test 1', _id: 'asd123' },
-  { title: 'test 2', _id: 'asd124' },
-  { title: 'test 3', _id: 'asd125' }
+  { title: 'test 1', _id: 'asd123', createdAt: new Date() },
+  { title: 'test 2', _id: 'asd124', createdAt: new Date() },
+  { title: 'test 3', _id: 'asd125', createdAt: new Date() }
 ];
 
 describe('(Component) News - Home', () => {
@@ -51,8 +51,8 @@ describe('(Component) News - Home', () => {
           <img />
           <div>
             <div className='heading-with-btn'>
-              {p.createdAt && <p className='small-tab'>{moment(p.createdAt).fromNow()}</p>}
               <h3><Link to={`news/${p._id}`}>{p.title}</Link></h3>
+              {p.createdAt && <p className='small-tab'>{moment(p.createdAt).fromNow()}</p>}
             </div>
             <Link to={`news/${p._id}`} className='btn btn-sm'>View</Link>
             <Link to={`news/${p._id}/edit`} className='btn btn-sm'>Edit</Link>

@@ -1,3 +1,3 @@
-import PromiseError from './PromiseError';
+import EmptyArticlesMessage from './EmptyArticlesMessage';
 
-export default PromiseError;
+export default EmptyArticlesMessage;

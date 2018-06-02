@@ -5,9 +5,10 @@ import sinonChai from 'sinon-chai';
 import { Field } from 'redux-form';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
-import { LoginForm, required } from './LoginForm';
+import { LoginForm } from './LoginForm';
 import TextInput from '../../components/TextInput';
 import LoadingSpinner from '../../components/LoadingSpinner';
+import { required } from '../../utils/form';
 
 chai.use(sinonChai);
 
@@ -122,21 +123,6 @@ describe('(Component) LoginForm', () => {
       }
       wrapper.instance().onFormSubmit(mockEv);
       expect(prevDefaultSpy).to.have.been.calledOnce;
-    });
-  });
-
-  describe('required', () => {
-    describe('when there is a value', () => {
-      it('should return undefined string', () => {
-        const result = required('a');
-        expect(result).to.eq(undefined);
-      });
-    });
-    describe('when there is a value', () => {
-      it('should return undefined', () => {
-        const result = required('');
-        expect(result).to.eq('required');
-      });
     });
   });
 });
