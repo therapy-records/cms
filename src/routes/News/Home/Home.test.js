@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { News } from './index';
 import LoadingSpinner from '../../../components/LoadingSpinner';
+import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
 
 chai.use(sinonChai);
 
@@ -124,7 +125,7 @@ describe('(Component) News - Home', () => {
         />
       );
       const actual = wrapper.containsMatchingElement(
-        <p>No articles yet. <Link to='news/create'>Create an article</Link></p>
+        <EmptyArticlesMessage type='news' />
       );
       expect(actual).to.equal(true);
     });

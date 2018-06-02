@@ -12,6 +12,7 @@ import {
   // selectNewsArticlesQueueReverse
 } from '../../../selectors/news';
 import LoadingSpinner from '../../../components/LoadingSpinner';
+import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
 
 const dateIsBefore = (a, b) => {
   return new Date(b.createdAt) - new Date(a.createdAt)
@@ -48,7 +49,7 @@ export class News extends React.Component {
     this.props.onSetSelectedNewsArticle(postObj);
   }
 
-  renderPost(p) {
+  renderArticle(p) {
     const articleImg = () => {
       if (p.mainImage && p.mainImage.url) {
         return p.mainImage.url;
@@ -134,13 +135,13 @@ export class News extends React.Component {
               hasCombinedArticles ? (
                 <div>
                   <ul>
-                    {_combinedArticles.map((p) => this.renderPost(p))}
+                    {_combinedArticles.map((p) => this.renderArticle(p))}
                   </ul>
 
                 </div>
               ) : (
                 <div>
-                  <p>No articles yet. <Link to='news/create'>Create an article</Link></p>
+                  <EmptyArticlesMessage type='news' />
                 </div>
               )
             }

@@ -8,6 +8,7 @@ import { setSelectedOtherWorkArticle } from '../../../reducers/otherWorkArticle'
 import { resetPromiseState } from '../../../reducers/uiState';
 import { selectOtherWorkArticles } from '../../../selectors/otherWork'
 import LoadingSpinner from '../../../components/LoadingSpinner';
+import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
 
 class OtherWorkHome extends React.Component {
   componentWillMount() {
@@ -96,7 +97,7 @@ class OtherWorkHome extends React.Component {
               </div>
             : (
               <div>
-                <p>No articles yet. <Link to='other-work/create'>Create an article</Link></p>
+                <EmptyArticlesMessage type='other-work' />
               </div>
             )}
           </div>
