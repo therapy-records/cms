@@ -25,6 +25,17 @@ body {
   box-sizing: inherit;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
 .container,
 .main-container,
 .main-container-inner {
@@ -116,6 +127,9 @@ textarea {
   -moz-appearance: none;
   border: solid 1px #b7b7b7;
   font-size: 1em;
+  &:focus {
+    outline: auto 3px #AFAFAF;
+  }
 }
 
 .form-error {
@@ -139,6 +153,14 @@ button[disabled] {
 }
 
 button,
+.btn,
+a {
+  &:focus {
+    outline: auto 3px #AFAFAF;
+  }
+}
+
+button,
 .btn {
   border: 0 none;
   display: inline-block;
@@ -152,7 +174,7 @@ button,
   text-decoration: none;
   appearance: none;
   cursor: pointer;
-  transition:all 0.3s ease;
+  transition: all .3s ease;
   font-family: $font-main;
   text-align: center;
   @media(min-width: 600px) {
@@ -175,6 +197,27 @@ button,
     }  
   }
 
+}
+
+.btn-burger {
+  background: none;
+  color: #000;
+  font-size: 1.5em;
+  padding: .5em;
+  transition: all .6s ease;
+  width: auto;
+  &:hover,
+  &:focus,
+  &.active {
+    color: #000;
+    background: none;
+  }
+  &:focus,
+  &.active {
+    outline: 0 none;
+    opacity: .2;
+    transform: rotate(360deg);
+  }
 }
 
 .btn-sm {
@@ -212,9 +255,6 @@ button[disabled] {
 
 a {
   color: $color-blue-2;
-  &:visited {
-    
-  }
   &:hover,
   &:focus {
     color: $color-blue-1;
@@ -431,11 +471,6 @@ iframe {
     @media(min-width: 600px) {
       width: auto;
     }
-  }
-  .btn:hover,
-  .btn:focus {
-    color: #FFF;
-    text-decoration: underline;
   }
 }
 

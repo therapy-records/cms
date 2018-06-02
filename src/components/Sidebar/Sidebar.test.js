@@ -125,7 +125,46 @@ describe('(Component) Sidebar', () => {
       });
     });
   });
+
+  it('should render an overlay', () => {
+    const actual = wrapper.containsMatchingElement(
+      <div
+        className='sidebar-overlay'
+        onClick={wrapper.instance().toggleSidebar}
+      />
+    );
+    expect(actual).to.eq(true);
+  });
+
+
+  describe('burger button', () => {
+    it('should be rendered', () => {
+      const actual = wrapper.containsMatchingElement(
+        <button
+          onClick={wrapper.instance().toggleSidebar}
+          className='btn-burger'
+        >
+          &#9776;
+            <span className='sr-only'>Open Menu</span>
+        </button>
+      );
+      expect(actual).to.eq(true);
+    });
+  });
  
+
+  describe('close button', () => {
+    it('should be rendered', () => {
+      const actual = wrapper.containsMatchingElement(
+        <button
+          onClick={wrapper.instance().toggleSidebar}
+          className='btn-close'
+        >x</button>
+      );
+      expect(actual).to.eq(true);
+    });
+  });
+
   describe('nav items', () => {
     it('should render a link to dashboard', () => {
       const actual = wrapper.containsMatchingElement(
@@ -165,7 +204,7 @@ describe('(Component) Sidebar', () => {
 
   });
   
-  describe('logout link', () => {
+  describe('logout button', () => {
     beforeEach(() => {
       props.location.pathname = '/test';
       wrapper = shallow(<Sidebar {...props} />)

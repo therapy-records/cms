@@ -46,7 +46,6 @@ export class Sidebar extends React.PureComponent {
     } = this.state;
 
     const isHomeRoute = location.pathname === '/';
-    let sidebarClassName = 'sidebar';
 
     const isLargeScreen = windowWidth >= 768;
 
@@ -54,23 +53,37 @@ export class Sidebar extends React.PureComponent {
                      (!isHomeRoute && isLargeScreen) ||
                      (!isHomeRoute && isOpen);
 
-    if (isActive) {
+    let sidebarClassName = 'sidebar';
+
+    if (isActive && !isLargeScreen) {
+      sidebarClassName = 'sidebar sidebar-active sidebar-box-shadow';
+    } else if (isActive) {
       sidebarClassName = 'sidebar sidebar-active';
     }
 
     return (
       <div>
+
+        <div
+          className={(isActive && !isLargeScreen) ? 'sidebar-overlay active' : 'sidebar-overlay'}
+          onClick={this.toggleSidebar}
+        />
+
         <button
-          onClick={this.toggleSidebar}>
-          open
+          onClick={this.toggleSidebar}
+          className={isActive ? 'btn-burger active' : 'btn-burger'}
+        >
+          &#9776;
+          <span className='sr-only'>Open Menu</span>
         </button>
+
         <aside className={sidebarClassName}>
 
           <button
-            onClick={this.toggleSidebar}>
-            close
+            onClick={this.toggleSidebar}
+            className='btn-close'
+          >x
           </button>
-
 
           <h1>
             <NavLink to='/'>FR-CMS</NavLink>
