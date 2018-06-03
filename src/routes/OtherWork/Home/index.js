@@ -91,7 +91,7 @@ export class OtherWork extends React.Component {
 
             {hasArticles
               ? <div>
-                <ul>
+                <ul className='cancel-margin'>
                   {articles.map((p) => this.renderArticle(p))}
                 </ul>
               </div>

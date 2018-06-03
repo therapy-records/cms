@@ -59,7 +59,7 @@ export class Quotes extends React.Component {
     return (
       <div>
         <h5>Quotes</h5>
-        <ul>
+        <ul className='cancel-margin'>
           {items.map((i, index) => {
             return (
               <li key={index} className='quotes-list-item'>

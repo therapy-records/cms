@@ -27,6 +27,7 @@ class _RichTextEditor extends React.Component {
     return (
       <RichTextEditor
         value={this.state.value}
+        placeholder='It was an honour to...'
         onChange={this.onChange} />
     );
   }

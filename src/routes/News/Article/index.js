@@ -128,6 +128,11 @@ export class Article extends React.Component {
               <div className='heading-with-btn'>
                 <h2>{article.title}</h2>
                 <p className='small-tab'>{moment(article.createdAt).fromNow()}</p>
+                {article.editedAt &&
+                  <p>Last modified {moment(article.editedAt).fromNow()}
+                    <small>{moment(article.editedAt).format('DD/mm/YYYY')}</small>
+                  </p>
+                }
               </div>
 
               <div className='action-btns'>
@@ -142,34 +147,29 @@ export class Article extends React.Component {
                 >Edit
                 </Link>
               </div>
-
             </div>
 
-            {article.editedAt &&
-              <p>Last modified {moment(article.editedAt).fromNow()}
-                <small>{moment(article.editedAt).format('DD/mm/YYYY')}</small>
-              </p>
+            {article.bodyMain &&
+              <div className='row-large'>
+                <div dangerouslySetInnerHTML={this.renderHtml(article.bodyMain)} />
+              </div>
             }
 
-              <div dangerouslySetInnerHTML={this.renderHtml(article.bodyMain)} />
+            {article.quotes.length ?
+              <div className='row-large'>
+                <ul className='cancel-margin'>
+                  {article.quotes.map((q) =>
+                    <li key={q.author}>
+                      <i>&quot;{q.copy}&quot;</i> - {q.author}
+                    </li>
+                  )}
+                </ul>
+              </div>
+            : null}
 
-              <br />
 
-              {article.quotes ?
-                <div>
-                  <ul>
-                    {article.quotes.map((q) =>
-                      <li key={q.author}>
-                        <i>&quot;{q.copy}&quot;</i> - {q.author}
-                      </li>
-                    )}
-                  </ul>
-                </div>
-              : null}
-
-              <br />
-
-              <div className='cols-container'>
+            {(articleHasImages || article.secondaryImageUrl) &&
+              <div className='row-large cols-container'>
 
                 {articleHasImages ?
                   <div>
@@ -181,12 +181,12 @@ export class Article extends React.Component {
                           alt={`Fiona Ross - ${article.title}`}
                         />
                       </a>
-                    : <img
+                      : <img
                         src={articleImg()}
                         alt={`Fiona Ross - ${article.title}`}
                       />}
                   </div>
-                : null}
+                  : null}
 
                 {article.secondaryImageUrl &&
                   <div>
@@ -196,51 +196,54 @@ export class Article extends React.Component {
                     />
                   </div>
                 }
+              </div>
+            }
+
+            {article.ticketsLink ||
+             article.venueLink ||
+             article.videoEmbed ||
+             articleHasHashtags ?
+              <div className='row-large'>
+                {article.ticketsLink && <a className='btn' href={article.ticketsLink} target='_blank'>Get tickets</a>}
+                {article.venueLink && <a className='btn' href={article.venueLink} target='_blank'>Venue</a>}
+
+                <br />
+
+                {article.videoEmbed &&
+                  <iframe
+                    width='560'
+                    src={article.videoEmbed}
+                    title={`Video of ${article.title}`}
+                    frameBorder='0'
+                    allowFullScreen
+                  />
+                }
+
+                {articleHasHashtags ?
+                  <div>
+                    <h3>Hashtags</h3>
+                    <ul className='cancel-margin'>
+                      {article.socialShare.hashtags.map((h) =>
+                        <li key={h}>{h}</li>
+                      )}
+                    </ul>
+                  </div>
+                : null}
 
               </div>
+            : null}
 
-              <br />
-              <br />
-
-              {article.ticketsLink && <a className='btn' href={article.ticketsLink} target='_blank'>Get tickets</a>}
-              {article.venueLink && <a className='btn' href={article.venueLink} target='_blank'>Venue</a>}
-              <br />
-
-              {article.videoEmbed &&
-                <iframe
-                  width='560'
-                  src={article.videoEmbed}
-                  title={`Video of ${article.title}`}
-                  frameBorder='0'
-                  allowFullScreen
-                />
-              }
-
-              <br />
-
-              {articleHasMiniGalleryImages ?
-                <div>
-                  <h3>Mini gallery images</h3>
-                  <ul className='article-gallery-flex-root'>
-                    {article.miniGalleryImages.map((i) => (
-                      <li key={i} className='article-col-50 no-list-style article-gallery-item'>
-                        <img src={i} alt='gallery shot' />
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              : null}
-
-              {articleHasHashtags ?
-                <div>
-                  <h3>Hashtags</h3>
-                  <ul>
-                    {article.socialShare.hashtags.map((h) =>
-                      <li key={h}>{h}</li>
-                    )}
-                  </ul>
-                </div>
-              : null}
+            {articleHasMiniGalleryImages ?
+              <div className='row-large'>
+                <ul className='article-gallery-flex-root'>
+                  {article.miniGalleryImages.map((i) => (
+                    <li key={i} className='article-col-50 no-list-style article-gallery-item'>
+                      <img src={i} alt='gallery shot' />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            : null}
 
           </div>
         )}

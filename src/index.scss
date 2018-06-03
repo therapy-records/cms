@@ -73,6 +73,10 @@ body {
   }
 }
 
+.row-large {
+  margin-bottom: 4em;
+}
+
 .container {
   max-width: 1000px;
   padding: 1em;
@@ -334,11 +338,15 @@ li {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: left;
+  margin: 0 -2%;
 }
 
 .article-gallery-item {
   flex: 1 0 33%;
   max-width: 33%;
+  max-height: 210px;
+  overflow: hidden;
+  padding: 2%;
 }
 
 .ButtonWrap__root___1EO_R {
@@ -373,14 +381,23 @@ label {
 h5,
 label {
   font-size: 1.5em;
+  margin-bottom: .5em;
 }
 
 .label-small {
   font-size: 1.2em;
 }
 
+.cancel-margin {
+  margin: 0;
+}
+
 iframe {
   width: 100%;
+  min-height: 250px;
+  @media(min-width: 600px) {
+    min-height: 400px;
+  }
 }
 
 .heading-with-btn {
@@ -399,7 +416,7 @@ iframe {
   h2,
   h3,
   .small-tab {
-    margin-right: .5em;
+    margin-right: 2em;
   }
   .btn {
     position: relative;
@@ -457,9 +474,9 @@ iframe {
     }
   }
   h3 {
-    margin-top:0;
-    margin-bottom: 0.7em;
-    letter-spacing:0.5px;
+    margin-top: 0;
+    margin-bottom: .15em;
+    letter-spacing: .5px;
   }
   .btn {
     width: 30%;

@@ -134,7 +134,7 @@ export class News extends React.Component {
             {
               hasCombinedArticles ? (
                 <div>
-                  <ul>
+                  <ul className='cancel-margin'>
                     {_combinedArticles.map((p) => this.renderArticle(p))}
                   </ul>
 

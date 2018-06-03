@@ -125,6 +125,7 @@ export class NewsArticleForm extends React.Component {
           <br />
 
           <Field name='mainImage.url'
+                 title='Image'
                  component={DropzoneImageUpload}
                  existingImage={formValues && formValues.mainImage.url}
                  minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS} />
@@ -194,7 +195,6 @@ export class NewsArticleForm extends React.Component {
           <br />
 
           <div>
-            <h5>Links to...</h5>
             <br />
             <div className='cols-container links-cols-container'>
               <div className='col-50'>

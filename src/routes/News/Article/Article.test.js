@@ -290,12 +290,6 @@ describe('(Component) News - Article', () => {
         props.article.miniGalleryImages = mockMiniGalleryImages;
         wrapper = shallow(<Article {...props} />);
       });
-      it('should render a heading', () => {
-        const actual = wrapper.containsMatchingElement(
-          <h3>Mini gallery images</h3>
-        );
-        expect(actual).to.equal(true);
-      });
 
       it('should render a list of images', () => {
         const actual = wrapper.containsAllMatchingElements([

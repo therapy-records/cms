@@ -133,7 +133,7 @@ export class DropzoneImageUpload extends React.Component {
             >
               {(!multiple && !items.length)
                 ? <div className='dropzone-cta'>
-                  <span>Drag &amp; drop image</span>
+                  <span>Drag &amp; drop</span>
                   <div className={isLoading ? 'dropzone-loading dropzone-loading-active' : 'dropzone-loading'}>
                     <LoadingSpinner />
                   </div>
@@ -142,7 +142,7 @@ export class DropzoneImageUpload extends React.Component {
 
               {multiple
                 ? <div className='dropzone-cta'>
-                  <span>Drag &amp; drop  multiple images</span>
+                  <span>Drag &amp; drop multiple</span>
                   <div className={isLoading ? 'dropzone-loading dropzone-loading-active' : 'dropzone-loading'}>
                     <LoadingSpinner />
                   </div>
@@ -164,7 +164,7 @@ export class DropzoneImageUpload extends React.Component {
           </div>
 
           {invalidDimensions.length
-            ? <ul className="dropzone-dimensions-messages">
+            ? <ul className="dropzone-dimensions-messages cancel-margin">
               {invalidDimensions.map((message, index) =>
                 <li
                   key={index}
@@ -179,7 +179,7 @@ export class DropzoneImageUpload extends React.Component {
           {multiple &&
             <div className='col-2 gallery-images-col-2'>
               {(multiple && items && items.length)
-                ? <ul className='flex-root gallery-images-flex-root'>
+                ? <ul className='flex-root gallery-images-flex-root cancel-margin'>
                   {items.map((i) => (
                     <li key={i} className='col-50 no-list-style gallery-image-upload-item'>
                       <img src={i} alt={`gallery item ${i + 1}`} />

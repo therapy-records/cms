@@ -32,7 +32,7 @@ class ArticleLive extends React.Component {
 
         {article.quotes
           ? <div>
-            <ul>
+            <ul className='cancel-margin'>
               {article.quotes.map((q) =>
                 <li key={q.author}>
                   <i>&quot;{q.copy}&quot;</i> - {q.author}
