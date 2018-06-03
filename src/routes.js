@@ -158,7 +158,7 @@ const Routes = ({ store }) => (
 );
 
 Router.propTypes = {
-  store: PropTypes.objectOf(PropTypes.any).isRequired,
+  store: PropTypes.objectOf(PropTypes.any),
   isAuth: PropTypes.bool,
   onAuthCheck: PropTypes.func.isRequired
 };
