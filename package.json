@@ -11,9 +11,9 @@
     "test": "node scripts/test.js --env=jsdom",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
-    "precommit": "npm run test-coverage",
-    "prepush": "npm run test-coverage",
-    "test-coverage": "npm test -- --coverage"
+    "precommit": "npm run lint && npm run test-coverage",
+    "prepush": "npm run lint && npm run test-coverage",
+    "test-coverage": "npm run lint && npm test -- --coverage"
   },
   "dependencies": {
     "autoprefixer": "7.1.6",
