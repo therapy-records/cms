@@ -8,7 +8,9 @@ class _RichTextEditor extends React.Component {
     super(props);
     this.onChange = this.onChange.bind(this);
     this.state = {
-      value: this.props.value ? RichTextEditor.createValueFromString(this.props.value, 'html') : ''
+      value: this.props.value ?
+        RichTextEditor.createValueFromString(this.props.value, 'html') :
+        RichTextEditor.createValueFromString('', 'html')
     }
   }
 

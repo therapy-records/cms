@@ -12,6 +12,7 @@ module.exports = {
     "rules": {
         "semi": 0,
         "space-before-function-paren": ["error", "never"],
+        "no-console": 0,
         "react/jsx-uses-react": 1,
         "react/jsx-uses-vars": 1,
         "react/prop-types": ["error", { ignore: ['store']}]
