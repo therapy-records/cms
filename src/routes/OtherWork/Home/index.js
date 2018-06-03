@@ -68,7 +68,7 @@ export class OtherWork extends React.Component {
       articles
     } = this.props;
 
-    const hasArticles = articles && articles.length;
+    const hasArticles = (articles && articles !== null) && articles.length;
 
     return (
       <div className='container'>
@@ -123,6 +123,7 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = (state) => ({
+  promiseLoading: state.uiState.promiseLoading,
   articles: selectOtherWorkArticles(state)
 })
 
