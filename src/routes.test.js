@@ -1,5 +1,4 @@
 import React from 'react'
-
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import { Route } from 'react-router-dom';
@@ -19,7 +18,6 @@ import OtherWorkHome from './routes/OtherWork/Home';
 import OtherWorkArticle from './routes/OtherWork/Article';
 import OtherWorkArticleEdit from './routes/OtherWork/ArticleEdit';
 import OtherWorkArticleCreate from './routes/OtherWork/ArticleCreate';
-import { authCheck } from './actions/auth';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -36,14 +34,14 @@ const mockStore = configMockStore(mockState, mockDispatch);
 describe('Router', () => {
   let wrapper,
     props = {
-      isAuth: false
+      store: mockStore,
+      isAuth: false,
+      onAuthCheck: sinon.spy()
     };
 
   beforeEach(() => {
     wrapper = shallow(<Router {...props} />);
   });
-
-  Sidebar
 
   it('should render <Sidebar />', () => {
     const actual = wrapper.containsMatchingElement(
@@ -69,6 +67,7 @@ describe('Router', () => {
         path="/dashboard"
         component={Dashboard}
         isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
         exact
       />
     );
@@ -81,6 +80,7 @@ describe('Router', () => {
         path="/press"
         component={Press}
         isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
         exact
       />
     );
@@ -93,6 +93,7 @@ describe('Router', () => {
         path="/news"
         component={NewsHome}
         isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
         exact
       />
     );
@@ -105,6 +106,7 @@ describe('Router', () => {
         path="/news/create"
         component={NewsArticleCreate}
         isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
         exact
       />
     );
@@ -117,6 +119,7 @@ describe('Router', () => {
         path="/news/:id"
         component={NewsArticle}
         isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
         exact
       />
     );
@@ -129,6 +132,7 @@ describe('Router', () => {
         path="/news/:id/edit"
         component={NewsArticleEdit}
         isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
         exact
       />
     );
@@ -141,6 +145,7 @@ describe('Router', () => {
         path="/other-work"
         component={OtherWorkHome}
         isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
         exact
       />
     );
@@ -153,6 +158,7 @@ describe('Router', () => {
         path="/other-work/create"
         component={OtherWorkArticleCreate}
         isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
         exact
       />
     );
@@ -165,6 +171,7 @@ describe('Router', () => {
         path="/other-work/:id"
         component={OtherWorkArticle}
         isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
         exact
       />
     );
@@ -177,6 +184,7 @@ describe('Router', () => {
         path="/other-work/:id/edit"
         component={OtherWorkArticleEdit}
         isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
         exact
       />
     );

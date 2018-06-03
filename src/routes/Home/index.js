@@ -65,7 +65,7 @@ Home.propTypes = {
   promiseLoading: PropTypes.bool,
   onPostForm: PropTypes.func,
   authError: PropTypes.string,
-  history: PropTypes.object.isRequired,
+  history: PropTypes.array.isRequired,
   location: PropTypes.object.isRequired
 }
 

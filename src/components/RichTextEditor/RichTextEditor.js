@@ -4,11 +4,11 @@ import RichTextEditor from 'react-rte'
 import './RichTextEditor.css'
 
 class _RichTextEditor extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.onChange = this.onChange.bind(this);
     this.state = {
-      value: RichTextEditor.createValueFromString(this.props.value, 'html')
+      value: this.props.value ? RichTextEditor.createValueFromString(this.props.value, 'html') : ''
     }
   }
 

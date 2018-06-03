@@ -68,7 +68,7 @@ Dashboard.propTypes = {
   newsArticles: PropTypes.array,
   onFetchNewsArticles: PropTypes.func.isRequired,
   resetPromiseState: PropTypes.func.isRequired,
-  otherWorkArticles: PropTypes.func.isRequired,
+  otherWorkArticles: PropTypes.array,
   onFetchOtherWorkArticles: PropTypes.func.isRequired,
   promiseLoading: PropTypes.bool
 }

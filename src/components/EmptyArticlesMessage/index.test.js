@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import EmptyArticlesMessage from './index'
@@ -15,7 +14,7 @@ describe('(Component) EmptyArticlesMessage', () => {
 
   it('should render a message', () => {
     wrapper = shallow(
-      <EmptyArticlesMessage {...props} />
+      <EmptyArticlesMessage type={props.type} />
     );
     const actual = wrapper.containsMatchingElement(
       <div>

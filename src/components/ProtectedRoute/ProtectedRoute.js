@@ -35,7 +35,7 @@ class ProtectedRoute extends React.PureComponent {
 
 ProtectedRoute.propTypes = {
   component: PropTypes.any.isRequired,
-  location: PropTypes.object.isRequired,
+  location: PropTypes.object,
   onAuthCheck: PropTypes.func.isRequired,
   isAuth: PropTypes.bool
 }

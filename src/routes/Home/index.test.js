@@ -13,7 +13,8 @@ describe('(Component) Home', () => {
     isAuth: false,
     onAuthCheck: () => { },
     onPostForm: sinon.spy(),
-    history: []
+    history: [],
+    location: {}
   };
   let props = baseProps;
 
