@@ -88,13 +88,14 @@ describe('(Component) LoginForm', () => {
         onSubmit: () => {},
         error: undefined,
         pristine: false,
-        submitting: false
+        submitting: false,
+        promiseLoading: false
       }
       const buttonWrapper = shallow(<LoginForm {...props} />);
       const actual = buttonWrapper.containsMatchingElement(
         <button type='submit' disabled={false}>Login</button>
       );
-      expect(actual).to.equal(true);
+      expect(actual).to.eq(true);
     });
 
     it('should call onSubmit prop onClick', () => {
@@ -109,6 +110,21 @@ describe('(Component) LoginForm', () => {
       button.simulate('click');
       expect(props.onSubmit.calledOnce).to.eq(true);
     });
+
+    it('should be disabled when promiseLoading', () => {
+      props = {
+        onSubmit: sinon.spy(),
+        error: undefined,
+        pristine: false,
+        submitting: false,
+        promiseLoading: true
+      };
+      const buttonWrapper = shallow(<LoginForm {...props} />);
+      const button = buttonWrapper.find('button');
+      button.simulate('click');
+      expect(button.prop('disabled')).to.eq(true);
+    });
+
   });
 
   describe('onFormSubmit', () => {
