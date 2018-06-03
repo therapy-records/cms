@@ -110,9 +110,10 @@ export class Article extends React.Component {
 
     return (
       <article className='container article'>
-        {promiseLoading &&
-          <LoadingSpinner />
-        }
+        <LoadingSpinner
+          active={promiseLoading}
+          fullScreen
+        />
 
         {article && article.isDeleted &&
           <div style={{ textAlign: 'center' }}>

@@ -55,18 +55,14 @@ describe('(Component) OtherWork - OtherWork', () => {
     });
   });
 
-  describe('when promise is loading', () => {
-    beforeEach(() => {
-      props = baseProps;
-      props.promiseLoading = true;
-      wrapper = shallow(<Article {...props} />);
-    });
-    it('should show loading', () => {
-      const actual = wrapper.containsMatchingElement(
-        <LoadingSpinner />
-      );
-      expect(actual).to.equal(true);
-    });
+  it('should render <LoadingSpinner />', () => {
+    const actual = wrapper.containsMatchingElement(
+      <LoadingSpinner
+        active={props.promiseLoading}
+        fullScreen
+      />
+    );
+    expect(actual).to.equal(true);
   });
 
   describe('when article is deleted', () => {
