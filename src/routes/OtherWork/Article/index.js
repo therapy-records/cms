@@ -82,7 +82,7 @@ export class Article extends React.Component {
     }
 
     return (
-      <article className='container article'>
+      <article className='container article article-other-work'>
         {/*promiseLoading &&
           <LoadingSpinner fullScreen />
         */}
@@ -126,25 +126,23 @@ export class Article extends React.Component {
               </p>
             }
 
-            <p>{article.copy}</p>
-
-            <br />
-
-            <p>Release date: {moment(article.releaseDate).fromNow()}</p>
-            <p>Links to: <a href={article.externalLink} target='_blank'>{article.externalLink}</a></p>
-
-            <div className='cols-container'>
-
-              {article.mainImageUrl &&
-                <div>
-                  <img
-                    src={article.mainImageUrl}
-                    alt={`Fiona Ross - ${article.title}`}
-                  />
-                </div>
-              }
-
+            <div className='row-large'>
+              <p>{article.copy}</p>
+              <p><a href={article.externalLink} target='_blank'>{article.externalLink}</a></p>
             </div>
+
+
+            {article.mainImageUrl &&
+              <div className='row-large img-container'>
+                <img
+                  src={article.mainImageUrl}
+                  alt={`Fiona Ross - ${article.title}`}
+                />
+              </div>
+            }
+
+            <p>Released: {moment(article.releaseDate).fromNow()}</p>
+
           </div>
         )}
 

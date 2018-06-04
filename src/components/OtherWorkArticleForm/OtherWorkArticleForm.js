@@ -44,9 +44,12 @@ export class OtherWorkArticleForm extends React.Component {
     }
 
     return (
-      <section className='root'>
-        <div className='heading'>
-          <h2>{isEditForm ? 'Edit Other Work' : 'Create Other Work'}</h2>
+      <section className='root article-create'>
+
+        <div className='heading-action-btns'>
+          <div className='heading-with-btn'>
+            <h2>{isEditForm ? 'Edit Other Work' : 'Create Other Work'}</h2>
+          </div>
         </div>
 
         <form onSubmit={(e) => e.preventDefault()} encType='multipart/form-data'>
@@ -55,52 +58,57 @@ export class OtherWorkArticleForm extends React.Component {
 
           <div className='row-large'>
             <Field name='title'
-              component={TextInput}
-              type='text'
-              placeholder='Hello World'
-              label='Title'
-              validate={required}
+                   component={TextInput}
+                   type='text'
+                   placeholder='Hello World'
+                   label='Title'
+                   validate={required}
+                   required
             />
           </div>
 
           <div className='row-large'>
 
           <Field name='copy'
-            component={TextInput}
-            type='text'
-            placeholder='Short excerpt'
-            label='Copy'
-            validate={required}
+                 component={TextInput}
+                 type='text'
+                 placeholder='Short excerpt'
+                 label='Copy'
+                 validate={required}
+                 required
           />
           </div>
 
           <div className='row-large'>
             <Field name='externalLink'
-              component={TextInput}
-              type='Link to article'
-              label='Link to article'
-              placeholder='http://bbc.co.uk/fiona-ross'
-              validate={required}
+                   component={TextInput}
+                   type='Link to article'
+                   label='Link to article'
+                   placeholder='http://bbc.co.uk/fiona-ross'
+                   validate={required}
+                   required
             />
           </div>
 
           <div className='row-large'>
             <Field name='mainImageUrl'
-              component={DropzoneImageUpload}
-              title='Main image'
-              existingImage={formValues && formValues.mainImageUrl}
-              validate={required}
-              minImageDimensions={OTHER_WORK_ARTICLE_MIN_IMAGE_DIMENSIONS}
+                   component={DropzoneImageUpload}
+                   title='Main image'
+                   existingImage={formValues && formValues.mainImageUrl}
+                   validate={required}
+                   minImageDimensions={OTHER_WORK_ARTICLE_MIN_IMAGE_DIMENSIONS}
+                   required
             />
           </div>
 
           <div className='row-large'>
 
             <Field name='releaseDate'
-              component={Datepicker}
-              initTime={formValues && formValues.releaseDate}
-              title='Release date'
-              validate={required}
+                   component={Datepicker}
+                   initTime={formValues && formValues.releaseDate}
+                   title='Release date'
+                   validate={required}
+                   required
             />
           </div>
 

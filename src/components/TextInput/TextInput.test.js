@@ -28,7 +28,8 @@ describe('(Component) TextInput', () => {
     },
     smallLabelSize: false,
     hideLabel: false,
-    autoFocus: false
+    autoFocus: false,
+    required: false
   };
   const props = mockProps;
 
@@ -55,6 +56,19 @@ describe('(Component) TextInput', () => {
       <label>{mockProps.label}</label>
     )
     expect(actual).to.eq(true);
+  });
+
+  describe('with required prop', () => {
+    it('should render a label with required star', () => {
+      wrapper.setProps({
+        required: true
+      });
+      const label = wrapper.find('label');
+      const actual = label.containsMatchingElement(
+        <span className='required'>*</span>
+      )
+      expect(actual).to.eq(true);
+    });
   });
 
   it('should render an error', () => {

@@ -51,6 +51,7 @@ describe('(Component) OtherWorkArticleForm', () => {
           title='Main image'
           component={DropzoneImageUpload}
           minImageDimensions={OTHER_WORK_ARTICLE_MIN_IMAGE_DIMENSIONS}
+          required
         />
       );
       expect(actual).to.equal(true);
@@ -59,11 +60,12 @@ describe('(Component) OtherWorkArticleForm', () => {
     it('should render a title field', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='title'
-          component={TextInput}
-          type='text'
-          placeholder='Hello World'
-          label='Title'
-          validate={required}
+               component={TextInput}
+               type='text'
+               placeholder='Hello World'
+               label='Title'
+               validate={required}
+               required
         />
       );
       expect(actual).to.equal(true);
@@ -72,8 +74,10 @@ describe('(Component) OtherWorkArticleForm', () => {
     it('should render a copy field', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='copy'
-          component={TextInput}
-          validate={required} />
+               component={TextInput}
+               validate={required}
+               required
+        />
       );
       expect(actual).to.equal(true)
     });
@@ -81,7 +85,9 @@ describe('(Component) OtherWorkArticleForm', () => {
     it('should render an externalLink field', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='externalLink'
-          component={TextInput} />
+               component={TextInput}
+               required
+        />
       );
       expect(actual).to.equal(true)
     });
@@ -96,9 +102,10 @@ describe('(Component) OtherWorkArticleForm', () => {
       const datepickerWrapper = shallow(<OtherWorkArticleForm {...props} />);
       const actual = datepickerWrapper.containsMatchingElement(
         <Field name='releaseDate'
-          component={Datepicker}
-          title='Release date'
-          initTime={props.formValues.scheduledTime} />
+               component={Datepicker}
+               title='Release date'
+               initTime={props.formValues.scheduledTime}      
+         />
       );
       expect(actual).to.equal(true);
     });

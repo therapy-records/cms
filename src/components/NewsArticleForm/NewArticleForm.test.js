@@ -153,7 +153,9 @@ describe('(Component) NewsArticleForm', () => {
           type='text'
           placeholder='Hello World'
           label='Title'
-          validate={required} />
+          validate={required}
+          required
+        />
       );
       expect(actual).to.equal(true);
     });
@@ -162,7 +164,9 @@ describe('(Component) NewsArticleForm', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='bodyMain'
           component={bodyMainRTE}
-          validate={required} />
+          validate={required}
+          required
+        />
       );
       expect(actual).to.equal(true)
     });

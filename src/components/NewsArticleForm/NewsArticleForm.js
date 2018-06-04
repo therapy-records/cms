@@ -93,10 +93,14 @@ export class NewsArticleForm extends React.Component {
     }
 
     return (
-      <section className='root'>
-        <div className='heading'>
-          <h2>{isEditForm ? 'Edit News' : 'Create News'}</h2>
-          <ArticlePreview />
+      <section className='root article-create'>
+        <div className='heading-action-btns'>
+          <div className='heading-with-btn'>
+            <h2>{isEditForm ? 'Edit News' : 'Create News'}</h2>
+          </div>
+          <div className='action-btns'>
+            <ArticlePreview />
+          </div>
         </div>
 
         <form onSubmit={this.handleSubmit} encType='multipart/form-data'>
@@ -110,6 +114,7 @@ export class NewsArticleForm extends React.Component {
                   placeholder='Hello World'
                   label='Title'
                   validate={required}
+                  required
             />
           </div>
 
@@ -118,6 +123,7 @@ export class NewsArticleForm extends React.Component {
               name='bodyMain'
               component={bodyMainRTE}
               validate={required}
+              required
             />
           </div>
 

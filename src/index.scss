@@ -303,6 +303,10 @@ h3 {
   font-size: 1.8em;
 }
 
+p {
+  margin-bottom: 1em;
+}
+
 img {
   max-width: 100%;
 }
@@ -326,6 +330,12 @@ li {
   flex-direction: column;
   @media(min-width: 600px) {
     flex-direction: row;
+    > div {
+      width: 50%;
+      &:first-child {
+        padding-right: 1em;
+      }
+    }
   }
 }
 
@@ -455,6 +465,21 @@ iframe {
 .article-card {
   a {
     word-break: break-word;
+  }
+}
+
+.article-create {
+  .heading-action-btns {
+    margin-bottom: 3em;
+  }
+}
+
+.article-other-work {
+  .img-container {
+    margin-bottom: .5em;
+  }
+  img {
+    max-width: 500px;
   }
 }
 

@@ -159,14 +159,14 @@ describe('(Component) OtherWork - OtherWork', () => {
 
     it('should render externalLink', () => {
       const actual = wrapper.containsMatchingElement(
-        <p>Links to: <a href={props.article.externalLink} target='_blank'>{props.article.externalLink}</a></p>
+        <p><a href={props.article.externalLink} target='_blank'>{props.article.externalLink}</a></p>
       );
       expect(actual).to.equal(true);
     });
 
     it('should render releaseDate', () => {
       const actual = wrapper.containsMatchingElement(
-        <p>Release date: {moment(props.article.releaseDate).fromNow()}</p>
+        <p>Released: {moment(props.article.releaseDate).fromNow()}</p>
       );
       expect(actual).to.equal(true);
     });
