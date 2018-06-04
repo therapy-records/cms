@@ -156,27 +156,12 @@ export class NewsArticleForm extends React.Component {
               <div>
                 <br />
                 <Field name='secondaryImageUrl'
-                      component={DropzoneImageUpload}
-                      title='Secondary featured image' />
+                       component={DropzoneImageUpload}
+                       title='Secondary featured image'
+                />
               </div>
             }
           </div>
-
-          <div className='row-large'>
-            <Field name='quotes'
-                  component={Quotes} />
-          </div>
-
-
-          <div className='row-large'>
-            <Field name='miniGalleryImages'
-                  component={DropzoneImageUpload}
-                  title='Mini gallery images'
-                  multiple
-                  existingMiniGalleryImages={formValues && formValues.miniGalleryImages}
-            />
-          </div>
-
           
           <div className='row-large'>
             <div className='cols-container links-cols-container'>
@@ -221,6 +206,21 @@ export class NewsArticleForm extends React.Component {
               </div>
             </div>
 
+          </div>
+
+          <div className='row-large'>
+            <Field name='quotes'
+                   component={Quotes} />
+          </div>
+
+
+          <div className='row-large'>
+            <Field name='miniGalleryImages'
+                   component={DropzoneImageUpload}
+                   title='Mini gallery images'
+                   multiple
+                   existingMiniGalleryImages={formValues && formValues.miniGalleryImages}
+            />
           </div>
 
           {/*

@@ -4,6 +4,7 @@
   align-items: flex-start;
   margin-bottom: 2em;
   h2 + div {
+    margin-top: .5em;
     margin-left: 1em;
   }
 }
@@ -37,5 +38,8 @@
     &:last-child {
       padding-left:1em;
     }
+  }
+  > div {
+    margin-bottom: 2.5em;
   }
 }
