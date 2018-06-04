@@ -46,62 +46,63 @@ export class OtherWorkArticleForm extends React.Component {
     return (
       <section className='root'>
         <div className='heading'>
-          <h2>{isEditForm ? 'Edit other-work article' : 'Create other-work article'}</h2>
+          <h2>{isEditForm ? 'Edit Other Work' : 'Create Other Work'}</h2>
         </div>
 
         <form onSubmit={(e) => e.preventDefault()} encType='multipart/form-data'>
 
           <div className='col-clear' />
 
-          <Field name='title'
-            component={TextInput}
-            type='text'
-            placeholder='Hello World'
-            label='Title'
-            validate={required} />
+          <div className='row-large'>
+            <Field name='title'
+              component={TextInput}
+              type='text'
+              placeholder='Hello World'
+              label='Title'
+              validate={required}
+            />
+          </div>
 
-          <br />
+          <div className='row-large'>
 
           <Field name='copy'
             component={TextInput}
             type='text'
             placeholder='Short excerpt'
             label='Copy'
-            validate={required} />
-
-          <br />
-
-          <Field name='externalLink'
-            component={TextInput}
-            type='Link to article'
-            label='Link to article'
-            placeholder='http://bbc.co.uk/fiona-ross'
-            validate={required} />
-
-          <br />
-          <br />
-
-          <Field name='mainImageUrl'
-            component={DropzoneImageUpload}
-            title='Main image'
-            existingImage={formValues && formValues.mainImageUrl}
             validate={required}
-            minImageDimensions={OTHER_WORK_ARTICLE_MIN_IMAGE_DIMENSIONS} />
+          />
+          </div>
 
-          <br />
-          <br />
-          <br />
+          <div className='row-large'>
+            <Field name='externalLink'
+              component={TextInput}
+              type='Link to article'
+              label='Link to article'
+              placeholder='http://bbc.co.uk/fiona-ross'
+              validate={required}
+            />
+          </div>
 
-          <Field name='releaseDate'
-            component={Datepicker}
-            initTime={formValues && formValues.releaseDate}
-            title='Release date'
-            validate={required} />
+          <div className='row-large'>
+            <Field name='mainImageUrl'
+              component={DropzoneImageUpload}
+              title='Main image'
+              existingImage={formValues && formValues.mainImageUrl}
+              validate={required}
+              minImageDimensions={OTHER_WORK_ARTICLE_MIN_IMAGE_DIMENSIONS}
+            />
+          </div>
 
-          <br />
-          <br />
-          <br />
-          <br />
+          <div className='row-large'>
+
+            <Field name='releaseDate'
+              component={Datepicker}
+              initTime={formValues && formValues.releaseDate}
+              title='Release date'
+              validate={required}
+            />
+          </div>
 
           {/* isEditForm &&
             <div>
@@ -114,17 +115,13 @@ export class OtherWorkArticleForm extends React.Component {
 
           {error && <p>{error}</p>}
 
-          <br />
-          <br />
-
-          <button type='submit'
-            className='btn-lg btn-submit'
-            disabled={error || pristine || submitting || error || invalid}
-            onClick={() => this.handleSubmit()}>Submit
-          </button>
-
-          <br />
-          <br />
+          <div className='row-large'>
+            <button type='submit'
+              className='btn-lg btn-submit'
+              disabled={error || pristine || submitting || error || invalid}
+              onClick={() => this.handleSubmit()}>Submit
+            </button>
+          </div>
 
         </form>
       </section>

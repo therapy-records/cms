@@ -74,7 +74,16 @@ body {
 }
 
 .row-large {
-  margin-bottom: 4em;
+  margin-bottom: 2.5em;
+  @media(min-width: 768px) {
+    margin-bottom: 4em;
+  }
+  input {
+    margin-bottom: 0;
+  }
+  .form-error {
+    margin-top: 1em;
+  }
 }
 
 .container {
@@ -137,6 +146,7 @@ textarea {
 }
 
 .form-error {
+  display: inline-block;
   background: $color-red-1;
   color: #FFF;
   padding: 7px 20px;

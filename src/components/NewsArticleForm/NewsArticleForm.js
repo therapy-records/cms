@@ -103,99 +103,82 @@ export class NewsArticleForm extends React.Component {
 
           <div className='col-clear' />
 
-          <Field name='title'
-                 component={TextInput}
-                 type='text'
-                 placeholder='Hello World'
-                 label='Title'
-                 validate={required} />
+          <div className='row-large'>
+            <Field name='title'
+                  component={TextInput}
+                  type='text'
+                  placeholder='Hello World'
+                  label='Title'
+                  validate={required}
+            />
+          </div>
 
-          <br />
-          <br />
-          <br />
+          <div className='row-large'>
+            <Field
+              name='bodyMain'
+              component={bodyMainRTE}
+              validate={required}
+            />
+          </div>
 
-          <Field
-            name='bodyMain'
-            component={bodyMainRTE}
-            validate={required}
-          />
+          <div className='row-large'>
+            <Field name='mainImage.url'
+                  title='Image'
+                  component={DropzoneImageUpload}
+                  existingImage={formValues && formValues.mainImage.url}
+                  minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
+            />
+          </div>
 
-          <br />
-          <br />
-          <br />
+          <div className='row-large'>
+            <Field name='mainImage.externalLink'
+                  component={TextInput}
+                  type='url'
+                  title='Image link'
+                  label='Image link'
+                  placeholder='http://bbc.co.uk/fiona-ross'
+            />
+          </div>
 
-          <Field name='mainImage.url'
-                 title='Image'
-                 component={DropzoneImageUpload}
-                 existingImage={formValues && formValues.mainImage.url}
-                 minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS} />
+          <div className='row-large'>
+            <button
+              onClick={this.handleSecondaryImageToggle}
+              className='btn-sm secondary-img-toggle'
+              style={{ width: 'auto' }}
+            >
+              {showSecondaryImageField ?
+                'Remove secondary featured image' :
+                'Add secondary featured image'
+              }
+            </button>
 
-          <br />
-          <br />
-
-          <Field name='mainImage.externalLink'
-                 component={TextInput}
-                 type='url'
-                 title='Image link'
-                 label='Image link'
-                 placeholder='http://bbc.co.uk/fiona-ross' />
-
-          <br />
-          <br />
-          <br />
-
-          <button
-            onClick={this.handleSecondaryImageToggle}
-            className='btn-sm secondary-img-toggle'
-            style={{ width: 'auto' }}
-          >
-            {showSecondaryImageField ?
-              'Remove secondary featured image' :
-              'Add secondary featured image'
+            {showSecondaryImageField &&
+              <div>
+                <br />
+                <Field name='secondaryImageUrl'
+                      component={DropzoneImageUpload}
+                      title='Secondary featured image' />
+              </div>
             }
-          </button>
+          </div>
 
-          {showSecondaryImageField &&
-            <div>
-              <br />
-              <Field name='secondaryImageUrl'
-                    component={DropzoneImageUpload}
-                    title='Secondary featured image' />
-            </div>
-          }
+          <div className='row-large'>
+            <Field name='quotes'
+                  component={Quotes} />
+          </div>
 
-          <br />
-          <br />
-          <br />
 
-          <Field name='quotes'
-                 component={Quotes} />
+          <div className='row-large'>
+            <Field name='miniGalleryImages'
+                  component={DropzoneImageUpload}
+                  title='Mini gallery images'
+                  multiple
+                  existingMiniGalleryImages={formValues && formValues.miniGalleryImages}
+            />
+          </div>
 
-          <br />
-          <br />
-          <br />
-
-          {isEditForm &&
-            <div>
-              <br />
-              <br />
-              <p>NOTE: Any images previously uploaded will <b>not be overriden</b></p>
-              <p><small>To remove previous images contact admin</small></p>
-            </div>
-          }
-
-          <Field name='miniGalleryImages'
-                component={DropzoneImageUpload}
-                title='Mini gallery images'
-                multiple
-                existingMiniGalleryImages={formValues && formValues.miniGalleryImages} />
-
-          <br />
-          <br />
-          <br />
-
-          <div>
-            <br />
+          
+          <div className='row-large'>
             <div className='cols-container links-cols-container'>
               <div className='col-50'>
                 <Field name='ticketsLink'
@@ -203,7 +186,8 @@ export class NewsArticleForm extends React.Component {
                       type='text'
                       placeholder='http://www...'
                       label='Tickets '
-                      smallLabelSize />
+                      smallLabelSize
+                />
 
                 <br />
 
@@ -212,7 +196,8 @@ export class NewsArticleForm extends React.Component {
                       type='text'
                       placeholder='http://www...'
                       label='Venue'
-                      smallLabelSize />
+                      smallLabelSize
+                />
               </div>
 
               <div className='col-50'>
@@ -221,7 +206,8 @@ export class NewsArticleForm extends React.Component {
                       type='text'
                       placeholder='https://www.youtube.com/embed/45JLCGLplvk'
                       label='YouTube video'
-                      smallLabelSize />
+                      smallLabelSize
+                />
 
                 <br />
 
@@ -230,15 +216,12 @@ export class NewsArticleForm extends React.Component {
                       type='text'
                       placeholder='trending, happy, fionaross'
                       label='Hashtags'
-                      smallLabelSize />
+                      smallLabelSize
+                />
               </div>
             </div>
 
           </div>
-
-          <br />
-          <br />
-          <br />
 
           {/*
             <Field name='scheduledTime'
@@ -250,18 +233,15 @@ export class NewsArticleForm extends React.Component {
           */}
           {error && <p>{error}</p>}
 
-          <br />
-          <br />
 
-          <button type='submit'
-                  className='btn-lg btn-submit'
-                  disabled={error || pristine || submitting || error || invalid}
-                  onClick={() => this.handleSubmit()}
-                  >Submit
-          </button>
-
-          <br />
-          <br />
+          <div className='row-large'>
+            <button type='submit'
+                    className='btn-lg btn-submit'
+                    disabled={error || pristine || submitting || error || invalid}
+                    onClick={() => this.handleSubmit()}
+                    >Submit
+            </button>
+          </div>
 
         </form>
       </section>
