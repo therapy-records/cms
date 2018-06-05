@@ -31,15 +31,6 @@ describe('(Component) News - ArticleEdit', () => {
     expect(props.onDestroyArticle).to.have.been.calledOnce;
   });
 
-  it('should render editing title', () => {
-    props = baseProps;
-    wrapper = shallow(<ArticleEdit {...props} />);
-    const actual = wrapper.containsMatchingElement(
-      <p>editing <br />{props.article.title}</p>
-    );
-    expect(actual).to.equal(true);
-  });
-
   it('should render a NewsArticleForm', () => {
     props = baseProps;
     wrapper = shallow(<ArticleEdit {...props} />);

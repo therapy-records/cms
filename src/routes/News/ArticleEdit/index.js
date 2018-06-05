@@ -51,19 +51,10 @@ export class ArticleEdit extends React.Component {
           </div>
         }
         {!promiseLoading && !promiseSuccess &&
-          <div>
-            <p>editing <br />{article.title}</p>
-            <br />
-            <br />
-            <hr />
-            <br />
-            <br />
-            {/* onSubmitFormQueue={() => this.props.onEditArticleQueue(article)} */}
-            <NewsArticleForm
-              onSubmitForm={() => this.props.onEditArticle(article)}
-              location={location}
-            />
-          </div>
+          <NewsArticleForm
+            onSubmitForm={() => this.props.onEditArticle(article)}
+            location={location}
+          />
         }
       </article>
     )

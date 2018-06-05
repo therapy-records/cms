@@ -37,7 +37,7 @@ export class ArticlePreview extends React.Component {
         <button
           onClick={this.handleModalOpen}
           disabled={disabled}
-          className='btn-sm btn-width-auto btn-preview'>Preview
+          className='btn-width-auto btn-preview'>Preview
         </button>
         {this.state.isShowingModal &&
           <ModalContainer onClose={this.handleModalClose}>

@@ -96,7 +96,7 @@ export class NewsArticleForm extends React.Component {
       <section className='root article-create'>
         <div className='heading-action-btns'>
           <div className='heading-with-btn'>
-            <h2>{isEditForm ? 'Edit News' : 'Create News'}</h2>
+            <h2>{isEditForm ? `Editing ${formValues && formValues.title}` : 'Create News'}</h2>
           </div>
           <div className='action-btns'>
             <ArticlePreview />
@@ -131,7 +131,7 @@ export class NewsArticleForm extends React.Component {
             <Field name='mainImage.url'
                   title='Image'
                   component={DropzoneImageUpload}
-                  existingImage={formValues && formValues.mainImage.url}
+                  existingImage={formValues && formValues.mainImage && formValues.mainImage.url}
                   minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
             />
           </div>

@@ -37,13 +37,19 @@ describe('(Component) NewsArticleForm', () => {
     expect(actual).to.equal(true);
   });
 
-  it('should render an `Edit` heading', () => {
-    props = { ...baseProps, location: { pathname: 'test/edit' } };
+  it('should render an `Editing` heading', () => {
+    props = {
+      ...baseProps,
+      location: { pathname: 'test/edit' },
+      formValues: {
+        title: 'hello world'
+      }
+    };
     const editWrapper = shallow(
       <NewsArticleForm {...props} />
     );
     const actual = editWrapper.containsMatchingElement(
-      <h2>Edit News</h2>
+      <h2>{`Editing ${props.formValues.title}`}</h2>
     );
     expect(actual).to.equal(true);
   });
