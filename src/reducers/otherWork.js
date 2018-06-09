@@ -10,7 +10,7 @@ import {
   promiseSuccess,
   promiseError
 } from './uiState';
-
+import { setSelectedOtherWorkArticle } from './otherWorkArticle';
 export const FETCH_OTHER_WORK_ARTICLES_SUCCESS = 'FETCH_OTHER_WORK_ARTICLES_SUCCESS';
 export const POST_OTHER_WORK_FORM_SUCCESS = 'POST_OTHER_WORK_FORM_SUCCESS';
 export const EDIT_OTHER_WORK_SUCCESS = 'EDIT_OTHER_WORK_SUCCESS';
@@ -104,8 +104,10 @@ export const editOtherWork = (postToEdit) => {
       JSON.stringify(postToEdit)
     ).then(
       (data) => {
+        postToEdit.editSuccess = true;
         dispatch(promiseLoading(false));
         dispatch(promiseSuccess(true));
+        dispatch(setSelectedOtherWorkArticle(postToEdit));
         dispatch(editOtherWorkSuccess());
       }, (err) => {
         dispatch(promiseLoading(false));

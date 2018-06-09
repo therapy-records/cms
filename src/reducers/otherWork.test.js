@@ -23,9 +23,9 @@ import {
 import {
   UISTATE_PROMISE_LOADING,
   UISTATE_PROMISE_SUCCESS,
-  UISTATE_PROMISE_ERROR,
-  UISTATE_PROMISE_SUCCESS_RESET
+  UISTATE_PROMISE_ERROR
 } from '../constants/actions';
+import { SET_SELECTED_OTHER_WORK_ARTICLE } from './otherWorkArticle';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -200,6 +200,74 @@ describe('(Redux Module) news', () => {
 
       store.clearActions();
       return store.dispatch(postOtherWork(mock.article)).then(() => {
+        const storeActions = store.getActions();
+        expect(storeActions).to.deep.equal(expectedActions);
+        store.clearActions();
+      });
+    });
+  });
+  describe('(Thunk) editOtherWork', () => {
+    afterEach(() => {
+      nock.cleanAll();
+    });
+    it('should be exported as a function', () => {
+      expect(editOtherWork).to.be.a('function');
+    });
+
+    it('should return a function', () => {
+      expect(editOtherWork()).to.be.a('function');
+    });
+
+    it('should dispatch the correct actions on success', () => {
+      _axiosAuthHeaders.put = sinon.stub().returns(Promise.resolve(mockArticle));
+      nock(API_ROOT + OTHER_WORK + 'asdf1234')
+        .put(`${OTHER_WORK}asdf1234`, {})
+        .reply(200, mockArticle);
+
+      const expectedActions = [
+        { type: UISTATE_PROMISE_LOADING, payload: true },
+        { type: UISTATE_PROMISE_LOADING, payload: false },
+        { type: UISTATE_PROMISE_SUCCESS, payload: true },
+        { type: SET_SELECTED_OTHER_WORK_ARTICLE, payload: mockArticle },
+        { type: EDIT_OTHER_WORK_SUCCESS }
+      ];
+
+      store.clearActions();
+      return store.dispatch(editOtherWork(mockArticle)).then(() => {
+        const storeActions = store.getActions();
+        expect(storeActions[3].type).to.deep.equal(expectedActions[3].type);
+        store.clearActions();
+      });
+    });
+
+    it('should dispatch setSelectedOtherWorkArticle action with editSuccess added to payload', () => {
+      _axiosAuthHeaders.put = sinon.stub().returns(Promise.resolve(mockArticle));
+      nock(API_ROOT + OTHER_WORK + 'asdf1234')
+        .put(`${OTHER_WORK}asdf1234`, {})
+        .reply(200, mockArticle);
+
+      store.clearActions();
+      return store.dispatch(editOtherWork(mockArticle)).then(() => {
+        const storeActions = store.getActions();
+        const actionWithEditedArticle = storeActions.find(a => a.type === SET_SELECTED_OTHER_WORK_ARTICLE);
+        expect(actionWithEditedArticle.payload.editSuccess).to.eq(true);
+        store.clearActions();
+      });
+    });
+
+    it('should dispatch the correct actions on error', () => {
+      _axiosAuthHeaders.put = sinon.stub().returns(Promise.reject(mockErrorResponse));
+      nock(API_ROOT + OTHER_WORK + 'asdf1234')
+        .put(`${OTHER_WORK}asdf1234`, {})
+        .reply(500);
+
+      const expectedActions = [
+        { type: UISTATE_PROMISE_LOADING, payload: true },
+        { type: UISTATE_PROMISE_LOADING, payload: false },
+        { type: UISTATE_PROMISE_ERROR, payload: mockErrorResponse.response.status.toString() }
+      ];
+
+      return store.dispatch(editOtherWork({})).then(() => {
         const storeActions = store.getActions();
         expect(storeActions).to.deep.equal(expectedActions);
         store.clearActions();

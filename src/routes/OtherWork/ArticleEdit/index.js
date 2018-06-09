@@ -52,13 +52,15 @@ class ArticleEdit extends React.Component {
         {promiseError &&
           <p>error updating other-work article :( {promiseError.message}</p>
         }
-        {(!promiseLoading && promiseSuccess) &&
+
+        {!promiseLoading && (promiseSuccess && article.editSuccess) &&
           <div>
             <h2>Successfully updated! <br /><br />🚀</h2>
-            <Link to='other-work'>Go to other work</Link>
+            <Link to='/other-work'>Go to other work</Link>
           </div>
         }
-        {!promiseLoading && !promiseSuccess &&
+
+        {(!promiseLoading && !article.editSuccess) &&
           <OtherWorkArticleForm
             onSubmitForm={() => this.props.onEditArticle(article)}
             location={location}

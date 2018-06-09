@@ -23,7 +23,7 @@ import {
   // editNewsQueue
   default as newsReducer
 } from '../reducers/news';
-import { SET_SELECTED_NEWS_ARTICLE } from '../reducers/newsArticle';
+import { SET_SELECTED_NEWS_ARTICLE } from './newsArticle';
 import {
   API_ROOT,
   NEWS,
