@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { resetPromiseState } from '../../../reducers/uiState';
-import { destroySelectedOtherWorkArticle } from '../../../reducers/otherWorkArticle';
+import {
+  destroySelectedOtherWorkArticle,
+  fetchSingleOtherWorkArticle
+} from '../../../reducers/otherWorkArticle';
 import { editOtherWork } from '../../../reducers/otherWork';
 import { selectSelectedOtherWorkArticle } from '../../../selectors/otherWork';
 import OtherWorkArticleForm from '../../../components/OtherWorkArticleForm';
@@ -13,6 +16,14 @@ class ArticleEdit extends React.Component {
   componentWillUnmount() {
     this.props.resetPromiseState();
     this.props.onDestroyArticle();
+  }
+  
+  componentWillMount() {
+    const { article, match } = this.props;
+    const paramsId = match.params.id;
+    if (!article || !article._id) {
+      this.props.onFetchArticle(paramsId);
+    }
   }
 
   renderHtml(data) {
@@ -61,16 +72,19 @@ class ArticleEdit extends React.Component {
 ArticleEdit.propTypes = {
   onEditArticle: PropTypes.func.isRequired,
   onDestroyArticle: PropTypes.func.isRequired,
+  onFetchArticle: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
   promiseSuccess: PropTypes.bool,
   promiseError: PropTypes.bool,
   resetPromiseState: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired
 }
 
 const mapDispatchToProps = {
   onEditArticle: (article) => editOtherWork(article),
+  onFetchArticle: (id) => fetchSingleOtherWorkArticle(id),
   onDestroyArticle: () => destroySelectedOtherWorkArticle(),
   resetPromiseState: () => resetPromiseState()
 }

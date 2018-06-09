@@ -88,8 +88,7 @@ ArticleEdit.propTypes = {
   promiseError: PropTypes.bool,
   resetPromiseState: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
-  editSuccessFromStoreee: PropTypes.bool
+  match: PropTypes.object.isRequired
 }
 
 const mapDispatchToProps = {
@@ -104,8 +103,7 @@ const mapStateToProps = (state, props) => ({
   promiseLoading: state.uiState.promiseLoading,
   promiseSuccess: state.uiState.promiseSuccess,
   promiseError: state.uiState.promiseError,
-  state: state.location,
-  editSuccessFromStoreee: state.selectedNewsArticle.editSuccess
+  state: state.location
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleEdit)

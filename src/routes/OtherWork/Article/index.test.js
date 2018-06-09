@@ -38,22 +38,52 @@ describe('(Component) OtherWork - OtherWork', () => {
     };
   props = baseProps;
 
-  describe('on componentWillUnmount', () => {
-    let props,
-      wrapper;
-    beforeEach(() => {
-      props = {
-        ...baseProps,
-        resetPromiseState: sinon.spy(),
-        onDeleteArticle: sinon.spy()
-      }
-      wrapper = shallow(<Article {...props} />);
+  describe('methods', () => {
+    describe('componentWillUnmount', () => {
+      it('should call resetPromiseState', () => {
+        props.resetPromiseState = sinon.spy();
+        wrapper = shallow(<Article {...props} />);
+        wrapper.instance().componentWillUnmount();
+        expect(props.resetPromiseState).to.have.been.called;
+      });
     });
-    it('should call resetPromiseState', () => {
-      wrapper.unmount();
-      expect(props.resetPromiseState.calledOnce).to.eq(true);
+    describe('componentWillMount', () => {
+      describe('when an article does not exist / article._id is undefined', () => {
+        beforeEach(() => {
+          props = baseProps;
+          props.article = {};
+          props.onFetchArticle = sinon.spy();
+          wrapper = shallow(<Article {...props} />);
+        });
+        it('should call onFetchArticle', () => {
+          expect(props.onFetchArticle.calledOnce).to.eq(true);
+        });
+      });
+
+      describe('when an article id does not match param ID', () => {
+        it('should call onFetchArticle', () => {
+          props = baseProps;
+          props.article = { _id: 456 };
+          props.params = { id: 123 };
+          props.onFetchArticle = sinon.spy();
+          wrapper = shallow(<Article {...props} />);
+          expect(props.onFetchArticle.calledOnce).to.eq(true);
+        });
+      });
+
+      describe('when there is no param ID', () => {
+        it('should call onFetchArticle', () => {
+          props = baseProps;
+          props.article = { _id: 456 };
+          props.params = {};
+          props.onFetchArticle = sinon.spy();
+          wrapper = shallow(<Article {...props} />);
+          expect(props.onFetchArticle.calledOnce).to.eq(true);
+        });
+      });
     });
   });
+  
 
   it('should render <LoadingSpinner />', () => {
     const actual = wrapper.containsMatchingElement(
@@ -273,15 +303,6 @@ describe('(Component) OtherWork - OtherWork', () => {
         />
       );
       expect(actual).to.equal(true);
-    });
-  });
-
-  describe('componentWillUnmount', () => {
-    it('should call resetPromiseState', () => {
-      props.resetPromiseState = sinon.spy();
-      wrapper = shallow(<Article {...props} />);
-      wrapper.instance().componentWillUnmount();
-      expect(props.resetPromiseState).to.have.been.called;
     });
   });
 });
