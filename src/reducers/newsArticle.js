@@ -77,6 +77,12 @@ export const setSelectedNewsArticle = (article) => {
   }
 }
 
+export const setSelectedNewsArticleEditSuccess = (article) => {
+  return (dispatch) => {
+    dispatch(selectedNewsArticle(article));
+  }
+}
+
 export const fetchSingleNewsArticle = (articleId) => {
   return (dispatch) => {
     dispatch(promiseLoading(true));
@@ -98,9 +104,6 @@ export const fetchSingleNewsArticle = (articleId) => {
 export const deleteNewsArticle = (articleId) => {
   return (dispatch) => {
     dispatch(promiseLoading(true));
-    const postHeaders = new Headers(); // eslint-disable-line no-undef
-    postHeaders.set('Content-Type', 'application/json');
-    postHeaders.set('Authorization', localStorage.getItem('token')); // eslint-disable-line no-undef
     return new Promise((resolve, reject) => {
       return _axiosAuthHeaders.delete(API_ROOT + NEWS + '/' + articleId)
         .then((data) => {
@@ -110,7 +113,6 @@ export const deleteNewsArticle = (articleId) => {
             dispatch(deleteSuccess(data));
             dispatch(selectedNewsArticleDeleted());
             dispatch(fetchNewsArticles());
-            // dispatch(fetchNewsQueueArticles());
             resolve();
           } else {
             dispatch(promiseLoading(false));
@@ -163,6 +165,7 @@ export const actions = {
   fetchSingleNewsArticle,
   deleteNewsArticle,
   setSelectedNewsArticle,
+  setSelectedNewsArticleEditSuccess,
   selectedNewsArticleDeleted,
   destroySelectedNewsArticle
   // deleteScheduledArticle

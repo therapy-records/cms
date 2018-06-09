@@ -22,9 +22,11 @@ class ArticleCreate extends React.Component {
 
     return (
       <div className='container'>
-        {promiseLoading &&
-          <LoadingSpinner />
-        }
+
+        <LoadingSpinner
+          fullScreen
+          active={promiseLoading}
+        />
 
         {promiseError &&
           <p>error posting article :( {promiseError.message}</p>
@@ -33,7 +35,7 @@ class ArticleCreate extends React.Component {
         {!promiseLoading && promiseSuccess &&
           <div>
             <h2>Successfully posted! <br /><br />🚀</h2>
-            <Link to='/other-work' className='news-link'>Go to Other Work</Link>
+            <Link to='/other-work'>Go to Other Work</Link>
           </div>
         }
 

@@ -24,6 +24,7 @@ export class Article extends React.Component {
     }
     this.handleModalOpen = this.handleModalOpen.bind(this);
     this.handleModalClose = this.handleModalClose.bind(this);
+    this.handleOnDeleteArticle = this.handleOnDeleteArticle.bind(this);
   }
 
   handleModalOpen() {
@@ -58,13 +59,8 @@ export class Article extends React.Component {
     return { __html: data }
   }
 
-  handleOnDeleteArticle(article) {
-    // if (article.scheduledTime) {
-    //   this.props.onDeleteScheduledArticle(article._id)
-    // } else {
-    //   this.props.onDeleteArticle(article._id)
-    // }
-    this.props.onDeleteArticle(article._id)
+  handleOnDeleteArticle() {
+    this.props.onDeleteArticle(this.props.article._id)
     this.handleModalClose();
   }
 
@@ -110,6 +106,7 @@ export class Article extends React.Component {
 
     return (
       <article className='container article'>
+
         <LoadingSpinner
           active={promiseLoading}
           fullScreen

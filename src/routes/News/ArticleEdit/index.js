@@ -8,7 +8,10 @@ import {
   editNews
   // editNewsQueue
 } from '../../../reducers/news';
-import { destroySelectedNewsArticle } from '../../../reducers/newsArticle';
+import {
+  destroySelectedNewsArticle,
+  fetchSingleNewsArticle
+} from '../../../reducers/newsArticle';
 import NewsArticleForm from '../../../components/NewsArticleForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
@@ -16,6 +19,14 @@ export class ArticleEdit extends React.Component {
   componentWillUnmount() {
     this.props.resetPromiseState();
     this.props.onDestroyArticle();
+  }
+
+  componentWillMount() {
+    const {article, match} = this.props;
+    const paramsId = match.params.id;
+    if (!article || !article._id) {
+      this.props.onFetchArticle(paramsId);
+    }
   }
 
   renderHtml(data) {
@@ -31,26 +42,32 @@ export class ArticleEdit extends React.Component {
       location
     } = this.props;
 
+
     if (!article || !article.title) {
       return null;
     }
 
     return (
       <article className='container'>
-        {promiseLoading &&
-          <LoadingSpinner />
-        }
+        
+        <LoadingSpinner
+          active={promiseLoading}
+          fullScreen
+        />
+
 
         {promiseError &&
           <p>error updating news article :( {promiseError.message}</p>
         }
-        {(!promiseLoading && promiseSuccess) &&
+
+        {!promiseLoading && (promiseSuccess && article.editSuccess) &&
           <div>
             <h2>Successfully updated! <br /><br />🚀</h2>
-            <Link to='news' className='news-link'>Go to news</Link>
+            <Link to='/news'>Go to news</Link>
           </div>
         }
-        {!promiseLoading && !promiseSuccess &&
+
+        {(!promiseLoading && !article.editSuccess) &&
           <NewsArticleForm
             onSubmitForm={() => this.props.onEditArticle(article)}
             location={location}
@@ -63,19 +80,21 @@ export class ArticleEdit extends React.Component {
 
 ArticleEdit.propTypes = {
   onEditArticle: PropTypes.func.isRequired,
-  // onEditArticleQueue: PropTypes.func.isRequired,
+  onFetchArticle: PropTypes.func.isRequired,
   onDestroyArticle: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
   promiseSuccess: PropTypes.bool,
   promiseError: PropTypes.bool,
   resetPromiseState: PropTypes.func.isRequired,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+  editSuccessFromStoreee: PropTypes.bool
 }
 
 const mapDispatchToProps = {
   onEditArticle: (article) => editNews(article),
-  // onEditArticleQueue: (article) => editNewsQueue(article),
+  onFetchArticle: (id) => fetchSingleNewsArticle(id),
   onDestroyArticle: () => destroySelectedNewsArticle(),
   resetPromiseState: () => resetPromiseState()
 }
@@ -85,7 +104,8 @@ const mapStateToProps = (state, props) => ({
   promiseLoading: state.uiState.promiseLoading,
   promiseSuccess: state.uiState.promiseSuccess,
   promiseError: state.uiState.promiseError,
-  state: state.location
+  state: state.location,
+  editSuccessFromStoreee: state.selectedNewsArticle.editSuccess
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleEdit)

@@ -32,7 +32,7 @@ export class ArticleCreate extends React.Component {
         {!promiseLoading && promiseSuccess &&
           <div>
             <h2>Successfully posted! <br /><br />🚀</h2>
-            <Link to='/news' className='news-link'>Go to news</Link>
+            <Link to='/news'>Go to news</Link>
           </div>
         }
 

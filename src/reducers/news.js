@@ -12,6 +12,8 @@ import {
   promiseError
 } from './uiState';
 
+import { setSelectedNewsArticleEditSuccess } from './newsArticle';
+
 export const FETCH_NEWS_ARTICLES_SUCCESS = 'FETCH_NEWS_ARTICLES_SUCCESS';
 export const POST_NEWS_FORM_SUCCESS = 'POST_NEWS_FORM_SUCCESS';
 export const EDIT_NEWS_SUCCESS = 'EDIT_NEWS_SUCCESS';
@@ -126,8 +128,10 @@ export const editNews = (postToEdit) => {
       JSON.stringify(postToEdit)
     ).then(
       (data) => {
+        postToEdit.editSuccess = true;
         dispatch(promiseLoading(false));
         dispatch(promiseSuccess(true));
+        dispatch(setSelectedNewsArticleEditSuccess(postToEdit))
         dispatch(editNewsSuccess());
       }, (err) => {
         dispatch(promiseLoading(false));

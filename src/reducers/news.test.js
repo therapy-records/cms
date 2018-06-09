@@ -23,6 +23,7 @@ import {
   // editNewsQueue
   default as newsReducer
 } from '../reducers/news';
+import { SET_SELECTED_NEWS_ARTICLE } from '../reducers/newsArticle';
 import {
   API_ROOT,
   NEWS,
@@ -32,8 +33,7 @@ import {
 import {
   UISTATE_PROMISE_LOADING,
   UISTATE_PROMISE_SUCCESS,
-  UISTATE_PROMISE_ERROR,
-  UISTATE_PROMISE_SUCCESS_RESET
+  UISTATE_PROMISE_ERROR
 } from '../constants/actions';
 
 const middlewares = [thunk];
@@ -262,6 +262,7 @@ describe('(Redux Module) news', () => {
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
         { type: UISTATE_PROMISE_SUCCESS, payload: true },
+        { type: SET_SELECTED_NEWS_ARTICLE, payload: mock.newsArticle },
         { type: EDIT_NEWS_SUCCESS }
       ];
 
@@ -272,6 +273,22 @@ describe('(Redux Module) news', () => {
         store.clearActions();
       });
     });
+
+    it('should dispatch setSelectedNewsArticleEditSuccess action with editSuccess added to payload', () => {
+      _axiosAuthHeaders.put = sinon.stub().returns(Promise.resolve(mock.newsArticle));
+      nock(API_ROOT + NEWS + 'asdf1234')
+        .put(`${NEWS}asdf1234`, {})
+        .reply(200, mock.newsArticle);
+
+      store.clearActions();
+      return store.dispatch(editNews(mock.newsArticle)).then(() => {
+        const storeActions = store.getActions();
+        const actionWithEditedArticle = storeActions.find(a => a.type === SET_SELECTED_NEWS_ARTICLE);
+        expect(actionWithEditedArticle.payload.editSuccess).to.eq(true);
+        store.clearActions();
+      });
+    });
+
 
     it('should dispatch the correct actions on error', () => {
       _axiosAuthHeaders.put = sinon.stub().returns(Promise.reject(mockErrorResponse));

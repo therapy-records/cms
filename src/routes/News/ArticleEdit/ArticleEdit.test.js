@@ -14,21 +14,58 @@ describe('(Component) News - ArticleEdit', () => {
     props,
     baseProps = {
       onEditArticle: () => {},
-      // onEditArticleQueue: () => {},
+      onFetchArticle: () => { },
+      onDestroyArticle: () => {},
       resetPromiseState: () => {},
-      article: { title: 'test' },
+      article: { title: 'test', id: 'asdf1234' },
       location: {
         pathname: 'article/edit'
+      },
+      match: {
+        params: { id: 123 }
       }
     };
 
-  it('should call onDestroyArticle on componentWillUnmount', () => {
-    let props = baseProps;
-    props.onDestroyArticle = sinon.spy();
-    wrapper = shallow(<ArticleEdit {...props} />);
-    wrapper.unmount();
-    expect(props.onDestroyArticle).to.have.been.called;
-    expect(props.onDestroyArticle).to.have.been.calledOnce;
+  describe('methods', () => {
+
+    describe('componentWillUnmount', () => {
+      it('should call resetPromiseState', () => {
+        let props = baseProps;
+        props.resetPromiseState = sinon.spy();
+        wrapper = shallow(<ArticleEdit {...props} />);
+        wrapper.unmount();
+        expect(props.resetPromiseState).to.have.been.called;
+        expect(props.resetPromiseState).to.have.been.calledOnce;
+      });
+      it('should call onDestroyArticle', () => {
+        let props = baseProps;
+        props.onDestroyArticle = sinon.spy();
+        wrapper = shallow(<ArticleEdit {...props} />);
+        wrapper.unmount();
+        expect(props.onDestroyArticle).to.have.been.called;
+        expect(props.onDestroyArticle).to.have.been.calledOnce;
+      });
+    });
+
+    describe('componentWillMount', () => {
+      it('should call onFetchArticle if there is no article', () => {
+        let props = baseProps;
+        props.onFetchArticle = sinon.spy();
+        wrapper = shallow(<ArticleEdit {...props} article={{}} />);
+        wrapper.unmount();
+        expect(props.onFetchArticle).to.have.been.called;
+        expect(props.onFetchArticle).to.have.been.calledOnce;
+      });
+      it('should call onFetchArticle if there is no article', () => {
+        let props = baseProps;
+        props.onFetchArticle = sinon.spy();
+        wrapper = shallow(<ArticleEdit {...props} article={{ title: 'test' }} />);
+        wrapper.unmount();
+        expect(props.onFetchArticle).to.have.been.called;
+        expect(props.onFetchArticle).to.have.been.calledOnce;
+      });
+    });
+
   });
 
   it('should render a NewsArticleForm', () => {
@@ -46,23 +83,27 @@ describe('(Component) News - ArticleEdit', () => {
     });
     it('should show loading', () => {
       const actual = wrapper.containsMatchingElement(
-        <LoadingSpinner />
+        <LoadingSpinner
+          active={props.promiseLoading}
+          fullScreen
+        />
       );
       expect(actual).to.equal(true);
     });
   });
 
-  describe('when article is successfully posted and promise not loading', () => {
+  describe('when article is successfully posted, promise not loading and article.editSuccess', () => {
     beforeEach(() => {
       props = baseProps;
       props.promiseLoading = false;
       props.promiseSuccess = true;
+      props.article.editSuccess = true;
       wrapper = shallow(<ArticleEdit {...props} />);
     });
     it('should show success message and link', () => {
       const actual = wrapper.containsAllMatchingElements([
         <h2>Successfully updated! <br /><br />🚀</h2>,
-        <Link to='news' className='news-link'>Go to news</Link>
+        <Link to='/news'>Go to news</Link>
       ]);
       expect(actual).to.equal(true);
     });
