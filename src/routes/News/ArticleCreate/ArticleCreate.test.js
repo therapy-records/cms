@@ -62,7 +62,7 @@ describe('(Component) News - ArticleCreate', () => {
     it('should show success message and link', () => {
       const actual = wrapper.containsAllMatchingElements([
         <h2>Successfully created! <small>🚀</small></h2>,
-        <button to='/news'>Go to news</button>,
+        <Link to='/news' className='btn'>Go to news</Link>,
         <Link to='/news/create'>Create another article</Link>
       ]);
       expect(actual).to.equal(true);
