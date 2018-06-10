@@ -70,10 +70,10 @@ export const postOtherWork = () => {
       API_ROOT + OTHER_WORK_CREATE,
       getFormObj()
     ).then(
-      (data) => {
+      (res) => {
         dispatch(promiseLoading(false));
         dispatch(promiseSuccess(true));
-        dispatch(postOtherWorkSuccess(data));
+        dispatch(postOtherWorkSuccess(res.data));
       }, (err) => {
         dispatch(promiseLoading(false));
         dispatch(promiseError(err.response && err.response.status.toString()));
@@ -131,7 +131,10 @@ const ACTION_HANDLERS = {
   [FETCH_OTHER_WORK_ARTICLES_SUCCESS]: (state, action) => {
     return { ...state, articles: action.payload }
   },
-  [POST_OTHER_WORK_FORM_SUCCESS]: (state, action) => state = action.payload
+  [POST_OTHER_WORK_FORM_SUCCESS]: (state, action) => state = {
+    ...state,
+    articles: [...state.articles, action.payload]
+  }
 }
 /* eslint-enable no-return-assign */
 

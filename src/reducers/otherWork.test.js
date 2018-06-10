@@ -45,6 +45,11 @@ const mock = {
       { title: 'do something else' }
     ]
   },
+  postOtherWorkResponse: {
+    data: {
+      title: 'do something'
+    }
+  },
   article: mockArticle
 };
 
@@ -167,7 +172,7 @@ describe('(Redux Module) news', () => {
     });
 
     it('should dispatch the correct actions on success', () => {
-      _axiosAuthHeaders.post = sinon.stub().returns(Promise.resolve(mock.article));
+      _axiosAuthHeaders.post = sinon.stub().returns(Promise.resolve(mock.postOtherWorkResponse));
       nock(API_ROOT + OTHER_WORK_CREATE)
         .post(OTHER_WORK_CREATE, mock.article)
         .reply(200, mock.article);
@@ -176,7 +181,7 @@ describe('(Redux Module) news', () => {
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
         { type: UISTATE_PROMISE_SUCCESS, payload: true },
-        { type: POST_OTHER_WORK_FORM_SUCCESS, payload: mock.article }
+        { type: POST_OTHER_WORK_FORM_SUCCESS, payload: mock.postOtherWorkResponse.data }
       ];
 
       store.clearActions();
