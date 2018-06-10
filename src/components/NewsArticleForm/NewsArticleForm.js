@@ -144,6 +144,7 @@ export class NewsArticleForm extends React.Component {
                   <Field name='secondaryImageUrl'
                          component={DropzoneImageUpload}
                          title='Second image'
+                         minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
                   />
                 : 
                   <div className='secondary-image-toggle-container'>
@@ -151,7 +152,6 @@ export class NewsArticleForm extends React.Component {
                       type='button'
                       onClick={this.handleSecondaryImageToggle}
                       className='btn-sm secondary-img-toggle'
-                      style={{ width: 'auto' }}
                     >Add second image
                     </button>
                   </div>

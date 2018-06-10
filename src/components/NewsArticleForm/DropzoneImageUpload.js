@@ -158,7 +158,7 @@ export class DropzoneImageUpload extends React.Component {
             </Dropzone>
 
             {minImageDimensions &&
-              <p className='dropzone-image-dimension-notice'>Image must be at least {minImageDimensions.width}px x {minImageDimensions.height}px</p>
+              <p className='dropzone-image-dimension-notice'>Image must be at least {minImageDimensions.width}px by {minImageDimensions.height}px</p>
             }
 
           </div>
