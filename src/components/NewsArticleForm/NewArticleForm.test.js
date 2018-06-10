@@ -110,7 +110,7 @@ describe('(Component) NewsArticleForm', () => {
     describe('secondaryImageUrl', () => {
       it('should render a button toggle ', () => {
         const actual = wrapper.containsMatchingElement(
-          <button>Add secondary featured image</button>
+          <button>Add second image</button>
         );
         expect(actual).to.equal(true);
       });
@@ -122,33 +122,22 @@ describe('(Component) NewsArticleForm', () => {
         );
         expect(actual).to.equal(false);
       });
-      it('should show/hide the secondaryImageUrl field on button toggle ', () => {
+      it('should show the secondaryImageUrl field on button toggle ', () => {
         const button = wrapper.find('.secondary-img-toggle');
         button.simulate('click');
         let actual = wrapper.containsMatchingElement(
           <Field name='secondaryImageUrl'
-            title='Secondary featured image'
+            title='Second image'
             component={DropzoneImageUpload} />
         );
         expect(actual).to.equal(true);
-        button.simulate('click');
-        actual = wrapper.containsMatchingElement(
-          <Field name='secondaryImageUrl'
-            title='Secondary featured image'
-            component={DropzoneImageUpload} />
-        );
-        expect(actual).to.equal(false);
       });
 
-      it('should change button text on toggle ', () => {
+      it('should hide the button on toggle ', () => {
         let button = wrapper.find('.secondary-img-toggle');
-        expect(button.text()).to.eq('Add secondary featured image');
         button.simulate('click');
         button = wrapper.find('.secondary-img-toggle');
-        expect(button.text()).to.eq('Remove secondary featured image');
-        button.simulate('click');
-        button = wrapper.find('.secondary-img-toggle');
-        expect(button.text()).to.eq('Add secondary featured image'); // remove
+        expect(button.length).to.eq(0);
       });
     });
 

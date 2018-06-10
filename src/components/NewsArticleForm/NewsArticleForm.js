@@ -128,47 +128,54 @@ export class NewsArticleForm extends React.Component {
           </div>
 
           <div className='row-large'>
-            <Field name='mainImage.url'
+            <div className='cols-container'>
+
+              <div>
+                <Field name='mainImage.url'
                   title='Image'
                   component={DropzoneImageUpload}
                   existingImage={formValues && formValues.mainImage && formValues.mainImage.url}
                   minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
-            />
-          </div>
-
-          <div className='row-large'>
-            <Field name='mainImage.externalLink'
-                  component={TextInput}
-                  type='url'
-                  title='Image link'
-                  label='Image link'
-                  placeholder='http://bbc.co.uk/fiona-ross'
-            />
-          </div>
-
-          <div className='row-large'>
-            <button
-              onClick={this.handleSecondaryImageToggle}
-              className='btn-sm secondary-img-toggle'
-              style={{ width: 'auto' }}
-            >
-              {showSecondaryImageField ?
-                'Remove secondary featured image' :
-                'Add secondary featured image'
-              }
-            </button>
-
-            {showSecondaryImageField &&
-              <div>
-                <br />
-                <Field name='secondaryImageUrl'
-                       component={DropzoneImageUpload}
-                       title='Secondary featured image'
                 />
               </div>
-            }
+
+              <div>
+                {showSecondaryImageField ?
+                  <Field name='secondaryImageUrl'
+                         component={DropzoneImageUpload}
+                         title='Second image'
+                  />
+                : 
+                  <div className='secondary-image-toggle-container'>
+                    <button
+                      type='button'
+                      onClick={this.handleSecondaryImageToggle}
+                      className='btn-sm secondary-img-toggle'
+                      style={{ width: 'auto' }}
+                    >Add second image
+                    </button>
+                  </div>
+                }
+              </div>
+
+            </div>
           </div>
-          
+
+          <div className='row-large'>
+            <div className='cols-container links-cols-container'>
+              <div className='col-50'>
+                <Field name='mainImage.externalLink'
+                      component={TextInput}
+                      type='url'
+                      title='Image link'
+                      label='Image link'
+                      placeholder='http://bbc.co.uk/fiona-ross'
+                />
+              </div>
+              <div className='col-50' />
+            </div>
+          </div>
+
           <div className='row-large'>
             <div className='cols-container links-cols-container'>
               <div className='col-50'>
