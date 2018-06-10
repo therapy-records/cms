@@ -5,6 +5,7 @@ import {
   // selectNewsArticlesQueue,
   // selectNewsArticlesQueueReverse,
   filterNewsArticlesArticle,
+  selectNewsArticlesArticle,
   selectSelectedNewsArticle,
   selectSelectedNewsArticleTitle,
   selectSelectedNewsArticleBodyMain,
@@ -16,7 +17,7 @@ import {
   selectSelectedNewsArticleVenueLink,
   selectSelectedNewsArticleMiniGalleryImages,
   selectSelectedNewsArticleVideoEmbed,
-  selectSelectedNewsArticleScheduledTime,
+  // selectSelectedNewsArticleScheduledTime,
   selectSelectedNewsArticleSocialShare,
   selectSelectedNewsArticleSocialShareHashtags
 } from './news';
@@ -79,13 +80,13 @@ const mockState = {
 };
 
 describe('(Selectors) news', () => {
-  const postId = 'asdf1234';
+  const articleId = 'asdf1234';
   let _newsArticle,
     _mockSelectedNewsArticle,
     newsArticle,
     mockSelectedNewsArticle;
   beforeEach(() => {
-    _newsArticle = selectSelectedNewsArticle(mockState, postId);
+    _newsArticle = selectSelectedNewsArticle(mockState, articleId);
     _mockSelectedNewsArticle = selectSelectedNewsArticle(mockState)
     newsArticle = _newsArticle;
     mockSelectedNewsArticle = _mockSelectedNewsArticle
@@ -124,9 +125,18 @@ describe('(Selectors) news', () => {
   });
 
   describe('filterNewsArticlesArticle', () => {
+    it('should filter articles by id', () => {
+      const actual = filterNewsArticlesArticle(mockState, articleId);
+      const expected = mockState.news.articles.filter(p => p._id === articleId);
+      expect(actual).to.deep.eq(expected);
+    });
+  });
+
+  describe('selectNewsArticlesArticle', () => {
     it('should return a post in array', () => {
-      const actual = filterNewsArticlesArticle(mockState, postId);
-      const expected = [newsArticle];
+      const actual = selectNewsArticlesArticle(mockState, articleId);
+      const filtered = mockState.news.articles.filter(p => p._id === articleId);
+      const expected = filtered[0];
       expect(actual).to.deep.equal(expected);
     });
   });
@@ -141,7 +151,7 @@ describe('(Selectors) news', () => {
 
   describe('selectSelectedNewsArticleTitle', () => {
     it('should return a title', () => {
-      const actual = selectSelectedNewsArticleTitle(mockState, postId);
+      const actual = selectSelectedNewsArticleTitle(mockState, articleId);
       const expected = newsArticle.title;
       expect(actual).to.equal(expected);
     });
@@ -149,7 +159,7 @@ describe('(Selectors) news', () => {
 
   describe('selectSelectedNewsArticleBodyMain', () => {
     it('should return bodyMain', () => {
-      const actual = selectSelectedNewsArticleBodyMain(mockState, postId);
+      const actual = selectSelectedNewsArticleBodyMain(mockState, articleId);
       const expected = newsArticle.bodyMain;
       expect(actual).to.deep.equal(expected);
     });
@@ -157,7 +167,7 @@ describe('(Selectors) news', () => {
 
   describe('selectSelectedNewsArticleQuotes', () => {
     it('should return bodyMain', () => {
-      const actual = selectSelectedNewsArticleQuotes(mockState, postId);
+      const actual = selectSelectedNewsArticleQuotes(mockState, articleId);
       const expected = newsArticle.quotes;
       expect(actual).to.deep.equal(expected);
     });
@@ -165,7 +175,7 @@ describe('(Selectors) news', () => {
 
   describe('selectSelectedNewsArticleMainImageUrl', () => {
     it('should return bodyMain', () => {
-      const actual = selectSelectedNewsArticleMainImageUrl(mockState, postId);
+      const actual = selectSelectedNewsArticleMainImageUrl(mockState, articleId);
       const expected = newsArticle.mainImage.url;
       expect(actual).to.equal(expected);
     });
@@ -173,7 +183,7 @@ describe('(Selectors) news', () => {
 
   describe('selectSelectedNewsArticleMainImageExternalLink', () => {
     it('should return bodyMain', () => {
-      const actual = selectSelectedNewsArticleMainImageExternalLink(mockState, postId);
+      const actual = selectSelectedNewsArticleMainImageExternalLink(mockState, articleId);
       const expected = newsArticle.mainImage.externalLink;
       expect(actual).to.equal(expected);
     });
@@ -181,7 +191,7 @@ describe('(Selectors) news', () => {
 
   describe('selectSelectedNewsArticleSecondaryImageUrl', () => {
     it('should return bodyMain', () => {
-      const actual = selectSelectedNewsArticleSecondaryImageUrl(mockState, postId);
+      const actual = selectSelectedNewsArticleSecondaryImageUrl(mockState, articleId);
       const expected = newsArticle.mainImageUrl;
       expect(actual).to.equal(expected);
     });
@@ -189,7 +199,7 @@ describe('(Selectors) news', () => {
 
   describe('selectSelectedNewsArticleTicketsLink', () => {
     it('should return bodyMain', () => {
-      const actual = selectSelectedNewsArticleTicketsLink(mockState, postId);
+      const actual = selectSelectedNewsArticleTicketsLink(mockState, articleId);
       const expected = newsArticle.ticketsLink;
       expect(actual).to.equal(expected);
     });
@@ -197,7 +207,7 @@ describe('(Selectors) news', () => {
 
   describe('selectSelectedNewsArticleVenueLink', () => {
     it('should return bodyMain', () => {
-      const actual = selectSelectedNewsArticleVenueLink(mockState, postId);
+      const actual = selectSelectedNewsArticleVenueLink(mockState, articleId);
       const expected = newsArticle.venueLink;
       expect(actual).to.equal(expected);
     });
@@ -205,7 +215,7 @@ describe('(Selectors) news', () => {
 
   describe('selectSelectedNewsArticleMiniGalleryImages', () => {
     it('should return bodyMain', () => {
-      const actual = selectSelectedNewsArticleMiniGalleryImages(mockState, postId);
+      const actual = selectSelectedNewsArticleMiniGalleryImages(mockState, articleId);
       const expected = newsArticle.miniGalleryImages;
       expect(actual).to.deep.equal(expected);
     });
@@ -213,7 +223,7 @@ describe('(Selectors) news', () => {
 
   describe('selectSelectedNewsArticleVideoEmbed', () => {
     it('should return bodyMain', () => {
-      const actual = selectSelectedNewsArticleVideoEmbed(mockState, postId);
+      const actual = selectSelectedNewsArticleVideoEmbed(mockState, articleId);
       const expected = newsArticle.videoEmbed;
       expect(actual).to.equal(expected);
     });
@@ -221,7 +231,7 @@ describe('(Selectors) news', () => {
 
   // describe('selectSelectedNewsArticleScheduledTime', () => {
   //   it('should return scheduledTime', () => {
-  //     const actual = selectSelectedNewsArticleScheduledTime(mockState, postId);
+  //     const actual = selectSelectedNewsArticleScheduledTime(mockState, articleId);
   //     const expected = newsArticle.scheduledTime;
   //     expect(actual).to.equal(expected);
   //   });
@@ -229,7 +239,7 @@ describe('(Selectors) news', () => {
 
   describe('selectSelectedNewsArticleSocialShare', () => {
     it('should return socialShare', () => {
-      const actual = selectSelectedNewsArticleSocialShare(mockState, postId);
+      const actual = selectSelectedNewsArticleSocialShare(mockState, articleId);
       const expected = newsArticle.socialShare;
       expect(actual).to.equal(expected);
     });
@@ -237,7 +247,7 @@ describe('(Selectors) news', () => {
 
   describe('selectSelectedNewsArticleSocialShareHashtags', () => {
     it('should return socialShare.hashtags', () => {
-      const actual = selectSelectedNewsArticleSocialShareHashtags(mockState, postId);
+      const actual = selectSelectedNewsArticleSocialShareHashtags(mockState, articleId);
       const expected = newsArticle.socialShare.hashtags;
       expect(actual).to.equal(expected);
     });
