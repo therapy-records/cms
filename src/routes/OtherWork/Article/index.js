@@ -4,12 +4,17 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { resetPromiseState } from '../../../reducers/uiState';
-import { selectSelectedOtherWorkArticle } from '../../../selectors/otherWork';
 import {
   deleteOtherWorkArticle,
   fetchSingleOtherWorkArticle,
   destroySelectedOtherWorkArticle
 } from '../../../reducers/otherWorkArticle';
+import {
+  selectUiStateLoading,
+  selectUiStateSuccess,
+  selectUiStateError
+} from '../../../selectors/uiState';
+import { selectSelectedOtherWorkArticle } from '../../../selectors/otherWork';
 import ArticleDeleteModal from '../../../components/ArticleDeleteModal'
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import PromiseError from '../../../components/PromiseError';
@@ -178,9 +183,9 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state, props) => ({
   article: selectSelectedOtherWorkArticle(state),
-  promiseLoading: state.uiState.promiseLoading,
-  promiseSuccess: state.uiState.promiseSuccess,
-  promiseError: state.uiState.promiseError,
+  promiseLoading: selectUiStateLoading(state),
+  promiseSuccess: selectUiStateSuccess(state),
+  promiseError: selectUiStateError(state),
   location: state.location
 })
 

@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { postOtherWork } from '../../../reducers/otherWork';
 import { resetPromiseState } from '../../../reducers/uiState';
+import {
+  selectUiStateLoading,
+  selectUiStateSuccess
+} from '../../../selectors/uiState';
 import OtherWorkArticleForm from '../../../components/OtherWorkArticleForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
@@ -69,8 +73,8 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  promiseLoading: state.uiState.promiseLoading,
-  promiseSuccess: state.uiState.promiseSuccess,
+  promiseLoading: selectUiStateLoading(state),
+  promiseSuccess: selectUiStateSuccess(state),
   location: state.location
 })
 

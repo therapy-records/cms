@@ -9,6 +9,11 @@ import {
 } from '../../../reducers/otherWorkArticle';
 import { editOtherWork } from '../../../reducers/otherWork';
 import { selectSelectedOtherWorkArticle } from '../../../selectors/otherWork';
+import {
+  selectUiStateLoading,
+  selectUiStateSuccess,
+  selectUiStateError
+} from '../../../selectors/uiState';
 import OtherWorkArticleForm from '../../../components/OtherWorkArticleForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
@@ -94,9 +99,9 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state, props) => ({
   article: selectSelectedOtherWorkArticle(state),
-  promiseLoading: state.uiState.promiseLoading,
-  promiseSuccess: state.uiState.promiseSuccess,
-  promiseError: state.uiState.promiseError,
+  promiseLoading: selectUiStateLoading(state),
+  promiseSuccess: selectUiStateSuccess(state),
+  promiseError: selectUiStateError(state),
   state: state.location
 });
 

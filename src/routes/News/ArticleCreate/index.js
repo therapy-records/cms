@@ -5,6 +5,10 @@ import { connect } from 'react-redux';
 // import { postNews, postNewsQueue } from '../../../reducers/news';
 import { postNews } from '../../../reducers/news';
 import { resetPromiseState } from '../../../reducers/uiState';
+import {
+  selectUiStateLoading,
+  selectUiStateSuccess
+} from '../../../selectors/uiState';
 import NewsArticleForm from '../../../components/NewsArticleForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
@@ -72,8 +76,8 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  promiseLoading: state.uiState.promiseLoading,
-  promiseSuccess: state.uiState.promiseSuccess,
+  promiseLoading: selectUiStateLoading(state),
+  promiseSuccess: selectUiStateSuccess(state),
   location: state.location
 })
 

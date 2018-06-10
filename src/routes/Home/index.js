@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LoginForm from '../../components/LoginForm';
 import { userLogin } from '../../reducers/user';
+import { selectUiStateLoading } from '../../selectors/uiState';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import './styles.css';
 
@@ -75,7 +76,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   isAuth: state.user.isAuth,
-  promiseLoading: state.uiState.promiseLoading,
+  promiseLoading: selectUiStateLoading(state),
   authError: state.user.authError
 })
 

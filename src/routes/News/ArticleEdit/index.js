@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { selectSelectedNewsArticle } from '../../../selectors/news';
 import { resetPromiseState } from '../../../reducers/uiState';
 import {
   editNews
@@ -12,6 +11,12 @@ import {
   destroySelectedNewsArticle,
   fetchSingleNewsArticle
 } from '../../../reducers/newsArticle';
+import { selectSelectedNewsArticle } from '../../../selectors/news';
+import {
+  selectUiStateLoading,
+  selectUiStateSuccess,
+  selectUiStateError
+} from '../../../selectors/uiState';
 import NewsArticleForm from '../../../components/NewsArticleForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
@@ -102,9 +107,9 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state, props) => ({
   article: selectSelectedNewsArticle(state),
-  promiseLoading: state.uiState.promiseLoading,
-  promiseSuccess: state.uiState.promiseSuccess,
-  promiseError: state.uiState.promiseError,
+  promiseLoading: selectUiStateLoading(state),
+  promiseSuccess: selectUiStateSuccess(state),
+  promiseError: selectUiStateError(state),
   state: state.location
 });
 

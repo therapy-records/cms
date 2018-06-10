@@ -6,7 +6,8 @@ import moment from 'moment';
 import { fetchOtherWorkArticles } from '../../../reducers/otherWork';
 import { setSelectedOtherWorkArticle } from '../../../reducers/otherWorkArticle';
 import { resetPromiseState } from '../../../reducers/uiState';
-import { selectOtherWorkArticles } from '../../../selectors/otherWork'
+import { selectOtherWorkArticles } from '../../../selectors/otherWork';
+import { selectUiStateLoading } from '../../../selectors/uiState';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
 
@@ -123,7 +124,7 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = (state) => ({
-  promiseLoading: state.uiState.promiseLoading,
+  promiseLoading: selectUiStateLoading(state),
   articles: selectOtherWorkArticles(state)
 })
 

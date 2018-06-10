@@ -11,6 +11,7 @@ import {
   selectNewsArticlesReverse
   // selectNewsArticlesQueueReverse
 } from '../../../selectors/news';
+import { selectUiStateLoading } from '../../../selectors/uiState';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
 
@@ -172,7 +173,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  promiseLoading: state.uiState.promiseLoading,
+  promiseLoading: selectUiStateLoading(state),
   articles: selectNewsArticlesReverse(state)
   // articlesQueue: selectNewsArticlesQueueReverse(state)
 })

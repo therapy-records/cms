@@ -6,6 +6,7 @@ import { fetchNewsArticles } from '../../reducers/news';
 import { fetchOtherWorkArticles } from '../../reducers/otherWork';
 import { resetPromiseState } from '../../reducers/uiState';
 import { selectNewsArticles } from '../../selectors/news';
+import { selectUiStateLoading } from '../../selectors/uiState';
 import { selectOtherWorkArticles } from '../../selectors/otherWork';
 import './styles.css';
 import LoadingSpinner from '../../components/LoadingSpinner';
@@ -76,7 +77,7 @@ Dashboard.propTypes = {
 const mapStateToProps = (state) => ({
   newsArticles: selectNewsArticles(state),
   otherWorkArticles: selectOtherWorkArticles(state),
-  promiseLoading: state.uiState.promiseLoading
+  promiseLoading: selectUiStateLoading(state)
 })
 
 const mapDispatchToProps = {

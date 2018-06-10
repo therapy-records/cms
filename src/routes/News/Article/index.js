@@ -7,6 +7,11 @@ import { resetPromiseState } from '../../../reducers/uiState';
 import { fetchNewsArticles } from '../../../reducers/news';
 import { selectSelectedNewsArticle } from '../../../selectors/news';
 import {
+  selectUiStateLoading,
+  selectUiStateSuccess,
+  selectUiStateError
+} from '../../../selectors/uiState';
+import {
   deleteNewsArticle,
   // deleteScheduledArticle,
   fetchSingleNewsArticle,
@@ -285,9 +290,9 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state, props) => ({
   article: selectSelectedNewsArticle(state),
-  promiseLoading: state.uiState.promiseLoading,
-  promiseSuccess: state.uiState.promiseSuccess,
-  promiseError: state.uiState.promiseError
+  promiseLoading: selectUiStateLoading(state),
+  promiseSuccess: selectUiStateSuccess(state),
+  promiseError: selectUiStateError(state)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Article)
