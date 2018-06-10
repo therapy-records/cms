@@ -93,10 +93,10 @@ export const postNews = () => {
       API_ROOT + NEWS_CREATE,
       getFormObj()
     ).then(
-      (data) => {
+      (res) => {
         dispatch(promiseLoading(false));
         dispatch(promiseSuccess(true));
-        dispatch(postNewsSuccess(data));
+        dispatch(postNewsSuccess(res.data));
       }, (err) => {
         dispatch(promiseLoading(false));
         dispatch(promiseError(err.response && err.response.status.toString()));
@@ -242,7 +242,10 @@ const ACTION_HANDLERS = {
   [FETCH_NEWS_ARTICLES_SUCCESS]: (state, action) => {
     return { ...state, articles: action.payload }
   },
-  [POST_NEWS_FORM_SUCCESS]: (state, action) => state = action.payload
+  [POST_NEWS_FORM_SUCCESS]: (state, action) => state = {
+    ...state,
+    articles: [ ...state.articles, action.payload ]
+  }
   // [FETCH_NEWS_ARTICLES_QUEUE_SUCCESS]: (state, action) => {
   //   return { ...state, articlesQueue: action.payload }
   // },

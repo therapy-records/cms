@@ -65,6 +65,11 @@ const mock = {
       { title: 'do something else' }
     ]
   },
+  postNewsResponse: {
+    data: {
+      title: 'do something'
+    }
+  },
   newsArticle: mockNewsArticle
   // newsArticleQueue: mockNewsArticleQueue
 };
@@ -200,16 +205,16 @@ describe('(Redux Module) news', () => {
     });
 
     it('should dispatch the correct actions on success', () => {
-      _axiosAuthHeaders.post = sinon.stub().returns(Promise.resolve(mock.newsArticle));
+      _axiosAuthHeaders.post = sinon.stub().returns(Promise.resolve(mock.postNewsResponse));
       nock(API_ROOT + NEWS_CREATE)
         .post(NEWS_CREATE, mock.newsArticle)
-        .reply(200, mock.newsArticle);
+        .reply(200, mock.postNewsResponse.data);
 
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
         { type: UISTATE_PROMISE_SUCCESS, payload: true },
-        { type: POST_NEWS_FORM_SUCCESS, payload: mock.newsArticle }
+        { type: POST_NEWS_FORM_SUCCESS, payload: mock.postNewsResponse.data }
       ];
 
       store.clearActions();
