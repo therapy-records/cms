@@ -51,6 +51,7 @@ export class Article extends React.Component {
     // if (!this.props.location.pathname.includes('/edit')) {
     //   this.props.onDestroyArticle();
     // }
+    this.props.onDestroyArticle();
   }
 
   renderHtml(data) {

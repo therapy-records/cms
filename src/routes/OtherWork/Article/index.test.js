@@ -46,6 +46,13 @@ describe('(Component) OtherWork - OtherWork', () => {
         wrapper.instance().componentWillUnmount();
         expect(props.resetPromiseState).to.have.been.called;
       });
+
+      it('should call onDestroyArticle', () => {
+        props.onDestroyArticle = sinon.spy();
+        wrapper = shallow(<Article {...props} />);
+        wrapper.instance().componentWillUnmount();
+        expect(props.onDestroyArticle).to.have.been.called;
+      });
     });
     describe('componentWillMount', () => {
       describe('when an article does not exist / article._id is undefined', () => {

@@ -79,17 +79,6 @@ describe('(Component) News - Article', () => {
       wrapper.unmount();
       expect(props.onDestroyArticle.calledOnce).to.eq(true);
     });
-
-    it('should not call onDestroyArticle if history.location.pathname includes edit', () => {
-      props.history = {
-        location: {
-          pathname: 'news/123456789/edit'
-        }
-      };
-      wrapper = shallow(<Article {...props} />);
-      wrapper.unmount();
-      expect(props.onDestroyArticle.calledOnce).to.eq(false);
-    });
   });
 
   describe('renderHtml', () => {

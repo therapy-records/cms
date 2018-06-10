@@ -50,9 +50,7 @@ export class Article extends React.Component {
 
   componentWillUnmount() {
     this.props.resetPromiseState();
-    if (!this.props.history.location.pathname.includes('/edit')) {
-      this.props.onDestroyArticle();
-    }
+    this.props.onDestroyArticle();
   }
 
   renderHtml(data) {
