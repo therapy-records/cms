@@ -62,8 +62,10 @@ export class ArticleEdit extends React.Component {
 
         {!promiseLoading && (promiseSuccess && article.editSuccess) &&
           <div>
-            <h2>Successfully updated! <br /><br />🚀</h2>
-            <Link to='/news'>Go to news</Link>
+            <h2>Successfully updated! <small>🚀</small></h2>
+            <div className='inline-flex'>
+              <Link to='/news'>Go to news</Link>
+            </div>
           </div>
         }
 

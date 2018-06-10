@@ -123,8 +123,8 @@ describe('(Component) News - Article', () => {
     it('should have correct copy', () => {
       const actual = wrapper.containsMatchingElement(
         <div>
-          <h4>Successfully deleted!</h4>
-          <p>redirecting...</p>
+          <h2>Successfully deleted! <small>🚀</small></h2>
+          <p>Redirecting...</p>
         </div>
       );
       expect(actual).to.equal(true);

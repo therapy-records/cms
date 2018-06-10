@@ -34,8 +34,11 @@ class ArticleCreate extends React.Component {
 
         {!promiseLoading && promiseSuccess &&
           <div>
-            <h2>Successfully posted! <br /><br />🚀</h2>
-            <Link to='/other-work'>Go to Other Work</Link>
+            <h2>Successfully created! <small>🚀</small></h2>
+            <div className='inline-flex'>
+              <Link to='/other-work'>Go to Other Work</Link>
+              <Link to='/other-work/create'>Create another article</Link>
+            </div>
           </div>
         }
 

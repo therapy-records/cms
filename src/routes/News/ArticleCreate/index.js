@@ -23,16 +23,22 @@ export class ArticleCreate extends React.Component {
 
     return (
       <div className='container'>
-        {promiseLoading &&
-          <LoadingSpinner />
-        }
+
+        <LoadingSpinner
+          active={promiseLoading}
+          fullScreen
+        />
+
         {promiseError &&
           <p>error posting article :( {promiseError.message}</p>
         }
         {!promiseLoading && promiseSuccess &&
           <div>
-            <h2>Successfully posted! <br /><br />🚀</h2>
-            <Link to='/news'>Go to news</Link>
+            <h2>Successfully created! <small>🚀</small></h2>
+            <div className='inline-flex'>
+              <button to='/news'>Go to news</button>
+              <Link to='/news/create'>Create another article</Link>
+            </div>
           </div>
         }
 

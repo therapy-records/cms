@@ -55,7 +55,7 @@ class ArticleEdit extends React.Component {
 
         {!promiseLoading && (promiseSuccess && article.editSuccess) &&
           <div>
-            <h2>Successfully updated! <br /><br />🚀</h2>
+            <h2>Successfully updated! <small>🚀</small></h2>
             <Link to='/other-work'>Go to other work</Link>
           </div>
         }

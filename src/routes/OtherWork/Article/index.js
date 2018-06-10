@@ -73,28 +73,28 @@ export class Article extends React.Component {
       promiseError
     } = this.props;
 
+    // todo: move to will/did update
+
     if (article && article.isDeleted) {
       setTimeout(() => {
         this.props.history.push({
           pathname: '/other-work'
         });
-      }, 1000)
+      }, 3000)
     }
 
     return (
       <article className='container article article-other-work'>
-        {/*promiseLoading &&
-          <LoadingSpinner fullScreen />
-        */}
+
         <LoadingSpinner
           active={promiseLoading}
           fullScreen
         />
 
         {article && article.isDeleted &&
-          <div style={{ textAlign: 'center' }}>
-            <h4>Successfully deleted!</h4>
-            <p>redirecting...</p>
+          <div>
+            <h2>Successfully deleted! <small>🚀</small></h2>
+            <p>Redirecting...</p>
           </div>
         }
 

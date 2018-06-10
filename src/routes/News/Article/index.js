@@ -96,12 +96,13 @@ export class Article extends React.Component {
       return null;
     }
 
+    // todo: move to will/did update
     if (article && article.isDeleted) {
       setTimeout(() => {
         this.props.history.push({
           pathname: '/news'
         });
-      }, 1000)
+      }, 3000);
     }
 
     return (
@@ -113,9 +114,9 @@ export class Article extends React.Component {
         />
 
         {article && article.isDeleted &&
-          <div style={{ textAlign: 'center' }}>
-            <h4>Successfully deleted!</h4>
-            <p>redirecting...</p>
+          <div>
+            <h2>Successfully deleted! <small>🚀</small></h2>
+            <p>Redirecting...</p>
           </div>
         }
 

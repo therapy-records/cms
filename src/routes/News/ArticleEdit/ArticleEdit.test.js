@@ -102,7 +102,7 @@ describe('(Component) News - ArticleEdit', () => {
     });
     it('should show success message and link', () => {
       const actual = wrapper.containsAllMatchingElements([
-        <h2>Successfully updated! <br /><br />🚀</h2>,
+        <h2>Successfully updated! <small>🚀</small></h2>,
         <Link to='/news'>Go to news</Link>
       ]);
       expect(actual).to.equal(true);
