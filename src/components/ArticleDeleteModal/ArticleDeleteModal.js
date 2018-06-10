@@ -17,7 +17,7 @@ class ArticleDeleteModal extends React.Component {
             <h4>Are you sure you want to delete this article?</h4>
             <p>It will be gone forever!</p>
             <button
-              className='btn'
+              className='btn btn-danger cancel-margin'
               onClick={onDeleteArticle}
             >Delete article</button>
           </div>

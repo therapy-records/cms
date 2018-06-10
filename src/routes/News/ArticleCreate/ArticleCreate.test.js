@@ -46,7 +46,10 @@ describe('(Component) News - ArticleCreate', () => {
     });
     it('should show loading', () => {
       const actual = wrapper.containsMatchingElement(
-        <LoadingSpinner />
+        <LoadingSpinner
+          active={props.promiseLoading}
+          fullScreen
+        />
       );
       expect(actual).to.equal(true);
     });

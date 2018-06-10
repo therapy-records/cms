@@ -36,7 +36,7 @@ class ArticleCreate extends React.Component {
           <div>
             <h2>Successfully created! <small>🚀</small></h2>
             <div className='inline-flex'>
-              <Link to='/other-work'>Go to Other Work</Link>
+              <Link to='/other-work' className='btn'>Go to Other Work</Link>
               <Link to='/other-work/create'>Create another article</Link>
             </div>
           </div>

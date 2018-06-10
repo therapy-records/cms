@@ -228,36 +228,24 @@ describe('(Component) OtherWork - OtherWork', () => {
       expect(wrapper.instance().state.isShowingModal).to.eq(false);
     });
 
-    describe('handleOnDeleteArticle', () => {
-      it('should call props.onDeleteArticle', () => {
-        wrapper = shallow(<Article {...props} />);
-        wrapper.instance().handleOnDeleteArticle(props.article);
-        expect(props.onDeleteArticle.calledOnce).to.eq(true);
-        expect(props.onDeleteArticle.calledWith(props.article._id)).to.eq(true);
-      })
-    });
-
     describe('handleModalOnDelete', () => {
-      it('should call handleOnDeleteArticle and handleModalClose', () => {
-        wrapper = shallow(<Article {...props} />);
-        const handleOnDeleteArticleSpy = sinon.spy();
-        const handleModalCloseSpy = sinon.spy();
-        wrapper.instance().handleOnDeleteArticle = handleOnDeleteArticleSpy;
-        wrapper.instance().handleModalClose = handleModalCloseSpy;
-
-        wrapper.instance().handleModalOnDelete();
-        expect(handleOnDeleteArticleSpy.calledOnce).to.eq(true);
-        expect(handleModalCloseSpy.calledOnce).to.eq(true);
-      });
-    });
-
-    describe('handleOnDeleteArticle', () => {
       it('should call props.onDeleteArticle', () => {
         wrapper = shallow(<Article {...props} />);
-        wrapper.instance().handleOnDeleteArticle = sinon.spy();
-        wrapper.instance().handleOnDeleteArticle(props.article);
-        expect(props.onDeleteArticle.calledOnce).to.eq(true);
-      })
+        const onDeleteArticleSpy = sinon.spy();
+        wrapper.setProps({
+          onDeleteArticle: onDeleteArticleSpy
+        });
+        wrapper.instance().handleModalOnDelete();
+        expect(onDeleteArticleSpy.calledOnce).to.eq(true);
+      });
+
+      it('should call handleModalClose', () => {
+        wrapper = shallow(<Article {...props} />);
+        wrapper.instance().handleModalClose = sinon.spy();
+        wrapper.instance().handleModalOnDelete(props.article);
+        expect(wrapper.instance().handleModalClose.calledOnce).to.eq(true);
+      });
+
     });
 
     describe('renderHtml', () => {
@@ -294,7 +282,7 @@ describe('(Component) OtherWork - OtherWork', () => {
       const actual = wrapper.containsMatchingElement(
         <ArticleDeleteModal
           handleModalClose={wrapper.instance().handleModalClose}
-          onDeleteArticle={wrapper.instance().handleOnDeleteArticle}
+          onDeleteArticle={wrapper.instance().handleModalOnDelete}
         />
       );
       expect(actual).to.equal(false);

@@ -22,6 +22,7 @@ export class Article extends React.Component {
     }
     this.handleModalOpen = this.handleModalOpen.bind(this);
     this.handleModalClose = this.handleModalClose.bind(this);
+    this.handleModalOnDelete = this.handleModalOnDelete.bind(this);
   }
 
   handleModalOpen() {
@@ -47,10 +48,6 @@ export class Article extends React.Component {
 
   componentWillUnmount() {
     this.props.resetPromiseState();
-    // TODO: fix
-    // if (!this.props.location.pathname.includes('/edit')) {
-    //   this.props.onDestroyArticle();
-    // }
     this.props.onDestroyArticle();
   }
 
@@ -58,12 +55,8 @@ export class Article extends React.Component {
     return { __html: data }
   }
 
-  handleOnDeleteArticle(article) {
-    this.props.onDeleteArticle(article._id)
-  }
-
   handleModalOnDelete() {
-    this.handleOnDeleteArticle(this.props.article);
+    this.props.onDeleteArticle(this.props.article._id)
     this.handleModalClose();
   }
 

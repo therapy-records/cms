@@ -45,9 +45,10 @@ class ArticleEdit extends React.Component {
 
     return (
       <article className='container'>
-        {promiseLoading &&
-          <LoadingSpinner />
-        }
+        <LoadingSpinner
+          active={promiseLoading}
+          fullScreen
+        />
 
         {promiseError &&
           <p>error updating other-work article :( {promiseError.message}</p>
@@ -56,7 +57,7 @@ class ArticleEdit extends React.Component {
         {!promiseLoading && (promiseSuccess && article.editSuccess) &&
           <div>
             <h2>Successfully updated! <small>🚀</small></h2>
-            <Link to='/other-work'>Go to other work</Link>
+            <Link to='/other-work' className='btn'>Go to other work</Link>
           </div>
         }
 
