@@ -59,32 +59,6 @@ const mockState = {
 
 describe('(Selectors) otherWork', () => {
   const articleId = 'asdf1234';
-  // let _newsArticle,
-  //   _mockSelectedOtherWorkArticle,
-  //   OtherWorkArticle,
-  //   mockSelectedOtherWorkArticle;
-  // beforeEach(() => {
-  //   _OtherWorkArticle = selectSelectedOtherWorkArticle(mockState, postId);
-  //   _mockSelectedOtherWorkArticle = selectSelectedOtherWorkArticle(mockState)
-  //   OtherWorkArticle = _OtherWorkArticle;
-  //   mockSelectedOtherWorkArticle = _mockSelectedOtherWorkArticle
-  // });
-
-  // describe('selectNewsArticlesQueue', () => {
-  //   it('should return news articles', () => {
-  //     const actual = selectNewsArticlesQueue(mockState);
-  //     const expected = mockArticles;
-  //     expect(actual).to.deep.equal(expected);
-  //   });
-  // });
-
-  // describe('selectNewsArticlesQueueReverse', () => {
-  //   it('should return news articles', () => {
-  //     const actual = selectNewsArticlesQueueReverse(mockState);
-  //     const expected = mockArticles.reverse();
-  //     expect(actual).to.deep.equal(expected);
-  //   });
-  // });
 
   describe('selectOtherWorkArticles', () => {
     it('should return articles', () => {
