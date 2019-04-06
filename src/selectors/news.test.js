@@ -2,8 +2,6 @@
 import {
   selectNewsArticles,
   selectNewsArticlesReverse,
-  // selectNewsArticlesQueue,
-  // selectNewsArticlesQueueReverse,
   filterNewsArticlesArticle,
   selectNewsArticlesArticle,
   selectSelectedNewsArticle,
@@ -17,7 +15,6 @@ import {
   selectSelectedNewsArticleVenueLink,
   selectSelectedNewsArticleMiniGalleryImages,
   selectSelectedNewsArticleVideoEmbed,
-  // selectSelectedNewsArticleScheduledTime,
   selectSelectedNewsArticleSocialShare,
   selectSelectedNewsArticleSocialShareHashtags
 } from './news';
@@ -73,8 +70,7 @@ const mockArticles = [
 
 const mockState = {
   news: {
-    articles: mockArticles,
-    articlesQueue: mockArticles
+    articles: mockArticles
   },
   selectedNewsArticle: mockArticles[1]
 };
@@ -91,22 +87,6 @@ describe('(Selectors) news', () => {
     newsArticle = _newsArticle;
     mockSelectedNewsArticle = _mockSelectedNewsArticle
   });
-
-  // describe('selectNewsArticlesQueue', () => {
-  //   it('should return news articles', () => {
-  //     const actual = selectNewsArticlesQueue(mockState);
-  //     const expected = mockArticles;
-  //     expect(actual).to.deep.equal(expected);
-  //   });
-  // });
-
-  // describe('selectNewsArticlesQueueReverse', () => {
-  //   it('should return news articles', () => {
-  //     const actual = selectNewsArticlesQueueReverse(mockState);
-  //     const expected = mockArticles.reverse();
-  //     expect(actual).to.deep.equal(expected);
-  //   });
-  // });
 
   describe('selectNewsArticles', () => {
     it('should return news articles', () => {
@@ -228,14 +208,6 @@ describe('(Selectors) news', () => {
       expect(actual).to.equal(expected);
     });
   });
-
-  // describe('selectSelectedNewsArticleScheduledTime', () => {
-  //   it('should return scheduledTime', () => {
-  //     const actual = selectSelectedNewsArticleScheduledTime(mockState, articleId);
-  //     const expected = newsArticle.scheduledTime;
-  //     expect(actual).to.equal(expected);
-  //   });
-  // });
 
   describe('selectSelectedNewsArticleSocialShare', () => {
     it('should return socialShare', () => {

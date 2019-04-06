@@ -104,7 +104,7 @@ describe('(Component) OtherWorkArticleForm', () => {
         <Field name='releaseDate'
                component={Datepicker}
                title='Release date'
-               initTime={props.formValues.scheduledTime}      
+               initTime={props.formValues.releaseDate}      
          />
       );
       expect(actual).to.equal(true);

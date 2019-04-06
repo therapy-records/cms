@@ -4,7 +4,6 @@ import axios from 'axios';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
-import _axiosAuthHeaders from '../utils/axios'
 
 import {
   SET_SELECTED_NEWS_ARTICLE,
@@ -12,32 +11,23 @@ import {
   DESTROY_SELECTED_NEWS_ARTICLE,
   DELETE_SINGLE_NEWS_ARTICLE_SUCCESS,
   DELETE_SINGLE_NEWS_ARTICLE_ERROR,
-  // DELETE_SINGLE_NEWS_QUEUE_ARTICLE_SUCCESS,
-  // DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR,
   selectedNewsArticle,
   selectedNewsArticleDeleted,
   deleteSuccess,
-  // deleteQueueArticleSuccess,
-  // deleteQueueArticleError,
   deleteError,
   setSelectedNewsArticle,
   fetchSingleNewsArticle,
   deleteNewsArticle,
-  deleteScheduledArticle,
   destroySelectedNewsArticle,
   default as newsArticleReducer
 } from './newsArticle';
 import {
   API_ROOT,
-  NEWS,
-  NEWS_CREATE
-  // NEWS_QUEUE
+  NEWS
 } from '../constants';
 import {
   UISTATE_PROMISE_LOADING,
-  UISTATE_PROMISE_SUCCESS,
-  UISTATE_PROMISE_ERROR,
-  UISTATE_PROMISE_SUCCESS_RESET
+  UISTATE_PROMISE_SUCCESS
 } from '../constants/actions';
 
 const middlewares = [thunk];
@@ -69,14 +59,6 @@ const mock = {
 
 const mockState = {
   selectedNewsArticle: {}
-  // news: {
-  //   articles: mock.getNewsResponse.data,
-  //   articlesQueue: mock.getNewsResponse.data
-  // }
-};
-
-const mockErrorResponse = {
-  response: { status: 404 }
 };
 
 const store = mockStore(mockState);
@@ -101,14 +83,6 @@ describe('(Redux Module) newsArticle', () => {
   it('should export a constant DELETE_SINGLE_NEWS_ARTICLE_ERROR', () => {
     expect(DELETE_SINGLE_NEWS_ARTICLE_ERROR).to.equal('DELETE_SINGLE_NEWS_ARTICLE_ERROR')
   });
-
-  // it('should export a constant DELETE_SINGLE_NEWS_QUEUE_ARTICLE_SUCCESS', () => {
-  //   expect(DELETE_SINGLE_NEWS_QUEUE_ARTICLE_SUCCESS).to.equal('DELETE_SINGLE_NEWS_QUEUE_ARTICLE_SUCCESS')
-  // });
-
-  // it('should export a constant DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR', () => {
-  //   expect(DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR).to.equal('DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR')
-  // });
 
   describe('(Reducer)', () => {
     it('should be a function', () => {
@@ -192,44 +166,6 @@ describe('(Redux Module) newsArticle', () => {
       expect(state).to.deep.eq(mockData);
     });
   });
-
-  // describe('(Action) deleteQueueArticleSuccess', () => {
-  //   afterEach(() => {
-  //     nock.cleanAll()
-  //   });
-
-  //   it('should be exported as a function', () => {
-  //     expect(deleteQueueArticleSuccess).to.be.a('function');
-  //   });
-
-  //   it('should return an action with type DELETE_SINGLE_NEWS_QUEUE_ARTICLE_SUCCESS', () => {
-  //     expect(deleteQueueArticleSuccess()).to.have.property('type', DELETE_SINGLE_NEWS_QUEUE_ARTICLE_SUCCESS);
-  //   });
-
-  //   it('should update state', () => {
-  //     let state = newsArticleReducer(mockState, deleteQueueArticleSuccess());
-  //     expect(state).to.deep.eq({});
-  //   });
-  // });
-
-  // describe('(Action) deleteQueueArticleError', () => {
-  //   afterEach(() => {
-  //     nock.cleanAll()
-  //   });
-
-  //   it('should be exported as a function', () => {
-  //     expect(deleteQueueArticleError).to.be.a('function');
-  //   });
-
-  //   it('should return an action with type DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR', () => {
-  //     expect(deleteQueueArticleError()).to.have.property('type', DELETE_SINGLE_NEWS_QUEUE_ARTICLE_ERROR);
-  //   });
-
-  //   it('should update state', () => {
-  //     let state = newsArticleReducer(mockState, deleteQueueArticleError());
-  //     expect(state).to.deep.eq({ error: true });
-  //   });
-  // });
 
   describe('(Action) deleteError', () => {
     afterEach(() => {
@@ -322,18 +258,4 @@ describe('(Redux Module) newsArticle', () => {
       expect(deleteNewsArticle()).to.be.a('function');
     });
   });
-
-  // describe('(Thunk) deleteScheduledArticle', () => {
-  //   afterEach(() => {
-  //     nock.cleanAll();
-  //   });
-
-  //   it('should be exported as a function', () => {
-  //     expect(deleteScheduledArticle).to.be.a('function');
-  //   });
-
-  //   it('should return a function', () => {
-  //     expect(deleteScheduledArticle()).to.be.a('function');
-  //   });
-  // });
 });

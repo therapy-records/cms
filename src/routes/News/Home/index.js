@@ -3,14 +3,10 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import moment from 'moment';
-// import { fetchNewsArticles, fetchNewsQueueArticles } from '../../../reducers/news';
 import { fetchNewsArticles } from '../../../reducers/news';
 import { setSelectedNewsArticle } from '../../../reducers/newsArticle';
 import { resetPromiseState } from '../../../reducers/uiState';
-import {
-  selectNewsArticlesReverse
-  // selectNewsArticlesQueueReverse
-} from '../../../selectors/news';
+import {selectNewsArticlesReverse} from '../../../selectors/news';
 import { selectUiStateLoading } from '../../../selectors/uiState';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
@@ -21,9 +17,6 @@ const dateIsBefore = (a, b) => {
 
 export class News extends React.Component {
   componentWillMount() {
-    // if (this.props.articlesQueue === null) {
-    //   this.props.onFetchNewsQueueArticles();
-    // }
     if (this.props.articles === null) {
       this.props.onFetchNewsArticles();
     }
@@ -37,14 +30,9 @@ export class News extends React.Component {
     return articles.sort(dateIsBefore);
   }
 
-  getCombinedArticles(queueFeed, newsFeed) {
-    if (!queueFeed) {
-      return this.orderArticles([...newsFeed]);
-    } else if (!newsFeed) {
-      return this.orderArticles([...queueFeed]);
-    }
-    return this.orderArticles([...queueFeed, ...newsFeed]);
-  }
+  // getCombinedArticles(newsFeed) {
+  //   this.orderArticles(newsFeed);
+  // }
 
   handleButtonClick(postObj) {
     this.props.onSetSelectedNewsArticle(postObj);
@@ -63,14 +51,6 @@ export class News extends React.Component {
       <li key={p._id} className='article-card'>
         <img src={articleImg()} alt={p.title} />
         <div>
-          {/*
-            {p.scheduledTime &&
-              <p
-                className='small-tab'>
-                Scheduled for {moment(p.scheduledTime).format('Do MMM \'YY')}
-              </p>
-            }
-          */}
           <div className='heading-with-btn'>
             <h3>
               <Link
@@ -104,12 +84,10 @@ export class News extends React.Component {
   render() {
     const {
       promiseLoading,
-      // articlesQueue,
       articles
     } = this.props;
 
-    // let _combinedArticles = (articlesQueue || articles) && this.getCombinedArticles(articlesQueue, articles);
-    let _combinedArticles = articles && this.getCombinedArticles(articles);
+    let _combinedArticles = articles && this.orderArticles(articles);
 
     const hasCombinedArticles = (_combinedArticles !== null) && (_combinedArticles && _combinedArticles.length);
 
@@ -157,9 +135,7 @@ export class News extends React.Component {
 News.propTypes = {
   promiseLoading: PropTypes.bool,
   onFetchNewsArticles: PropTypes.func.isRequired,
-  // onFetchNewsQueueArticles: PropTypes.func.isRequired,
   onSetSelectedNewsArticle: PropTypes.func.isRequired,
-  articlesQueue: PropTypes.array,
   articles: PropTypes.array,
   combinedArticles: PropTypes.array,
   resetPromiseState: PropTypes.func
@@ -167,7 +143,6 @@ News.propTypes = {
 
 const mapDispatchToProps = {
   onFetchNewsArticles: () => fetchNewsArticles(),
-  // onFetchNewsQueueArticles: () => fetchNewsQueueArticles(),
   onSetSelectedNewsArticle: (article) => setSelectedNewsArticle(article),
   resetPromiseState: () => resetPromiseState()
 }
@@ -175,7 +150,6 @@ const mapDispatchToProps = {
 const mapStateToProps = (state) => ({
   promiseLoading: selectUiStateLoading(state),
   articles: selectNewsArticlesReverse(state)
-  // articlesQueue: selectNewsArticlesQueueReverse(state)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(News)

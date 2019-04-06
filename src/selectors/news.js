@@ -1,17 +1,6 @@
 import { createSelector } from 'reselect'
 
 /*
-state.news.articlesQueue
-*/
-
-// export const selectNewsArticlesQueue = (state) => state.news.articlesQueue;
-
-// export const selectNewsArticlesQueueReverse = createSelector(
-//   selectNewsArticlesQueue,
-//   (articlesQueue) => articlesQueue && articlesQueue.reverse()
-// );
-
-/*
 state.news.articles
 */
 
@@ -89,11 +78,6 @@ export const selectSelectedNewsArticleVideoEmbed = createSelector(
   selectSelectedNewsArticle,
   (article) => article && article.videoEmbed
 );
-
-// export const selectSelectedNewsArticleScheduledTime = createSelector(
-//   selectSelectedNewsArticle,
-//   (article) => article && article.scheduledTime
-// );
 
 export const selectSelectedNewsArticleSocialShare = createSelector(
   selectSelectedNewsArticle,

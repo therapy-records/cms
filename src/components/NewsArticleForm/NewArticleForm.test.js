@@ -10,7 +10,6 @@ import {
   NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS
 } from './NewsArticleForm';
 import TextInput from '../TextInput';
-import Datepicker from '../Datepicker/Datepicker';
 import ArticlePreview from '../ArticlePreview/ArticlePreview';
 import DropzoneImageUpload from './DropzoneImageUpload';
 import Quotes from './Quotes';
@@ -22,7 +21,6 @@ describe('(Component) NewsArticleForm', () => {
     props,
     baseProps = {
       handleModalClose: () => {},
-      // onSubmitFormQueue: () => {},
       onSubmitForm: () => {}
     }
 
@@ -173,28 +171,6 @@ describe('(Component) NewsArticleForm', () => {
       );
       expect(actual).to.equal(true)
     });
-
-    // it('should render scheduledTime field', () => {
-    //   const props = {
-    //     ...baseProps,
-    //     formValues: {
-    //       scheduledTime: new Date(),
-    //       mainImage: {
-    //         url: 'test.com'
-    //       }
-    //     }
-    //   };
-    //   const datepickerWrapper = shallow(<NewsArticleForm {...props} />);
-    //   const actual = datepickerWrapper.containsMatchingElement(
-    //     <Field name='scheduledTime'
-    //            component={Datepicker}
-    //            initTime={props.formValues.scheduledTime}
-    //            title='Scheduler (optional)'
-    //            titleSub='Post live on a date of choosing'
-    //            titleSub2='NOTE: This is an alpha version. Time of posting is not exact and could be offset.' />
-    //   );
-    //   expect(actual).to.equal(true);
-    // });
   });
 
   it('should render an error', () => {
@@ -241,23 +217,5 @@ describe('(Component) NewsArticleForm', () => {
       button.simulate('click');
       expect(props.onSubmitForm.calledOnce).to.eq(true);
     });
-
-    // it('should call onSubmitFormQueue prop onClick if scheduledTime', () => {
-    //   props = {
-    //     ...baseProps,
-    //     onSubmitFormQueue: sinon.spy(),
-    //     error: undefined,
-    //     pristine: false,
-    //     submitting: false,
-    //     formValues: {
-    //       scheduledTime: new Date(),
-    //       mainImage: { url: 'test.com' }
-    //     }
-    //   }
-    //   const buttonWrapper = shallow(<NewsArticleForm {...props} />);
-    //   const button = buttonWrapper.find('button[type="submit"]');
-    //   button.simulate('click');
-    //   expect(props.onSubmitFormQueue.calledOnce).to.eq(true);
-    // });
   });
 });

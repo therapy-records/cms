@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import { postNews, postNewsQueue } from '../../../reducers/news';
 import { postNews } from '../../../reducers/news';
 import { resetPromiseState } from '../../../reducers/uiState';
 import {
@@ -46,8 +45,6 @@ export class ArticleCreate extends React.Component {
           </div>
         }
 
-        {/* onSubmitFormQueue={this.props.onPostArticleQueue} */}
-
         {!promiseLoading && !promiseSuccess &&
           <NewsArticleForm
             onSubmitForm={this.props.onPostArticle}
@@ -61,7 +58,6 @@ export class ArticleCreate extends React.Component {
 
 ArticleCreate.propTypes = {
   onPostArticle: PropTypes.func.isRequired,
-  // onPostArticleQueue: PropTypes.func.isRequired,
   promiseLoading: PropTypes.bool,
   promiseSuccess: PropTypes.bool,
   promiseError: PropTypes.object,
@@ -71,7 +67,6 @@ ArticleCreate.propTypes = {
 
 const mapDispatchToProps = {
   onPostArticle: () => postNews(),
-  // onPostArticleQueue: () => postNewsQueue(),
   resetPromiseState: () => resetPromiseState()
 }
 

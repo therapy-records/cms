@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { resetPromiseState } from '../../../reducers/uiState';
-import {
-  editNews
-  // editNewsQueue
-} from '../../../reducers/news';
+import { editNews } from '../../../reducers/news';
 import {
   destroySelectedNewsArticle,
   fetchSingleNewsArticle

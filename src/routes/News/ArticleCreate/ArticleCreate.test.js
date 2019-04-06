@@ -14,7 +14,6 @@ describe('(Component) News - ArticleCreate', () => {
     props,
     baseProps = {
       onPostArticle: () => {},
-      // onPostArticleQueue: () => {},
       resetPromiseState: () => {}
     };
 

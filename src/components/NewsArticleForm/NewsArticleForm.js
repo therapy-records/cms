@@ -14,13 +14,11 @@ import {
   selectSelectedNewsArticleVenueLink,
   selectSelectedNewsArticleMiniGalleryImages,
   selectSelectedNewsArticleVideoEmbed,
-  // selectSelectedNewsArticleScheduledTime,
   selectSelectedNewsArticleSocialShareHashtags
 } from '../../selectors/news';
 import { selectNewsArticleFormValues } from '../../selectors/form';
 import './NewsArticleForm.css';
 import DropzoneImageUpload from './DropzoneImageUpload';
-// import Datepicker from '../Datepicker/Datepicker';
 import Quotes from './Quotes';
 import ArticlePreview from '../ArticlePreview/ArticlePreview';
 import TextInput from '../../components/TextInput';
@@ -59,11 +57,6 @@ export class NewsArticleForm extends React.Component {
   }
 
   handleSubmit() {
-    // if (this.props.formValues.scheduledTime) {
-    //   this.props.onSubmitFormQueue();
-    // } else {
-    //   this.props.onSubmitForm();
-    // }
     this.props.onSubmitForm();
   }
 
@@ -236,14 +229,6 @@ export class NewsArticleForm extends React.Component {
             />
           </div>
 
-          {/*
-            <Field name='scheduledTime'
-                component={Datepicker}
-                initTime={formValues && formValues.scheduledTime}
-                title='Scheduler (optional)'
-                titleSub='Post live on a date of choosing'
-                titleSub2='NOTE: This is an alpha version. Time of posting is not exact and could be offset.' />
-          */}
           {error && <p>{error}</p>}
 
 
@@ -269,7 +254,6 @@ NewsArticleForm.propTypes = {
   invalid: PropTypes.bool,
   formValues: PropTypes.object,
   onSubmitForm: PropTypes.func.isRequired,
-  // onSubmitFormQueue: PropTypes.func.isRequired,
   location: PropTypes.object
 };
 
@@ -293,7 +277,6 @@ InitFromStateForm = connect(
       venueLink: selectSelectedNewsArticleVenueLink(state),
       videoEmbed: selectSelectedNewsArticleVideoEmbed(state),
       miniGalleryImages: selectSelectedNewsArticleMiniGalleryImages(state),
-      // scheduledTime: selectSelectedNewsArticleScheduledTime(state),
       socialShare: {
         hashtags: selectSelectedNewsArticleSocialShareHashtags(state)
       }

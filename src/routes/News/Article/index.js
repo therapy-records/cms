@@ -13,7 +13,6 @@ import {
 } from '../../../selectors/uiState';
 import {
   deleteNewsArticle,
-  // deleteScheduledArticle,
   fetchSingleNewsArticle,
   destroySelectedNewsArticle
 } from '../../../reducers/newsArticle';
@@ -269,7 +268,6 @@ Article.propTypes = {
   history: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   onDeleteArticle: PropTypes.func.isRequired,
-  // onDeleteScheduledArticle: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
   promiseError: PropTypes.bool,
@@ -283,7 +281,6 @@ const mapDispatchToProps = {
   onFetchArticle: (id) => fetchSingleNewsArticle(id),
   onFetchNewsArticles: () => fetchNewsArticles(),
   onDeleteArticle: (id) => deleteNewsArticle(id),
-  // onDeleteScheduledArticle: (id) => deleteScheduledArticle(id),
   resetPromiseState: () => resetPromiseState(),
   onDestroyArticle: () => destroySelectedNewsArticle()
 }
