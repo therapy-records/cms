@@ -28,26 +28,3 @@
 .gallery-images-flex-root {
   font-size: 25px; // counter mysterious counter ('0') from react-dropzone
 }
-
-.links-cols-container > div {
-  @media(min-width: 600px) {
-    flex: 0 1 50%;
-    &:first-child {
-      padding-right:1em;
-    }
-    &:last-child {
-      padding-left:1em;
-    }
-  }
-  > div {
-    margin-bottom: 2.5em;
-  }
-}
-
-.secondary-image-toggle-container {
-  min-height: 265px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}

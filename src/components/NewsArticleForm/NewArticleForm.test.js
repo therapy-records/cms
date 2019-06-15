@@ -93,59 +93,13 @@ describe('(Component) NewsArticleForm', () => {
       expect(actual).to.equal(true);
     });
 
-    it('should render a mainImage.externalLink field', () => {
+    it('should render a month field', () => {
       const actual = wrapper.containsMatchingElement(
-        <Field name='mainImage.externalLink'
-          type='url'
-          title='Image link'
-          label='Image link'
-          placeholder='http://bbc.co.uk/fiona-ross'
-          component={TextInput} />
-      );
-      expect(actual).to.equal(true);
-    });
-
-    describe('secondaryImageUrl', () => {
-      it('should render a button toggle ', () => {
-        const actual = wrapper.containsMatchingElement(
-          <button>Add second image</button>
-        );
-        expect(actual).to.equal(true);
-      });
-      it('should not render a secondaryImageUrl field by default ', () => {
-        const actual = wrapper.containsMatchingElement(
-          <Field name='secondaryImageUrl'
-            title='Secondary featured image'
-            component={DropzoneImageUpload} />
-        );
-        expect(actual).to.equal(false);
-      });
-      it('should show the secondaryImageUrl field on button toggle ', () => {
-        const button = wrapper.find('.secondary-img-toggle');
-        button.simulate('click');
-        let actual = wrapper.containsMatchingElement(
-          <Field name='secondaryImageUrl'
-            title='Second image'
-            component={DropzoneImageUpload} />
-        );
-        expect(actual).to.equal(true);
-      });
-
-      it('should hide the button on toggle ', () => {
-        let button = wrapper.find('.secondary-img-toggle');
-        button.simulate('click');
-        button = wrapper.find('.secondary-img-toggle');
-        expect(button.length).to.eq(0);
-      });
-    });
-
-    it('should render a title field', () => {
-      const actual = wrapper.containsMatchingElement(
-        <Field name='title'
+        <Field name='month'
           component={TextInput}
           type='text'
-          placeholder='Hello World'
-          label='Title'
+          placeholder='January update'
+          label='Month'
           validate={required}
           required
         />
@@ -198,7 +152,7 @@ describe('(Component) NewsArticleForm', () => {
       }
       const buttonWrapper = shallow(<NewsArticleForm {...props} />);
       const actual = buttonWrapper.containsMatchingElement(
-        <button type='submit'>Submit</button>
+        <button type='submit'>Post monthly update</button>
       );
       expect(actual).to.equal(true);
     });

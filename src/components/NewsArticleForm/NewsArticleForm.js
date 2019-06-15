@@ -48,20 +48,13 @@ export class NewsArticleForm extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      showSecondaryImageField: false
-    };
+    this.state = {};
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleSecondaryImageToggle = this.handleSecondaryImageToggle.bind(this)
     
   }
 
   handleSubmit() {
     this.props.onSubmitForm();
-  }
-
-  handleSecondaryImageToggle() {
-    this.setState({ showSecondaryImageField: !this.state.showSecondaryImageField })
   }
 
   render() {
@@ -73,10 +66,6 @@ export class NewsArticleForm extends React.Component {
       location,
       formValues
     } = this.props;
-
-    const {
-      showSecondaryImageField
-    } = this.state;
 
     let isEditForm;
     if (location && location.pathname.includes('edit')) {
@@ -101,11 +90,11 @@ export class NewsArticleForm extends React.Component {
           <div className='col-clear' />
 
           <div className='row-large'>
-            <Field name='title'
+            <Field name='month'
                   component={TextInput}
                   type='text'
-                  placeholder='Hello World'
-                  label='Title'
+                  placeholder='January update'
+                  label='Month'
                   validate={required}
                   required
             />
@@ -132,86 +121,7 @@ export class NewsArticleForm extends React.Component {
                 />
               </div>
 
-              <div>
-                {showSecondaryImageField ?
-                  <Field name='secondaryImageUrl'
-                         component={DropzoneImageUpload}
-                         title='Second image'
-                         minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
-                  />
-                : 
-                  <div className='secondary-image-toggle-container'>
-                    <button
-                      type='button'
-                      onClick={this.handleSecondaryImageToggle}
-                      className='btn-sm secondary-img-toggle'
-                    >Add second image
-                    </button>
-                  </div>
-                }
-              </div>
-
             </div>
-          </div>
-
-          <div className='row-large'>
-            <div className='cols-container links-cols-container'>
-              <div className='col-50'>
-                <Field name='mainImage.externalLink'
-                      component={TextInput}
-                      type='url'
-                      title='Image link'
-                      label='Image link'
-                      placeholder='http://bbc.co.uk/fiona-ross'
-                />
-              </div>
-              <div className='col-50' />
-            </div>
-          </div>
-
-          <div className='row-large'>
-            <div className='cols-container links-cols-container'>
-              <div className='col-50'>
-                <Field name='ticketsLink'
-                      component={TextInput}
-                      type='text'
-                      placeholder='http://www...'
-                      label='Tickets '
-                      smallLabelSize
-                />
-
-                <br />
-
-                <Field name='venueLink'
-                      component={TextInput}
-                      type='text'
-                      placeholder='http://www...'
-                      label='Venue'
-                      smallLabelSize
-                />
-              </div>
-
-              <div className='col-50'>
-                <Field name='videoEmbed'
-                      component={TextInput}
-                      type='text'
-                      placeholder='https://www.youtube.com/embed/45JLCGLplvk'
-                      label='YouTube video'
-                      smallLabelSize
-                />
-
-                <br />
-
-                <Field name='socialShare.hashtags'
-                      component={TextInput}
-                      type='text'
-                      placeholder='trending, happy, fionaross'
-                      label='Hashtags'
-                      smallLabelSize
-                />
-              </div>
-            </div>
-
           </div>
 
           <div className='row-large'>
@@ -219,15 +129,6 @@ export class NewsArticleForm extends React.Component {
                    component={Quotes} />
           </div>
 
-
-          <div className='row-large'>
-            <Field name='miniGalleryImages'
-                   component={DropzoneImageUpload}
-                   title='Mini gallery images'
-                   multiple
-                   existingMiniGalleryImages={formValues && formValues.miniGalleryImages}
-            />
-          </div>
 
           {error && <p>{error}</p>}
 
@@ -237,7 +138,7 @@ export class NewsArticleForm extends React.Component {
                     className='btn-lg btn-submit'
                     disabled={error || pristine || submitting || error || invalid}
                     onClick={() => this.handleSubmit()}
-                    >Submit
+                    >Post monthly update
             </button>
           </div>
 
@@ -265,7 +166,7 @@ let InitFromStateForm = reduxForm({
 InitFromStateForm = connect(
   (state, props) => ({
     initialValues: {
-      title: selectSelectedNewsArticleTitle(state),
+      month: selectSelectedNewsArticleTitle(state),
       bodyMain: selectSelectedNewsArticleBodyMain(state),
       quotes: selectSelectedNewsArticleQuotes(state),
       mainImage: {
