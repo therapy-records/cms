@@ -24,18 +24,28 @@ class _RichTextEditor extends React.Component {
   }
 
   render() {
+    const {title} = this.props;
+
     return (
-      <RichTextEditor
-        value={this.state.value}
-        placeholder='It was an honour to...'
-        onChange={this.onChange} />
+      <div>
+
+      {title && <h5>{title}</h5>}
+
+        <RichTextEditor
+          value={this.state.value}
+          placeholder='It was an honour to...'
+          onChange={this.onChange}
+        />
+
+      </div>
     );
   }
 }
 
 _RichTextEditor.propTypes = {
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.string
+  value: PropTypes.string,
+  title: PropTypes.string
 }
 
 export default _RichTextEditor;

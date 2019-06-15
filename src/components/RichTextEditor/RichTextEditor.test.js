@@ -9,7 +9,8 @@ Enzyme.configure({ adapter: new Adapter() });
 describe('(Component) RichTextEditor', () => {
   let wrapper,
     props = {
-      onChange: () => {}
+      onChange: () => {},
+      title: 'Test title'
     },
     onChangeSpy;
 
@@ -28,6 +29,13 @@ describe('(Component) RichTextEditor', () => {
         expect(wrapper.instance().state.value).to.exist;
         wrapper.instance().onChange(mockValue);
         expect(wrapper.instance().state.value).to.eq(mockValue);
+      });
+
+      it('should set render a title', () => {
+        const actual = wrapper.containsMatchingElement(
+          <h5>{props.title}</h5>
+        );
+        expect(actual).to.eq(true);
       });
 
       it('should call props.onChange', () => {

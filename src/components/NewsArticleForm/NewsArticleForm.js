@@ -30,10 +30,15 @@ export const NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS = {
   height: 450
 };
 
-export const bodyMainRTE = ({ input, onChange, props, meta: { touched, error } }) => (
+export const bodyMainRTE = ({ input, title, onChange, props, meta: { touched, error } }) => (
   <div>
     {touched && error && (<p>Main content is {error}</p>)}
-    <RichTextEditor value={input.value} onChange={e => { input.onChange(e) }} {...props} />
+    <RichTextEditor
+      value={input.value}
+      title={title}
+      onChange={e => { input.onChange(e) }}
+      {...props}
+    />
   </div>
 );
 
@@ -41,7 +46,8 @@ bodyMainRTE.propTypes = {
   input: PropTypes.object.isRequired,
   onChange: PropTypes.func,
   props: PropTypes.object,
-  meta: PropTypes.object.isRequired
+  meta: PropTypes.object.isRequired,
+  title: PropTypes.string
 }
 
 export class NewsArticleForm extends React.Component {
@@ -100,28 +106,22 @@ export class NewsArticleForm extends React.Component {
             />
           </div>
 
-          <div className='row-large'>
+          <div className="row-large cols-container">
             <Field
               name='bodyMain'
+              title="Copy"
               component={bodyMainRTE}
               validate={required}
               required
             />
-          </div>
 
-          <div className='row-large'>
-            <div className='cols-container'>
-
-              <div>
-                <Field name='mainImage.url'
-                  title='Image'
-                  component={DropzoneImageUpload}
-                  existingImage={formValues && formValues.mainImage && formValues.mainImage.url}
-                  minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
-                />
-              </div>
-
-            </div>
+            <Field
+              name='mainImage.url'
+              title='Image'
+              component={DropzoneImageUpload}
+              existingImage={formValues && formValues.mainImage && formValues.mainImage.url}
+              minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
+            />
           </div>
 
           <div className='row-large'>
