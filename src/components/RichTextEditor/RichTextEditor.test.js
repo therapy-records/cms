@@ -9,8 +9,14 @@ Enzyme.configure({ adapter: new Adapter() });
 describe('(Component) RichTextEditor', () => {
   let wrapper,
     props = {
-      onChange: () => {},
-      title: 'Test title'
+      input: {
+        onChange: () => {}
+      },
+      title: 'Test title',
+      meta: {
+        touched: false,
+        error: ''
+      }
     },
     onChangeSpy;
 
@@ -20,7 +26,9 @@ describe('(Component) RichTextEditor', () => {
         wrapper = shallow(<_RichTextEditor {...props} />);
         onChangeSpy = sinon.spy();
         wrapper.setProps({
-          onChange: onChangeSpy
+          input: {
+            onChange: onChangeSpy
+          }
         });
       });
 
@@ -31,14 +39,14 @@ describe('(Component) RichTextEditor', () => {
         expect(wrapper.instance().state.value).to.eq(mockValue);
       });
 
-      it('should set render a title', () => {
+      it('should render a title', () => {
         const actual = wrapper.containsMatchingElement(
           <h5>{props.title}</h5>
         );
         expect(actual).to.eq(true);
       });
 
-      it('should call props.onChange', () => {
+      it('should call props.input.onChange', () => {
         const mockValue = 'testing';
         wrapper.instance().onChange(mockValue);
         expect(onChangeSpy).to.have.been.calledOnce;

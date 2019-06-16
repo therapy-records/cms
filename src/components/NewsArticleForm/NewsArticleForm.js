@@ -30,26 +30,6 @@ export const NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS = {
   height: 450
 };
 
-export const bodyMainRTE = ({ input, title, onChange, props, meta: { touched, error } }) => (
-  <div>
-    {touched && error && (<p>Main content is {error}</p>)}
-    <RichTextEditor
-      value={input.value}
-      title={title}
-      onChange={e => { input.onChange(e) }}
-      {...props}
-    />
-  </div>
-);
-
-bodyMainRTE.propTypes = {
-  input: PropTypes.object.isRequired,
-  onChange: PropTypes.func,
-  props: PropTypes.object,
-  meta: PropTypes.object.isRequired,
-  title: PropTypes.string
-}
-
 export class NewsArticleForm extends React.Component {
 
   constructor(props) {
@@ -110,7 +90,7 @@ export class NewsArticleForm extends React.Component {
             <Field
               name='bodyMain'
               title="Copy"
-              component={bodyMainRTE}
+              component={RichTextEditor}
               validate={required}
               required
             />

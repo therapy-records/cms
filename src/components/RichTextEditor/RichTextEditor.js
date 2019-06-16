@@ -16,20 +16,27 @@ class _RichTextEditor extends React.Component {
 
   onChange(value){
     this.setState({ value });
-    if (this.props.onChange) {
-      this.props.onChange(
+    if (this.props.input.onChange) {
+      this.props.input.onChange(
         value.toString('html')
       );
     }
   }
 
   render() {
-    const {title} = this.props;
+    const {
+      title,
+      meta
+    } = this.props;
+
+    const {touched, error} = meta;
 
     return (
       <div>
 
       {title && <h5>{title}</h5>}
+
+      {touched && error && (<p>Main content is {error}</p>)}
 
         <RichTextEditor
           value={this.state.value}
@@ -43,7 +50,9 @@ class _RichTextEditor extends React.Component {
 }
 
 _RichTextEditor.propTypes = {
-  onChange: PropTypes.func.isRequired,
+  // onChange: PropTypes.func.isRequired,
+  input: PropTypes.object.isRequired,
+  meta: PropTypes.object.isRequired,
   value: PropTypes.string,
   title: PropTypes.string
 }

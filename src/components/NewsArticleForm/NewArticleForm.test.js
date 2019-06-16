@@ -6,13 +6,13 @@ import Adapter from 'enzyme-adapter-react-15';
 import {
   NewsArticleForm,
   required,
-  bodyMainRTE,
   NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS
 } from './NewsArticleForm';
 import TextInput from '../TextInput';
 import ArticlePreview from '../ArticlePreview/ArticlePreview';
 import DropzoneImageUpload from './DropzoneImageUpload';
 import Quotes from './Quotes';
+import RichTextEditor from '../RichTextEditor';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -110,7 +110,7 @@ describe('(Component) NewsArticleForm', () => {
     it('should render a bodyMain field', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='bodyMain'
-          component={bodyMainRTE}
+          component={RichTextEditor}
           validate={required}
           required
         />
