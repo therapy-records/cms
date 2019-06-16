@@ -24,6 +24,11 @@ state.news.selectedNewsArticle
 
 export const selectSelectedNewsArticle = (state) => state.selectedNewsArticle;
 
+export const selectSelectedNewsArticleSections = createSelector(
+  selectSelectedNewsArticle,
+  (article) => article && article.sections
+);
+
 export const selectSelectedNewsArticleTitle = createSelector(
   selectSelectedNewsArticle,
   (article) => article && article.title

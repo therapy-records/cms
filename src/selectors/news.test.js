@@ -5,19 +5,30 @@ import {
   filterNewsArticlesArticle,
   selectNewsArticlesArticle,
   selectSelectedNewsArticle,
-  selectSelectedNewsArticleTitle,
-  selectSelectedNewsArticleBodyMain,
-  selectSelectedNewsArticleQuotes,
-  selectSelectedNewsArticleMainImageUrl,
-  selectSelectedNewsArticleMainImageExternalLink,
-  selectSelectedNewsArticleSecondaryImageUrl,
-  selectSelectedNewsArticleTicketsLink,
-  selectSelectedNewsArticleVenueLink,
-  selectSelectedNewsArticleMiniGalleryImages,
-  selectSelectedNewsArticleVideoEmbed,
-  selectSelectedNewsArticleSocialShare,
-  selectSelectedNewsArticleSocialShareHashtags
+  selectSelectedNewsArticleSections
+  // selectSelectedNewsArticleTitle,
+  // selectSelectedNewsArticleBodyMain,
+  // selectSelectedNewsArticleQuotes,
+  // selectSelectedNewsArticleMainImageUrl,
+  // selectSelectedNewsArticleMainImageExternalLink,
+  // selectSelectedNewsArticleSecondaryImageUrl,
+  // selectSelectedNewsArticleTicketsLink,
+  // selectSelectedNewsArticleVenueLink,
+  // selectSelectedNewsArticleMiniGalleryImages,
+  // selectSelectedNewsArticleVideoEmbed,
+  // selectSelectedNewsArticleSocialShare,
+  // selectSelectedNewsArticleSocialShareHashtags
 } from './news';
+
+const mockSelectedNewsArticle = {
+  month: 'June',
+  sections: [
+    {
+      images: [],
+      copy: []
+    }
+  ]
+}
 
 const mockArticles = [
   {
@@ -72,7 +83,7 @@ const mockState = {
   news: {
     articles: mockArticles
   },
-  selectedNewsArticle: mockArticles[1]
+  selectedNewsArticle: mockSelectedNewsArticle
 };
 
 describe('(Selectors) news', () => {
@@ -129,99 +140,107 @@ describe('(Selectors) news', () => {
     });
   });
 
-  describe('selectSelectedNewsArticleTitle', () => {
-    it('should return a title', () => {
-      const actual = selectSelectedNewsArticleTitle(mockState, articleId);
-      const expected = newsArticle.title;
+  describe('selectSelectedNewsArticleSections', () => {
+    it('should return selectedNewsArticle.sections', () => {
+      const actual = selectSelectedNewsArticleSections(mockState);
+      const expected = mockSelectedNewsArticle.sections;
       expect(actual).to.equal(expected);
     });
   });
 
-  describe('selectSelectedNewsArticleBodyMain', () => {
-    it('should return bodyMain', () => {
-      const actual = selectSelectedNewsArticleBodyMain(mockState, articleId);
-      const expected = newsArticle.bodyMain;
-      expect(actual).to.deep.equal(expected);
-    });
-  });
+  // describe('selectSelectedNewsArticleTitle', () => {
+  //   it('should return a title', () => {
+  //     const actual = selectSelectedNewsArticleTitle(mockState, articleId);
+  //     const expected = newsArticle.title;
+  //     expect(actual).to.equal(expected);
+  //   });
+  // });
 
-  describe('selectSelectedNewsArticleQuotes', () => {
-    it('should return bodyMain', () => {
-      const actual = selectSelectedNewsArticleQuotes(mockState, articleId);
-      const expected = newsArticle.quotes;
-      expect(actual).to.deep.equal(expected);
-    });
-  });
+  // describe('selectSelectedNewsArticleBodyMain', () => {
+  //   it('should return bodyMain', () => {
+  //     const actual = selectSelectedNewsArticleBodyMain(mockState, articleId);
+  //     const expected = newsArticle.bodyMain;
+  //     expect(actual).to.deep.equal(expected);
+  //   });
+  // });
 
-  describe('selectSelectedNewsArticleMainImageUrl', () => {
-    it('should return bodyMain', () => {
-      const actual = selectSelectedNewsArticleMainImageUrl(mockState, articleId);
-      const expected = newsArticle.mainImage.url;
-      expect(actual).to.equal(expected);
-    });
-  });
+  // describe('selectSelectedNewsArticleQuotes', () => {
+  //   it('should return bodyMain', () => {
+  //     const actual = selectSelectedNewsArticleQuotes(mockState, articleId);
+  //     const expected = newsArticle.quotes;
+  //     expect(actual).to.deep.equal(expected);
+  //   });
+  // });
 
-  describe('selectSelectedNewsArticleMainImageExternalLink', () => {
-    it('should return bodyMain', () => {
-      const actual = selectSelectedNewsArticleMainImageExternalLink(mockState, articleId);
-      const expected = newsArticle.mainImage.externalLink;
-      expect(actual).to.equal(expected);
-    });
-  });
+  // describe('selectSelectedNewsArticleMainImageUrl', () => {
+  //   it('should return bodyMain', () => {
+  //     const actual = selectSelectedNewsArticleMainImageUrl(mockState, articleId);
+  //     const expected = newsArticle.mainImage.url;
+  //     expect(actual).to.equal(expected);
+  //   });
+  // });
 
-  describe('selectSelectedNewsArticleSecondaryImageUrl', () => {
-    it('should return bodyMain', () => {
-      const actual = selectSelectedNewsArticleSecondaryImageUrl(mockState, articleId);
-      const expected = newsArticle.mainImageUrl;
-      expect(actual).to.equal(expected);
-    });
-  });
+  // describe('selectSelectedNewsArticleMainImageExternalLink', () => {
+  //   it('should return bodyMain', () => {
+  //     const actual = selectSelectedNewsArticleMainImageExternalLink(mockState, articleId);
+  //     const expected = newsArticle.mainImage.externalLink;
+  //     expect(actual).to.equal(expected);
+  //   });
+  // });
 
-  describe('selectSelectedNewsArticleTicketsLink', () => {
-    it('should return bodyMain', () => {
-      const actual = selectSelectedNewsArticleTicketsLink(mockState, articleId);
-      const expected = newsArticle.ticketsLink;
-      expect(actual).to.equal(expected);
-    });
-  });
+  // describe('selectSelectedNewsArticleSecondaryImageUrl', () => {
+  //   it('should return bodyMain', () => {
+  //     const actual = selectSelectedNewsArticleSecondaryImageUrl(mockState, articleId);
+  //     const expected = newsArticle.mainImageUrl;
+  //     expect(actual).to.equal(expected);
+  //   });
+  // });
 
-  describe('selectSelectedNewsArticleVenueLink', () => {
-    it('should return bodyMain', () => {
-      const actual = selectSelectedNewsArticleVenueLink(mockState, articleId);
-      const expected = newsArticle.venueLink;
-      expect(actual).to.equal(expected);
-    });
-  });
+  // describe('selectSelectedNewsArticleTicketsLink', () => {
+  //   it('should return bodyMain', () => {
+  //     const actual = selectSelectedNewsArticleTicketsLink(mockState, articleId);
+  //     const expected = newsArticle.ticketsLink;
+  //     expect(actual).to.equal(expected);
+  //   });
+  // });
 
-  describe('selectSelectedNewsArticleMiniGalleryImages', () => {
-    it('should return bodyMain', () => {
-      const actual = selectSelectedNewsArticleMiniGalleryImages(mockState, articleId);
-      const expected = newsArticle.miniGalleryImages;
-      expect(actual).to.deep.equal(expected);
-    });
-  });
+  // describe('selectSelectedNewsArticleVenueLink', () => {
+  //   it('should return bodyMain', () => {
+  //     const actual = selectSelectedNewsArticleVenueLink(mockState, articleId);
+  //     const expected = newsArticle.venueLink;
+  //     expect(actual).to.equal(expected);
+  //   });
+  // });
 
-  describe('selectSelectedNewsArticleVideoEmbed', () => {
-    it('should return bodyMain', () => {
-      const actual = selectSelectedNewsArticleVideoEmbed(mockState, articleId);
-      const expected = newsArticle.videoEmbed;
-      expect(actual).to.equal(expected);
-    });
-  });
+  // describe('selectSelectedNewsArticleMiniGalleryImages', () => {
+  //   it('should return bodyMain', () => {
+  //     const actual = selectSelectedNewsArticleMiniGalleryImages(mockState, articleId);
+  //     const expected = newsArticle.miniGalleryImages;
+  //     expect(actual).to.deep.equal(expected);
+  //   });
+  // });
 
-  describe('selectSelectedNewsArticleSocialShare', () => {
-    it('should return socialShare', () => {
-      const actual = selectSelectedNewsArticleSocialShare(mockState, articleId);
-      const expected = newsArticle.socialShare;
-      expect(actual).to.equal(expected);
-    });
-  });
+  // describe('selectSelectedNewsArticleVideoEmbed', () => {
+  //   it('should return bodyMain', () => {
+  //     const actual = selectSelectedNewsArticleVideoEmbed(mockState, articleId);
+  //     const expected = newsArticle.videoEmbed;
+  //     expect(actual).to.equal(expected);
+  //   });
+  // });
 
-  describe('selectSelectedNewsArticleSocialShareHashtags', () => {
-    it('should return socialShare.hashtags', () => {
-      const actual = selectSelectedNewsArticleSocialShareHashtags(mockState, articleId);
-      const expected = newsArticle.socialShare.hashtags;
-      expect(actual).to.equal(expected);
-    });
-  });
+  // describe('selectSelectedNewsArticleSocialShare', () => {
+  //   it('should return socialShare', () => {
+  //     const actual = selectSelectedNewsArticleSocialShare(mockState, articleId);
+  //     const expected = newsArticle.socialShare;
+  //     expect(actual).to.equal(expected);
+  //   });
+  // });
+
+  // describe('selectSelectedNewsArticleSocialShareHashtags', () => {
+  //   it('should return socialShare.hashtags', () => {
+  //     const actual = selectSelectedNewsArticleSocialShareHashtags(mockState, articleId);
+  //     const expected = newsArticle.socialShare.hashtags;
+  //     expect(actual).to.equal(expected);
+  //   });
+  // });
 });

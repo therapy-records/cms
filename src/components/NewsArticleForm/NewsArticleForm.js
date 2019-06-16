@@ -4,17 +4,18 @@ import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import RichTextEditor from '../RichTextEditor'
 import {
-  selectSelectedNewsArticleTitle,
-  selectSelectedNewsArticleQuotes,
-  selectSelectedNewsArticleBodyMain,
-  selectSelectedNewsArticleMainImageUrl,
-  selectSelectedNewsArticleMainImageExternalLink,
-  selectSelectedNewsArticleSecondaryImageUrl,
-  selectSelectedNewsArticleTicketsLink,
-  selectSelectedNewsArticleVenueLink,
-  selectSelectedNewsArticleMiniGalleryImages,
-  selectSelectedNewsArticleVideoEmbed,
-  selectSelectedNewsArticleSocialShareHashtags
+  selectSelectedNewsArticleSections
+  // selectSelectedNewsArticleTitle,
+  // selectSelectedNewsArticleQuotes,
+  // selectSelectedNewsArticleBodyMain,
+  // selectSelectedNewsArticleMainImageUrl,
+  // selectSelectedNewsArticleMainImageExternalLink,
+  // selectSelectedNewsArticleSecondaryImageUrl,
+  // selectSelectedNewsArticleTicketsLink,
+  // selectSelectedNewsArticleVenueLink,
+  // selectSelectedNewsArticleMiniGalleryImages,
+  // selectSelectedNewsArticleVideoEmbed,
+  // selectSelectedNewsArticleSocialShareHashtags
 } from '../../selectors/news';
 import { selectNewsArticleFormValues } from '../../selectors/form';
 import './NewsArticleForm.css';
@@ -34,13 +35,21 @@ export class NewsArticleForm extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
     this.handleSubmit = this.handleSubmit.bind(this);
-    
+    this.handleAddSection = this.handleAddSection.bind(this);
   }
 
   handleSubmit() {
     this.props.onSubmitForm();
+  }
+
+  handleAddSection() {
+    const {
+      formValues,
+      onAddArticleSection
+    } = this.props;
+
+    onAddArticleSection(formValues);
   }
 
   render() {
@@ -52,6 +61,9 @@ export class NewsArticleForm extends React.Component {
       location,
       formValues
     } = this.props;
+
+    if (!formValues) return null;
+
 
     let isEditForm;
     if (location && location.pathname.includes('edit')) {
@@ -71,11 +83,11 @@ export class NewsArticleForm extends React.Component {
           </div>
         </div>
 
+        <div className='col-clear' />
+
         <form onSubmit={this.handleSubmit} encType='multipart/form-data'>
 
-          <div className='col-clear' />
-
-          <div className='row-large'>
+        <div className='row-large'>
             <Field name='month'
                   component={TextInput}
                   type='text'
@@ -86,28 +98,42 @@ export class NewsArticleForm extends React.Component {
             />
           </div>
 
-          <div className="row-large cols-container">
-            <Field
-              name='bodyMain'
-              title="Copy"
-              component={RichTextEditor}
-              validate={required}
-              required
-            />
+          <ul>
+            {(formValues && formValues.sections) && formValues.sections.map((section, index) => {
+              return (
+                <li key={index}>
+                  <div className="row-large cols-container">
+                    <Field
+                      name='bodyMain'
+                      title="Copy"
+                      component={RichTextEditor}
+                      validate={required}
+                      required
+                    />
 
-            <Field
-              name='mainImage.url'
-              title='Image'
-              component={DropzoneImageUpload}
-              existingImage={formValues && formValues.mainImage && formValues.mainImage.url}
-              minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
-            />
-          </div>
+                    <Field
+                      name='mainImage.url'
+                      title='Image'
+                      component={DropzoneImageUpload}
+                      existingImage={formValues && formValues.mainImage && formValues.mainImage.url}
+                      minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
+                    />
+                  </div>
 
-          <div className='row-large'>
-            <Field name='quotes'
-                   component={Quotes} />
-          </div>
+                  <div className='row-large'>
+                    <Field name='quotes'
+                      component={Quotes} />
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+          
+          <button
+            type='button'
+            onClick={this.handleAddSection}
+            >Add a new section
+          </button>
 
 
           {error && <p>{error}</p>}
@@ -129,12 +155,13 @@ export class NewsArticleForm extends React.Component {
 }
 
 NewsArticleForm.propTypes = {
+  onSubmitForm: PropTypes.func.isRequired,
+  onAddArticleSection: PropTypes.func.isRequired,
   error: PropTypes.string,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
   invalid: PropTypes.bool,
   formValues: PropTypes.object,
-  onSubmitForm: PropTypes.func.isRequired,
   location: PropTypes.object
 };
 
@@ -145,6 +172,7 @@ let InitFromStateForm = reduxForm({
 
 InitFromStateForm = connect(
   (state, props) => ({
+    /*
     initialValues: {
       month: selectSelectedNewsArticleTitle(state),
       bodyMain: selectSelectedNewsArticleBodyMain(state),
@@ -161,6 +189,10 @@ InitFromStateForm = connect(
       socialShare: {
         hashtags: selectSelectedNewsArticleSocialShareHashtags(state)
       }
+    }
+    */
+    initialValues: {
+      sections: selectSelectedNewsArticleSections(state)
     }
   })
 )(InitFromStateForm);

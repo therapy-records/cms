@@ -8,11 +8,15 @@ import nock from 'nock';
 import {
   SET_SELECTED_NEWS_ARTICLE,
   SET_SELECTED_NEWS_ARTICLE_DELETED,
+  ADD_SELECTED_NEWS_ARTICLE_SECTION,
   DESTROY_SELECTED_NEWS_ARTICLE,
   DELETE_SINGLE_NEWS_ARTICLE_SUCCESS,
   DELETE_SINGLE_NEWS_ARTICLE_ERROR,
+  EMPTY_ARTICLE_SECTION,
+  INITIAL_STATE,
   selectedNewsArticle,
   selectedNewsArticleDeleted,
+  addNewsArticleSection,
   deleteSuccess,
   deleteError,
   setSelectedNewsArticle,
@@ -57,9 +61,7 @@ const mock = {
   }
 };
 
-const mockState = {
-  selectedNewsArticle: {}
-};
+const mockState = INITIAL_STATE;
 
 const store = mockStore(mockState);
 
@@ -72,6 +74,9 @@ describe('(Redux Module) newsArticle', () => {
     expect(SET_SELECTED_NEWS_ARTICLE_DELETED).to.equal('SET_SELECTED_NEWS_ARTICLE_DELETED')
   });
 
+  it('should export a constant ADD_SELECTED_NEWS_ARTICLE_SECTION', () => {
+    expect(ADD_SELECTED_NEWS_ARTICLE_SECTION).to.equal('ADD_SELECTED_NEWS_ARTICLE_SECTION')
+  });
   it('should export a constant DESTROY_SELECTED_NEWS_ARTICLE', () => {
     expect(DESTROY_SELECTED_NEWS_ARTICLE).to.equal('DESTROY_SELECTED_NEWS_ARTICLE')
   });
@@ -91,7 +96,8 @@ describe('(Redux Module) newsArticle', () => {
 
     it('should initialize with correct state', () => {
       const state = newsArticleReducer(undefined, {});
-      expect(state).to.deep.eq({});
+      const expectedInitialState = INITIAL_STATE;
+      expect(state).to.deep.eq(expectedInitialState);
     });
   });
 
@@ -139,6 +145,37 @@ describe('(Redux Module) newsArticle', () => {
     it('should update state', () => {
       let state = newsArticleReducer(mockState, selectedNewsArticleDeleted());
       expect(state).to.deep.eq({ isDeleted: true });
+    });
+  });
+
+  describe('(Action) addNewsArticleSection', () => {
+    afterEach(() => {
+      nock.cleanAll()
+    });
+
+    it('should be exported as a function', () => {
+      expect(addNewsArticleSection).to.be.a('function');
+    });
+
+    it('should return an action with type ADD_SELECTED_NEWS_ARTICLE_SECTION', () => {
+      expect(addNewsArticleSection(INITIAL_STATE)).to.have.property('type', ADD_SELECTED_NEWS_ARTICLE_SECTION);
+    });
+
+    it('should update state', () => {
+      const mockSelectedArticle = {
+        sections: [
+          EMPTY_ARTICLE_SECTION
+        ]
+      };
+      let state = newsArticleReducer(mockState, addNewsArticleSection(mockSelectedArticle));
+
+      const expected = {
+        sections: [
+          EMPTY_ARTICLE_SECTION,
+          EMPTY_ARTICLE_SECTION
+        ]
+      };
+      expect(state).to.deep.eq(expected);
     });
   });
 
@@ -207,7 +244,7 @@ describe('(Redux Module) newsArticle', () => {
 
     it('should update state', () => {
       let state = newsArticleReducer(mockState, destroySelectedNewsArticle());
-      expect(state).to.deep.eq({selectedNewsArticle: {}});
+      expect(state).to.deep.eq(INITIAL_STATE);
     });
   });
 

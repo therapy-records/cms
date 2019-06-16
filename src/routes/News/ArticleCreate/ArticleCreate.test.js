@@ -14,7 +14,9 @@ describe('(Component) News - ArticleCreate', () => {
     props,
     baseProps = {
       onPostArticle: () => {},
-      resetPromiseState: () => {}
+      onAddArticleSection: () => {},
+      resetPromiseState: () => {},
+      location: {}
     };
 
   it('should call resetPromiseState on componentWillUnmount', () => {
@@ -32,6 +34,8 @@ describe('(Component) News - ArticleCreate', () => {
     const actual = wrapper.containsMatchingElement(
       <NewsArticleForm
         onSubmitForm={props.onPostArticle}
+        onAddArticleSection={props.onAddArticleSection}
+        location={props.location}
       />
     );
     expect(actual).to.equal(true);

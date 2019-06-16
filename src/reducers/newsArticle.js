@@ -11,8 +11,20 @@ import {
 } from './uiState';
 import { fetchNewsArticles } from './news';
 
+export const EMPTY_ARTICLE_SECTION = {
+  images: [],
+  copy: []
+};
+
+export const INITIAL_STATE = {
+  sections: [
+    EMPTY_ARTICLE_SECTION
+  ]
+};
+
 export const SET_SELECTED_NEWS_ARTICLE = 'SET_SELECTED_NEWS_ARTICLE';
 export const SET_SELECTED_NEWS_ARTICLE_DELETED = 'SET_SELECTED_NEWS_ARTICLE_DELETED';
+export const ADD_SELECTED_NEWS_ARTICLE_SECTION = 'ADD_SELECTED_NEWS_ARTICLE_SECTION';
 export const DESTROY_SELECTED_NEWS_ARTICLE = 'DESTROY_SELECTED_NEWS_ARTICLE';
 
 export const DELETE_SINGLE_NEWS_ARTICLE_SUCCESS = 'DELETE_SINGLE_NEWS_ARTICLE_SUCCESS';
@@ -33,6 +45,19 @@ export function selectedNewsArticleDeleted() {
   return {
     type: SET_SELECTED_NEWS_ARTICLE_DELETED,
     payload: { isDeleted: true }
+  }
+}
+
+export function addNewsArticleSection(article) {
+  const updatedArticle = article;
+  updatedArticle.sections = [
+    ...updatedArticle.sections,
+    EMPTY_ARTICLE_SECTION
+  ];
+
+  return {
+    type: ADD_SELECTED_NEWS_ARTICLE_SECTION,
+    payload: updatedArticle
   }
 }
 
@@ -130,6 +155,7 @@ export const actions = {
 const ACTION_HANDLERS = {
   [SET_SELECTED_NEWS_ARTICLE]: (state, action) => state = action.payload,
   [SET_SELECTED_NEWS_ARTICLE_DELETED]: (state, action) => state = action.payload,
+  [ADD_SELECTED_NEWS_ARTICLE_SECTION]: (state, action) => state = action.payload,
   [DESTROY_SELECTED_NEWS_ARTICLE]: (state, action) => state = action.payload,
 
   [DELETE_SINGLE_NEWS_ARTICLE_SUCCESS]: (state, action) => state = action.payload,
@@ -140,10 +166,8 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = {
-};
 
-export default function selectedNewsArticleReducer(state = initialState, action) {
+export default function selectedNewsArticleReducer(state = INITIAL_STATE, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state
