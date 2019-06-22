@@ -2,8 +2,7 @@
 import {
   selectUiState,
   selectUiStateLoading,
-  selectUiStateSuccess,
-  selectUiStateError
+  selectUiStateSuccess
 } from './uiState';
 
 const mockState = {
@@ -34,13 +33,6 @@ describe('(Selectors) uiState', () => {
     it('should return uiState', () => {
       const actual = selectUiStateSuccess(mockState);
       expect(actual).to.deep.equal(mockState.uiState.promiseSuccess);
-    });
-  });
-
-  describe('selectUiStateError', () => {
-    it('should return uiState', () => {
-      const actual = selectUiStateError(mockState);
-      expect(actual).to.deep.equal(mockState.uiState.promiseError);
     });
   });
 

@@ -11,13 +11,11 @@ import {
 } from '../../../reducers/otherWorkArticle';
 import {
   selectUiStateLoading,
-  selectUiStateSuccess,
-  selectUiStateError
+  selectUiStateSuccess
 } from '../../../selectors/uiState';
 import { selectSelectedOtherWorkArticle } from '../../../selectors/otherWork';
 import ArticleDeleteModal from '../../../components/ArticleDeleteModal'
 import LoadingSpinner from '../../../components/LoadingSpinner';
-import PromiseError from '../../../components/PromiseError';
 
 export class Article extends React.Component {
   constructor() {
@@ -68,8 +66,7 @@ export class Article extends React.Component {
   render() {
     const {
       article,
-      promiseLoading,
-      promiseError
+      promiseLoading
     } = this.props;
 
     // todo: move to will/did update
@@ -145,10 +142,6 @@ export class Article extends React.Component {
           </div>
         )}
 
-        {promiseError &&
-          <PromiseError message='fetching other-work article' />
-        }
-
         {(!promiseLoading && this.state.isShowingModal) &&
           <ArticleDeleteModal
             handleModalClose={this.handleModalClose}
@@ -165,7 +158,6 @@ Article.propTypes = {
   onDeleteArticle: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
-  promiseError: PropTypes.bool,
   onFetchArticle: PropTypes.func.isRequired,
   resetPromiseState: PropTypes.func.isRequired,
   onDestroyArticle: PropTypes.func.isRequired,
@@ -185,7 +177,6 @@ const mapStateToProps = (state, props) => ({
   article: selectSelectedOtherWorkArticle(state),
   promiseLoading: selectUiStateLoading(state),
   promiseSuccess: selectUiStateSuccess(state),
-  promiseError: selectUiStateError(state),
   location: state.location
 })
 

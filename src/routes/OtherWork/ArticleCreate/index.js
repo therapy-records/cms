@@ -20,7 +20,6 @@ class ArticleCreate extends React.Component {
     const {
       promiseLoading,
       promiseSuccess,
-      promiseError,
       location
     } = this.props;
 
@@ -31,10 +30,6 @@ class ArticleCreate extends React.Component {
           fullScreen
           active={promiseLoading}
         />
-
-        {promiseError &&
-          <p>error posting article :( {promiseError.message}</p>
-        }
 
         {!promiseLoading && promiseSuccess &&
           <div>
@@ -62,7 +57,6 @@ ArticleCreate.propTypes = {
   onPostArticle: PropTypes.func.isRequired,
   promiseLoading: PropTypes.bool,
   promiseSuccess: PropTypes.bool,
-  promiseError: PropTypes.bool,
   location: PropTypes.object,
   resetPromiseState: PropTypes.func
 }

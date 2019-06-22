@@ -8,8 +8,7 @@ import { fetchNewsArticles } from '../../../reducers/news';
 import { selectSelectedNewsArticle } from '../../../selectors/news';
 import {
   selectUiStateLoading,
-  selectUiStateSuccess,
-  selectUiStateError
+  selectUiStateSuccess
 } from '../../../selectors/uiState';
 import {
   deleteNewsArticle,
@@ -18,7 +17,6 @@ import {
 } from '../../../reducers/newsArticle';
 import ArticleDeleteModal from '../../../components/ArticleDeleteModal';
 import LoadingSpinner from '../../../components/LoadingSpinner';
-import PromiseError from '../../../components/PromiseError';
 
 export class Article extends React.Component {
   constructor() {
@@ -69,8 +67,7 @@ export class Article extends React.Component {
   render() {
     const {
       article,
-      promiseLoading,
-      promiseError
+      promiseLoading
     } = this.props;
 
     const articleHasMiniGalleryImages = article &&
@@ -249,10 +246,6 @@ export class Article extends React.Component {
           </div>
         )}
 
-        {promiseError &&
-          <PromiseError message='fetching news article' />
-        }
-
         {(!promiseLoading && this.state.isShowingModal) &&
           <ArticleDeleteModal
             handleModalClose={this.handleModalClose}
@@ -270,7 +263,6 @@ Article.propTypes = {
   onDeleteArticle: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
-  promiseError: PropTypes.bool,
   onFetchArticle: PropTypes.func.isRequired,
   resetPromiseState: PropTypes.func.isRequired,
   onDestroyArticle: PropTypes.func.isRequired,
@@ -288,8 +280,7 @@ const mapDispatchToProps = {
 const mapStateToProps = (state, props) => ({
   article: selectSelectedNewsArticle(state),
   promiseLoading: selectUiStateLoading(state),
-  promiseSuccess: selectUiStateSuccess(state),
-  promiseError: selectUiStateError(state)
+  promiseSuccess: selectUiStateSuccess(state)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Article)

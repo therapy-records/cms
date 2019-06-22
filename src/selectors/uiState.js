@@ -11,8 +11,3 @@ export const selectUiStateSuccess = createSelector(
   selectUiState,
   (uiState) => uiState && uiState.promiseSuccess
 );
-
-export const selectUiStateError = createSelector(
-  selectUiState,
-  (uiState) => uiState && uiState.promiseError
-);

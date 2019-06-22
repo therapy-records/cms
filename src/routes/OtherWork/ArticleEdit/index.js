@@ -11,8 +11,7 @@ import { editOtherWork } from '../../../reducers/otherWork';
 import { selectSelectedOtherWorkArticle } from '../../../selectors/otherWork';
 import {
   selectUiStateLoading,
-  selectUiStateSuccess,
-  selectUiStateError
+  selectUiStateSuccess
 } from '../../../selectors/uiState';
 import OtherWorkArticleForm from '../../../components/OtherWorkArticleForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
@@ -40,7 +39,6 @@ class ArticleEdit extends React.Component {
       article,
       promiseLoading,
       promiseSuccess,
-      promiseError,
       location
     } = this.props;
 
@@ -54,10 +52,6 @@ class ArticleEdit extends React.Component {
           active={promiseLoading}
           fullScreen
         />
-
-        {promiseError &&
-          <p>error updating other-work article :( {promiseError.message}</p>
-        }
 
         {!promiseLoading && (promiseSuccess && article.editSuccess) &&
           <div>
@@ -84,7 +78,6 @@ ArticleEdit.propTypes = {
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
   promiseSuccess: PropTypes.bool,
-  promiseError: PropTypes.bool,
   resetPromiseState: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired
@@ -101,7 +94,6 @@ const mapStateToProps = (state, props) => ({
   article: selectSelectedOtherWorkArticle(state),
   promiseLoading: selectUiStateLoading(state),
   promiseSuccess: selectUiStateSuccess(state),
-  promiseError: selectUiStateError(state),
   state: state.location
 });
 

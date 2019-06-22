@@ -109,20 +109,6 @@ describe('(Component) News - ArticleEdit', () => {
     });
   });
 
-  describe('when promise errors', () => {
-    beforeEach(() => {
-      props = baseProps;
-      props.promiseError = true;
-      wrapper = shallow(<ArticleEdit {...props} />);
-    });
-    it('should show error message', () => {
-      const actual = wrapper.containsMatchingElement(
-        <p>error updating news article :( {props.promiseError.message}</p>
-      );
-      expect(actual).to.equal(true);
-    });
-  });
-
   describe('componentWillUnmount', () => {
     it('should call resetPromiseState', () => {
       props.resetPromiseState = sinon.spy();
