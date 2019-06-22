@@ -1,20 +1,20 @@
 import React from 'react';
-import {GenericError} from './GenericError';
+import {StickyError} from './StickyError';
 import Sticky from '../Sticky/Sticky';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('(Component) GenericError', () => {
+describe('(Component) StickyError', () => {
   let wrapper,
     props = {
-      message: 'something has gone wrong'
+      message: 'Something has gone wrong'
     };
 
   describe('rendering', () => {
     beforeEach(() => {
-      wrapper = shallow(<GenericError {...props} />);
+      wrapper = shallow(<StickyError {...props} />);
     });
 
     it('should render <Sticky /> with props.message', () => {
