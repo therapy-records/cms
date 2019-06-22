@@ -5,11 +5,15 @@ import {
 } from '../constants/index'
 import {
   USER_AUTH_SUCCESS,
-  USER_AUTH_ERROR
+  USER_AUTH_ERROR,
+  GENERIC_ERROR_MESSAGE
 } from '../constants/actions'
 import {
   promiseLoading
 } from './uiState';
+import {
+  genericError
+} from './genericError';
 
 // ------------------------------------
 // Actions
@@ -28,8 +32,7 @@ export function authError(err) {
   return {
     type: USER_AUTH_ERROR,
     payload: {
-      isAuth: false,
-      authError: err
+      isAuth: false
     }
   }
 }
@@ -53,6 +56,7 @@ export const userLogin = () => {
         return null;
       }
     }
+
     return axiosUserLogin.post(
       API_ROOT + AUTH_LOGIN,
       userObj()
@@ -64,15 +68,15 @@ export const userLogin = () => {
       } else {
         localStorage.removeItem('token'); // eslint-disable-line no-undef
         dispatch(promiseLoading(false));
-        return dispatch(authError(data.data.message));
+        return dispatch(genericError(data.data.message));
       }
     }).catch((error) => {
       if (error.response) {
         dispatch(promiseLoading(false));
-        dispatch(authError(error.response.data.message))
+        dispatch(genericError(error.response.data.message))
       } else if (error.request) {
         dispatch(promiseLoading(false));
-        dispatch(authError('Sorry, something has gone wrong'));
+        dispatch(genericError(GENERIC_ERROR_MESSAGE));
       }
     });
   }
@@ -106,8 +110,7 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = {
-  isAuth: null,
-  authError: undefined
+  isAuth: null
 };
 export default function userReducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]

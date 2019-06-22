@@ -71,7 +71,7 @@ describe('(Actions) auth', () => {
         .reply(200, mock.authResponseSuccess);
 
       const expectedActions = [
-        { type: USER_AUTH_ERROR, payload: { isAuth: false, authError: undefined } },
+        { type: USER_AUTH_ERROR, payload: { isAuth: false } },
         { type: USER_AUTH_SUCCESS, payload: { isAuth: true } }
       ];
 
@@ -89,8 +89,8 @@ describe('(Actions) auth', () => {
         .reply(200, mock.authResponseError);
 
       const expectedActions = [
-        { type: USER_AUTH_ERROR, payload: { isAuth: false, authError: undefined } },
-        { type: USER_AUTH_ERROR, payload: { isAuth: false, authError: undefined } }
+        { type: USER_AUTH_ERROR, payload: { isAuth: false } },
+        { type: USER_AUTH_ERROR, payload: { isAuth: false } }
       ];
 
       return store.dispatch(authCheck()).then(() => {
@@ -107,8 +107,8 @@ describe('(Actions) auth', () => {
         .reply(200, mock.authResponseError);
 
       const expectedActions = [
-        { type: USER_AUTH_ERROR, payload: { isAuth: false, authError: undefined } },
-        { type: USER_AUTH_ERROR, payload: { isAuth: false, authError: undefined } }
+        { type: USER_AUTH_ERROR, payload: { isAuth: false } },
+        { type: USER_AUTH_ERROR, payload: { isAuth: false } }
       ];
 
       return store.dispatch(authCheck()).then(() => {

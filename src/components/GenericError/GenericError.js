@@ -13,7 +13,7 @@ export class GenericError extends PureComponent {
 
     return (
       <Sticky>
-        {message}
+        <p>{message}</p>
       </Sticky>
     );
   }

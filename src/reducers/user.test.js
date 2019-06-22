@@ -11,13 +11,14 @@ import {
 } from './user';
 import {
   API_ROOT,
-  // AUTH,
   AUTH_LOGIN
 } from '../constants';
 import {
   USER_AUTH_SUCCESS,
   USER_AUTH_ERROR,
-  UISTATE_PROMISE_LOADING
+  UISTATE_PROMISE_LOADING,
+  GENERIC_ERROR,
+  GENERIC_ERROR_MESSAGE
 } from '../constants/actions';
 
 const middlewares = [thunk];
@@ -63,8 +64,7 @@ describe('(Redux Module) user', () => {
     it('should initialize with correct state', () => {
       const state = userReducer(undefined, {});
       expect(state).to.deep.equal({
-        isAuth: null,
-        authError: undefined
+        isAuth: null
       });
     });
   });
@@ -102,7 +102,7 @@ describe('(Redux Module) user', () => {
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
-        { type: USER_AUTH_ERROR, payload: { isAuth: false, authError: mock.authResponseError.data.message } }
+        { type: GENERIC_ERROR, payload: mock.authResponseError.data.message }
       ];
 
       return store.dispatch(userLogin()).then(() => {
@@ -126,7 +126,7 @@ describe('(Redux Module) user', () => {
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
-        { type: USER_AUTH_ERROR, payload: { isAuth: false, authError: mockPromiseError.response.data.message } }
+        { type: GENERIC_ERROR, payload: mockPromiseError.response.data.message }
       ];
 
       return store.dispatch(userLogin()).then(() => {
@@ -146,7 +146,7 @@ describe('(Redux Module) user', () => {
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
-        { type: USER_AUTH_ERROR, payload: { isAuth: false, authError: 'Sorry, something has gone wrong' } }
+        { type: GENERIC_ERROR, payload: GENERIC_ERROR_MESSAGE }
       ];
 
       return store.dispatch(userLogin()).then(() => {
@@ -164,10 +164,11 @@ describe('(Redux Module) user', () => {
 
     it('should dispatch the correct actions', () => {
       const expectedActions = [
-        { type: USER_AUTH_ERROR, payload: { isAuth: false, authError: undefined } }
+        { type: USER_AUTH_ERROR, payload: { isAuth: false } }
       ];
       return store.dispatch(userLogout()).then(() => {
         const storeActions = store.getActions();
+        console.log('the store actions \n ', storeActions);
         expect(storeActions).to.deep.equal(expectedActions);
         store.clearActions();
       });
