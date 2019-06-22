@@ -17,8 +17,8 @@ import {
   USER_AUTH_SUCCESS,
   USER_AUTH_ERROR,
   UISTATE_PROMISE_LOADING,
-  GENERIC_ERROR,
-  GENERIC_ERROR_MESSAGE
+  ERROR_ALERT,
+  ERROR_ALERT_MESSAGE
 } from '../constants/actions';
 
 const middlewares = [thunk];
@@ -102,7 +102,7 @@ describe('(Redux Module) user', () => {
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
-        { type: GENERIC_ERROR, payload: mock.authResponseError.data.message }
+        { type: ERROR_ALERT, payload: mock.authResponseError.data.message }
       ];
 
       return store.dispatch(userLogin()).then(() => {
@@ -126,7 +126,7 @@ describe('(Redux Module) user', () => {
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
-        { type: GENERIC_ERROR, payload: mockPromiseError.response.data.message }
+        { type: ERROR_ALERT, payload: mockPromiseError.response.data.message }
       ];
 
       return store.dispatch(userLogin()).then(() => {
@@ -146,7 +146,7 @@ describe('(Redux Module) user', () => {
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
-        { type: GENERIC_ERROR, payload: GENERIC_ERROR_MESSAGE }
+        { type: ERROR_ALERT, payload: ERROR_ALERT_MESSAGE }
       ];
 
       return store.dispatch(userLogin()).then(() => {

@@ -6,14 +6,10 @@ import {
 import {
   USER_AUTH_SUCCESS,
   USER_AUTH_ERROR,
-  GENERIC_ERROR_MESSAGE
+  ERROR_ALERT_MESSAGE
 } from '../constants/actions'
-import {
-  promiseLoading
-} from './uiState';
-import {
-  genericError
-} from './genericError';
+import { promiseLoading } from './uiState';
+import { errorAlert } from './errorAlert';
 
 // ------------------------------------
 // Actions
@@ -68,15 +64,15 @@ export const userLogin = () => {
       } else {
         localStorage.removeItem('token'); // eslint-disable-line no-undef
         dispatch(promiseLoading(false));
-        return dispatch(genericError(data.data.message));
+        return dispatch(errorAlert(data.data.message));
       }
     }).catch((error) => {
       if (error.response) {
         dispatch(promiseLoading(false));
-        dispatch(genericError(error.response.data.message))
+        dispatch(errorAlert(error.response.data.message))
       } else if (error.request) {
         dispatch(promiseLoading(false));
-        dispatch(genericError(GENERIC_ERROR_MESSAGE));
+        dispatch(errorAlert(ERROR_ALERT_MESSAGE));
       }
     });
   }

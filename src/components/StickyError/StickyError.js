@@ -28,7 +28,7 @@ StickyError.defaultProps = {
 };
 
 const mapStateToProps = (state) => ({
-  message: state.genericError.message
+  message: state.errorAlert.message
 });
 
 export const ConnectedStickyError = connect(

@@ -1,14 +1,14 @@
 import {
-  GENERIC_ERROR
+  ERROR_ALERT
 } from '../constants/actions'
 
 // ------------------------------------
 // Actions
 // ------------------------------------
 
-export const genericError = str => {
+export const errorAlert = str => {
   return {
-    type: GENERIC_ERROR,
+    type: ERROR_ALERT,
     payload: str || ''
   }
 }
@@ -18,7 +18,7 @@ export const genericError = str => {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [GENERIC_ERROR]: (state, action) => {
+  [ERROR_ALERT]: (state, action) => {
     return { ...state, message: action.payload }
   }
 }
@@ -30,7 +30,7 @@ export const initialState = {
   message: ''
 };
 
-export default function genericErrorReducer(state = initialState, action) {
+export default function errorAlertReducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
   return handler ? handler(state, action) : state
 }
