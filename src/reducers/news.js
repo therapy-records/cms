@@ -50,7 +50,7 @@ export const fetchNewsArticles = () => {
         },
         (err) => {
           dispatch(promiseLoading(false));
-          dispatch(promiseError(err.response && err.response.status.toString()));
+          dispatch(promiseError());
         }
       )
   }
@@ -77,7 +77,7 @@ export const postNews = () => {
         dispatch(postNewsSuccess(res.data));
       }, (err) => {
         dispatch(promiseLoading(false));
-        dispatch(promiseError(err.response && err.response.status.toString()));
+        dispatch(promiseError());
         return err;
       }
     );
@@ -112,7 +112,7 @@ export const editNews = (postToEdit) => {
         dispatch(editNewsSuccess());
       }, (err) => {
         dispatch(promiseLoading(false));
-        dispatch(promiseError(err.response && err.response.status.toString()));
+        dispatch(promiseError());
       }
     );
   }

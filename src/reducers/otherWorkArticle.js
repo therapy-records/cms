@@ -68,7 +68,7 @@ export const fetchSingleOtherWorkArticle = (articleId) => {
         },
         () => {
           dispatch(promiseLoading(false));
-          dispatch(promiseError(true));
+          dispatch(promiseError());
         }
       )
   }

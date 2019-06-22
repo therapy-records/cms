@@ -200,7 +200,7 @@ describe('(Redux Module) news', () => {
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
-        { type: UISTATE_PROMISE_ERROR, payload: mockErrorResponse.response.status.toString() }
+        { type: UISTATE_PROMISE_ERROR, payload: true }
       ];
 
       store.clearActions();
@@ -269,7 +269,7 @@ describe('(Redux Module) news', () => {
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
-        { type: UISTATE_PROMISE_ERROR, payload: mockErrorResponse.response.status.toString() }
+        { type: UISTATE_PROMISE_ERROR, payload: true }
       ];
 
       return store.dispatch(editOtherWork({})).then(() => {

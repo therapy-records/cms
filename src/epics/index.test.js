@@ -57,12 +57,12 @@ describe('epics', () => {
   describe('errorAlertEpic', () => {
     it(`should dispatch correct ${ERROR_ALERT} action`, () => {
       const expectedActions = [
-        { type: UISTATE_PROMISE_ERROR, payload: mockErrorResponse.response.status.toString() },
+        { type: UISTATE_PROMISE_ERROR, payload: true },
         { type: ERROR_ALERT, payload: ERROR_ALERT_MESSAGE }
       ];
 
       store = mockStore(mockState, {});
-      store.dispatch(promiseError(mockErrorResponse.response.status));
+      store.dispatch(promiseError());
       const storeActions = store.getActions();
       expect(storeActions).to.deep.equal(expectedActions);
     });
