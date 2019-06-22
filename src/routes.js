@@ -3,6 +3,7 @@ import { Provider, connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import GenericError from './components/GenericError/GenericError';
 import Sidebar from './components/Sidebar/Sidebar';
 import Home from './routes/Home';
 import Dashboard from './routes/Dashboard';
@@ -28,6 +29,8 @@ export class Router extends Component {
       <BrowserRouter>
         <div>
 
+          <GenericError />
+
           <div className="main-container">
 
             <div className='col-first'>
@@ -50,6 +53,7 @@ export class Router extends Component {
                   onAuthCheck={onAuthCheck}
                   exact
                 />
+
                 <ProtectedRoute
                   path="/press"
                   component={Press}
