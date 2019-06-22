@@ -1,20 +1,12 @@
 import 'core-js';
-
 import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
 import { createEpicMiddleware } from 'redux-observable';
 import nock from 'nock';
-import {
-  initialState,
-  promiseLoading,
-  promiseSuccess,
-  promiseError,
-  resetPromiseState,
-  default as uiStateReducer
-} from '../reducers/uiState';
+import {promiseError} from '../reducers/uiState';
 import {
   UISTATE_PROMISE_ERROR,
-  USER_AUTH_ERROR
+  ERROR_ALERT,
+  ERROR_ALERT_MESSAGE
 } from '../constants/actions'
 import rootEpic from './index';
 
@@ -46,15 +38,11 @@ describe('epics', () => {
     epicMiddleware.replaceEpic(rootEpic);
   });
 
-  describe('authCheckEpic', () => {
-    it(`should dispatch correct ${USER_AUTH_ERROR} action`, () => {
+  describe('errorAlertEpic', () => {
+    it(`should dispatch correct ${ERROR_ALERT} action`, () => {
       const expectedActions = [
         { type: UISTATE_PROMISE_ERROR, payload: mockErrorResponse.response.status.toString() },
-        { type: USER_AUTH_ERROR,
-          payload: {
-            isAuth: false
-          }
-        }
+        { type: ERROR_ALERT, payload: ERROR_ALERT_MESSAGE }
       ];
 
       store.dispatch(promiseError(mockErrorResponse.response.status));
