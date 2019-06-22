@@ -98,6 +98,20 @@ describe('epics', () => {
       });
     });
 
+    describe('when a promiseLoading action\'s payload is FALSE', () => {
+      it(`should NOT dispatch ${RESET_ERROR_ALERT} action`, () => {
+        mockState.errorAlert.message = undefined;
+        const expectedActions = [
+          { type: UISTATE_PROMISE_LOADING, payload: false }
+        ];
+
+        store = mockStore(mockState, {});
+        store.dispatch(promiseLoading(false));
+        const storeActions = store.getActions();
+        expect(storeActions).to.deep.equal(expectedActions);
+      });
+    });
+
   });
 
 });

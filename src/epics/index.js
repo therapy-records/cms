@@ -24,7 +24,8 @@ const resetErrorAlertEpic = (action$, store) => {
     .filter(action =>
       (store.getState().errorAlert.message &&
       store.getState().errorAlert.message !== '' &&
-      action.type === UISTATE_PROMISE_LOADING)
+      action.type === UISTATE_PROMISE_LOADING &&
+      action.payload === true)
     )
     .mapTo(resetErrorAlert())
 }
