@@ -58,11 +58,11 @@ export const userLogin = () => {
       userObj()
     ).then((data) => {
       if (data && data.data.success === true) {
-        localStorage.setItem('token', data.data.token); // eslint-disable-line no-undef
+        localStorage.setItem('token', data.data.token);
         dispatch(promiseLoading(false));
         return dispatch(authSuccess())
       } else {
-        localStorage.removeItem('token'); // eslint-disable-line no-undef
+        localStorage.removeItem('token');
         dispatch(promiseLoading(false));
         return dispatch(errorAlert(data.data.message));
       }
@@ -81,7 +81,7 @@ export const userLogin = () => {
 export const userLogout = () => {
   return (dispatch, getState) =>
     new Promise((resolve) => {
-      localStorage.removeItem('token'); // eslint-disable-line no-undef
+      localStorage.removeItem('token');
       dispatch(authError());
       resolve();
     })

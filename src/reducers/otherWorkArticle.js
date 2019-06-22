@@ -77,9 +77,9 @@ export const fetchSingleOtherWorkArticle = (articleId) => {
 export const deleteOtherWorkArticle = (articleId) => {
   return (dispatch) => {
     dispatch(promiseLoading(true));
-    const postHeaders = new Headers(); // eslint-disable-line no-undef
+    const postHeaders = new Headers();
     postHeaders.set('Content-Type', 'application/json');
-    postHeaders.set('Authorization', localStorage.getItem('token')); // eslint-disable-line no-undef
+    postHeaders.set('Authorization', localStorage.getItem('token'));
     return new Promise((resolve, reject) => {
       return _axiosAuthHeaders.delete(API_ROOT + OTHER_WORK + '/' + articleId)
         .then((data) => {

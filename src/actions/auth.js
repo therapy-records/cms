@@ -10,20 +10,20 @@ import {
 
 export const authCheck = () => {
   return (dispatch) => {
-    const token = localStorage.getItem('token'); // eslint-disable-line no-undef
+    const token = localStorage.getItem('token');
     if (!token || token === 'undefined') {
       dispatch(authError());
       return _axiosAuthHeaders.post(API_ROOT + AUTH)
         .then((data) => {
           if (data.data.success === true) {
-            localStorage.setItem('token', data.data.token); // eslint-disable-line no-undef
+            localStorage.setItem('token', data.data.token);
             return dispatch(authSuccess());
           } else {
-            localStorage.removeItem('token'); // eslint-disable-line no-undef
+            localStorage.removeItem('token');
             return dispatch(authError());
           }
         }, () => {
-          localStorage.removeItem('token'); // eslint-disable-line no-undef
+          localStorage.removeItem('token');
           return dispatch(authError());
         });
     } else {
@@ -32,11 +32,11 @@ export const authCheck = () => {
           if (data.data.success === true) {
             return dispatch(authSuccess());
           } else {
-            localStorage.removeItem('token'); // eslint-disable-line no-undef
+            localStorage.removeItem('token');
             return dispatch(authError());
           }
         }, () => {
-          localStorage.removeItem('token'); // eslint-disable-line no-undef
+          localStorage.removeItem('token');
           return dispatch(authError());
         });
     }
