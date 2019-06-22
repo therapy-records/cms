@@ -6,13 +6,14 @@ import {
   UISTATE_PROMISE_ERROR
 } from '../constants/actions'
 
+// TODO (maybe): change to generic error check epic ?
+
 const authCheckEpic = (action$, store) => {
   return action$
     .filter(action =>
-      action.type === UISTATE_PROMISE_ERROR &&
-        action.payload === '401'
+      action.type === UISTATE_PROMISE_ERROR
     )
-    .mapTo(authError('401'));
+    .mapTo(authError());
 }
 
 const rootEpic = combineEpics(

@@ -52,8 +52,7 @@ describe('epics', () => {
         { type: UISTATE_PROMISE_ERROR, payload: mockErrorResponse.response.status.toString() },
         { type: USER_AUTH_ERROR,
           payload: {
-            isAuth: false,
-            authError: mockErrorResponse.response.status
+            isAuth: false
           }
         }
       ];
