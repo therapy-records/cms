@@ -131,9 +131,14 @@ const ACTION_HANDLERS = {
   [FETCH_NEWS_ARTICLES_SUCCESS]: (state, action) => {
     return { ...state, articles: action.payload }
   },
-  [POST_NEWS_FORM_SUCCESS]: (state, action) => state = {
-    ...state,
-    articles: [ ...state.articles, action.payload ]
+  [POST_NEWS_FORM_SUCCESS]: (state, action) => {
+    let articlesArray = [
+      action.payload
+    ];
+    if (state.articles) {
+      articlesArray = [...articlesArray, ...state.articles]
+    }
+    return { ...state, articles: articlesArray }
   }
 }
 /* eslint-enable no-return-assign */
