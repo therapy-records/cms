@@ -7,4 +7,5 @@ export const UISTATE_PROMISE_ERROR = 'UISTATE_PROMISE_ERROR'
 export const UISTATE_PROMISE_SUCCESS_RESET = 'UISTATE_PROMISE_SUCCESS_RESET'
 
 export const ERROR_ALERT = 'ERROR_ALERT';
+export const RESET_ERROR_ALERT = 'RESET_ERROR_ALERT';
 export const ERROR_ALERT_MESSAGE = 'Sorry, something has gone wrong.';

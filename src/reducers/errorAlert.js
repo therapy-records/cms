@@ -1,5 +1,6 @@
 import {
-  ERROR_ALERT
+  ERROR_ALERT,
+  RESET_ERROR_ALERT
 } from '../constants/actions'
 
 // ------------------------------------
@@ -13,12 +14,22 @@ export const errorAlert = str => {
   }
 }
 
+export const resetErrorAlert = str => {
+  return {
+    type: RESET_ERROR_ALERT,
+    payload: ''
+  }
+}
+
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
   [ERROR_ALERT]: (state, action) => {
+    return { ...state, message: action.payload }
+  },
+  [RESET_ERROR_ALERT]: (state, action) => {
     return { ...state, message: action.payload }
   }
 }

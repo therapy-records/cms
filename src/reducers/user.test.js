@@ -168,7 +168,6 @@ describe('(Redux Module) user', () => {
       ];
       return store.dispatch(userLogout()).then(() => {
         const storeActions = store.getActions();
-        console.log('the store actions \n ', storeActions);
         expect(storeActions).to.deep.equal(expectedActions);
         store.clearActions();
       });
