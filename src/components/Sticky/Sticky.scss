@@ -1,0 +1,12 @@
+.sticky {    
+    position: fixed;
+    z-index: 5;
+    width: 100%;
+    padding: 1em;
+    text-align: center;
+    background: darkred;
+    color: #FFF;
+    p {
+      margin: 0;
+    }
+}
