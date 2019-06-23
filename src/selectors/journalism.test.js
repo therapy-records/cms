@@ -28,11 +28,7 @@ const mockArticles = [
     socialShare: {
       hashtags: ['something', 'somethingElse']
     },
-    mainImageUrl: 'http://something/test.jpg',
-    quotes: [
-      { quote: 'amazing!', author: 'joe bloggs' },
-      { quote: 'yay!', author: 'someone' }
-    ]
+    mainImageUrl: 'http://something/test.jpg'
   },
   {
     _id: 'zxcv789',
@@ -42,11 +38,7 @@ const mockArticles = [
     miniGallery: ['asdf', 'asdf', 'asdf'],
     socialShare: {
       hashtags: ['something', 'somethingElse']
-    },
-    quotes: [
-      { quote: 'amazing!', author: 'joe bloggs' },
-      { quote: 'yay!', author: 'someone' }
-    ]
+    }
   }
 ];
 

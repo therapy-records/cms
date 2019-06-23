@@ -8,7 +8,6 @@ import {
   selectSelectedNewsArticleSections
   // selectSelectedNewsArticleTitle,
   // selectSelectedNewsArticleBodyMain,
-  // selectSelectedNewsArticleQuotes,
   // selectSelectedNewsArticleMainImageUrl,
   // selectSelectedNewsArticleMainImageExternalLink,
   // selectSelectedNewsArticleSecondaryImageUrl,
@@ -39,11 +38,7 @@ const mockArticles = [
     miniGallery: ['asdf', 'asdf', 'asdf'],
     socialShare: {
       hashtags: ['something', 'somethingElse']
-    },
-    quotes: [
-      { quote: 'amazing!', author: 'joe bloggs' },
-      { quote: 'yay!', author: 'someone' }
-    ]
+    }
   },
   {
     _id: 'asdf1234',
@@ -57,11 +52,7 @@ const mockArticles = [
     mainImage: {
       url: 'http://something/test.jpg',
       externalLink: 'http://google.com'
-    },
-    quotes: [
-      { quote: 'amazing!', author: 'joe bloggs' },
-      { quote: 'yay!', author: 'someone' }
-    ]
+    }
   },
   {
     _id: 'zxcv789',
@@ -71,11 +62,7 @@ const mockArticles = [
     miniGallery: ['asdf', 'asdf', 'asdf'],
     socialShare: {
       hashtags: ['something', 'somethingElse']
-    },
-    quotes: [
-      { quote: 'amazing!', author: 'joe bloggs' },
-      { quote: 'yay!', author: 'someone' }
-    ]
+    }
   }
 ];
 
@@ -160,14 +147,6 @@ describe('(Selectors) news', () => {
   //   it('should return bodyMain', () => {
   //     const actual = selectSelectedNewsArticleBodyMain(mockState, articleId);
   //     const expected = newsArticle.bodyMain;
-  //     expect(actual).to.deep.equal(expected);
-  //   });
-  // });
-
-  // describe('selectSelectedNewsArticleQuotes', () => {
-  //   it('should return bodyMain', () => {
-  //     const actual = selectSelectedNewsArticleQuotes(mockState, articleId);
-  //     const expected = newsArticle.quotes;
   //     expect(actual).to.deep.equal(expected);
   //   });
   // });

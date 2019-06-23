@@ -30,20 +30,6 @@ class ArticleLive extends React.Component {
 
         <br />
 
-        {article.quotes
-          ? <div>
-            <ul className='cancel-margin'>
-              {article.quotes.map((q) =>
-                <li key={q.author}>
-                  <i>&quot;{q.copy}&quot;</i> - {q.author}
-                </li>
-              )}
-            </ul>
-          </div>
-          : null}
-
-        <br />
-
         <div className='cols-container'>
 
           {article.mainImage.url

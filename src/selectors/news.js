@@ -39,11 +39,6 @@ export const selectSelectedNewsArticleBodyMain = createSelector(
   (article) => article && article.bodyMain
 );
 
-export const selectSelectedNewsArticleQuotes = createSelector(
-  selectSelectedNewsArticle,
-  (article) => article && article.quotes
-);
-
 export const selectSelectedNewsArticleMainImage = createSelector(
   selectSelectedNewsArticle,
   (article) => article && article.mainImage && article.mainImage

@@ -153,19 +153,6 @@ export class Article extends React.Component {
               </div>
             }
 
-            {article.quotes.length ?
-              <div className='row-large'>
-                <ul className='cancel-margin'>
-                  {article.quotes.map((q) =>
-                    <li key={q.author}>
-                      <i>&quot;{q.copy}&quot;</i> - {q.author}
-                    </li>
-                  )}
-                </ul>
-              </div>
-            : null}
-
-
             {(articleHasImages || article.secondaryImageUrl) &&
               <div className='row-large cols-container'>
 

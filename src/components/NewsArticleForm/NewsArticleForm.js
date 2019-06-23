@@ -6,7 +6,6 @@ import RichTextEditor from '../RichTextEditor'
 import {
   selectSelectedNewsArticleSections
   // selectSelectedNewsArticleTitle,
-  // selectSelectedNewsArticleQuotes,
   // selectSelectedNewsArticleBodyMain,
   // selectSelectedNewsArticleMainImageUrl,
   // selectSelectedNewsArticleMainImageExternalLink,
@@ -20,7 +19,6 @@ import {
 import { selectNewsArticleFormValues } from '../../selectors/form';
 import './NewsArticleForm.css';
 import DropzoneImageUpload from './DropzoneImageUpload';
-import Quotes from './Quotes';
 import ArticlePreview from '../ArticlePreview/ArticlePreview';
 import TextInput from '../../components/TextInput';
 import { required } from '../../utils/form';
@@ -120,10 +118,6 @@ export class NewsArticleForm extends React.Component {
                     />
                   </div>
 
-                  <div className='row-large'>
-                    <Field name='quotes'
-                      component={Quotes} />
-                  </div>
                 </li>
               );
             })}
@@ -176,7 +170,6 @@ InitFromStateForm = connect(
     initialValues: {
       month: selectSelectedNewsArticleTitle(state),
       bodyMain: selectSelectedNewsArticleBodyMain(state),
-      quotes: selectSelectedNewsArticleQuotes(state),
       mainImage: {
         url: selectSelectedNewsArticleMainImageUrl(state),
         externalLink: selectSelectedNewsArticleMainImageExternalLink(state)

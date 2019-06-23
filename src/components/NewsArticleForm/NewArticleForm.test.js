@@ -11,7 +11,6 @@ import {
 import TextInput from '../TextInput';
 import ArticlePreview from '../ArticlePreview/ArticlePreview';
 import DropzoneImageUpload from './DropzoneImageUpload';
-import Quotes from './Quotes';
 import RichTextEditor from '../RichTextEditor';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -146,14 +145,6 @@ describe('(Component) NewsArticleForm', () => {
           />
         );
         expect(actual).to.equal(true);
-      });
-
-      it('should render a quotes field', () => {
-        const actual = wrapper.containsMatchingElement(
-          <Field name='quotes'
-            component={Quotes} />
-        );
-        expect(actual).to.equal(true)
       });
     });
 
