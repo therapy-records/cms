@@ -101,8 +101,8 @@ export class Sidebar extends React.PureComponent {
             News
           </NavLink>
 
-          <NavLink to='/other-work' activeClassName='route--active'>
-            Other Work
+          <NavLink to='/journalism' activeClassName='route--active'>
+            Journalism
           </NavLink>
 
           <NavLink to='/press' activeClassName='route--active'>

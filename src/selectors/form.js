@@ -14,15 +14,15 @@ export const selectNewsArticleFormSyncErrors = createSelector(
   (form) => form && form.syncErrors && form.syncErrors || false
 );
 
-export const selectOtherWorkArticleForm = (state) => state.form.OTHER_WORK_ARTICLE_FORM;
+export const selectJournalismArticleForm = (state) => state.form.JOURNALISM_ARTICLE_FORM;
 
-export const selectOtherWorkArticleFormValues = createSelector(
-  selectOtherWorkArticleForm,
+export const selectJournalismArticleFormValues = createSelector(
+  selectJournalismArticleForm,
   (form) => form && form.values
 );
 
-export const selectOtherWorkArticleFormValuesSyncErrors = createSelector(
-  selectOtherWorkArticleForm,
+export const selectJournalismArticleFormValuesSyncErrors = createSelector(
+  selectJournalismArticleForm,
   (form) => form && form.syncErrors && form.syncErrors || false
 );
 

@@ -3,18 +3,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import { fetchOtherWorkArticles } from '../../../reducers/otherWork';
-import { setSelectedOtherWorkArticle } from '../../../reducers/otherWorkArticle';
+import { fetchJournalismArticles } from '../../../reducers/journalism';
+import { setSelectedJournalismArticle } from '../../../reducers/journalismArticle';
 import { resetPromiseState } from '../../../reducers/uiState';
-import { selectOtherWorkArticles } from '../../../selectors/otherWork';
+import { selectJournalismArticles } from '../../../selectors/journalism';
 import { selectUiStateLoading } from '../../../selectors/uiState';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
 
-export class OtherWork extends React.Component {
+export class Journalism extends React.Component {
   componentWillMount() {
     if (this.props.articles === null) {
-      this.props.onFetchOtherWorkArticles();
+      this.props.onfetchJournalismArticles();
     }
   }
 
@@ -23,7 +23,7 @@ export class OtherWork extends React.Component {
   }
 
   handleButtonClick(postObj) {
-    this.props.onSetSelectedOtherWorkArticle(postObj);
+    this.props.onsetSelectedJournalismArticle(postObj);
   }
 
   renderArticle(p) {
@@ -35,7 +35,7 @@ export class OtherWork extends React.Component {
             <h3>
               <Link
                 onClick={() => this.handleButtonClick(p)}
-                to={`other-work/${p._id}`}
+                to={`journalism/${p._id}`}
               >{p.title}
               </Link>
             </h3>
@@ -46,14 +46,14 @@ export class OtherWork extends React.Component {
 
           <Link
             onClick={() => this.handleButtonClick(p)}
-            to={`other-work/${p._id}`}
+            to={`journalism/${p._id}`}
             className='btn btn-sm'
           >
             View
           </Link>
           <Link
             onClick={() => this.handleButtonClick(p)}
-            to={`other-work/${p._id}/edit`}
+            to={`journalism/${p._id}/edit`}
             className='btn btn-sm'
           >
             Edit
@@ -83,10 +83,10 @@ export class OtherWork extends React.Component {
 
             <div className='heading-action-btns'>
               <div>
-                <h2>Other Work</h2>
+                <h2>Journalism</h2>
               </div>
               <div className='action-btns'>
-                <Link to='other-work/create' className='btn'>Create</Link>
+                <Link to='journalism/create' className='btn'>Create</Link>
               </div>
             </div>
 
@@ -98,7 +98,7 @@ export class OtherWork extends React.Component {
               </div>
               : (
                 <div>
-                  <EmptyArticlesMessage type='other-work' />
+                  <EmptyArticlesMessage type='journalism' />
                 </div>
               )}
           </div>
@@ -109,23 +109,23 @@ export class OtherWork extends React.Component {
   }
 }
 
-OtherWork.propTypes = {
+Journalism.propTypes = {
   promiseLoading: PropTypes.bool,
-  onFetchOtherWorkArticles: PropTypes.func.isRequired,
-  onSetSelectedOtherWorkArticle: PropTypes.func.isRequired,
+  onfetchJournalismArticles: PropTypes.func.isRequired,
+  onsetSelectedJournalismArticle: PropTypes.func.isRequired,
   articles: PropTypes.array,
   resetPromiseState: PropTypes.func
 }
 
 const mapDispatchToProps = {
-  onFetchOtherWorkArticles: () => fetchOtherWorkArticles(),
-  onSetSelectedOtherWorkArticle: (article) => setSelectedOtherWorkArticle(article),
+  onfetchJournalismArticles: () => fetchJournalismArticles(),
+  onsetSelectedJournalismArticle: (article) => setSelectedJournalismArticle(article),
   resetPromiseState: () => resetPromiseState()
 };
 
 const mapStateToProps = (state) => ({
   promiseLoading: selectUiStateLoading(state),
-  articles: selectOtherWorkArticles(state)
+  articles: selectJournalismArticles(state)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(OtherWork);
+export default connect(mapStateToProps, mapDispatchToProps)(Journalism);

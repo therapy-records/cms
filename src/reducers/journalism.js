@@ -2,48 +2,48 @@ import axios from 'axios';
 import _axiosAuthHeaders from '../utils/axios'
 import {
   API_ROOT,
-  OTHER_WORK,
-  OTHER_WORK_CREATE
+  JOURNALISM,
+  JOURNALISM_CREATE
 } from '../constants';
 import {
   promiseLoading,
   promiseSuccess,
   promiseError
 } from './uiState';
-import { setSelectedOtherWorkArticle } from './otherWorkArticle';
-export const FETCH_OTHER_WORK_ARTICLES_SUCCESS = 'FETCH_OTHER_WORK_ARTICLES_SUCCESS';
-export const POST_OTHER_WORK_FORM_SUCCESS = 'POST_OTHER_WORK_FORM_SUCCESS';
-export const EDIT_OTHER_WORK_SUCCESS = 'EDIT_OTHER_WORK_SUCCESS';
+import { setSelectedJournalismArticle } from './journalismArticle';
+export const FETCH_JOURNALISM_ARTICLES_SUCCESS = 'FETCH_JOURNALISM_ARTICLES_SUCCESS';
+export const POST_JOURNALISM_FORM_SUCCESS = 'POST_JOURNALISM_FORM_SUCCESS';
+export const EDIT_JOURNALISM_SUCCESS = 'EDIT_JOURNALISM_SUCCESS';
 
 // ------------------------------------
 // Actions
 // ------------------------------------
 
-export function fetchOtherWorkArticlesSuccess(data) {
+export function fetchJournalismArticlesSuccess(data) {
   return {
-    type: FETCH_OTHER_WORK_ARTICLES_SUCCESS,
+    type: FETCH_JOURNALISM_ARTICLES_SUCCESS,
     payload: data
   }
 }
 
-export function postOtherWorkSuccess(data) {
+export function postJournalismSuccess(data) {
   return {
-    type: POST_OTHER_WORK_FORM_SUCCESS,
+    type: POST_JOURNALISM_FORM_SUCCESS,
     payload: data
   }
 }
 
-export function editOtherWorkSuccess() {
-  return { type: EDIT_OTHER_WORK_SUCCESS }
+export function editJournalismSuccess() {
+  return { type: EDIT_JOURNALISM_SUCCESS }
 }
 
-export const fetchOtherWorkArticles = () => {
+export const fetchJournalismArticles = () => {
   return (dispatch, getState) => {
     dispatch(promiseLoading(true));
-    return axios.get(API_ROOT + OTHER_WORK)
+    return axios.get(API_ROOT + JOURNALISM)
       .then(
         (res) => {
-          dispatch(fetchOtherWorkArticlesSuccess(res.data));
+          dispatch(fetchJournalismArticlesSuccess(res.data));
           dispatch(promiseLoading(false));
           dispatch(promiseSuccess(true));
         },
@@ -55,25 +55,25 @@ export const fetchOtherWorkArticles = () => {
   }
 }
 
-export const postOtherWork = () => {
+export const postJournalism = () => {
   return (dispatch, getState) => {
     dispatch(promiseLoading(true));
     const getFormObj = () => {
-      if (getState().form.OTHER_WORK_ARTICLE_FORM &&
-        getState().form.OTHER_WORK_ARTICLE_FORM.values) {
-        return JSON.stringify(getState().form.OTHER_WORK_ARTICLE_FORM.values);
+      if (getState().form.JOURNALISM_ARTICLE_FORM &&
+        getState().form.JOURNALISM_ARTICLE_FORM.values) {
+        return JSON.stringify(getState().form.JOURNALISM_ARTICLE_FORM.values);
       } else {
         return null;
       }
     }
     return _axiosAuthHeaders.post(
-      API_ROOT + OTHER_WORK_CREATE,
+      API_ROOT + JOURNALISM_CREATE,
       getFormObj()
     ).then(
       (res) => {
         dispatch(promiseLoading(false));
         dispatch(promiseSuccess(true));
-        dispatch(postOtherWorkSuccess(res.data));
+        dispatch(postJournalismSuccess(res.data));
       }, (err) => {
         dispatch(promiseLoading(false));
         dispatch(promiseError());
@@ -83,13 +83,13 @@ export const postOtherWork = () => {
   }
 }
 
-export const editOtherWork = (postToEdit) => {
+export const editJournalism = (postToEdit) => {
   return (dispatch, getState) => {
     dispatch(promiseLoading(true));
     let getFormValues = () => {
-      if (getState().form.OTHER_WORK_ARTICLE_FORM &&
-        getState().form.OTHER_WORK_ARTICLE_FORM.values) {
-        return getState().form.OTHER_WORK_ARTICLE_FORM.values;
+      if (getState().form.JOURNALISM_ARTICLE_FORM &&
+        getState().form.JOURNALISM_ARTICLE_FORM.values) {
+        return getState().form.JOURNALISM_ARTICLE_FORM.values;
       } else {
         return null;
       }
@@ -100,15 +100,15 @@ export const editOtherWork = (postToEdit) => {
     postToEdit.mainImageUrl = reduxFormObj.mainImageUrl;
 
     return _axiosAuthHeaders.put(
-      API_ROOT + OTHER_WORK + '/' + postToEdit._id,
+      API_ROOT + JOURNALISM + '/' + postToEdit._id,
       JSON.stringify(postToEdit)
     ).then(
       (data) => {
         postToEdit.editSuccess = true;
         dispatch(promiseLoading(false));
         dispatch(promiseSuccess(true));
-        dispatch(setSelectedOtherWorkArticle(postToEdit));
-        dispatch(editOtherWorkSuccess());
+        dispatch(setSelectedJournalismArticle(postToEdit));
+        dispatch(editJournalismSuccess());
       }, (err) => {
         dispatch(promiseLoading(false));
         dispatch(promiseError());
@@ -118,9 +118,9 @@ export const editOtherWork = (postToEdit) => {
 }
 
 export const actions = {
-  fetchOtherWorkArticles,
-  postOtherWork,
-  editOtherWork
+  fetchJournalismArticles,
+  postJournalism,
+  editJournalism
 }
 
 // ------------------------------------
@@ -128,10 +128,10 @@ export const actions = {
 // ------------------------------------
 /* eslint-disable no-return-assign */
 const ACTION_HANDLERS = {
-  [FETCH_OTHER_WORK_ARTICLES_SUCCESS]: (state, action) => {
+  [FETCH_JOURNALISM_ARTICLES_SUCCESS]: (state, action) => {
     return { ...state, articles: action.payload }
   },
-  [POST_OTHER_WORK_FORM_SUCCESS]: (state, action) => {
+  [POST_JOURNALISM_FORM_SUCCESS]: (state, action) => {
     let articlesArray = [
       action.payload
     ];

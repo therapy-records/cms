@@ -19,9 +19,9 @@ describe('(Component) Dashboard', () => {
   beforeEach(() => {
     props = {
       newsArticles: mockArticles,
-      otherWorkArticles: mockArticles,
+      journalismArticles: mockArticles,
       onFetchNewsArticles: () => mockArticles,
-      onFetchOtherWorkArticles: () => mockArticles,
+      onfetchJournalismArticles: () => mockArticles,
       resetPromiseState: () => {}
     }
     wrapper = shallow(<Dashboard {...props} />)
@@ -55,9 +55,9 @@ describe('(Component) Dashboard', () => {
     expect(actual).to.be.true;
   });
 
-  it('should render a link to create a other-work article', () => {
+  it('should render a link to create a journalism article', () => {
     const actual = wrapper.containsMatchingElement(
-      <Link to='other-work/create'>Other Work article</Link>
+      <Link to='journalism/create'>Journalism article</Link>
     );
     expect(actual).to.be.true;
   });
@@ -69,9 +69,9 @@ describe('(Component) Dashboard', () => {
     expect(actual).to.be.true;
   });
 
-  it('should render a total amount of other-work articles', () => {
+  it('should render a total amount of journalism articles', () => {
     const actual = wrapper.containsMatchingElement(
-      <p>Other-work articles: {props.otherWorkArticles.length}</p>
+      <p>Journalism articles: {props.journalismArticles.length}</p>
     );
     expect(actual).to.be.true;
   });
@@ -96,23 +96,23 @@ describe('(Component) Dashboard', () => {
     });
   });
 
-  describe('when otherWorkArticles === null', () => {
-    it('should call onFetchOtherWorkArticles', () => {
-      props.otherWorkArticles = null;
-      props.onFetchOtherWorkArticles = sinon.spy();
+  describe('when journalismArticles === null', () => {
+    it('should call onfetchJournalismArticles', () => {
+      props.journalismArticles = null;
+      props.onfetchJournalismArticles = sinon.spy();
       props.resetPromiseState = () => { };
       shallow(<Dashboard {...props} />)
-      expect(props.onFetchOtherWorkArticles).to.have.been.called;
+      expect(props.onfetchJournalismArticles).to.have.been.called;
     });
   });
 
-  describe('when otherWorkArticles is empty array', () => {
-    it('should not call onFetchOtherWorkArticles', () => {
-      props.otherWorkArticles = [];
-      props.onFetchOtherWorkArticles = sinon.spy();
+  describe('when journalismArticles is empty array', () => {
+    it('should not call onfetchJournalismArticles', () => {
+      props.journalismArticles = [];
+      props.onfetchJournalismArticles = sinon.spy();
       props.resetPromiseState = () => { };
       shallow(<Dashboard {...props} />)
-      expect(props.onFetchOtherWorkArticles).to.not.have.been.called;
+      expect(props.onfetchJournalismArticles).to.not.have.been.called;
     });
   });
 

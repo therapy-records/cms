@@ -178,10 +178,10 @@ describe('(Component) Sidebar', () => {
       expect(actual).to.eq(true);
     });
 
-    it('should render a link to other work', () => {
+    it('should render a link to journalism', () => {
       const actual = wrapper.containsMatchingElement(
-        <NavLink to='/other-work' activeClassName='route--active'>
-          Other Work
+        <NavLink to='/journalism' activeClassName='route--active'>
+          Journalism
         </NavLink>
       );
       expect(actual).to.eq(true);

@@ -4,9 +4,9 @@ import errorAlertReducer from './errorAlert';
 import userReducer from './user';
 import uiStateReducer from './uiState';
 import newsReducer from './news';
-import otherWorkReducer from './otherWork';
+import journalismReducer from './journalism';
 import selectedNewsArticleReducer from './newsArticle';
-import selectedOtherWorkArticleReducer from './otherWorkArticle';
+import selectedJournalismArticleReducer from './journalismArticle';
 
 const rootReducers = combineReducers({
   errorAlert: errorAlertReducer,
@@ -14,9 +14,9 @@ const rootReducers = combineReducers({
   uiState: uiStateReducer,
   form: formReducer,
   news: newsReducer,
-  otherWork: otherWorkReducer,
+  journalism: journalismReducer,
   selectedNewsArticle: selectedNewsArticleReducer,
-  selectedOtherWorkArticle: selectedOtherWorkArticleReducer
+  selectedJournalismArticle: selectedJournalismArticleReducer
 });
 
 export default rootReducers;

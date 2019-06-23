@@ -10,7 +10,7 @@ import LoadingSpinner from '../../../components/LoadingSpinner';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('(Component) OtherWork - OtherWork', () => {
+describe('(Component) Journalism - Journalism', () => {
   let wrapper,
     props,
     mockArticle = {

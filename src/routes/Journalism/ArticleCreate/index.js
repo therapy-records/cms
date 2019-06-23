@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { postOtherWork } from '../../../reducers/otherWork';
+import { postJournalism } from '../../../reducers/journalism';
 import { resetPromiseState } from '../../../reducers/uiState';
 import {
   selectUiStateLoading,
   selectUiStateSuccess
 } from '../../../selectors/uiState';
-import OtherWorkArticleForm from '../../../components/OtherWorkArticleForm';
+import JournalismArticleForm from '../../../components/JournalismArticleForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
 class ArticleCreate extends React.Component {
@@ -35,14 +35,14 @@ class ArticleCreate extends React.Component {
           <div>
             <h2>Successfully created! <small>🚀</small></h2>
             <div className='inline-flex'>
-              <Link to='/other-work' className='btn'>Go to Other Work</Link>
-              <Link to='/other-work/create'>Create another article</Link>
+              <Link to='/journalism' className='btn'>Go to Journalism</Link>
+              <Link to='/journalism/create'>Create another article</Link>
             </div>
           </div>
         }
 
         {!promiseLoading && !promiseSuccess &&
-          <OtherWorkArticleForm
+          <JournalismArticleForm
             onSubmitForm={this.props.onPostArticle}
             location={location}
           />
@@ -62,7 +62,7 @@ ArticleCreate.propTypes = {
 }
 
 const mapDispatchToProps = {
-  onPostArticle: () => postOtherWork(),
+  onPostArticle: () => postJournalism(),
   resetPromiseState: () => resetPromiseState()
 }
 
