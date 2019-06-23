@@ -10,6 +10,7 @@ import {selectNewsArticlesReverse} from '../../../selectors/news';
 import { selectUiStateLoading } from '../../../selectors/uiState';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
+import { getArticlesFirstImageUrl } from '../../../utils/news';
 
 const dateIsBefore = (a, b) => {
   return new Date(b.createdAt) - new Date(a.createdAt)
@@ -38,24 +39,10 @@ export class News extends React.Component {
     this.props.onSetSelectedNewsArticle(postObj);
   }
 
-  getArticleImageUrl(article){
-    const hasImages = article.sections &&
-      article.sections.length &&
-      article.sections[0].images &&
-      article.sections[0].images.length &&
-      article.sections[0].images[0].url;
-
-    if (hasImages) {
-      const firstImage = article.sections[0].images[0].url;
-      return firstImage;
-    }
-    return 'http://via.placeholder.com/100x137/C8C8C8/777?text=No+image&color=EEEEEE';
-  }
-
   renderArticle(article) {
     return (
       <li key={article._id} className='article-card'>
-        <img src={this.getArticleImageUrl(article)} alt={article.title} />
+        <img src={getArticlesFirstImageUrl(article, true)} alt={article.title} />
         <div>
           <div className='heading-with-btn'>
             <h3>
