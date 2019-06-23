@@ -38,40 +38,46 @@ export class News extends React.Component {
     this.props.onSetSelectedNewsArticle(postObj);
   }
 
-  renderArticle(p) {
-    const articleImg = () => {
-      if (p.mainImage && p.mainImage.url) {
-        return p.mainImage.url;
-      } else if (p.miniGalleryImages && p.miniGalleryImages.length) {
-        return p.miniGalleryImages[0];
-      }
-      return 'http://via.placeholder.com/100x137/C8C8C8/777?text=No+image&color=EEEEEE';
+  getArticleImageUrl(article){
+    const hasImages = article.sections &&
+      article.sections.length &&
+      article.sections[0].images &&
+      article.sections[0].images.length &&
+      article.sections[0].images[0].url;
+
+    if (hasImages) {
+      const firstImage = article.sections[0].images[0].url;
+      return firstImage;
     }
+    return 'http://via.placeholder.com/100x137/C8C8C8/777?text=No+image&color=EEEEEE';
+  }
+
+  renderArticle(article) {
     return (
-      <li key={p._id} className='article-card'>
-        <img src={articleImg()} alt={p.title} />
+      <li key={article._id} className='article-card'>
+        <img src={this.getArticleImageUrl(article)} alt={article.title} />
         <div>
           <div className='heading-with-btn'>
             <h3>
               <Link
-                onClick={() => this.handleButtonClick(p)}
-                to={`news/${p._id}`}
-              >{p.title}
+                onClick={() => this.handleButtonClick(article)}
+                to={`news/${article._id}`}
+              >{article.title}
               </Link>
             </h3>
-            {p.createdAt && <p className='small-tab'>{moment(p.createdAt).fromNow()}</p>}
+            {article.createdAt && <p className='small-tab'>{moment(article.createdAt).fromNow()}</p>}
           </div>
 
           <Link
-            onClick={() => this.handleButtonClick(p)}
-            to={`news/${p._id}`}
+            onClick={() => this.handleButtonClick(article)}
+            to={`news/${article._id}`}
             className='btn btn-sm'
           >
             View
           </Link>
           <Link
-            onClick={() => this.handleButtonClick(p)}
-            to={`news/${p._id}/edit`}
+            onClick={() => this.handleButtonClick(article)}
+            to={`news/${article._id}/edit`}
             className='btn btn-sm'
           >
             Edit

@@ -122,21 +122,50 @@ describe('(Component) News - Home', () => {
     });
   });
 
-  describe('componentWillMount', () => {
-    it('should call onfetchJournalismArticles when articles === null', () => {
-      props.onFetchNewsArticles = sinon.spy();
-      props.articles = null;
-      wrapper = shallow(<News {...props} />);
-      expect(props.onFetchNewsArticles.calledOnce).to.eq(true);
-    });
-  });
+  describe('methods', () => {
 
-  describe('componentWillUnmount', () => {
-    it('should call resetPromiseState', () => {
-      props.resetPromiseState = sinon.spy();
-      wrapper = shallow(<News {...props} />);
-      wrapper.instance().componentWillUnmount();
-      expect(props.resetPromiseState).to.have.been.called;
+    describe('componentWillMount', () => {
+      it('should call onfetchJournalismArticles when articles === null', () => {
+        props.onFetchNewsArticles = sinon.spy();
+        props.articles = null;
+        wrapper = shallow(<News {...props} />);
+        expect(props.onFetchNewsArticles.calledOnce).to.eq(true);
+      });
+    });
+
+    describe('componentWillUnmount', () => {
+      it('should call resetPromiseState', () => {
+        props.resetPromiseState = sinon.spy();
+        wrapper = shallow(<News {...props} />);
+        wrapper.instance().componentWillUnmount();
+        expect(props.resetPromiseState).to.have.been.called;
+      });
+    });
+
+    describe('getArticleImageUrl', () => {
+      it('should return an article\'s first image in article.sections', () => {
+        const mockArticle = {
+          sections: [
+            {
+              images: [
+                { url: 'http://testing.com' }
+              ]
+            }
+          ]
+        };
+        wrapper = shallow(<News {...props} />);
+        const result = wrapper.instance().getArticleImageUrl(mockArticle);
+        const expected = mockArticle.sections[0].images[0].url;
+        expect(result).to.eq(expected);
+      });
+      describe('when the article does not have an image', () => {
+        it('should return a placeholder image', () => {
+          wrapper = shallow(<News {...props} />);
+          const result = wrapper.instance().getArticleImageUrl({});
+          const expected = 'http://via.placeholder.com/100x137/C8C8C8/777?text=No+image&color=EEEEEE';
+          expect(result).to.eq(expected);
+        });
+      });
     });
   });
 });
