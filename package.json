@@ -12,7 +12,6 @@
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "precommit": "npm run lint && npm run test-coverage",
-    "prepush": "npm run lint && npm run test-coverage",
     "test-coverage": "npm run lint && npm test -- --coverage"
   },
   "dependencies": {
@@ -126,10 +125,10 @@
     ],
     "coverageThreshold": {
       "global": {
-        "statements": 76,
-        "branches": 77,
-        "functions": 68,
-        "lines": 77
+        "statements": 74,
+        "branches": 73,
+        "functions": 65,
+        "lines": 76
       }
     },
     "coveragePathIgnorePatterns": [
