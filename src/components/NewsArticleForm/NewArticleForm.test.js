@@ -27,7 +27,7 @@ describe('(Component) NewsArticleForm', () => {
       sections: [
         {
           images: [],
-          copy: []
+          copy: ''
         }
       ]
     }
@@ -112,9 +112,10 @@ describe('(Component) NewsArticleForm', () => {
         wrapper = shallow(<NewsArticleForm {...props} />);
       });
 
-      it('should render a month field', () => {
+      it('should render a title/month field', () => {
         const actual = wrapper.containsMatchingElement(
-          <Field name='month'
+          <Field
+            name='title'
             component={TextInput}
             type='text'
             placeholder='January update'
@@ -125,52 +126,6 @@ describe('(Component) NewsArticleForm', () => {
         );
         expect(actual).to.equal(true);
       });
-
-      it('should render a bodyMain field', () => {
-        const actual = wrapper.containsMatchingElement(
-          <Field name='bodyMain'
-            component={RichTextEditor}
-            validate={required}
-            required
-          />
-        );
-        expect(actual).to.equal(true)
-      });
-
-      it('should render a mainImage.url field', () => {
-        const actual = wrapper.containsMatchingElement(
-          <Field name='mainImage.url'
-            component={DropzoneImageUpload}
-            minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
-          />
-        );
-        expect(actual).to.equal(true);
-      });
-    });
-
-    it('should render an error', () => {
-      props = {
-        ...baseProps,
-        error: 'Something is wrong'
-      }
-      const errorWrapper = shallow(
-        <NewsArticleForm {...props} />
-      );
-      const actual = errorWrapper.containsMatchingElement(
-        <p>{props.error}</p>
-      );
-      expect(actual).to.equal(true);
-    });
-
-    it('should render a an `Add a new section` button', () => {
-      const actual = wrapper.containsMatchingElement(
-        <button
-          type='button'
-          onClick={wrapper.instance().handleAddSection}
-        >Add a new section
-        </button>
-      );
-      expect(actual).to.eq(true);
     });
 
     describe('submit button', () => {

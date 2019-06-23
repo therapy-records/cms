@@ -21,70 +21,14 @@ export const selectNewsArticlesArticle = createSelector(
 /*
 state.news.selectedNewsArticle
 */
-
 export const selectSelectedNewsArticle = (state) => state.selectedNewsArticle;
-
-export const selectSelectedNewsArticleSections = createSelector(
-  selectSelectedNewsArticle,
-  (article) => article && article.sections
-);
 
 export const selectSelectedNewsArticleTitle = createSelector(
   selectSelectedNewsArticle,
   (article) => article && article.title
 );
 
-export const selectSelectedNewsArticleBodyMain = createSelector(
+export const selectSelectedNewsArticleSections = createSelector(
   selectSelectedNewsArticle,
-  (article) => article && article.bodyMain
-);
-
-export const selectSelectedNewsArticleMainImage = createSelector(
-  selectSelectedNewsArticle,
-  (article) => article && article.mainImage && article.mainImage
-);
-
-export const selectSelectedNewsArticleMainImageUrl = createSelector(
-  selectSelectedNewsArticleMainImage,
-  (mainImage) => mainImage && mainImage.url
-);
-
-export const selectSelectedNewsArticleMainImageExternalLink = createSelector(
-  selectSelectedNewsArticleMainImage,
-  (mainImage) => mainImage && mainImage.externalLink
-);
-
-export const selectSelectedNewsArticleSecondaryImageUrl = createSelector(
-  selectSelectedNewsArticle,
-  (article) => article && article.secondaryImageUrl
-);
-
-export const selectSelectedNewsArticleTicketsLink = createSelector(
-  selectSelectedNewsArticle,
-  (article) => article && article.ticketsLink
-);
-
-export const selectSelectedNewsArticleVenueLink = createSelector(
-  selectSelectedNewsArticle,
-  (article) => article && article.venueLink
-);
-
-export const selectSelectedNewsArticleMiniGalleryImages = createSelector(
-  selectSelectedNewsArticle,
-  (article) => article && article.miniGalleryImages
-);
-
-export const selectSelectedNewsArticleVideoEmbed = createSelector(
-  selectSelectedNewsArticle,
-  (article) => article && article.videoEmbed
-);
-
-export const selectSelectedNewsArticleSocialShare = createSelector(
-  selectSelectedNewsArticle,
-  (article) => article && article.socialShare
-);
-
-export const selectSelectedNewsArticleSocialShareHashtags = createSelector(
-  selectSelectedNewsArticleSocialShare,
-  (socialShare) => socialShare && socialShare.hashtags
+  (article) => article && article.sections
 );

@@ -477,6 +477,12 @@ iframe {
   .heading-action-btns {
     margin-bottom: 3em;
   }
+  ul,ol,dl {
+    margin-left: 0;
+  }
+  li {
+    list-style-type: none;
+  }
 }
 
 .article-journalism {

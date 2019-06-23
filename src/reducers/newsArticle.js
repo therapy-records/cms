@@ -12,8 +12,12 @@ import {
 import { fetchNewsArticles } from './news';
 
 export const EMPTY_ARTICLE_SECTION = {
-  images: [],
-  copy: []
+  images: [
+    {
+      url: ''
+    }
+  ],
+  copy: ''
 };
 
 export const INITIAL_STATE = {

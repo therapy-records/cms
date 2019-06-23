@@ -1,24 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Field, reduxForm } from 'redux-form'
-import RichTextEditor from '../RichTextEditor'
+import { Field, FieldArray, reduxForm } from 'redux-form'
+import RichTextEditor from '../RichTextEditor';
+import DropzoneImageUpload from './DropzoneImageUpload';
 import {
+  selectSelectedNewsArticleTitle,
   selectSelectedNewsArticleSections
-  // selectSelectedNewsArticleTitle,
-  // selectSelectedNewsArticleBodyMain,
-  // selectSelectedNewsArticleMainImageUrl,
-  // selectSelectedNewsArticleMainImageExternalLink,
-  // selectSelectedNewsArticleSecondaryImageUrl,
-  // selectSelectedNewsArticleTicketsLink,
-  // selectSelectedNewsArticleVenueLink,
-  // selectSelectedNewsArticleMiniGalleryImages,
-  // selectSelectedNewsArticleVideoEmbed,
-  // selectSelectedNewsArticleSocialShareHashtags
 } from '../../selectors/news';
 import { selectNewsArticleFormValues } from '../../selectors/form';
 import './NewsArticleForm.css';
-import DropzoneImageUpload from './DropzoneImageUpload';
 import ArticlePreview from '../ArticlePreview/ArticlePreview';
 import TextInput from '../../components/TextInput';
 import { required } from '../../utils/form';
@@ -35,6 +26,8 @@ export class NewsArticleForm extends React.Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleAddSection = this.handleAddSection.bind(this);
+    this.renderSectionFields = this.renderSectionFields.bind(this);
+    this.renderSectionImageFields = this.renderSectionImageFields.bind(this);
   }
 
   handleSubmit() {
@@ -50,6 +43,53 @@ export class NewsArticleForm extends React.Component {
     onAddArticleSection(formValues);
   }
 
+  renderSectionImageFields({ fields, meta: { error } }) {
+    return (
+      <ul>
+        {fields.map((imageSection, index) =>
+          <li key={index}>
+            <Field
+              name={`${imageSection}.url`}
+              title='Image'
+              component={DropzoneImageUpload}
+              existingImage={imageSection.url}
+              minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
+            />
+
+          </li>
+        )}
+      </ul>
+    );
+  }
+
+  renderSectionFields({ fields, meta: { error } }) {
+    return (
+      <ul>
+      {fields.map((section, index) => (
+        <li
+          key={index}
+          className="row-large cols-container"
+        >
+
+          <Field
+            name={`${section}.copy`}
+            title="Copy"
+            component={RichTextEditor}
+            validate={required}
+            required
+          />
+
+          <FieldArray
+            name={`${section}.images`}
+            component={this.renderSectionImageFields}
+          />
+
+        </li>
+      ))}
+      </ul>
+    );
+  }
+
   render() {
     const {
       error,
@@ -61,7 +101,6 @@ export class NewsArticleForm extends React.Component {
     } = this.props;
 
     if (!formValues) return null;
-
 
     let isEditForm;
     if (location && location.pathname.includes('edit')) {
@@ -86,7 +125,7 @@ export class NewsArticleForm extends React.Component {
         <form onSubmit={this.handleSubmit} encType='multipart/form-data'>
 
         <div className='row-large'>
-            <Field name='month'
+            <Field name='title'
                   component={TextInput}
                   type='text'
                   placeholder='January update'
@@ -96,42 +135,7 @@ export class NewsArticleForm extends React.Component {
             />
           </div>
 
-          <ul>
-            {(formValues && formValues.sections) && formValues.sections.map((section, index) => {
-              return (
-                <li key={index}>
-                  <div className="row-large cols-container">
-                    <Field
-                      name='bodyMain'
-                      title="Copy"
-                      component={RichTextEditor}
-                      validate={required}
-                      required
-                    />
-
-                    <Field
-                      name='mainImage.url'
-                      title='Image'
-                      component={DropzoneImageUpload}
-                      existingImage={formValues && formValues.mainImage && formValues.mainImage.url}
-                      minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
-                    />
-                  </div>
-
-                </li>
-              );
-            })}
-          </ul>
-          
-          <button
-            type='button'
-            onClick={this.handleAddSection}
-            >Add a new section
-          </button>
-
-
-          {error && <p>{error}</p>}
-
+          <FieldArray name="sections" component={this.renderSectionFields} />
 
           <div className='row-large'>
             <button type='submit'
@@ -166,25 +170,8 @@ let InitFromStateForm = reduxForm({
 
 InitFromStateForm = connect(
   (state, props) => ({
-    /*
     initialValues: {
-      month: selectSelectedNewsArticleTitle(state),
-      bodyMain: selectSelectedNewsArticleBodyMain(state),
-      mainImage: {
-        url: selectSelectedNewsArticleMainImageUrl(state),
-        externalLink: selectSelectedNewsArticleMainImageExternalLink(state)
-      },
-      secondaryImageUrl: selectSelectedNewsArticleSecondaryImageUrl(state),
-      ticketsLink: selectSelectedNewsArticleTicketsLink(state),
-      venueLink: selectSelectedNewsArticleVenueLink(state),
-      videoEmbed: selectSelectedNewsArticleVideoEmbed(state),
-      miniGalleryImages: selectSelectedNewsArticleMiniGalleryImages(state),
-      socialShare: {
-        hashtags: selectSelectedNewsArticleSocialShareHashtags(state)
-      }
-    }
-    */
-    initialValues: {
+      title: selectSelectedNewsArticleTitle(state),
       sections: selectSelectedNewsArticleSections(state)
     }
   })
