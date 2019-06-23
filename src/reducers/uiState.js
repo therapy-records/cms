@@ -23,10 +23,10 @@ export const promiseSuccess = (bool) => {
   }
 }
 
-export const promiseError = (err) => {
+export const promiseError = () => {
   return {
     type: UISTATE_PROMISE_ERROR,
-    payload: err
+    payload: true
   }
 }
 

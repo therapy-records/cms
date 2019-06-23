@@ -6,7 +6,6 @@ import Adapter from 'enzyme-adapter-react-15';
 import { Article } from './index'
 import ArticleDeleteModal from '../../../components/ArticleDeleteModal'
 import LoadingSpinner from '../../../components/LoadingSpinner';
-import PromiseError from '../../../components/PromiseError';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -114,20 +113,6 @@ describe('(Component) News - Article', () => {
           <h2>Successfully deleted! <small>🚀</small></h2>
           <p>Redirecting...</p>
         </div>
-      );
-      expect(actual).to.equal(true);
-    });
-  });
-
-  describe('when promise errors', () => {
-    beforeEach(() => {
-      props = baseProps;
-      props.promiseError = true;
-      wrapper = shallow(<Article {...props} />);
-    });
-    it('should show loading', () => {
-      const actual = wrapper.containsMatchingElement(
-        <PromiseError message='fetching news article' />
       );
       expect(actual).to.equal(true);
     });

@@ -103,17 +103,11 @@ describe('(Redux Module) uiState', () => {
     });
 
     it('should update state', () => {
-      let state = uiStateReducer(initialState, promiseError('testing'));
+      let state = uiStateReducer(initialState, promiseError());
       expect(state).to.deep.equal({
         promiseLoading: false,
         promiseSuccess: false,
-        promiseError: 'testing'
-      });
-      state = uiStateReducer(initialState, promiseError(false));
-      expect(state).to.deep.equal({
-        promiseLoading: false,
-        promiseSuccess: false,
-        promiseError: false
+        promiseError: true
       });
     });
   });

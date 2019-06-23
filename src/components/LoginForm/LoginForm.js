@@ -16,7 +16,6 @@ export class LoginForm extends React.Component {
       pristine,
       submitting,
       onSubmit,
-      authError,
       promiseLoading
     } = this.props
 
@@ -53,8 +52,6 @@ export class LoginForm extends React.Component {
 
           {error && <p className='form-error'>{error}</p>}
 
-          {authError && <p className='form-error'>{authError}</p>}
-
           <br />
 
           <div>
@@ -77,8 +74,7 @@ LoginForm.propTypes = {
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
   promiseLoading: PropTypes.bool,
-  onSubmit: PropTypes.func.isRequired,
-  authError: PropTypes.string
+  onSubmit: PropTypes.func.isRequired
 }
 
 export default reduxForm({

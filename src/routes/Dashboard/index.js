@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { fetchNewsArticles } from '../../reducers/news';
-import { fetchOtherWorkArticles } from '../../reducers/otherWork';
+import { fetchJournalismArticles } from '../../reducers/journalism';
 import { resetPromiseState } from '../../reducers/uiState';
 import { selectNewsArticles } from '../../selectors/news';
 import { selectUiStateLoading } from '../../selectors/uiState';
-import { selectOtherWorkArticles } from '../../selectors/otherWork';
+import { selectJournalismArticles } from '../../selectors/journalism';
 import './styles.css';
 import LoadingSpinner from '../../components/LoadingSpinner';
 
@@ -19,23 +19,23 @@ export class Dashboard extends React.Component {
   componentDidMount() {
     const {
       newsArticles,
-      otherWorkArticles,
+      journalismArticles,
       onFetchNewsArticles,
-      onFetchOtherWorkArticles
+      onfetchJournalismArticles
     } = this.props;
     if (newsArticles === null) {
       onFetchNewsArticles();
     }
 
-    if (otherWorkArticles === null) {
-      onFetchOtherWorkArticles();
+    if (journalismArticles === null) {
+      onfetchJournalismArticles();
     }
   }
 
   render() {
     const {
       newsArticles,
-      otherWorkArticles,
+      journalismArticles,
       promiseLoading
     } = this.props;
 
@@ -48,7 +48,7 @@ export class Dashboard extends React.Component {
 
         <h2>Create</h2>
         <Link to='news/create' className='btn'>News article</Link>
-        <Link to='other-work/create' className='btn'>Other Work article</Link>
+        <Link to='journalism/create' className='btn'>Journalism article</Link>
 
         <br />
         <br />
@@ -58,7 +58,7 @@ export class Dashboard extends React.Component {
 
         <h3>Stats</h3>
         {newsArticles && <p>News articles: {newsArticles.length}</p>}
-        {otherWorkArticles && <p>Other-work articles: {otherWorkArticles.length}</p>}
+        {journalismArticles && <p>Journalism articles: {journalismArticles.length}</p>}
         <p>Press releases: Coming soon...</p>
       </div>
     )
@@ -69,20 +69,20 @@ Dashboard.propTypes = {
   newsArticles: PropTypes.array,
   onFetchNewsArticles: PropTypes.func.isRequired,
   resetPromiseState: PropTypes.func.isRequired,
-  otherWorkArticles: PropTypes.array,
-  onFetchOtherWorkArticles: PropTypes.func.isRequired,
+  journalismArticles: PropTypes.array,
+  onfetchJournalismArticles: PropTypes.func.isRequired,
   promiseLoading: PropTypes.bool
 }
 
 const mapStateToProps = (state) => ({
   newsArticles: selectNewsArticles(state),
-  otherWorkArticles: selectOtherWorkArticles(state),
+  journalismArticles: selectJournalismArticles(state),
   promiseLoading: selectUiStateLoading(state)
 })
 
 const mapDispatchToProps = {
   onFetchNewsArticles: () => fetchNewsArticles(),
-  onFetchOtherWorkArticles: () => fetchOtherWorkArticles(),
+  onfetchJournalismArticles: () => fetchJournalismArticles(),
   resetPromiseState: () => resetPromiseState()
 }
 

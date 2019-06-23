@@ -7,11 +7,10 @@ import Adapter from 'enzyme-adapter-react-15';
 import { Article } from './index'
 import ArticleDeleteModal from '../../../components/ArticleDeleteModal'
 import LoadingSpinner from '../../../components/LoadingSpinner';
-import PromiseError from '../../../components/PromiseError';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('(Component) OtherWork - OtherWork', () => {
+describe('(Component) Journalism - Journalism', () => {
   let wrapper,
     props,
     mockArticle = {
@@ -116,20 +115,6 @@ describe('(Component) OtherWork - OtherWork', () => {
           <h2>Successfully deleted! <small>🚀</small></h2>
           <p>Redirecting...</p>
         </div>
-      );
-      expect(actual).to.equal(true);
-    });
-  });
-
-  describe('when promise errors', () => {
-    beforeEach(() => {
-      props = baseProps;
-      props.promiseError = true;
-      wrapper = shallow(<Article {...props} />);
-    });
-    it('should render <PromiseError />', () => {
-      const actual = wrapper.containsMatchingElement(
-        <PromiseError message='fetching other-work article' />
       );
       expect(actual).to.equal(true);
     });

@@ -17,6 +17,10 @@ module.exports = {
         "react/jsx-uses-vars": 1,
         "react/prop-types": ["error", { ignore: ['store']}]
     },
+    "globals": {
+        "localStorage": true,
+        "Headers": true
+    },
     "env": {
         "jest": true
     }

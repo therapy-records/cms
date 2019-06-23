@@ -4,13 +4,13 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import { OtherWork } from './index';
+import { Journalism } from './index';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-const createOtherWorkArticles = (ids) => {
+const createJournalismArticles = (ids) => {
   const articles = [];
   ids.map(id => {
     articles.push({
@@ -24,21 +24,21 @@ const createOtherWorkArticles = (ids) => {
   return articles;
 }
 
-const mockOtherWorkArticles = createOtherWorkArticles([1, 2, 3]);
-describe('(Component) OtherWork - Home', () => {
+const mockJournalismArticles = createJournalismArticles([1, 2, 3]);
+describe('(Component) Journalism - Home', () => {
   let wrapper,
     props,
     baseProps = {
-      onFetchOtherWorkArticles: sinon.spy(),
-      onSetSelectedOtherWorkArticle: sinon.spy(),
-      articles: mockOtherWorkArticles,
+      onfetchJournalismArticles: sinon.spy(),
+      onsetSelectedJournalismArticle: sinon.spy(),
+      articles: mockJournalismArticles,
       resetPromiseState: sinon.spy(),
       onSetSelectedNewsArticle: sinon.spy()
     };
   props = baseProps;
 
   it('should render <LoadingSpinner />', () => {
-    wrapper = shallow(<OtherWork {...props} />);
+    wrapper = shallow(<Journalism {...props} />);
     wrapper.setProps({
       promiseLoading: true
     });
@@ -51,8 +51,8 @@ describe('(Component) OtherWork - Home', () => {
     expect(actual).to.equal(true);
   });
 
-  it('should render list of otherWorkArticles', () => {
-    wrapper = shallow(<OtherWork {...props} />);
+  it('should render list of journalismArticles', () => {
+    wrapper = shallow(<Journalism {...props} />);
     const expectedArticle = (key) => {
       const p = props.articles[key]; // eslint-disable-line
       return (
@@ -62,7 +62,7 @@ describe('(Component) OtherWork - Home', () => {
             <div className='heading-with-btn'>
               <h3>
                 <Link
-                  to={`other-work/${p._id}`}
+                  to={`journalism/${p._id}`}
                 >{p.title}
                 </Link>
               </h3>
@@ -72,13 +72,13 @@ describe('(Component) OtherWork - Home', () => {
             <p>Links to: {p.externalLink}</p>
 
             <Link
-              to={`other-work/${p._id}`}
+              to={`journalism/${p._id}`}
               className='btn btn-sm'
             >
               View
             </Link>
             <Link
-              to={`other-work/${p._id}/edit`}
+              to={`journalism/${p._id}/edit`}
               className='btn btn-sm'
             >
               Edit
@@ -96,41 +96,41 @@ describe('(Component) OtherWork - Home', () => {
   });
 
   describe('article', () => {
-    it('should call onSetSelectedOtherWorkArticle on `view` button click', () => {
+    it('should call onsetSelectedJournalismArticle on `view` button click', () => {
       let _props = baseProps;
-      _props.onSetSelectedOtherWorkArticle = sinon.spy();
-      wrapper = shallow(<OtherWork {..._props} />);
+      _props.onsetSelectedJournalismArticle = sinon.spy();
+      wrapper = shallow(<Journalism {..._props} />);
       const lastArticle = wrapper.find('.article-card').last();
       const lastArticleButton = lastArticle.find(Link).first();
       lastArticleButton.simulate('click');
-      expect(_props.onSetSelectedOtherWorkArticle).to.have.been.called;
-      const expectedArticle = mockOtherWorkArticles[mockOtherWorkArticles.length - 1];
-      expect(_props.onSetSelectedOtherWorkArticle).to.have.been.calledWith(expectedArticle);
+      expect(_props.onsetSelectedJournalismArticle).to.have.been.called;
+      const expectedArticle = mockJournalismArticles[mockJournalismArticles.length - 1];
+      expect(_props.onsetSelectedJournalismArticle).to.have.been.calledWith(expectedArticle);
     });
 
-    it('should call onSetSelectedOtherWorkArticle on `edit` button click', () => {
+    it('should call onsetSelectedJournalismArticle on `edit` button click', () => {
       let _props = baseProps;
-      _props.onSetSelectedOtherWorkArticle = sinon.spy();
-      wrapper = shallow(<OtherWork {..._props} />);
+      _props.onsetSelectedJournalismArticle = sinon.spy();
+      wrapper = shallow(<Journalism {..._props} />);
       const lastArticle = wrapper.find('.article-card').last();
       const lastArticleButton = lastArticle.find(Link).last();
       lastArticleButton.simulate('click');
-      expect(_props.onSetSelectedOtherWorkArticle).to.have.been.called;
-      const expectedArticle = mockOtherWorkArticles[mockOtherWorkArticles.length - 1];
-      expect(_props.onSetSelectedOtherWorkArticle).to.have.been.calledWith(expectedArticle);
+      expect(_props.onsetSelectedJournalismArticle).to.have.been.called;
+      const expectedArticle = mockJournalismArticles[mockJournalismArticles.length - 1];
+      expect(_props.onsetSelectedJournalismArticle).to.have.been.calledWith(expectedArticle);
     });
   });
 
   describe('when promiseLoading is false', () => {
     it('should render a page title', () => {
       const actual = wrapper.containsMatchingElement(
-        <h2>Other Work</h2>
+        <h2>Journalism</h2>
       );
       expect(actual).to.equal(true);
     });
     it('should render a create button', () => {
       const actual = wrapper.containsMatchingElement(
-        <Link to='other-work/create' className='btn'>Create</Link>
+        <Link to='journalism/create' className='btn'>Create</Link>
       );
       expect(actual).to.equal(true);
     });
@@ -139,32 +139,32 @@ describe('(Component) OtherWork - Home', () => {
   describe('when no articles', () => {
     it('should render a message with button link', () => {
       const wrapper = shallow(
-        <OtherWork
+        <Journalism
           articles={[]}
-          onFetchOtherWorkArticles={() => { }}
-          onSetSelectedOtherWorkArticle={() => { }}
+          onfetchJournalismArticles={() => { }}
+          onsetSelectedJournalismArticle={() => { }}
         />
       );
       const actual = wrapper.containsMatchingElement(
-        <EmptyArticlesMessage type='other-work' />
+        <EmptyArticlesMessage type='journalism' />
       );
       expect(actual).to.equal(true);
     });
   });
 
   describe('componentWillMount', () => {
-    it('should call onFetchOtherWorkArticles when articles === null', () => {
-      props.onFetchOtherWorkArticles = sinon.spy();
+    it('should call onfetchJournalismArticles when articles === null', () => {
+      props.onfetchJournalismArticles = sinon.spy();
       props.articles = null;
-      wrapper = shallow(<OtherWork {...props} />);
-      expect(props.onFetchOtherWorkArticles.calledOnce).to.eq(true);
+      wrapper = shallow(<Journalism {...props} />);
+      expect(props.onfetchJournalismArticles.calledOnce).to.eq(true);
     });
   });
 
   describe('componentWillUnmount', () => {
     it('should call resetPromiseState', () => {
       props.resetPromiseState = sinon.spy();
-      wrapper = shallow(<OtherWork {...props} />);
+      wrapper = shallow(<Journalism {...props} />);
       wrapper.instance().componentWillUnmount();
       expect(props.resetPromiseState).to.have.been.called;
     });

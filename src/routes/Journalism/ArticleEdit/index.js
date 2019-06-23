@@ -4,17 +4,16 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { resetPromiseState } from '../../../reducers/uiState';
 import {
-  destroySelectedOtherWorkArticle,
-  fetchSingleOtherWorkArticle
-} from '../../../reducers/otherWorkArticle';
-import { editOtherWork } from '../../../reducers/otherWork';
-import { selectSelectedOtherWorkArticle } from '../../../selectors/otherWork';
+  destroySelectedJournalismArticle,
+  fetchSingleJournalismArticle
+} from '../../../reducers/journalismArticle';
+import { editJournalism } from '../../../reducers/journalism';
+import { selectSelectedJournalismArticle } from '../../../selectors/journalism';
 import {
   selectUiStateLoading,
-  selectUiStateSuccess,
-  selectUiStateError
+  selectUiStateSuccess
 } from '../../../selectors/uiState';
-import OtherWorkArticleForm from '../../../components/OtherWorkArticleForm';
+import JournalismArticleForm from '../../../components/JournalismArticleForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
 class ArticleEdit extends React.Component {
@@ -40,7 +39,6 @@ class ArticleEdit extends React.Component {
       article,
       promiseLoading,
       promiseSuccess,
-      promiseError,
       location
     } = this.props;
 
@@ -55,19 +53,15 @@ class ArticleEdit extends React.Component {
           fullScreen
         />
 
-        {promiseError &&
-          <p>error updating other-work article :( {promiseError.message}</p>
-        }
-
         {!promiseLoading && (promiseSuccess && article.editSuccess) &&
           <div>
             <h2>Successfully updated! <small>🚀</small></h2>
-            <Link to='/other-work' className='btn'>Go to other work</Link>
+            <Link to='/journalism' className='btn'>Go to journalism</Link>
           </div>
         }
 
         {(!promiseLoading && !article.editSuccess) &&
-          <OtherWorkArticleForm
+          <JournalismArticleForm
             onSubmitForm={() => this.props.onEditArticle(article)}
             location={location}
           />
@@ -84,24 +78,22 @@ ArticleEdit.propTypes = {
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
   promiseSuccess: PropTypes.bool,
-  promiseError: PropTypes.bool,
   resetPromiseState: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired
 }
 
 const mapDispatchToProps = {
-  onEditArticle: (article) => editOtherWork(article),
-  onFetchArticle: (id) => fetchSingleOtherWorkArticle(id),
-  onDestroyArticle: () => destroySelectedOtherWorkArticle(),
+  onEditArticle: (article) => editJournalism(article),
+  onFetchArticle: (id) => fetchSingleJournalismArticle(id),
+  onDestroyArticle: () => destroySelectedJournalismArticle(),
   resetPromiseState: () => resetPromiseState()
 }
 
 const mapStateToProps = (state, props) => ({
-  article: selectSelectedOtherWorkArticle(state),
+  article: selectSelectedJournalismArticle(state),
   promiseLoading: selectUiStateLoading(state),
   promiseSuccess: selectUiStateSuccess(state),
-  promiseError: selectUiStateError(state),
   state: state.location
 });
 

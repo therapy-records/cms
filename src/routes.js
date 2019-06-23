@@ -3,6 +3,7 @@ import { Provider, connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import StickyError from './components/StickyError/StickyError';
 import Sidebar from './components/Sidebar/Sidebar';
 import Home from './routes/Home';
 import Dashboard from './routes/Dashboard';
@@ -11,10 +12,10 @@ import NewsHome from './routes/News/Home';
 import NewsArticle from './routes/News/Article';
 import NewsArticleEdit from './routes/News/ArticleEdit';
 import NewsArticleCreate from './routes/News/ArticleCreate';
-import OtherWorkHome from './routes/OtherWork/Home';
-import OtherWorkArticle from './routes/OtherWork/Article';
-import OtherWorkArticleEdit from './routes/OtherWork/ArticleEdit';
-import OtherWorkArticleCreate from './routes/OtherWork/ArticleCreate';
+import JournalismHome from './routes/Journalism/Home';
+import JournalismArticle from './routes/Journalism/Article';
+import JournalismArticleEdit from './routes/Journalism/ArticleEdit';
+import JournalismArticleCreate from './routes/Journalism/ArticleCreate';
 import { authCheck } from './actions/auth';
 import './index.css';
 
@@ -27,6 +28,8 @@ export class Router extends Component {
     return (
       <BrowserRouter>
         <div>
+
+          <StickyError />
 
           <div className="main-container">
 
@@ -50,6 +53,7 @@ export class Router extends Component {
                   onAuthCheck={onAuthCheck}
                   exact
                 />
+
                 <ProtectedRoute
                   path="/press"
                   component={Press}
@@ -91,32 +95,32 @@ export class Router extends Component {
                 />
 
                 <ProtectedRoute
-                  path="/other-work"
-                  component={OtherWorkHome}
+                  path="/journalism"
+                  component={JournalismHome}
                   isAuth={isAuth}
                   onAuthCheck={onAuthCheck}
                   exact
                 />
 
                 <ProtectedRoute
-                  path="/other-work/create"
-                  component={OtherWorkArticleCreate}
+                  path="/journalism/create"
+                  component={JournalismArticleCreate}
                   isAuth={isAuth}
                   onAuthCheck={onAuthCheck}
                   exact
                 />
 
                 <ProtectedRoute
-                  path="/other-work/:id"
-                  component={OtherWorkArticle}
+                  path="/journalism/:id"
+                  component={JournalismArticle}
                   isAuth={isAuth}
                   onAuthCheck={onAuthCheck}
                   exact
                 />
 
                 <ProtectedRoute
-                  path="/other-work/:id/edit"
-                  component={OtherWorkArticleEdit}
+                  path="/journalism/:id/edit"
+                  component={JournalismArticleEdit}
                   isAuth={isAuth}
                   onAuthCheck={onAuthCheck}
                   exact

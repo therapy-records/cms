@@ -19,10 +19,9 @@ export class ArticleCreate extends React.Component {
 
   render() {
     const {
+      location,
       promiseLoading,
       promiseSuccess,
-      promiseError,
-      location,
       onPostArticle,
       onAddArticleSection
     } = this.props;
@@ -35,9 +34,6 @@ export class ArticleCreate extends React.Component {
           fullScreen
         />
 
-        {promiseError &&
-          <p>error posting article :( {promiseError.message}</p>
-        }
         {!promiseLoading && promiseSuccess &&
           <div>
             <h2>Successfully created! <small>🚀</small></h2>
@@ -65,7 +61,6 @@ ArticleCreate.propTypes = {
   onAddArticleSection: PropTypes.func.isRequired,
   promiseLoading: PropTypes.bool,
   promiseSuccess: PropTypes.bool,
-  promiseError: PropTypes.object,
   location: PropTypes.object,
   resetPromiseState: PropTypes.func
 }

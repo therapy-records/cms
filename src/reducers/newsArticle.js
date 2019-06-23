@@ -99,7 +99,7 @@ export const fetchSingleNewsArticle = (articleId) => {
         },
         (err) => {
           dispatch(promiseLoading(false));
-          dispatch(promiseError(err.response && err.response.status.toString()));
+          dispatch(promiseError())
         }
       )
   }

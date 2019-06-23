@@ -5,11 +5,11 @@ import {
 } from '../constants/index'
 import {
   USER_AUTH_SUCCESS,
-  USER_AUTH_ERROR
+  USER_AUTH_ERROR,
+  ERROR_ALERT_MESSAGE
 } from '../constants/actions'
-import {
-  promiseLoading
-} from './uiState';
+import { promiseLoading } from './uiState';
+import { errorAlert } from './errorAlert';
 
 // ------------------------------------
 // Actions
@@ -28,8 +28,7 @@ export function authError(err) {
   return {
     type: USER_AUTH_ERROR,
     payload: {
-      isAuth: false,
-      authError: err
+      isAuth: false
     }
   }
 }
@@ -53,26 +52,27 @@ export const userLogin = () => {
         return null;
       }
     }
+
     return axiosUserLogin.post(
       API_ROOT + AUTH_LOGIN,
       userObj()
     ).then((data) => {
       if (data && data.data.success === true) {
-        localStorage.setItem('token', data.data.token); // eslint-disable-line no-undef
+        localStorage.setItem('token', data.data.token);
         dispatch(promiseLoading(false));
         return dispatch(authSuccess())
       } else {
-        localStorage.removeItem('token'); // eslint-disable-line no-undef
+        localStorage.removeItem('token');
         dispatch(promiseLoading(false));
-        return dispatch(authError(data.data.message));
+        return dispatch(errorAlert(data.data.message));
       }
     }).catch((error) => {
       if (error.response) {
         dispatch(promiseLoading(false));
-        dispatch(authError(error.response.data.message))
+        dispatch(errorAlert(error.response.data.message))
       } else if (error.request) {
         dispatch(promiseLoading(false));
-        dispatch(authError('Sorry, something has gone wrong'));
+        dispatch(errorAlert(ERROR_ALERT_MESSAGE));
       }
     });
   }
@@ -81,7 +81,7 @@ export const userLogin = () => {
 export const userLogout = () => {
   return (dispatch, getState) =>
     new Promise((resolve) => {
-      localStorage.removeItem('token'); // eslint-disable-line no-undef
+      localStorage.removeItem('token');
       dispatch(authError());
       resolve();
     })
@@ -106,8 +106,7 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = {
-  isAuth: null,
-  authError: undefined
+  isAuth: null
 };
 export default function userReducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]

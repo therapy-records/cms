@@ -50,7 +50,7 @@ export const fetchNewsArticles = () => {
         },
         (err) => {
           dispatch(promiseLoading(false));
-          dispatch(promiseError(err.response && err.response.status.toString()));
+          dispatch(promiseError());
         }
       )
   }
@@ -77,7 +77,7 @@ export const postNews = () => {
         dispatch(postNewsSuccess(res.data));
       }, (err) => {
         dispatch(promiseLoading(false));
-        dispatch(promiseError(err.response && err.response.status.toString()));
+        dispatch(promiseError());
         return err;
       }
     );
@@ -112,7 +112,7 @@ export const editNews = (postToEdit) => {
         dispatch(editNewsSuccess());
       }, (err) => {
         dispatch(promiseLoading(false));
-        dispatch(promiseError(err.response && err.response.status.toString()));
+        dispatch(promiseError());
       }
     );
   }
@@ -131,9 +131,14 @@ const ACTION_HANDLERS = {
   [FETCH_NEWS_ARTICLES_SUCCESS]: (state, action) => {
     return { ...state, articles: action.payload }
   },
-  [POST_NEWS_FORM_SUCCESS]: (state, action) => state = {
-    ...state,
-    articles: [ ...state.articles, action.payload ]
+  [POST_NEWS_FORM_SUCCESS]: (state, action) => {
+    let articlesArray = [
+      action.payload
+    ];
+    if (state.articles) {
+      articlesArray = [...articlesArray, ...state.articles]
+    }
+    return { ...state, articles: articlesArray }
   }
 }
 /* eslint-enable no-return-assign */

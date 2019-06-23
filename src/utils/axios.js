@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const headers = {
   'Content-Type': 'application/json',
-  'Authorization': localStorage.getItem('token') // eslint-disable-line no-undef
+  'Authorization': localStorage.getItem('token')
 }
 
 const _axiosAuthHeaders = axios.create({

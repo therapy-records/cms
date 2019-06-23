@@ -75,22 +75,6 @@ describe('(Component) News - ArticleCreate', () => {
     });
   });
 
-  describe('when promise errors', () => {
-    beforeEach(() => {
-      props = baseProps;
-      props.promiseError = {
-        message: 'api error'
-      };
-      wrapper = shallow(<ArticleCreate {...props} />);
-    });
-    it('should show error message', () => {
-      const actual = wrapper.containsMatchingElement(
-        <p>error posting article :( {props.promiseError.message}</p>
-      );
-      expect(actual).to.equal(true);
-    });
-  });
-
   describe('componentWillUnmount', () => {
     it('should call resetPromiseState', () => {
       props.resetPromiseState = sinon.spy();

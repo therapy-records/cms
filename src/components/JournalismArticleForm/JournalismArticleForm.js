@@ -3,25 +3,25 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import {
-  selectSelectedOtherWorkArticleTitle,
-  selectSelectedOtherWorkArticleCopy,
-  selectSelectedOtherWorkArticleExternalLink,
-  selectSelectedOtherWorkArticleMainImageUrl,
-  selectSelectedOtherWorkArticleReleaseDate
-} from '../../selectors/otherWork';
-import { selectOtherWorkArticleFormValues } from '../../selectors/form';
+  selectSelectedJournalismArticleTitle,
+  selectSelectedJournalismArticleCopy,
+  selectSelectedJournalismArticleExternalLink,
+  selectSelectedJournalismArticleMainImageUrl,
+  selectSelectedJournalismArticleReleaseDate
+} from '../../selectors/journalism';
+import { selectJournalismArticleFormValues } from '../../selectors/form';
 import Datepicker from '../Datepicker/Datepicker';
 import DropzoneImageUpload from '../NewsArticleForm/DropzoneImageUpload';
 import TextInput from '../TextInput';
 import { required } from '../../utils/form';
-import { OTHER_WORK_ARTICLE_FORM } from '../../constants';
+import { JOURNALISM_ARTICLE_FORM } from '../../constants';
 
-export const OTHER_WORK_ARTICLE_MIN_IMAGE_DIMENSIONS = {
+export const JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS = {
   width: 500,
   height: 500
 };
 
-export class OtherWorkArticleForm extends React.Component {
+export class JournalismArticleForm extends React.Component {
   handleSubmit() {
     this.props.onSubmitForm();
   }
@@ -48,7 +48,7 @@ export class OtherWorkArticleForm extends React.Component {
 
         <div className='heading-action-btns'>
           <div className='heading-with-btn'>
-            <h2>{isEditForm ? 'Edit Other Work' : 'Create Other Work'}</h2>
+            <h2>{isEditForm ? 'Edit Journalism article' : 'Create Journalism article'}</h2>
           </div>
         </div>
 
@@ -96,7 +96,7 @@ export class OtherWorkArticleForm extends React.Component {
                    title='Main image'
                    existingImage={formValues && formValues.mainImageUrl}
                    validate={required}
-                   minImageDimensions={OTHER_WORK_ARTICLE_MIN_IMAGE_DIMENSIONS}
+                  minImageDimensions={JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS}
                    required
             />
           </div>
@@ -137,7 +137,7 @@ export class OtherWorkArticleForm extends React.Component {
   }
 }
 
-OtherWorkArticleForm.propTypes = {
+JournalismArticleForm.propTypes = {
   error: PropTypes.string,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
@@ -148,24 +148,24 @@ OtherWorkArticleForm.propTypes = {
 };
 
 let InitFromStateForm = reduxForm({
-  form: OTHER_WORK_ARTICLE_FORM,
+  form: JOURNALISM_ARTICLE_FORM,
   enableReinitialize: true
-})(OtherWorkArticleForm);
+})(JournalismArticleForm);
 
 InitFromStateForm = connect(
   (state, props) => ({
     initialValues: {
-      title: selectSelectedOtherWorkArticleTitle(state),
-      copy: selectSelectedOtherWorkArticleCopy(state),
-      externalLink: selectSelectedOtherWorkArticleExternalLink(state),
-      mainImageUrl: selectSelectedOtherWorkArticleMainImageUrl(state),
-      releaseDate: selectSelectedOtherWorkArticleReleaseDate(state)
+      title: selectSelectedJournalismArticleTitle(state),
+      copy: selectSelectedJournalismArticleCopy(state),
+      externalLink: selectSelectedJournalismArticleExternalLink(state),
+      mainImageUrl: selectSelectedJournalismArticleMainImageUrl(state),
+      releaseDate: selectSelectedJournalismArticleReleaseDate(state)
     }
   })
 )(InitFromStateForm);
 
 const mapStateToProps = (state) => ({
-  formValues: selectOtherWorkArticleFormValues(state)
+  formValues: selectJournalismArticleFormValues(state)
 });
 
 export default connect(mapStateToProps, {})(InitFromStateForm)

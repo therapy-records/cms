@@ -123,7 +123,7 @@ describe('(Component) News - Home', () => {
   });
 
   describe('componentWillMount', () => {
-    it('should call onFetchOtherWorkArticles when articles === null', () => {
+    it('should call onfetchJournalismArticles when articles === null', () => {
       props.onFetchNewsArticles = sinon.spy();
       props.articles = null;
       wrapper = shallow(<News {...props} />);

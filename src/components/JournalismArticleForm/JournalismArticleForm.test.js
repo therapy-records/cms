@@ -6,13 +6,13 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import TextInput from '../TextInput/TextInput';
 import Datepicker from '../Datepicker/Datepicker';
-import { OtherWorkArticleForm, OTHER_WORK_ARTICLE_MIN_IMAGE_DIMENSIONS } from './OtherWorkArticleForm';
+import { JournalismArticleForm, JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS } from './JournalismArticleForm';
 import DropzoneImageUpload from '../NewsArticleForm/DropzoneImageUpload';
 import { required } from '../../utils/form';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('(Component) OtherWorkArticleForm', () => {
+describe('(Component) JournalismArticleForm', () => {
   let wrapper,
     props,
     baseProps = {
@@ -22,10 +22,10 @@ describe('(Component) OtherWorkArticleForm', () => {
   it('should render a `Create` heading', () => {
     props = { ...baseProps, location: { pathname: 'test/create' } };
     const createWrapper = shallow(
-      <OtherWorkArticleForm {...props} />
+      <JournalismArticleForm {...props} />
     );
     const actual = createWrapper.containsMatchingElement(
-      <h2>Create Other Work</h2>
+      <h2>Create Journalism article</h2>
     );
     expect(actual).to.equal(true);
   });
@@ -33,24 +33,24 @@ describe('(Component) OtherWorkArticleForm', () => {
   it('should render an `Edit` heading', () => {
     props = { ...baseProps, location: { pathname: 'test/edit' } };
     const editWrapper = shallow(
-      <OtherWorkArticleForm {...props} />
+      <JournalismArticleForm {...props} />
     );
     const actual = editWrapper.containsMatchingElement(
-      <h2>Edit Other Work</h2>
+      <h2>Edit Journalism article</h2>
     );
     expect(actual).to.equal(true);
   });
 
   describe('form fields', () => {
     beforeEach(() => {
-      wrapper = shallow(<OtherWorkArticleForm {...props} />);
+      wrapper = shallow(<JournalismArticleForm {...props} />);
     });
     it('should render a mainImageUrl field', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='mainImageUrl'
           title='Main image'
           component={DropzoneImageUpload}
-          minImageDimensions={OTHER_WORK_ARTICLE_MIN_IMAGE_DIMENSIONS}
+          minImageDimensions={JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS}
           required
         />
       );
@@ -99,7 +99,7 @@ describe('(Component) OtherWorkArticleForm', () => {
           releaseDate: new Date()
         }
       };
-      const datepickerWrapper = shallow(<OtherWorkArticleForm {...props} />);
+      const datepickerWrapper = shallow(<JournalismArticleForm {...props} />);
       const actual = datepickerWrapper.containsMatchingElement(
         <Field name='releaseDate'
                component={Datepicker}
@@ -117,7 +117,7 @@ describe('(Component) OtherWorkArticleForm', () => {
       error: 'Something is wrong'
     }
     const errorWrapper = shallow(
-      <OtherWorkArticleForm {...props} />
+      <JournalismArticleForm {...props} />
     );
     const actual = errorWrapper.containsMatchingElement(
       <p>{props.error}</p>
@@ -132,7 +132,7 @@ describe('(Component) OtherWorkArticleForm', () => {
         pristine: false,
         submitting: false
       }
-      const buttonWrapper = shallow(<OtherWorkArticleForm {...props} />);
+      const buttonWrapper = shallow(<JournalismArticleForm {...props} />);
       const actual = buttonWrapper.containsMatchingElement(
         <button type='submit'>Submit</button>
       );
@@ -146,7 +146,7 @@ describe('(Component) OtherWorkArticleForm', () => {
         submitting: false,
         formValues: { mainImage: { url: 'test.com' } }
       }
-      const buttonWrapper = shallow(<OtherWorkArticleForm {...props} />);
+      const buttonWrapper = shallow(<JournalismArticleForm {...props} />);
       const button = buttonWrapper.find('button[type="submit"]');
       button.simulate('click');
       expect(props.onSubmitForm.calledOnce).to.eq(true);

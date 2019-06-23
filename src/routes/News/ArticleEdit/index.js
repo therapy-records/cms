@@ -11,8 +11,7 @@ import {
 import { selectSelectedNewsArticle } from '../../../selectors/news';
 import {
   selectUiStateLoading,
-  selectUiStateSuccess,
-  selectUiStateError
+  selectUiStateSuccess
 } from '../../../selectors/uiState';
 import NewsArticleForm from '../../../components/NewsArticleForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
@@ -40,7 +39,6 @@ export class ArticleEdit extends React.Component {
       article,
       promiseLoading,
       promiseSuccess,
-      promiseError,
       location
     } = this.props;
 
@@ -56,11 +54,6 @@ export class ArticleEdit extends React.Component {
           active={promiseLoading}
           fullScreen
         />
-
-
-        {promiseError &&
-          <p>error updating news article :( {promiseError.message}</p>
-        }
 
         {!promiseLoading && (promiseSuccess && article.editSuccess) &&
           <div>
@@ -89,7 +82,6 @@ ArticleEdit.propTypes = {
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
   promiseSuccess: PropTypes.bool,
-  promiseError: PropTypes.bool,
   resetPromiseState: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired
@@ -106,7 +98,6 @@ const mapStateToProps = (state, props) => ({
   article: selectSelectedNewsArticle(state),
   promiseLoading: selectUiStateLoading(state),
   promiseSuccess: selectUiStateSuccess(state),
-  promiseError: selectUiStateError(state),
   state: state.location
 });
 

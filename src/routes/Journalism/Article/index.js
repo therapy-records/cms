@@ -5,19 +5,17 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { resetPromiseState } from '../../../reducers/uiState';
 import {
-  deleteOtherWorkArticle,
-  fetchSingleOtherWorkArticle,
-  destroySelectedOtherWorkArticle
-} from '../../../reducers/otherWorkArticle';
+  deleteJournalismArticle,
+  fetchSingleJournalismArticle,
+  destroySelectedJournalismArticle
+} from '../../../reducers/journalismArticle';
 import {
   selectUiStateLoading,
-  selectUiStateSuccess,
-  selectUiStateError
+  selectUiStateSuccess
 } from '../../../selectors/uiState';
-import { selectSelectedOtherWorkArticle } from '../../../selectors/otherWork';
+import { selectSelectedJournalismArticle } from '../../../selectors/journalism';
 import ArticleDeleteModal from '../../../components/ArticleDeleteModal'
 import LoadingSpinner from '../../../components/LoadingSpinner';
-import PromiseError from '../../../components/PromiseError';
 
 export class Article extends React.Component {
   constructor() {
@@ -68,8 +66,7 @@ export class Article extends React.Component {
   render() {
     const {
       article,
-      promiseLoading,
-      promiseError
+      promiseLoading
     } = this.props;
 
     // todo: move to will/did update
@@ -77,13 +74,13 @@ export class Article extends React.Component {
     if (article && article.isDeleted) {
       setTimeout(() => {
         this.props.history.push({
-          pathname: '/other-work'
+          pathname: '/journalism'
         });
       }, 3000)
     }
 
     return (
-      <article className='container article article-other-work'>
+      <article className='container article article-journalism'>
 
         <LoadingSpinner
           active={promiseLoading}
@@ -113,7 +110,7 @@ export class Article extends React.Component {
                 >Delete
                 </button>
                 <Link
-                  to={`/other-work/${article._id}/edit`}
+                  to={`/journalism/${article._id}/edit`}
                   className='btn btn-edit'
                 >Edit</Link>
               </div>
@@ -145,10 +142,6 @@ export class Article extends React.Component {
           </div>
         )}
 
-        {promiseError &&
-          <PromiseError message='fetching other-work article' />
-        }
-
         {(!promiseLoading && this.state.isShowingModal) &&
           <ArticleDeleteModal
             handleModalClose={this.handleModalClose}
@@ -165,7 +158,6 @@ Article.propTypes = {
   onDeleteArticle: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
-  promiseError: PropTypes.bool,
   onFetchArticle: PropTypes.func.isRequired,
   resetPromiseState: PropTypes.func.isRequired,
   onDestroyArticle: PropTypes.func.isRequired,
@@ -175,17 +167,16 @@ Article.propTypes = {
 }
 
 const mapDispatchToProps = {
-  onFetchArticle: (id) => fetchSingleOtherWorkArticle(id),
-  onDeleteArticle: (id) => deleteOtherWorkArticle(id),
+  onFetchArticle: (id) => fetchSingleJournalismArticle(id),
+  onDeleteArticle: (id) => deleteJournalismArticle(id),
   resetPromiseState: () => resetPromiseState(),
-  onDestroyArticle: () => destroySelectedOtherWorkArticle()
+  onDestroyArticle: () => destroySelectedJournalismArticle()
 }
 
 const mapStateToProps = (state, props) => ({
-  article: selectSelectedOtherWorkArticle(state),
+  article: selectSelectedJournalismArticle(state),
   promiseLoading: selectUiStateLoading(state),
   promiseSuccess: selectUiStateSuccess(state),
-  promiseError: selectUiStateError(state),
   location: state.location
 })
 
