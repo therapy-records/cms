@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import { Link } from 'react-router-dom';
 import { ArticleEdit } from './index';
@@ -10,46 +10,51 @@ import LoadingSpinner from '../../../components/LoadingSpinner';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) News - ArticleEdit', () => {
-  let wrapper,
-    props,
-    baseProps = {
-      onEditArticle: () => {},
-      onFetchArticle: () => { },
-      onDestroyArticle: () => {},
-      resetPromiseState: () => {},
-      article: { title: 'test', id: 'asdf1234' },
-      location: {
-        pathname: 'article/edit'
-      },
-      match: {
-        params: { id: 123 }
-      }
-    };
+  let wrapper;
+  let props = {
+    onEditArticle: () => {},
+    onFetchArticle: () => { },
+    onDestroyArticle: () => {},
+    resetPromiseState: () => {},
+    article: { title: 'test', id: 'asdf1234' },
+    location: {
+      pathname: 'article/edit'
+    },
+    match: {
+      params: { id: 123 }
+    }
+  };
+
+  beforeEach(() => {
+    wrapper = shallow(<ArticleEdit {...props} />);
+  });
 
   describe('methods', () => {
 
     describe('componentWillUnmount', () => {
       it('should call resetPromiseState', () => {
-        let props = baseProps;
-        props.resetPromiseState = sinon.spy();
-        wrapper = shallow(<ArticleEdit {...props} />);
+        const resetPromiseStateSpy = sinon.spy();
+        wrapper.setProps({
+          resetPromiseState: resetPromiseStateSpy
+        });
         wrapper.unmount();
-        expect(props.resetPromiseState).to.have.been.called;
-        expect(props.resetPromiseState).to.have.been.calledOnce;
+        expect(resetPromiseStateSpy).to.have.been.called;
+        expect(resetPromiseStateSpy).to.have.been.calledOnce;
       });
+
       it('should call onDestroyArticle', () => {
-        let props = baseProps;
-        props.onDestroyArticle = sinon.spy();
-        wrapper = shallow(<ArticleEdit {...props} />);
+        const onDestroyArticleSpy = sinon.spy();
+        wrapper.setProps({
+          onDestroyArticle: onDestroyArticleSpy
+        });
         wrapper.unmount();
-        expect(props.onDestroyArticle).to.have.been.called;
-        expect(props.onDestroyArticle).to.have.been.calledOnce;
+        expect(onDestroyArticleSpy).to.have.been.called;
+        expect(onDestroyArticleSpy).to.have.been.calledOnce;
       });
     });
 
     describe('componentWillMount', () => {
       it('should call onFetchArticle if there is no article', () => {
-        let props = baseProps;
         props.onFetchArticle = sinon.spy();
         wrapper = shallow(<ArticleEdit {...props} article={{}} />);
         wrapper.unmount();
@@ -57,7 +62,6 @@ describe('(Component) News - ArticleEdit', () => {
         expect(props.onFetchArticle).to.have.been.calledOnce;
       });
       it('should call onFetchArticle if there is no article', () => {
-        let props = baseProps;
         props.onFetchArticle = sinon.spy();
         wrapper = shallow(<ArticleEdit {...props} article={{ title: 'test' }} />);
         wrapper.unmount();
@@ -66,55 +70,56 @@ describe('(Component) News - ArticleEdit', () => {
       });
     });
 
+    describe('renderHtml', () => {
+      it('should return an object with `__html` property', () => {
+        const mockData = {test: true};
+        const result = wrapper.instance().renderHtml(mockData);
+        expect(result).to.deep.eq({
+          __html: mockData
+        })
+      });
+    });
   });
 
-  it('should render a NewsArticleForm', () => {
-    props = baseProps;
-    wrapper = shallow(<ArticleEdit {...props} />);
-    const form = wrapper.find(NewsArticleForm);
-    expect(form.length).to.equal(1);
-  });
-
-  describe('when promise is loading', () => {
-    beforeEach(() => {
-      props = baseProps;
-      props.promiseLoading = true;
+  describe('rendering', () => {
+  
+    it('should render a NewsArticleForm', () => {
       wrapper = shallow(<ArticleEdit {...props} />);
+      const form = wrapper.find(NewsArticleForm);
+      expect(form.length).to.equal(1);
     });
-    it('should show loading', () => {
-      const actual = wrapper.containsMatchingElement(
-        <LoadingSpinner
-          active={props.promiseLoading}
-          fullScreen
-        />
-      );
-      expect(actual).to.equal(true);
-    });
-  });
 
-  describe('when article is successfully posted, promise not loading and article.editSuccess', () => {
-    beforeEach(() => {
-      props = baseProps;
-      props.promiseLoading = false;
-      props.promiseSuccess = true;
-      props.article.editSuccess = true;
-      wrapper = shallow(<ArticleEdit {...props} />);
+    describe('when promise is loading', () => {
+      beforeEach(() => {
+        props.promiseLoading = true;
+        wrapper = shallow(<ArticleEdit {...props} />);
+      });
+      it('should show loading', () => {
+        const actual = wrapper.containsMatchingElement(
+          <LoadingSpinner
+            active={props.promiseLoading}
+            fullScreen
+          />
+        );
+        expect(actual).to.equal(true);
+      });
     });
-    it('should show success message and link', () => {
-      const actual = wrapper.containsAllMatchingElements([
-        <h2>Successfully updated! <small>🚀</small></h2>,
-        <Link to='/news'>Go to news</Link>
-      ]);
-      expect(actual).to.equal(true);
-    });
-  });
 
-  describe('componentWillUnmount', () => {
-    it('should call resetPromiseState', () => {
-      props.resetPromiseState = sinon.spy();
-      wrapper = shallow(<ArticleEdit {...props} />);
-      wrapper.instance().componentWillUnmount();
-      expect(props.resetPromiseState).to.have.been.called;
+    describe('when article is successfully posted, promise not loading and article.editSuccess', () => {
+      beforeEach(() => {
+        props.promiseLoading = false;
+        props.promiseSuccess = true;
+        props.article.editSuccess = true;
+        wrapper = shallow(<ArticleEdit {...props} />);
+      });
+
+      it('should show success message and link', () => {
+        const actual = wrapper.containsAllMatchingElements([
+          <h2>Successfully updated! <small>🚀</small></h2>,
+          <Link to='/news'>Go to news</Link>
+        ]);
+        expect(actual).to.equal(true);
+      });
     });
   });
 });

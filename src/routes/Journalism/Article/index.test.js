@@ -1,12 +1,17 @@
 import React from 'react'
 import moment from 'moment';
-
 import { Link } from 'react-router-dom'
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
-import { Article } from './index'
+import configureMockStore from 'redux-mock-store';
+import ConnectedArticle, { Article } from './index'
 import ArticleDeleteModal from '../../../components/ArticleDeleteModal'
 import LoadingSpinner from '../../../components/LoadingSpinner';
+import {
+  selectUiStateLoading,
+  selectUiStateSuccess
+} from '../../../selectors/uiState';
+import { selectSelectedJournalismArticle } from '../../../selectors/journalism';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -283,6 +288,39 @@ describe('(Component) Journalism - Journalism', () => {
         />
       );
       expect(actual).to.equal(true);
+    });
+  });
+  describe('ConnectedArticle', () => {
+    const mockStore = configureMockStore();
+    const mockStoreState = {
+      uiState: {
+        promiseLoading: false,
+        promiseSuccess: false
+      },
+      location: {},
+      selectedJournalismArticle: mockArticle
+    };
+    let renderedProps;
+    let store = {};
+
+    beforeEach(() => {
+      store = mockStore(mockStoreState);
+      wrapper = shallow(
+        <ConnectedArticle
+          store={store}
+          location={mockStoreState.location}
+        />
+      );
+    });
+
+    it('should map state to props', () => {
+      renderedProps = wrapper.props();
+
+      expect(renderedProps.article).to.eq(selectSelectedJournalismArticle(mockStoreState));
+      expect(renderedProps.promiseLoading).to.eq(selectUiStateLoading(mockStoreState));
+      expect(renderedProps.promiseSuccess).to.eq(selectUiStateSuccess(mockStoreState));
+      expect(renderedProps.location).to.eq(mockStoreState.location);
+
     });
   });
 });
