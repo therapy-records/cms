@@ -17,6 +17,7 @@ import {
 } from '../../../reducers/newsArticle';
 import ArticleDeleteModal from '../../../components/ArticleDeleteModal';
 import LoadingSpinner from '../../../components/LoadingSpinner';
+import { getArticlesFirstImageUrl } from '../../../utils/news';
 
 export class Article extends React.Component {
   constructor() {
@@ -70,31 +71,6 @@ export class Article extends React.Component {
       promiseLoading
     } = this.props;
 
-    const articleHasMiniGalleryImages = article &&
-                                        article.miniGalleryImages &&
-                                        article.miniGalleryImages.length &&
-                                        article.miniGalleryImages.length > 0;
-
-    const articleHasHashtags = article &&
-                               article.socialShare &&
-                               article.socialShare.hashtags &&
-                               article.socialShare.hashtags.length &&
-                               article.socialShare.hashtags.length > 0;
-
-    const articleHasMainImage = article && article.mainImage && article.mainImage.url;
-    const articleHasImages = article && articleHasMainImage || articleHasMiniGalleryImages; // eslint-disable-line
-
-    const articleImg = () => {
-      if (!article) {
-        return null;
-      } else if (article.mainImage && article.mainImage.url) {
-        return article.mainImage.url;
-      } else if (articleHasMiniGalleryImages) {
-        return article.miniGalleryImages[0];
-      }
-      return null;
-    }
-
     // todo: move to will/did update
     if (article && article.isDeleted) {
       setTimeout(() => {
@@ -103,6 +79,8 @@ export class Article extends React.Component {
         });
       }, 3000);
     }
+
+    const articleHasAnImage = getArticlesFirstImageUrl(article);
 
     return (
       <article className='container article'>
@@ -147,88 +125,41 @@ export class Article extends React.Component {
               </div>
             </div>
 
-            {article.bodyMain &&
-              <div className='row-large'>
-                <div dangerouslySetInnerHTML={this.renderHtml(article.bodyMain)} />
-              </div>
-            }
+            <ul className='row-large'>
+              {articleHasAnImage ?
+                article.sections.map((section, index) => (
+                    <li
+                      key={index}
+                      className='cols-container'
+                    >
 
-            {(articleHasImages || article.secondaryImageUrl) &&
-              <div className='row-large cols-container'>
+                      <div>
+                        <ul>
+                          {section.images.map(image => {
+                            return image.url && (
+                              <img
+                                key={image.url}
+                                src={image.url}
+                                alt='Fiona Ross'
+                              />
+                            )
+                          })}
+                        </ul>
+                      </div>
 
-                {articleHasImages ?
-                  <div>
-                    {article.mainImage && article.mainImage.externalLink ?
-                      <a href={article.mainImage.externalLink}
-                        target='_blank'>
-                        <img
-                          src={articleImg()}
-                          alt={`Fiona Ross - ${article.title}`}
-                        />
-                      </a>
-                      : <img
-                        src={articleImg()}
-                        alt={`Fiona Ross - ${article.title}`}
-                      />}
-                  </div>
-                  : null}
+                      <div>
+                        <div dangerouslySetInnerHTML={this.renderHtml(section.copy)} />
+                      </div>
 
-                {article.secondaryImageUrl &&
-                  <div>
-                    <img
-                      src={article.secondaryImageUrl}
-                      alt={`Fiona Ross - ${article.title}`}
-                    />
-                  </div>
-                }
-              </div>
-            }
-
-            {article.ticketsLink ||
-             article.venueLink ||
-             article.videoEmbed ||
-             articleHasHashtags ?
-              <div className='row-large'>
-                {article.ticketsLink && <a className='btn' href={article.ticketsLink} target='_blank'>Get tickets</a>}
-                {article.venueLink && <a className='btn' href={article.venueLink} target='_blank'>Venue</a>}
-
-                <br />
-
-                {article.videoEmbed &&
-                  <iframe
-                    width='560'
-                    src={article.videoEmbed}
-                    title={`Video of ${article.title}`}
-                    frameBorder='0'
-                    allowFullScreen
-                  />
-                }
-
-                {articleHasHashtags ?
-                  <div>
-                    <h3>Hashtags</h3>
-                    <ul className='cancel-margin'>
-                      {article.socialShare.hashtags.map((h) =>
-                        <li key={h}>{h}</li>
-                      )}
-                    </ul>
-                  </div>
-                : null}
-
-              </div>
-            : null}
-
-            {articleHasMiniGalleryImages ?
-              <div className='row-large'>
-                <ul className='article-gallery-flex-root'>
-                  {article.miniGalleryImages.map((i) => (
-                    <li key={i} className='article-col-50 no-list-style article-gallery-item'>
-                      <img src={i} alt='gallery shot' />
                     </li>
-                  ))}
-                </ul>
-              </div>
-            : null}
+                  )
+                )
+              : (
+                  <div>
+                    <div dangerouslySetInnerHTML={this.renderHtml(article.sections[0].copy)} />
+                  </div>
+              )}
+            </ul>
 
           </div>
         )}

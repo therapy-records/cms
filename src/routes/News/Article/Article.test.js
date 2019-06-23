@@ -12,24 +12,25 @@ Enzyme.configure({ adapter: new Adapter() });
 describe('(Component) News - Article', () => {
   let wrapper,
     props,
-    mockMiniGalleryImages = [
-      'http://image1.com',
-      'http://image2.com',
-      'http://image3.com'
-    ],
     mockArticle = {
       _id: 'asdf1234',
       title: 'hello world',
-      bodyMain: '<p>dummy copy</p><div>something<h2>title</h2></div>',
-      mainImage: {
-        url: 'http://test.com/hi.jpg'
-      },
-      createdAt: new Date(),
-      ticketsLink: 'http://test.com',
-      venueLink: 'http://test.com',
-      videoEmbed: 'http://youtube.com/something',
-      miniGalleryImages: mockMiniGalleryImages,
-      socialShare: {}
+      sections: [
+        {
+          images: [
+            { url: 'http:/test1.com' },
+            { url: 'http:/test2.com' }
+          ],
+          copy: '<p>test</p>'
+        },
+        {
+          images: [
+            { url: 'http:/test3.com' },
+            { url: 'http:/test4.com' }
+          ],
+          copy: '<p>test</p>'
+        }
+      ]
     },
     baseProps = {
       onFetchNewsArticles: sinon.spy(),
@@ -52,290 +53,199 @@ describe('(Component) News - Article', () => {
     };
   props = baseProps;
 
-  describe('on componentWillUnmount', () => {
-    let props,
-      wrapper;
-    beforeEach(() => {
-      props = {
-        ...baseProps,
-        resetPromiseState: sinon.spy(),
-        onDestroyArticle: sinon.spy()
-      }
-      wrapper = shallow(<Article {...props} />);
-    });
-    it('should call resetPromiseState', () => {
-      wrapper.unmount();
-      expect(props.resetPromiseState.calledOnce).to.eq(true);
-    });
-    it('should call onDestroyArticle if location.pathname does not include edit', () => {
-      wrapper.unmount();
-      expect(props.onDestroyArticle.calledOnce).to.eq(true);
-    });
+  beforeEach(() => {
+    wrapper = shallow(<Article {...props} />);
   });
 
-  describe('renderHtml', () => {
-    it('should return an object', () => {
-      wrapper = shallow(<Article {...props} />);
-      const actual = wrapper.instance().renderHtml('<p>test</p>');
-      expect(actual).to.deep.eq({
-        __html: '<p>test</p>'
+  describe('methods', () => {
+    describe('on componentWillUnmount', () => {
+      const resetPromiseStateSpy = sinon.spy();
+      const onDestroyArticleSpy = sinon.spy();
+      beforeEach(() => {
+        wrapper.setProps({
+          resetPromiseState: resetPromiseStateSpy,
+          onDestroyArticle: onDestroyArticleSpy
+        });
       });
-    })
+
+      it('should call resetPromiseState', () => {
+        wrapper.unmount();
+        expect(resetPromiseStateSpy.calledOnce).to.eq(true);
+      });
+
+      it('should call onDestroyArticle', () => {
+        wrapper = shallow(<Article {...props} />);
+        wrapper.unmount();
+        expect(onDestroyArticleSpy.calledOnce).to.eq(true);
+      });
+    });
+
+    describe('renderHtml', () => {
+      it('should return an object', () => {
+        const actual = wrapper.instance().renderHtml('<p>test</p>');
+        expect(actual).to.deep.eq({
+          __html: '<p>test</p>'
+        });
+      })
+    });    
   });
 
-  it('should render <LoadingSpinner />', () => {
-    const actual = wrapper.containsMatchingElement(
-      <LoadingSpinner
-        active={props.promiseLoading}
-        fullScreen
-      />
-    );
-    expect(actual).to.equal(true);
-  });
-
-  describe('when article is deleted', () => {
+  describe('rendering', () => {
     beforeEach(() => {
-      props = baseProps;
-      const deletedArticle = { isDeleted: true };
-      props.article = deletedArticle;
       wrapper = shallow(<Article {...props} />);
     });
 
-    it('should have correct copy', () => {
+    it('should render <LoadingSpinner />', () => {
       const actual = wrapper.containsMatchingElement(
-        <div>
-          <h2>Successfully deleted! <small>🚀</small></h2>
-          <p>Redirecting...</p>
-        </div>
-      );
-      expect(actual).to.equal(true);
-    });
-  });
-
-  describe('when an article does not exist / article._id is undefined', () => {
-    beforeEach(() => {
-      props = baseProps;
-      props.article = {};
-      props.onFetchArticle = sinon.spy();
-      wrapper = shallow(<Article {...props} />);
-    });
-    it('should call onFetchArticle', () => {
-      expect(props.onFetchArticle.calledOnce).to.eq(true);
-    });
-  });
-
-  describe('when an article id does not match param ID', () => {
-    it('should call onFetchArticle', () => {
-      props = baseProps;
-      props.article = { _id: 456 };
-      props.params = { id: 123 };
-      props.onFetchArticle = sinon.spy();
-      wrapper = shallow(<Article {...props} />);
-      expect(props.onFetchArticle.calledOnce).to.eq(true);
-    });
-  });
-
-  describe('when there is no param ID', () => {
-    it('should call onFetchArticle', () => {
-      props = baseProps;
-      props.article = { _id: 456 };
-      props.params = { };
-      props.onFetchArticle = sinon.spy();
-      wrapper = shallow(<Article {...props} />);
-      expect(props.onFetchArticle.calledOnce).to.eq(true);
-    });
-  });
-
-  describe('when an article exists', () => {
-    beforeEach(() => {
-      props = baseProps;
-      props.article = mockArticle;
-      wrapper = shallow(<Article {...props} />);
-    });
-    it('should render a title', () => {
-      const actual = wrapper.containsMatchingElement(
-        <h2>{props.article.title}</h2>
+        <LoadingSpinner
+          active={props.promiseLoading}
+          fullScreen
+        />
       );
       expect(actual).to.equal(true);
     });
 
-    describe('main image', () => {
-      it('should render mainImage.url if it exists', () => {
+    describe('when article is deleted', () => {
+      beforeEach(() => {
+        props = baseProps;
+        const deletedArticle = { isDeleted: true };
+        props.article = deletedArticle;
+        wrapper = shallow(<Article {...props} />);
+      });
+
+      it('should have correct copy', () => {
         const actual = wrapper.containsMatchingElement(
-          <img
-            src={props.article.mainImage.url}
-            alt={`Fiona Ross - ${props.article.title}`}
-          />
+          <div>
+            <h2>Successfully deleted! <small>🚀</small></h2>
+            <p>Redirecting...</p>
+          </div>
+        );
+        expect(actual).to.equal(true);
+      });
+    });
+
+    describe('when an article does not exist / article._id is undefined', () => {
+      beforeEach(() => {
+        props = baseProps;
+        props.article = {};
+        props.onFetchArticle = sinon.spy();
+        wrapper = shallow(<Article {...props} />);
+      });
+      it('should call onFetchArticle', () => {
+        expect(props.onFetchArticle.calledOnce).to.eq(true);
+      });
+    });
+
+    describe('when an article id does not match param ID', () => {
+      it('should call onFetchArticle', () => {
+        props = baseProps;
+        props.article = { _id: 456 };
+        props.params = { id: 123 };
+        props.onFetchArticle = sinon.spy();
+        wrapper = shallow(<Article {...props} />);
+        expect(props.onFetchArticle.calledOnce).to.eq(true);
+      });
+    });
+
+    describe('when there is no param ID', () => {
+      it('should call onFetchArticle', () => {
+        props = baseProps;
+        props.article = { _id: 456 };
+        props.params = {};
+        props.onFetchArticle = sinon.spy();
+        wrapper = shallow(<Article {...props} />);
+        expect(props.onFetchArticle.calledOnce).to.eq(true);
+      });
+    });
+
+    describe('when an article exists', () => {
+      beforeEach(() => {
+        wrapper.setProps({
+          ...baseProps,
+          article: mockArticle
+        });
+      });
+
+      it('should render a title', () => {
+        const actual = wrapper.containsMatchingElement(
+          <h2>{mockArticle.title}</h2>
         );
         expect(actual).to.equal(true);
       });
 
-      it('should render the first image in miniGalleryImages if !mainImage.url and miniGalleryImages length', () => {
-        props = baseProps;
-        props.article.mainImage.url = undefined;
-        wrapper = shallow(<Article {...props} />);
-        const actual = wrapper.containsMatchingElement(
-          <img
-            src={props.article.miniGalleryImages[0]}
-            alt={`Fiona Ross - ${props.article.title}`}
-          />
-        );
-        expect(actual).to.equal(true);
+      it('should be render an `edit article` button', () => {
+        const editButton = wrapper.find(Link);
+        expect(editButton.length).to.equal(1);
       });
 
-      it('should not render an image if !miniGalleryImages or !mainImage.url', () => {
-        props = baseProps;
-        props.article.mainImage.url = undefined;
-        props.article.miniGalleryImages = [];
-        wrapper = shallow(<Article {...props} />);
-        const actualMiniGalleryImages = wrapper.containsMatchingElement(
-          <img
-            src={props.article.miniGalleryImages[0]}
-            alt={`Fiona Ross - ${props.article.title}`}
-          />
-        );
-        expect(actualMiniGalleryImages).to.equal(false);
-
-        const actualMainImageUrl = wrapper.containsMatchingElement(
-          <img
-            src={props.article.mainImage.url}
-            alt={`Fiona Ross - ${props.article.title}`}
-          />
-        );
-        expect(actualMainImageUrl).to.equal(false);
+      describe('sections', () => {
+        it('should render an image for each section', () => {
+          const actual = wrapper.containsAllMatchingElements([
+            <img
+              key={mockArticle.sections[0].images[0].url}
+              src={mockArticle.sections[0].images[0].url}
+              alt='Fiona Ross'
+            />,
+            <img
+              key={mockArticle.sections[1].images[1].url}
+              src={mockArticle.sections[1].images[1].url}
+              alt='Fiona Ross'
+            />
+          ]);
+          expect(actual).to.equal(true);
+        });
+        it('should render `copy` for each section', () => {
+          const actual = wrapper.containsAllMatchingElements([
+            <div
+              key='test1'
+              dangerouslySetInnerHTML={
+                wrapper.instance().renderHtml(mockArticle.sections[0].copy)
+              }
+            />,
+            <div
+              key='test2'
+              dangerouslySetInnerHTML={
+                wrapper.instance().renderHtml(mockArticle.sections[1].copy)
+              }
+            />
+            ]);
+          expect(actual).to.equal(true);
+        });
       });
+    });
 
-      it('should render inside a link if mainImage.externalLink', () => {
+    describe('delete article button', () => {
+      beforeEach(() => {
         props = baseProps;
         props.article = mockArticle;
-        props.article.mainImage.externalLink = 'testing.com';
+        props.handleModalOpen = sinon.spy();
+        props.handleModalClose = () => { };
+        props.promiseLoading = false;
         wrapper = shallow(<Article {...props} />);
-        const actualMiniGalleryImages = wrapper.containsMatchingElement(
-          <a href={mockArticle.mainImage.externalLink}
-            target='_blank'>
-            <img
-              src={props.article.miniGalleryImages[0]}
-              alt={`Fiona Ross - ${props.article.title}`}
-            />
-          </a>
+      });
+
+      it('should not render <ArticleDeleteModal /> by default', () => {
+        const actual = wrapper.containsMatchingElement(
+          <ArticleDeleteModal
+            handleModalClose={wrapper.instance().handleModalClose}
+            onDeleteArticle={wrapper.instance().handleOnDeleteArticle}
+          />
         );
-        expect(actualMiniGalleryImages).to.equal(false);
-      });
-    });
-
-    it('should render ticketsLink', () => {
-      const actual = wrapper.containsMatchingElement(
-        <a href={props.article.ticketsLink} target='_blank'>Get tickets</a>
-      );
-      expect(actual).to.equal(true);
-    });
-
-    it('should render venueLink', () => {
-      const actual = wrapper.containsMatchingElement(
-        <a href={props.article.venueLink} target='_blank'>Venue</a>
-      );
-      expect(actual).to.equal(true);
-    });
-
-    describe('miniGalleryImages', () => {
-      beforeEach(() => {
-        props.article.miniGalleryImages = mockMiniGalleryImages;
-        wrapper = shallow(<Article {...props} />);
+        expect(actual).to.equal(false);
       });
 
-      it('should render a list of images', () => {
-        const actual = wrapper.containsAllMatchingElements([
-          <li><img src={props.article.miniGalleryImages[0]} /></li>,
-          <li><img src={props.article.miniGalleryImages[1]} /></li>,
-          <li><img src={props.article.miniGalleryImages[2]} /></li>
-        ])
+      it('should set state and render <ArticleDeleteModal />', () => {
+        const button = wrapper.find('button');
+        button.simulate('click');
+        const actual = wrapper.containsMatchingElement(
+          <ArticleDeleteModal
+            handleModalClose={wrapper.instance().handleModalClose}
+            onDeleteArticle={wrapper.instance().handleOnDeleteArticle}
+          />
+        );
         expect(actual).to.equal(true);
       });
-    });
-
-    it('should render venue link', () => {
-      const actual = wrapper.containsMatchingElement(
-        <a href={props.article.venueLink} target='_blank'>Venue</a>
-      );
-      expect(actual).to.equal(true);
-    });
-
-    it('should render videoEmbed', () => {
-      const actual = wrapper.containsMatchingElement(
-        <iframe
-          width='560'
-          src={props.article.videoEmbed}
-          frameBorder='0'
-          allowFullScreen
-        />
-      );
-      expect(actual).to.equal(true);
-    });
-
-    it('should render miniGalleryImages', () => {
-      const actual = wrapper.containsAllMatchingElements([
-        <li>
-          <img src={props.article.miniGalleryImages[0]} />
-        </li>,
-        <li>
-          <img src={props.article.miniGalleryImages[1]} />
-        </li>,
-        <li>
-          <img src={props.article.miniGalleryImages[2]} />
-        </li>
-      ]);
-      expect(actual).to.equal(true);
-    });
+    });    
   });
 
-  describe('edit article button', () => {
-    it('should be rendered', () => {
-      let props = baseProps;
-      wrapper = shallow(<Article {...props} />);
-      const editButton = wrapper.find(Link);
-      expect(editButton.length).to.equal(1);
-    });
-  });
-
-  describe('delete article button', () => {
-    beforeEach(() => {
-      props = baseProps;
-      props.article = mockArticle;
-      props.handleModalOpen = sinon.spy();
-      props.handleModalClose = () => {};
-      props.promiseLoading = false;
-      wrapper = shallow(<Article {...props} />);
-    });
-
-    it('should not render <ArticleDeleteModal /> by default', () => {
-      const actual = wrapper.containsMatchingElement(
-        <ArticleDeleteModal
-          handleModalClose={wrapper.instance().handleModalClose}
-          onDeleteArticle={wrapper.instance().handleOnDeleteArticle}
-        />
-      );
-      expect(actual).to.equal(false);
-    });
-
-    it('should set state and render <ArticleDeleteModal />', () => {
-      const button = wrapper.find('button');
-      button.simulate('click');
-      const actual = wrapper.containsMatchingElement(
-        <ArticleDeleteModal
-          handleModalClose={wrapper.instance().handleModalClose}
-          onDeleteArticle={wrapper.instance().handleOnDeleteArticle}
-        />
-      );
-      expect(actual).to.equal(true);
-    });
-  });
-
-  describe('componentWillUnmount', () => {
-    it('should call resetPromiseState', () => {
-      props.resetPromiseState = sinon.spy();
-      wrapper = shallow(<Article {...props} />);
-      wrapper.instance().componentWillUnmount();
-      expect(props.resetPromiseState).to.have.been.called;
-    });
-  });
 });
