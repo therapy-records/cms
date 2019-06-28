@@ -9,7 +9,6 @@ import {
   NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS
 } from './NewsArticleForm';
 import TextInput from '../TextInput';
-import ArticlePreview from '../ArticlePreview/ArticlePreview';
 import DropzoneImageUpload from './DropzoneImageUpload';
 import RichTextEditor from '../RichTextEditor';
 
@@ -79,32 +78,6 @@ describe('(Component) NewsArticleForm', () => {
         <h2>{`Editing ${props.formValues.title}`}</h2>
       );
       expect(actual).to.equal(true);
-    });
-
-    it('should render <ArticlePreview />', () => {
-      wrapper = shallow(
-        <NewsArticleForm {...props} />
-      );
-      const actual = wrapper.containsMatchingElement(
-        <ArticlePreview />
-      );
-      expect(actual).to.equal(true);
-    });
-
-    it('should not render <ArticlePreview /> with disabled prop, with correct conditions', () => {
-      const _location = { pathname: 'test/create' };
-      props = { ...baseProps, location: _location, invalid: true };
-      wrapper = shallow(<NewsArticleForm {...props} />);
-      const actual = wrapper.containsMatchingElement(<ArticlePreview />);
-      expect(actual).to.equal(true);
-      props = { ...baseProps, location: _location, error: 'an error' };
-      const wrapperError = shallow(<NewsArticleForm {...props} />);
-      const actualError = wrapperError.containsMatchingElement(<ArticlePreview />);
-      expect(actualError).to.equal(true);
-      props = { ...baseProps, location: _location, pristine: true };
-      const wrapperPristine = shallow(<NewsArticleForm {...props} />);
-      const actualPristine = wrapperPristine.containsMatchingElement(<ArticlePreview />);
-      expect(actualPristine).to.equal(true);
     });
 
     describe('form fields', () => {

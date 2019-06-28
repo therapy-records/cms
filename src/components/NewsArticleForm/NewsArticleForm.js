@@ -10,7 +10,6 @@ import {
 } from '../../selectors/news';
 import { selectNewsArticleFormValues } from '../../selectors/form';
 import './NewsArticleForm.css';
-import ArticlePreview from '../ArticlePreview/ArticlePreview';
 import TextInput from '../../components/TextInput';
 import { required } from '../../utils/form';
 import { NEWS_ARTICLE_FORM } from '../../constants';
@@ -116,7 +115,7 @@ export class NewsArticleForm extends React.Component {
             <h2>{isEditForm ? `Editing ${formValues && formValues.title}` : 'Create News'}</h2>
           </div>
           <div className='action-btns'>
-            <ArticlePreview />
+            <p>action buttons here</p>
           </div>
         </div>
 
