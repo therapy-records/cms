@@ -23,7 +23,8 @@ export class ArticleCreate extends React.Component {
       promiseLoading,
       promiseSuccess,
       onPostArticle,
-      onAddArticleSection
+      onAddArticleSection,
+      resetPromiseState
     } = this.props;
 
     return (
@@ -39,7 +40,11 @@ export class ArticleCreate extends React.Component {
             <h2>Successfully created! <small>🚀</small></h2>
             <div className='inline-flex'>
               <Link to='/news' className='btn'>Go to news</Link>
-              <Link to='/news/create'>Create another article</Link>
+              <button
+                onClick={() => resetPromiseState()}
+              >
+              Create another article
+              </button>
             </div>
           </div>
         }

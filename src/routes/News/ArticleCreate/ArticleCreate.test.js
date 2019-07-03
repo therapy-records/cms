@@ -65,13 +65,36 @@ describe('(Component) News - ArticleCreate', () => {
       props.promiseSuccess = true;
       wrapper = shallow(<ArticleCreate {...props} />);
     });
-    it('should show success message and link', () => {
-      const actual = wrapper.containsAllMatchingElements([
-        <h2>Successfully created! <small>🚀</small></h2>,
-        <Link to='/news' className='btn'>Go to news</Link>,
-        <Link to='/news/create'>Create another article</Link>
-      ]);
+
+    it('should render success message and link', () => {
+      const actual = wrapper.containsMatchingElement(
+        <h2>Successfully created! <small>🚀</small></h2>
+      );
       expect(actual).to.equal(true);
+    });
+
+    it('should render a link to news page', () => {
+      const actual = wrapper.containsMatchingElement(
+        <Link to='/news' className='btn'>Go to news</Link>,
+      );
+      expect(actual).to.eq(true);
+    });
+
+    describe('create another article button', () => {
+      it('should render', () => {
+        const button = wrapper.find('button');
+        expect(button.text()).to.eq('Create another article');
+      });
+
+      it('should call props.resetPromiseState onClick', () => {
+        const resetPromiseStateSpy = sinon.spy();
+        wrapper.setProps({
+          resetPromiseState: resetPromiseStateSpy
+        });
+        const button = wrapper.find('button');
+        button.simulate('click');
+        expect(resetPromiseStateSpy).to.have.been.calledOnce;
+      });
     });
   });
 
