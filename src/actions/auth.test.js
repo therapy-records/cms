@@ -1,9 +1,8 @@
 import 'core-js';
-
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
-import _axiosAuthHeaders from '../utils/axios'
+import * as mockAxios from 'axios';
 import {
   API_ROOT,
   AUTH
@@ -19,15 +18,11 @@ const mockStore = configureMockStore(middlewares);
 
 const mock = {
   authResponseSuccess: {
-    data: {
-      success: true
-    }
+    success: true
   },
   authResponseError: {
-    data: {
-      success: false,
-      message: 'oh no!'
-    }
+    success: false,
+    message: 'oh no!'
   },
   loginForm: {
     username: 'admin',
@@ -49,6 +44,11 @@ const mockDispatch = {
 const store = mockStore(mockState, mockDispatch);
 
 describe('(Actions) auth', () => {
+
+  beforeEach(() => {
+    mockAxios.create = jest.fn(() => mockAxios);
+  });
+
   describe('(Thunk) authCheck', () => {
     afterEach(() => {
       nock.cleanAll()
@@ -62,16 +62,15 @@ describe('(Actions) auth', () => {
       expect(authCheck()).to.be.a('function');
     });
 
-    // todo: why getting 'network error' issues with nock/axios?
-
     it('should dispatch the correct actions on auth success', () => {
-      _axiosAuthHeaders.post = sinon.stub().returns(Promise.resolve(mock.authResponseSuccess));
-      nock(API_ROOT + AUTH)
+      localStorage.setItem('token', 'tony-testing');
+      mockAxios.post = jest.fn(() => Promise.resolve(mock.authResponseSuccess))
+
+      nock('http://localhost:4040/api')
         .post('/auth')
         .reply(200, mock.authResponseSuccess);
 
       const expectedActions = [
-        { type: USER_AUTH_ERROR, payload: { isAuth: false } },
         { type: USER_AUTH_SUCCESS, payload: { isAuth: true } }
       ];
 
@@ -83,8 +82,10 @@ describe('(Actions) auth', () => {
     });
 
     it('should dispatch the correct actions on auth error', () => {
-      _axiosAuthHeaders.post = sinon.stub().returns(Promise.resolve(mock.authResponseError));
-      nock(API_ROOT + AUTH)
+      localStorage.setItem('token', '');
+      mockAxios.post = jest.fn(() => Promise.resolve(mock.authResponseError))
+
+      nock('http://localhost:4040/api')
         .post('/auth')
         .reply(200, mock.authResponseError);
 
@@ -101,7 +102,6 @@ describe('(Actions) auth', () => {
     });
 
     it('should dispatch the correct actions on promise error', () => {
-      _axiosAuthHeaders.post = sinon.stub().returns(Promise.reject(mock.authResponseError));
       nock(API_ROOT + AUTH)
         .post('/auth')
         .reply(200, mock.authResponseError);

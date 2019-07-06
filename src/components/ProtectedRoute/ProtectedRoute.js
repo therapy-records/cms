@@ -9,6 +9,11 @@ class ProtectedRoute extends React.PureComponent {
       this.props.onAuthCheck();
     }
   }
+
+  componentWillUpdate() {
+    this.props.onAuthCheck();
+  }
+
   render() {
     const {
       component: Component,

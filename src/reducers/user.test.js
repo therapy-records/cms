@@ -1,8 +1,8 @@
 import 'core-js';
-
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
+import * as mockAxios from 'axios';
 import {
   userLogin,
   userLogout,
@@ -26,15 +26,12 @@ const mockStore = configureMockStore(middlewares);
 
 const mock = {
   authResponseSuccess: {
-    data: {
-      success: true
-    }
+    success: true,
+    token: 'mock-token'
   },
   authResponseError: {
-    data: {
-      success: false,
-      message: 'whoops!'
-    }
+    success: false,
+    message: 'whoops!'
   },
   loginForm: {
     username: 'admin',
@@ -75,9 +72,12 @@ describe('(Redux Module) user', () => {
     });
 
     it('should dispatch the correct actions on auth success', () => {
-      axiosUserLogin.post = sinon.stub().returns(Promise.resolve(mock.authResponseSuccess));
-      nock(API_ROOT + AUTH_LOGIN)
-        .post('/login')
+      localStorage.setItem('token', 'tony-testing');
+      mockAxios.create = jest.fn(() => mockAxios);
+      mockAxios.post = jest.fn(() => Promise.resolve(mock.authResponseSuccess))
+
+      nock('http://localhost:4040/api')
+        .post('/auth/login')
         .reply(200, mock.authResponseSuccess);
 
       const expectedActions = [
@@ -94,15 +94,14 @@ describe('(Redux Module) user', () => {
     });
 
     it('should dispatch the correct actions on auth error', () => {
-      axiosUserLogin.post = sinon.stub().returns(Promise.resolve(mock.authResponseError));
-      nock(API_ROOT + AUTH_LOGIN)
-        .post('/login')
+      nock('http://localhost:4040/api')
+        .post('/auth/login')
         .reply(200, mock.authResponseError);
 
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
-        { type: ERROR_ALERT, payload: mock.authResponseError.data.message }
+        { type: ERROR_ALERT, payload: mock.authResponseError.message }
       ];
 
       return store.dispatch(userLogin()).then(() => {
@@ -118,15 +117,15 @@ describe('(Redux Module) user', () => {
           ...mock.authResponseError
         }
       };
-      axiosUserLogin.post = sinon.stub().returns(Promise.reject(mockPromiseError));
-      nock(API_ROOT + AUTH_LOGIN)
-        .post('/login')
+
+      nock('http://localhost:4040/api')
+        .post('/auth/login')
         .reply(401, mock.authResponseError);
 
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
-        { type: ERROR_ALERT, payload: mockPromiseError.response.data.message }
+        { type: ERROR_ALERT, payload: mockPromiseError.response.message }
       ];
 
       return store.dispatch(userLogin()).then(() => {
@@ -138,15 +137,15 @@ describe('(Redux Module) user', () => {
 
     it('should dispatch the correct actions and message on promise error with alternative response object', () => {
       const mockPromiseError = { request: {} };
-      axiosUserLogin.post = sinon.stub().returns(Promise.reject(mockPromiseError));
-      nock(API_ROOT + AUTH_LOGIN)
-        .post('/login')
+      mockAxios.post = jest.fn(() => Promise.reject(mockPromiseError));
+      nock('http://localhost:4040/api')
+        .post('/auth/login')
         .reply(401, mock.authResponseError);
 
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
-        { type: ERROR_ALERT, payload: ERROR_ALERT_MESSAGE }
+        { type: ERROR_ALERT, payload: mock.authResponseError.message }
       ];
 
       return store.dispatch(userLogin()).then(() => {

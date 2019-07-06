@@ -1,4 +1,4 @@
-import _axiosAuthHeaders from '../utils/axios'
+import axios from 'axios';
 import {
   authSuccess,
   authError
@@ -11,9 +11,17 @@ import {
 export const authCheck = () => {
   return (dispatch) => {
     const token = localStorage.getItem('token');
+    const _axios = axios.create({
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      }
+    });
+
     if (!token || token === 'undefined') {
       dispatch(authError());
-      return _axiosAuthHeaders.post(API_ROOT + AUTH)
+
+      return _axios.post(API_ROOT + AUTH)
         .then((data) => {
           if (data.data.success === true) {
             localStorage.setItem('token', data.data.token);
@@ -25,9 +33,11 @@ export const authCheck = () => {
         }, () => {
           localStorage.removeItem('token');
           return dispatch(authError());
+        }).catch(() => {
+          return dispatch(authError());
         });
     } else {
-      return _axiosAuthHeaders.post(API_ROOT + AUTH)
+      return _axios.post(API_ROOT + AUTH)
         .then((data) => {
           if (data.data.success === true) {
             return dispatch(authSuccess());
@@ -37,6 +47,8 @@ export const authCheck = () => {
           }
         }, () => {
           localStorage.removeItem('token');
+          return dispatch(authError());
+        }).catch(() => {
           return dispatch(authError());
         });
     }

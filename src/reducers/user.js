@@ -33,13 +33,6 @@ export function authError(err) {
   }
 }
 
-export const axiosUserLogin = axios.create({
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': localStorage.getItem('token') // eslint-disable-line no-undef
-  }
-});
-
 export const userLogin = () => {
   return (dispatch, getState) => {
     dispatch(promiseLoading(true));
@@ -53,7 +46,15 @@ export const userLogin = () => {
       }
     }
 
-    return axiosUserLogin.post(
+    const token = localStorage.getItem('token');
+    const _axios = axios.create({
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      }
+    });
+
+    return _axios.post(
       API_ROOT + AUTH_LOGIN,
       userObj()
     ).then((data) => {
