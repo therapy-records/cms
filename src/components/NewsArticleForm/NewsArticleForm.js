@@ -44,48 +44,52 @@ export class NewsArticleForm extends React.Component {
 
   renderSectionImageFields({ fields, meta: { error } }) {
     return (
-      <ul>
-        {fields.map((imageSection, index) =>
-          <li key={index}>
-            <Field
-              name={`${imageSection}.url`}
-              title='Image'
-              component={DropzoneImageUpload}
-              existingImage={imageSection.url}
-              minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
-            />
+      <div>
+        <ul>
+          {fields.map((imageSection, index) =>
+            <li key={index}>
+              <Field
+                name={`${imageSection}.url`}
+                title='Image'
+                component={DropzoneImageUpload}
+                existingImage={imageSection.url}
+                minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
+              />
 
-          </li>
-        )}
-      </ul>
+            </li>
+          )}
+        </ul>
+      </div>
     );
   }
 
   renderSectionFields({ fields, meta: { error } }) {
     return (
-      <ul>
-      {fields.map((section, index) => (
-        <li
-          key={index}
-          className="row-large cols-container"
-        >
+      <div>
+        <ul>
+        {fields.map((section, index) => (
+          <li
+            key={index}
+            className="row-large cols-container"
+          >
 
-          <Field
-            name={`${section}.copy`}
-            title="Copy"
-            component={RichTextEditor}
-            validate={required}
-            required
-          />
+            <Field
+              name={`${section}.copy`}
+              title="Copy"
+              component={RichTextEditor}
+              validate={required}
+              required
+            />
 
-          <FieldArray
-            name={`${section}.images`}
-            component={this.renderSectionImageFields}
-          />
+            <FieldArray
+              name={`${section}.images`}
+              component={this.renderSectionImageFields}
+            />
 
-        </li>
-      ))}
-      </ul>
+          </li>
+        ))}
+        </ul>
+      </div>
     );
   }
 
@@ -123,15 +127,15 @@ export class NewsArticleForm extends React.Component {
 
         <form onSubmit={this.handleSubmit} encType='multipart/form-data'>
 
-        <div className='row-large'>
-            <Field name='title'
-                  component={TextInput}
-                  type='text'
-                  placeholder='January update'
-                  label='Month'
-                  validate={required}
-                  required
-            />
+          <div className='row-large'>
+              <Field name='title'
+                    component={TextInput}
+                    type='text'
+                    placeholder='January update'
+                    label='Month'
+                    validate={required}
+                    required
+              />
           </div>
 
           <FieldArray name="sections" component={this.renderSectionFields} />
