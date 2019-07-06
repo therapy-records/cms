@@ -19,6 +19,15 @@ export class DropzoneImageUpload extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const {existingImage} = this.props;
+    if (existingImage) {
+      this.setState({
+        singleItem: existingImage
+      });
+    }
+  }
+
   componentWillReceiveProps(props) {
     if (props.existingImage) {
       this.setState({
@@ -127,7 +136,7 @@ export class DropzoneImageUpload extends React.Component {
             <Dropzone
               name={input.name}
               onDrop={this.handleOnDrop.bind(this)} // eslint-disable-line
-              className={isLoading ? 'dropzone dropzone-active' : 'dropzone'}
+              className={isLoading ? 'dropzone dropzone-active' : `dropzone ${singleItem && 'dropzone-existing-image'}`}
               activeClassName='dropzone-active'
               multiple={multiple}
             >
@@ -151,9 +160,9 @@ export class DropzoneImageUpload extends React.Component {
 
               {singleItem && <img src={singleItem} alt='Upload preview' />}
 
-              {(!multiple && items.length) &&
+              {(!multiple && items.length) ?
                 <img src={items[0]} /> // eslint-disable-line
-              }
+              : null}
 
             </Dropzone>
 

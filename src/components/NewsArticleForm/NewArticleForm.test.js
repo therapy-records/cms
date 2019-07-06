@@ -5,12 +5,9 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import {
   NewsArticleForm,
-  required,
-  NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS
+  required
 } from './NewsArticleForm';
 import TextInput from '../TextInput';
-import DropzoneImageUpload from './DropzoneImageUpload';
-import RichTextEditor from '../RichTextEditor';
 
 Enzyme.configure({ adapter: new Adapter() });
 

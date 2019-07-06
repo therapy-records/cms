@@ -6,18 +6,20 @@ import './RichTextEditor.css'
 class _RichTextEditor extends React.Component {
   constructor(props){
     super(props);
-    this.onChange = this.onChange.bind(this);
+    this.handleOnChange = this.handleOnChange.bind(this);
     this.state = {
-      value: this.props.value ?
-        RichTextEditor.createValueFromString(this.props.value, 'html') :
+      value: this.props.input.value ?
+        RichTextEditor.createValueFromString(this.props.input.value, 'html') :
         RichTextEditor.createValueFromString('', 'html')
     }
   }
 
-  onChange(value){
+  handleOnChange(value){
+    const {onChange} = this.props.input;
+
     this.setState({ value });
-    if (this.props.input.onChange) {
-      this.props.input.onChange(
+    if (onChange) {
+      onChange(
         value.toString('html')
       );
     }
@@ -36,12 +38,12 @@ class _RichTextEditor extends React.Component {
 
       {title && <h5>{title}</h5>}
 
-      {touched && error && (<p>Main content is {error}</p>)}
+      {touched && error && (<p>Copy is {error}</p>)}
 
         <RichTextEditor
           value={this.state.value}
           placeholder='This month has been fantastic...'
-          onChange={this.onChange}
+          onChange={this.handleOnChange}
         />
 
       </div>

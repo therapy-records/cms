@@ -16,6 +16,7 @@ describe('(Component) News - ArticleEdit', () => {
     onFetchArticle: () => { },
     onDestroyArticle: () => {},
     resetPromiseState: () => {},
+    onAddArticleSection: () => {},
     article: { title: 'test', id: 'asdf1234' },
     location: {
       pathname: 'article/edit'
@@ -85,10 +86,15 @@ describe('(Component) News - ArticleEdit', () => {
   
     it('should render a NewsArticleForm', () => {
       wrapper = shallow(<ArticleEdit {...props} />);
-      const form = wrapper.find(NewsArticleForm);
-      expect(form.length).to.equal(1);
+      const actual = wrapper.containsMatchingElement(
+        <NewsArticleForm
+          onSubmitForm={props.onPostArticle}
+          onAddArticleSection={props.onAddArticleSection}
+          location={props.location}
+        />
+      );
+      expect(actual).to.equal(true);
     });
-
     describe('when promise is loading', () => {
       beforeEach(() => {
         props.promiseLoading = true;

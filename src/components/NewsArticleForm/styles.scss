@@ -37,9 +37,21 @@
   min-height: 200px;
   align-items: center;
   transition: all 0.2s ease;
-  text-shadow: 0 3px 6px #FFF;
+  // text-shadow: 0 3px 6px #FFF;
   color: #000;
-  font-size: 25px; // counter mysterious counter ('0') from react-dropzone
+  font-size: 25px;
+  background: rgba(204, 204, 204, 0.2);
+}
+
+.dropzone-existing-image {
+  .dropzone-cta {
+    background: rgba(204, 204, 204, 0.7);
+    span {
+      background: #3A3A3A;
+      color: #FFF;
+      padding: .25em;
+    }
+  }
 }
 
 .dropzone-active {

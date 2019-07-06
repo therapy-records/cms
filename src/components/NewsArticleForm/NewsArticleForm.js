@@ -46,18 +46,18 @@ export class NewsArticleForm extends React.Component {
     return (
       <div>
         <ul>
-          {fields.map((imageSection, index) =>
+          {fields.map((imageSection, index) => (
             <li key={index}>
               <Field
                 name={`${imageSection}.url`}
                 title='Image'
                 component={DropzoneImageUpload}
-                existingImage={imageSection.url}
+                existingImage={fields.get(index).url}
                 minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
               />
 
             </li>
-          )}
+          ))}
         </ul>
       </div>
     );
@@ -138,7 +138,10 @@ export class NewsArticleForm extends React.Component {
               />
           </div>
 
-          <FieldArray name="sections" component={this.renderSectionFields} />
+          <FieldArray
+            name="sections"
+            component={this.renderSectionFields}
+          />
 
           <div className='row-large'>
             <button type='submit'

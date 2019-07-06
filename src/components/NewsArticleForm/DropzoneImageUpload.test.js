@@ -26,21 +26,20 @@ describe('(Component) DropzoneImageUpload', () => {
     );
   });
 
-  it('should render a title', () => {
-    const actual = wrapper.containsMatchingElement(
-      <h5>{props.title}</h5>
-    );
-    expect(actual).to.equal(true);
-  });
-
-  it('should render a minImageDimensions message', () => {
-    const actual = wrapper.containsMatchingElement(
-      <p>Image must be at least {props.minImageDimensions.width}px by {props.minImageDimensions.height}px</p>
-    );
-    expect(actual).to.equal(true);
-  });
-
   describe('methods', () => {
+
+    describe('componentDidMount', () => {
+      describe('when there is props.existingImage', () => {
+        it('should set state', () => {
+          const mockExistingImageUrl = 'http://test.com/image.jpg';
+          wrapper.setProps({
+            existingImage: mockExistingImageUrl
+          });
+          expect(wrapper.state().singleItem).to.eq(mockExistingImageUrl);
+        });
+      });
+    });
+
     describe('componentWillReceiveProps', () => {
       const mockFile1 = 'testing/test.jpg';
       const mockFile2 = 'testing/test2.jpg';
@@ -77,21 +76,37 @@ describe('(Component) DropzoneImageUpload', () => {
         expect(result).to.eq(mockUrl.replace(/upload/, 'upload/c_limit,q_100,w_650'))
       });
     });
+
+    describe('handleOnDrop', () => {
+      it('should call uploadSingleImage for each file item', () => {
+        const mockFiles = [
+          'temp/testing1.jpg',
+          'temp/testing2.jpg',
+          'temp/testing3.jpg'
+        ];
+        const uploadSingleImageSpy = sinon.spy();
+        wrapper.instance().uploadSingleImage = uploadSingleImageSpy;
+        wrapper.instance().handleOnDrop(mockFiles);
+        expect(uploadSingleImageSpy).to.have.been.calledWith(mockFiles[0]);
+        expect(uploadSingleImageSpy).to.have.been.calledWith(mockFiles[1]);
+        expect(uploadSingleImageSpy).to.have.been.calledWith(mockFiles[2]);
+      });
+    });
   });
 
-  describe('handleOnDrop', () => {
-    it('should call uploadSingleImage for each file item', () => {
-      const mockFiles = [
-        'temp/testing1.jpg',
-        'temp/testing2.jpg',
-        'temp/testing3.jpg'
-      ];
-      const uploadSingleImageSpy = sinon.spy();
-      wrapper.instance().uploadSingleImage = uploadSingleImageSpy;
-      wrapper.instance().handleOnDrop(mockFiles);
-      expect(uploadSingleImageSpy).to.have.been.calledWith(mockFiles[0]);
-      expect(uploadSingleImageSpy).to.have.been.calledWith(mockFiles[1]);
-      expect(uploadSingleImageSpy).to.have.been.calledWith(mockFiles[2]);
+  describe('rendering', () => {
+    it('should render a title', () => {
+      const actual = wrapper.containsMatchingElement(
+        <h5>{props.title}</h5>
+      );
+      expect(actual).to.equal(true);
+    });
+
+    it('should render a minImageDimensions message', () => {
+      const actual = wrapper.containsMatchingElement(
+        <p>Image must be at least {props.minImageDimensions.width}px by {props.minImageDimensions.height}px</p>
+      );
+      expect(actual).to.equal(true);
     });
   });
 });

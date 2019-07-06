@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { resetPromiseState } from '../../../reducers/uiState';
-import { editNews } from '../../../reducers/news';
+import {editNews} from '../../../reducers/news';
 import {
   destroySelectedNewsArticle,
-  fetchSingleNewsArticle
+  fetchSingleNewsArticle,
+  addNewsArticleSection
 } from '../../../reducers/newsArticle';
 import { selectSelectedNewsArticle } from '../../../selectors/news';
 import {
@@ -39,7 +40,9 @@ export class ArticleEdit extends React.Component {
       article,
       promiseLoading,
       promiseSuccess,
-      location
+      location,
+      onEditArticle,
+      onAddArticleSection
     } = this.props;
 
 
@@ -66,7 +69,8 @@ export class ArticleEdit extends React.Component {
 
         {(!promiseLoading && !article.editSuccess) &&
           <NewsArticleForm
-            onSubmitForm={() => this.props.onEditArticle(article)}
+            onSubmitForm={onEditArticle}
+            onAddArticleSection={onAddArticleSection}
             location={location}
           />
         }
@@ -79,6 +83,7 @@ ArticleEdit.propTypes = {
   onEditArticle: PropTypes.func.isRequired,
   onFetchArticle: PropTypes.func.isRequired,
   onDestroyArticle: PropTypes.func.isRequired,
+  onAddArticleSection: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
   promiseSuccess: PropTypes.bool,
@@ -91,6 +96,7 @@ const mapDispatchToProps = {
   onEditArticle: (article) => editNews(article),
   onFetchArticle: (id) => fetchSingleNewsArticle(id),
   onDestroyArticle: () => destroySelectedNewsArticle(),
+  onAddArticleSection: article => addNewsArticleSection(article),
   resetPromiseState: () => resetPromiseState()
 }
 
