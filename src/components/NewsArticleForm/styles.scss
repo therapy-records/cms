@@ -22,7 +22,7 @@
   justify-content: center;
   margin-bottom:1em;
   transition: all 0.2s ease;
-  font-size: 0.1em; // hide mysterious counter ('0') from react-dropzone
+  font-size: 0.1em;
   &.large {
     min-width:350px;
   }
@@ -37,7 +37,6 @@
   min-height: 200px;
   align-items: center;
   transition: all 0.2s ease;
-  // text-shadow: 0 3px 6px #FFF;
   color: #000;
   font-size: 25px;
   background: rgba(204, 204, 204, 0.2);

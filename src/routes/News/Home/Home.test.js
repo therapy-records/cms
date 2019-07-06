@@ -42,7 +42,7 @@ describe('(Component) News - Home', () => {
     props = baseProps;
     wrapper = shallow(<News {...props} />);
     const renderNewsArticle = (key) => {
-      const p = props.articles[key]; // eslint-disable-line
+      const p = props.articles[key];
       return (
         <li key={p._id} className='article-card'>
           <img />

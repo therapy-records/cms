@@ -115,7 +115,12 @@ Journalism.propTypes = {
   onsetSelectedJournalismArticle: PropTypes.func.isRequired,
   articles: PropTypes.array,
   resetPromiseState: PropTypes.func
-}
+};
+
+Journalism.defaultProps = {
+  articles: [],
+  resetPromiseState: () => {}
+};
 
 const mapDispatchToProps = {
   onfetchJournalismArticles: () => fetchJournalismArticles(),

@@ -29,9 +29,6 @@ export class News extends React.Component {
     if (!hasFetchedArticles) {
       onFetchNewsArticles();
     }
-    // if (this.props.articles === null) {
-    //   this.props.onFetchNewsArticles();
-    // }
   }
 
   componentWillUnmount() {
@@ -144,6 +141,13 @@ News.propTypes = {
   articles: PropTypes.array,
   combinedArticles: PropTypes.array,
   resetPromiseState: PropTypes.func
+}
+
+News.defaultProps = {
+  promiseLoading: false,
+  articles: [],
+  combinedArticles: [],
+  resetPromiseState: () => {}
 }
 
 const mapDispatchToProps = {
