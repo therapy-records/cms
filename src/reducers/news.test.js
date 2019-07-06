@@ -64,7 +64,8 @@ const mock = {
 
 const mockState = {
   news: {
-    articles: mock.getNewsResponse.data
+    articles: mock.getNewsResponse.data,
+    hasFetched: false
   },
   form: {
     NEWS_ARTICLE_FORM: {
@@ -100,7 +101,10 @@ describe('(Redux Module) news', () => {
     it('should initialize with correct state', () => {
       const state = newsReducer(undefined, {});
       expect(state).to.deep.equal(
-        { articles: null }
+        {
+          articles: null,
+          hasFetched: false
+        }
       );
     });
   });
@@ -126,10 +130,16 @@ describe('(Redux Module) news', () => {
     it('should update state', () => {
       const mockData1 = [ { title: 'something' }, { title: 'test' } ];
       const mockData2 = [ { title: 'hello' }, { title: 'bonjour' } ];
-      let state = newsReducer(mockState, fetchArticlesSuccess(mockData1));
-      expect(state.articles).to.deep.equal(mockData1);
-      state = newsReducer(state, fetchArticlesSuccess(mockData2))
-      expect(state.articles).to.deep.equal(mockData2);
+      let state = newsReducer(mockState.news, fetchArticlesSuccess(mockData1));
+      expect(state).to.deep.eq({
+        articles: mockData1,
+        hasFetched: true
+      });
+      state = newsReducer(mockState.news, fetchArticlesSuccess(mockData2));
+      expect(state).to.deep.eq({
+        articles: mockData2,
+        hasFetched: true
+      });
     });
   });
 

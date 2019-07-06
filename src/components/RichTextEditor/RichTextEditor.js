@@ -40,7 +40,7 @@ class _RichTextEditor extends React.Component {
 
         <RichTextEditor
           value={this.state.value}
-          placeholder='It was an honour to...'
+          placeholder='This month has been fantastic...'
           onChange={this.onChange}
         />
 

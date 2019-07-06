@@ -6,7 +6,10 @@ import moment from 'moment';
 import { fetchNewsArticles } from '../../../reducers/news';
 import { setSelectedNewsArticle } from '../../../reducers/newsArticle';
 import { resetPromiseState } from '../../../reducers/uiState';
-import {selectNewsArticlesReverse} from '../../../selectors/news';
+import {
+  selectNewsArticlesReverse,
+  selectNewsHasFetched
+} from '../../../selectors/news';
 import { selectUiStateLoading } from '../../../selectors/uiState';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
@@ -18,9 +21,17 @@ const dateIsBefore = (a, b) => {
 
 export class News extends React.Component {
   componentWillMount() {
-    if (this.props.articles === null) {
-      this.props.onFetchNewsArticles();
+    const {
+      hasFetchedArticles,
+      onFetchNewsArticles
+    } = this.props;
+
+    if (!hasFetchedArticles) {
+      onFetchNewsArticles();
     }
+    // if (this.props.articles === null) {
+    //   this.props.onFetchNewsArticles();
+    // }
   }
 
   componentWillUnmount() {
@@ -127,6 +138,7 @@ export class News extends React.Component {
 
 News.propTypes = {
   promiseLoading: PropTypes.bool,
+  hasFetchedArticles: PropTypes.bool.isRequired,
   onFetchNewsArticles: PropTypes.func.isRequired,
   onSetSelectedNewsArticle: PropTypes.func.isRequired,
   articles: PropTypes.array,
@@ -142,6 +154,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   promiseLoading: selectUiStateLoading(state),
+  hasFetchedArticles: selectNewsHasFetched(state),
   articles: selectNewsArticlesReverse(state)
 })
 

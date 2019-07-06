@@ -22,7 +22,8 @@ describe('(Component) News - Home', () => {
     baseProps = {
       onFetchNewsArticles: () => {},
       onSetSelectedNewsArticle: () => {},
-      articles: mockArticles
+      articles: mockArticles,
+      hasFetchedArticles: true
     };
 
   it('should render <LoadingSpinner />', () => {
@@ -113,6 +114,7 @@ describe('(Component) News - Home', () => {
           newsArticles={[]}
           onFetchNewsArticles={() => { }}
           onSetSelectedNewsArticle={() => { }}
+          hasFetchedArticles
         />
       );
       const actual = wrapper.containsMatchingElement(
@@ -125,11 +127,16 @@ describe('(Component) News - Home', () => {
   describe('methods', () => {
 
     describe('componentWillMount', () => {
-      it('should call onfetchJournalismArticles when articles === null', () => {
-        props.onFetchNewsArticles = sinon.spy();
-        props.articles = null;
+      it('should call onFetchNewsArticles when props.hasFetchedArticles is FALSE', () => {
+        const onFetchNewsArticlesSpy = sinon.spy();
         wrapper = shallow(<News {...props} />);
-        expect(props.onFetchNewsArticles.calledOnce).to.eq(true);
+        wrapper.setProps({
+          articles: null,
+          hasFetchedArticles: false,
+          onFetchNewsArticles: onFetchNewsArticlesSpy
+        });
+        wrapper.instance().componentWillMount();
+        expect(onFetchNewsArticlesSpy.calledOnce).to.eq(true);
       });
     });
 
