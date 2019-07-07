@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import LoginForm from '../../components/LoginForm';
 import { userLogin } from '../../reducers/user';
 import { selectUiStateLoading } from '../../selectors/uiState';
+import { authCheck } from '../../actions/auth';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import './styles.css';
 
@@ -13,6 +14,13 @@ export class Home extends React.Component {
       this.props.history.push({
         pathname: '/dashboard'
       });
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.isAuth === null ||
+      this.props.isAuth === false) {
+      this.props.onAuthCheck();
     }
   }
 
@@ -67,11 +75,13 @@ Home.propTypes = {
   onPostForm: PropTypes.func,
   authError: PropTypes.string,
   history: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
+  onAuthCheck: PropTypes.func.isRequired
 }
 
 const mapDispatchToProps = {
-  onPostForm: () => userLogin()
+  onPostForm: () => userLogin(),
+  onAuthCheck: () => authCheck()
 }
 
 const mapStateToProps = (state) => ({

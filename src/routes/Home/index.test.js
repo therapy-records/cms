@@ -71,6 +71,23 @@ describe('(Component) Home', () => {
   });
 
   describe('methods', () => {
+
+    describe('componentDidMount', () => {
+      describe('when isAuth is false', () => {
+        it('should call props.onAuthCheck', () => {
+          const onAuthCheckSpy = sinon.spy();
+          wrapper = shallow(<Home {...props} />);
+          wrapper.setProps({
+            isAuth: false,
+            onAuthCheck: onAuthCheckSpy
+          });
+
+          wrapper.instance().componentDidMount();
+          expect(onAuthCheckSpy).to.have.been.calledOnce;
+        });
+      });
+    });
+
     describe('componentWillReceiveProps', () => {
       describe('when there is location.state.from.pathname', () => {
         it('should push from.pathname to props.history', () => {
@@ -92,6 +109,7 @@ describe('(Component) Home', () => {
           const lastHistoryObj = props.history[props.history.length - 1];
           expect(lastHistoryObj.pathname).to.eq('random-route');
         });
+
         describe('when isAuth is false', () => {
           it('should not push from.pathname', () => {
             props.isAuth = false;
@@ -123,5 +141,6 @@ describe('(Component) Home', () => {
         });
       });
     });
+
   });
 });
