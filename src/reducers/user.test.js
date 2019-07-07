@@ -6,19 +6,13 @@ import * as mockAxios from 'axios';
 import {
   userLogin,
   userLogout,
-  axiosUserLogin,
   default as userReducer
 } from './user';
-import {
-  API_ROOT,
-  AUTH_LOGIN
-} from '../constants';
 import {
   USER_AUTH_SUCCESS,
   USER_AUTH_ERROR,
   UISTATE_PROMISE_LOADING,
-  ERROR_ALERT,
-  ERROR_ALERT_MESSAGE
+  ERROR_ALERT
 } from '../constants/actions';
 
 const middlewares = [thunk];
@@ -72,7 +66,7 @@ describe('(Redux Module) user', () => {
     });
 
     it('should dispatch the correct actions on auth success', () => {
-      localStorage.setItem('token', 'tony-testing');
+      localStorage.setItem('token', 'testing');
       mockAxios.create = jest.fn(() => mockAxios);
       mockAxios.post = jest.fn(() => Promise.resolve(mock.authResponseSuccess))
 
