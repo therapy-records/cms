@@ -1,9 +1,9 @@
 import 'core-js';
 
-import axios from 'axios';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
+import * as mockAxios from 'axios';
 import _axiosAuthHeaders from '../utils/axios'
 import {
   FETCH_JOURNALISM_ARTICLES_SUCCESS,
@@ -17,8 +17,7 @@ import {
 } from './journalism';
 import {
   API_ROOT,
-  JOURNALISM,
-  JOURNALISM_CREATE
+  JOURNALISM
 } from '../constants';
 import {
   UISTATE_PROMISE_LOADING,
@@ -39,23 +38,19 @@ let mockArticle = {
 };
 
 const mock = {
-  getJournalismResponse: {
-    data: [
+  getJournalismResponse: [
       { title: 'do something' },
       { title: 'do something else' }
-    ]
-  },
+  ],
   postJournalismResponse: {
-    data: {
-      title: 'do something'
-    }
+    title: 'do something'
   },
   article: mockArticle
 };
 
 const mockState = {
   journalism: {
-    articles: mock.getJournalismResponse.data
+    articles: mock.getJournalismResponse
   },
   form: {
     JOURNALISM_ARTICLE_FORM: {
@@ -138,14 +133,16 @@ describe('(Redux Module) news', () => {
     });
 
     it('should dispatch the correct actions', () => {
-      axios.get = sinon.stub().returns(Promise.resolve(mock.getJournalismResponse));
-      nock(API_ROOT + JOURNALISM)
-        .get('/news')
-        .reply(200, mock.getJournalismResponse.data);
+      mockAxios.create = jest.fn(() => mockAxios);
+      mockAxios.get = jest.fn(() => Promise.resolve(mock.getJournalismResponse))
+
+      nock('http://localhost:4040/api')
+        .get('/journalism')
+        .reply(200, mock.getJournalismResponse);
 
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
-        { type: FETCH_JOURNALISM_ARTICLES_SUCCESS, payload: mock.getJournalismResponse.data },
+        { type: FETCH_JOURNALISM_ARTICLES_SUCCESS, payload: mock.getJournalismResponse },
         { type: UISTATE_PROMISE_LOADING, payload: false },
         { type: UISTATE_PROMISE_SUCCESS, payload: true }
       ];
@@ -172,16 +169,19 @@ describe('(Redux Module) news', () => {
     });
 
     it('should dispatch the correct actions on success', () => {
-      _axiosAuthHeaders.post = sinon.stub().returns(Promise.resolve(mock.postJournalismResponse));
-      nock(API_ROOT + JOURNALISM_CREATE)
-        .post(JOURNALISM_CREATE, mock.article)
-        .reply(200, mock.article);
+      localStorage.setItem('token', 'testing');
+      mockAxios.create = jest.fn(() => mockAxios);
+      mockAxios.post = jest.fn(() => Promise.resolve(mock.postJournalismResponse))
+
+      nock('http://localhost:4040/api')
+        .post('/journalism')
+        .reply(200, mock.postJournalismResponse);
 
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
         { type: UISTATE_PROMISE_SUCCESS, payload: true },
-        { type: POST_JOURNALISM_FORM_SUCCESS, payload: mock.postJournalismResponse.data }
+        { type: POST_JOURNALISM_FORM_SUCCESS, payload: mock.postJournalismResponse }
       ];
 
       store.clearActions();
@@ -193,9 +193,12 @@ describe('(Redux Module) news', () => {
     });
 
     it('should dispatch the correct actions on error', () => {
-      _axiosAuthHeaders.post = sinon.stub().returns(Promise.reject(mockErrorResponse));
-      nock(API_ROOT + JOURNALISM_CREATE)
-        .post(JOURNALISM_CREATE, mock.article);
+      localStorage.setItem('token', 'testing');
+      mockAxios.create = jest.fn(() => mockAxios);
+      mockAxios.post = jest.fn(() => Promise.resolve(mockErrorResponse))
+
+      nock('http://localhost:4040/api')
+        .post('/journalism', mock.article)
 
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
@@ -225,8 +228,9 @@ describe('(Redux Module) news', () => {
 
     it('should dispatch the correct actions on success', () => {
       _axiosAuthHeaders.put = sinon.stub().returns(Promise.resolve(mockArticle));
-      nock(API_ROOT + JOURNALISM + 'asdf1234')
-        .put(`${JOURNALISM}asdf1234`, {})
+
+      nock('http://localhost:4040/api/journalism/asdf1234')
+        .put('/journalism/asdf1234', {})
         .reply(200, mockArticle);
 
       const expectedActions = [

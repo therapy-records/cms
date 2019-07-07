@@ -66,7 +66,16 @@ export const postJournalism = () => {
         return null;
       }
     }
-    return _axiosAuthHeaders.post(
+
+    const token = localStorage.getItem('token');
+    const _axios = axios.create({
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      }
+    });
+
+    return _axios.post(
       API_ROOT + JOURNALISM_CREATE,
       getFormObj()
     ).then(
