@@ -11,7 +11,7 @@ describe('(Component) Home', () => {
   let wrapper;
   const baseProps = {
     isAuth: false,
-    onAuthCheck: () => { },
+    onAuthCheck: () => {},
     onPostForm: sinon.spy(),
     history: {
       push: () => {}
@@ -20,53 +20,58 @@ describe('(Component) Home', () => {
   };
   let props = baseProps;
 
-  describe('when isAuth is null', () => {
-    beforeEach(() => {
-      props.isAuth = null;
-      wrapper = shallow(<Home {...props} />)
+  describe('rendering', () => {
+    describe('when isAuth is false', () => {
+      beforeEach(() => {
+        props.isAuth = false;
+        wrapper = shallow(<Home {...props} />)
+      });
+
+      it('should render LoginForm', () => {
+        const reduxForm = wrapper.find('ReduxForm');
+        expect(reduxForm.length).to.eq(1);
+        expect(reduxForm.prop('isAuth')).to.eq(props.isAuth);
+        expect(reduxForm.prop('authError')).to.eq(props.authError);
+        expect(reduxForm.prop('promiseLoading')).to.eq(props.promiseLoading);
+        expect(reduxForm.prop('onSubmit')).to.eq(props.onPostForm);
+      });
     });
 
-    it('should render LoginForm', () => {
-      const reduxForm = wrapper.find('ReduxForm');
-      expect(reduxForm.length).to.eq(1);
-      expect(reduxForm.prop('isAuth')).to.eq(props.isAuth);
-      expect(reduxForm.prop('authError')).to.eq(props.authError);
-      expect(reduxForm.prop('promiseLoading')).to.eq(props.promiseLoading);
-      expect(reduxForm.prop('onSubmit')).to.eq(props.onPostForm);
-    });
-  });
+    describe('when isAuth is null (i.e, not chceked)', () => {
+      beforeEach(() => {
+        props.isAuth = null;
+        wrapper = shallow(<Home {...props} />)
+      });
 
-  describe('when isAuth is false', () => {
-    beforeEach(() => {
-      props.isAuth = false;
-      wrapper = shallow(<Home {...props} />)
-    });
-
-    it('should render LoginForm reduxForm', () => {
-      const reduxForm = wrapper.find('ReduxForm');
-      expect(reduxForm).to.have.length(1);
-      const reduxFormIsAuth = reduxForm.prop('isAuth');
-      expect(reduxFormIsAuth).to.be.false;
-    });
-  });
-
-  describe('when isAuth', () => {
-    beforeEach(() => {
-      props = {
-        ...baseProps,
-        isAuth: true
-      }
-      wrapper = shallow(<Home {...props} />)
+      it('should render <LoadingSpinner />', () => {
+        const actual = wrapper.containsMatchingElement(
+          <LoadingSpinner
+            active
+            fullScreenIgnoreSidebar
+          />
+        );
+        expect(actual).to.be.true;
+      });
     });
 
-    it('should render <LoadingSpinner />', () => {
-      const actual = wrapper.containsMatchingElement(
-        <LoadingSpinner
-          active
-          fullScreenIgnoreSidebar
-        />
-      );
-      expect(actual).to.be.true;
+    describe('when isAuth is true', () => {
+      beforeEach(() => {
+        props = {
+          ...baseProps,
+          isAuth: true
+        }
+        wrapper = shallow(<Home {...props} />)
+      });
+
+      it('should render <LoadingSpinner />', () => {
+        const actual = wrapper.containsMatchingElement(
+          <LoadingSpinner
+            active
+            fullScreenIgnoreSidebar
+          />
+        );
+        expect(actual).to.be.true;
+      });
     });
   });
 

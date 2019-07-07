@@ -44,23 +44,23 @@ export class Home extends React.Component {
     return (
       <div className='container home-container'>
         <div>
-          {(isAuth === null ||
-           isAuth === false) &&
-              <LoginForm
-                onSubmit={onPostForm}
-                isAuth={isAuth}
-                authError={authError}
-                promiseLoading={promiseLoading}
-              />
-          }
 
-          {isAuth &&
+          {(isAuth || isAuth === null) &&
             <div>
               <LoadingSpinner
                 active
                 fullScreenIgnoreSidebar
               />
             </div>
+          }
+
+          {isAuth === false &&
+              <LoginForm
+                onSubmit={onPostForm}
+                isAuth={isAuth}
+                authError={authError}
+                promiseLoading={promiseLoading}
+              />
           }
 
         </div>
