@@ -16,6 +16,24 @@ export class Datepicker extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentDidMount() {
+    const {
+      initTime,
+      input
+    } = this.props;
+    
+    if (!initTime) {
+      input.onChange(this.state.m);
+    }
+  }
+
+  componentDidUpdate() {
+    // ensure we send empty string back to form
+    if (this.state.pickerActive === false) {
+      this.props.input.onChange('');
+    }
+  }
+
   handleTogglePicker() {
     const initTime = this.props.initTime && moment(this.props.initTime);
     this.setState({
@@ -27,13 +45,6 @@ export class Datepicker extends React.Component {
   handleChange(e) {
     this.setState({ m: e });
     this.props.input.onChange(moment(e).toISOString());
-  }
-
-  componentDidUpdate() {
-    // ensure we send empty string back to form
-    if (this.state.pickerActive === false) {
-      this.props.input.onChange('');
-    }
   }
 
   render() {

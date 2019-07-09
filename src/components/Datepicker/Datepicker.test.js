@@ -84,6 +84,31 @@ describe('(Component) Datepicker', () => {
   });
 
   describe('methods', () => {
+
+    describe('componentDidMount', () => {
+      it('should update state', () => {
+        wrapper = shallow(<Datepicker {...props} />);
+        wrapper.instance().componentDidMount('test');
+      });
+      describe('when there is no props.initTime', () => {
+        it('should call props.input.onChange with moment value from state', () => {
+          const inputOnChangeSpy = sinon.spy();
+          wrapper = shallow(<Datepicker {...props} />);
+          wrapper.setProps({
+            initTime: '',
+            input: {
+              onChange: inputOnChangeSpy
+            }
+          });
+          wrapper.instance().componentDidMount();
+          expect(inputOnChangeSpy).to.have.been.calledOnce;
+          expect(inputOnChangeSpy).to.have.been.calledWith(
+            wrapper.instance().state.m
+          );
+        });
+      });
+    });
+
     describe('handleChange', () => {
       it('should update state', () => {
         wrapper = shallow(<Datepicker {...props} />);
