@@ -7,11 +7,11 @@ import configureMockStore from 'redux-mock-store';
 import ConnectedJournalism, { Journalism } from './index';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
-import { selectSelectedNewsArticle } from '../../../selectors/news';
 import {
-  selectUiStateLoading,
-  selectUiStateSuccess
-} from '../../../selectors/uiState';
+  selectJournalismHasFetched,
+  selectSelectedJournalismArticle
+} from '../../../selectors/journalism';
+import {selectUiStateLoading} from '../../../selectors/uiState';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -35,44 +35,16 @@ describe('(Component) Journalism - Home', () => {
   let wrapper,
     props,
     baseProps = {
-      onfetchJournalismArticles: sinon.spy(),
-      onsetSelectedJournalismArticle: sinon.spy(),
+      hasFetchedArticles: true,
+      onFetchJournalismArticles: () => {},
+      onSetSelectedJournalismArticle: sinon.spy(),
       articles: mockJournalismArticles,
-      resetPromiseState: sinon.spy(),
-      onSetSelectedNewsArticle: sinon.spy()
+      resetPromiseState: sinon.spy()
     };
   props = baseProps;
 
   beforeEach(() => {
     wrapper = shallow(<Journalism {...props} />);
-  });
-
-  describe('methods', () => {
-    describe('componentWillMount', () => {
-      it('should call onfetchJournalismArticles when articles === null', () => {
-        const onFetchJournalismArticlesSpy = sinon.spy();
-        wrapper = shallow(
-          <Journalism
-            {...props}
-            articles={null}
-            onfetchJournalismArticles={onFetchJournalismArticlesSpy}
-          />
-        );
-        wrapper.instance().componentWillUnmount();
-        expect(onFetchJournalismArticlesSpy.calledOnce).to.eq(true);
-      });
-    });
-
-    describe('componentWillUnmount', () => {
-      it('should call resetPromiseState', () => {
-        const resetPromiseStateSpy = sinon.spy();
-        wrapper.setProps({
-          resetPromiseState: resetPromiseStateSpy
-        });
-        wrapper.instance().componentWillUnmount();
-        expect(resetPromiseStateSpy).to.have.been.called;
-      });
-    });
   });
 
   describe('rendering', () => {
@@ -133,28 +105,28 @@ describe('(Component) Journalism - Home', () => {
     });
 
     describe('article', () => {
-      it('should call onsetSelectedJournalismArticle on `view` button click', () => {
+      it('should call onSetSelectedJournalismArticle on `view` button click', () => {
         let _props = baseProps;
-        _props.onsetSelectedJournalismArticle = sinon.spy();
+        _props.onSetSelectedJournalismArticle = sinon.spy();
         wrapper = shallow(<Journalism {..._props} />);
         const lastArticle = wrapper.find('.article-card').last();
         const lastArticleButton = lastArticle.find(Link).first();
         lastArticleButton.simulate('click');
-        expect(_props.onsetSelectedJournalismArticle).to.have.been.called;
+        expect(_props.onSetSelectedJournalismArticle).to.have.been.called;
         const expectedArticle = mockJournalismArticles[mockJournalismArticles.length - 1];
-        expect(_props.onsetSelectedJournalismArticle).to.have.been.calledWith(expectedArticle);
+        expect(_props.onSetSelectedJournalismArticle).to.have.been.calledWith(expectedArticle);
       });
 
-      it('should call onsetSelectedJournalismArticle on `edit` button click', () => {
+      it('should call onSetSelectedJournalismArticle on `edit` button click', () => {
         let _props = baseProps;
-        _props.onsetSelectedJournalismArticle = sinon.spy();
+        _props.onSetSelectedJournalismArticle = sinon.spy();
         wrapper = shallow(<Journalism {..._props} />);
         const lastArticle = wrapper.find('.article-card').last();
         const lastArticleButton = lastArticle.find(Link).last();
         lastArticleButton.simulate('click');
-        expect(_props.onsetSelectedJournalismArticle).to.have.been.called;
+        expect(_props.onSetSelectedJournalismArticle).to.have.been.called;
         const expectedArticle = mockJournalismArticles[mockJournalismArticles.length - 1];
-        expect(_props.onsetSelectedJournalismArticle).to.have.been.calledWith(expectedArticle);
+        expect(_props.onSetSelectedJournalismArticle).to.have.been.calledWith(expectedArticle);
       });
     });
 
@@ -178,14 +150,41 @@ describe('(Component) Journalism - Home', () => {
         const wrapper = shallow(
           <Journalism
             articles={[]}
-            onfetchJournalismArticles={() => { }}
-            onsetSelectedJournalismArticle={() => { }}
+            hasFetchedArticles={false}
+            onFetchJournalismArticles={() => { }}
+            onSetSelectedJournalismArticle={() => { }}
           />
         );
         const actual = wrapper.containsMatchingElement(
           <EmptyArticlesMessage type='journalism' />
         );
         expect(actual).to.equal(true);
+      });
+    });
+  });
+
+  describe('methods', () => {
+    describe('componentWillMount', () => {
+      it('should call onFetchNewsArticles when props.hasFetchedArticles is FALSE', () => {
+        const onFetchJournalismArticlesSpy = sinon.spy();
+        wrapper.setProps({
+            hasFetchedArticles: false,
+            onFetchJournalismArticles: onFetchJournalismArticlesSpy
+        });
+
+        wrapper.instance().componentWillMount();
+        expect(onFetchJournalismArticlesSpy.calledOnce).to.eq(true);
+      });
+    });
+
+    describe('componentWillUnmount', () => {
+      it('should call resetPromiseState', () => {
+        const resetPromiseStateSpy = sinon.spy();
+        wrapper.setProps({
+          resetPromiseState: resetPromiseStateSpy
+        });
+        wrapper.instance().componentWillUnmount();
+        expect(resetPromiseStateSpy).to.have.been.called;
       });
     });
   });
@@ -219,8 +218,9 @@ describe('(Component) Journalism - Home', () => {
 
     it('should map state to props', () => {
       renderedProps = wrapper.props();
-      expect(renderedProps.article).to.eq(selectSelectedNewsArticle(mockStoreState));
       expect(renderedProps.promiseLoading).to.eq(selectUiStateLoading(mockStoreState));
+      expect(renderedProps.hasFetchedArticles).to.eq(selectJournalismHasFetched(mockStoreState));
+      expect(renderedProps.article).to.eq(selectSelectedJournalismArticle(mockStoreState));
     });
   });
 

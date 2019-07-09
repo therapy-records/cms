@@ -138,7 +138,11 @@ export const actions = {
 /* eslint-disable no-return-assign */
 const ACTION_HANDLERS = {
   [FETCH_JOURNALISM_ARTICLES_SUCCESS]: (state, action) => {
-    return { ...state, articles: action.payload }
+    return {
+      ...state,
+      articles: action.payload,
+      hasFetched: true
+    }
   },
   [POST_JOURNALISM_FORM_SUCCESS]: (state, action) => {
     let articlesArray = [
@@ -156,8 +160,10 @@ const ACTION_HANDLERS = {
 // Reducer
 // ------------------------------------
 const initialState = {
+  hasFetched: false,
   articles: null
 };
+
 export default function newsReducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
   return handler ? handler(state, action) : state

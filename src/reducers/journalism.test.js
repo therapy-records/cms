@@ -86,7 +86,10 @@ describe('(Redux Module) news', () => {
     it('should initialize with correct state', () => {
       const state = journalismReducer(undefined, {});
       expect(state).to.deep.equal(
-        { articles: null }
+        {
+          articles: null,
+          hasFetched: false
+        }
       );
     });
   });
@@ -112,10 +115,16 @@ describe('(Redux Module) news', () => {
     it('should update state', () => {
       const mockData1 = [ { title: 'something' }, { title: 'test' } ];
       const mockData2 = [ { title: 'hello' }, { title: 'bonjour' } ];
-      let state = journalismReducer(mockState, fetchJournalismArticlesSuccess(mockData1));
-      expect(state.articles).to.deep.equal(mockData1);
-      state = journalismReducer(state, fetchJournalismArticlesSuccess(mockData2))
-      expect(state.articles).to.deep.equal(mockData2);
+      let state = journalismReducer(mockState.journalism, fetchJournalismArticlesSuccess(mockData1));
+      expect(state).to.deep.eq({
+        articles: mockData1,
+        hasFetched: true
+      });
+      state = journalismReducer(state.journalism, fetchJournalismArticlesSuccess(mockData2))
+      expect(state).to.deep.eq({
+        articles: mockData2,
+        hasFetched: true
+      });
     });
   });
 

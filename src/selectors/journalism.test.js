@@ -1,5 +1,6 @@
 
 import {
+  selectJournalismArticlesHasFetched,
   selectJournalismArticles,
   selectJournalismArticlesReverse,
   filterJournalismArticlesArticle,
@@ -44,13 +45,21 @@ const mockArticles = [
 
 const mockState = {
   journalism: {
-    articles: mockArticles
+    articles: mockArticles,
+    hasFetched: false
   },
   selectedJournalismArticle: mockArticles[1]
 };
 
 describe('(Selectors) journalism', () => {
   const articleId = 'asdf1234';
+
+  describe('selectJournalismArticlesHasFetched', () => {
+    it('should return articles', () => {
+      const actual = selectJournalismArticlesHasFetched(mockState);
+      expect(actual).to.deep.equal(mockState.journalism.hasFetched);
+    });
+  });
 
   describe('selectJournalismArticles', () => {
     it('should return articles', () => {

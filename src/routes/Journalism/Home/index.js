@@ -6,15 +6,23 @@ import moment from 'moment';
 import { fetchJournalismArticles } from '../../../reducers/journalism';
 import { setSelectedJournalismArticle } from '../../../reducers/journalismArticle';
 import { resetPromiseState } from '../../../reducers/uiState';
-import { selectJournalismArticles } from '../../../selectors/journalism';
+import {
+  selectJournalismArticles,
+  selectJournalismHasFetched
+} from '../../../selectors/journalism';
 import { selectUiStateLoading } from '../../../selectors/uiState';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
 
 export class Journalism extends React.Component {
   componentWillMount() {
-    if (this.props.articles === null) {
-      this.props.onfetchJournalismArticles();
+    const {
+      hasFetchedArticles,
+      onFetchJournalismArticles
+    } = this.props;
+
+    if (!hasFetchedArticles) {
+      onFetchJournalismArticles();
     }
   }
 
@@ -23,7 +31,7 @@ export class Journalism extends React.Component {
   }
 
   handleButtonClick(postObj) {
-    this.props.onsetSelectedJournalismArticle(postObj);
+    this.props.onSetSelectedJournalismArticle(postObj);
   }
 
   renderArticle(p) {
@@ -73,6 +81,7 @@ export class Journalism extends React.Component {
 
     return (
       <div className='container'>
+
         <LoadingSpinner
           active={promiseLoading}
           fullScreen
@@ -111,8 +120,9 @@ export class Journalism extends React.Component {
 
 Journalism.propTypes = {
   promiseLoading: PropTypes.bool,
-  onfetchJournalismArticles: PropTypes.func.isRequired,
-  onsetSelectedJournalismArticle: PropTypes.func.isRequired,
+  hasFetchedArticles: PropTypes.bool.isRequired,
+  onFetchJournalismArticles: PropTypes.func.isRequired,
+  onSetSelectedJournalismArticle: PropTypes.func.isRequired,
   articles: PropTypes.array,
   resetPromiseState: PropTypes.func
 };
@@ -123,13 +133,14 @@ Journalism.defaultProps = {
 };
 
 const mapDispatchToProps = {
-  onfetchJournalismArticles: () => fetchJournalismArticles(),
-  onsetSelectedJournalismArticle: (article) => setSelectedJournalismArticle(article),
+  onFetchJournalismArticles: () => fetchJournalismArticles(),
+  onSetSelectedJournalismArticle: (article) => setSelectedJournalismArticle(article),
   resetPromiseState: () => resetPromiseState()
 };
 
 const mapStateToProps = (state) => ({
   promiseLoading: selectUiStateLoading(state),
+  hasFetchedArticles: selectJournalismHasFetched(state),
   articles: selectJournalismArticles(state)
 })
 

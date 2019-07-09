@@ -1,8 +1,10 @@
 import { createSelector } from 'reselect'
 
 /*
-state.journalism.articles
+state.journalism
 */
+
+export const selectJournalismHasFetched = (state) => state.journalism.hasFetched;
 
 export const selectJournalismArticles = (state) => state.journalism.articles;
 
