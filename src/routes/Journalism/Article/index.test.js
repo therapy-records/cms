@@ -320,7 +320,6 @@ describe('(Component) Journalism - Journalism', () => {
       expect(renderedProps.promiseLoading).to.eq(selectUiStateLoading(mockStoreState));
       expect(renderedProps.promiseSuccess).to.eq(selectUiStateSuccess(mockStoreState));
       expect(renderedProps.location).to.eq(mockStoreState.location);
-
     });
   });
 });

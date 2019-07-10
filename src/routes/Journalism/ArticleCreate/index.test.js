@@ -3,19 +3,19 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import { Link } from 'react-router-dom'
 import { ArticleCreate } from './index';
-import NewsArticleForm from '../../../components/NewsArticleForm';
+import JournalismArticleForm from '../../../components/JournalismArticleForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('(Component) News - ArticleCreate', () => {
+describe('(Component) Journalism - ArticleCreate', () => {
   let wrapper,
-  props = {
-    onPostArticle: () => {},
-    onAddArticleSection: () => {},
-    resetPromiseState: () => {},
-    location: {}
-  };
+    props = {
+      onPostArticle: () => { },
+      onAddArticleSection: () => { },
+      resetPromiseState: () => { },
+      location: {}
+    };
 
   beforeEach(() => {
     wrapper = shallow(<ArticleCreate {...props} />);
@@ -35,11 +35,10 @@ describe('(Component) News - ArticleCreate', () => {
   });
 
   describe('rendering', () => {
-    it('should render a NewsArticleForm', () => {
+    it('should render a JournalismArticleForm', () => {
       const actual = wrapper.containsMatchingElement(
-        <NewsArticleForm
+        <JournalismArticleForm
           onSubmitForm={props.onPostArticle}
-          onAddArticleSection={props.onAddArticleSection}
           location={props.location}
         />
       );
@@ -76,16 +75,16 @@ describe('(Component) News - ArticleCreate', () => {
         expect(actual).to.equal(true);
       });
 
-      it('should render a link to news page', () => {
+      it('should render a link to journalism page', () => {
         const actual = wrapper.containsMatchingElement(
-          <Link to='/news' className='btn'>Go to news</Link>
+          <Link to='/journalism' className='btn'>Go to Journalism</Link>
         );
         expect(actual).to.eq(true);
       });
 
-      it('should render a link to news/create', () => {
+      it('should render a link to journalism/create', () => {
         const actual = wrapper.containsMatchingElement(
-          <Link to='/news/create' className='btn'>Create another article</Link>
+          <Link to='/journalism/create' className='btn'>Create another article</Link>
         );
         expect(actual).to.eq(true);
       });

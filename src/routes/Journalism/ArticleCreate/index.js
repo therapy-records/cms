@@ -11,7 +11,7 @@ import {
 import JournalismArticleForm from '../../../components/JournalismArticleForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
-class ArticleCreate extends React.Component {
+export class ArticleCreate extends React.Component {
   componentWillUnmount() {
     this.props.resetPromiseState();
   }
@@ -36,7 +36,7 @@ class ArticleCreate extends React.Component {
             <h2>Successfully created! <small>🚀</small></h2>
             <div className='inline-flex'>
               <Link to='/journalism' className='btn'>Go to Journalism</Link>
-              <Link to='/journalism/create'>Create another article</Link>
+              <Link to='/journalism/create' className='btn'>Create another article</Link>
             </div>
           </div>
         }
