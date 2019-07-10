@@ -21,14 +21,14 @@ export class Dashboard extends React.Component {
       newsArticles,
       journalismArticles,
       onFetchNewsArticles,
-      onfetchJournalismArticles
+      onFetchJournalismArticles
     } = this.props;
     if (newsArticles === null) {
       onFetchNewsArticles();
     }
 
     if (journalismArticles === null) {
-      onfetchJournalismArticles();
+      onFetchJournalismArticles();
     }
   }
 
@@ -70,7 +70,7 @@ Dashboard.propTypes = {
   onFetchNewsArticles: PropTypes.func.isRequired,
   resetPromiseState: PropTypes.func.isRequired,
   journalismArticles: PropTypes.array,
-  onfetchJournalismArticles: PropTypes.func.isRequired,
+  onFetchJournalismArticles: PropTypes.func.isRequired,
   promiseLoading: PropTypes.bool
 }
 
@@ -82,7 +82,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   onFetchNewsArticles: () => fetchNewsArticles(),
-  onfetchJournalismArticles: () => fetchJournalismArticles(),
+  onFetchJournalismArticles: () => fetchJournalismArticles(),
   resetPromiseState: () => resetPromiseState()
 }
 

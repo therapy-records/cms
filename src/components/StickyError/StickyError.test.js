@@ -1,8 +1,9 @@
 import React from 'react';
-import {StickyError} from './StickyError';
+import ConnectedStickyError, {StickyError} from './StickyError';
 import Sticky from '../Sticky/Sticky';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
+import configureMockStore from 'redux-mock-store';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -13,6 +14,7 @@ describe('(Component) StickyError', () => {
     };
 
   describe('rendering', () => {
+
     beforeEach(() => {
       wrapper = shallow(<StickyError {...props} />);
     });
@@ -32,6 +34,30 @@ describe('(Component) StickyError', () => {
         expect(wrapper.type()).to.eq(null);
       });
     });
+  });
 
+  describe('ConnectedStickyError', () => {
+    const mockStore = configureMockStore();
+    const mockStoreState = {
+      errorAlert: {
+        message: 'oh no'
+      }
+    };
+    let renderedProps;
+    let store = {};
+
+    beforeEach(() => {
+      store = mockStore(mockStoreState);
+      wrapper = shallow(
+        <ConnectedStickyError
+          store={store}
+        />
+      );
+    });
+
+    it('should map state to props', () => {
+      renderedProps = wrapper.props();
+      expect(renderedProps.message).to.eq(mockStoreState.errorAlert.message);
+    });
   });
 });

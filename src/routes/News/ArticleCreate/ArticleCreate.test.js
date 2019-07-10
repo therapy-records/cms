@@ -97,7 +97,7 @@ describe('(Component) News - ArticleCreate', () => {
     });
   });
 
-  describe('ConnectedArticle', () => {
+  describe('ConnectedArticleCreate', () => {
     const mockStore = configureMockStore();
     const mockStoreState = {
       uiState: {
@@ -126,5 +126,4 @@ describe('(Component) News - ArticleCreate', () => {
       expect(renderedProps.location).to.eq(mockStoreState.location);
     });
   });
-
 });
