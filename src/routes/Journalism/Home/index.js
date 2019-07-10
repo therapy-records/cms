@@ -7,7 +7,7 @@ import { fetchJournalismArticles } from '../../../reducers/journalism';
 import { setSelectedJournalismArticle } from '../../../reducers/journalismArticle';
 import { resetPromiseState } from '../../../reducers/uiState';
 import {
-  selectJournalismArticles,
+  selectJournalismArticlesReverse,
   selectJournalismHasFetched
 } from '../../../selectors/journalism';
 import { selectUiStateLoading } from '../../../selectors/uiState';
@@ -141,7 +141,7 @@ const mapDispatchToProps = {
 const mapStateToProps = (state) => ({
   promiseLoading: selectUiStateLoading(state),
   hasFetchedArticles: selectJournalismHasFetched(state),
-  articles: selectJournalismArticles(state)
+  articles: selectJournalismArticlesReverse(state)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Journalism);
