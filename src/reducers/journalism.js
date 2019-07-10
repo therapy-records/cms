@@ -106,7 +106,7 @@ export const editJournalism = (postToEdit) => {
     const reduxFormObj = getFormValues();
     postToEdit.title = reduxFormObj.title;
     postToEdit.copy = reduxFormObj.copy;
-    postToEdit.mainImageUrl = reduxFormObj.mainImageUrl;
+    postToEdit.imageUrl = reduxFormObj.imageUrl;
 
     return _axiosAuthHeaders.put(
       API_ROOT + JOURNALISM + '/' + postToEdit._id,

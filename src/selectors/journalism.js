@@ -41,9 +41,9 @@ export const selectSelectedJournalismArticleExternalLink = createSelector(
   (article) => article && article.externalLink
 );
 
-export const selectSelectedJournalismArticleMainImageUrl = createSelector(
+export const selectSelectedJournalismArticleImageUrl = createSelector(
   selectSelectedJournalismArticle,
-  (article) => article && article.mainImageUrl
+  (article) => article && article.imageUrl
 );
 
 export const selectSelectedJournalismArticleReleaseDate = createSelector(

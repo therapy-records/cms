@@ -37,7 +37,7 @@ export class Journalism extends React.Component {
   renderArticle(p) {
     return (
       <li key={p._id} className='article-card'>
-        <img src={p.mainImageUrl} alt="" />
+        <img src={p.imageUrl} alt="" />
         <div>
           <div className='heading-with-btn'>
             <h3>

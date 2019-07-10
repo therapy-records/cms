@@ -22,7 +22,7 @@ describe('(Component) Journalism - Journalism', () => {
       _id: 'asdf1234',
       title: 'test',
       bodyMain: '<p>dummy copy</p><div>something<h2>title</h2></div>',
-      mainImageUrl: 'http://test.com/hi.jpg',
+      imageUrl: 'http://test.com/hi.jpg',
       releaseDate: new Date(),
       editedAt: new Date(),
       externalLink: 'http://test.com'
@@ -173,10 +173,10 @@ describe('(Component) Journalism - Journalism', () => {
     });
 
     describe('main image', () => {
-      it('should render mainImageUrl if it exists', () => {
+      it('should render imageUrl if it exists', () => {
         const actual = wrapper.containsMatchingElement(
           <img
-            src={props.article.mainImageUrl}
+            src={props.article.imageUrl}
             alt={`Fiona Ross - ${props.article.title}`}
           />
         );

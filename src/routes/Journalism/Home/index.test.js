@@ -23,7 +23,7 @@ const createJournalismArticles = (ids) => {
       _id: `asd12${id}`,
       releaseDate: new Date(),
       externalLink: 'http://test.com',
-      mainImageUrl: 'http://test.com'
+      imageUrl: 'http://test.com'
     })
   });
   return articles;
@@ -66,7 +66,7 @@ describe('(Component) Journalism - Home', () => {
         const p = props.articles[key]; // eslint-disable-line
         return (
           <li key={p._id} className='article-card'>
-            <img src={p.mainImageUrl} />
+            <img src={p.imageUrl} />
             <div>
               <div className='heading-with-btn'>
                 <h3>

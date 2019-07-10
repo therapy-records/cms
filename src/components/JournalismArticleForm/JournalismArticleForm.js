@@ -6,7 +6,7 @@ import {
   selectSelectedJournalismArticleTitle,
   selectSelectedJournalismArticleCopy,
   selectSelectedJournalismArticleExternalLink,
-  selectSelectedJournalismArticleMainImageUrl,
+  selectSelectedJournalismArticleImageUrl,
   selectSelectedJournalismArticleReleaseDate
 } from '../../selectors/journalism';
 import { selectJournalismArticleFormValues } from '../../selectors/form';
@@ -91,10 +91,10 @@ export class JournalismArticleForm extends React.Component {
           </div>
 
           <div className='row-large'>
-            <Field name='mainImageUrl'
+            <Field name='imageUrl'
                    component={DropzoneImageUpload}
-                   title='Main image'
-                   existingImage={formValues && formValues.mainImageUrl}
+                   title='Article screenshot'
+                   existingImage={formValues && formValues.imageUrl}
                    validate={required}
                   minImageDimensions={JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS}
                    required
@@ -158,7 +158,7 @@ InitFromStateForm = connect(
       title: selectSelectedJournalismArticleTitle(state),
       copy: selectSelectedJournalismArticleCopy(state),
       externalLink: selectSelectedJournalismArticleExternalLink(state),
-      mainImageUrl: selectSelectedJournalismArticleMainImageUrl(state),
+      imageUrl: selectSelectedJournalismArticleImageUrl(state),
       releaseDate: selectSelectedJournalismArticleReleaseDate(state)
     }
   })

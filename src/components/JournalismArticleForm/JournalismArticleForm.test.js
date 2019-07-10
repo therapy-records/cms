@@ -45,10 +45,10 @@ describe('(Component) JournalismArticleForm', () => {
     beforeEach(() => {
       wrapper = shallow(<JournalismArticleForm {...props} />);
     });
-    it('should render a mainImageUrl field', () => {
+    it('should render a imageUrl field', () => {
       const actual = wrapper.containsMatchingElement(
-        <Field name='mainImageUrl'
-          title='Main image'
+        <Field name='imageUrl'
+          title='Article screenshot'
           component={DropzoneImageUpload}
           minImageDimensions={JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS}
           required

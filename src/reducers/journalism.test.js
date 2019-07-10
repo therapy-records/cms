@@ -32,7 +32,7 @@ let mockArticle = {
   _id: 'asdfsaf',
   title: 'hello',
   copy: 'world',
-  mainImageUrl: 'http://image.com',
+  imageUrl: 'http://image.com',
   externalLink: 'test.com',
   releaseDate: new Date()
 };

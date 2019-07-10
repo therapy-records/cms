@@ -1,6 +1,6 @@
 
 import {
-  selectJournalismArticlesHasFetched,
+  selectJournalismHasFetched,
   selectJournalismArticles,
   selectJournalismArticlesReverse,
   filterJournalismArticlesArticle,
@@ -9,7 +9,7 @@ import {
   selectSelectedJournalismArticleTitle,
   selectSelectedJournalismArticleCopy,
   selectSelectedJournalismArticleExternalLink,
-  selectSelectedJournalismArticleMainImageUrl,
+  selectSelectedJournalismArticleImageUrl,
   selectSelectedJournalismArticleReleaseDate,
 } from './journalism';
 
@@ -29,7 +29,7 @@ const mockArticles = [
     socialShare: {
       hashtags: ['something', 'somethingElse']
     },
-    mainImageUrl: 'http://something/test.jpg'
+    imageUrl: 'http://something/test.jpg'
   },
   {
     _id: 'zxcv789',
@@ -54,9 +54,9 @@ const mockState = {
 describe('(Selectors) journalism', () => {
   const articleId = 'asdf1234';
 
-  describe('selectJournalismArticlesHasFetched', () => {
+  describe('selectJournalismHasFetched', () => {
     it('should return articles', () => {
-      const actual = selectJournalismArticlesHasFetched(mockState);
+      const actual = selectJournalismHasFetched(mockState);
       expect(actual).to.deep.equal(mockState.journalism.hasFetched);
     });
   });
@@ -120,10 +120,10 @@ describe('(Selectors) journalism', () => {
     });
   });
 
-  describe('selectSelectedJournalismArticleMainImageUrl', () => {
+  describe('selectSelectedJournalismArticleImageUrl', () => {
     it('should return selected/active article title', () => {
-      const actual = selectSelectedJournalismArticleMainImageUrl(mockState, articleId);
-      expect(actual).to.deep.eq(mockState.selectedJournalismArticle.mainImageUrl);
+      const actual = selectSelectedJournalismArticleImageUrl(mockState, articleId);
+      expect(actual).to.deep.eq(mockState.selectedJournalismArticle.imageUrl);
     });
   });
 

@@ -128,10 +128,10 @@ export class Article extends React.Component {
             </div>
 
 
-            {article.mainImageUrl &&
+            {article.imageUrl &&
               <div className='row-large img-container'>
                 <img
-                  src={article.mainImageUrl}
+                  src={article.imageUrl}
                   alt={`Fiona Ross - ${article.title}`}
                 />
               </div>
