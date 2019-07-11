@@ -73,6 +73,13 @@ body {
   }
 }
 
+.row {
+  margin-bottom: 2.5em;
+  @media(min-width: 768px) {
+    margin-bottom: 1.5em;
+  }
+}
+
 .row-large {
   margin-bottom: 2.5em;
   @media(min-width: 768px) {
@@ -405,7 +412,7 @@ small,
 
 h5,
 label {
-  font-size: 1.5em;
+  font-size: 1em;
   margin-bottom: .5em;
 }
 

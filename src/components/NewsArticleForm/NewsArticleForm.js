@@ -2,8 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Field, FieldArray, reduxForm } from 'redux-form'
-import RichTextEditor from '../RichTextEditor';
-import DropzoneImageUpload from './DropzoneImageUpload';
 import {
   selectSelectedNewsArticleTitle,
   selectSelectedNewsArticleSections
@@ -12,86 +10,18 @@ import { selectNewsArticleFormValues } from '../../selectors/form';
 import './NewsArticleForm.css';
 import TextInput from '../../components/TextInput';
 import { required } from '../../utils/form';
-import { EMPTY_ARTICLE_SECTION_OBJ } from '../../utils/news';
 import { NEWS_ARTICLE_FORM } from '../../constants';
-
-export const NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS = {
-  width: 450,
-  height: 450
-};
+import NewsFormSectionFields from './NewsFormSectionFields';
 
 export class NewsArticleForm extends React.Component {
 
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.renderSectionFields = this.renderSectionFields.bind(this);
-    this.renderSectionImageFields = this.renderSectionImageFields.bind(this);
   }
 
   handleSubmit() {
     this.props.onSubmitForm();
-  }
-
-  renderSectionImageFields({ fields, meta: { error } }) {
-    return (
-      <div>
-        <ul>
-          {fields.map((imageSection, index) => (
-            <li key={index}>
-              <Field
-                name={`${imageSection}.url`}
-                title='Image'
-                component={DropzoneImageUpload}
-                existingImage={fields.get(index).url}
-                minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
-              />
-
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
-
-  renderSectionFields({ fields, meta: { error } }) {
-    return (
-      <div>
-        <ul>
-        {fields.map((section, index) => (
-          <li
-            key={index}
-            className="row-large"
-          >
-
-            <div className="cols-container">
-
-              <Field
-                name={`${section}.copy`}
-                title="Copy"
-                component={RichTextEditor}
-                validate={required}
-                required
-              />
-
-              <FieldArray
-                name={`${section}.images`}
-                component={this.renderSectionImageFields}
-              />
-            </div>
-
-            <button
-              type="button"
-              onClick={() => fields.push(EMPTY_ARTICLE_SECTION_OBJ)}
-            >
-              Add section
-            </button>
-
-          </li>
-        ))}
-        </ul>
-      </div>
-    );
   }
 
   render() {
@@ -120,7 +50,7 @@ export class NewsArticleForm extends React.Component {
             <h2>{isEditForm ? `Editing ${formValues && formValues.title}` : 'Create News'}</h2>
           </div>
           <div className='action-btns'>
-            <p>action buttons here</p>
+            <p>delete button here</p>
           </div>
         </div>
 
@@ -141,7 +71,7 @@ export class NewsArticleForm extends React.Component {
 
           <FieldArray
             name="sections"
-            component={this.renderSectionFields}
+            component={NewsFormSectionFields}
           />
 
           <div className='row-large'>
