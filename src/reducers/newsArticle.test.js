@@ -148,37 +148,6 @@ describe('(Redux Module) newsArticle', () => {
     });
   });
 
-  describe('(Action) addNewsArticleSection', () => {
-    afterEach(() => {
-      nock.cleanAll()
-    });
-
-    it('should be exported as a function', () => {
-      expect(addNewsArticleSection).to.be.a('function');
-    });
-
-    it('should return an action with type ADD_SELECTED_NEWS_ARTICLE_SECTION', () => {
-      expect(addNewsArticleSection(INITIAL_STATE)).to.have.property('type', ADD_SELECTED_NEWS_ARTICLE_SECTION);
-    });
-
-    it('should update state', () => {
-      const mockSelectedArticle = {
-        sections: [
-          EMPTY_ARTICLE_SECTION
-        ]
-      };
-      let state = newsArticleReducer(mockState, addNewsArticleSection(mockSelectedArticle));
-
-      const expected = {
-        sections: [
-          EMPTY_ARTICLE_SECTION,
-          EMPTY_ARTICLE_SECTION
-        ]
-      };
-      expect(state).to.deep.eq(expected);
-    });
-  });
-
   describe('(Action) deleteSuccess', () => {
     afterEach(() => {
       nock.cleanAll()

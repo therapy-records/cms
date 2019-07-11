@@ -1,3 +1,12 @@
+export const EMPTY_ARTICLE_SECTION_OBJ = {
+  images: [
+    {
+      url: ''
+    }
+  ],
+  copy: ''
+};
+
 export const getArticlesFirstImageUrl = (article, placeholderFallback = false) => {
   const hasImages = article.sections &&
     article.sections.length &&

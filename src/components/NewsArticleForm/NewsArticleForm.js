@@ -12,6 +12,7 @@ import { selectNewsArticleFormValues } from '../../selectors/form';
 import './NewsArticleForm.css';
 import TextInput from '../../components/TextInput';
 import { required } from '../../utils/form';
+import { EMPTY_ARTICLE_SECTION_OBJ } from '../../utils/news';
 import { NEWS_ARTICLE_FORM } from '../../constants';
 
 export const NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS = {
@@ -24,22 +25,12 @@ export class NewsArticleForm extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleAddSection = this.handleAddSection.bind(this);
     this.renderSectionFields = this.renderSectionFields.bind(this);
     this.renderSectionImageFields = this.renderSectionImageFields.bind(this);
   }
 
   handleSubmit() {
     this.props.onSubmitForm();
-  }
-
-  handleAddSection() {
-    const {
-      formValues,
-      onAddArticleSection
-    } = this.props;
-
-    onAddArticleSection(formValues);
   }
 
   renderSectionImageFields({ fields, meta: { error } }) {
@@ -70,21 +61,31 @@ export class NewsArticleForm extends React.Component {
         {fields.map((section, index) => (
           <li
             key={index}
-            className="row-large cols-container"
+            className="row-large"
           >
 
-            <Field
-              name={`${section}.copy`}
-              title="Copy"
-              component={RichTextEditor}
-              validate={required}
-              required
-            />
+            <div className="cols-container">
 
-            <FieldArray
-              name={`${section}.images`}
-              component={this.renderSectionImageFields}
-            />
+              <Field
+                name={`${section}.copy`}
+                title="Copy"
+                component={RichTextEditor}
+                validate={required}
+                required
+              />
+
+              <FieldArray
+                name={`${section}.images`}
+                component={this.renderSectionImageFields}
+              />
+            </div>
+
+            <button
+              type="button"
+              onClick={() => fields.push(EMPTY_ARTICLE_SECTION_OBJ)}
+            >
+              Add section
+            </button>
 
           </li>
         ))}
@@ -160,7 +161,6 @@ export class NewsArticleForm extends React.Component {
 
 NewsArticleForm.propTypes = {
   onSubmitForm: PropTypes.func.isRequired,
-  onAddArticleSection: PropTypes.func.isRequired,
   error: PropTypes.string,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,

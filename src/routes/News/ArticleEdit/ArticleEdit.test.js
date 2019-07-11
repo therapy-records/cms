@@ -21,7 +21,6 @@ describe('(Component) News - ArticleEdit', () => {
     onFetchArticle: () => { },
     onDestroyArticle: () => {},
     resetPromiseState: () => {},
-    onAddArticleSection: () => {},
     article: { title: 'test', id: 'asdf1234' },
     location: {
       pathname: 'article/edit'
@@ -94,7 +93,6 @@ describe('(Component) News - ArticleEdit', () => {
       const actual = wrapper.containsMatchingElement(
         <NewsArticleForm
           onSubmitForm={props.onPostArticle}
-          onAddArticleSection={props.onAddArticleSection}
           location={props.location}
         />
       );

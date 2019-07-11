@@ -17,7 +17,6 @@ describe('(Component) News - ArticleCreate', () => {
   let wrapper,
   props = {
     onPostArticle: () => {},
-    onAddArticleSection: () => {},
     resetPromiseState: () => {},
     location: {}
   };
@@ -44,7 +43,6 @@ describe('(Component) News - ArticleCreate', () => {
       const actual = wrapper.containsMatchingElement(
         <NewsArticleForm
           onSubmitForm={props.onPostArticle}
-          onAddArticleSection={props.onAddArticleSection}
           location={props.location}
         />
       );

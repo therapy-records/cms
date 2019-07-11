@@ -36,21 +36,6 @@ describe('(Component) NewsArticleForm', () => {
     );
   });
 
-  describe('methods', () => {
-    describe('handleAddSection', () => {
-      it('should call props.onAddArticleSection with formValues', () => {
-        const onAddArticleSectionSpy = sinon.spy();
-        wrapper.setProps({
-          onAddArticleSection: onAddArticleSectionSpy
-        });
-        wrapper.instance().handleAddSection();
-        expect(onAddArticleSectionSpy).to.have.been.calledOnce;
-        expect(onAddArticleSectionSpy).to.have.been.calledWith(props.formValues);
-        
-      });
-    });
-  });
-
   describe('rendering', () => {
 
     it('should render a `Create` heading', () => {

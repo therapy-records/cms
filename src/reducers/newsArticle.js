@@ -1,5 +1,6 @@
 import axios from 'axios';
 import _axiosAuthHeaders from '../utils/axios'
+import { EMPTY_ARTICLE_SECTION_OBJ }  from '../utils/news';
 import {
   API_ROOT,
   NEWS
@@ -11,18 +12,9 @@ import {
 } from './uiState';
 import { fetchNewsArticles } from './news';
 
-export const EMPTY_ARTICLE_SECTION = {
-  images: [
-    {
-      url: ''
-    }
-  ],
-  copy: ''
-};
-
 export const INITIAL_STATE = {
   sections: [
-    EMPTY_ARTICLE_SECTION
+    EMPTY_ARTICLE_SECTION_OBJ
   ]
 };
 
@@ -49,19 +41,6 @@ export function selectedNewsArticleDeleted() {
   return {
     type: SET_SELECTED_NEWS_ARTICLE_DELETED,
     payload: { isDeleted: true }
-  }
-}
-
-export function addNewsArticleSection(article) {
-  const updatedArticle = article;
-  updatedArticle.sections = [
-    ...updatedArticle.sections,
-    EMPTY_ARTICLE_SECTION
-  ];
-
-  return {
-    type: ADD_SELECTED_NEWS_ARTICLE_SECTION,
-    payload: updatedArticle
   }
 }
 
