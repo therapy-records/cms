@@ -20,7 +20,6 @@ export const INITIAL_STATE = {
 
 export const SET_SELECTED_NEWS_ARTICLE = 'SET_SELECTED_NEWS_ARTICLE';
 export const SET_SELECTED_NEWS_ARTICLE_DELETED = 'SET_SELECTED_NEWS_ARTICLE_DELETED';
-export const ADD_SELECTED_NEWS_ARTICLE_SECTION = 'ADD_SELECTED_NEWS_ARTICLE_SECTION';
 export const DESTROY_SELECTED_NEWS_ARTICLE = 'DESTROY_SELECTED_NEWS_ARTICLE';
 
 export const DELETE_SINGLE_NEWS_ARTICLE_SUCCESS = 'DELETE_SINGLE_NEWS_ARTICLE_SUCCESS';
@@ -138,7 +137,6 @@ export const actions = {
 const ACTION_HANDLERS = {
   [SET_SELECTED_NEWS_ARTICLE]: (state, action) => state = action.payload,
   [SET_SELECTED_NEWS_ARTICLE_DELETED]: (state, action) => state = action.payload,
-  [ADD_SELECTED_NEWS_ARTICLE_SECTION]: (state, action) => state = action.payload,
   [DESTROY_SELECTED_NEWS_ARTICLE]: (state, action) => state = action.payload,
 
   [DELETE_SINGLE_NEWS_ARTICLE_SUCCESS]: (state, action) => state = action.payload,
