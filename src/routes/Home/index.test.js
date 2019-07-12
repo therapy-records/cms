@@ -1,9 +1,10 @@
 import React from 'react'
-
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
-import { Home } from './index'
+import configureMockStore from 'redux-mock-store';
+import ConnectedHome, { Home } from './index'
 import LoadingSpinner from '../../components/LoadingSpinner';
+import { selectUiStateLoading } from '../../selectors/uiState';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -166,4 +167,38 @@ describe('(Component) Home', () => {
     });
 
   });
+  describe('ConnectedArticle', () => {
+    const mockStore = configureMockStore();
+    const mockStoreState = {
+      uiState: {
+        promiseLoading: false
+      },
+      user: {
+        isAuth: false,
+        authError: ''
+      },
+      location: {},
+    };
+    let renderedProps;
+    let store = {};
+
+    beforeEach(() => {
+      store = mockStore(mockStoreState);
+      wrapper = shallow(
+        <ConnectedHome
+          store={store}
+          location={mockStoreState.location}
+          history={{}}
+        />
+      );
+    });
+
+    it('should map state to props', () => {
+      renderedProps = wrapper.props();
+      expect(renderedProps.promiseLoading).to.eq(selectUiStateLoading(mockStoreState));
+      expect(renderedProps.isAuth).to.eq(mockStoreState.user.isAuth);
+      expect(renderedProps.authError).to.eq(mockStoreState.user.authError);
+    });
+  });
+
 });

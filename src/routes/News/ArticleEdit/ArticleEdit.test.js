@@ -94,6 +94,19 @@ describe('(Component) News - ArticleEdit', () => {
         })
       });
     });
+
+    describe('handleOnEditArticle', () => {
+      it('should call props.onEditArticle', () => {
+        const onEditArticleSpy = sinon.spy();
+        wrapper.setProps({
+          onEditArticle: onEditArticleSpy
+        })
+        wrapper.instance().handleOnEditArticle();
+        expect(onEditArticleSpy).to.have.been.calledOnce;
+        expect(onEditArticleSpy).to.have.been.calledWith(props.article);
+      });
+    });
+
   });
 
   describe('rendering', () => {
@@ -102,7 +115,7 @@ describe('(Component) News - ArticleEdit', () => {
       wrapper = shallow(<ArticleEdit {...props} />);
       const actual = wrapper.containsMatchingElement(
         <NewsArticleForm
-          onSubmitForm={props.onPostArticle}
+          onSubmitForm={wrapper.instance().handleOnEditArticle}
           location={props.location}
         />
       );

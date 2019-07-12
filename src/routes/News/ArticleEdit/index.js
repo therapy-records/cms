@@ -17,6 +17,11 @@ import NewsArticleForm from '../../../components/NewsArticleForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
 export class ArticleEdit extends React.Component {
+  constructor() {
+    super();
+    this.handleOnEditArticle = this.handleOnEditArticle.bind(this);
+  }
+
   componentWillUnmount() {
     this.props.resetPromiseState();
     this.props.onDestroyArticle();
@@ -34,13 +39,20 @@ export class ArticleEdit extends React.Component {
     return { __html: data }
   }
 
+  handleOnEditArticle() {
+    const {
+      article,
+      onEditArticle
+    } = this.props;
+    onEditArticle(article);
+  }
+
   render() {
     const {
       article,
       promiseLoading,
       promiseSuccess,
-      location,
-      onEditArticle
+      location
     } = this.props;
 
 
@@ -67,7 +79,7 @@ export class ArticleEdit extends React.Component {
 
         {(!promiseLoading && !article.editSuccess) &&
           <NewsArticleForm
-            onSubmitForm={onEditArticle}
+            onSubmitForm={this.handleOnEditArticle}
             location={location}
           />
         }

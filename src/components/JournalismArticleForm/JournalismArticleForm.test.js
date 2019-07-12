@@ -4,11 +4,13 @@ import sinon from 'sinon'
 import { Field } from 'redux-form';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
+import configureMockStore from 'redux-mock-store';
 import TextInput from '../TextInput/TextInput';
 import Datepicker from '../Datepicker/Datepicker';
-import { JournalismArticleForm, JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS } from './JournalismArticleForm';
+import ConnectedJournalismArticleForm, { JournalismArticleForm, JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS } from './JournalismArticleForm';
 import DropzoneImageUpload from '../NewsArticleForm/DropzoneImageUpload';
 import { required } from '../../utils/form';
+import { selectJournalismArticleFormValues } from '../../selectors/form';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -152,4 +154,33 @@ describe('(Component) JournalismArticleForm', () => {
       expect(props.onSubmitForm.calledOnce).to.eq(true);
     });
   });
+
+  describe('ConnectedArticle', () => {
+    const mockStore = configureMockStore();
+    const mockStoreState = {
+      form: {
+        'JOURNALISM_ARTICLE_FORM': {
+          values: {}
+        }
+      }
+    };
+    let renderedProps;
+    let store = {};
+
+    beforeEach(() => {
+      store = mockStore(mockStoreState);
+      wrapper = shallow(
+        <ConnectedJournalismArticleForm
+          store={store}
+          location={mockStoreState.location}
+        />
+      );
+    });
+
+    it('should map state to props', () => {
+      renderedProps = wrapper.props();
+      expect(renderedProps.formValues).to.eq(selectJournalismArticleFormValues(mockStoreState));
+    });
+  });
+
 });

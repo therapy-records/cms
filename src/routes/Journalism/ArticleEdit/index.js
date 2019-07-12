@@ -17,6 +17,11 @@ import JournalismArticleForm from '../../../components/JournalismArticleForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
 export class ArticleEdit extends React.Component {
+  constructor() {
+    super();
+    this.handleOnEditArticle = this.handleOnEditArticle.bind(this);
+  }
+
   componentWillUnmount() {
     this.props.resetPromiseState();
     this.props.onDestroyArticle();
@@ -32,6 +37,14 @@ export class ArticleEdit extends React.Component {
 
   renderHtml(data) {
     return { __html: data }
+  }
+
+  handleOnEditArticle() {
+    const {
+      article,
+      onEditArticle
+    } = this.props;
+    onEditArticle(article);
   }
 
   render() {
@@ -62,7 +75,7 @@ export class ArticleEdit extends React.Component {
 
         {(!promiseLoading && !article.editSuccess) &&
           <JournalismArticleForm
-            onSubmitForm={() => this.props.onEditArticle(article)}
+            onSubmitForm={this.handleOnEditArticle}
             location={location}
           />
         }
