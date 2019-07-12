@@ -60,18 +60,28 @@ describe('(Component) News - ArticleEdit', () => {
 
     describe('componentWillMount', () => {
       it('should call onFetchArticle if there is no article', () => {
-        props.onFetchArticle = sinon.spy();
-        wrapper = shallow(<ArticleEdit {...props} article={{}} />);
-        wrapper.unmount();
-        expect(props.onFetchArticle).to.have.been.called;
-        expect(props.onFetchArticle).to.have.been.calledOnce;
+        const onFetchArticleSpy = sinon.spy();
+        wrapper = shallow(
+          <ArticleEdit
+            {...props}
+            article={{}}
+            onFetchArticle={onFetchArticleSpy}
+          />
+        );
+        expect(onFetchArticleSpy).to.have.been.called;
+        expect(onFetchArticleSpy).to.have.been.calledOnce;
       });
-      it('should call onFetchArticle if there is no article', () => {
-        props.onFetchArticle = sinon.spy();
-        wrapper = shallow(<ArticleEdit {...props} article={{ title: 'test' }} />);
-        wrapper.unmount();
-        expect(props.onFetchArticle).to.have.been.called;
-        expect(props.onFetchArticle).to.have.been.calledOnce;
+      it('should call onFetchArticle if there is no article id', () => {
+        const onFetchArticleSpy = sinon.spy();
+        wrapper = shallow(
+          <ArticleEdit
+            {...props}
+            article={{title: 'test'}}
+            onFetchArticle={onFetchArticleSpy}
+          />
+        );
+        expect(onFetchArticleSpy).to.have.been.called;
+        expect(onFetchArticleSpy).to.have.been.calledOnce;
       });
     });
 
@@ -125,7 +135,7 @@ describe('(Component) News - ArticleEdit', () => {
       it('should show success message and link', () => {
         const actual = wrapper.containsAllMatchingElements([
           <h2>Successfully updated! <small>🚀</small></h2>,
-          <Link to='/news'>Go to news</Link>
+          <Link to='/news'>Go to News</Link>
         ]);
         expect(actual).to.equal(true);
       });
@@ -153,6 +163,7 @@ describe('(Component) News - ArticleEdit', () => {
         <ConnectedArticleEdit
           store={store}
           location={mockStoreState.location}
+          match={{}}
         />
       );
     });

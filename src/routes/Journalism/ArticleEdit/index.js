@@ -16,7 +16,7 @@ import {
 import JournalismArticleForm from '../../../components/JournalismArticleForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
-class ArticleEdit extends React.Component {
+export class ArticleEdit extends React.Component {
   componentWillUnmount() {
     this.props.resetPromiseState();
     this.props.onDestroyArticle();
@@ -56,7 +56,7 @@ class ArticleEdit extends React.Component {
         {!promiseLoading && (promiseSuccess && article.editSuccess) &&
           <div>
             <h2>Successfully updated! <small>🚀</small></h2>
-            <Link to='/journalism' className='btn'>Go to journalism</Link>
+            <Link to='/journalism' className='btn'>Go to Journalism</Link>
           </div>
         }
 

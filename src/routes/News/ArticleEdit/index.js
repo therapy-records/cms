@@ -60,7 +60,7 @@ export class ArticleEdit extends React.Component {
           <div>
             <h2>Successfully updated! <small>🚀</small></h2>
             <div className='inline-flex'>
-              <Link to='/news'>Go to news</Link>
+              <Link to='/news'>Go to News</Link>
             </div>
           </div>
         }
