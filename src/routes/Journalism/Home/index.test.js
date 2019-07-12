@@ -200,7 +200,8 @@ describe('(Component) Journalism - Home', () => {
         articles: [
           {test: true},
           {test: true}
-        ]
+        ],
+        hasFetched: false
       },
     };
     let renderedProps;

@@ -95,7 +95,7 @@ describe('(Component) Datepicker', () => {
           const inputOnChangeSpy = sinon.spy();
           wrapper = shallow(<Datepicker {...props} />);
           wrapper.setProps({
-            initTime: '',
+            initTime: undefined,
             input: {
               onChange: inputOnChangeSpy
             }
@@ -112,8 +112,9 @@ describe('(Component) Datepicker', () => {
     describe('handleChange', () => {
       it('should update state', () => {
         wrapper = shallow(<Datepicker {...props} />);
-        wrapper.instance().handleChange('test');
-        expect(wrapper.instance().state.m).to.eq('test');
+        const mockDate = new Date();
+        wrapper.instance().handleChange(mockDate);
+        expect(wrapper.instance().state.m).to.eq(mockDate);
       });
       it('should call input.onChange', () => {
         wrapper = shallow(<Datepicker {...props} />);
@@ -123,7 +124,7 @@ describe('(Component) Datepicker', () => {
             onChange: onChangeSpy
           }
         });
-        wrapper.instance().handleChange('test');
+        wrapper.instance().handleChange(new Date());
         expect(onChangeSpy).have.been.calledOnce;
       });
     });

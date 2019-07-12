@@ -14,7 +14,7 @@ describe('(Component) Home', () => {
     onAuthCheck: () => {},
     onPostForm: sinon.spy(),
     history: {
-      push: () => {}
+      push: jest.fn()
     },
     location: {}
   };
@@ -101,7 +101,9 @@ describe('(Component) Home', () => {
               from: { pathname: 'test' }
             }
           };
-          props.history = [{ pathname: 'test' }];
+          const historyPushSpy = sinon.spy();
+          props.history.pathname = 'test';
+          
 
           wrapper = shallow(<Home {...props} />);
           wrapper.setProps({
@@ -109,27 +111,36 @@ describe('(Component) Home', () => {
               state: {
                 from: { pathname: 'random-route' }
               }
+            },
+            history: {
+              ...props.history,
+              push: historyPushSpy
             }
           });
-          const lastHistoryObj = props.history[props.history.length - 1];
-          expect(lastHistoryObj.pathname).to.eq('random-route');
+          expect(historyPushSpy).to.have.been.calledWith({
+            pathname: 'random-route'
+          });
         });
 
-        describe('when isAuth is false', () => {
+        describe('when isAuth is true', () => {
           it('should not push from.pathname', () => {
-            props.isAuth = false;
-            props.history = [{ pathname: 'test' }];
-            wrapper = shallow(<Home {...props} />);
+            const historyPushSpy = sinon.spy();
             wrapper.setProps({
-              isAuth: false,
+              isAuth: true,
               location: {
                 state: {
                   from: { pathname: 'test' }
                 }
+              },
+              history: {
+                ...props.history,
+                push: historyPushSpy
               }
             });
-            const lastHistoryObj = props.history[props.history.length - 1];
-            expect(lastHistoryObj.pathname).to.eq('test');
+            expect(historyPushSpy).to.have.been.calledOnce;
+            expect(historyPushSpy).to.have.been.calledWith({
+              pathname: 'test'
+            });
           });
         });
       });
@@ -138,11 +149,18 @@ describe('(Component) Home', () => {
         it('should push `/dashboard` to props.history', () => {
           props.location = {};
           wrapper = shallow(<Home {...props} />);
+          const historyPushSpy = sinon.spy();
           wrapper.setProps({
-            isAuth: true
+            isAuth: true,
+            history: {
+              ...props.history,
+              push: historyPushSpy
+            }
           });
-          const lastHistoryObj = props.history[props.history.length - 1];
-          expect(lastHistoryObj.pathname).to.eq('/dashboard');
+          expect(historyPushSpy).to.have.been.calledOnce;
+          expect(historyPushSpy).to.have.been.calledWith({
+            pathname: '/dashboard'
+          });
         });
       });
     });

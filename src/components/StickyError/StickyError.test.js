@@ -1,9 +1,9 @@
 import React from 'react';
-import ConnectedStickyError, {StickyError} from './StickyError';
-import Sticky from '../Sticky/Sticky';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import configureMockStore from 'redux-mock-store';
+import ConnectedStickyError, { StickyError } from './StickyError';
+import Sticky from '../Sticky/Sticky';
 
 Enzyme.configure({ adapter: new Adapter() });
 

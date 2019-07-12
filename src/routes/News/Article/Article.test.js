@@ -1,11 +1,16 @@
 import React from 'react'
-
 import { Link } from 'react-router-dom'
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
-import { Article } from './index'
+import configureMockStore from 'redux-mock-store';
+import ConnectedArticle, { Article } from './index'
 import ArticleDeleteModal from '../../../components/ArticleDeleteModal'
 import LoadingSpinner from '../../../components/LoadingSpinner';
+import { selectSelectedNewsArticle } from '../../../selectors/news';
+import {
+  selectUiStateLoading,
+  selectUiStateSuccess
+} from '../../../selectors/uiState';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -58,7 +63,7 @@ describe('(Component) News - Article', () => {
   });
 
   describe('methods', () => {
-    describe('on componentWillUnmount', () => {
+    describe('componentWillUnmount', () => {
       const resetPromiseStateSpy = sinon.spy();
       const onDestroyArticleSpy = sinon.spy();
       beforeEach(() => {
@@ -80,14 +85,50 @@ describe('(Component) News - Article', () => {
       });
     });
 
+    describe('handleModalOpen', () => {
+      it('should set state.isShowingModal to true', () => {
+        wrapper.instance().handleModalOpen();
+        expect(wrapper.instance().state.isShowingModal).to.eq(true);
+      });
+    });
+
+    describe('handleModalClose', () => {
+      it('should set state.isShowingModal to false', () => {
+        wrapper.instance().handleModalClose();
+        expect(wrapper.instance().state.isShowingModal).to.eq(false);
+      });
+    });
+
     describe('renderHtml', () => {
       it('should return an object', () => {
         const actual = wrapper.instance().renderHtml('<p>test</p>');
         expect(actual).to.deep.eq({
           __html: '<p>test</p>'
         });
-      })
-    });    
+      });
+    });
+
+    describe('handleOnDeleteArticle', () => {
+      it('should call props.onDeleteArticle', () => {
+        const onDeleteArticleSpy = sinon.spy();
+        wrapper.setProps({
+          onDeleteArticle: onDeleteArticleSpy
+        });
+        wrapper.instance().handleOnDeleteArticle();
+        expect(onDeleteArticleSpy).to.have.been.calledOnce;
+        expect(onDeleteArticleSpy).to.have.been.calledWith(
+          props.article._id
+        );
+      });
+
+      it('should call handleModalClose', () => {
+        const handleModalCloseSpy = sinon.spy();
+        wrapper.instance().handleModalClose = handleModalCloseSpy;
+        wrapper.instance().handleOnDeleteArticle();
+        expect(handleModalCloseSpy).to.have.been.calledOnce;
+      });
+
+    });
   });
 
   describe('rendering', () => {
@@ -246,6 +287,38 @@ describe('(Component) News - Article', () => {
         expect(actual).to.equal(true);
       });
     });    
+  });
+
+  describe('ConnectedArticle', () => {
+    const mockStore = configureMockStore();
+    const mockStoreState = {
+      selectedNewsArticle: {},
+      uiState: {
+        promiseLoading: false,
+        promiseSuccess: true
+      }
+    };
+    let renderedProps;
+    let store = {};
+
+    beforeEach(() => {
+      store = mockStore(mockStoreState);
+      wrapper = shallow(
+        <ConnectedArticle
+          store={store}
+          history={{}}
+          match={{}}
+        />
+      );
+    });
+
+    it('should map state to props', () => {
+      renderedProps = wrapper.props();
+      // expect(renderedProps.message).to.eq(mockStoreState.errorAlert.message);
+      expect(renderedProps.article).to.eq(selectSelectedNewsArticle(mockStoreState)),
+      expect(renderedProps.promiseLoading).to.eq(selectUiStateLoading(mockStoreState)),
+      expect(renderedProps.promiseSuccess).to.eq(selectUiStateSuccess(mockStoreState))
+    });
   });
 
 });
