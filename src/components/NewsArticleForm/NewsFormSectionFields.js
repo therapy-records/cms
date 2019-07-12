@@ -79,7 +79,7 @@ class NewsFormSectionFields extends PureComponent {
 }
 
 NewsFormSectionFields.propTypes = {
-  fields: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
+  fields: PropTypes.object
 };
 
 export default NewsFormSectionFields;
