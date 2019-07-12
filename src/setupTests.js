@@ -12,7 +12,7 @@ const localStorageMock = () => {
       return store[key] || undefined
     },
     setItem: (key, value) => {
-      store[key] = value.toString();
+      store[key] = value && value.toString();
     },
     removeItem: jest.fn(),
     clear: jest.fn()

@@ -14,7 +14,7 @@ export const authCheck = () => {
     const _axios = axios.create({
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': token
+        'Authorization': token || ''
       }
     });
 
@@ -26,14 +26,11 @@ export const authCheck = () => {
           if (data.data.success === true) {
             localStorage.setItem('token', data.data.token);
             return dispatch(authSuccess());
-          } else {
-            localStorage.removeItem('token');
-            return dispatch(authError());
           }
-        }, () => {
           localStorage.removeItem('token');
           return dispatch(authError());
-        }).catch(() => {
+        }).catch(err => {
+          localStorage.removeItem('token');
           return dispatch(authError());
         });
     } else {
@@ -41,16 +38,12 @@ export const authCheck = () => {
         .then((data) => {
           if (data.data.success === true) {
             return dispatch(authSuccess());
-          } else {
-            localStorage.removeItem('token');
-            return dispatch(authError());
           }
-        }, () => {
           localStorage.removeItem('token');
           return dispatch(authError());
-        }).catch(() => {
-          return dispatch(authError());
-        });
+        }).catch(() =>
+          dispatch(authError())
+        );
     }
   }
 }
