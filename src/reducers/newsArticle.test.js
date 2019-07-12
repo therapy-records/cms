@@ -12,11 +12,9 @@ import {
   DESTROY_SELECTED_NEWS_ARTICLE,
   DELETE_SINGLE_NEWS_ARTICLE_SUCCESS,
   DELETE_SINGLE_NEWS_ARTICLE_ERROR,
-  EMPTY_ARTICLE_SECTION,
   INITIAL_STATE,
   selectedNewsArticle,
   selectedNewsArticleDeleted,
-  addNewsArticleSection,
   deleteSuccess,
   deleteError,
   setSelectedNewsArticle,
@@ -36,23 +34,6 @@ import {
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
-let mockNewsArticle = {
-  _id: 'xcxcxcxcxccx1234',
-  title: 'hello',
-  createdAt: new Date(),
-  bodyMain: '<p>test</p>',
-  mainImage: {
-    url: 'http://image.com',
-    externalLink: 'test.com'
-  },
-  ticketsLink: '',
-  venueLink: '',
-  miniGalleryImages: [
-    'asdf.jpg', 'qweqwe.jpg'
-  ],
-  videoEmbed: 'http://asdf.com/dfdf'
-};
-
 const mock = {
   getArticleResponse: {
     data: {
