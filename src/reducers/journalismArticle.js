@@ -11,6 +11,8 @@ import {
 } from './uiState';
 import { fetchJournalismArticles } from './journalism';
 
+export const INITIAL_STATE = {};
+
 export const SET_SELECTED_JOURNALISM_ARTICLE = 'SET_SELECTED_JOURNALISM_ARTICLE';
 export const SET_SELECTED_JOURNALISM_ARTICLE_DELETED = 'SET_SELECTED_JOURNALISM_ARTICLE_DELETED';
 export const DESTROY_SELECTED_JOURNALISM_ARTICLE = 'DESTROY_SELECTED_JOURNALISM_ARTICLE';
@@ -22,28 +24,28 @@ export const DELETE_SINGLE_JOURNALISM_ARTICLE_ERROR = 'DELETE_SINGLE_JOURNALISM_
 // Actions
 // ------------------------------------
 
-function selectedJournalismArticle(article) {
+export function selectedJournalismArticle(article) {
   return {
     type: SET_SELECTED_JOURNALISM_ARTICLE,
     payload: article
   }
 }
 
-function selectedJournalismArticleDeleted() {
+export function selectedJournalismArticleDeleted() {
   return {
     type: SET_SELECTED_JOURNALISM_ARTICLE_DELETED,
     payload: { isDeleted: true }
   }
 }
 
-function deleteSuccess(data) {
+export function deleteSuccess(data) {
   return {
     type: DELETE_SINGLE_JOURNALISM_ARTICLE_SUCCESS,
     payload: data
   }
 }
 
-function deleteError() {
+export function deleteError() {
   return {
     type: DELETE_SINGLE_JOURNALISM_ARTICLE_ERROR,
     payload: { error: true }
@@ -137,10 +139,8 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = {
-};
 
-export default function selectedJournalismArticleReducer(state = initialState, action) {
+export default function selectedJournalismArticleReducer(state = INITIAL_STATE, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state

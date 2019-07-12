@@ -177,6 +177,19 @@ describe('(Redux Module) newsArticle', () => {
     it('should be exported as a function', () => {
       expect(setSelectedNewsArticle).to.be.a('function');
     });
+
+    it('should dispatch the correct actions', () => {
+      const mockArticle = { title: 'test' };
+      const expectedActions = [
+        {type: SET_SELECTED_NEWS_ARTICLE, payload: mockArticle}
+      ];
+      store.clearActions();
+      store.dispatch(setSelectedNewsArticle(mockArticle));
+      const storeActions = store.getActions();
+      expect(storeActions).to.deep.equal(expectedActions);
+      store.clearActions();
+    });
+
   });
 
   describe('(Action) destroySelectedNewsArticle', () => {
@@ -191,6 +204,17 @@ describe('(Redux Module) newsArticle', () => {
     it('should update state', () => {
       let state = newsArticleReducer(mockState, destroySelectedNewsArticle());
       expect(state).to.deep.eq(INITIAL_STATE);
+    });
+
+    it('should dispatch the correct actions', () => {
+      const expectedActions = [
+        {type: DESTROY_SELECTED_NEWS_ARTICLE, payload: {}}
+      ];
+      store.clearActions();
+      store.dispatch(destroySelectedNewsArticle());
+      const storeActions = store.getActions();
+      expect(storeActions).to.deep.equal(expectedActions);
+      store.clearActions();
     });
   });
 
