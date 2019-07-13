@@ -80,7 +80,7 @@ describe('(Component) Dashboard', () => {
 
     it('should render a total amount of news articles', () => {
       const actual = wrapper.containsMatchingElement(
-        <p>News articles: {props.newsArticles.length}</p>
+        <p>Monthly News articles: {props.newsArticles.length}</p>
       );
       expect(actual).to.be.true;
     });
