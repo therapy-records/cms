@@ -23,3 +23,20 @@ export const getArticlesFirstImageUrl = (article, placeholderFallback = false) =
   }
   return null;
 };
+
+export const removeEmptyImageUrls = sections => {
+  if (sections && sections.length) {
+    return sections.map(section => {
+      const sectionImages = [];
+
+      section.images.map(imageObj => {
+        if (imageObj.url.length > 0) {
+          sectionImages.push(imageObj);
+        }
+      });
+
+      section.images = sectionImages;
+      return section;
+    });
+  }
+}

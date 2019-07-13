@@ -39,7 +39,7 @@ let mockNewsArticle = {
       copy: 'testing',
       images: [
         { url: 'test.com' },
-        { url: 'test2.com' },
+        { url: 'test2.com' }
       ]
     }
   ]
@@ -67,7 +67,7 @@ const mockState = {
   },
   form: {
     NEWS_ARTICLE_FORM: {
-      values: mock.newsArticle
+      values: mockNewsArticle
     }
   }
 };

@@ -1,5 +1,6 @@
 import {
-  getArticlesFirstImageUrl
+  getArticlesFirstImageUrl,
+  removeEmptyImageUrls
 } from './news';
 
 describe('(Utils) form', () => {
@@ -39,6 +40,47 @@ describe('(Utils) form', () => {
       });
     });
 
+  });
+
+  describe('removeEmptyImageUrls', () => {
+
+    it('should return an array of objects without empty url strings in child images array', () => {
+      const result = removeEmptyImageUrls([
+        {
+          copy: 'test',
+          images: [
+            { url: 'test.jpg' },
+            { url: '' },
+            { url: 'test2.jpg' }
+          ]
+        },
+        {
+          copy: 'test2',
+          images: [
+            { url: 'test.jpg' },
+            { url: 'test2.jpg' },
+            { url: '' }
+          ]
+        }
+      ]);
+      const expected = [
+        {
+          copy: 'test',
+          images: [
+            { url: 'test.jpg' },
+            { url: 'test2.jpg' }
+          ]
+        },
+        {
+          copy: 'test2',
+          images: [
+            { url: 'test.jpg' },
+            { url: 'test2.jpg' },
+          ]
+        }
+      ];
+      expect(result).to.deep.eq(expected);
+    });
 
   });
 

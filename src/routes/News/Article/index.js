@@ -17,7 +17,6 @@ import {
 } from '../../../reducers/newsArticle';
 import ArticleDeleteModal from '../../../components/ArticleDeleteModal';
 import LoadingSpinner from '../../../components/LoadingSpinner';
-import { getArticlesFirstImageUrl } from '../../../utils/news';
 
 export class Article extends React.Component {
   constructor() {
@@ -80,8 +79,6 @@ export class Article extends React.Component {
       }, 3000);
     }
 
-    const articleHasAnImage = getArticlesFirstImageUrl(article);
-
     return (
       <article className='container article'>
 
@@ -126,13 +123,18 @@ export class Article extends React.Component {
             </div>
 
             <ul className='row-large row-alternating-columns'>
-              {articleHasAnImage ?
-                article.sections.map((section, index) => (
-                    <li
-                      key={index}
-                      className='cols-container'
-                    >
+              {article.sections.map((section, index) => {
+                const hasImages = section.images.length > 0;
+                const hasCopy = section.copy;
+                const hasCopyAndImages = (hasCopy && hasImages);
 
+                return (
+                  <li
+                    key={index}
+                    className={hasCopyAndImages ? 'cols-container' : null}
+                  >
+
+                    {hasImages && 
                       <div>
                         <ul>
                           {section.images.map(image => {
@@ -146,19 +148,17 @@ export class Article extends React.Component {
                           })}
                         </ul>
                       </div>
+                    }
 
+                    {hasCopy &&
                       <div>
                         <div dangerouslySetInnerHTML={this.renderHtml(section.copy)} />
                       </div>
+                    }
 
-                    </li>
-                  )
+                  </li>
                 )
-              : (
-                  <div>
-                    <div dangerouslySetInnerHTML={this.renderHtml(article.sections[0].copy)} />
-                  </div>
-              )}
+              })}
             </ul>
 
           </div>

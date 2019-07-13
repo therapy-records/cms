@@ -10,9 +10,8 @@ import {
   promiseSuccess,
   promiseError
 } from './uiState';
-
 import { setSelectedNewsArticleEditSuccess } from './newsArticle';
-
+import { removeEmptyImageUrls } from '../utils/news';
 export const FETCH_NEWS_ARTICLES_SUCCESS = 'FETCH_NEWS_ARTICLES_SUCCESS';
 export const POST_NEWS_FORM_SUCCESS = 'POST_NEWS_FORM_SUCCESS';
 export const EDIT_NEWS_SUCCESS = 'EDIT_NEWS_SUCCESS';
@@ -60,15 +59,19 @@ export const postNews = () => {
   return (dispatch, getState) => {
     dispatch(promiseLoading(true));
     const getFormObj = () => {
-      if (getState().form.NEWS_ARTICLE_FORM &&
-        getState().form.NEWS_ARTICLE_FORM.values) {
-        return JSON.stringify(getState().form.NEWS_ARTICLE_FORM.values);
+      const newsFormFromState = getState().form.NEWS_ARTICLE_FORM;
+      if (newsFormFromState &&
+          newsFormFromState.values) {
+        return newsFormFromState.values;
       }
     }
 
+    const formObj = getFormObj();
+    formObj.sections = removeEmptyImageUrls(formObj.sections);
+
     return _axiosAuthHeaders.post(
       API_ROOT + NEWS_CREATE,
-      getFormObj()
+      JSON.stringify(formObj)
     ).then(
       (res) => {
         dispatch(promiseLoading(false));
@@ -86,32 +89,17 @@ export const postNews = () => {
 export const editNews = (postToEdit) => {
   return (dispatch, getState) => {
     dispatch(promiseLoading(true));
-    let getFormValues = () => {
-      if (getState().form.NEWS_ARTICLE_FORM &&
-        getState().form.NEWS_ARTICLE_FORM.values) {
-        return getState().form.NEWS_ARTICLE_FORM.values;
+    let getFormObj = () => {
+      const newsFormFromState = getState().form.NEWS_ARTICLE_FORM;
+      if (newsFormFromState &&
+          newsFormFromState.values) {
+        return newsFormFromState.values;
       }
     }
-    const reduxFormObj = getFormValues();
 
-    postToEdit.title = reduxFormObj.title;
-    const mappedSections = reduxFormObj.sections.map(section => {
-      const sectionImages = [];
-
-      section.images.map(imageObj => {
-        if (imageObj.url.length > 0) {
-          sectionImages.push(imageObj);
-        }
-        return null;
-      });
-
-      return {
-        copy: section.copy,
-        images: sectionImages
-      };
-    });
-
-    postToEdit.sections = mappedSections;
+    const formObj = getFormObj();
+    postToEdit.title = formObj.title;
+    postToEdit.sections = removeEmptyImageUrls(formObj.sections);
 
     return _axiosAuthHeaders.put(
       API_ROOT + NEWS + '/' + postToEdit._id,
