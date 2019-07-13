@@ -92,7 +92,7 @@ export class Journalism extends React.Component {
 
             <div className='heading-action-btns'>
               <div>
-                <h2>Journalism</h2>
+                <h2>Journalism ✍️</h2>
               </div>
               <div className='action-btns'>
                 <Link to='journalism/create' className='btn'>Create</Link>

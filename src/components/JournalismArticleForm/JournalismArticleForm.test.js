@@ -27,7 +27,7 @@ describe('(Component) JournalismArticleForm', () => {
       <JournalismArticleForm {...props} />
     );
     const actual = createWrapper.containsMatchingElement(
-      <h2>Create Journalism article</h2>
+      <h2>Create Journalism ✍️</h2>
     );
     expect(actual).to.equal(true);
   });
@@ -38,7 +38,7 @@ describe('(Component) JournalismArticleForm', () => {
       <JournalismArticleForm {...props} />
     );
     const actual = editWrapper.containsMatchingElement(
-      <h2>Edit Journalism article</h2>
+      <h2>Edit Journalism ✍️</h2>
     );
     expect(actual).to.equal(true);
   });

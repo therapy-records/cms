@@ -40,7 +40,7 @@ describe('(Component) NewsArticleForm', () => {
 
     it('should render a `Create` heading', () => {
       const actual = wrapper.containsMatchingElement(
-        <h2>Create News</h2>
+        <h2>Create News 🗞️</h2>
       );
       expect(actual).to.equal(true);
     });
@@ -57,7 +57,7 @@ describe('(Component) NewsArticleForm', () => {
         <NewsArticleForm {...props} />
       );
       const actual = editWrapper.containsMatchingElement(
-        <h2>{`Editing ${props.formValues.title}`}</h2>
+        <h2>{`Editing ${props.formValues.title} 🗞️`}</h2>
       );
       expect(actual).to.equal(true);
     });

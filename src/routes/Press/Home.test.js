@@ -20,7 +20,7 @@ describe('(Component) Press - Home', () => {
 
   it('should render a page title', () => {
     const actual = wrapper.containsMatchingElement(
-      <h2>Press</h2>
+      <h2>Press 📢</h2>
     );
     expect(actual).to.equal(true);
   });

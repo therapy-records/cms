@@ -93,12 +93,14 @@ describe('(Component) News - Home', () => {
   });
 
   describe('when promiseLoading is false', () => {
+
     it('should render a page title', () => {
       const actual = wrapper.containsMatchingElement(
-        <h2>News</h2>
+        <h2>News 🗞️️️️</h2>
       );
       expect(actual).to.equal(true);
     });
+
     it('should render a create button', () => {
       const actual = wrapper.containsMatchingElement(
         <Link to='news/create' className='btn'>Create</Link>

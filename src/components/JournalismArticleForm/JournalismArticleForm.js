@@ -48,7 +48,7 @@ export class JournalismArticleForm extends React.Component {
 
         <div className='heading-action-btns'>
           <div className='heading-with-btn'>
-            <h2>{isEditForm ? 'Edit Journalism article' : 'Create Journalism article'}</h2>
+            <h2>{isEditForm ? 'Edit Journalism ✍️' : 'Create Journalism ✍️'}</h2>
           </div>
         </div>
 

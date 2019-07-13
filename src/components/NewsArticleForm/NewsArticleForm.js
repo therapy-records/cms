@@ -48,7 +48,7 @@ export class NewsArticleForm extends React.Component {
       <section className='root article-create'>
         <div className='heading-action-btns'>
           <div className='heading-with-btn'>
-            <h2>{isEditForm ? `Editing ${formValues && formValues.title}` : 'Create News'}</h2>
+            <h2>{isEditForm ? `Editing ${formValues && formValues.title} 🗞️` : 'Create News 🗞️'}</h2>
           </div>
           <div className='action-btns'>
             <p>delete button here</p>

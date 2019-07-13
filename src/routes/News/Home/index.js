@@ -104,7 +104,7 @@ export class News extends React.Component {
           <div>
             <div className='heading-action-btns'>
               <div>
-                <h2>News</h2>
+                <h2>News 🗞️️️️</h2>
               </div>
               <div className='action-btns'>
                 <Link to='news/create' className='btn'>Create</Link>

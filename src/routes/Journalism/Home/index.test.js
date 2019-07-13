@@ -133,7 +133,7 @@ describe('(Component) Journalism - Home', () => {
     describe('when promiseLoading is false', () => {
       it('should render a page title', () => {
         const actual = wrapper.containsMatchingElement(
-          <h2>Journalism</h2>
+          <h2>Journalism ✍️</h2>
         );
         expect(actual).to.equal(true);
       });
