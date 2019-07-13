@@ -1,9 +1,10 @@
-import React from 'react'
-
-import { Sidebar } from './Sidebar'
-import { NavLink } from 'react-router-dom'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
+import configureMockStore from 'redux-mock-store';
+import ConnectedSidebar, { Sidebar, mapDispatchToProps } from './Sidebar';
+import { userLogout } from '../../reducers/user'
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -69,10 +70,8 @@ describe('(Component) Sidebar', () => {
           location: { pathname: '/' }
         });
       });
-      it('should render not render active className', () => {
-        const aside = wrapper.find('aside');
-        expect(aside.prop('className')).to.eq('sidebar');
-        expect(aside.prop('className')).to.not.eq('sidebar sidebar-active');
+      it('should return null', () => {
+        expect(wrapper.type()).to.eq(null);
       });
     });
   });

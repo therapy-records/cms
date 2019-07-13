@@ -52,10 +52,11 @@ export class Sidebar extends React.PureComponent {
     const isHomeRoute = location.pathname === '/';
 
     const isLargeScreen = windowWidth >= 768;
+    if (isHomeRoute) return null;
 
-    const isActive = (!isHomeRoute && (isOpen && !isLargeScreen)) ||
-                     (!isHomeRoute && isLargeScreen) ||
-                     (!isHomeRoute && isOpen);
+    const isActive = (isOpen && !isLargeScreen) ||
+                     isLargeScreen ||
+                     isOpen;
 
     let sidebarClassName = 'sidebar';
 
@@ -123,7 +124,7 @@ Sidebar.propTypes = {
   onLogout: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = {
+export const mapDispatchToProps = {
   onLogout: () => userLogout()
 }
 
