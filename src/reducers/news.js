@@ -61,12 +61,11 @@ export const postNews = () => {
     dispatch(promiseLoading(true));
     const getFormObj = () => {
       if (getState().form.NEWS_ARTICLE_FORM &&
-          getState().form.NEWS_ARTICLE_FORM.values) {
+        getState().form.NEWS_ARTICLE_FORM.values) {
         return JSON.stringify(getState().form.NEWS_ARTICLE_FORM.values);
-      } else {
-        return null;
       }
     }
+
     return _axiosAuthHeaders.post(
       API_ROOT + NEWS_CREATE,
       getFormObj()
@@ -91,14 +90,28 @@ export const editNews = (postToEdit) => {
       if (getState().form.NEWS_ARTICLE_FORM &&
         getState().form.NEWS_ARTICLE_FORM.values) {
         return getState().form.NEWS_ARTICLE_FORM.values;
-      } else {
-        return null;
       }
     }
     const reduxFormObj = getFormValues();
+
     postToEdit.title = reduxFormObj.title;
-    postToEdit.bodyMain = reduxFormObj.bodyMain;
-    postToEdit.mainImage = reduxFormObj.mainImage;
+    const mappedSections = reduxFormObj.sections.map(section => {
+      const sectionImages = [];
+
+      section.images.map(imageObj => {
+        if (imageObj.url.length > 0) {
+          sectionImages.push(imageObj);
+        }
+        return null;
+      });
+
+      return {
+        copy: section.copy,
+        images: sectionImages
+      };
+    });
+
+    postToEdit.sections = mappedSections;
 
     return _axiosAuthHeaders.put(
       API_ROOT + NEWS + '/' + postToEdit._id,

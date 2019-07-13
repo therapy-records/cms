@@ -34,17 +34,15 @@ let mockNewsArticle = {
   _id: 'xcxcxcxcxccx1234',
   title: 'hello',
   createdAt: new Date(),
-  bodyMain: '<p>test</p>',
-  mainImage: {
-    url: 'http://image.com',
-    externalLink: 'test.com'
-  },
-  ticketsLink: '',
-  venueLink: '',
-  miniGalleryImages: [
-    'asdf.jpg', 'qweqwe.jpg'
-  ],
-  videoEmbed: 'http://asdf.com/dfdf'
+  sections: [
+    {
+      copy: 'testing',
+      images: [
+        { url: 'test.com' },
+        { url: 'test2.com' },
+      ]
+    }
+  ]
 };
 
 const mock = {
