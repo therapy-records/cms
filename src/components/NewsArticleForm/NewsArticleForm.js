@@ -10,6 +10,7 @@ import { selectNewsArticleFormValues } from '../../selectors/form';
 import './NewsArticleForm.css';
 import TextInput from '../../components/TextInput';
 import { required } from '../../utils/form';
+import { EMPTY_ARTICLE_SECTION_OBJ } from '../../utils/news';
 import { NEWS_ARTICLE_FORM } from '../../constants';
 import NewsFormSectionFields from './NewsFormSectionFields';
 
@@ -108,7 +109,8 @@ InitFromStateForm = connect(
   (state, props) => ({
     initialValues: {
       title: selectSelectedNewsArticleTitle(state),
-      sections: selectSelectedNewsArticleSections(state)
+      sections: selectSelectedNewsArticleSections(state) ||
+                [ EMPTY_ARTICLE_SECTION_OBJ ]
     }
   })
 )(InitFromStateForm);
