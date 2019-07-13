@@ -125,7 +125,7 @@ export class Article extends React.Component {
               </div>
             </div>
 
-            <ul className='row-large'>
+            <ul className='row-large row-alternating-columns'>
               {articleHasAnImage ?
                 article.sections.map((section, index) => (
                     <li
