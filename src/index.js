@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import createBrowserHistory from 'history/createBrowserHistory';
+import { createBrowserHistory } from 'history';
 import Routes from './routes';
 import store from './store';
 import registerServiceWorker from './registerServiceWorker';
