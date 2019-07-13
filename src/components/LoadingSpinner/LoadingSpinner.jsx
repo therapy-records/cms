@@ -19,7 +19,6 @@ const Spinner = () => (
   </div>
 );
 
-
 class LoadingSpinner extends PureComponent {
   render() {
     const {

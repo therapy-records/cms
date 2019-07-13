@@ -1,8 +1,7 @@
-import React from 'react'
-
-import LoadingSpinner from './LoadingSpinner'
+import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
+import LoadingSpinner from './LoadingSpinner';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -36,8 +35,12 @@ describe('(Component) LoadingSpinner', () => {
 
     describe('when active', () => {
       it('should render Spinner with wrapping div and active className ', () => {
-        const overlay = wrapper.find('.loading-spinner-overlay .loading-spinner-overlay-active');
+        let overlay = wrapper.find('.loading-spinner-overlay');
         expect(overlay.length).to.equal(1);
+
+        overlay = wrapper.find('.loading-spinner-overlay-active');
+        expect(overlay.length).to.equal(1);
+
         const circleElm = overlay.find('.sk-circle');
         expect(circleElm.length).to.eq(1);
       });
@@ -56,8 +59,15 @@ describe('(Component) LoadingSpinner', () => {
       });
 
       it('should render Spinner with wrapping div and active className ', () => {
-        const overlay = wrapper.find('.loading-spinner-overlay .loading-spinner-overlay-ignore-sidebar .loading-spinner-overlay-active');
+        let overlay = wrapper.find('.loading-spinner-overlay');
         expect(overlay.length).to.equal(1);
+
+        overlay = wrapper.find('.loading-spinner-overlay-ignore-sidebar');
+        expect(overlay.length).to.equal(1);
+
+        overlay = wrapper.find('.loading-spinner-overlay-active');
+        expect(overlay.length).to.equal(1);
+
         const circleElm = overlay.find('.sk-circle');
         expect(circleElm.length).to.eq(1);
       });
@@ -70,8 +80,12 @@ describe('(Component) LoadingSpinner', () => {
         });
       });
       it('should render Spinner with wrapping div and inactive className ', () => {
-        const overlay = wrapper.find('.loading-spinner-overlay .loading-spinner-overlay-ignore-sidebar');
+        let overlay = wrapper.find('.loading-spinner-overlay');
         expect(overlay.length).to.equal(1);
+
+        overlay = wrapper.find('.loading-spinner-overlay-ignore-sidebar');
+        expect(overlay.length).to.equal(1);
+
         const circleElm = overlay.find('.sk-circle');
         expect(circleElm.length).to.eq(1);
       });
