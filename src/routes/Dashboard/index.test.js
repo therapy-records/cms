@@ -59,21 +59,21 @@ describe('(Component) Dashboard', () => {
 
     it('should render a heading', () => {
       const heading = wrapper.containsMatchingElement(
-        <h2>Create</h2>
+        <h2>Welcome back 👋</h2>
       );
       expect(heading).to.be.true;
     });
 
-    it('should render a link to create a news article', () => {
+    it('should render a link to create a news', () => {
       const actual = wrapper.containsMatchingElement(
-        <Link to='news/create'>News article</Link>
+        <Link to='news/create'>Create news</Link>
       );
       expect(actual).to.be.true;
     });
 
     it('should render a link to create a journalism article', () => {
       const actual = wrapper.containsMatchingElement(
-        <Link to='journalism/create'>Journalism article</Link>
+        <Link to='journalism/create'>Add a Journalism article</Link>
       );
       expect(actual).to.be.true;
     });

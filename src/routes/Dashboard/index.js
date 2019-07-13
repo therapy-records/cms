@@ -46,9 +46,10 @@ export class Dashboard extends React.Component {
           fullScreen
         />
 
-        <h2>Create</h2>
-        <Link to='news/create' className='btn'>News article</Link>
-        <Link to='journalism/create' className='btn'>Journalism article</Link>
+        <h2>Welcome back 👋</h2>
+        <br />
+        <Link to='news/create' className='btn btn-sm'>Create news</Link>
+        <Link to='journalism/create' className='btn btn-sm'>Add a Journalism article</Link>
 
         <br />
         <br />
@@ -57,9 +58,8 @@ export class Dashboard extends React.Component {
         <br />
 
         <h3>Stats</h3>
-        {newsArticles && <p>News articles: {newsArticles.length}</p>}
+        {newsArticles && <p>Monthly News articles: {newsArticles.length}</p>}
         {journalismArticles && <p>Journalism articles: {journalismArticles.length}</p>}
-        <p>Press releases: Coming soon...</p>
       </div>
     )
   }
