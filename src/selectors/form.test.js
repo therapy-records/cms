@@ -12,8 +12,7 @@ const mockState = {
   form: {
     NEWS_ARTICLE_FORM: {
       values: {
-        title: 'asdfasdf',
-        mainBody: '<p>hello</p><p>test</p>'
+        title: 'asdfasdf'
       },
       syncErrors: {
         someField: 'is required'
@@ -21,8 +20,7 @@ const mockState = {
     },
     JOURNALISM_ARTICLE_FORM: {
       values: {
-        title: 'asdfasdf',
-        mainBody: '<p>hello</p><p>test</p>'
+        title: 'asdfasdf'
       },
       syncErrors: {
         someField: 'is required'

@@ -15,13 +15,12 @@ import { selectSelectedJournalismArticle } from '../../../selectors/journalism';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('(Component) Journalism - Journalism', () => {
+describe('(Component) Journalism - Article', () => {
   let wrapper,
     props,
     mockArticle = {
       _id: 'asdf1234',
       title: 'test',
-      bodyMain: '<p>dummy copy</p><div>something<h2>title</h2></div>',
       imageUrl: 'http://test.com/hi.jpg',
       releaseDate: new Date(),
       editedAt: new Date(),

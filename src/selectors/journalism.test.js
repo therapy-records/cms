@@ -17,29 +17,19 @@ const mockArticles = [
   {
     _id: 'xcxcxcxcxccx1234',
     title: 'hello',
-    createdAt: new Date(),
-    mainBody: '<p>test</p>',
+    createdAt: new Date()
   },
   {
     _id: 'asdf1234',
     title: 'hi',
     createdAt: new Date(),
-    mainBody: '<p>hello world</p>',
-    miniGallery: ['asdf', 'asdf', 'asdf'],
-    socialShare: {
-      hashtags: ['something', 'somethingElse']
-    },
     imageUrl: 'http://something/test.jpg'
   },
   {
     _id: 'zxcv789',
     title: 'crazy',
     createdAt: new Date(),
-    mainBody: '<p>testing</p>',
-    miniGallery: ['asdf', 'asdf', 'asdf'],
-    socialShare: {
-      hashtags: ['something', 'somethingElse']
-    }
+    imageUrl: 'http://something/test.jpg'
   }
 ];
 

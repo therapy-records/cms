@@ -121,7 +121,7 @@ describe('(Selectors) news', () => {
   });
 
   describe('selectSelectedNewsArticleSections', () => {
-    it('should return bodyMain', () => {
+    it('should return article.sections', () => {
       const actual = selectSelectedNewsArticleSections(mockState, articleId);
       const expected = newsArticle.sections;
       expect(actual).to.deep.equal(expected);
