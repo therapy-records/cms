@@ -1,15 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { ModalContainer, ModalDialog } from 'react-modal-dialog';
+import ReactModal from 'react-modal';
+
+if (process.env.NODE_ENV !== 'test') {
+  ReactModal.setAppElement('#root');
+}
 
 class ArticleDeleteModal extends React.Component {
   render() {
     const {
-      // handleModalClose,
+      handleModalClose,
       onDeleteArticle
     } = this.props;
 
     return (
+      <ReactModal
+        isOpen
+        shouldCloseOnOverlayClick
+        onRequestClose={handleModalClose}
+        className='modal'
+        overlayClassName='modal-overlay'
+      >
         <div>
           <h4>Are you sure you want to delete this article?</h4>
           <p>It will be gone forever!</p>
@@ -18,6 +29,7 @@ class ArticleDeleteModal extends React.Component {
             onClick={onDeleteArticle}
           >Delete article</button>
         </div>
+      </ReactModal>
     )
   }
 }

@@ -25,7 +25,7 @@ export class Article extends React.Component {
     }
     this.handleModalOpen = this.handleModalOpen.bind(this);
     this.handleModalClose = this.handleModalClose.bind(this);
-    this.handleModalOnDelete = this.handleModalOnDelete.bind(this);
+    this.handleOnDeleteArticle = this.handleOnDeleteArticle.bind(this);
   }
 
   handleModalOpen() {
@@ -40,8 +40,8 @@ export class Article extends React.Component {
     const propsArticle = this.props.article;
     const paramsId = this.props.match.params.id;
     const noArticle = !propsArticle ||
-      !propsArticle._id ||
-      !paramsId;
+                      !propsArticle._id ||
+                      !paramsId;
 
     const articleMatches = !noArticle && propsArticle._id === paramsId;
     if (noArticle || !articleMatches) {
@@ -58,7 +58,7 @@ export class Article extends React.Component {
     return { __html: data }
   }
 
-  handleModalOnDelete() {
+  handleOnDeleteArticle() {
     this.props.onDeleteArticle(this.props.article._id)
     this.handleModalClose();
   }
@@ -70,7 +70,6 @@ export class Article extends React.Component {
     } = this.props;
 
     // todo: move to will/did update
-
     if (article && article.isDeleted) {
       setTimeout(() => {
         this.props.history.push({
@@ -83,18 +82,18 @@ export class Article extends React.Component {
       <article className='container article article-journalism'>
 
         <LoadingSpinner
-          active={promiseLoading}
+          active={promiseLoading && !article.isDeleted}
           fullScreen
         />
 
-        {article && article.isDeleted &&
+        {(article && article.isDeleted) &&
           <div>
             <h2>Successfully deleted! <small>🚀</small></h2>
             <p>Redirecting...</p>
           </div>
         }
 
-        {(article && article.title && !article.isDeleted) && (
+        {(!promiseLoading && article && article.title && !article.isDeleted) && (
           <div>
 
             <div className='heading-action-btns'>
@@ -142,10 +141,10 @@ export class Article extends React.Component {
           </div>
         )}
 
-        {(!promiseLoading && this.state.isShowingModal) &&
+        {(!promiseLoading && this.state.isShowingModal && !article.isDeleted) &&
           <ArticleDeleteModal
             handleModalClose={this.handleModalClose}
-            onDeleteArticle={this.handleModalOnDelete}
+            onDeleteArticle={this.handleOnDeleteArticle}
           />
         }
       </article>
@@ -154,7 +153,6 @@ export class Article extends React.Component {
 }
 
 Article.propTypes = {
-  // location: PropTypes.object.isRequired,
   onDeleteArticle: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
@@ -176,8 +174,7 @@ const mapDispatchToProps = {
 const mapStateToProps = (state, props) => ({
   article: selectSelectedJournalismArticle(state),
   promiseLoading: selectUiStateLoading(state),
-  promiseSuccess: selectUiStateSuccess(state),
-  location: state.location
+  promiseSuccess: selectUiStateSuccess(state)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Article)

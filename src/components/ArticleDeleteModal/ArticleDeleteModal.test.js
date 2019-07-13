@@ -1,32 +1,42 @@
-import React from 'react'
-import ArticleDeleteModal from './ArticleDeleteModal';
+import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
+import ReactModal from 'react-modal';
+import ArticleDeleteModal from './ArticleDeleteModal';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('(Component) News - ArticleDeleteModal', () => {
+describe('(Component) ArticleDeleteModal', () => {
   let wrapper,
     props = {
       handleModalClose: () => {},
       onDeleteArticle: () => {}
     }
 
-  // it('should render <ModalContainer />', () => {
-  //   wrapper = shallow(<ArticleDeleteModal {...props} />);
-  //   const actual = wrapper.containsMatchingElement(
-  //     <ModalContainer onClose={props.handleModalClose}>
-  //       <ModalDialog onClose={props.handleModalClose}>
-  //         <div>
-  //           <h4>Are you sure you want to delete this article?</h4>
-  //           <p>It will be gone forever!</p>
-  //           <button onClick={props.onDeleteArticle}>Delete article</button>
-  //         </div>
-  //       </ModalDialog>
-  //     </ModalContainer>
-  //   );
-  //   expect(actual).to.equal(true);
-  // });
+  it('should render <ReactModal />', () => {
+    wrapper = shallow(
+      <ArticleDeleteModal {...props} />
+    );
+    const actual = wrapper.containsMatchingElement(
+      <ReactModal
+        isOpen
+        shouldCloseOnOverlayClick
+        onRequestClose={props.handleModalClose}
+        className='modal'
+        overlayClassName='modal-overlay'
+      >
+        <div>
+          <h4>Are you sure you want to delete this article?</h4>
+          <p>It will be gone forever!</p>
+          <button
+            className='btn btn-danger cancel-margin'
+            onClick={props.onDeleteArticle}
+          >Delete article</button>
+        </div>
+      </ReactModal>
+    );
+    expect(actual).to.equal(true);
+  });
 
   describe('delete button', () => {
     it('should call props.onDeleteArticle onClick', () => {

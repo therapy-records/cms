@@ -587,3 +587,31 @@ iframe {
 
 @import 'styles/form.scss';
 
+
+
+.modal-overlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.73);
+    z-index: 5;
+}
+
+.modal {
+    max-width: 450px;
+    margin: auto;
+    margin-top: 5%;
+    z-index: 6;
+    background: #FFF;
+    text-align: center;
+    padding: 2em;
+    box-shadow: 0 11px 32px #000;
+}
+
+
+.modal button {
+  margin-top: 1em;
+}

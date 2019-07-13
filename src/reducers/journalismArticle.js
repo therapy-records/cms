@@ -79,9 +79,6 @@ export const fetchSingleJournalismArticle = (articleId) => {
 export const deleteJournalismArticle = (articleId) => {
   return (dispatch) => {
     dispatch(promiseLoading(true));
-    const postHeaders = new Headers();
-    postHeaders.set('Content-Type', 'application/json');
-    postHeaders.set('Authorization', localStorage.getItem('token'));
     return new Promise((resolve, reject) => {
       return _axiosAuthHeaders.delete(API_ROOT + JOURNALISM + '/' + articleId)
         .then((data) => {
@@ -96,7 +93,7 @@ export const deleteJournalismArticle = (articleId) => {
             dispatch(promiseLoading(false));
             dispatch(promiseError());
             dispatch(deleteError())
-            reject()
+            reject(new Error('Unable to delete journalism article'));
           }
         }
         );

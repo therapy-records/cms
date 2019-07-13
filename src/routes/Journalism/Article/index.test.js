@@ -217,21 +217,21 @@ describe('(Component) Journalism - Article', () => {
       expect(wrapper.instance().state.isShowingModal).to.eq(false);
     });
 
-    describe('handleModalOnDelete', () => {
+    describe('handleOnDeleteArticle', () => {
       it('should call props.onDeleteArticle', () => {
         wrapper = shallow(<Article {...props} />);
         const onDeleteArticleSpy = sinon.spy();
         wrapper.setProps({
           onDeleteArticle: onDeleteArticleSpy
         });
-        wrapper.instance().handleModalOnDelete();
+        wrapper.instance().handleOnDeleteArticle();
         expect(onDeleteArticleSpy.calledOnce).to.eq(true);
       });
 
       it('should call handleModalClose', () => {
         wrapper = shallow(<Article {...props} />);
         wrapper.instance().handleModalClose = sinon.spy();
-        wrapper.instance().handleModalOnDelete(props.article);
+        wrapper.instance().handleOnDeleteArticle(props.article);
         expect(wrapper.instance().handleModalClose.calledOnce).to.eq(true);
       });
 
@@ -271,7 +271,7 @@ describe('(Component) Journalism - Article', () => {
       const actual = wrapper.containsMatchingElement(
         <ArticleDeleteModal
           handleModalClose={wrapper.instance().handleModalClose}
-          onDeleteArticle={wrapper.instance().handleModalOnDelete}
+          onDeleteArticle={wrapper.instance().handleOnDeleteArticle}
         />
       );
       expect(actual).to.equal(false);
@@ -283,7 +283,7 @@ describe('(Component) Journalism - Article', () => {
       const actual = wrapper.containsMatchingElement(
         <ArticleDeleteModal
           handleModalClose={wrapper.instance().handleModalClose}
-          onDeleteArticle={wrapper.instance().handleModalOnDelete}
+          onDeleteArticle={wrapper.instance().handleOnDeleteArticle}
         />
       );
       expect(actual).to.equal(true);

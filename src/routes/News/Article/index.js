@@ -83,18 +83,18 @@ export class Article extends React.Component {
       <article className='container article'>
 
         <LoadingSpinner
-          active={promiseLoading}
+          active={promiseLoading && !article.isDeleted}
           fullScreen
         />
 
-        {article && article.isDeleted &&
+        {(article && article.isDeleted) &&
           <div>
             <h2>Successfully deleted! <small>🚀</small></h2>
             <p>Redirecting...</p>
           </div>
         }
 
-        {(article && article.title && !article.isDeleted) && (
+        {(!promiseLoading && article && article.title && !article.isDeleted) && (
           <div>
 
             <div className='heading-action-btns'>
@@ -164,7 +164,7 @@ export class Article extends React.Component {
           </div>
         )}
 
-        {(!promiseLoading && this.state.isShowingModal) &&
+        {(!promiseLoading && this.state.isShowingModal && !article.isDeleted) &&
           <ArticleDeleteModal
             handleModalClose={this.handleModalClose}
             onDeleteArticle={this.handleOnDeleteArticle}
