@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import moment from 'moment';
-import { fetchNewsArticles } from '../../../reducers/news';
+import { fetchNewsArticles } from '../../../actions/news';
 import { setSelectedNewsArticle } from '../../../reducers/newsArticle';
 import { resetPromiseState } from '../../../reducers/uiState';
 import {

@@ -1,12 +1,9 @@
 import 'core-js';
-
 import axios from 'axios';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
-
 import {
-  SET_SELECTED_NEWS_ARTICLE,
   SET_SELECTED_NEWS_ARTICLE_DELETED,
   DESTROY_SELECTED_NEWS_ARTICLE,
   DELETE_SINGLE_NEWS_ARTICLE_SUCCESS,
@@ -28,7 +25,8 @@ import {
 } from '../constants';
 import {
   UISTATE_PROMISE_LOADING,
-  UISTATE_PROMISE_SUCCESS
+  UISTATE_PROMISE_SUCCESS,
+  SET_SELECTED_NEWS_ARTICLE
 } from '../constants/actions';
 
 const middlewares = [thunk];
@@ -46,10 +44,6 @@ const mockState = INITIAL_STATE;
 const store = mockStore(mockState);
 
 describe('(Redux Module) newsArticle', () => {
-  it('should export a constant SET_SELECTED_NEWS_ARTICLE', () => {
-    expect(SET_SELECTED_NEWS_ARTICLE).to.equal('SET_SELECTED_NEWS_ARTICLE')
-  });
-
   it('should export a constant SET_SELECTED_NEWS_ARTICLE_DELETED', () => {
     expect(SET_SELECTED_NEWS_ARTICLE_DELETED).to.equal('SET_SELECTED_NEWS_ARTICLE_DELETED')
   });

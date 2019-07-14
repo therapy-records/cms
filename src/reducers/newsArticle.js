@@ -6,11 +6,14 @@ import {
   NEWS
 } from '../constants'
 import {
+  SET_SELECTED_NEWS_ARTICLE
+} from '../constants/actions'
+import {
   promiseLoading,
   promiseSuccess,
   promiseError
 } from './uiState';
-import { fetchNewsArticles } from './news';
+import { fetchNewsArticles } from '../actions/news';
 
 export const INITIAL_STATE = {
   sections: [
@@ -18,7 +21,7 @@ export const INITIAL_STATE = {
   ]
 };
 
-export const SET_SELECTED_NEWS_ARTICLE = 'SET_SELECTED_NEWS_ARTICLE';
+// export const SET_SELECTED_NEWS_ARTICLE = 'SET_SELECTED_NEWS_ARTICLE';
 export const SET_SELECTED_NEWS_ARTICLE_DELETED = 'SET_SELECTED_NEWS_ARTICLE_DELETED';
 export const DESTROY_SELECTED_NEWS_ARTICLE = 'DESTROY_SELECTED_NEWS_ARTICLE';
 

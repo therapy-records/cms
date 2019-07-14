@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { fetchNewsArticles } from '../../reducers/news';
+import { fetchNewsArticles } from '../../actions/news';
 import { fetchJournalismArticles } from '../../reducers/journalism';
 import { resetPromiseState } from '../../reducers/uiState';
 import { selectNewsArticles } from '../../selectors/news';

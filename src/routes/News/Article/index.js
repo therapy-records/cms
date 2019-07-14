@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { resetPromiseState } from '../../../reducers/uiState';
-import { fetchNewsArticles } from '../../../reducers/news';
+import { fetchNewsArticles } from '../../../actions/news';
 import { selectSelectedNewsArticle } from '../../../selectors/news';
 import {
   selectUiStateLoading,
