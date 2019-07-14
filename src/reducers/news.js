@@ -141,7 +141,7 @@ const ACTION_HANDLERS = {
       action.payload
     ];
     if (state.articles) {
-      articlesArray = [...articlesArray, ...state.articles]
+      articlesArray = [...state.articles, ...articlesArray]
     }
     return { ...state, articles: articlesArray }
   }

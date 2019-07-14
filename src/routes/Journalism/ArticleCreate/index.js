@@ -20,7 +20,8 @@ export class ArticleCreate extends React.Component {
     const {
       promiseLoading,
       promiseSuccess,
-      location
+      location,
+      onPostArticle
     } = this.props;
 
     return (
@@ -43,7 +44,7 @@ export class ArticleCreate extends React.Component {
 
         {!promiseLoading && !promiseSuccess &&
           <JournalismArticleForm
-            onSubmitForm={this.props.onPostArticle}
+            onSubmitForm={onPostArticle}
             location={location}
           />
         }

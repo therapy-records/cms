@@ -112,15 +112,6 @@ export class JournalismArticleForm extends React.Component {
             />
           </div>
 
-          {/* isEditForm &&
-            <div>
-              <br />
-              <br />
-              <p>NOTE: Any images previously uploaded will <b>not be overriden</b></p>
-              <p><small>To remove previous images contact admin</small></p>
-            </div>
-          */}
-
           {error && <p>{error}</p>}
 
           <div className='row-large'>
