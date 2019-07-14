@@ -9,7 +9,7 @@ import {
   promiseSuccess,
   promiseError
 } from '../actions/uiState';
-import { fetchJournalismArticles } from './journalism';
+import { fetchJournalismArticles } from '../actions/journalism';
 
 export const INITIAL_STATE = {};
 
