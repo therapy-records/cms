@@ -1,22 +1,15 @@
 import 'core-js';
-
 import axios from 'axios';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 import _axiosAuthHeaders from '../utils/axios'
-
 import {
-  // FETCH_NEWS_ARTICLES_SUCCESS,
-  // POST_NEWS_FORM_SUCCESS,
-  // EDIT_NEWS_SUCCESS,
   fetchArticlesSuccess,
   fetchNewsArticles,
   postNews,
   editNews
-  // default as newsReducer
 } from '../actions/news';
-// import { SET_SELECTED_NEWS_ARTICLE } from '../newsArticle';
 import {
   API_ROOT,
   NEWS,
@@ -81,8 +74,6 @@ const mockErrorResponse = {
 };
 
 const store = mockStore(mockState);
-
-
 
 describe('(Actions) news', () => {
   

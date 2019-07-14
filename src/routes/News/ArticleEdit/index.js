@@ -7,7 +7,7 @@ import { editNews } from '../../../actions/news';
 import {
   destroySelectedNewsArticle,
   fetchSingleNewsArticle
-} from '../../../reducers/newsArticle';
+} from '../../../actions/newsArticle';
 import { selectSelectedNewsArticle } from '../../../selectors/news';
 import {
   selectUiStateLoading,

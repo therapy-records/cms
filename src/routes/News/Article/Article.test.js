@@ -314,7 +314,6 @@ describe('(Component) News - Article', () => {
 
     it('should map state to props', () => {
       renderedProps = wrapper.props();
-      // expect(renderedProps.message).to.eq(mockStoreState.errorAlert.message);
       expect(renderedProps.article).to.eq(selectSelectedNewsArticle(mockStoreState)),
       expect(renderedProps.promiseLoading).to.eq(selectUiStateLoading(mockStoreState)),
       expect(renderedProps.promiseSuccess).to.eq(selectUiStateSuccess(mockStoreState))

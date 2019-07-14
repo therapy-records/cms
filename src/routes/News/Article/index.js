@@ -14,7 +14,7 @@ import {
   deleteNewsArticle,
   fetchSingleNewsArticle,
   destroySelectedNewsArticle
-} from '../../../reducers/newsArticle';
+} from '../../../actions/newsArticle';
 import ArticleDeleteModal from '../../../components/ArticleDeleteModal';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 

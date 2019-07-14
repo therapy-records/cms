@@ -16,7 +16,7 @@ import {
   promiseError
 } from '../reducers/uiState';
 
-import { setSelectedNewsArticleEditSuccess } from '../reducers/newsArticle';
+import { setSelectedNewsArticleEditSuccess } from '../actions/newsArticle';
 import { removeEmptyImageUrls } from '../utils/news';
 
 
