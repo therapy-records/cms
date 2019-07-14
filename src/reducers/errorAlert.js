@@ -3,28 +3,6 @@ import {
   RESET_ERROR_ALERT
 } from '../constants/actions'
 
-// ------------------------------------
-// Actions
-// ------------------------------------
-
-export const errorAlert = str => {
-  return {
-    type: ERROR_ALERT,
-    payload: str || ''
-  }
-}
-
-export const resetErrorAlert = str => {
-  return {
-    type: RESET_ERROR_ALERT,
-    payload: ''
-  }
-}
-
-
-// ------------------------------------
-// Action Handlers
-// ------------------------------------
 const ACTION_HANDLERS = {
   [ERROR_ALERT]: (state, action) => {
     return { ...state, message: action.payload }
@@ -37,11 +15,11 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-export const initialState = {
+export const INITIAL_STATE = {
   message: ''
 };
 
-export default function errorAlertReducer(state = initialState, action) {
+export default function errorAlertReducer(state = INITIAL_STATE, action) {
   const handler = ACTION_HANDLERS[action.type]
   return handler ? handler(state, action) : state
 }

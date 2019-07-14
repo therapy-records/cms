@@ -9,7 +9,7 @@ import {
   ERROR_ALERT_MESSAGE
 } from '../constants/actions'
 import { promiseLoading } from '../actions/uiState';
-import { errorAlert } from './errorAlert';
+import { errorAlert } from '../actions/errorAlert';
 
 // ------------------------------------
 // Actions

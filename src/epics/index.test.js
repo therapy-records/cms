@@ -6,7 +6,7 @@ import {
   promiseError,
   promiseLoading
 } from '../actions/uiState';
-import { errorAlert } from '../reducers/errorAlert';
+import { errorAlert } from '../actions/errorAlert';
 import {
   UISTATE_PROMISE_ERROR,
   UISTATE_PROMISE_LOADING,
@@ -22,10 +22,6 @@ let middlewares = [epicMiddleware];
 
 describe('epics', () => {
   let mockStore = configureMockStore(middlewares);
-
-  const mockErrorResponse = {
-    response: { status: '401' }
-  };
 
   const mockState = {
     user: {

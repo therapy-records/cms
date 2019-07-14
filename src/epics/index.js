@@ -4,7 +4,7 @@ import 'rxjs/add/operator/mapTo';
 import {
   errorAlert,
   resetErrorAlert
-} from '../reducers/errorAlert';
+} from '../actions/errorAlert';
 import {
   UISTATE_PROMISE_ERROR,
   UISTATE_PROMISE_LOADING,
