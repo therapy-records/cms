@@ -8,7 +8,7 @@ import {
   USER_AUTH_ERROR,
   ERROR_ALERT_MESSAGE
 } from '../constants/actions'
-import { promiseLoading } from './uiState';
+import { promiseLoading } from '../actions/uiState';
 import { errorAlert } from './errorAlert';
 
 // ------------------------------------

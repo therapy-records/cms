@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import moment from 'moment';
 import { fetchNewsArticles } from '../../../actions/news';
 import { setSelectedNewsArticle } from '../../../actions/newsArticle';
-import { resetPromiseState } from '../../../reducers/uiState';
+import { resetPromiseState } from '../../../actions/uiState';
 import {
   selectNewsArticlesReverse,
   selectNewsHasFetched

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { fetchJournalismArticles } from '../../../reducers/journalism';
 import { setSelectedJournalismArticle } from '../../../reducers/journalismArticle';
-import { resetPromiseState } from '../../../reducers/uiState';
+import { resetPromiseState } from '../../../actions/uiState';
 import {
   selectJournalismArticlesReverse,
   selectJournalismHasFetched

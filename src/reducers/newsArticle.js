@@ -13,9 +13,6 @@ export const INITIAL_STATE = {
   ]
 };
 
-// ------------------------------------
-// Action Handlers
-// ------------------------------------
 /* eslint-disable no-return-assign */
 const ACTION_HANDLERS = {
   [SET_SELECTED_NEWS_ARTICLE]: (state, action) => state = action.payload,

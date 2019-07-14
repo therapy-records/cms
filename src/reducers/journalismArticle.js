@@ -8,7 +8,7 @@ import {
   promiseLoading,
   promiseSuccess,
   promiseError
-} from './uiState';
+} from '../actions/uiState';
 import { fetchJournalismArticles } from './journalism';
 
 export const INITIAL_STATE = {};

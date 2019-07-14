@@ -9,7 +9,7 @@ import {
   promiseLoading,
   promiseSuccess,
   promiseError
-} from './uiState';
+} from '../actions/uiState';
 import { setSelectedJournalismArticle } from './journalismArticle';
 export const FETCH_JOURNALISM_ARTICLES_SUCCESS = 'FETCH_JOURNALISM_ARTICLES_SUCCESS';
 export const POST_JOURNALISM_FORM_SUCCESS = 'POST_JOURNALISM_FORM_SUCCESS';

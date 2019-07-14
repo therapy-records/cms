@@ -5,41 +5,6 @@ import {
   UISTATE_PROMISE_SUCCESS_RESET
 } from '../constants/actions'
 
-// ------------------------------------
-// Actions
-// ------------------------------------
-
-export const promiseLoading = (bool) => {
-  return {
-    type: UISTATE_PROMISE_LOADING,
-    payload: bool
-  }
-}
-
-export const promiseSuccess = (bool) => {
-  return {
-    type: UISTATE_PROMISE_SUCCESS,
-    payload: bool
-  }
-}
-
-export const promiseError = () => {
-  return {
-    type: UISTATE_PROMISE_ERROR,
-    payload: true
-  }
-}
-
-export const resetPromiseState = () => {
-  return {
-    type: UISTATE_PROMISE_SUCCESS_RESET,
-    payload: false
-  }
-}
-
-// ------------------------------------
-// Action Handlers
-// ------------------------------------
 const ACTION_HANDLERS = {
   [UISTATE_PROMISE_LOADING]: (state, action) => {
     return { ...state, promiseLoading: action.payload }
@@ -58,13 +23,13 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-export const initialState = {
+export const INITIAL_STATE = {
   promiseLoading: false,
   promiseSuccess: false,
   promiseError: false
 };
 
-export default function uiStateReducer(state = initialState, action) {
+export default function uiStateReducer(state = INITIAL_STATE, action) {
   const handler = ACTION_HANDLERS[action.type]
   return handler ? handler(state, action) : state
 }

@@ -5,7 +5,7 @@ import nock from 'nock';
 import {
   promiseError,
   promiseLoading
-} from '../reducers/uiState';
+} from '../actions/uiState';
 import { errorAlert } from '../reducers/errorAlert';
 import {
   UISTATE_PROMISE_ERROR,

@@ -14,7 +14,7 @@ import {
   promiseLoading,
   promiseSuccess,
   promiseError
-} from '../reducers/uiState';
+} from '../actions/uiState';
 
 import { setSelectedNewsArticleEditSuccess } from '../actions/newsArticle';
 import { removeEmptyImageUrls } from '../utils/news';

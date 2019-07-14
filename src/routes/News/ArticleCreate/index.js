@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { postNews } from '../../../actions/news';
-import { resetPromiseState } from '../../../reducers/uiState';
+import { resetPromiseState } from '../../../actions/uiState';
 import {
   selectUiStateLoading,
   selectUiStateSuccess

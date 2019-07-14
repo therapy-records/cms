@@ -16,7 +16,7 @@ import {
   promiseLoading,
   promiseSuccess,
   promiseError
-} from '../reducers/uiState';
+} from '../actions/uiState';
 import { fetchNewsArticles } from './news';
 
 export const INITIAL_STATE = {
