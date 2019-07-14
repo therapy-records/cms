@@ -20,10 +20,9 @@ import {
   UISTATE_PROMISE_ERROR,
   FETCH_JOURNALISM_ARTICLES_SUCCESS,
   POST_JOURNALISM_FORM_SUCCESS,
-  EDIT_JOURNALISM_SUCCESS
+  EDIT_JOURNALISM_SUCCESS,
+  SET_SELECTED_JOURNALISM_ARTICLE
 } from '../constants/actions';
-
-import { SET_SELECTED_JOURNALISM_ARTICLE } from '../reducers/journalismArticle';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -82,21 +81,6 @@ describe('(Actions) journalism', () => {
       const mockData = [ { title: 'something' }, { title: 'test' } ];
       expect(fetchJournalismArticlesSuccess(mockData)).to.have.property('payload', mockData);
     });
-
-    // it('should update state', () => {
-    //   const mockData1 = [ { title: 'something' }, { title: 'test' } ];
-    //   const mockData2 = [ { title: 'hello' }, { title: 'bonjour' } ];
-    //   let state = journalismReducer(mockState.journalism, fetchJournalismArticlesSuccess(mockData1));
-    //   expect(state).to.deep.eq({
-    //     articles: mockData1,
-    //     hasFetched: true
-    //   });
-    //   state = journalismReducer(state.journalism, fetchJournalismArticlesSuccess(mockData2))
-    //   expect(state).to.deep.eq({
-    //     articles: mockData2,
-    //     hasFetched: true
-    //   });
-    // });
   });
 
   describe('(Thunk) fetchJournalismArticles', () => {
@@ -229,7 +213,7 @@ describe('(Actions) journalism', () => {
       });
     });
 
-    it('should dispatch setSelectedJournalismArticle action with editSuccess added to payload', () => {
+    it('should dispatch SET_SELECTED_JOURNALISM_ARTICLE action with editSuccess added to payload', () => {
       _axiosAuthHeaders.put = sinon.stub().returns(Promise.resolve(mockArticle));
       nock(API_ROOT + JOURNALISM + 'asdf1234')
         .put(`${JOURNALISM}asdf1234`, {})

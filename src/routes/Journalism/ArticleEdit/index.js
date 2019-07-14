@@ -6,8 +6,8 @@ import { resetPromiseState } from '../../../actions/uiState';
 import {
   destroySelectedJournalismArticle,
   fetchSingleJournalismArticle
-} from '../../../reducers/journalismArticle';
-import { editJournalism } from '../../../reducers/journalism';
+} from '../../../actions/journalismArticle';
+import { editJournalism } from '../../../actions/journalism';
 import { selectSelectedJournalismArticle } from '../../../selectors/journalism';
 import {
   selectUiStateLoading,

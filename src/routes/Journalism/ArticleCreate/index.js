@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { postJournalism } from '../../../reducers/journalism';
+import { postJournalism } from '../../../actions/journalism';
 import { resetPromiseState } from '../../../actions/uiState';
 import {
   selectUiStateLoading,

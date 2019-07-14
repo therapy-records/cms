@@ -15,7 +15,7 @@ import {
   promiseSuccess,
   promiseError
 } from './uiState';
-import { setSelectedJournalismArticle } from '../reducers/journalismArticle';
+import { setSelectedJournalismArticle } from './journalismArticle';
 
 export function fetchJournalismArticlesSuccess(data) {
   return {

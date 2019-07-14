@@ -8,7 +8,7 @@ import {
   deleteJournalismArticle,
   fetchSingleJournalismArticle,
   destroySelectedJournalismArticle
-} from '../../../reducers/journalismArticle';
+} from '../../../actions/journalismArticle';
 import {
   selectUiStateLoading,
   selectUiStateSuccess
