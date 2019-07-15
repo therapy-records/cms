@@ -13,7 +13,7 @@ import {
   selectUiStateLoading,
   selectUiStateSuccess
 } from '../../../selectors/uiState';
-import NewsArticleForm from '../../../components/NewsArticleForm';
+import NewsForm from '../../../components/NewsForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
 export class ArticleEdit extends React.Component {
@@ -78,7 +78,7 @@ export class ArticleEdit extends React.Component {
         }
 
         {(!promiseLoading && !article.editSuccess) &&
-          <NewsArticleForm
+          <NewsForm
             onSubmitForm={this.handleOnEditArticle}
             location={location}
           />

@@ -4,14 +4,14 @@ import { Field } from 'redux-form';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import {
-  NewsArticleForm,
+  NewsForm,
   required
-} from './NewsArticleForm';
+} from './NewsForm';
 import TextInput from '../TextInput';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('(Component) NewsArticleForm', () => {
+describe('(Component) NewsForm', () => {
   let wrapper,
   props,
   baseProps = {
@@ -32,7 +32,7 @@ describe('(Component) NewsArticleForm', () => {
   beforeEach(() => {
     props = { ...baseProps, location: { pathname: 'test/create' } };
     wrapper = shallow(
-      <NewsArticleForm {...props} />
+      <NewsForm {...props} />
     );
   });
 
@@ -54,7 +54,7 @@ describe('(Component) NewsArticleForm', () => {
         }
       };
       const editWrapper = shallow(
-        <NewsArticleForm {...props} />
+        <NewsForm {...props} />
       );
       const actual = editWrapper.containsMatchingElement(
         <h2>{`Editing ${props.formValues.title} 🗞️`}</h2>
@@ -64,7 +64,7 @@ describe('(Component) NewsArticleForm', () => {
 
     describe('form fields', () => {
       beforeEach(() => {
-        wrapper = shallow(<NewsArticleForm {...props} />);
+        wrapper = shallow(<NewsForm {...props} />);
       });
 
       it('should render a title/month field', () => {
@@ -92,7 +92,7 @@ describe('(Component) NewsArticleForm', () => {
           pristine: false,
           submitting: false
         }
-        const buttonWrapper = shallow(<NewsArticleForm {...props} />);
+        const buttonWrapper = shallow(<NewsForm {...props} />);
         const actual = buttonWrapper.containsMatchingElement(
           <button type='submit'>Post monthly update</button>
         );
@@ -108,7 +108,7 @@ describe('(Component) NewsArticleForm', () => {
           submitting: false,
           formValues: { mainImage: { url: 'test.com' } }
         }
-        const buttonWrapper = shallow(<NewsArticleForm {...props} />);
+        const buttonWrapper = shallow(<NewsForm {...props} />);
         const button = buttonWrapper.find('button[type="submit"]');
         button.simulate('click');
         expect(props.onSubmitForm.calledOnce).to.eq(true);

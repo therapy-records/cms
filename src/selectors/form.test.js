@@ -1,8 +1,8 @@
 
 import {
-  selectNewsArticleForm,
-  selectNewsArticleFormValues,
-  selectNewsArticleFormSyncErrors,
+  selectNewsForm,
+  selectNewsFormValues,
+  selectNewsFormSyncErrors,
   selectJournalismArticleForm,
   selectJournalismArticleFormValues,
   selectJournalismArticleFormValuesSyncErrors
@@ -10,7 +10,7 @@ import {
 
 const mockState = {
   form: {
-    NEWS_ARTICLE_FORM: {
+    NEWS_FORM: {
       values: {
         title: 'asdfasdf'
       },
@@ -30,24 +30,24 @@ const mockState = {
 };
 
 describe('(Selectors) form', () => {
-  describe('selectNewsArticleForm', () => {
-    it('should return NEWS_ARTICLE_FORM', () => {
-      const actual = selectNewsArticleForm(mockState);
-      const expected = mockState.form.NEWS_ARTICLE_FORM;
+  describe('selectNewsForm', () => {
+    it('should return NEWS_FORM', () => {
+      const actual = selectNewsForm(mockState);
+      const expected = mockState.form.NEWS_FORM;
       expect(actual).to.deep.equal(expected);
     });
   });
-  describe('selectNewsArticleFormValues', () => {
-    it('should return NEWS_ARTICLE_FORM values', () => {
-      const actual = selectNewsArticleFormValues(mockState);
-      const expected = mockState.form.NEWS_ARTICLE_FORM.values;
+  describe('selectNewsFormValues', () => {
+    it('should return NEWS_FORM values', () => {
+      const actual = selectNewsFormValues(mockState);
+      const expected = mockState.form.NEWS_FORM.values;
       expect(actual).to.deep.equal(expected);
     });
   });
-  describe('selectNewsArticleFormSyncErrors', () => {
-    it('should return NEWS_ARTICLE_FORM syncErrors', () => {
-      const actual = selectNewsArticleFormSyncErrors(mockState);
-      const expected = mockState.form.NEWS_ARTICLE_FORM.syncErrors;
+  describe('selectNewsFormSyncErrors', () => {
+    it('should return NEWS_FORM syncErrors', () => {
+      const actual = selectNewsFormSyncErrors(mockState);
+      const expected = mockState.form.NEWS_FORM.syncErrors;
       expect(actual).to.deep.equal(expected);
     });
   });
@@ -55,7 +55,7 @@ describe('(Selectors) form', () => {
   describe('selectJournalismArticleForm', () => {
     it('should return JOURNALISM_ARTICLE_FORM', () => {
       const actual = selectJournalismArticleForm(mockState);
-      const expected = mockState.form.NEWS_ARTICLE_FORM;
+      const expected = mockState.form.NEWS_FORM;
       expect(actual).to.deep.equal(expected);
     });
   });

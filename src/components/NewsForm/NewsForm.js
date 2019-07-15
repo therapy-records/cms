@@ -6,15 +6,15 @@ import {
   selectSelectedNewsArticleTitle,
   selectSelectedNewsArticleSections
 } from '../../selectors/news';
-import { selectNewsArticleFormValues } from '../../selectors/form';
-import './NewsArticleForm.css';
-import TextInput from '../../components/TextInput';
+import { selectNewsFormValues } from '../../selectors/form';
+import './NewsForm.css';
+import TextInput from '../TextInput';
 import { required } from '../../utils/form';
 import { EMPTY_ARTICLE_SECTION_OBJ } from '../../utils/news';
-import { NEWS_ARTICLE_FORM } from '../../constants';
+import { NEWS_FORM } from '../../constants';
 import NewsFormSectionFields from './NewsFormSectionFields';
 
-export class NewsArticleForm extends React.Component {
+export class NewsForm extends React.Component {
 
   constructor(props) {
     super(props);
@@ -90,7 +90,7 @@ export class NewsArticleForm extends React.Component {
   }
 }
 
-NewsArticleForm.propTypes = {
+NewsForm.propTypes = {
   onSubmitForm: PropTypes.func.isRequired,
   error: PropTypes.string,
   pristine: PropTypes.bool,
@@ -101,9 +101,9 @@ NewsArticleForm.propTypes = {
 };
 
 let InitFromStateForm = reduxForm({
-  form: NEWS_ARTICLE_FORM,
+  form: NEWS_FORM,
   enableReinitialize : true
-})(NewsArticleForm);
+})(NewsForm);
 
 InitFromStateForm = connect(
   (state, props) => ({
@@ -116,7 +116,7 @@ InitFromStateForm = connect(
 )(InitFromStateForm);
 
 const mapStateToProps = (state) => ({
-  formValues: selectNewsArticleFormValues(state)
+  formValues: selectNewsFormValues(state)
 });
 
 export default connect(mapStateToProps, {})(InitFromStateForm)

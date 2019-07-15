@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-15';
 import configureMockStore from 'redux-mock-store';
 import { Link } from 'react-router-dom';
 import ConnectedArticleCreate, { ArticleCreate } from './index';
-import NewsArticleForm from '../../../components/NewsArticleForm';
+import NewsForm from '../../../components/NewsForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import {
   selectUiStateLoading,
@@ -39,9 +39,9 @@ describe('(Component) News - ArticleCreate', () => {
   });
 
   describe('rendering', () => {
-    it('should render a NewsArticleForm', () => {
+    it('should render a NewsForm', () => {
       const actual = wrapper.containsMatchingElement(
-        <NewsArticleForm
+        <NewsForm
           onSubmitForm={props.onPostArticle}
           location={props.location}
         />

@@ -63,7 +63,7 @@ const mockState = {
     hasFetched: false
   },
   form: {
-    NEWS_ARTICLE_FORM: {
+    NEWS_FORM: {
       values: mockNewsArticle
     }
   }

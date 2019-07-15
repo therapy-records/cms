@@ -13,5 +13,5 @@ export const JOURNALISM_CREATE = JOURNALISM;
 export const AUTH = 'auth';
 export const AUTH_LOGIN = AUTH + '/login';
 
-export const NEWS_ARTICLE_FORM = 'NEWS_ARTICLE_FORM';
+export const NEWS_FORM = 'NEWS_FORM';
 export const JOURNALISM_ARTICLE_FORM = 'JOURNALISM_ARTICLE_FORM';

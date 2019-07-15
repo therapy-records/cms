@@ -59,7 +59,7 @@ export const postNews = () => {
   return (dispatch, getState) => {
     dispatch(promiseLoading(true));
     const getFormObj = () => {
-      const newsFormFromState = getState().form.NEWS_ARTICLE_FORM;
+      const newsFormFromState = getState().form.NEWS_FORM;
       if (newsFormFromState &&
         newsFormFromState.values) {
         return newsFormFromState.values;
@@ -90,7 +90,7 @@ export const editNews = (postToEdit) => {
   return (dispatch, getState) => {
     dispatch(promiseLoading(true));
     let getFormObj = () => {
-      const newsFormFromState = getState().form.NEWS_ARTICLE_FORM;
+      const newsFormFromState = getState().form.NEWS_FORM;
       if (newsFormFromState &&
         newsFormFromState.values) {
         return newsFormFromState.values;
