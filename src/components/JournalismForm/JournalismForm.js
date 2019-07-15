@@ -9,19 +9,19 @@ import {
   selectSelectedJournalismArticleImageUrl,
   selectSelectedJournalismArticleReleaseDate
 } from '../../selectors/journalism';
-import { selectJournalismArticleFormValues } from '../../selectors/form';
+import { selectJournalismFormValues } from '../../selectors/form';
 import Datepicker from '../Datepicker/Datepicker';
 import DropzoneImageUpload from '../NewsForm/DropzoneImageUpload';
 import TextInput from '../TextInput';
 import { required } from '../../utils/form';
-import { JOURNALISM_ARTICLE_FORM } from '../../constants';
+import { JOURNALISM_FORM } from '../../constants';
 
 export const JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS = {
   width: 500,
   height: 500
 };
 
-export class JournalismArticleForm extends React.Component {
+export class JournalismForm extends React.Component {
   handleSubmit() {
     this.props.onSubmitForm();
   }
@@ -128,7 +128,7 @@ export class JournalismArticleForm extends React.Component {
   }
 }
 
-JournalismArticleForm.propTypes = {
+JournalismForm.propTypes = {
   error: PropTypes.string,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
@@ -139,9 +139,9 @@ JournalismArticleForm.propTypes = {
 };
 
 let InitFromStateForm = reduxForm({
-  form: JOURNALISM_ARTICLE_FORM,
+  form: JOURNALISM_FORM,
   enableReinitialize: true
-})(JournalismArticleForm);
+})(JournalismForm);
 
 InitFromStateForm = connect(
   (state, props) => ({
@@ -156,7 +156,7 @@ InitFromStateForm = connect(
 )(InitFromStateForm);
 
 const mapStateToProps = (state) => ({
-  formValues: selectJournalismArticleFormValues(state)
+  formValues: selectJournalismFormValues(state)
 });
 
 export default connect(mapStateToProps, {})(InitFromStateForm)

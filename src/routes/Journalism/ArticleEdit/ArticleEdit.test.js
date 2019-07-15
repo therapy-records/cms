@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-15';
 import configureMockStore from 'redux-mock-store';
 import {Link} from 'react-router-dom';
 import ConnectedArticleEdit, {ArticleEdit} from './index';
-import JournalismArticleForm from '../../../components/JournalismArticleForm';
+import JournalismForm from '../../../components/JournalismForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import {
 selectUiStateLoading,
@@ -110,10 +110,10 @@ describe('(Component) Journalism - ArticleEdit', () => {
 
   describe('rendering', () => {
 
-    it('should render a JournalismArticleForm', () => {
+    it('should render a JournalismForm', () => {
       wrapper = shallow(<ArticleEdit {...props} />);
       const actual = wrapper.containsMatchingElement(
-        <JournalismArticleForm
+        <JournalismForm
           onSubmitForm={wrapper.instance().handleOnEditArticle}
           location={props.location}
         />

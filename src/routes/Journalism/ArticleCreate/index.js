@@ -8,7 +8,7 @@ import {
   selectUiStateLoading,
   selectUiStateSuccess
 } from '../../../selectors/uiState';
-import JournalismArticleForm from '../../../components/JournalismArticleForm';
+import JournalismForm from '../../../components/JournalismForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
 export class ArticleCreate extends React.Component {
@@ -43,7 +43,7 @@ export class ArticleCreate extends React.Component {
         }
 
         {!promiseLoading && !promiseSuccess &&
-          <JournalismArticleForm
+          <JournalismForm
             onSubmitForm={onPostArticle}
             location={location}
           />

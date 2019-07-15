@@ -51,7 +51,7 @@ const mockState = {
     articles: mock.getJournalismResponse
   },
   form: {
-    JOURNALISM_ARTICLE_FORM: {
+    JOURNALISM_FORM: {
       values: mock.article
     }
   }

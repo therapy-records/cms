@@ -7,14 +7,14 @@ import Adapter from 'enzyme-adapter-react-15';
 import configureMockStore from 'redux-mock-store';
 import TextInput from '../TextInput/TextInput';
 import Datepicker from '../Datepicker/Datepicker';
-import ConnectedJournalismArticleForm, { JournalismArticleForm, JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS } from './JournalismArticleForm';
+import ConnectedJournalismForm, { JournalismForm, JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS } from './JournalismForm';
 import DropzoneImageUpload from '../NewsForm/DropzoneImageUpload';
 import { required } from '../../utils/form';
-import { selectJournalismArticleFormValues } from '../../selectors/form';
+import { selectJournalismFormValues } from '../../selectors/form';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('(Component) JournalismArticleForm', () => {
+describe('(Component) JournalismForm', () => {
   let wrapper,
     props,
     baseProps = {
@@ -24,7 +24,7 @@ describe('(Component) JournalismArticleForm', () => {
   it('should render a `Create` heading', () => {
     props = { ...baseProps, location: { pathname: 'test/create' } };
     const createWrapper = shallow(
-      <JournalismArticleForm {...props} />
+      <JournalismForm {...props} />
     );
     const actual = createWrapper.containsMatchingElement(
       <h2>Create Journalism ✍️</h2>
@@ -35,7 +35,7 @@ describe('(Component) JournalismArticleForm', () => {
   it('should render an `Edit` heading', () => {
     props = { ...baseProps, location: { pathname: 'test/edit' } };
     const editWrapper = shallow(
-      <JournalismArticleForm {...props} />
+      <JournalismForm {...props} />
     );
     const actual = editWrapper.containsMatchingElement(
       <h2>Edit Journalism ✍️</h2>
@@ -45,7 +45,7 @@ describe('(Component) JournalismArticleForm', () => {
 
   describe('form fields', () => {
     beforeEach(() => {
-      wrapper = shallow(<JournalismArticleForm {...props} />);
+      wrapper = shallow(<JournalismForm {...props} />);
     });
     it('should render a imageUrl field', () => {
       const actual = wrapper.containsMatchingElement(
@@ -101,7 +101,7 @@ describe('(Component) JournalismArticleForm', () => {
           releaseDate: new Date()
         }
       };
-      const datepickerWrapper = shallow(<JournalismArticleForm {...props} />);
+      const datepickerWrapper = shallow(<JournalismForm {...props} />);
       const actual = datepickerWrapper.containsMatchingElement(
         <Field name='releaseDate'
                component={Datepicker}
@@ -119,7 +119,7 @@ describe('(Component) JournalismArticleForm', () => {
       error: 'Something is wrong'
     }
     const errorWrapper = shallow(
-      <JournalismArticleForm {...props} />
+      <JournalismForm {...props} />
     );
     const actual = errorWrapper.containsMatchingElement(
       <p>{props.error}</p>
@@ -134,7 +134,7 @@ describe('(Component) JournalismArticleForm', () => {
         pristine: false,
         submitting: false
       }
-      const buttonWrapper = shallow(<JournalismArticleForm {...props} />);
+      const buttonWrapper = shallow(<JournalismForm {...props} />);
       const actual = buttonWrapper.containsMatchingElement(
         <button type='submit'>Submit</button>
       );
@@ -148,7 +148,7 @@ describe('(Component) JournalismArticleForm', () => {
         submitting: false,
         formValues: { mainImage: { url: 'test.com' } }
       }
-      const buttonWrapper = shallow(<JournalismArticleForm {...props} />);
+      const buttonWrapper = shallow(<JournalismForm {...props} />);
       const button = buttonWrapper.find('button[type="submit"]');
       button.simulate('click');
       expect(props.onSubmitForm.calledOnce).to.eq(true);
@@ -159,7 +159,7 @@ describe('(Component) JournalismArticleForm', () => {
     const mockStore = configureMockStore();
     const mockStoreState = {
       form: {
-        'JOURNALISM_ARTICLE_FORM': {
+        'JOURNALISM_FORM': {
           values: {}
         }
       }
@@ -170,7 +170,7 @@ describe('(Component) JournalismArticleForm', () => {
     beforeEach(() => {
       store = mockStore(mockStoreState);
       wrapper = shallow(
-        <ConnectedJournalismArticleForm
+        <ConnectedJournalismForm
           store={store}
           location={mockStoreState.location}
         />
@@ -179,7 +179,7 @@ describe('(Component) JournalismArticleForm', () => {
 
     it('should map state to props', () => {
       renderedProps = wrapper.props();
-      expect(renderedProps.formValues).to.eq(selectJournalismArticleFormValues(mockStoreState));
+      expect(renderedProps.formValues).to.eq(selectJournalismFormValues(mockStoreState));
     });
   });
 

@@ -3,9 +3,9 @@ import {
   selectNewsForm,
   selectNewsFormValues,
   selectNewsFormSyncErrors,
-  selectJournalismArticleForm,
-  selectJournalismArticleFormValues,
-  selectJournalismArticleFormValuesSyncErrors
+  selectJournalismForm,
+  selectJournalismFormValues,
+  selectJournalismFormValuesSyncErrors
 } from './form';
 
 const mockState = {
@@ -18,7 +18,7 @@ const mockState = {
         someField: 'is required'
       }
     },
-    JOURNALISM_ARTICLE_FORM: {
+    JOURNALISM_FORM: {
       values: {
         title: 'asdfasdf'
       },
@@ -52,24 +52,24 @@ describe('(Selectors) form', () => {
     });
   });
 
-  describe('selectJournalismArticleForm', () => {
-    it('should return JOURNALISM_ARTICLE_FORM', () => {
-      const actual = selectJournalismArticleForm(mockState);
+  describe('selectJournalismForm', () => {
+    it('should return JOURNALISM_FORM', () => {
+      const actual = selectJournalismForm(mockState);
       const expected = mockState.form.NEWS_FORM;
       expect(actual).to.deep.equal(expected);
     });
   });
-  describe('selectJournalismArticleFormValues', () => {
-    it('should return JOURNALISM_ARTICLE_FORM values', () => {
-      const actual = selectJournalismArticleFormValues(mockState);
-      const expected = mockState.form.JOURNALISM_ARTICLE_FORM.values;
+  describe('selectJournalismFormValues', () => {
+    it('should return JOURNALISM_FORM values', () => {
+      const actual = selectJournalismFormValues(mockState);
+      const expected = mockState.form.JOURNALISM_FORM.values;
       expect(actual).to.deep.equal(expected);
     });
   });
-  describe('selectJournalismArticleFormValuesSyncErrors', () => {
-    it('should return JOURNALISM_ARTICLE_FORM syncErrors', () => {
-      const actual = selectJournalismArticleFormValuesSyncErrors(mockState);
-      const expected = mockState.form.JOURNALISM_ARTICLE_FORM.syncErrors;
+  describe('selectJournalismFormValuesSyncErrors', () => {
+    it('should return JOURNALISM_FORM syncErrors', () => {
+      const actual = selectJournalismFormValuesSyncErrors(mockState);
+      const expected = mockState.form.JOURNALISM_FORM.syncErrors;
       expect(actual).to.deep.equal(expected);
     });
   });

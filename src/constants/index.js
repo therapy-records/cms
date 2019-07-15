@@ -14,4 +14,4 @@ export const AUTH = 'auth';
 export const AUTH_LOGIN = AUTH + '/login';
 
 export const NEWS_FORM = 'NEWS_FORM';
-export const JOURNALISM_ARTICLE_FORM = 'JOURNALISM_ARTICLE_FORM';
+export const JOURNALISM_FORM = 'JOURNALISM_FORM';

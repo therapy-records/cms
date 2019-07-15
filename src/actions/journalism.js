@@ -57,9 +57,9 @@ export const postJournalism = () => {
   return (dispatch, getState) => {
     dispatch(promiseLoading(true));
     const getFormObj = () => {
-      if (getState().form.JOURNALISM_ARTICLE_FORM &&
-        getState().form.JOURNALISM_ARTICLE_FORM.values) {
-        return JSON.stringify(getState().form.JOURNALISM_ARTICLE_FORM.values);
+      if (getState().form.JOURNALISM_FORM &&
+        getState().form.JOURNALISM_FORM.values) {
+        return JSON.stringify(getState().form.JOURNALISM_FORM.values);
       } else {
         return null;
       }
@@ -94,9 +94,9 @@ export const editJournalism = (postToEdit) => {
   return (dispatch, getState) => {
     dispatch(promiseLoading(true));
     let getFormValues = () => {
-      if (getState().form.JOURNALISM_ARTICLE_FORM &&
-        getState().form.JOURNALISM_ARTICLE_FORM.values) {
-        return getState().form.JOURNALISM_ARTICLE_FORM.values;
+      if (getState().form.JOURNALISM_FORM &&
+        getState().form.JOURNALISM_FORM.values) {
+        return getState().form.JOURNALISM_FORM.values;
       } else {
         return null;
       }

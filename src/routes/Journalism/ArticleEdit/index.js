@@ -13,7 +13,7 @@ import {
   selectUiStateLoading,
   selectUiStateSuccess
 } from '../../../selectors/uiState';
-import JournalismArticleForm from '../../../components/JournalismArticleForm';
+import JournalismForm from '../../../components/JournalismForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
 export class ArticleEdit extends React.Component {
@@ -74,7 +74,7 @@ export class ArticleEdit extends React.Component {
         }
 
         {(!promiseLoading && !article.editSuccess) &&
-          <JournalismArticleForm
+          <JournalismForm
             onSubmitForm={this.handleOnEditArticle}
             location={location}
           />
