@@ -29,42 +29,25 @@ describe('(Component) DropzoneImageUpload', () => {
   describe('methods', () => {
 
     describe('componentDidMount', () => {
-      describe('when there is props.existingImage', () => {
+      describe('when there is props.existingimages', () => {
         it('should set state', () => {
-          const mockExistingImageUrl = 'http://test.com/image.jpg';
+          const mockExistingImages = ['http://test.com/image.jpg'];
           wrapper.setProps({
-            existingImage: mockExistingImageUrl
+            existingImages: mockExistingImages
           });
-          expect(wrapper.state().singleItem).to.eq(mockExistingImageUrl);
+          expect(wrapper.state().images).to.deep.eq(mockExistingImages);
         });
       });
     });
 
     describe('componentWillReceiveProps', () => {
-      const mockFile1 = 'testing/test.jpg';
-      const mockFile2 = 'testing/test2.jpg';
-
-      describe('when there is props.existingImage', () => {
-        it('should set singleItem state', () => {
+      describe('when there is props.existingImages', () => {
+        it('should set state', () => {
+          const mockExistingImages = ['http://test.com/image.jpg'];
           wrapper.setProps({
-            existingImage: mockFile1
+            existingImages: mockExistingImages
           });
-          expect(wrapper.state().singleItem).to.eq(mockFile1);
-        });
-      });
-
-      describe('when there is props.existingMiniGalleryImages', () => {
-        it('should set items state', () => {
-          wrapper.setProps({
-            existingMiniGalleryImages: [
-              mockFile1,
-              mockFile2
-            ]
-          });
-          expect(wrapper.state().items).to.deep.eq([
-            mockFile1,
-            mockFile2
-          ]);
+          expect(wrapper.state().images).to.deep.eq(mockExistingImages);
         });
       });
     });

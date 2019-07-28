@@ -127,10 +127,10 @@
     ],
     "coverageThreshold": {
       "global": {
-        "statements": 82,
-        "branches": 85,
-        "functions": 79,
-        "lines": 83
+        "statements": 87,
+        "branches": 86,
+        "functions": 80,
+        "lines": 87
       }
     },
     "coveragePathIgnorePatterns": [

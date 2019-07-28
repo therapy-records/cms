@@ -1,11 +1,12 @@
 import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
-import {Field, FieldArray} from 'redux-form';
-import NewsFormSectionFields from './NewsFormSectionFields';
-import NewsFormSectionFieldImages from './NewsFormSectionFieldImages';
+import { Field } from 'redux-form';
+import { NewsFormSectionFields }  from './NewsFormSectionFields';
+import DropzoneImageUpload from '../NewsForm/DropzoneImageUpload';
 import RichTextEditor from '../RichTextEditor';
-import {required} from '../../utils/form';
+import { required } from '../../utils/form';
+import { NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS } from '../../utils/news';
 
 Enzyme.configure({adapter: new Adapter()});
 
@@ -33,10 +34,12 @@ describe('(Component) NewsFormSectionFields', () => {
   const props = {
     fields: {
       map: callback => mockFields.map((field, index) => callback(field, index)),
+      get: index => mockFields[index],
       push: fieldsPushSpy,
       remove: fieldsRemoveSpy,
       length: mockFields.length
-    }
+    },
+    updateSectionImages: () => {}
   };
 
   beforeEach(() => {
@@ -49,31 +52,6 @@ describe('(Component) NewsFormSectionFields', () => {
 
     it('should render multiple list items', () => {
       expect(wrapper.find('li').length).to.eq(mockFields.length);
-    });
-
-    it('should render a list item with <Field /> for `copy`', () => {
-      const li = wrapper.find('li').first();
-      const actual = li.containsMatchingElement(
-        <Field
-          name={`${mockFields[0]}.copy`}
-          title="Copy"
-          component={RichTextEditor}
-          validate={required}
-          required
-        />
-      );
-      expect(actual).to.eq(true);
-    });
-
-    it('should render a list item with <FieldArray /> for `images`', () => {
-      const li = wrapper.find('li').first();
-      const actual = li.containsMatchingElement(
-        <FieldArray
-          name={`${mockFields[0]}.images`}
-          component={NewsFormSectionFieldImages}
-        />
-      );
-      expect(actual).to.eq(true);
     });
 
     describe('field/section heading', () => {
@@ -109,7 +87,9 @@ describe('(Component) NewsFormSectionFields', () => {
           wrapper.setProps({
             fields: {
               map: callback => _mockFields.map((field, index) => callback(field, index)),
-            }
+              get: index => mockFields[index],
+            },
+            updateSectionImages: () => {}
           });
 
           const li = wrapper.find('li').first();
@@ -121,6 +101,35 @@ describe('(Component) NewsFormSectionFields', () => {
       });
     });
 
+    it('should render a list item with <Field /> for `copy`', () => {
+      const li = wrapper.find('li').first();
+      const actual = li.containsMatchingElement(
+        <Field
+          name={`${mockFields[0]}.copy`}
+          title="Copy"
+          component={RichTextEditor}
+          validate={required}
+          required
+        />
+      );
+      expect(actual).to.eq(true);
+    });
+
+
+    it('should render a list item with <DropzoneImageUpload />', () => {
+      const li = wrapper.find('li').first();
+      const dropzoneImageUpload = li.find('DropzoneImageUpload');
+      expect(dropzoneImageUpload.length).to.eq(1);
+      expect(dropzoneImageUpload.prop('component')).to.eq(DropzoneImageUpload);
+      const expectedExistingImages = [
+        ...mockFields[0].images.map(imageObj => imageObj.url)
+      ];
+
+      expect(dropzoneImageUpload.prop('existingImages')).to.deep.eq(expectedExistingImages);
+      expect(dropzoneImageUpload.prop('minImageDimensions')).to.eq(NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS);
+      expect(dropzoneImageUpload.prop('onChange')).to.be.a('function');
+    });
+
     describe('`Add section` button', () => {
       it('should render', () => {
         const button = wrapper.find('button').last();
@@ -128,12 +137,11 @@ describe('(Component) NewsFormSectionFields', () => {
         expect(button.text()).to.eq('Add section');
       });
 
-        it('should call props.fields.push onClick', () => {
-            const button = wrapper.find('button').last();
-            button.simulate('click');
-            expect(fieldsPushSpy).to.have.been.calledOnce;
-        });
-
+      it('should call props.fields.push onClick', () => {
+          const button = wrapper.find('button').last();
+          button.simulate('click');
+          expect(fieldsPushSpy).to.have.been.calledOnce;
+      });
     });
 
   });

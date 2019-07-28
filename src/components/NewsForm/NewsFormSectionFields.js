@@ -1,60 +1,91 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Field, FieldArray } from 'redux-form';
+import { connect } from 'react-redux';
+import { Field, change } from 'redux-form';
+import DropzoneImageUpload from './DropzoneImageUpload';
 import RichTextEditor from '../RichTextEditor';
 import { required } from '../../utils/form';
-import { EMPTY_ARTICLE_SECTION_OBJ } from '../../utils/news';
-import NewsFormSectionFieldImages from './NewsFormSectionFieldImages';
+import {
+  EMPTY_ARTICLE_SECTION_OBJ,
+  NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS
+} from '../../utils/news';
 
-class NewsFormSectionFields extends PureComponent {
+export class NewsFormSectionFields extends Component {
+  constructor(props) {
+    super(props);
+    this.handleUpdateSectionImages = this.handleUpdateSectionImages.bind(this);
+  }
+
+  handleUpdateSectionImages(imageUrl, sectionImageIndex, sectionIndex) {
+    this.props.updateSectionImages('NEWS_FORM', `sections.${sectionIndex}.images.${sectionImageIndex}.url`, imageUrl);
+  }
+  
   render() {
     const {fields} = this.props;
 
     return (
       <div>
         <ul>
-          {fields.map((section, index) => (
-            <li
-              key={`${index}_${fields.length}`}
-              className="row-large"
-            >
+          {fields.map((section, sectionIndex) => {
+            const sectionImages = fields.get(sectionIndex).images;
+            const hasSectionImages = sectionImages.find(imageObj => imageObj.url !== '');
 
-              {fields.length > 1 &&
-                <div className="news-article-form-section-heading">
-                  <h4>Section {index + 1}</h4>
-                  <button
-                    type="button"
-                    className="btn-sm btn-danger"
-                    onClick={() => fields.remove(index)}
-                  >
-                    Remove
-                  </button>
+            // temporary solution until DropzoneImageUpload is updated to handle `url` and `alt`
+            // currently only handles array of strings/urls
+            let sectionImagesArray = [];
+            if (hasSectionImages) {
+              sectionImagesArray = [
+                ...sectionImages.map(imageObj => imageObj.url)
+              ];
+            }
+
+            return (
+              <li
+                key={`${sectionIndex}_${fields.length}`}
+                className="row-large"
+              >
+
+                {fields.length > 1 &&
+                  <div className="news-article-form-section-heading">
+                    <h4>Section {sectionIndex + 1}</h4>
+                    <button
+                      type="button"
+                      className="btn-sm btn-danger"
+                      onClick={() => fields.remove(sectionIndex)}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                }
+
+                <div>
+
+                  <div className="row">
+                    <Field
+                      name={`${section}.copy`}
+                      title="Copy"
+                      component={RichTextEditor}
+                      validate={required}
+                      required
+                    />
+                  </div>
+
+                  <div className="row">
+                    <DropzoneImageUpload
+                      component={DropzoneImageUpload}
+                      existingImages={sectionImagesArray}
+                      minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
+                      onChange={(imageUrl, sectionImageIndex) =>
+                        this.handleUpdateSectionImages(imageUrl, sectionImageIndex, sectionIndex)
+                      }
+                    />
+                  </div>
+
                 </div>
-              }
 
-              <div>
-
-                <div className="row">
-                  <Field
-                    name={`${section}.copy`}
-                    title="Copy"
-                    component={RichTextEditor}
-                    validate={required}
-                    required
-                  />
-                </div>
-
-                <div className="row">
-                  <FieldArray
-                    name={`${section}.images`}
-                    component={NewsFormSectionFieldImages}
-                  />
-                </div>
-
-              </div>
-
-            </li>
-          ))}
+              </li>
+            );
+          })}
         </ul>
 
         <div className='row-large'>
@@ -79,7 +110,14 @@ class NewsFormSectionFields extends PureComponent {
 }
 
 NewsFormSectionFields.propTypes = {
-  fields: PropTypes.object
+  fields: PropTypes.object,
+  updateSectionImages: PropTypes.func.isRequired
 };
 
-export default NewsFormSectionFields;
+export const mapDispatchToProps = {
+  updateSectionImages: (...args) => change(...args)
+}
+
+export default connect(null, mapDispatchToProps)(NewsFormSectionFields);
+
+

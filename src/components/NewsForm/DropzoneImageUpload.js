@@ -12,31 +12,25 @@ export class DropzoneImageUpload extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [],
-      singleItem: '',
+      images: [],
       invalidDimensions: [],
       isLoading: false
     };
   }
 
   componentDidMount() {
-    const {existingImage} = this.props;
-    if (existingImage) {
+    const {existingImages} = this.props;
+    if (existingImages) {
       this.setState({
-        singleItem: existingImage
+        images: [...existingImages]
       });
     }
   }
 
   componentWillReceiveProps(props) {
-    if (props.existingImage) {
+    if (props.existingImages) {
       this.setState({
-        singleItem: props.existingImage
-      });
-    }
-    if (props.existingMiniGalleryImages) {
-      this.setState({
-        items: props.existingMiniGalleryImages
+        images: [...props.existingImages]
       });
     }
   }
@@ -67,22 +61,21 @@ export class DropzoneImageUpload extends React.Component {
     upload.end((err, response) => {
       if (response.body.secure_url !== '') {
         if (this.validMinimumImageDimensions(response.body)) {
-          if (this.props.multiple === true) {
             this.setState({
-              items: [
-                ...this.state.items,
+              images: [
+                ...this.state.images,
                 ...[this.handleImageResponseUrl(response.body.secure_url)]
               ],
               isLoading: false
+            }, () => {
+              const {images} = this.state;
+              const lastImageInState = images[images.length - 1];
+              const imageIndex = images.indexOf(lastImageInState);
+              this.props.onChange(
+                lastImageInState,
+                imageIndex
+              );
             });
-            this.props.input.onChange(this.state.items);
-          } else {
-            this.setState({
-              singleItem: this.handleImageResponseUrl(response.body.secure_url),
-              isLoading: false
-            });
-            this.props.input.onChange(this.state.singleItem);
-          }
         } else {
           const message = {
             tooSmall: `Image too small (width: ${response.body.width} height: ${response.body.height})`,
@@ -99,11 +92,11 @@ export class DropzoneImageUpload extends React.Component {
           });
         }
       }
-      if (err) {
-        this.setState({
-          singleItem: `Sorry, error ${err}`
-        });
-      }
+      // if (err) {
+      //   this.setState({
+      //     images: `Sorry, error ${err}`
+      //   });
+      // }
     });
   }
 
@@ -113,15 +106,13 @@ export class DropzoneImageUpload extends React.Component {
 
   render() {
     const {
-      input,
       title,
       multiple,
       minImageDimensions
     } = this.props;
 
     const {
-      items,
-      singleItem,
+      images,
       invalidDimensions,
       isLoading
     } = this.state;
@@ -134,13 +125,12 @@ export class DropzoneImageUpload extends React.Component {
 
           <div className={multiple && 'col-1'}>
             <Dropzone
-              name={input.name}
               onDrop={this.handleOnDrop.bind(this)} // eslint-disable-line
-              className={isLoading ? 'dropzone dropzone-active' : `dropzone ${singleItem && 'dropzone-existing-image'}`}
+              className={isLoading ? 'dropzone dropzone-active' : `dropzone ${images && 'dropzone-existing-image'}`}
               activeClassName='dropzone-active'
               multiple={multiple}
             >
-              {(!multiple && !items.length)
+              {!images.length
                 ? <div className='dropzone-cta'>
                   <span>Drag &amp; drop</span>
                   <div className={isLoading ? 'dropzone-loading dropzone-loading-active' : 'dropzone-loading'}>
@@ -148,21 +138,6 @@ export class DropzoneImageUpload extends React.Component {
                   </div>
                 </div>
                 : null}
-
-              {multiple
-                ? <div className='dropzone-cta'>
-                  <span>Drag &amp; drop multiple</span>
-                  <div className={isLoading ? 'dropzone-loading dropzone-loading-active' : 'dropzone-loading'}>
-                    <LoadingSpinner />
-                  </div>
-                </div>
-                : null}
-
-              {singleItem && <img src={singleItem} alt='Upload preview' />}
-
-              {(!multiple && items.length) ?
-                <img src={items[0]} /> // eslint-disable-line
-              : null}
 
             </Dropzone>
 
@@ -185,19 +160,17 @@ export class DropzoneImageUpload extends React.Component {
             </ul>
             : null}
 
-          {multiple &&
+          {(images && images.length) ?
             <div className='col-2 gallery-images-col-2'>
-              {(multiple && items && items.length)
-                ? <ul className='flex-root gallery-images-flex-root cancel-margin'>
-                  {items.map((i) => (
-                    <li key={i} className='col-50 no-list-style gallery-image-upload-item'>
-                      <img src={i} alt={`gallery item ${i + 1}`} />
-                    </li>
-                  ))}
-                </ul>
-                : null}
+              <ul className='flex-root gallery-images-flex-root cancel-margin'>
+                {images.map((i) => (
+                  <li key={i} className='col-50 no-list-style gallery-image-upload-item'>
+                    <img src={i} alt={`image  ${i + 1}`} />
+                  </li>
+                ))}
+              </ul>
             </div>
-          }
+          : null}
 
         </div>
       </div>
@@ -206,11 +179,10 @@ export class DropzoneImageUpload extends React.Component {
 }
 
 DropzoneImageUpload.propTypes = {
-  input: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
   title: PropTypes.string,
   multiple: PropTypes.bool,
-  existingImage: PropTypes.string,
-  existingMiniGalleryImages: PropTypes.array,
+  existingImages: PropTypes.array,
   minImageDimensions: PropTypes.object
 };
 

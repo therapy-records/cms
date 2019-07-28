@@ -7,6 +7,11 @@ export const EMPTY_ARTICLE_SECTION_OBJ = {
   copy: ''
 };
 
+export const NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS = {
+  width: 450,
+  height: 450
+};
+
 export const getArticlesFirstImageUrl = (article, placeholderFallback = false) => {
   const hasImages = article.sections &&
     article.sections.length &&
