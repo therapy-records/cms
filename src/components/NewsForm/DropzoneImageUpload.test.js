@@ -10,9 +10,7 @@ Enzyme.configure({ adapter: new Adapter() });
 describe('(Component) DropzoneImageUpload', () => {
   let wrapper,
     props = {
-      input: {
-        onChange: () => {}
-      },
+      onChange: () => {},
       title: 'hello test',
       minImageDimensions: {
         width: 400,
@@ -35,6 +33,7 @@ describe('(Component) DropzoneImageUpload', () => {
           wrapper.setProps({
             existingImages: mockExistingImages
           });
+          wrapper.instance().componentDidMount();
           expect(wrapper.state().images).to.deep.eq(mockExistingImages);
         });
       });
@@ -57,6 +56,32 @@ describe('(Component) DropzoneImageUpload', () => {
         const mockUrl = 'upload';
         const result = wrapper.instance().handleImageResponseUrl(mockUrl);
         expect(result).to.eq(mockUrl.replace(/upload/, 'upload/c_limit,q_100,w_650'))
+      });
+    });
+
+    describe('validMinimumImageDimensions', () => {
+      let mockMinImageDimensions
+      beforeEach(() => {
+        mockMinImageDimensions = { width: 3, height: 3 };
+        wrapper.setProps({
+          minImageDimensions: mockMinImageDimensions
+        });
+      });
+
+      describe('when provided width and height is greater than or equal to the minimum dimensions', () => {
+        it('should return true', () => {
+          let result = wrapper.instance().validMinimumImageDimensions({ width: 3, height: 3 });
+          expect(result).to.eq(true);
+          result = wrapper.instance().validMinimumImageDimensions({ width: 4, height: 4 });
+          expect(result).to.eq(true);          
+        });
+      });
+
+      describe('when provided width and height is less than the minimum dimensions', () => {
+        it('should return false', () => {
+          let result = wrapper.instance().validMinimumImageDimensions({ width: 2, height: 2 });
+          expect(result).to.eq(false);
+        });
       });
     });
 

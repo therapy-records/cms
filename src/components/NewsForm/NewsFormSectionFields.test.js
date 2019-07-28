@@ -48,6 +48,31 @@ describe('(Component) NewsFormSectionFields', () => {
     );
   });
 
+  describe('methods', () => {
+    describe('handleUpdateSectionImages', () => {
+      it('should call props.updateSectionImages', () => {
+        const updateSectionImagesSpy = sinon.spy();
+        wrapper = shallow(
+          <NewsFormSectionFields
+            {...props}
+            updateSectionImages={updateSectionImagesSpy}
+          />
+        );
+
+        wrapper.instance().handleUpdateSectionImages(
+          'testImage.png',
+          1,
+          3
+        );
+        expect(updateSectionImagesSpy).to.have.been.calledWith(
+          'NEWS_FORM',
+          `sections.3.images.1.url`,
+          'testImage.png'
+        );
+      });
+    });
+  });
+
   describe('rendering', () => {
 
     it('should render multiple list items', () => {
@@ -116,18 +141,39 @@ describe('(Component) NewsFormSectionFields', () => {
     });
 
 
-    it('should render a list item with <DropzoneImageUpload />', () => {
-      const li = wrapper.find('li').first();
-      const dropzoneImageUpload = li.find('DropzoneImageUpload');
-      expect(dropzoneImageUpload.length).to.eq(1);
-      expect(dropzoneImageUpload.prop('component')).to.eq(DropzoneImageUpload);
-      const expectedExistingImages = [
-        ...mockFields[0].images.map(imageObj => imageObj.url)
-      ];
+    describe('<DropzoneImageUpload />', () => {
+      it('should render in a list item', () => {
+        const li = wrapper.find('li').first();
+        const dropzoneImageUpload = li.find('DropzoneImageUpload');
+        expect(dropzoneImageUpload.length).to.eq(1);
+        expect(dropzoneImageUpload.prop('component')).to.eq(DropzoneImageUpload);
+        const expectedExistingImages = [
+          ...mockFields[0].images.map(imageObj => imageObj.url)
+        ];
 
-      expect(dropzoneImageUpload.prop('existingImages')).to.deep.eq(expectedExistingImages);
-      expect(dropzoneImageUpload.prop('minImageDimensions')).to.eq(NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS);
-      expect(dropzoneImageUpload.prop('onChange')).to.be.a('function');
+        expect(dropzoneImageUpload.prop('existingImages')).to.deep.eq(expectedExistingImages);
+        expect(dropzoneImageUpload.prop('minImageDimensions')).to.eq(NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS);
+        expect(dropzoneImageUpload.prop('onChange')).to.be.a('function');
+      });
+    });
+
+    describe('DropzoneImageUpload onChange prop', () => {
+      it('should call handleUpdateSectionImages', () => {
+        const handleUpdateSectionImagesSpy = sinon.spy();
+        wrapper.instance().handleUpdateSectionImages = handleUpdateSectionImagesSpy;
+        const li = wrapper.find('li').last(1);
+        const dropzoneImageUpload = li.find('DropzoneImageUpload');
+        dropzoneImageUpload.props().onChange(
+          mockFields[1].images[1].url,
+          1
+        );
+        expect(handleUpdateSectionImagesSpy).to.have.been.called;
+        expect(handleUpdateSectionImagesSpy).to.have.been.calledWith(
+          mockFields[1].images[1].url,
+          1,
+          1
+        );
+      });
     });
 
     describe('`Add section` button', () => {
