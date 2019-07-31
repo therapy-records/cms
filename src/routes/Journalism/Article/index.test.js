@@ -93,12 +93,11 @@ describe('(Component) Journalism - Article', () => {
       });
     });
   });
-  
 
   it('should render <LoadingSpinner />', () => {
     const actual = wrapper.containsMatchingElement(
       <LoadingSpinner
-        active={props.promiseLoading}
+        active={props.promiseLoading && !baseProps.article.isDeleted}
         fullScreen
       />
     );
@@ -121,6 +120,16 @@ describe('(Component) Journalism - Article', () => {
         </div>
       );
       expect(actual).to.equal(true);
+    });
+
+    describe('with promiseLoading', () => {
+      it('should NOT render <LoadingSpinner /> with active prop', () => {
+        wrapper.setProps({
+          promiseLoading: true
+        });
+        const loadingSpinner = wrapper.find('LoadingSpinner');
+        expect(loadingSpinner.prop('active')).to.eq(false);
+      });
     });
   });
 

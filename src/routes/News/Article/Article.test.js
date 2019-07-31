@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import configureMockStore from 'redux-mock-store';
+import moment from 'moment';
 import ConnectedArticle, { Article } from './index'
 import ArticleDeleteModal from '../../../components/ArticleDeleteModal'
 import LoadingSpinner from '../../../components/LoadingSpinner';
@@ -163,6 +164,16 @@ describe('(Component) News - Article', () => {
         );
         expect(actual).to.equal(true);
       });
+
+      describe('with promiseLoading', () => {
+        it('should NOT render <LoadingSpinner /> with active prop', () => {
+          wrapper.setProps({
+            promiseLoading: true
+          });
+          const loadingSpinner = wrapper.find('LoadingSpinner');
+          expect(loadingSpinner.prop('active')).to.eq(false);
+        });
+      });
     });
 
     describe('when an article does not exist / article._id is undefined', () => {
@@ -214,6 +225,27 @@ describe('(Component) News - Article', () => {
         expect(actual).to.equal(true);
       });
 
+      describe('when an article has `editedAt`', () => {
+        it('should render `last modified` copy with date', () => {
+          const mockEditedAtDate = 'Wed Jul 31 2019 08:54:44 GMT+0100';
+          wrapper.setProps({
+            article: {
+              ...mockArticle,
+              editedAt: mockEditedAtDate
+            }
+          });
+          const modifiedDiv = wrapper.find('.heading-modified');
+          const expectedDate1 = moment(mockEditedAtDate).fromNow();
+          const expectedDate2 = moment(mockEditedAtDate).format('DD/mm/YYYY');
+          const actual = modifiedDiv.containsMatchingElement(
+            <p>Last modified {expectedDate1}
+              <small>{expectedDate2}</small>
+            </p>
+          );
+          expect(actual).to.eq(true);
+        });
+      });
+
       it('should be render an `edit article` button', () => {
         const editButton = wrapper.find(Link);
         expect(editButton.length).to.equal(1);
@@ -235,6 +267,7 @@ describe('(Component) News - Article', () => {
           ]);
           expect(actual).to.equal(true);
         });
+
         it('should render `copy` for each section', () => {
           const actual = wrapper.containsAllMatchingElements([
             <div

@@ -8,7 +8,7 @@ const ACTION_HANDLERS = {
     return { ...state, message: action.payload }
   },
   [RESET_ERROR_ALERT]: (state, action) => {
-    return { ...state, message: action.payload }
+    return { ...state, message: '' }
   }
 }
 

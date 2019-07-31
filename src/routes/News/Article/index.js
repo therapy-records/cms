@@ -102,9 +102,11 @@ export class Article extends React.Component {
                 <h2>{article.title}</h2>
                 <p className='small-tab'>{moment(article.createdAt).fromNow()}</p>
                 {article.editedAt &&
-                  <p>Last modified {moment(article.editedAt).fromNow()}
-                    <small>{moment(article.editedAt).format('DD/mm/YYYY')}</small>
-                  </p>
+                  <div className='heading-modified'>
+                    <p>Last modified {moment(article.editedAt).fromNow()}
+                      <small>{moment(article.editedAt).format('DD/mm/YYYY')}</small>
+                    </p>
+                  </div>
                 }
               </div>
 

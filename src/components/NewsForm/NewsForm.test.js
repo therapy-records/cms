@@ -38,6 +38,15 @@ describe('(Component) NewsForm', () => {
 
   describe('rendering', () => {
 
+    describe('when there are no props.formValues', () => {
+      it('should return null', () => {
+        wrapper.setProps({
+          formValues: undefined
+        });
+        expect(wrapper.type()).to.eq(null);
+      });
+    });
+
     it('should render a `Create` heading', () => {
       const actual = wrapper.containsMatchingElement(
         <h2>Create News 🗞️</h2>
