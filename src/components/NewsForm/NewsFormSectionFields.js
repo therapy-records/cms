@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Field, change } from 'redux-form';
+import { Field, change, arrayRemove } from 'redux-form';
 import DropzoneImageUpload from './DropzoneImageUpload';
 import RichTextEditor from '../RichTextEditor';
 import { required } from '../../utils/form';
@@ -14,10 +14,15 @@ export class NewsFormSectionFields extends Component {
   constructor(props) {
     super(props);
     this.handleUpdateSectionImages = this.handleUpdateSectionImages.bind(this);
+    this.handleRemoveSectionImage = this.handleRemoveSectionImage.bind(this);
   }
 
   handleUpdateSectionImages(imageUrl, sectionImageIndex, sectionIndex) {
     this.props.updateSectionImages('NEWS_FORM', `sections.${sectionIndex}.images.${sectionImageIndex}.url`, imageUrl);
+  }
+
+  handleRemoveSectionImage(sectionImageIndex, sectionIndex) {
+    this.props.removeSectionImage('NEWS_FORM', `sections.${sectionIndex}.images`, sectionImageIndex);
   }
   
   render() {
@@ -28,12 +33,11 @@ export class NewsFormSectionFields extends Component {
         <ul>
           {fields.map((section, sectionIndex) => {
             const sectionImages = fields.get(sectionIndex).images;
-            const hasSectionImages = sectionImages.find(imageObj => imageObj.url !== '');
 
             // temporary solution until DropzoneImageUpload is updated to handle `url` and `alt`
             // currently only handles array of strings/urls
             let sectionImagesArray = [];
-            if (hasSectionImages) {
+            if (sectionImages.length) {
               sectionImagesArray = [
                 ...sectionImages.map(imageObj => imageObj.url)
               ];
@@ -74,10 +78,13 @@ export class NewsFormSectionFields extends Component {
                     <DropzoneImageUpload
                       title="Images"
                       component={DropzoneImageUpload}
-                      existingImages={sectionImagesArray}
+                      existingImages={sectionImagesArray.length ? sectionImagesArray : []}
                       minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
                       onChange={(imageUrl, sectionImageIndex) =>
                         this.handleUpdateSectionImages(imageUrl, sectionImageIndex, sectionIndex)
+                      }
+                      onRemove={(sectionImageIndex) =>
+                        this.handleRemoveSectionImage(sectionImageIndex, sectionIndex)
                       }
                     />
                   </div>
@@ -112,12 +119,14 @@ export class NewsFormSectionFields extends Component {
 
 NewsFormSectionFields.propTypes = {
   fields: PropTypes.object,
-  updateSectionImages: PropTypes.func.isRequired
+  updateSectionImages: PropTypes.func.isRequired,
+  removeSectionImage: PropTypes.func.isRequired
 };
 
 export const mapDispatchToProps = {
-  updateSectionImages: (...args) => change(...args)
-}
+  updateSectionImages: (...args) => change(...args),
+  removeSectionImage: (...args) => arrayRemove(...args)
+};
 
 export default connect(null, mapDispatchToProps)(NewsFormSectionFields);
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Field } from 'redux-form';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import DropzoneImageUpload from './DropzoneImageUpload';
@@ -9,7 +8,6 @@ Enzyme.configure({ adapter: new Adapter() });
 describe('(Component) DropzoneImageUpload', () => {
   let wrapper,
     props = {
-      onChange: () => {},
       title: 'hello test',
       minImageDimensions: {
         width: 400,
@@ -99,6 +97,53 @@ describe('(Component) DropzoneImageUpload', () => {
         expect(uploadSingleImageSpy).to.have.been.calledWith(mockFiles[2]);
       });
     });
+
+    describe('removeSingleImage', () => {
+      const mockInitImageState = [
+        'temp/testing1.jpg',
+        'temp/testing2.jpg',
+        'temp/testing3.jpg'
+      ];
+
+      it('should remove a given image url from state and call props.input.onChange', () => {
+        const imageToRemove = mockInitImageState[1];
+        const onChangeSpy = sinon.spy();
+
+        wrapper.setProps({
+          input: {
+            onChange: onChangeSpy
+          }
+        });
+        wrapper.setState({ images: mockInitImageState });
+        wrapper.instance().removeSingleImage(imageToRemove);
+        expect(wrapper.state().images).to.deep.eq([
+          mockInitImageState[0],
+          mockInitImageState[2]
+        ]);
+        expect(onChangeSpy).to.have.been.calledWith('');
+      });
+
+      describe('with no props.input.onChange', () => {
+        it('should remove a given image url from state and call props.onRemove', () => {
+          const imageToRemove = mockInitImageState[1];
+          const onRemoveSpy = sinon.spy();
+
+          wrapper.setProps({
+            onRemove: onRemoveSpy
+          });
+          wrapper.setState({ images: mockInitImageState });
+          wrapper.instance().removeSingleImage(imageToRemove);
+          const expectedState = [
+            mockInitImageState[0],
+            mockInitImageState[2]
+          ];
+          expect(wrapper.state().images).to.deep.eq(expectedState);
+          expect(onRemoveSpy).to.have.been.calledWith(1);
+        });
+
+      });
+    });
+
   });
 
   describe('rendering', () => {

@@ -39,7 +39,8 @@ describe('(Component) NewsFormSectionFields', () => {
       remove: fieldsRemoveSpy,
       length: mockFields.length
     },
-    updateSectionImages: () => {}
+    updateSectionImages: () => {},
+    removeSectionImage: () => {}
   };
 
   beforeEach(() => {
@@ -68,6 +69,28 @@ describe('(Component) NewsFormSectionFields', () => {
           'NEWS_FORM',
           `sections.3.images.1.url`,
           'testImage.png'
+        );
+      });
+    });
+
+    describe('handleRemoveSectionImage', () => {
+      it('should call props.removeSectionImage', () => {
+        const removeSectionImageSpy = sinon.spy();
+        wrapper = shallow(
+          <NewsFormSectionFields
+            {...props}
+            removeSectionImage={removeSectionImageSpy}
+          />
+        );
+
+        wrapper.instance().handleRemoveSectionImage(
+          2,
+          3
+        );
+        expect(removeSectionImageSpy).to.have.been.calledWith(
+          'NEWS_FORM',
+          `sections.3.images`,
+          2
         );
       });
     });
@@ -114,7 +137,8 @@ describe('(Component) NewsFormSectionFields', () => {
               map: callback => _mockFields.map((field, index) => callback(field, index)),
               get: index => mockFields[index],
             },
-            updateSectionImages: () => {}
+            updateSectionImages: () => {},
+            removeSectionImage: () => {}
           });
 
           const li = wrapper.find('li').first();
@@ -154,6 +178,28 @@ describe('(Component) NewsFormSectionFields', () => {
         expect(dropzoneImageUpload.prop('existingImages')).to.deep.eq(expectedExistingImages);
         expect(dropzoneImageUpload.prop('minImageDimensions')).to.eq(NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS);
         expect(dropzoneImageUpload.prop('onChange')).to.be.a('function');
+        expect(dropzoneImageUpload.prop('onRemove')).to.be.a('function');
+      });
+
+      describe('when there are no exisiting images in sthe section', () => {
+        it('should pass empty array to <DropzoneImageUpload />', () => {
+          const _mockFields = [{
+            images: []
+          }];
+
+          wrapper.setProps({
+            fields: {
+              map: callback => _mockFields.map((field, index) => callback(field, index)),
+              get: index => _mockFields[index],
+            },
+            updateSectionImages: () => {},
+            removeSectionImage: () => {}
+          });
+
+          const li = wrapper.find('li').first();
+          const dropzoneImageUpload = li.find('DropzoneImageUpload');
+          expect(dropzoneImageUpload.prop('existingImages')).to.deep.eq([]);
+        });
       });
 
       describe('DropzoneImageUpload onChange prop', () => {
@@ -174,6 +220,25 @@ describe('(Component) NewsFormSectionFields', () => {
           );
         });
       });
+
+      describe('DropzoneImageUpload onRemove prop', () => {
+        it('should call handleUpdateSectionImages', () => {
+          const handleRemoveSectionImageSpy = sinon.spy();
+          wrapper.instance().handleRemoveSectionImage = handleRemoveSectionImageSpy;
+          const li = wrapper.find('li').last(1);
+          const dropzoneImageUpload = li.find('DropzoneImageUpload');
+          dropzoneImageUpload.props().onRemove(
+            2,
+            1
+          );
+          expect(handleRemoveSectionImageSpy).to.have.been.called;
+          expect(handleRemoveSectionImageSpy).to.have.been.calledWith(
+            2,
+            1
+          );
+        });
+      });
+
     });
 
     describe('`Add section` button', () => {

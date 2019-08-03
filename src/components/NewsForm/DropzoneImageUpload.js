@@ -108,6 +108,26 @@ export class DropzoneImageUpload extends React.Component {
     files.forEach((f) => this.uploadSingleImage(f));
   }
 
+  removeSingleImage(imageUrl) {
+    const { images } = this.state;
+    const updatedImages = images.filter((i) => i !== imageUrl);
+    this.setState({
+      images: updatedImages
+    }, () => {
+      const { images } = this.state;
+      const lastImageInState = images[images.length - 1];
+      const imageIndex = images.indexOf(lastImageInState);
+
+      // if props.input.onChange, it's a single redux-form Field
+      // if props.onRemove, it's a custom form field/array of images
+      if (this.props.input && this.props.input.onChange) {
+        this.props.input.onChange('');
+      } else if (this.props.onRemove) {
+        this.props.onRemove(imageIndex);
+      }
+    }) ;
+  }
+
   render() {
     const {
       title,
@@ -149,11 +169,22 @@ export class DropzoneImageUpload extends React.Component {
           {(images && images.length) ?
             <div>
               <ul className='flex-root gallery-images-flex-root'>
-                {images.map((i) => (
-                  <li key={i} className='col-50 no-list-style gallery-image-upload-item'>
-                    <img src={i} alt={`image  ${i + 1}`} />
-                  </li>
-                ))}
+                {images.map((i) => {
+                  if (i !== '') {
+                    return (
+                      <li key={i} className='col-50 no-list-style gallery-image-upload-item'>
+                        <img src={i} alt={`image  ${i + 1}`} />
+                        <button
+                          type="button"
+                          className="btn-danger btn-sm-remove"
+                          onClick={() => this.removeSingleImage(i)}>
+                          remove
+                      </button>
+                      </li>
+                    );
+                  }
+                  return null;
+                })}
               </ul>
             </div>
           : null}
@@ -179,6 +210,7 @@ export class DropzoneImageUpload extends React.Component {
 
 DropzoneImageUpload.propTypes = {
   onChange: PropTypes.func,
+  onRemove: PropTypes.func,
   input: PropTypes.shape({
     onChange: PropTypes.func
   }),
@@ -189,9 +221,8 @@ DropzoneImageUpload.propTypes = {
 
 DropzoneImageUpload.defaultProps = {
   onChange: () => {},
-  input: {
-    onChange: () => {}
-  },
+  onRemove: () => { },
+  input: {},
   existingImages: [],
   minImageDimensions: {}
 };
