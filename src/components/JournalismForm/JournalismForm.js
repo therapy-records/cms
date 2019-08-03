@@ -96,7 +96,7 @@ export class JournalismForm extends React.Component {
                    title='Article screenshot'
                    existingImage={formValues && formValues.imageUrl}
                    validate={required}
-                  minImageDimensions={JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS}
+                   minImageDimensions={JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS}
                    required
             />
           </div>

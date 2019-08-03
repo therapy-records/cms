@@ -144,7 +144,7 @@ export class DropzoneImageUpload extends React.Component {
 
           {(images && images.length) ?
             <div>
-              <ul className='flex-root gallery-images-flex-root cancel-margin'>
+              <ul className='flex-root gallery-images-flex-root'>
                 {images.map((i) => (
                   <li key={i} className='col-50 no-list-style gallery-image-upload-item'>
                     <img src={i} alt={`image  ${i + 1}`} />

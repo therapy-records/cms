@@ -1,29 +1,50 @@
 .flex-root {
-  display: flex;
-  flex-direction: row;
+  @media(min-width: 768px) {
+    display: flex;
+    flex-direction: row;
+  }
 }
 
 .flex-root > div {
-  width: 50%;
-  max-width: 50%;
+  @media(min-width: 768px) {
+    width: 50%;
+    max-width: 50%;
+  }
 }
 
 .gallery-images-flex-root {
+  display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
+  @media(min-width: 768px) {
+    margin-top: -0.3em;
+    padding-left: 0.25em;
+  }
 }
 
 .gallery-image-upload-item {
-  flex: 1 0 33%;
-  width: 33%;
-  max-width: 33.333%;
-  padding-left: 0.5em;
-  padding-bottom: 0.5em;
+  padding: 0.25em;
+  margin: 0;
+  display: flex;
+  flex: 1 0 25%;
+  width: 25%;
+  max-width: 25%;
+  @media(min-width: 768px) {
+    flex: 1 0 50%;
+    width: 50%;
+    max-width: 50%;
+  }
+  @media(min-width: 900px) {
+    flex: 1 0 33%;
+    width: 33%;
+    max-width: 33.333%;
+  }
 }
 
 .dropzone {
   position: relative;
   width: 100%;
-  min-height: 200px;
+  min-height: 204px;
   border: dashed 5px #9E9E9E;
   background:#EEE;
   display: inline-flex;
