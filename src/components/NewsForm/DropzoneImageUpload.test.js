@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Field } from 'redux-form';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
@@ -110,6 +109,40 @@ describe('(Component) DropzoneImageUpload', () => {
         </h5>
       );
       expect(actual).to.equal(true);
+    });
+
+    describe('when state.isLoading', () => {
+      beforeEach(() => {
+        wrapper.setState({
+          isLoading: true
+        });
+      });
+
+      it('should add an `active` className to Dropzone component', () => {
+        const activeClassName = wrapper.find('.dropzone.dropzone-active');
+        expect(activeClassName.length).to.eq(1);
+      });
+
+      it('should add a `loading/active` className to Dropzone cta element', () => {
+        const activeClassName = wrapper.find('.dropzone-loading.dropzone-loading-active');
+        expect(activeClassName.length).to.eq(1);
+      });
+    });
+
+    describe('with state.invalidDimensions', () => {
+      it('should render a list of messages', () => {
+        wrapper.setState({
+          invalidDimensions: [
+            'error message A',
+            'error message B'
+          ]
+        });
+        const actual = wrapper.containsAllMatchingElements([
+          <li key={0} className='form-error'>error message A</li>,
+          <li key={1}>error message B</li>
+        ]);
+        expect(actual).to.eq(true);
+      });
     });
   });
 

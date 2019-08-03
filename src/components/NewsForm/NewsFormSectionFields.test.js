@@ -140,7 +140,6 @@ describe('(Component) NewsFormSectionFields', () => {
       expect(actual).to.eq(true);
     });
 
-
     describe('<DropzoneImageUpload />', () => {
       it('should render in a list item', () => {
         const li = wrapper.find('li').first();
@@ -156,24 +155,24 @@ describe('(Component) NewsFormSectionFields', () => {
         expect(dropzoneImageUpload.prop('minImageDimensions')).to.eq(NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS);
         expect(dropzoneImageUpload.prop('onChange')).to.be.a('function');
       });
-    });
 
-    describe('DropzoneImageUpload onChange prop', () => {
-      it('should call handleUpdateSectionImages', () => {
-        const handleUpdateSectionImagesSpy = sinon.spy();
-        wrapper.instance().handleUpdateSectionImages = handleUpdateSectionImagesSpy;
-        const li = wrapper.find('li').last(1);
-        const dropzoneImageUpload = li.find('DropzoneImageUpload');
-        dropzoneImageUpload.props().onChange(
-          mockFields[1].images[1].url,
-          1
-        );
-        expect(handleUpdateSectionImagesSpy).to.have.been.called;
-        expect(handleUpdateSectionImagesSpy).to.have.been.calledWith(
-          mockFields[1].images[1].url,
-          1,
-          1
-        );
+      describe('DropzoneImageUpload onChange prop', () => {
+        it('should call handleUpdateSectionImages', () => {
+          const handleUpdateSectionImagesSpy = sinon.spy();
+          wrapper.instance().handleUpdateSectionImages = handleUpdateSectionImagesSpy;
+          const li = wrapper.find('li').last(1);
+          const dropzoneImageUpload = li.find('DropzoneImageUpload');
+          dropzoneImageUpload.props().onChange(
+            mockFields[1].images[1].url,
+            1
+          );
+          expect(handleUpdateSectionImagesSpy).to.have.been.called;
+          expect(handleUpdateSectionImagesSpy).to.have.been.calledWith(
+            mockFields[1].images[1].url,
+            1,
+            1
+          );
+        });
       });
     });
 
