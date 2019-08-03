@@ -18,7 +18,10 @@ describe('(Component) JournalismForm', () => {
   let wrapper,
     props,
     baseProps = {
-      onSubmitForm: () => {}
+      onSubmitForm: () => {},
+      formValues: {
+        imageUrl: 'test.com'
+      }
     }
 
   it('should render a `Create` heading', () => {
@@ -50,8 +53,9 @@ describe('(Component) JournalismForm', () => {
     it('should render a imageUrl field', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='imageUrl'
-          title='Article screenshot'
           component={DropzoneImageUpload}
+          title='Article screenshot'
+          existingImages={[props.formValues.imageUrl]}
           minImageDimensions={JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS}
           required
         />

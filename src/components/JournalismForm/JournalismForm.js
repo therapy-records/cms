@@ -94,7 +94,7 @@ export class JournalismForm extends React.Component {
             <Field name='imageUrl'
                    component={DropzoneImageUpload}
                    title='Article screenshot'
-                   existingImage={formValues && formValues.imageUrl}
+                   existingImages={formValues && formValues.imageUrl && [formValues.imageUrl]}
                    validate={required}
                    minImageDimensions={JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS}
                    required

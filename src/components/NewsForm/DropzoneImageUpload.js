@@ -71,10 +71,14 @@ export class DropzoneImageUpload extends React.Component {
               const {images} = this.state;
               const lastImageInState = images[images.length - 1];
               const imageIndex = images.indexOf(lastImageInState);
-              this.props.onChange(
-                lastImageInState,
-                imageIndex
-              );
+              if (this.props.input && this.props.input.onChange) {
+                this.props.input.onChange(lastImageInState);
+              } else if (this.props.onChange) {
+                this.props.onChange(
+                  lastImageInState,
+                  imageIndex
+                ); 
+              }
             });
         } else {
           const message = {
@@ -174,13 +178,21 @@ export class DropzoneImageUpload extends React.Component {
 }
 
 DropzoneImageUpload.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  title: PropTypes.string,
+  onChange: PropTypes.func,
+  input: PropTypes.shape({
+    onChange: PropTypes.func
+  }),
+  title: PropTypes.string.isRequired,
   existingImages: PropTypes.array,
   minImageDimensions: PropTypes.object
 };
 
 DropzoneImageUpload.defaultProps = {
+  onChange: () => {},
+  input: {
+    onChange: () => {}
+  },
+  existingImages: [],
   minImageDimensions: {}
 };
 
