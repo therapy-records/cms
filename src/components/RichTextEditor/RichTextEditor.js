@@ -36,7 +36,7 @@ class _RichTextEditor extends React.Component {
     return (
       <div>
 
-      {title && <h5>{title}</h5>}
+      {title && <h5>{title}<span className='required'>*</span></h5>}
 
       {touched && error && (<p>Copy is {error}</p>)}
 

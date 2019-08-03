@@ -30,9 +30,24 @@
   justify-content: space-between;
 }
 
-.gallery-images-col-2 {
-  font-size: 0.1em; // hide mysterious counter ('0') from react-dropzone
+.news-form-section {
+  &.news-form-section-large {
+    border: solid 1px #EEE;
+    padding: 2em;
+    box-shadow: 0 3px 22px #CACACA;
+    @media(min-width: 768px) {
+      width: calc(100% + 4em);
+      margin-right: -2em;
+      margin-left: -2em;
+    }  
+  }
+  .row {
+    @media(min-width: 768px) {
+      margin-bottom: 3em;
+    }
+    &.last {
+      margin-bottom: 0;
+    }
+  }
 }
-.gallery-images-flex-root {
-  font-size: 25px; // counter mysterious counter ('0') from react-dropzone
-}
+

@@ -103,18 +103,14 @@ describe('(Component) DropzoneImageUpload', () => {
   });
 
   describe('rendering', () => {
-    it('should render a title', () => {
+    it('should render a heading/title with props.minImageDimensions', () => {
       const actual = wrapper.containsMatchingElement(
-        <h5>{props.title}</h5>
-      );
-      expect(actual).to.equal(true);
-    });
-
-    it('should render a minImageDimensions message', () => {
-      const actual = wrapper.containsMatchingElement(
-        <p>Image must be at least {props.minImageDimensions.width}px by {props.minImageDimensions.height}px</p>
+        <h5>{props.title}&nbsp;
+          <span><small>(must be at least {props.minImageDimensions.width}px by {props.minImageDimensions.height}px)</small></span>
+        </h5>
       );
       expect(actual).to.equal(true);
     });
   });
+
 });

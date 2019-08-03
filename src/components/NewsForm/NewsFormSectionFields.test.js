@@ -93,7 +93,7 @@ describe('(Component) NewsFormSectionFields', () => {
           const li = wrapper.find('li').first();
           const button = li.find('button');
           expect(button.prop('type')).to.eq('button');
-          expect(button.text()).to.eq('Remove');
+          expect(button.text()).to.eq('Remove section');
         });
         it('should call props.fields.remove onClick', () => {
           const li = wrapper.find('li').first();
@@ -146,6 +146,7 @@ describe('(Component) NewsFormSectionFields', () => {
         const li = wrapper.find('li').first();
         const dropzoneImageUpload = li.find('DropzoneImageUpload');
         expect(dropzoneImageUpload.length).to.eq(1);
+        expect(dropzoneImageUpload.prop('title')).to.eq('Images');
         expect(dropzoneImageUpload.prop('component')).to.eq(DropzoneImageUpload);
         const expectedExistingImages = [
           ...mockFields[0].images.map(imageObj => imageObj.url)

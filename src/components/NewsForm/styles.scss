@@ -1,12 +1,21 @@
 .flex-root {
   display: flex;
   flex-direction: row;
+}
+
+.flex-root > div {
+  width: 50%;
+  max-width: 50%;
+}
+
+.gallery-images-flex-root {
   flex-wrap: wrap;
 }
 
 .gallery-image-upload-item {
-  flex: 1 0 50%;
-  max-width: 50%;
+  flex: 1 0 33%;
+  width: 33%;
+  max-width: 33.333%;
   padding-left: 0.5em;
   padding-bottom: 0.5em;
 }
@@ -15,7 +24,7 @@
   position: relative;
   width: 100%;
   min-height: 200px;
-  border: dashed 5px #CCC;
+  border: dashed 5px #9E9E9E;
   background:#EEE;
   display: inline-flex;
   align-items: center;
@@ -34,7 +43,7 @@
   height: 100%;
   display: flex;
   justify-content: center;
-  min-height: 200px;
+  min-height: 97%;
   align-items: center;
   transition: all 0.2s ease;
   color: #000;
@@ -49,6 +58,7 @@
       background: #3A3A3A;
       color: #FFF;
       padding: .25em;
+      font-size: .9em;
     }
   }
 }
@@ -87,8 +97,5 @@
 }
 
 .dropzone-image-dimension-notice {
-  margin-top: .2em;
-  text-align: center;
-  font-size: .9em;
   opacity: .5;
 }

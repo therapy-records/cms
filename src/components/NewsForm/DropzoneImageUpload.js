@@ -107,7 +107,6 @@ export class DropzoneImageUpload extends React.Component {
   render() {
     const {
       title,
-      multiple,
       minImageDimensions
     } = this.props;
 
@@ -119,49 +118,32 @@ export class DropzoneImageUpload extends React.Component {
 
     return (
       <div>
-        <h5>{title}</h5>
+        <h5>{title}&nbsp;
+          {minImageDimensions &&
+            <span className='dropzone-image-dimension-notice'><small>(must be at least {minImageDimensions.width}px by {minImageDimensions.height}px)</small></span>
+          }
+        </h5>
 
-        <div className={multiple && 'cols-container'}>
-
-          <div className={multiple && 'col-1'}>
+        <div className='flex-root'>
+          <div>
             <Dropzone
               onDrop={this.handleOnDrop.bind(this)} // eslint-disable-line
               className={isLoading ? 'dropzone dropzone-active' : `dropzone ${images && 'dropzone-existing-image'}`}
               activeClassName='dropzone-active'
-              multiple={multiple}
+              multiple
             >
-              {!images.length
-                ? <div className='dropzone-cta'>
-                  <span>Drag &amp; drop</span>
-                  <div className={isLoading ? 'dropzone-loading dropzone-loading-active' : 'dropzone-loading'}>
-                    <LoadingSpinner />
-                  </div>
+              <div className='dropzone-cta'>
+                <span>Drag &amp; drop images</span>
+                <div className={isLoading ? 'dropzone-loading dropzone-loading-active' : 'dropzone-loading'}>
+                  <LoadingSpinner />
                 </div>
-                : null}
+              </div>
 
             </Dropzone>
-
-            {minImageDimensions &&
-              <p className='dropzone-image-dimension-notice'>Image must be at least {minImageDimensions.width}px by {minImageDimensions.height}px</p>
-            }
-
           </div>
 
-          {invalidDimensions.length
-            ? <ul className="dropzone-dimensions-messages cancel-margin">
-              {invalidDimensions.map((message, index) =>
-                <li
-                  key={index}
-                  className={index === 0 && 'form-error'}
-                >
-                  {message}
-                </li>
-              )}
-            </ul>
-            : null}
-
           {(images && images.length) ?
-            <div className='col-2 gallery-images-col-2'>
+            <div>
               <ul className='flex-root gallery-images-flex-root cancel-margin'>
                 {images.map((i) => (
                   <li key={i} className='col-50 no-list-style gallery-image-upload-item'>
@@ -171,8 +153,21 @@ export class DropzoneImageUpload extends React.Component {
               </ul>
             </div>
           : null}
-
         </div>
+
+        {invalidDimensions.length ?
+          <ul className="dropzone-dimensions-messages cancel-margin">
+            {invalidDimensions.map((message, index) =>
+              <li
+                key={index}
+                className={index === 0 && 'form-error'}
+              >
+                {message}
+              </li>
+            )}
+          </ul>
+        : null}
+
       </div>
     )
   }
@@ -181,7 +176,6 @@ export class DropzoneImageUpload extends React.Component {
 DropzoneImageUpload.propTypes = {
   onChange: PropTypes.func.isRequired,
   title: PropTypes.string,
-  multiple: PropTypes.bool,
   existingImages: PropTypes.array,
   minImageDimensions: PropTypes.object
 };

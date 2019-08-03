@@ -42,7 +42,7 @@ export class NewsFormSectionFields extends Component {
             return (
               <li
                 key={`${sectionIndex}_${fields.length}`}
-                className="row-large"
+                className={fields.length > 1 ? 'row-large news-form-section news-form-section-large' : 'news-form-section'}
               >
 
                 {fields.length > 1 &&
@@ -53,7 +53,7 @@ export class NewsFormSectionFields extends Component {
                       className="btn-sm btn-danger"
                       onClick={() => fields.remove(sectionIndex)}
                     >
-                      Remove
+                      Remove section
                     </button>
                   </div>
                 }
@@ -70,8 +70,9 @@ export class NewsFormSectionFields extends Component {
                     />
                   </div>
 
-                  <div className="row">
+                  <div className={fields.length > 1 ? 'row last' : 'row'}>
                     <DropzoneImageUpload
+                      title="Images"
                       component={DropzoneImageUpload}
                       existingImages={sectionImagesArray}
                       minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
