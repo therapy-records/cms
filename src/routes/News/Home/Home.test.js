@@ -48,11 +48,11 @@ describe('(Component) News - Home', () => {
           <img />
           <div>
             <div className='heading-with-btn'>
-              <h3><Link to={`news/${p._id}`}>{p.title}</Link></h3>
+              <h3><Link to={`/news/${p._id}`}>{p.title}</Link></h3>
               {p.createdAt && <p className='small-tab'>{moment(p.createdAt).fromNow()}</p>}
             </div>
-            <Link to={`news/${p._id}`} className='btn btn-sm'>View</Link>
-            <Link to={`news/${p._id}/edit`} className='btn btn-sm'>Edit</Link>
+            <Link to={`/news/${p._id}`} className='btn btn-sm'>View</Link>
+            <Link to={`/news/${p._id}/edit`} className='btn btn-sm'>Edit</Link>
           </div>
         </li>
       )

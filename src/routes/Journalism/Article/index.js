@@ -78,6 +78,8 @@ export class Article extends React.Component {
               article={article}
               onDeleteArticle={() => onDeleteArticle(article._id)}
               promiseLoading={promiseLoading}
+              showEditButton
+              showDeleteButton
             />
 
             <div className='row-large'>

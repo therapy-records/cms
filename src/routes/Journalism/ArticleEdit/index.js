@@ -55,12 +55,22 @@ export class ArticleEdit extends React.Component {
       location
     } = this.props;
 
-    if (!article || !article.title) {
+    // todo: move to will/did update
+    if (article && article.isDeleted) {
+      setTimeout(() => {
+        this.props.history.push({
+          pathname: '/journalism'
+        });
+      }, 3000)
+    }
+  
+    if (!article.isDeleted && !article._id) {
       return null;
     }
 
     return (
       <article className='container'>
+
         <LoadingSpinner
           active={promiseLoading}
           fullScreen
@@ -73,8 +83,17 @@ export class ArticleEdit extends React.Component {
           </div>
         }
 
+        {(article && article.isDeleted) &&
+          <div>
+            <h2>Successfully deleted! <small>🚀</small></h2>
+            <p>Redirecting...</p>
+          </div>
+        }
+
         {(!promiseLoading && !article.editSuccess) &&
+         (!promiseLoading && !article.isDeleted) &&
           <JournalismForm
+            articleId={article._id}
             onSubmitForm={this.handleOnEditArticle}
             location={location}
           />
@@ -93,14 +112,8 @@ ArticleEdit.propTypes = {
   promiseSuccess: PropTypes.bool,
   resetPromiseState: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired
-}
-
-const mapDispatchToProps = {
-  onEditArticle: (article) => editJournalism(article),
-  onFetchArticle: (id) => fetchSingleJournalismArticle(id),
-  onDestroyArticle: () => destroySelectedJournalismArticle(),
-  resetPromiseState: () => resetPromiseState()
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object
 }
 
 const mapStateToProps = (state, props) => ({
@@ -109,5 +122,12 @@ const mapStateToProps = (state, props) => ({
   promiseSuccess: selectUiStateSuccess(state),
   state: state.location
 });
+
+const mapDispatchToProps = {
+  onEditArticle: (article) => editJournalism(article),
+  onFetchArticle: (id) => fetchSingleJournalismArticle(id),
+  onDestroyArticle: () => destroySelectedJournalismArticle(),
+  resetPromiseState: () => resetPromiseState()
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleEdit)

@@ -43,7 +43,7 @@ export class Journalism extends React.Component {
             <h3>
               <Link
                 onClick={() => this.handleButtonClick(p)}
-                to={`journalism/${p._id}`}
+                to={`/journalism/${p._id}`}
               >{p.title}
               </Link>
             </h3>
@@ -54,14 +54,14 @@ export class Journalism extends React.Component {
 
           <Link
             onClick={() => this.handleButtonClick(p)}
-            to={`journalism/${p._id}`}
+            to={`/journalism/${p._id}`}
             className='btn btn-sm'
           >
             View
           </Link>
           <Link
             onClick={() => this.handleButtonClick(p)}
-            to={`journalism/${p._id}/edit`}
+            to={`/journalism/${p._id}/edit`}
             className='btn btn-sm'
           >
             Edit

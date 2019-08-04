@@ -55,8 +55,16 @@ export class ArticleEdit extends React.Component {
       location
     } = this.props;
 
+    // todo: move to will/did update
+    if (article && article.isDeleted) {
+      setTimeout(() => {
+        this.props.history.push({
+          pathname: '/news'
+        });
+      }, 3000)
+    }
 
-    if (!article || !article.title) {
+    if (!article.isDeleted && !article._id) {
       return null;
     }
 
@@ -77,8 +85,17 @@ export class ArticleEdit extends React.Component {
           </div>
         }
 
+        {(article && article.isDeleted) &&
+          <div>
+            <h2>Successfully deleted! <small>🚀</small></h2>
+            <p>Redirecting...</p>
+          </div>
+        }
+
         {(!promiseLoading && !article.editSuccess) &&
+         (!promiseLoading && !article.isDeleted) &&
           <NewsForm
+            articleId={article._id}
             onSubmitForm={this.handleOnEditArticle}
             location={location}
           />
@@ -97,7 +114,8 @@ ArticleEdit.propTypes = {
   promiseSuccess: PropTypes.bool,
   resetPromiseState: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired
+  match: PropTypes.object.isRequired,
+  history: PropTypes.object
 }
 
 const mapDispatchToProps = {

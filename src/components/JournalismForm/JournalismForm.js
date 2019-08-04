@@ -1,7 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { Field, reduxForm } from 'redux-form'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
+import { deleteJournalismArticle } from '../../actions/journalismArticle'
 import {
   selectSelectedJournalismArticleTitle,
   selectSelectedJournalismArticleCopy,
@@ -10,6 +11,8 @@ import {
   selectSelectedJournalismArticleReleaseDate
 } from '../../selectors/journalism';
 import { selectJournalismFormValues } from '../../selectors/form';
+import { selectUiStateLoading } from '../../selectors/uiState';
+import ArticleHeader from '../ArticleHeader';
 import Datepicker from '../Datepicker/Datepicker';
 import DropzoneImageUpload from '../NewsForm/DropzoneImageUpload';
 import TextInput from '../TextInput';
@@ -33,8 +36,13 @@ export class JournalismForm extends React.Component {
       submitting,
       invalid,
       formValues,
-      location
+      location,
+      promiseLoading,
+      articleId,
+      onDeleteArticle
     } = this.props;
+
+    if (!formValues) return null;
 
     let isEditForm;
     if (location && location.pathname.includes('edit')) {
@@ -46,11 +54,14 @@ export class JournalismForm extends React.Component {
     return (
       <section className='root article-create'>
 
-        <div className='heading-action-btns'>
-          <div className='heading-with-btn'>
-            <h2>{isEditForm ? 'Edit Journalism ✍️' : 'Create Journalism ✍️'}</h2>
-          </div>
-        </div>
+        <ArticleHeader
+          baseUrl='/journalism'
+          article={formValues}
+          onDeleteArticle={isEditForm ? () => onDeleteArticle(articleId) : () => { }}
+          promiseLoading={promiseLoading}
+          heading={isEditForm ? `Editing ${formValues && formValues.title} ✍️` : 'Create Journalism ✍️'}
+          showDeleteButton={isEditForm}
+        />
 
         <form onSubmit={(e) => e.preventDefault()} encType='multipart/form-data'>
 
@@ -129,13 +140,16 @@ export class JournalismForm extends React.Component {
 }
 
 JournalismForm.propTypes = {
+  onSubmitForm: PropTypes.func.isRequired,
+  onDeleteArticle: PropTypes.func.isRequired,
   error: PropTypes.string,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
   invalid: PropTypes.bool,
   formValues: PropTypes.object,
-  onSubmitForm: PropTypes.func.isRequired,
-  location: PropTypes.object
+  location: PropTypes.object,
+  promiseLoading: PropTypes.bool,
+  articleId: PropTypes.string
 };
 
 let InitFromStateForm = reduxForm({
@@ -156,7 +170,12 @@ InitFromStateForm = connect(
 )(InitFromStateForm);
 
 const mapStateToProps = (state) => ({
-  formValues: selectJournalismFormValues(state)
+  formValues: selectJournalismFormValues(state),
+  promiseLoading: selectUiStateLoading(state)
 });
 
-export default connect(mapStateToProps, {})(InitFromStateForm)
+const mapDispatchToProps = {
+  onDeleteArticle: (id) => deleteJournalismArticle(id),
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(InitFromStateForm)

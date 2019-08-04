@@ -1,13 +1,16 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { Field, FieldArray, reduxForm } from 'redux-form'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Field, FieldArray, reduxForm } from 'redux-form';
+import { deleteNewsArticle } from '../../actions/newsArticle';
 import {
   selectSelectedNewsArticleTitle,
   selectSelectedNewsArticleSections
 } from '../../selectors/news';
 import { selectNewsFormValues } from '../../selectors/form';
+import { selectUiStateLoading } from '../../selectors/uiState';
 import './NewsForm.css';
+import ArticleHeader from '../ArticleHeader';
 import TextInput from '../TextInput';
 import { required } from '../../utils/form';
 import { EMPTY_ARTICLE_SECTION_OBJ } from '../../utils/news';
@@ -32,7 +35,10 @@ export class NewsForm extends React.Component {
       submitting,
       invalid,
       location,
-      formValues
+      formValues,
+      onDeleteArticle,
+      articleId,
+      promiseLoading
     } = this.props;
 
     if (!formValues) return null;
@@ -46,14 +52,15 @@ export class NewsForm extends React.Component {
 
     return (
       <section className='root article-create'>
-        <div className='heading-action-btns'>
-          <div className='heading-with-btn'>
-            <h2>{isEditForm ? `Editing ${formValues && formValues.title} 🗞️` : 'Create News 🗞️'}</h2>
-          </div>
-          <div className='action-btns'>
-            <p>delete button here</p>
-          </div>
-        </div>
+
+        <ArticleHeader
+          baseUrl='/news'
+          article={formValues}
+          onDeleteArticle={isEditForm ? () => onDeleteArticle(articleId) : () => {}}
+          promiseLoading={promiseLoading}
+          heading={isEditForm ? `Editing ${formValues && formValues.title} 🗞️` : 'Create News 🗞️'}
+          showDeleteButton={isEditForm}
+        />
 
         <div className='col-clear' />
 
@@ -92,12 +99,15 @@ export class NewsForm extends React.Component {
 
 NewsForm.propTypes = {
   onSubmitForm: PropTypes.func.isRequired,
+  onDeleteArticle: PropTypes.func.isRequired,
+  articleId: PropTypes.string,
   error: PropTypes.string,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
   invalid: PropTypes.bool,
   formValues: PropTypes.object,
-  location: PropTypes.object
+  location: PropTypes.object,
+  promiseLoading: PropTypes.bool
 };
 
 let InitFromStateForm = reduxForm({
@@ -116,7 +126,12 @@ InitFromStateForm = connect(
 )(InitFromStateForm);
 
 const mapStateToProps = (state) => ({
-  formValues: selectNewsFormValues(state)
+  formValues: selectNewsFormValues(state),
+  promiseLoading: selectUiStateLoading(state),
 });
 
-export default connect(mapStateToProps, {})(InitFromStateForm)
+const mapDispatchToProps = {
+  onDeleteArticle: (id) => deleteNewsArticle(id),
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(InitFromStateForm)

@@ -71,7 +71,7 @@ describe('(Component) Journalism - Home', () => {
               <div className='heading-with-btn'>
                 <h3>
                   <Link
-                    to={`journalism/${p._id}`}
+                    to={`/journalism/${p._id}`}
                   >{p.title}
                   </Link>
                 </h3>
@@ -81,13 +81,13 @@ describe('(Component) Journalism - Home', () => {
               <p>Links to: {p.externalLink}</p>
 
               <Link
-                to={`journalism/${p._id}`}
+                to={`/journalism/${p._id}`}
                 className='btn btn-sm'
               >
                 View
               </Link>
               <Link
-                to={`journalism/${p._id}/edit`}
+                to={`/journalism/${p._id}/edit`}
                 className='btn btn-sm'
               >
                 Edit

@@ -34,7 +34,10 @@ class ArticleHeader extends Component {
     const {
       baseUrl,
       article,
-      promiseLoading
+      heading,
+      promiseLoading,
+      showEditButton,
+      showDeleteButton
     } = this.props;
 
     const { isShowingModal } = this.state;
@@ -43,8 +46,15 @@ class ArticleHeader extends Component {
       <div>
         <div className='article-header'>
           <div className='heading-with-btn'>
-            <h2>{article.title}</h2>
-            <p className='small-tab'>{moment(article.createdAt).fromNow()}</p>
+
+            {heading ?
+              <h2>{heading}</h2>
+            :
+              <h2>{article.title}</h2>
+            }
+
+            {article.createdAt && <p className='small-tab'>{moment(article.createdAt).fromNow()}</p>}
+
             {article.editedAt &&
               <div className='heading-modified'>
                 <p>Last modified {moment(article.editedAt).fromNow()}
@@ -52,23 +62,34 @@ class ArticleHeader extends Component {
                 </p>
               </div>
             }
+
           </div>
 
-          <div className='action-btns'>
-            <button
-              className='btn btn-danger'
-              onClick={this.handleModalOpen}
-            >Delete
-                      </button>
-            <Link
-              to={`${baseUrl}/${article._id}/edit`}
-              className='btn btn-edit'
-            >Edit
-            </Link>
-          </div>
+          {(showDeleteButton || showEditButton) && (
+            <div className='action-btns'>
+
+              {showDeleteButton && (
+                <button
+                  className='btn btn-danger'
+                  onClick={this.handleModalOpen}
+                >Delete
+                </button>
+              )}
+
+              {showEditButton && (
+                <Link
+                  to={`${baseUrl}/${article._id}/edit`}
+                  className='btn btn-edit'
+                >Edit
+                </Link>
+              )}
+
+            </div>
+          )}
+
         </div>
 
-        {(!promiseLoading && isShowingModal) &&
+        {(showDeleteButton && !promiseLoading && isShowingModal) &&
           <ArticleDeleteModal
             handleModalClose={this.handleModalClose}
             onDeleteArticle={this.handleOnDeleteArticle}
@@ -83,12 +104,18 @@ class ArticleHeader extends Component {
 ArticleHeader.propTypes = {
   baseUrl: PropTypes.string.isRequired,
   article: PropTypes.object.isRequired,
+  heading: PropTypes.string,
   onDeleteArticle: PropTypes.func.isRequired,
-  promiseLoading: PropTypes.bool
+  promiseLoading: PropTypes.bool,
+  showEditButton: PropTypes.bool,
+  showDeleteButton: PropTypes.bool
 };
 
 ArticleHeader.defaultProps = {
-  promiseLoading: false
+  heading: '',
+  promiseLoading: false,
+  showEditButton: false,
+  showDeleteButton: false
 };
 
 export default ArticleHeader;

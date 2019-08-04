@@ -35,7 +35,10 @@ describe('(Component) ArticleHeader', () => {
       baseUrl: '/news',
       promiseLoading: false,
       article: mockArticle,
-      onDeleteArticle: sinon.spy()
+      heading: 'test',
+      onDeleteArticle: sinon.spy(),
+      showEditButton: true,
+      showDeleteButton: true
     };
   props = baseProps;
 
@@ -87,11 +90,23 @@ describe('(Component) ArticleHeader', () => {
       wrapper = shallow(<ArticleHeader {...props} />);
     });
 
-    it('should render a title', () => {
+    it('should render props.heading', () => {
       const actual = wrapper.containsMatchingElement(
-        <h2>{mockArticle.title}</h2>
+        <h2>{props.heading}</h2>
       );
       expect(actual).to.equal(true);
+    });
+
+    describe('when there is no props.heading', () => {
+      it('should render article.title', () => {
+        wrapper.setProps({
+          heading: undefined
+        });
+        const actual = wrapper.containsMatchingElement(
+          <h2>{mockArticle.title}</h2>
+        );
+        expect(actual).to.equal(true);
+      });
     });
 
     describe('when an article has `editedAt`', () => {

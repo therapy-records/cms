@@ -11,6 +11,7 @@ import ConnectedJournalismForm, { JournalismForm, JOURNALISM_ARTICLE_MIN_IMAGE_D
 import DropzoneImageUpload from '../NewsForm/DropzoneImageUpload';
 import { required } from '../../utils/form';
 import { selectJournalismFormValues } from '../../selectors/form';
+import { selectUiStateLoading } from '../../selectors/uiState';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -20,32 +21,78 @@ describe('(Component) JournalismForm', () => {
     baseProps = {
       onSubmitForm: () => {},
       formValues: {
+        title: 'test',
         imageUrl: 'test.com'
-      }
-    }
+      },
+      articleId: '1234',
+      promiseLoading: false,
+      onDeleteArticle: () => {}
+    };
+    props = baseProps;
 
-  it('should render a `Create` heading', () => {
-    props = { ...baseProps, location: { pathname: 'test/create' } };
-    const createWrapper = shallow(
-      <JournalismForm {...props} />
-    );
-    const actual = createWrapper.containsMatchingElement(
-      <h2>Create Journalism ✍️</h2>
-    );
-    expect(actual).to.equal(true);
+  describe('when there are no props.formValues', () => {
+    it('should return null', () => {
+      const wrapper = shallow(
+        <JournalismForm
+          {...props}
+          formValues={undefined}
+        />
+      );
+      expect(wrapper.type()).to.eq(null);
+    });
   });
 
-  it('should render an `Edit` heading', () => {
-    props = { ...baseProps, location: { pathname: 'test/edit' } };
-    const editWrapper = shallow(
-      <JournalismForm {...props} />
-    );
-    const actual = editWrapper.containsMatchingElement(
-      <h2>Edit Journalism ✍️</h2>
-    );
-    expect(actual).to.equal(true);
-  });
+  describe('<ArticleHeader />', () => {
+    beforeEach(() => {
+      wrapper = shallow(
+        <JournalismForm
+          {...props}
+        />
+      );
+    });
 
+    it('should render', () => {
+      const articleHeader = wrapper.find('ArticleHeader');
+      expect(articleHeader.length).to.eq(1);
+      expect(articleHeader.prop('baseUrl')).to.eq('/journalism');
+      expect(articleHeader.prop('article')).to.eq(props.formValues);
+      expect(articleHeader.prop('onDeleteArticle')).to.be.a('function');
+      expect(articleHeader.prop('heading')).to.eq('Create Journalism ✍️');
+      expect(articleHeader.prop('promiseLoading')).to.eq(props.promiseLoading);
+      expect(articleHeader.prop('showDeleteButton')).to.eq(false);
+    });
+
+    describe('when it\'s an `edit` form', () => {
+      beforeEach(() => {
+        wrapper.setProps({
+          location: {
+            pathname: 'test/edit'
+          }
+        })
+      });
+
+      it('should render correct props', () => {
+        const articleHeader = wrapper.find('ArticleHeader');
+        expect(articleHeader.prop('onDeleteArticle')).to.be.a('function');
+        expect(articleHeader.prop('heading')).to.eq(`Editing ${baseProps.formValues.title} ✍️`);
+        expect(articleHeader.prop('showDeleteButton')).to.eq(true);
+      });
+
+      describe('onDeleteArticle prop', () => {
+        it('should call props.onDeleteArticle with article id', () => {
+          const onDeleteArticleSpy = sinon.spy();
+          wrapper.setProps({
+            onDeleteArticle: onDeleteArticleSpy
+          });
+          const articleHeader = wrapper.find('ArticleHeader');
+          articleHeader.props().onDeleteArticle();
+          expect(onDeleteArticleSpy).to.have.been.calledWith(props.articleId)
+        });
+      });
+
+    });
+  });
+  
   describe('form fields', () => {
     beforeEach(() => {
       wrapper = shallow(<JournalismForm {...props} />);
@@ -134,6 +181,7 @@ describe('(Component) JournalismForm', () => {
   describe('submit button', () => {
     it('should render a button', () => {
       props = {
+        ...baseProps,
         onSubmitForm: () => { },
         pristine: false,
         submitting: false
@@ -147,6 +195,7 @@ describe('(Component) JournalismForm', () => {
 
     it('should call onSubmitForm prop onClick', () => {
       props = {
+        ...baseProps,
         onSubmitForm: sinon.spy(),
         pristine: false,
         submitting: false,
@@ -159,13 +208,16 @@ describe('(Component) JournalismForm', () => {
     });
   });
 
-  describe('ConnectedArticle', () => {
+  describe('ConnectedJournalismForm', () => {
     const mockStore = configureMockStore();
     const mockStoreState = {
       form: {
         'JOURNALISM_FORM': {
           values: {}
         }
+      },
+      uiState: {
+        promiseLoading: false
       }
     };
     let renderedProps;
@@ -184,6 +236,7 @@ describe('(Component) JournalismForm', () => {
     it('should map state to props', () => {
       renderedProps = wrapper.props();
       expect(renderedProps.formValues).to.eq(selectJournalismFormValues(mockStoreState));
+      expect(renderedProps.promiseLoading).to.eq(selectUiStateLoading(mockStoreState));
     });
   });
 

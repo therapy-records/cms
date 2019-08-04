@@ -21,7 +21,7 @@ describe('(Component) News - ArticleEdit', () => {
     onFetchArticle: () => { },
     onDestroyArticle: () => {},
     resetPromiseState: () => {},
-    article: { title: 'test', id: 'asdf1234' },
+    article: { title: 'test', _id: 'asdf1234' },
     location: {
       pathname: 'article/edit'
     },
@@ -115,17 +115,20 @@ describe('(Component) News - ArticleEdit', () => {
       wrapper = shallow(<ArticleEdit {...props} />);
       const actual = wrapper.containsMatchingElement(
         <NewsForm
+          articleId={props.article._id}
           onSubmitForm={wrapper.instance().handleOnEditArticle}
           location={props.location}
         />
       );
       expect(actual).to.equal(true);
     });
+
     describe('when promise is loading', () => {
       beforeEach(() => {
         props.promiseLoading = true;
         wrapper = shallow(<ArticleEdit {...props} />);
       });
+
       it('should show loading', () => {
         const actual = wrapper.containsMatchingElement(
           <LoadingSpinner
@@ -152,7 +155,36 @@ describe('(Component) News - ArticleEdit', () => {
         ]);
         expect(actual).to.equal(true);
       });
+
+      it('should NOT render <NewsForm />', () => {
+        const newsForm = wrapper.find('NewsForm');
+        expect(newsForm.length).to.eq(0);
+      });
     });
+
+    describe('when article is deleted', () => {
+      beforeEach(() => {
+        const deletedArticle = { isDeleted: true };
+        props.article = deletedArticle;
+        wrapper = shallow(<ArticleEdit {...props} />);
+      });
+
+      it('should have correct copy', () => {
+        const actual = wrapper.containsMatchingElement(
+          <div>
+            <h2>Successfully deleted! <small>🚀</small></h2>
+            <p>Redirecting...</p>
+          </div>
+        );
+        expect(actual).to.equal(true);
+      });
+
+      it('should NOT render <NewsForm />', () => {
+        const newsForm = wrapper.find('NewsForm');
+        expect(newsForm.length).to.eq(0);
+      });
+    });
+
   });
 
   describe('ConnectedArticleEdit', () => {

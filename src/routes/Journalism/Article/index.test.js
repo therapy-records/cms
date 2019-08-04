@@ -181,6 +181,8 @@ describe('(Component) Journalism - Article', () => {
         expect(articleHeader.prop('article')).to.eq(mockArticle);
         expect(articleHeader.prop('onDeleteArticle')).to.be.a('function');
         expect(articleHeader.prop('promiseLoading')).to.eq(props.promiseLoading);
+        expect(articleHeader.prop('showEditButton')).to.eq(true);
+        expect(articleHeader.prop('showDeleteButton')).to.eq(true);
       });
 
       describe('onDeleteArticle prop', () => {

@@ -21,7 +21,7 @@ describe('(Component) Journalism - ArticleEdit', () => {
     onFetchArticle: () => {},
     onDestroyArticle: () => {},
     resetPromiseState: () => {},
-    article: {title: 'test', id: 'asdf1234'},
+    article: {title: 'test', _id: 'asdf1234'},
     location: {
         pathname: 'article/edit'
     },
@@ -114,6 +114,7 @@ describe('(Component) Journalism - ArticleEdit', () => {
       wrapper = shallow(<ArticleEdit {...props} />);
       const actual = wrapper.containsMatchingElement(
         <JournalismForm
+          articleId={props.article._id}
           onSubmitForm={wrapper.instance().handleOnEditArticle}
           location={props.location}
         />
@@ -153,6 +154,30 @@ describe('(Component) Journalism - ArticleEdit', () => {
         expect(actual).to.equal(true);
       });
     });
+
+    describe('when article is deleted', () => {
+      beforeEach(() => {
+        const deletedArticle = { isDeleted: true };
+        props.article = deletedArticle;
+        wrapper = shallow(<ArticleEdit {...props} />);
+      });
+
+      it('should have correct copy', () => {
+        const actual = wrapper.containsMatchingElement(
+          <div>
+            <h2>Successfully deleted! <small>🚀</small></h2>
+            <p>Redirecting...</p>
+          </div>
+        );
+        expect(actual).to.equal(true);
+      });
+
+      it('should NOT render <JournalismForm />', () => {
+        const journalismForm = wrapper.find('JournalismForm');
+        expect(journalismForm.length).to.eq(0);
+      });
+    });
+
   });
 
   describe('ConnectedArticleEdit', () => {

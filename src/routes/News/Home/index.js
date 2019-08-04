@@ -56,7 +56,7 @@ export class News extends React.Component {
             <h3>
               <Link
                 onClick={() => this.handleButtonClick(article)}
-                to={`news/${article._id}`}
+                to={`/news/${article._id}`}
               >{article.title}
               </Link>
             </h3>
@@ -65,14 +65,14 @@ export class News extends React.Component {
 
           <Link
             onClick={() => this.handleButtonClick(article)}
-            to={`news/${article._id}`}
+            to={`/news/${article._id}`}
             className='btn btn-sm'
           >
             View
           </Link>
           <Link
             onClick={() => this.handleButtonClick(article)}
-            to={`news/${article._id}/edit`}
+            to={`/news/${article._id}/edit`}
             className='btn btn-sm'
           >
             Edit
