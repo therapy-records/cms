@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import moment from 'moment';
+// import moment from 'moment';
 import { resetPromiseState } from '../../../actions/uiState';
 import { fetchNewsArticles } from '../../../actions/news';
 import { selectSelectedNewsArticle } from '../../../selectors/news';
@@ -15,27 +15,28 @@ import {
   fetchSingleNewsArticle,
   destroySelectedNewsArticle
 } from '../../../actions/newsArticle';
-import ArticleDeleteModal from '../../../components/ArticleDeleteModal';
+import ArticleHeader from '../../../components/ArticleHeader';
+// import ArticleDeleteModal from '../../../components/ArticleDeleteModal';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
 export class Article extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      isShowingModal: false
-    }
-    this.handleModalOpen = this.handleModalOpen.bind(this);
-    this.handleModalClose = this.handleModalClose.bind(this);
-    this.handleOnDeleteArticle = this.handleOnDeleteArticle.bind(this);
-  }
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     isShowingModal: false
+  //   }
+  //   this.handleModalOpen = this.handleModalOpen.bind(this);
+  //   this.handleModalClose = this.handleModalClose.bind(this);
+  //   this.handleOnDeleteArticle = this.handleOnDeleteArticle.bind(this);
+  // }
 
-  handleModalOpen() {
-    this.setState({ isShowingModal: true })
-  }
+  // handleModalOpen() {
+  //   this.setState({ isShowingModal: true })
+  // }
 
-  handleModalClose(){
-    this.setState({ isShowingModal: false })
-  }
+  // handleModalClose(){
+  //   this.setState({ isShowingModal: false })
+  // }
 
   componentWillMount() {
     const propsArticle = this.props.article;
@@ -59,15 +60,16 @@ export class Article extends React.Component {
     return { __html: data }
   }
 
-  handleOnDeleteArticle() {
-    this.props.onDeleteArticle(this.props.article._id)
-    this.handleModalClose();
-  }
+  // handleOnDeleteArticle() {
+  //   this.props.onDeleteArticle(this.props.article._id)
+  //   this.handleModalClose();
+  // }
 
   render() {
     const {
       article,
-      promiseLoading
+      promiseLoading,
+      onDeleteArticle
     } = this.props;
 
     // todo: move to will/did update
@@ -97,32 +99,11 @@ export class Article extends React.Component {
         {(!promiseLoading && article && article.title && !article.isDeleted) && (
           <div>
 
-            <div className='heading-action-btns'>
-              <div className='heading-with-btn'>
-                <h2>{article.title}</h2>
-                <p className='small-tab'>{moment(article.createdAt).fromNow()}</p>
-                {article.editedAt &&
-                  <div className='heading-modified'>
-                    <p>Last modified {moment(article.editedAt).fromNow()}
-                      <small>{moment(article.editedAt).format('DD/mm/YYYY')}</small>
-                    </p>
-                  </div>
-                }
-              </div>
-
-              <div className='action-btns'>
-                <button
-                  className='btn btn-danger'
-                  onClick={this.handleModalOpen}
-                >Delete
-                </button>
-                <Link
-                  to={`/news/${article._id}/edit`}
-                  className='btn btn-edit'
-                >Edit
-                </Link>
-              </div>
-            </div>
+            <ArticleHeader
+              article={article}
+              onDeleteArticle={() => onDeleteArticle(article._id)}
+              promiseLoading={promiseLoading}
+            />
 
             <ul className='row-large row-alternating-columns'>
               {article.sections.map((section, index) => {
@@ -166,12 +147,6 @@ export class Article extends React.Component {
           </div>
         )}
 
-        {(!promiseLoading && this.state.isShowingModal && !article.isDeleted) &&
-          <ArticleDeleteModal
-            handleModalClose={this.handleModalClose}
-            onDeleteArticle={this.handleOnDeleteArticle}
-          />
-        }
       </article>
     )
   }

@@ -471,23 +471,6 @@ iframe {
   }
 }
 
-@media(min-width: 600px) {
-  .heading-action-btns {
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    .action-btns {
-      min-width: 190px;
-      text-align: right;
-      .btn {
-        width: auto;
-      }
-    }
-  }
-}
-
 .row-alternating-columns {
   .cols-container:nth-child(even) {
     flex-direction: row-reverse;
@@ -509,7 +492,7 @@ iframe {
 }
 
 .article-create {
-  .heading-action-btns {
+  .article-heading {
     margin-bottom: 3em;
   }
   ul,ol, dl {

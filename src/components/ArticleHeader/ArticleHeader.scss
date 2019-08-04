@@ -1,0 +1,16 @@
+@media(min-width: 600px) {
+  .article-header {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    .action-btns {
+      min-width: 190px;
+      text-align: right;
+      .btn {
+        width: auto;
+      }
+    }
+  }
+}
