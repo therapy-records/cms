@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import moment from 'moment';
 import { resetPromiseState } from '../../../actions/uiState';
 import { fetchNewsArticles } from '../../../actions/news';
 import { selectSelectedNewsArticle } from '../../../selectors/news';
@@ -16,28 +14,9 @@ import {
   destroySelectedNewsArticle
 } from '../../../actions/newsArticle';
 import ArticleHeader from '../../../components/ArticleHeader';
-// import ArticleDeleteModal from '../../../components/ArticleDeleteModal';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
 export class Article extends React.Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     isShowingModal: false
-  //   }
-  //   this.handleModalOpen = this.handleModalOpen.bind(this);
-  //   this.handleModalClose = this.handleModalClose.bind(this);
-  //   this.handleOnDeleteArticle = this.handleOnDeleteArticle.bind(this);
-  // }
-
-  // handleModalOpen() {
-  //   this.setState({ isShowingModal: true })
-  // }
-
-  // handleModalClose(){
-  //   this.setState({ isShowingModal: false })
-  // }
-
   componentWillMount() {
     const propsArticle = this.props.article;
     const paramsId = this.props.match.params.id;
@@ -59,11 +38,6 @@ export class Article extends React.Component {
   renderHtml(data) {
     return { __html: data }
   }
-
-  // handleOnDeleteArticle() {
-  //   this.props.onDeleteArticle(this.props.article._id)
-  //   this.handleModalClose();
-  // }
 
   render() {
     const {

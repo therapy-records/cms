@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { resetPromiseState } from '../../../actions/uiState';
@@ -13,29 +12,11 @@ import {
   selectUiStateLoading,
   selectUiStateSuccess
 } from '../../../selectors/uiState';
+import ArticleHeader from '../../../components/ArticleHeader';
 import { selectSelectedJournalismArticle } from '../../../selectors/journalism';
-import ArticleDeleteModal from '../../../components/ArticleDeleteModal'
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
 export class Article extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      isShowingModal: false
-    }
-    this.handleModalOpen = this.handleModalOpen.bind(this);
-    this.handleModalClose = this.handleModalClose.bind(this);
-    this.handleOnDeleteArticle = this.handleOnDeleteArticle.bind(this);
-  }
-
-  handleModalOpen() {
-    this.setState({ isShowingModal: true })
-  }
-
-  handleModalClose() {
-    this.setState({ isShowingModal: false })
-  }
-
   componentWillMount() {
     const propsArticle = this.props.article;
     const paramsId = this.props.match.params.id;
@@ -58,15 +39,11 @@ export class Article extends React.Component {
     return { __html: data }
   }
 
-  handleOnDeleteArticle() {
-    this.props.onDeleteArticle(this.props.article._id)
-    this.handleModalClose();
-  }
-
   render() {
     const {
       article,
-      promiseLoading
+      promiseLoading,
+      onDeleteArticle
     } = this.props;
 
     // todo: move to will/did update
@@ -96,36 +73,17 @@ export class Article extends React.Component {
         {(!promiseLoading && article && article.title && !article.isDeleted) && (
           <div>
 
-            <div className='heading-action-btns'>
-              <div className='heading-with-btn'>
-                <h2>{article.title}</h2>
-                <p className='small-tab'>{moment(article.createdAt).fromNow()}</p>
-              </div>
-
-              <div className='action-btns'>
-                <button
-                  className='btn btn-danger'
-                  onClick={this.handleModalOpen}
-                >Delete
-                </button>
-                <Link
-                  to={`/journalism/${article._id}/edit`}
-                  className='btn btn-edit'
-                >Edit</Link>
-              </div>
-            </div>
-
-            {article.editedAt &&
-              <p>Last modified {moment(article.editedAt).fromNow()}
-                <small>{moment(article.editedAt).format('DD/mm/YYYY')}</small>
-              </p>
-            }
+            <ArticleHeader
+              baseUrl='/journalism'
+              article={article}
+              onDeleteArticle={() => onDeleteArticle(article._id)}
+              promiseLoading={promiseLoading}
+            />
 
             <div className='row-large'>
               <p>{article.copy}</p>
               <p><a href={article.externalLink} target='_blank'>{article.externalLink}</a></p>
             </div>
-
 
             {article.imageUrl &&
               <div className='row-large img-container'>
@@ -140,13 +98,6 @@ export class Article extends React.Component {
 
           </div>
         )}
-
-        {(!promiseLoading && this.state.isShowingModal && !article.isDeleted) &&
-          <ArticleDeleteModal
-            handleModalClose={this.handleModalClose}
-            onDeleteArticle={this.handleOnDeleteArticle}
-          />
-        }
       </article>
     )
   }

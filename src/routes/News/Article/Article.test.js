@@ -1,11 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import configureMockStore from 'redux-mock-store';
-import moment from 'moment';
 import ConnectedArticle, { Article } from './index';
-import ArticleDeleteModal from '../../../components/ArticleDeleteModal';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import { selectSelectedNewsArticle } from '../../../selectors/news';
 import {
@@ -184,7 +181,6 @@ describe('(Component) News - Article', () => {
       });
 
       describe('<ArticleHeader />', () => {
-
         it('should render', () => {
           const articleHeader = wrapper.find('ArticleHeader');
           expect(articleHeader.length).to.eq(1);

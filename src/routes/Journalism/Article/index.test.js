@@ -1,11 +1,9 @@
-import React from 'react'
+import React from 'react';
 import moment from 'moment';
-import { Link } from 'react-router-dom'
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import configureMockStore from 'redux-mock-store';
-import ConnectedArticle, { Article } from './index'
-import ArticleDeleteModal from '../../../components/ArticleDeleteModal'
+import ConnectedArticle, { Article } from './index';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import {
   selectUiStateLoading,
@@ -37,7 +35,8 @@ describe('(Component) Journalism - Article', () => {
         params: {
           id: 1234
         }
-      }
+      },
+      promiseLoading: false
     };
   props = baseProps;
 
@@ -173,11 +172,28 @@ describe('(Component) Journalism - Article', () => {
       props.article = mockArticle;
       wrapper = shallow(<Article {...props} />);
     });
-    it('should render a title', () => {
-      const actual = wrapper.containsMatchingElement(
-        <h2>{props.article.title}</h2>
-      );
-      expect(actual).to.equal(true);
+
+    describe('<ArticleHeader />', () => {
+      it('should render', () => {
+        const articleHeader = wrapper.find('ArticleHeader');
+        expect(articleHeader.length).to.eq(1);
+        expect(articleHeader.prop('baseUrl')).to.eq('/journalism');
+        expect(articleHeader.prop('article')).to.eq(mockArticle);
+        expect(articleHeader.prop('onDeleteArticle')).to.be.a('function');
+        expect(articleHeader.prop('promiseLoading')).to.eq(props.promiseLoading);
+      });
+
+      describe('onDeleteArticle prop', () => {
+        it('should call props.onDeleteArticle with article id', () => {
+          const onDeleteArticleSpy = sinon.spy();
+          wrapper.setProps({
+            onDeleteArticle: onDeleteArticleSpy
+          });
+          const articleHeader = wrapper.find('ArticleHeader');
+          articleHeader.props().onDeleteArticle();
+          expect(onDeleteArticleSpy).to.have.been.calledWith(mockArticle._id)
+        });
+      });
     });
 
     describe('main image', () => {
@@ -206,46 +222,9 @@ describe('(Component) Journalism - Article', () => {
       expect(actual).to.equal(true);
     });
 
-    it('should render editedAt', () => {
-      const actual = wrapper.containsMatchingElement(
-        <p>Last modified {moment(props.article.editedAt).fromNow()}
-          <small>{moment(props.article.editedAt).format('DD/mm/YYYY')}</small>
-        </p>
-      );
-      expect(actual).to.equal(true);
-    });
   });
 
   describe('methods', () => {
-    describe('handleModalOpen/handleModalClose', () => {
-      wrapper = shallow(<Article {...props} />);
-      expect(wrapper.instance().state.isShowingModal).to.eq(false);
-      wrapper.instance().handleModalOpen();
-      expect(wrapper.instance().state.isShowingModal).to.eq(true);
-      wrapper.instance().handleModalClose();
-      expect(wrapper.instance().state.isShowingModal).to.eq(false);
-    });
-
-    describe('handleOnDeleteArticle', () => {
-      it('should call props.onDeleteArticle', () => {
-        wrapper = shallow(<Article {...props} />);
-        const onDeleteArticleSpy = sinon.spy();
-        wrapper.setProps({
-          onDeleteArticle: onDeleteArticleSpy
-        });
-        wrapper.instance().handleOnDeleteArticle();
-        expect(onDeleteArticleSpy.calledOnce).to.eq(true);
-      });
-
-      it('should call handleModalClose', () => {
-        wrapper = shallow(<Article {...props} />);
-        wrapper.instance().handleModalClose = sinon.spy();
-        wrapper.instance().handleOnDeleteArticle(props.article);
-        expect(wrapper.instance().handleModalClose.calledOnce).to.eq(true);
-      });
-
-    });
-
     describe('renderHtml', () => {
       it('should return an object', () => {
         wrapper = shallow(<Article {...props} />);
@@ -257,47 +236,6 @@ describe('(Component) Journalism - Article', () => {
     });
   });
 
-  describe('edit article button', () => {
-    it('should be rendered', () => {
-      let props = baseProps;
-      wrapper = shallow(<Article {...props} />);
-      const editButton = wrapper.find(Link);
-      expect(editButton.length).to.equal(1);
-    });
-  });
-
-  describe('delete article button', () => {
-    beforeEach(() => {
-      props = baseProps;
-      props.article = mockArticle;
-      props.handleModalOpen = sinon.spy();
-      props.handleModalClose = () => { };
-      props.promiseLoading = false;
-      wrapper = shallow(<Article {...props} />);
-    });
-
-    it('should not render <ArticleDeleteModal /> by default', () => {
-      const actual = wrapper.containsMatchingElement(
-        <ArticleDeleteModal
-          handleModalClose={wrapper.instance().handleModalClose}
-          onDeleteArticle={wrapper.instance().handleOnDeleteArticle}
-        />
-      );
-      expect(actual).to.equal(false);
-    });
-
-    it('should render <ArticleDeleteModal />', () => {
-      const button = wrapper.find('button');
-      button.simulate('click');
-      const actual = wrapper.containsMatchingElement(
-        <ArticleDeleteModal
-          handleModalClose={wrapper.instance().handleModalClose}
-          onDeleteArticle={wrapper.instance().handleOnDeleteArticle}
-        />
-      );
-      expect(actual).to.equal(true);
-    });
-  });
   describe('ConnectedArticle', () => {
     const mockStore = configureMockStore();
     const mockStoreState = {
