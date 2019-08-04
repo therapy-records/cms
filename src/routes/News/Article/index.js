@@ -100,6 +100,7 @@ export class Article extends React.Component {
           <div>
 
             <ArticleHeader
+              baseUrl='/news'
               article={article}
               onDeleteArticle={() => onDeleteArticle(article._id)}
               promiseLoading={promiseLoading}

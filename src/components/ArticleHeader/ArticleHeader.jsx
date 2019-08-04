@@ -30,9 +30,9 @@ class ArticleHeader extends Component {
     this.handleModalClose();
   }
 
-
   render() {
     const {
+      baseUrl,
       article,
       promiseLoading
     } = this.props;
@@ -61,7 +61,7 @@ class ArticleHeader extends Component {
             >Delete
                       </button>
             <Link
-              to={`/news/${article._id}/edit`}
+              to={`${baseUrl}/${article._id}/edit`}
               className='btn btn-edit'
             >Edit
             </Link>
@@ -81,6 +81,7 @@ class ArticleHeader extends Component {
 }
 
 ArticleHeader.propTypes = {
+  baseUrl: PropTypes.string.isRequired,
   article: PropTypes.object.isRequired,
   onDeleteArticle: PropTypes.func.isRequired,
   promiseLoading: PropTypes.bool

@@ -188,6 +188,7 @@ describe('(Component) News - Article', () => {
         it('should render', () => {
           const articleHeader = wrapper.find('ArticleHeader');
           expect(articleHeader.length).to.eq(1);
+          expect(articleHeader.prop('baseUrl')).to.eq('/news');
           expect(articleHeader.prop('article')).to.eq(mockArticle);
           expect(articleHeader.prop('onDeleteArticle')).to.be.a('function');
           expect(articleHeader.prop('promiseLoading')).to.eq(props.promiseLoading);

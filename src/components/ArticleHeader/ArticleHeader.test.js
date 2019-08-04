@@ -32,8 +32,10 @@ describe('(Component) ArticleHeader', () => {
       ]
     },
     baseProps = {
-      onDeleteArticle: sinon.spy(),
-      article: mockArticle
+      baseUrl: '/news',
+      promiseLoading: false,
+      article: mockArticle,
+      onDeleteArticle: sinon.spy()
     };
   props = baseProps;
 
@@ -115,7 +117,9 @@ describe('(Component) ArticleHeader', () => {
 
     it('should be render an `edit article` button', () => {
       const editButton = wrapper.find(Link);
-      expect(editButton.length).to.equal(1);
+      expect(editButton.length).to.eq(1);
+      const expectedTo = `${baseProps.baseUrl}/${baseProps.article._id}/edit`;
+      expect(editButton.prop('to')).to.eq(expectedTo);
     });
 
     describe('delete article button', () => {
