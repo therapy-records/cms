@@ -11,6 +11,7 @@ selectUiStateLoading,
 selectUiStateSuccess
 } from '../../../selectors/uiState';
 import {selectSelectedJournalismArticle} from '../../../selectors/journalism';
+import redirect from '../../../utils/redirect';
 
 Enzyme.configure({adapter: new Adapter()});
 
@@ -176,6 +177,18 @@ describe('(Component) Journalism - ArticleEdit', () => {
         const journalismForm = wrapper.find('JournalismForm');
         expect(journalismForm.length).to.eq(0);
       });
+
+      it('should call redirect util', () => {
+        const redirectSpy = sinon.spy();
+        redirect.redirectHistory = redirectSpy;
+
+        wrapper = shallow(<ArticleEdit {...props} />);
+        wrapper.setProps({
+          article: { isDeleted: true }
+        });
+        expect(redirectSpy).to.have.been.called;
+      });
+
     });
 
   });

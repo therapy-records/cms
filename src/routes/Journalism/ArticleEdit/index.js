@@ -15,6 +15,8 @@ import {
 } from '../../../selectors/uiState';
 import JournalismForm from '../../../components/JournalismForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
+import redirect from '../../../utils/redirect';
+
 
 export class ArticleEdit extends React.Component {
   constructor() {
@@ -57,11 +59,7 @@ export class ArticleEdit extends React.Component {
 
     // todo: move to will/did update
     if (article && article.isDeleted) {
-      setTimeout(() => {
-        this.props.history.push({
-          pathname: '/journalism'
-        });
-      }, 3000)
+      redirect.redirectHistory(this.props.history, '/journalism');
     }
   
     if (!article.isDeleted && !article._id) {

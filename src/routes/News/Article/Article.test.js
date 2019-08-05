@@ -9,6 +9,7 @@ import {
   selectUiStateLoading,
   selectUiStateSuccess
 } from '../../../selectors/uiState';
+import redirect from '../../../utils/redirect';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -136,6 +137,18 @@ describe('(Component) News - Article', () => {
           expect(loadingSpinner.prop('active')).to.eq(false);
         });
       });
+
+      it('should call redirect util', () => {
+        const redirectSpy = sinon.spy();
+        redirect.redirectHistory = redirectSpy;
+
+        wrapper = shallow(<Article {...props} />);
+        wrapper.setProps({
+          article: { isDeleted: true }
+        });
+        expect(redirectSpy).to.have.been.called;
+      });
+
     });
 
     describe('when an article does not exist / article._id is undefined', () => {

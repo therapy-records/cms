@@ -10,6 +10,7 @@ import {
   selectUiStateSuccess
 } from '../../../selectors/uiState';
 import { selectSelectedJournalismArticle } from '../../../selectors/journalism';
+import redirect from '../../../utils/redirect';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -90,6 +91,19 @@ describe('(Component) Journalism - Article', () => {
           expect(props.onFetchArticle.calledOnce).to.eq(true);
         });
       });
+    });
+  });
+  
+  describe('when props.article.isDeleted', () => {
+    it('should call redirect util', () => {
+      const redirectSpy = sinon.spy();
+      redirect.redirectHistory = redirectSpy;
+
+      wrapper = shallow(<Article {...props} />);
+      wrapper.setProps({
+        article: { isDeleted: true }
+      });
+      expect(redirectSpy).to.have.been.called;
     });
   });
 

@@ -15,6 +15,7 @@ import {
 } from '../../../actions/newsArticle';
 import ArticleHeader from '../../../components/ArticleHeader';
 import LoadingSpinner from '../../../components/LoadingSpinner';
+import redirect from '../../../utils/redirect';
 
 export class Article extends React.Component {
   componentWillMount() {
@@ -48,11 +49,7 @@ export class Article extends React.Component {
 
     // todo: move to will/did update
     if (article && article.isDeleted) {
-      setTimeout(() => {
-        this.props.history.push({
-          pathname: '/news'
-        });
-      }, 3000);
+      redirect.redirectHistory(this.props.history, '/news');
     }
 
     return (

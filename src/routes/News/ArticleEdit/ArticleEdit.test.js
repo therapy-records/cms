@@ -11,6 +11,7 @@ import {
   selectUiStateSuccess
 } from '../../../selectors/uiState';
 import { selectSelectedNewsArticle } from '../../../selectors/news';
+import redirect from '../../../utils/redirect';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -183,6 +184,18 @@ describe('(Component) News - ArticleEdit', () => {
         const newsForm = wrapper.find('NewsForm');
         expect(newsForm.length).to.eq(0);
       });
+
+      it('should call redirect util', () => {
+        const redirectSpy = sinon.spy();
+        redirect.redirectHistory = redirectSpy;
+
+        wrapper = shallow(<ArticleEdit {...props} />);
+        wrapper.setProps({
+          article: { isDeleted: true }
+        });
+        expect(redirectSpy).to.have.been.called;
+      });
+
     });
 
   });
