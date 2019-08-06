@@ -117,6 +117,28 @@ describe('(Actions) journalism', () => {
         store.clearActions();
       });
     });
+
+    describe('on promise error', () => {
+      it('should dispatch the correct actions', () => {
+        mockAxios.get = jest.fn(() => Promise.reject(mock.getJournalismResponse))
+        nock('http://localhost:4040/api')
+          .get('/journalism')
+          .reply(500, mock.getJournalismResponse);
+
+        const expectedActions = [
+          { type: UISTATE_PROMISE_LOADING, payload: true },
+          { type: UISTATE_PROMISE_LOADING, payload: false },
+          { type: UISTATE_PROMISE_ERROR, payload: true }
+        ];
+        store.clearActions();
+        return store.dispatch(fetchJournalismArticles()).then(() => {
+          const storeActions = store.getActions();
+          expect(storeActions).to.deep.equal(expectedActions);
+          store.clearActions();
+        });
+      });
+    });
+
   });
 
   describe('(Thunk) postJournalism', () => {
@@ -178,6 +200,7 @@ describe('(Actions) journalism', () => {
       });
     });
   });
+
   describe('(Thunk) editJournalism', () => {
     afterEach(() => {
       nock.cleanAll();

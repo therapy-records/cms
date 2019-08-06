@@ -88,7 +88,7 @@ export class Article extends React.Component {
                 return (
                   <li
                     key={index}
-                    className={hasCopyAndImages ? 'cols-container' : null}
+                    className={hasCopyAndImages ? 'cols-container' : ''}
                   >
 
                     {hasImages && 

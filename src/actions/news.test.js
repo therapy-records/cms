@@ -128,6 +128,27 @@ describe('(Actions) news', () => {
         store.clearActions();
       });
     });
+
+    describe('on promise error', () => {
+      it('should dispatch the correct actions', () => {
+        axios.get = sinon.stub().returns(Promise.reject(mock.getNewsResponse));
+        nock(API_ROOT + NEWS)
+          .get('/news')
+          .reply(500, mock.getNewsResponse.data);
+
+        const expectedActions = [
+          { type: UISTATE_PROMISE_LOADING, payload: true },
+          { type: UISTATE_PROMISE_LOADING, payload: false },
+          { type: UISTATE_PROMISE_ERROR, payload: true }
+        ];
+        store.clearActions();
+        return store.dispatch(fetchNewsArticles()).then(() => {
+          const storeActions = store.getActions();
+          expect(storeActions).to.deep.equal(expectedActions);
+          store.clearActions();
+        });
+      });
+    });
   });
 
   describe('(Thunk) postNews', () => {

@@ -105,7 +105,7 @@ ArticleHeader.propTypes = {
   baseUrl: PropTypes.string.isRequired,
   article: PropTypes.object.isRequired,
   heading: PropTypes.string,
-  onDeleteArticle: PropTypes.func.isRequired,
+  onDeleteArticle: PropTypes.func,
   promiseLoading: PropTypes.bool,
   showEditButton: PropTypes.bool,
   showDeleteButton: PropTypes.bool
@@ -113,6 +113,7 @@ ArticleHeader.propTypes = {
 
 ArticleHeader.defaultProps = {
   heading: '',
+  onDeleteArticle: () => {},
   promiseLoading: false,
   showEditButton: false,
   showDeleteButton: false

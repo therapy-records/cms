@@ -20,6 +20,7 @@ import {
 import {
   UISTATE_PROMISE_LOADING,
   UISTATE_PROMISE_SUCCESS,
+  UISTATE_PROMISE_ERROR,
   SET_SELECTED_JOURNALISM_ARTICLE,
   SET_SELECTED_JOURNALISM_ARTICLE_DELETED,
   DESTROY_SELECTED_JOURNALISM_ARTICLE,
@@ -172,6 +173,27 @@ describe('(Actions) journalismArticle', () => {
         const storeActions = store.getActions();
         expect(storeActions).to.deep.equal(expectedActions);
         store.clearActions();
+      });
+    });
+
+    describe('on promise error', () => {
+      it('should dispatch the correct actions', () => {
+        axios.get = sinon.stub().returns(Promise.reject(mock.getArticleResponse));
+        nock(API_ROOT + JOURNALISM)
+          .get('/journalism')
+          .reply(mock.getArticleResponse.data);
+
+        const expectedActions = [
+          { type: UISTATE_PROMISE_LOADING, payload: true },
+          { type: UISTATE_PROMISE_LOADING, payload: false },
+          { type: UISTATE_PROMISE_ERROR, payload: true }
+        ];
+        store.clearActions();
+        return store.dispatch(fetchSingleJournalismArticle()).then(() => {
+          const storeActions = store.getActions();
+          expect(storeActions).to.deep.equal(expectedActions);
+          store.clearActions();
+        });
       });
     });
   });

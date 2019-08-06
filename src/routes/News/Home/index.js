@@ -66,14 +66,14 @@ export class News extends React.Component {
           <Link
             onClick={() => this.handleButtonClick(article)}
             to={`/news/${article._id}`}
-            className='btn btn-sm'
+            className='btn btn-sm btn-view'
           >
             View
           </Link>
           <Link
             onClick={() => this.handleButtonClick(article)}
             to={`/news/${article._id}/edit`}
-            className='btn btn-sm'
+            className='btn btn-sm btn-edit'
           >
             Edit
           </Link>
@@ -125,7 +125,6 @@ export class News extends React.Component {
                 </div>
               )
             }
-
           </div>
         }
       </div>
@@ -138,28 +137,27 @@ News.propTypes = {
   hasFetchedArticles: PropTypes.bool.isRequired,
   onFetchNewsArticles: PropTypes.func.isRequired,
   onSetSelectedNewsArticle: PropTypes.func.isRequired,
+  resetPromiseState: PropTypes.func.isRequired,
   articles: PropTypes.array,
-  combinedArticles: PropTypes.array,
-  resetPromiseState: PropTypes.func
+  combinedArticles: PropTypes.array
 }
 
 News.defaultProps = {
   promiseLoading: false,
   articles: [],
-  combinedArticles: [],
-  resetPromiseState: () => {}
+  combinedArticles: []
 }
+
+const mapStateToProps = (state, props) => ({
+  promiseLoading: selectUiStateLoading(state),
+  hasFetchedArticles: selectNewsHasFetched(state),
+  articles: selectNewsArticlesReverse(state)
+});
 
 const mapDispatchToProps = {
   onFetchNewsArticles: () => fetchNewsArticles(),
   onSetSelectedNewsArticle: (article) => setSelectedNewsArticle(article),
   resetPromiseState: () => resetPromiseState()
-}
-
-const mapStateToProps = (state) => ({
-  promiseLoading: selectUiStateLoading(state),
-  hasFetchedArticles: selectNewsHasFetched(state),
-  articles: selectNewsArticlesReverse(state)
-})
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(News)

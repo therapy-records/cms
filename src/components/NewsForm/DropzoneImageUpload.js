@@ -169,22 +169,17 @@ export class DropzoneImageUpload extends React.Component {
           {(images && images.length) ?
             <div>
               <ul className='flex-root gallery-images-flex-root'>
-                {images.map((i) => {
-                  if (i !== '') {
-                    return (
-                      <li key={i} className='col-50 no-list-style gallery-image-upload-item'>
-                        <img src={i} alt={`image  ${i + 1}`} />
-                        <button
-                          type="button"
-                          className="btn-danger btn-sm-remove"
-                          onClick={() => this.removeSingleImage(i)}>
-                          remove
-                      </button>
-                      </li>
-                    );
-                  }
-                  return null;
-                })}
+                {images.map((i) => (
+                  <li key={i} className='col-50 no-list-style gallery-image-upload-item'>
+                    <img src={i} alt={`image  ${i + 1}`} />
+                    <button
+                      type="button"
+                      className="btn-danger btn-sm-remove"
+                      onClick={() => this.removeSingleImage(i)}>
+                      remove
+                  </button>
+                  </li>
+                ))}
               </ul>
             </div>
           : null}

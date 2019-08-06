@@ -79,15 +79,15 @@ Home.propTypes = {
   onAuthCheck: PropTypes.func.isRequired
 }
 
-const mapDispatchToProps = {
-  onPostForm: () => userLogin(),
-  onAuthCheck: () => authCheck()
-}
-
 const mapStateToProps = (state) => ({
   isAuth: state.user.isAuth,
   promiseLoading: selectUiStateLoading(state),
   authError: state.user.authError
 })
+
+const mapDispatchToProps = {
+  onPostForm: () => userLogin(),
+  onAuthCheck: () => authCheck()
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

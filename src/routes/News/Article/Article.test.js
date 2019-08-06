@@ -219,6 +219,25 @@ describe('(Component) News - Article', () => {
       });
       
       describe('sections', () => {
+
+        describe('when a section does NOT have copy and images', () => {
+          it('should NOT render a `cols-container` class', () => {
+            wrapper.setProps({
+              article: {
+                title: 'test',
+                sections: [
+                  {
+                    images: []
+                  }
+                ]
+              }
+            });
+            const firstListItem = wrapper.find('li').first();
+            expect(firstListItem.hasClass('')).to.eq(true);
+            // expect(wrapper.find('.cols-container').length).to.eq(0);
+          });
+        });
+
         it('should render an image for each section', () => {
           const actual = wrapper.containsAllMatchingElements([
             <img

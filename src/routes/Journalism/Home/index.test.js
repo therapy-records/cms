@@ -82,13 +82,13 @@ describe('(Component) Journalism - Home', () => {
 
               <Link
                 to={`/journalism/${p._id}`}
-                className='btn btn-sm'
+                className='btn btn-sm btn-view'
               >
                 View
               </Link>
               <Link
                 to={`/journalism/${p._id}/edit`}
-                className='btn btn-sm'
+                className='btn btn-sm btn-edit'
               >
                 Edit
               </Link>
@@ -105,28 +105,49 @@ describe('(Component) Journalism - Home', () => {
     });
 
     describe('article', () => {
-      it('should call onSetSelectedJournalismArticle on `view` button click', () => {
-        let _props = baseProps;
-        _props.onSetSelectedJournalismArticle = sinon.spy();
-        wrapper = shallow(<Journalism {..._props} />);
-        const lastArticle = wrapper.find('.article-card').last();
-        const lastArticleButton = lastArticle.find(Link).first();
-        lastArticleButton.simulate('click');
-        expect(_props.onSetSelectedJournalismArticle).to.have.been.called;
-        const expectedArticle = mockJournalismArticles[mockJournalismArticles.length - 1];
-        expect(_props.onSetSelectedJournalismArticle).to.have.been.calledWith(expectedArticle);
+      describe('heading button', () => {
+        it('should call handleButtonClick', () => {
+          let _props = baseProps;
+          const handleButtonClickSpy = sinon.spy();
+          wrapper = shallow(<Journalism {..._props} />);
+          wrapper.instance().handleButtonClick = handleButtonClickSpy;
+          const lastArticle = wrapper.find('.article-card').last();
+          const button = lastArticle.find(Link).first();
+          button.simulate('click');
+          expect(handleButtonClickSpy).to.have.been.called;
+          const expectedCalledWith = mockJournalismArticles[mockJournalismArticles.length - 1];
+          expect(handleButtonClickSpy).to.have.been.calledWith(expectedCalledWith);
+        });
       });
 
-      it('should call onSetSelectedJournalismArticle on `edit` button click', () => {
-        let _props = baseProps;
-        _props.onSetSelectedJournalismArticle = sinon.spy();
-        wrapper = shallow(<Journalism {..._props} />);
-        const lastArticle = wrapper.find('.article-card').last();
-        const lastArticleButton = lastArticle.find(Link).last();
-        lastArticleButton.simulate('click');
-        expect(_props.onSetSelectedJournalismArticle).to.have.been.called;
-        const expectedArticle = mockJournalismArticles[mockJournalismArticles.length - 1];
-        expect(_props.onSetSelectedJournalismArticle).to.have.been.calledWith(expectedArticle);
+      describe('view button', () => {
+        it('should call handleButtonClick', () => {
+          let _props = baseProps;
+          const handleButtonClickSpy = sinon.spy();
+          wrapper = shallow(<Journalism {..._props} />);
+          wrapper.instance().handleButtonClick = handleButtonClickSpy;
+          const lastArticle = wrapper.find('.article-card').last();
+          const viewButton = lastArticle.find('.btn-view');
+          viewButton.simulate('click');
+          expect(handleButtonClickSpy).to.have.been.called;
+          const expectedCalledWith = mockJournalismArticles[mockJournalismArticles.length - 1];
+          expect(handleButtonClickSpy).to.have.been.calledWith(expectedCalledWith);
+        });
+      });
+
+      describe('edit button', () => {
+        it('should call handleButtonClick', () => {
+          let _props = baseProps;
+          const handleButtonClickSpy = sinon.spy();
+          wrapper = shallow(<Journalism {..._props} />);
+          wrapper.instance().handleButtonClick = handleButtonClickSpy;
+          const lastArticle = wrapper.find('.article-card').last();
+          const editButton = lastArticle.find('.btn-edit');
+          editButton.simulate('click');
+          expect(handleButtonClickSpy).to.have.been.called;
+          const expectedCalledWith = mockJournalismArticles[mockJournalismArticles.length - 1];
+          expect(handleButtonClickSpy).to.have.been.calledWith(expectedCalledWith);
+        });
       });
     });
 
@@ -153,6 +174,7 @@ describe('(Component) Journalism - Home', () => {
             hasFetchedArticles={false}
             onFetchJournalismArticles={() => { }}
             onSetSelectedJournalismArticle={() => { }}
+            resetPromiseState={() => {}}
           />
         );
         const actual = wrapper.containsMatchingElement(
@@ -185,6 +207,17 @@ describe('(Component) Journalism - Home', () => {
         });
         wrapper.instance().componentWillUnmount();
         expect(resetPromiseStateSpy).to.have.been.called;
+      });
+    });
+
+    describe('handleButtonClick', () => {
+      it('should call props.onSetSelectedJournalismArticle', () => {
+        const onSetSelectedJournalismArticleSpy = sinon.spy();
+        wrapper.setProps({
+          onSetSelectedJournalismArticle: onSetSelectedJournalismArticleSpy
+        });
+        wrapper.instance().handleButtonClick({test: true});
+        expect(onSetSelectedJournalismArticleSpy).to.have.been.calledWith({ test: true })
       });
     });
   });

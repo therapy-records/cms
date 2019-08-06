@@ -1,12 +1,18 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
-
 import Adapter from 'enzyme-adapter-react-15';
 import { Link } from 'react-router-dom';
+import configureMockStore from 'redux-mock-store';
 import moment from 'moment';
-import { News } from './index';
+import ConnectedNews, { News } from './index';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
+import {
+  selectNewsArticlesReverse,
+  selectNewsHasFetched
+} from '../../../selectors/news';
+import { selectUiStateLoading } from '../../../selectors/uiState';
+
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -22,6 +28,7 @@ describe('(Component) News - Home', () => {
     baseProps = {
       onFetchNewsArticles: () => {},
       onSetSelectedNewsArticle: () => {},
+      resetPromiseState: () => {},
       articles: mockArticles,
       hasFetchedArticles: true
     };
@@ -51,8 +58,8 @@ describe('(Component) News - Home', () => {
               <h3><Link to={`/news/${p._id}`}>{p.title}</Link></h3>
               {p.createdAt && <p className='small-tab'>{moment(p.createdAt).fromNow()}</p>}
             </div>
-            <Link to={`/news/${p._id}`} className='btn btn-sm'>View</Link>
-            <Link to={`/news/${p._id}/edit`} className='btn btn-sm'>Edit</Link>
+            <Link to={`/news/${p._id}`} className='btn btn-sm btn-view'>View</Link>
+            <Link to={`/news/${p._id}/edit`} className='btn btn-sm btn-edit'>Edit</Link>
           </div>
         </li>
       )
@@ -67,28 +74,49 @@ describe('(Component) News - Home', () => {
   });
 
   describe('article', () => {
-    it('should call onSetSelectedNewsArticle on `view` button click', () => {
-      let _props = baseProps;
-      _props.onSetSelectedNewsArticle = sinon.spy();
-      wrapper = shallow(<News {..._props} />);
-      const lastArticle = wrapper.find('.article-card').last();
-      const lastArticleButton = lastArticle.find(Link).first();
-      lastArticleButton.simulate('click');
-      expect(_props.onSetSelectedNewsArticle).to.have.been.called;
-      const expectedArticle = mockArticles[mockArticles.length - 1];
-      expect(_props.onSetSelectedNewsArticle).to.have.been.calledWith(expectedArticle);
+    describe('heading button', () => {
+      it('should call handleButtonClick', () => {
+        let _props = baseProps;
+        const handleButtonClickSpy = sinon.spy();
+        wrapper = shallow(<News {..._props} />);
+        wrapper.instance().handleButtonClick = handleButtonClickSpy;
+        const lastArticle = wrapper.find('.article-card').last();
+        const button = lastArticle.find(Link).first();
+        button.simulate('click');
+        expect(handleButtonClickSpy).to.have.been.called;
+        const expectedCalledWith = mockArticles[mockArticles.length - 1];
+        expect(handleButtonClickSpy).to.have.been.calledWith(expectedCalledWith);
+      });
     });
 
-    it('should call onSetSelectedNewsArticle on `edit` button click', () => {
-      let _props = baseProps;
-      _props.onSetSelectedNewsArticle = sinon.spy();
-      wrapper = shallow(<News {..._props} />);
-      const lastArticle = wrapper.find('.article-card').last();
-      const lastArticleButton = lastArticle.find(Link).last();
-      lastArticleButton.simulate('click');
-      expect(_props.onSetSelectedNewsArticle).to.have.been.called;
-      const expectedArticle = mockArticles[mockArticles.length - 1];
-      expect(_props.onSetSelectedNewsArticle).to.have.been.calledWith(expectedArticle);
+    describe('view button', () => {
+      it('should call handleButtonClick', () => {
+        let _props = baseProps;
+        const handleButtonClickSpy = sinon.spy();
+        wrapper = shallow(<News {..._props} />);
+        wrapper.instance().handleButtonClick = handleButtonClickSpy;
+        const lastArticle = wrapper.find('.article-card').last();
+        const viewButton = lastArticle.find('.btn-view');
+        viewButton.simulate('click');
+        expect(handleButtonClickSpy).to.have.been.called;
+        const expectedCalledWith = mockArticles[mockArticles.length - 1];
+        expect(handleButtonClickSpy).to.have.been.calledWith(expectedCalledWith);
+      });
+    });
+
+    describe('edit button', () => {
+      it('should call handleButtonClick', () => {
+        let _props = baseProps;
+        const handleButtonClickSpy = sinon.spy();
+        wrapper = shallow(<News {..._props} />);
+        wrapper.instance().handleButtonClick = handleButtonClickSpy;
+        const lastArticle = wrapper.find('.article-card').last();
+        const editButton = lastArticle.find('.btn-edit');
+        editButton.simulate('click');
+        expect(handleButtonClickSpy).to.have.been.called;
+        const expectedCalledWith = mockArticles[mockArticles.length - 1];
+        expect(handleButtonClickSpy).to.have.been.calledWith(expectedCalledWith);
+      });
     });
   });
 
@@ -116,6 +144,7 @@ describe('(Component) News - Home', () => {
           newsArticles={[]}
           onFetchNewsArticles={() => { }}
           onSetSelectedNewsArticle={() => { }}
+          resetPromiseState={() => {}}
           hasFetchedArticles
         />
       );
@@ -150,5 +179,50 @@ describe('(Component) News - Home', () => {
         expect(props.resetPromiseState).to.have.been.called;
       });
     });
+
+    describe('handleButtonClick', () => {
+      it('should call props.onSetSelectedJournalismArticle', () => {
+        const setSelectedNewsArticleSpy = sinon.spy();
+        wrapper.setProps({
+          onSetSelectedNewsArticle: setSelectedNewsArticleSpy
+        });
+        wrapper.instance().handleButtonClick({ test: true });
+        expect(setSelectedNewsArticleSpy).to.have.been.calledWith({ test: true })
+      });
+    });
+
   });
+
+  describe('ConnectedNews', () => {
+    const mockStore = configureMockStore();
+    const mockStoreState = {
+      news: {
+        articles: [],
+        hasFetched: false
+      },
+      uiState: {
+        promiseLoading: false
+      }
+    };
+    let renderedProps;
+    let store = {};
+
+    beforeEach(() => {
+      store = mockStore(mockStoreState);
+      wrapper = shallow(
+        <ConnectedNews
+          store={store}
+          hasFetchedArticles={false}
+        />
+      );
+    });   
+
+    it('should map state to props', () => {
+      renderedProps = wrapper.props();
+      expect(renderedProps.promiseLoading).to.eq(selectUiStateLoading(mockStoreState));
+      expect(renderedProps.hasFetchedArticles).to.eq(selectNewsHasFetched(mockStoreState));
+      expect(renderedProps.articles).to.eq(selectNewsArticlesReverse(mockStoreState));
+    });
+  });
+
 });

@@ -174,6 +174,57 @@ describe('(Component) DropzoneImageUpload', () => {
       });
     });
 
+    describe('images', () => {
+      const mockImages = [
+        'http://test.com/1.jpg',
+        'http://test.com/2.jpg',
+        'http://test.com/3.jpg'
+      ];
+
+      beforeEach(() => {
+        wrapper.setState({
+          images: mockImages
+        });
+      });
+
+      it('should render a list of images', () => {
+        const listItem = wrapper.find('li');
+        expect(listItem.length).to.eq(3);
+
+        const firstListItem = listItem.first();
+        const actual = firstListItem.containsMatchingElement(
+          <img src={mockImages[0]} alt={`image  ${mockImages[0] + 1}`} />
+        );
+        expect(actual).to.eq(true);
+      });
+
+      describe('remove buton', () => {
+        let listItem;
+        let button;
+
+        beforeEach(() => {
+          listItem = wrapper.find('li').first();
+          button = listItem.find('button');
+        });
+
+        it('should render in list item', () => {
+          expect(button.prop('type')).to.eq('button');
+          expect(button.prop('onClick')).to.be.a('function');
+          expect(button.text()).to.eq('remove');
+        });
+
+        describe('onClick', () => {
+          it('should call removeSingleImage function', () => {
+            const removeSingleImageSpy = sinon.spy();
+            wrapper.instance().removeSingleImage = removeSingleImageSpy;
+            button.simulate('click');
+            expect(removeSingleImageSpy).to.have.been.calledWith(mockImages[0])
+          });
+        });
+      });
+
+    });
+
     describe('with state.invalidDimensions', () => {
       it('should render a list of messages', () => {
         wrapper.setState({

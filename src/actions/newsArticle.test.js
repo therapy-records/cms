@@ -18,6 +18,7 @@ import { INITIAL_STATE } from '../reducers/newsArticle';
 import {
   UISTATE_PROMISE_LOADING,
   UISTATE_PROMISE_SUCCESS,
+  UISTATE_PROMISE_ERROR,
   SET_SELECTED_NEWS_ARTICLE,
   SET_SELECTED_NEWS_ARTICLE_DELETED,
   DESTROY_SELECTED_NEWS_ARTICLE,
@@ -187,8 +188,28 @@ describe('(Actions) newsArticle', () => {
         store.clearActions();
       });
     });
-  });
 
+    describe('on promise error', () => {
+      it('should dispatch the correct actions', () => {
+        axios.get = sinon.stub().returns(Promise.reject(mock.getArticleResponse));
+        nock(API_ROOT + NEWS)
+          .get('/news')
+          .reply(mock.getArticleResponse.data);
+
+        const expectedActions = [
+          { type: UISTATE_PROMISE_LOADING, payload: true },
+          { type: UISTATE_PROMISE_LOADING, payload: false },
+          { type: UISTATE_PROMISE_ERROR, payload: true }
+        ];
+        store.clearActions();
+        return store.dispatch(fetchSingleNewsArticle()).then(() => {
+          const storeActions = store.getActions();
+          expect(storeActions).to.deep.equal(expectedActions);
+          store.clearActions();
+        });
+      });
+    });
+  });
     
   describe('(Thunk) deleteNewsArticle', () => {
     afterEach(() => {
@@ -204,6 +225,7 @@ describe('(Actions) newsArticle', () => {
     });
 
     it('should dispatch the correct actions', () => {
+      axios.get = sinon.stub().returns(Promise.resolve(mock.getArticleResponse));
       _axiosAuthHeaders.delete = sinon.stub().returns(Promise.resolve({}));
       nock('http://localhost:4040/api/news')
         .delete('/news', {})
@@ -229,6 +251,5 @@ describe('(Actions) newsArticle', () => {
         store.clearActions();
       });
     });
-
   });
 });

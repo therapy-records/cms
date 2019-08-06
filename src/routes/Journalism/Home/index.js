@@ -51,18 +51,18 @@ export class Journalism extends React.Component {
           </div>
 
           <p>Links to: {p.externalLink}</p>
-
+        
           <Link
             onClick={() => this.handleButtonClick(p)}
             to={`/journalism/${p._id}`}
-            className='btn btn-sm'
+            className='btn btn-sm btn-view'
           >
             View
           </Link>
           <Link
             onClick={() => this.handleButtonClick(p)}
             to={`/journalism/${p._id}/edit`}
-            className='btn btn-sm'
+            className='btn btn-sm btn-edit'
           >
             Edit
           </Link>
@@ -123,13 +123,12 @@ Journalism.propTypes = {
   hasFetchedArticles: PropTypes.bool.isRequired,
   onFetchJournalismArticles: PropTypes.func.isRequired,
   onSetSelectedJournalismArticle: PropTypes.func.isRequired,
-  articles: PropTypes.array,
-  resetPromiseState: PropTypes.func
+  resetPromiseState: PropTypes.func.isRequired,
+  articles: PropTypes.array
 };
 
 Journalism.defaultProps = {
-  articles: [],
-  resetPromiseState: () => {}
+  articles: []
 };
 
 const mapDispatchToProps = {
