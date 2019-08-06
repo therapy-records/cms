@@ -80,6 +80,7 @@ describe('(Component) Sidebar', () => {
     beforeEach(() => {
       wrapper = shallow(<Sidebar {...props} />)
     });
+
     describe('toggleSidebar', () => {
       it('should update state', () => {
         wrapper.instance().toggleSidebar();
@@ -90,13 +91,25 @@ describe('(Component) Sidebar', () => {
         expect(wrapper.instance().state.isOpen).to.eq(true);
       });
     });
+
+    describe('handleOnClickNavItem', () => {
+      it('should call toggleSidebar', () => {
+        const toggleSidebarSpy = sinon.spy();
+        wrapper.instance().toggleSidebar = toggleSidebarSpy;
+        wrapper.instance().handleOnClickNavItem();
+        expect(toggleSidebarSpy).to.have.been.called;
+      });
+    });
+
     describe('componentDidMount', () => {
+
       it('should call handleResize', () => {
         const handleResizeSpy = sinon.spy();
         wrapper.instance().handleResize = handleResizeSpy;
         wrapper.instance().componentDidMount();
         expect(handleResizeSpy.calledOnce).to.eq(true);
       });
+
       it('should add window event listener', () => {
         const addEventListenerSpy = sinon.spy();
         global.window.addEventListener = addEventListenerSpy;
@@ -161,7 +174,11 @@ describe('(Component) Sidebar', () => {
   describe('nav items', () => {
     it('should render a link to dashboard', () => {
       const actual = wrapper.containsMatchingElement(
-        <NavLink to='/dashboard' activeClassName='route--active'>
+        <NavLink
+          to='/dashboard'
+          activeClassName='route--active'
+          onClick={wrapper.instance().handleOnClickNavItem}
+        >
           Dashboard
         </NavLink>
       );
@@ -170,7 +187,11 @@ describe('(Component) Sidebar', () => {
 
     it('should render a link to dashboard', () => {
       const actual = wrapper.containsMatchingElement(
-        <NavLink to='/news' activeClassName='route--active'>
+        <NavLink
+          to='/news'
+          activeClassName='route--active'
+          onClick={wrapper.instance().handleOnClickNavItem}
+        >
           News
         </NavLink>
       );
@@ -179,7 +200,11 @@ describe('(Component) Sidebar', () => {
 
     it('should render a link to journalism', () => {
       const actual = wrapper.containsMatchingElement(
-        <NavLink to='/journalism' activeClassName='route--active'>
+        <NavLink
+          to='/journalism'
+          activeClassName='route--active'
+          onClick={wrapper.instance().handleOnClickNavItem}
+        >
           Journalism
         </NavLink>
       );
@@ -188,7 +213,11 @@ describe('(Component) Sidebar', () => {
 
     it('should render a link to press', () => {
       const actual = wrapper.containsMatchingElement(
-        <NavLink to='/press' activeClassName='route--active'>
+        <NavLink
+          to='/press'
+          activeClassName='route--active'
+          onClick={wrapper.instance().handleOnClickNavItem}
+        >
           Press
         </NavLink>
       );

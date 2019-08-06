@@ -15,6 +15,7 @@ export class Sidebar extends React.PureComponent {
     };
     this.toggleSidebar = this.toggleSidebar.bind(this);
     this.handleResize = this.handleResize.bind(this)
+    this.handleOnClickNavItem = this.handleOnClickNavItem.bind(this);
     
   }
 
@@ -28,6 +29,10 @@ export class Sidebar extends React.PureComponent {
     this.setState({
       windowWidth: window.innerWidth
     });
+  }
+
+  handleOnClickNavItem() {
+    this.toggleSidebar();
   }
 
   componentDidMount() {
@@ -94,19 +99,35 @@ export class Sidebar extends React.PureComponent {
             <NavLink to='/'>FR-CMS</NavLink>
           </h1>
 
-          <NavLink to='/dashboard' activeClassName='route--active'>
+          <NavLink
+            to='/dashboard'
+            activeClassName='route--active'
+            onClick={this.handleOnClickNavItem}
+          >
             Dashboard
           </NavLink>
 
-          <NavLink to='/news' activeClassName='route--active'>
+          <NavLink
+            to='/news'
+            activeClassName='route--active'
+            onClick={this.handleOnClickNavItem}
+          >
             News
           </NavLink>
 
-          <NavLink to='/journalism' activeClassName='route--active'>
+          <NavLink
+            to='/journalism'
+            activeClassName='route--active'
+            onClick={this.handleOnClickNavItem}
+          >
             Journalism
           </NavLink>
 
-          <NavLink to='/press' activeClassName='route--active'>
+          <NavLink
+            to='/press'
+            activeClassName='route--active'
+            onClick={this.handleOnClickNavItem}
+          >
             Press
           </NavLink>
 
