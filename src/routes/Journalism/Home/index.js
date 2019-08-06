@@ -90,7 +90,7 @@ export class Journalism extends React.Component {
         {!promiseLoading &&
           <div>
 
-            <div className='heading-action-btns'>
+          <div className='heading-with-btns'>
               <div>
                 <h2>Journalism ✍️</h2>
               </div>

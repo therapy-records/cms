@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import ArticleDeleteModal from '../ArticleDeleteModal';
-import './ArticleHeader.css';
 
 class ArticleHeader extends Component {
   constructor() {
@@ -44,8 +43,8 @@ class ArticleHeader extends Component {
 
     return (
       <div>
-        <div className='article-header'>
-          <div className='heading-with-btn'>
+        <div className='heading-with-btns'>
+          <div>
 
             {heading ?
               <h2>{heading}</h2>
