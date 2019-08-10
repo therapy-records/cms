@@ -8,8 +8,8 @@ export const EMPTY_ARTICLE_SECTION_OBJ = {
 };
 
 export const NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS = {
-  width: 450,
-  height: 450
+  width: 350,
+  height: 350
 };
 
 export const getArticlesFirstImageUrl = (article, placeholderFallback = false) => {
