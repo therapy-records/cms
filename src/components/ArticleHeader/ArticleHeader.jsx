@@ -52,15 +52,13 @@ class ArticleHeader extends Component {
               <h2>{article.title}</h2>
             }
 
-            {article.createdAt && <p className='small-tab'>{moment(article.createdAt).fromNow()}</p>}
+            {(article.releaseDate || article.createdAt) && (
+              <p className='small-tab'>Released {moment(article.releaseDate || article.createdAt).format('DD MMM YYYY')}</p>
+            )}
 
-            {article.editedAt &&
-              <div className='heading-modified'>
-                <p>Last modified {moment(article.editedAt).fromNow()}
-                  <small>{moment(article.editedAt).format('DD/mm/YYYY')}</small>
-                </p>
-              </div>
-            }
+            {article.editedAt && (
+              <p className='small-tab'>Edited {moment(article.editedAt).fromNow()}</p>
+            )}
 
           </div>
 

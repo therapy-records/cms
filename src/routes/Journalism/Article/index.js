@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import moment from 'moment';
 import { resetPromiseState } from '../../../actions/uiState';
 import {
   deleteJournalismArticle,
@@ -92,8 +91,6 @@ export class Article extends React.Component {
                 />
               </div>
             }
-
-            <p>Released: {moment(article.releaseDate).fromNow()}</p>
 
           </div>
         )}

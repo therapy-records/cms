@@ -29,7 +29,8 @@ describe('(Component) ArticleHeader', () => {
           ],
           copy: '<p>test</p>'
         }
-      ]
+      ],
+      releaseDate: '2019-08-10T11:17:02.883Z'
     },
     baseProps = {
       baseUrl: '/news',
@@ -109,22 +110,51 @@ describe('(Component) ArticleHeader', () => {
       });
     });
 
-    describe('when an article has `editedAt`', () => {
-      it('should render `last modified` copy with date', () => {
-        const mockEditedAtDate = 'Wed Jul 31 2019 08:54:44 GMT+0100';
+    it('should render `releaseDate`', () => {
+      const expectedDate = moment(mockArticle.releaseDate).format('DD MMM YYYY');
+      const actual = wrapper.containsMatchingElement(
+        <p className='small-tab'>Released {expectedDate}</p>
+      );
+      expect(actual).to.eq(true);
+    });
+
+    describe('when article has `createdAt`', () => {
+      it('should render `createdAt` with copy', () => {
+        const mockDate = '2019-08-10T11:17:02.883Z';
         wrapper.setProps({
           article: {
             ...mockArticle,
-            editedAt: mockEditedAtDate
+            createdAt: mockDate
           }
         });
-        const modifiedDiv = wrapper.find('.heading-modified');
-        const expectedDate1 = moment(mockEditedAtDate).fromNow();
-        const expectedDate2 = moment(mockEditedAtDate).format('DD/mm/YYYY');
-        const actual = modifiedDiv.containsMatchingElement(
-          <p>Last modified {expectedDate1}
-            <small>{expectedDate2}</small>
-          </p>
+        const expectedDate = moment(mockDate).format('DD MMM YYYY');
+        const actual = wrapper.containsMatchingElement(
+          <p className='small-tab'>Released {expectedDate}</p>
+        );
+        expect(actual).to.eq(true);
+      });
+    });
+
+    it('should render `releaseDate`', () => {
+      const expectedDate = moment(mockArticle.releaseDate).format('DD MMM YYYY');
+      const actual = wrapper.containsMatchingElement(
+        <p className='small-tab'>Released {expectedDate}</p>
+      );
+      expect(actual).to.eq(true);
+    });
+
+    describe('when an article has `editedAt`', () => {
+      it('should render `editedAt` with copy', () => {
+        const mockDate = '2019-08-10T11:17:02.883Z';
+        wrapper.setProps({
+          article: {
+            ...mockArticle,
+            editedAt: mockDate
+          }
+        });
+        const expectedDate = moment(mockDate).fromNow();
+        const actual = wrapper.containsMatchingElement(
+          <p className='small-tab'>Edited {expectedDate}</p>
         );
         expect(actual).to.eq(true);
       });

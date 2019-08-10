@@ -231,13 +231,6 @@ describe('(Component) Journalism - Article', () => {
       expect(actual).to.equal(true);
     });
 
-    it('should render releaseDate', () => {
-      const actual = wrapper.containsMatchingElement(
-        <p>Released: {moment(props.article.releaseDate).fromNow()}</p>
-      );
-      expect(actual).to.equal(true);
-    });
-
   });
 
   describe('methods', () => {
