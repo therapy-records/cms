@@ -90,6 +90,23 @@ describe('(Component) JournalismForm', () => {
         });
       });
 
+      it('should render submit button copy', () => {
+        wrapper.setProps({
+          ...baseProps,
+          location: {
+            pathname: 'test/edit'
+          },
+          onSubmit: () => { },
+          error: undefined,
+          pristine: false,
+          submitting: false
+        });
+        const actual = wrapper.containsMatchingElement(
+          <button type='submit'>Update article</button>
+        );
+        expect(actual).to.equal(true);
+      });
+
     });
   });
   
@@ -191,7 +208,7 @@ describe('(Component) JournalismForm', () => {
       }
       const buttonWrapper = shallow(<JournalismForm {...props} />);
       const actual = buttonWrapper.containsMatchingElement(
-        <button type='submit'>Submit</button>
+        <button type='submit'>Post article</button>
       );
       expect(actual).to.equal(true);
     });

@@ -51,6 +51,8 @@ export class JournalismForm extends React.Component {
       isEditForm = false;
     }
 
+    const submitButtonCopy = isEditForm ? 'Update article' : 'Post article';
+
     return (
       <section className='root article-create'>
 
@@ -129,7 +131,8 @@ export class JournalismForm extends React.Component {
             <button type='submit'
               className='btn-lg btn-submit'
               disabled={error || pristine || submitting || error || invalid}
-              onClick={() => this.handleSubmit()}>Submit
+              onClick={() => this.handleSubmit()}>
+              {submitButtonCopy}
             </button>
           </div>
 

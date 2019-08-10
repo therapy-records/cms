@@ -13,7 +13,7 @@ import {
 import { selectUiStateLoading } from '../../../selectors/uiState';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
-import { getArticlesFirstImageUrl } from '../../../utils/news';
+import { getFirstImageInArticle } from '../../../utils/news';
 
 const dateIsBefore = (a, b) => {
   return new Date(b.createdAt) - new Date(a.createdAt)
@@ -50,7 +50,7 @@ export class News extends React.Component {
   renderArticle(article) {
     return (
       <li key={article._id} className='article-card'>
-        <img src={getArticlesFirstImageUrl(article, true)} alt={article.title} />
+        <img src={getFirstImageInArticle(article)} alt={article.title} />
         <div>
           <div className='heading-with-btn'>
             <h3>

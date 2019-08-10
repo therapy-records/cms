@@ -50,6 +50,8 @@ export class NewsForm extends React.Component {
       isEditForm = false;
     }
 
+    const submitButtonCopy = isEditForm ? 'Update article' : 'Post monthly update';
+
     return (
       <section className='root article-create'>
 
@@ -87,7 +89,7 @@ export class NewsForm extends React.Component {
                     className='btn-lg btn-submit'
                     disabled={error || pristine || submitting || error || invalid}
                     onClick={() => this.handleSubmit()}
-                    >Post monthly update
+            >{submitButtonCopy}
             </button>
           </div>
 

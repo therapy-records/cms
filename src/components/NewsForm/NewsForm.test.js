@@ -92,6 +92,23 @@ describe('(Component) NewsForm', () => {
           });
         });
 
+        it('should render submit button copy', () => {
+          props = {
+            ...baseProps,
+            location: {
+              pathname: 'test/edit'
+            },
+            onSubmit: () => {},
+            error: undefined,
+            pristine: false,
+            submitting: false
+          };
+          wrapper = shallow(<NewsForm {...props} />);
+          const actual = wrapper.containsMatchingElement(
+            <button type='submit'>Update article</button>
+          );
+          expect(actual).to.equal(true);
+        });
       });
     });
     
@@ -126,8 +143,8 @@ describe('(Component) NewsForm', () => {
           pristine: false,
           submitting: false
         }
-        const buttonWrapper = shallow(<NewsForm {...props} />);
-        const actual = buttonWrapper.containsMatchingElement(
+        wrapper = shallow(<NewsForm {...props} />);
+        const actual = wrapper.containsMatchingElement(
           <button type='submit'>Post monthly update</button>
         );
         expect(actual).to.equal(true);
@@ -142,8 +159,8 @@ describe('(Component) NewsForm', () => {
           submitting: false,
           formValues: { mainImage: { url: 'test.com' } }
         }
-        const buttonWrapper = shallow(<NewsForm {...props} />);
-        const button = buttonWrapper.find('button[type="submit"]');
+        wrapper = shallow(<NewsForm {...props} />);
+        const button = wrapper.find('button[type="submit"]');
         button.simulate('click');
         expect(props.onSubmitForm.calledOnce).to.eq(true);
       });

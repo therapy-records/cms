@@ -12,21 +12,24 @@ export const NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS = {
   height: 350
 };
 
-export const getArticlesFirstImageUrl = (article, placeholderFallback = false) => {
-  const hasImages = article.sections &&
-    article.sections.length &&
-    article.sections[0].images &&
-    article.sections[0].images.length &&
-    article.sections[0].images[0].url;
+export const getFirstImageInArticle = (article) => {
+  const { sections } = article;
+  const sectionsWithImages = [];
 
-  if (hasImages) {
-    const firstImage = article.sections[0].images[0].url;
-    return firstImage;
+  sections && sections.length && sections.forEach((section) => {
+    return section.images.forEach(imageObj => {
+      if (imageObj.url.length) {
+        sectionsWithImages.push(imageObj.url);
+        return imageObj.url;
+      }
+      return '';
+    });
+  });
+
+  if (sectionsWithImages.length) {
+    return sectionsWithImages[0];
   }
-  if (placeholderFallback) {
-    return 'http://via.placeholder.com/100x137/C8C8C8/777?text=No+image&color=EEEEEE';
-  }
-  return null;
+  return 'http://via.placeholder.com/100x137/C8C8C8/777?text=No+image&color=EEEEEE';
 };
 
 export const removeEmptyImageUrls = sections => {
