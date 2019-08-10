@@ -29,7 +29,8 @@ describe('(Component) TextInput', () => {
     smallLabelSize: false,
     hideLabel: false,
     autoFocus: false,
-    required: false
+    required: false,
+    maxLength: 10
   };
   const props = mockProps;
 
@@ -46,6 +47,7 @@ describe('(Component) TextInput', () => {
         placeholder={mockProps.placeholder}
         type={mockProps.type}
         autoFocus={mockProps.autoFocus}
+        maxLength={mockProps.maxLength}
       />
     )
     expect(actual).to.eq(true);

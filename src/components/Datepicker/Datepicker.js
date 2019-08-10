@@ -25,11 +25,6 @@ export class Datepicker extends React.Component {
     }
   }
 
-  componentDidUpdate() {
-    // ensure we send empty string back to form
-    this.props.input.onChange('');
-  }
-
   handleChange(e) {
     this.setState({ m: e });
     this.props.input.onChange(moment(e).toISOString());

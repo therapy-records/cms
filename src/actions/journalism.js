@@ -59,7 +59,7 @@ export const postJournalism = () => {
     const getFormObj = () => {
       if (getState().form.JOURNALISM_FORM &&
         getState().form.JOURNALISM_FORM.values) {
-        return JSON.stringify(getState().form.JOURNALISM_FORM.values);
+        return getState().form.JOURNALISM_FORM.values;
       } else {
         return null;
       }
@@ -73,9 +73,12 @@ export const postJournalism = () => {
       }
     });
 
+    const formObj = getFormObj();
+    formObj.copy = `${formObj.copy}...`;
+
     return _axios.post(
       API_ROOT + JOURNALISM_CREATE,
-      getFormObj()
+      JSON.stringify(formObj)
     ).then(
       (res) => {
         dispatch(promiseLoading(false));

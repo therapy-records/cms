@@ -1,7 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const textInput = ({ input, label, placeholder, hideLabel, autoFocus, type, required, meta: { touched, error } }) => (
+const textInput = ({
+  input,
+  label,
+  placeholder,
+  hideLabel,
+  autoFocus,
+  type,
+  required,
+  maxLength,
+  meta: {
+    touched,
+    error}
+  }) => (
   <div>
     {(label && !hideLabel) && <label>{label}{required && <span className='required'>*</span>}</label>}
     <input
@@ -9,6 +21,7 @@ const textInput = ({ input, label, placeholder, hideLabel, autoFocus, type, requ
       placeholder={placeholder}
       type={type}
       autoFocus={autoFocus}
+      maxLength={maxLength}
     />
     {touched && error && <span className='form-error'>{label} is {error}</span>}
   </div>
@@ -24,7 +37,8 @@ textInput.propTypes = {
   smallLabelSize: PropTypes.bool,
   hideLabel: PropTypes.bool,
   autoFocus: PropTypes.bool,
-  required: PropTypes.bool
+  required: PropTypes.bool,
+  maxLength: PropTypes.number
 }
 
 export default textInput;

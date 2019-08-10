@@ -87,6 +87,7 @@ export class JournalismForm extends React.Component {
                  type='text'
                  placeholder='Jazz In Europe Magazine'
                  label='Short excerpt'
+                 maxLength={50}
                  validate={required}
                  required
           />
