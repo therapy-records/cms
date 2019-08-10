@@ -19,9 +19,7 @@ describe('(Component) Datepicker', () => {
         onChange: () => {}
       },
       initTime: moment.now(),
-      title: 'my datepicker',
-      titleSub: 'all the things',
-      titleSub2: 'testing'
+      title: 'my datepicker'
     };
 
   beforeEach(() => {
@@ -37,50 +35,6 @@ describe('(Component) Datepicker', () => {
       <h5>{props.title}</h5>
     );
     expect(actual).to.equal(true);
-  });
-
-  it('should render a titleSub', () => {
-    const actual = wrapper.containsMatchingElement(
-      <p>{props.titleSub}</p>
-    );
-    expect(actual).to.equal(true);
-  });
-
-  it('should render titleSub2', () => {
-    const actual = wrapper.containsMatchingElement(
-      <p>{props.titleSub2}</p>
-    );
-    expect(actual).to.equal(true);
-  });
-
-  describe('with togglePicker', () => {
-    it('should render button', () => {
-      props.togglePicker = true;
-      wrapper = shallow(<Datepicker {...props} />);
-      const button = wrapper.find('button');
-      button.simulate('click');
-      expect(wrapper.find(InputMoment).length).to.equal(1);
-    });
-
-    it('should not render <InputMoment /> by default', () => {
-      props.togglePicker = true;
-      wrapper = shallow(<Datepicker {...props} />);
-      expect(wrapper.find(InputMoment).length).to.equal(0);
-    });
-
-    it('should not render <InputMoment /> after toggle', () => {
-      props.togglePicker = true;
-      wrapper = shallow(<Datepicker {...props} />);
-      const button = wrapper.find('button');
-      button.simulate('click');
-      expect(wrapper.find(InputMoment).length).to.equal(1);
-      button.simulate('click');
-      expect(wrapper.find(InputMoment).length).to.equal(0);
-      button.simulate('click');
-      expect(wrapper.find(InputMoment).length).to.equal(1);
-    });
-
-    // todo: should call prop with moment formatting
   });
 
   describe('methods', () => {
@@ -101,7 +55,7 @@ describe('(Component) Datepicker', () => {
             }
           });
           wrapper.instance().componentDidMount();
-          expect(inputOnChangeSpy).to.have.been.calledOnce;
+          expect(inputOnChangeSpy).to.have.been.called;
           expect(inputOnChangeSpy).to.have.been.calledWith(
             wrapper.instance().state.m
           );
@@ -116,6 +70,7 @@ describe('(Component) Datepicker', () => {
         wrapper.instance().handleChange(mockDate);
         expect(wrapper.instance().state.m).to.eq(mockDate);
       });
+
       it('should call input.onChange', () => {
         wrapper = shallow(<Datepicker {...props} />);
         const onChangeSpy = sinon.spy();
@@ -125,7 +80,7 @@ describe('(Component) Datepicker', () => {
           }
         });
         wrapper.instance().handleChange(new Date());
-        expect(onChangeSpy).have.been.calledOnce;
+        expect(onChangeSpy).have.been.called;
       });
     });
   });
