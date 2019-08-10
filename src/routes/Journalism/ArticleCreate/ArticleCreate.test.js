@@ -27,6 +27,7 @@ describe('(Component) Journalism - ArticleCreate', () => {
   });
 
   describe('methods', () => {
+
     describe('componentWillUnmount', () => {
       it('should call resetPromiseState', () => {
         const resetPromiseStateSpy = sinon.spy();
@@ -37,6 +38,18 @@ describe('(Component) Journalism - ArticleCreate', () => {
         expect(resetPromiseStateSpy).to.have.been.calledOnce;
       });
     });
+
+    describe('handleOnReset', () => {
+      it('should call resetPromiseState', () => {
+        const resetPromiseStateSpy = sinon.spy();
+        wrapper.setProps({
+          resetPromiseState: resetPromiseStateSpy
+        });
+        wrapper.instance().handleOnReset();
+        expect(resetPromiseStateSpy).to.have.been.calledOnce;
+      });
+    });
+
   });
 
   describe('rendering', () => {
@@ -87,9 +100,11 @@ describe('(Component) Journalism - ArticleCreate', () => {
         expect(actual).to.eq(true);
       });
 
-      it('should render a link to journalism/create', () => {
+      it('should render a `create another article` button', () => {
         const actual = wrapper.containsMatchingElement(
-          <Link to='/journalism/create' className='btn'>Create another article</Link>
+          <button
+            onClick={wrapper.instance().handleOnReset}
+          >Create another article</button>
         );
         expect(actual).to.eq(true);
       });

@@ -12,7 +12,16 @@ import JournalismForm from '../../../components/JournalismForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
 export class ArticleCreate extends React.Component {
+  constructor() {
+    super();
+    this.handleOnReset = this.handleOnReset.bind(this);
+  }
+
   componentWillUnmount() {
+    this.props.resetPromiseState();
+  }
+
+  handleOnReset() {
     this.props.resetPromiseState();
   }
 
@@ -37,7 +46,7 @@ export class ArticleCreate extends React.Component {
             <h2>Successfully created! <small>🚀</small></h2>
             <div className='inline-flex'>
               <Link to='/journalism' className='btn'>Go to Journalism</Link>
-              <Link to='/journalism/create' className='btn'>Create another article</Link>
+              <button onClick={this.handleOnReset}>Create another article</button>
             </div>
           </div>
         }
@@ -59,7 +68,7 @@ ArticleCreate.propTypes = {
   promiseLoading: PropTypes.bool,
   promiseSuccess: PropTypes.bool,
   location: PropTypes.object,
-  resetPromiseState: PropTypes.func
+  resetPromiseState: PropTypes.func.isRequired
 }
 
 const mapDispatchToProps = {
