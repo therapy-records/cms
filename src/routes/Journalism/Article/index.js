@@ -76,6 +76,7 @@ export class Article extends React.Component {
               promiseLoading={promiseLoading}
               showEditButton
               showDeleteButton
+              longHeading
             />
 
             <div className='row-large'>

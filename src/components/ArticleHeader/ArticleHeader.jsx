@@ -36,14 +36,17 @@ class ArticleHeader extends Component {
       heading,
       promiseLoading,
       showEditButton,
-      showDeleteButton
+      showDeleteButton,
+      longHeading
     } = this.props;
 
     const { isShowingModal } = this.state;
 
+    const containerClassName = longHeading ? 'heading-with-btns long-heading' : 'heading-with-btns';
+
     return (
       <div>
-        <div className='heading-with-btns'>
+        <div className={containerClassName}>
           <div>
 
             {heading ?
@@ -105,7 +108,8 @@ ArticleHeader.propTypes = {
   onDeleteArticle: PropTypes.func,
   promiseLoading: PropTypes.bool,
   showEditButton: PropTypes.bool,
-  showDeleteButton: PropTypes.bool
+  showDeleteButton: PropTypes.bool,
+  longHeading: PropTypes.bool
 };
 
 ArticleHeader.defaultProps = {
@@ -113,7 +117,8 @@ ArticleHeader.defaultProps = {
   onDeleteArticle: () => {},
   promiseLoading: false,
   showEditButton: false,
-  showDeleteButton: false
+  showDeleteButton: false,
+  longHeading: false
 };
 
 export default ArticleHeader;

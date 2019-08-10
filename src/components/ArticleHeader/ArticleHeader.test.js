@@ -91,6 +91,14 @@ describe('(Component) ArticleHeader', () => {
       wrapper = shallow(<ArticleHeader {...props} />);
     });
 
+    it('should render container class name', () => {
+      expect(wrapper.find('.heading-with-btns').length).to.eq(1);
+      wrapper.setProps({
+        longHeading: true
+      });
+      expect(wrapper.find('.heading-with-btns long-heading').length).to.eq(1);
+    });
+
     it('should render props.heading', () => {
       const actual = wrapper.containsMatchingElement(
         <h2>{props.heading}</h2>

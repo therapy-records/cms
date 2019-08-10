@@ -78,8 +78,6 @@ describe('(Component) Journalism - Home', () => {
                 {p.releaseDate && <p className='small-tab'>{moment(p.releaseDate).format('DD MMM YYYY')}</p>}
               </div>
 
-              <p>Links to: {p.externalLink}</p>
-
               <Link
                 to={`/journalism/${p._id}`}
                 className='btn btn-sm btn-view'

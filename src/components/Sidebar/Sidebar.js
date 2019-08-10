@@ -56,7 +56,7 @@ export class Sidebar extends React.PureComponent {
 
     const isHomeRoute = location.pathname === '/';
 
-    const isLargeScreen = windowWidth >= 768;
+    const isLargeScreen = windowWidth >= 900;
     if (isHomeRoute) return null;
 
     const isActive = (isOpen && !isLargeScreen) ||
