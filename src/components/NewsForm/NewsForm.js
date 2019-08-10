@@ -70,8 +70,8 @@ export class NewsForm extends React.Component {
               <Field name='title'
                     component={TextInput}
                     type='text'
-                    placeholder='January update'
-                    label='Month'
+                    placeholder='January 2019 update'
+                    label='Title'
                     validate={required}
                     required
               />

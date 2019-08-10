@@ -115,7 +115,7 @@ describe('(Component) JournalismForm', () => {
         <Field name='title'
                component={TextInput}
                type='text'
-               placeholder='Hello World'
+               placeholder='The Essence of Michel Camilo'
                label='Title'
                validate={required}
                required
@@ -128,6 +128,9 @@ describe('(Component) JournalismForm', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='copy'
                component={TextInput}
+               type='text'
+               placeholder='Jazz In Europe Magazine'
+               label='Short excerpt'
                validate={required}
                required
         />

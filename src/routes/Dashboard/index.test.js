@@ -66,28 +66,28 @@ describe('(Component) Dashboard', () => {
 
     it('should render a link to create a news', () => {
       const actual = wrapper.containsMatchingElement(
-        <Link to='news/create'>Create news</Link>
+        <Link to='news/create'>Create News</Link>
       );
       expect(actual).to.be.true;
     });
 
     it('should render a link to create a journalism article', () => {
       const actual = wrapper.containsMatchingElement(
-        <Link to='journalism/create'>Add a Journalism article</Link>
+        <Link to='journalism/create'>Create Journalism</Link>
       );
       expect(actual).to.be.true;
     });
 
     it('should render a total amount of news articles', () => {
       const actual = wrapper.containsMatchingElement(
-        <p>Monthly News articles: {props.newsArticles.length}</p>
+        <li>{props.newsArticles.length} News articles</li>
       );
       expect(actual).to.be.true;
     });
 
     it('should render a total amount of journalism articles', () => {
       const actual = wrapper.containsMatchingElement(
-        <p>Journalism articles: {props.journalismArticles.length}</p>
+        <li>{props.journalismArticles.length} Journalism articles</li>
       );
       expect(actual).to.be.true;
     });

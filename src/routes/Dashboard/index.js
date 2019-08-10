@@ -48,8 +48,8 @@ export class Dashboard extends React.Component {
 
         <h2>Welcome back 👋</h2>
         <br />
-        <Link to='news/create' className='btn'>Create news</Link>
-        <Link to='journalism/create' className='btn'>Add a Journalism article</Link>
+        <Link to='news/create' className='btn'>Create News</Link>
+        <Link to='journalism/create' className='btn'>Create Journalism</Link>
 
         <br />
         <br />
@@ -58,8 +58,12 @@ export class Dashboard extends React.Component {
         <br />
 
         <h3>Stats</h3>
-        {newsArticles && <p>Monthly News articles: {newsArticles.length}</p>}
-        {journalismArticles && <p>Journalism articles: {journalismArticles.length}</p>}
+        {(newsArticles || journalismArticles) &&
+          <ul>
+            {newsArticles && <li>{newsArticles.length} News articles</li>}
+            {journalismArticles && <li>{journalismArticles.length} Journalism articles</li>}
+          </ul>
+        }
       </div>
     )
   }

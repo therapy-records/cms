@@ -71,7 +71,7 @@ export class JournalismForm extends React.Component {
             <Field name='title'
                    component={TextInput}
                    type='text'
-                   placeholder='Hello World'
+                   placeholder='The Essence of Michel Camilo'
                    label='Title'
                    validate={required}
                    required
@@ -83,8 +83,8 @@ export class JournalismForm extends React.Component {
           <Field name='copy'
                  component={TextInput}
                  type='text'
-                 placeholder='Short excerpt'
-                 label='Copy'
+                 placeholder='Jazz In Europe Magazine'
+                 label='Short excerpt'
                  validate={required}
                  required
           />
