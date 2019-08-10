@@ -29,9 +29,9 @@ describe('(Component) Sidebar', () => {
     beforeEach(() => {
       wrapper = shallow(<Sidebar {...props} />)
     });
-    describe('when route is not home and window width is >= 768', () => {
+    describe('when route is not home and window width is >= 900', () => {
       beforeEach(() => {
-        global.window.innerWidth = 768;
+        global.window.innerWidth = 900;
       });
       it('should render correct active className', () => {
         const aside = wrapper.find('aside');

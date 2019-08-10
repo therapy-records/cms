@@ -96,7 +96,7 @@ describe('(Component) ArticleHeader', () => {
       wrapper.setProps({
         longHeading: true
       });
-      expect(wrapper.find('.heading-with-btns long-heading').length).to.eq(1);
+      expect(wrapper.find('.heading-with-btns.long-heading').length).to.eq(1);
     });
 
     it('should render props.heading', () => {
