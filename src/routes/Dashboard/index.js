@@ -48,8 +48,8 @@ export class Dashboard extends React.Component {
 
         <h2>Welcome back 👋</h2>
         <br />
-        <Link to='news/create' className='btn btn-sm'>Create news</Link>
-        <Link to='journalism/create' className='btn btn-sm'>Add a Journalism article</Link>
+        <Link to='news/create' className='btn'>Create news</Link>
+        <Link to='journalism/create' className='btn'>Add a Journalism article</Link>
 
         <br />
         <br />
