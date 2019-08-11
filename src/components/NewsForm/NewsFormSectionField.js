@@ -16,6 +16,31 @@ export class NewsFormSectionField extends Component {
     this.onToggleShowImageUpload = this.onToggleShowImageUpload.bind(this);
   }
 
+  componentWillMount() {
+    const {
+      fields,
+      sectionIndex
+    } = this.props;
+
+    const sectionImages = fields.get(sectionIndex).images;
+
+    // temporary solution until DropzoneImageUpload is updated to handle `url` and `alt`
+    // currently only handles array of strings/urls
+    let sectionImagesArray = [];
+
+    if (sectionImages.length) {
+      sectionImagesArray = [
+        ...sectionImages.map(imageObj => (imageObj.url && imageObj.url.length))
+      ];
+    }
+
+    const existingImages = sectionImagesArray.length;
+
+    if (existingImages) {
+      this.onToggleShowImageUpload();
+    }
+  }
+
   onToggleShowImageUpload() {
     this.setState({
       showImageUpload: true

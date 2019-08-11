@@ -56,6 +56,16 @@ describe('(Component) NewsFormSectionField', () => {
 
   describe('methods', () => {
 
+    describe('componentWillMount', () => {
+
+      it('should call onToggleShowImageUpload when images exist', () => {
+        const onToggleShowImageUploadSpy = sinon.spy();
+        wrapper.instance().onToggleShowImageUpload = onToggleShowImageUploadSpy;
+        wrapper.instance().componentWillMount();
+        expect(onToggleShowImageUploadSpy).to.have.been.called;
+      });
+    });
+
     describe('onToggleShowImageUpload', () => {
       it('should set state.showImageUpload to true', () => {
         wrapper.instance().onToggleShowImageUpload();
@@ -123,9 +133,15 @@ describe('(Component) NewsFormSectionField', () => {
     });
 
     describe('<DropzoneImageUpload />', () => {
-      it('should not be rendered by default', () => {
-        const dropzoneImageUpload = wrapper.find('DropzoneImageUpload');
-        expect(dropzoneImageUpload.length).to.eq(0);
+      describe('when state.showImageUpload is false', () => {
+        it('should NOT be rendered', () => {
+          wrapper.setState({
+            showImageUpload: false
+          });
+
+          const dropzoneImageUpload = wrapper.find('DropzoneImageUpload');
+          expect(dropzoneImageUpload.length).to.eq(0);
+        });
       });
       
       describe('with state.showImageUpload', () => {
