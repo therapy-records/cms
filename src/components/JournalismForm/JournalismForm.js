@@ -111,6 +111,7 @@ export class JournalismForm extends React.Component {
                    existingImages={formValues && formValues.imageUrl && [formValues.imageUrl]}
                    validate={required}
                    minImageDimensions={JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS}
+                   ctaCopy='Drag & drop image'
                    required
             />
           </div>

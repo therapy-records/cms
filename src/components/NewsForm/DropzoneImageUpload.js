@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Dropzone from 'react-dropzone';
 import request from 'superagent';
 import LoadingSpinner from '../LoadingSpinner';
-import './styles.css';
+import './DropzoneImageUpload.css';
 
 const CLOUDINARY_UPLOAD_PRESET_ID = 'gflm7wbr';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dpv2k0qsj/upload';
@@ -131,7 +131,9 @@ export class DropzoneImageUpload extends React.Component {
   render() {
     const {
       title,
-      minImageDimensions
+      minImageDimensions,
+      ctaCopy,
+      required
     } = this.props;
 
     const {
@@ -142,7 +144,9 @@ export class DropzoneImageUpload extends React.Component {
 
     return (
       <div>
-        <h5>{title}&nbsp;
+        <h5>{title}
+          {required && <span className='required'>*</span>}
+          &nbsp;
           {minImageDimensions &&
             <span className='dropzone-image-dimension-notice'><small>(must be at least {minImageDimensions.width}px by {minImageDimensions.height}px)</small></span>
           }
@@ -157,7 +161,7 @@ export class DropzoneImageUpload extends React.Component {
               multiple
             >
               <div className='dropzone-cta'>
-                <span>Drag &amp; drop images</span>
+                {ctaCopy ? <span>{ctaCopy}</span> : <span>Drag &amp; drop images</span>}
                 <div className={isLoading ? 'dropzone-loading dropzone-loading-active' : 'dropzone-loading'}>
                   <LoadingSpinner />
                 </div>
@@ -215,16 +219,20 @@ DropzoneImageUpload.propTypes = {
     onChange: PropTypes.func
   }),
   title: PropTypes.string.isRequired,
+  required: PropTypes.bool,
   existingImages: PropTypes.array,
-  minImageDimensions: PropTypes.object
+  minImageDimensions: PropTypes.object,
+  ctaCopy: PropTypes.string
 };
 
 DropzoneImageUpload.defaultProps = {
   onChange: () => {},
   onRemove: () => { },
   input: {},
+  required: false,
   existingImages: [],
-  minImageDimensions: {}
+  minImageDimensions: {},
+  ctaCopy: ''
 };
 
 export default DropzoneImageUpload;

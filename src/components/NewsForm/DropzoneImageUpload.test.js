@@ -12,7 +12,9 @@ describe('(Component) DropzoneImageUpload', () => {
       minImageDimensions: {
         width: 400,
         height: 400
-      }
+      },
+      ctaCopy: 'Drag/drop',
+      required: true
     };
 
   beforeEach(() => {
@@ -147,9 +149,11 @@ describe('(Component) DropzoneImageUpload', () => {
   });
 
   describe('rendering', () => {
-    it('should render a heading/title with props.minImageDimensions', () => {
+    it('should render a heading/title with `required` element and props.minImageDimensions copy', () => {
       const actual = wrapper.containsMatchingElement(
-        <h5>{props.title}&nbsp;
+        <h5>{props.title}
+          <span className='required'>*</span>
+          &nbsp;
           <span><small>(must be at least {props.minImageDimensions.width}px by {props.minImageDimensions.height}px)</small></span>
         </h5>
       );
@@ -171,6 +175,21 @@ describe('(Component) DropzoneImageUpload', () => {
       it('should add a `loading/active` className to Dropzone cta element', () => {
         const activeClassName = wrapper.find('.dropzone-loading.dropzone-loading-active');
         expect(activeClassName.length).to.eq(1);
+      });
+
+      it('should render cta copy', () => {
+        const ctaElement = wrapper.find('.dropzone-cta span');
+        expect(ctaElement.text()).to.eq(props.ctaCopy);
+      });
+
+      describe('when there is no props.ctaCopy', () => {
+        it('should render default copy', () => {
+          wrapper.setProps({
+            ctaCopy: undefined
+          });
+          const ctaElement = wrapper.find('.dropzone-cta span');
+          expect(ctaElement.text()).to.eq('Drag & drop images');
+        });
       });
     });
 

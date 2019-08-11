@@ -237,7 +237,18 @@ button,
       border-radius: 1em;
     }
   }
+}
 
+.button-link {
+  padding: 0;
+  text-decoration: underline;
+  background: none;
+  color: $color-blue-2;
+  &:hover,
+  &:focus {
+    background: none;
+    color: $color-blue-1;
+  }
 }
 
 .btn-burger {
