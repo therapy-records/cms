@@ -1,12 +1,12 @@
 import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
-import { NewsFormSectionFields }  from './NewsFormSectionFields';
+import { NewsFormSection }  from './NewsFormSection';
 import NewsFormSectionField from './NewsFormSectionField';
 
 Enzyme.configure({adapter: new Adapter()});
 
-describe('(Component) NewsFormSectionFields', () => {
+describe('(Component) NewsFormSection', () => {
   const mockSections = [
     'section[0]',
     'section[1]'
@@ -29,7 +29,7 @@ describe('(Component) NewsFormSectionFields', () => {
 
   beforeEach(() => {
     wrapper = shallow(
-      <NewsFormSectionFields {...props} />
+      <NewsFormSection {...props} />
     );
   });
 
@@ -38,7 +38,7 @@ describe('(Component) NewsFormSectionFields', () => {
       it('should call props.updateSectionImages', () => {
         const updateSectionImagesSpy = sinon.spy();
         wrapper = shallow(
-          <NewsFormSectionFields
+          <NewsFormSection
             {...props}
             updateSectionImages={updateSectionImagesSpy}
           />
@@ -61,7 +61,7 @@ describe('(Component) NewsFormSectionFields', () => {
       it('should call props.removeSectionImage', () => {
         const removeSectionImageSpy = sinon.spy();
         wrapper = shallow(
-          <NewsFormSectionFields
+          <NewsFormSection
             {...props}
             removeSectionImage={removeSectionImageSpy}
           />

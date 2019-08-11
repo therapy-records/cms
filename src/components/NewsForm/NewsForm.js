@@ -15,7 +15,7 @@ import TextInput from '../TextInput';
 import { required } from '../../utils/form';
 import { EMPTY_ARTICLE_SECTION_OBJ } from '../../utils/news';
 import { NEWS_FORM } from '../../constants';
-import NewsFormSectionFields from './NewsFormSectionFields';
+import NewsFormSection from './NewsFormSection';
 
 export class NewsForm extends React.Component {
 
@@ -81,7 +81,7 @@ export class NewsForm extends React.Component {
 
           <FieldArray
             name="sections"
-            component={NewsFormSectionFields}
+            component={NewsFormSection}
           />
 
           <div className='row-large'>

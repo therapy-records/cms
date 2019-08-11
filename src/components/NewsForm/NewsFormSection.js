@@ -5,7 +5,7 @@ import { change, arrayRemove } from 'redux-form';
 import NewsFormSectionField from './NewsFormSectionField';
 import { EMPTY_ARTICLE_SECTION_OBJ } from '../../utils/news';
 
-export class NewsFormSectionFields extends Component {
+export class NewsFormSection extends Component {
   constructor(props) {
     super(props);
     this.handleUpdateSectionImages = this.handleUpdateSectionImages.bind(this);
@@ -59,7 +59,7 @@ export class NewsFormSectionFields extends Component {
   }
 }
 
-NewsFormSectionFields.propTypes = {
+NewsFormSection.propTypes = {
   fields: PropTypes.object,
   updateSectionImages: PropTypes.func.isRequired,
   removeSectionImage: PropTypes.func.isRequired
@@ -70,6 +70,6 @@ export const mapDispatchToProps = {
   removeSectionImage: (...args) => arrayRemove(...args)
 };
 
-export default connect(null, mapDispatchToProps)(NewsFormSectionFields);
+export default connect(null, mapDispatchToProps)(NewsFormSection);
 
 
