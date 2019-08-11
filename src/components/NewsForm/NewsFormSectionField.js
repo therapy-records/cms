@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import DropzoneImageUpload from './DropzoneImageUpload';
+import DropzoneImageUpload from '../DropzoneImageUpload';
 import RichTextEditor from '../RichTextEditor';
 import { required } from '../../utils/form';
 import { NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS } from '../../utils/news';

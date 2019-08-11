@@ -8,7 +8,7 @@ import configureMockStore from 'redux-mock-store';
 import TextInput from '../TextInput/TextInput';
 import Datepicker from '../Datepicker/Datepicker';
 import ConnectedJournalismForm, { JournalismForm, JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS } from './JournalismForm';
-import DropzoneImageUpload from '../NewsForm/DropzoneImageUpload';
+import DropzoneImageUpload from '../DropzoneImageUpload';
 import { required } from '../../utils/form';
 import { selectJournalismFormValues } from '../../selectors/form';
 import { selectUiStateLoading } from '../../selectors/uiState';

@@ -14,7 +14,7 @@ import { selectJournalismFormValues } from '../../selectors/form';
 import { selectUiStateLoading } from '../../selectors/uiState';
 import ArticleHeader from '../ArticleHeader';
 import Datepicker from '../Datepicker/Datepicker';
-import DropzoneImageUpload from '../NewsForm/DropzoneImageUpload';
+import DropzoneImageUpload from '../DropzoneImageUpload';
 import TextInput from '../TextInput';
 import { required } from '../../utils/form';
 import { JOURNALISM_FORM } from '../../constants';
