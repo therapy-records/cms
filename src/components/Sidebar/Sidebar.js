@@ -104,7 +104,7 @@ export class Sidebar extends React.PureComponent {
             activeClassName='route--active'
             onClick={this.handleOnClickNavItem}
           >
-            Dashboard
+            🏠 Dashboard
           </NavLink>
 
           <NavLink
@@ -112,7 +112,7 @@ export class Sidebar extends React.PureComponent {
             activeClassName='route--active'
             onClick={this.handleOnClickNavItem}
           >
-            News
+            🗞️ News
           </NavLink>
 
           <NavLink
@@ -120,7 +120,7 @@ export class Sidebar extends React.PureComponent {
             activeClassName='route--active'
             onClick={this.handleOnClickNavItem}
           >
-            Journalism
+            ✍️ Journalism
           </NavLink>
 
           <NavLink
@@ -128,10 +128,10 @@ export class Sidebar extends React.PureComponent {
             activeClassName='route--active'
             onClick={this.handleOnClickNavItem}
           >
-            Press
+            📢 Press
           </NavLink>
 
-          <button onClick={() => { onLogout(); }} className='btn-logout'>Log out</button>
+          <button onClick={() => { onLogout(); }} className='btn-logout'>📪 Log out</button>
 
         </aside>
       </div>

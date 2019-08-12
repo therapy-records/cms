@@ -179,7 +179,7 @@ describe('(Component) Sidebar', () => {
           activeClassName='route--active'
           onClick={wrapper.instance().handleOnClickNavItem}
         >
-          Dashboard
+          🏠 Dashboard
         </NavLink>
       );
       expect(actual).to.eq(true);
@@ -192,7 +192,7 @@ describe('(Component) Sidebar', () => {
           activeClassName='route--active'
           onClick={wrapper.instance().handleOnClickNavItem}
         >
-          News
+          🗞️ News
         </NavLink>
       );
       expect(actual).to.eq(true);
@@ -205,7 +205,7 @@ describe('(Component) Sidebar', () => {
           activeClassName='route--active'
           onClick={wrapper.instance().handleOnClickNavItem}
         >
-          Journalism
+          ✍️ Journalism
         </NavLink>
       );
       expect(actual).to.eq(true);
@@ -218,7 +218,7 @@ describe('(Component) Sidebar', () => {
           activeClassName='route--active'
           onClick={wrapper.instance().handleOnClickNavItem}
         >
-          Press
+          📢 Press
         </NavLink>
       );
       expect(actual).to.eq(true);
@@ -232,7 +232,7 @@ describe('(Component) Sidebar', () => {
     });
     it('should be rendered', () => {
       const actual = wrapper.containsMatchingElement(
-        <button className='btn-logout'>Log out</button>
+        <button className='btn-logout'>📪 Log out</button>
       );
       expect(actual).to.equal(true);
     });
