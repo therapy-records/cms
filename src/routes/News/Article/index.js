@@ -113,6 +113,12 @@ export class Article extends React.Component {
                       </div>
                     }
 
+                    {section.videoEmbed &&
+                      <div>
+                        <div dangerouslySetInnerHTML={this.renderHtml(section.videoEmbed)} />
+                      </div>
+                    }
+
                   </li>
                 )
               })}

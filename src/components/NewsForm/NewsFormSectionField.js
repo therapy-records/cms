@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 import DropzoneImageUpload from '../DropzoneImageUpload';
 import RichTextEditor from '../RichTextEditor';
+import TextInput from '../../components/TextInput';
 import { required } from '../../utils/form';
 import { NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS } from '../../utils/news';
 import './NewsFormSectionField.css';
@@ -11,9 +12,11 @@ export class NewsFormSectionField extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showImageUpload: false
+      showImageUpload: false,
+      showVideoEmbed: false
     };
     this.onToggleShowImageUpload = this.onToggleShowImageUpload.bind(this);
+    this.onToggleShowVideoEmbed = this.onToggleShowVideoEmbed.bind(this);
   }
 
   componentWillMount() {
@@ -23,6 +26,7 @@ export class NewsFormSectionField extends Component {
     } = this.props;
 
     const sectionImages = fields.get(sectionIndex).images;
+    const sectionVideoEmbed = fields.get(sectionIndex).videoEmbed;
 
     // temporary solution until DropzoneImageUpload is updated to handle `url` and `alt`
     // currently only handles array of strings/urls
@@ -34,16 +38,26 @@ export class NewsFormSectionField extends Component {
       ];
     }
 
-    const existingImages = sectionImagesArray.length;
+    const existingImages = sectionImagesArray.length > 1;
 
     if (existingImages) {
       this.onToggleShowImageUpload();
+    }
+
+    if (sectionVideoEmbed) {
+      this.onToggleShowVideoEmbed();
     }
   }
 
   onToggleShowImageUpload() {
     this.setState({
       showImageUpload: true
+    });
+  }
+
+  onToggleShowVideoEmbed() {
+    this.setState({
+      showVideoEmbed: true
     });
   }
 
@@ -56,7 +70,10 @@ export class NewsFormSectionField extends Component {
       onRemoveSectionImage
     } = this.props;
 
-    const { showImageUpload } = this.state;
+    const {
+      showImageUpload,
+      showVideoEmbed
+    } = this.state;
 
     const sectionImages = fields.get(sectionIndex).images;
 
@@ -100,7 +117,7 @@ export class NewsFormSectionField extends Component {
             />
           </div>
 
-          <div className={fields.length > 1 ? 'row last' : 'row'}>
+          <div className={fields.length > 1 ? 'row last row-buttons' : 'row row-buttons'}>
             {showImageUpload ?
               <DropzoneImageUpload
                 title="Images"
@@ -123,6 +140,25 @@ export class NewsFormSectionField extends Component {
                 Add image
               </button>
             }
+            
+            {showVideoEmbed ?
+              <Field
+                name={`${section}.videoEmbed`}
+                type='text'
+                label='Video (iframe embed)'
+                component={TextInput}
+                placeholder='<iframe .... />'
+              />
+              :
+              <button
+                type='button'
+                className='button-link'
+                onClick={this.onToggleShowVideoEmbed}
+              >
+                Add video (iframe embed)
+              </button>
+            }
+
           </div>
 
         </div>

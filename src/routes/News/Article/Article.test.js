@@ -32,7 +32,8 @@ describe('(Component) News - Article', () => {
             { url: 'http:/test3.com' },
             { url: 'http:/test4.com' }
           ],
-          copy: '<p>test</p>'
+          copy: '<p>test</p>',
+          videoEmbed: '<iframe />'
         }
       ]
     },
@@ -271,6 +272,19 @@ describe('(Component) News - Article', () => {
             ]);
           expect(actual).to.equal(true);
         });
+
+        it('should render `videoEmbed` in a section', () => {
+          const actual = wrapper.containsMatchingElement(
+            <div
+              key='test2'
+              dangerouslySetInnerHTML={
+                wrapper.instance().renderHtml(mockArticle.sections[1].videoEmbed)
+              }
+            />
+          );
+          expect(actual).to.equal(true);
+        });
+
       });
     });
   });

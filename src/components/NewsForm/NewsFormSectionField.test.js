@@ -3,6 +3,7 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import { Field } from 'redux-form';
 import NewsFormSectionField from './NewsFormSectionField';
+import TextInput from '../../components/TextInput';
 import DropzoneImageUpload from '../DropzoneImageUpload';
 import RichTextEditor from '../RichTextEditor';
 import { required } from '../../utils/form';
@@ -57,13 +58,35 @@ describe('(Component) NewsFormSectionField', () => {
   describe('methods', () => {
 
     describe('componentWillMount', () => {
-
       it('should call onToggleShowImageUpload when images exist', () => {
         const onToggleShowImageUploadSpy = sinon.spy();
         wrapper.instance().onToggleShowImageUpload = onToggleShowImageUploadSpy;
         wrapper.instance().componentWillMount();
         expect(onToggleShowImageUploadSpy).to.have.been.called;
       });
+
+      it('should call onToggleShowVideoEmbed when videoEmbed exists', () => {
+        const onToggleShowVideoEmbedSpy = sinon.spy();
+
+        const _mockFields = [
+          {
+            ...mockFields[0],
+            videoEmbed: '<iframe />'
+          }
+        ];
+
+        wrapper.setProps({
+          ...props,
+          fields: {
+            map: callback => _mockFields.map((field, index) => callback(field, index)),
+            get: index => _mockFields[index],
+          }
+        });
+        wrapper.instance().onToggleShowVideoEmbed = onToggleShowVideoEmbedSpy;
+        wrapper.instance().componentWillMount();
+        expect(onToggleShowVideoEmbedSpy).to.have.been.called;
+      });
+
     });
 
     describe('onToggleShowImageUpload', () => {
@@ -72,6 +95,14 @@ describe('(Component) NewsFormSectionField', () => {
         expect(wrapper.state().showImageUpload).to.eq(true);
       });
     });
+
+    describe('onToggleShowVideoEmbed', () => {
+      it('should set state.showVideoEmbed to true', () => {
+        wrapper.instance().onToggleShowVideoEmbed();
+        expect(wrapper.state().showVideoEmbed).to.eq(true);
+      });
+    });
+
   });
 
   describe('rendering', () => {
@@ -134,17 +165,30 @@ describe('(Component) NewsFormSectionField', () => {
 
     describe('<DropzoneImageUpload />', () => {
       describe('when state.showImageUpload is false', () => {
-        it('should NOT be rendered', () => {
+        beforeEach(() => {
           wrapper.setState({
             showImageUpload: false
           });
+        });
 
+        it('should NOT be rendered', () => {
           const dropzoneImageUpload = wrapper.find('DropzoneImageUpload');
           expect(dropzoneImageUpload.length).to.eq(0);
         });
+
+        it('should render `Add image` button', () => {
+          const actual = wrapper.containsMatchingElement(
+            <button
+              onClick={wrapper.instance().onToggleShowImageUpload}
+            >
+              Add image
+          </button>
+          );
+          expect(actual).to.eq(true);
+        });
       });
       
-      describe('with state.showImageUpload', () => {
+      describe('when state.showImageUpload is true', () => {
         beforeEach(() => {
           wrapper.setState({
             showImageUpload: true
@@ -215,8 +259,78 @@ describe('(Component) NewsFormSectionField', () => {
             );
           });
         });
+
+        it('should NOT render `Add image` button', () => {
+          const actual = wrapper.containsMatchingElement(
+            <button
+              onClick={wrapper.instance().onToggleShowImageUpload}
+            >
+              Add image
+          </button>
+          );
+          expect(actual).to.eq(false);
+        });
+
       });
 
+    });
+
+    describe('videoEmbed field', () => {
+      it('should NOT render by default', () => {
+        const actual = wrapper.containsMatchingElement(
+          <Field
+            name={`${props.section}.videoEmbed`}
+            type='text'
+            label='Video (iframe embed)'
+            component={TextInput}
+            placeholder='<iframe .... />'
+          />
+        );
+        expect(actual).to.eq(false);
+      });
+
+      it('should render `Add video` button', () => {
+        const actual = wrapper.containsMatchingElement(
+          <button
+            onClick={wrapper.instance().onToggleShowVideoEmbed}
+          >
+            Add video (iframe embed)
+          </button>
+        );
+        expect(actual).to.eq(true);
+      });
+    
+      describe('when state.showVideoEmbed is true', () => {
+        beforeEach(() => {
+          wrapper.setState({
+            showVideoEmbed: true
+          });
+        });
+        it('should render <Field />', () => {
+          const actual = wrapper.containsMatchingElement(
+            <Field
+              name={`${props.section}.videoEmbed`}
+              type='text'
+              label='Video (iframe embed)'
+              component={TextInput}
+              placeholder='<iframe .... />'
+            />
+          );
+          expect(actual).to.eq(true);
+        });
+
+        it('should NOT render `Add video` button', () => {
+          const actual = wrapper.containsMatchingElement(
+            <button
+              onClick={wrapper.instance().onToggleShowVideoEmbed}
+            >
+              Add video (iframe embed)
+          </button>
+          );
+          expect(actual).to.eq(false);
+        });
+
+      });
     });
 
   });
