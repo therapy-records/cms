@@ -4,6 +4,7 @@ import { Field, reduxForm } from 'redux-form'
 import LoadingSpinner from '../LoadingSpinner';
 import TextInput from '../TextInput';
 import { required } from '../../utils/form';
+import './LoginForm.css';
 
 export class LoginForm extends React.Component {
   onFormSubmit(ev) {
@@ -14,6 +15,7 @@ export class LoginForm extends React.Component {
     const {
       error,
       pristine,
+      invalid,
       submitting,
       onSubmit,
       promiseLoading
@@ -58,7 +60,7 @@ export class LoginForm extends React.Component {
             <button
               type='submit'
               className='btn-lg btn-submit'
-              disabled={error || pristine || submitting || promiseLoading}
+              disabled={error || pristine || submitting || promiseLoading || invalid}
               onClick={onSubmit}>Login
             </button>
           </div>
@@ -73,6 +75,7 @@ LoginForm.propTypes = {
   error: PropTypes.string,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
+  invalid: PropTypes.bool,
   promiseLoading: PropTypes.bool,
   onSubmit: PropTypes.func.isRequired
 }

@@ -14,7 +14,7 @@ const textInput = ({
     touched,
     error}
   }) => (
-  <div>
+  <div className='text-input-container'>
     {(label && !hideLabel) && <label>{label}{required && <span className='required'>*</span>}</label>}
     <input
       {...input}

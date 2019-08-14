@@ -1,0 +1,19 @@
+@import 'styles/variables.scss';
+
+.login-form {
+
+  .text-input-container {
+    @media(min-width: 768px) {
+      position: relative;
+    }
+  }
+
+  .form-error {
+    @media(min-width: 768px) {
+      position: absolute;
+      top: .2em;
+      right: calc(-70%);
+    }
+  }
+
+}

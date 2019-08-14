@@ -59,14 +59,14 @@ body {
   }
   > .col-first {
     @media(min-width: $bp-md) {
-      width: 12%;
+      width: $sidebar-width;
       min-width: $sidebar-width;
       max-width: $sidebar-width;
     }
   }
   > .col-last {
     @media(min-width: $bp-md) {
-      width: 88%;
+      width: calc(100% - #{$sidebar-width});
       align-items: center;
       display: flex;
       justify-content: center;
@@ -153,6 +153,16 @@ textarea {
   }
 }
 
+
+@keyframes formErrorFade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .form-error {
   display: inline-block;
   background: $color-red-1;
@@ -160,6 +170,7 @@ textarea {
   padding: 7px 20px;
   font-weight: 300;
   transition:all 0.3s ease;
+  animation: formErrorFade .3s ease;
   @media(min-width: $bp-sm) {
     padding: 5px 15px;
   }
