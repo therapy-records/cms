@@ -8,8 +8,8 @@ import { resetPromiseState } from '../../actions/uiState';
 import { selectNewsArticles } from '../../selectors/news';
 import { selectUiStateLoading } from '../../selectors/uiState';
 import { selectJournalismArticles } from '../../selectors/journalism';
-import './styles.css';
 import LoadingSpinner from '../../components/LoadingSpinner';
+import './style.css';
 
 export class Dashboard extends React.Component {
   componentWillUnmount() {
@@ -40,22 +40,17 @@ export class Dashboard extends React.Component {
     } = this.props;
 
     return (
-      <div className='container container-dashboard'>
+      <div className='container dashboard'>
         <LoadingSpinner
           active={promiseLoading}
           fullScreen
         />
 
-        <h2>Welcome back 👋</h2>
-        <br />
-        <Link to='news/create' className='btn'>Create News</Link>
-        <Link to='journalism/create' className='btn'>Create Journalism</Link>
-
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+        <h2>Welcome back <span className='wave'>👋</span></h2>
+        <div className='ctas'>
+          <Link to='news/create' className='btn'>Create News</Link>
+          <Link to='journalism/create' className='btn'>Create Journalism</Link>
+        </div>
 
         <h3>Stats</h3>
         {(newsArticles || journalismArticles) &&

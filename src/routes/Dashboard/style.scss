@@ -1,0 +1,31 @@
+@keyframes waveRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(60deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(60deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+
+.dashboard {
+  h2 .wave {
+    display: inline-flex;
+    animation: waveRotate 1s ease-in-out;
+  }
+  .ctas {
+    padding: 1em 0 4em 0;
+    @media (min-width: 600px) {
+      padding: 1em 0 5em 0;
+    }
+  }
+}

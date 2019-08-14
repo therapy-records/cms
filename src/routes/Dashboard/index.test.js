@@ -59,7 +59,7 @@ describe('(Component) Dashboard', () => {
 
     it('should render a heading', () => {
       const heading = wrapper.containsMatchingElement(
-        <h2>Welcome back 👋</h2>
+        <h2>Welcome back <span>👋</span></h2>
       );
       expect(heading).to.be.true;
     });

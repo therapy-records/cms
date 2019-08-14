@@ -189,7 +189,7 @@ button,
   color: #FFF;
   font-weight: 300;
   margin: 0 0 .5em 0;
-  padding: .5em;
+  padding: .8em 1em;
   width: 100%;
   font-size: 1em;
   text-decoration: none;
@@ -198,9 +198,8 @@ button,
   transition: all .3s ease;
   font-family: $font-main;
   text-align: center;
-  @media(min-width: 600px) {
+  @media (min-width: 600px) {
     width: auto;
-    padding: .8em 1em;
   }
   &:hover,
   &:focus {
@@ -295,8 +294,12 @@ button[disabled] {
 }
 
 .btn + .btn {
+  margin-top: .5em;
   margin-bottom: 0;
-  margin-left: 1em;
+  @media (min-width: 600px) {
+    margin-top: 0;
+    margin-left: 1em;
+  }
 }
 
 a {
