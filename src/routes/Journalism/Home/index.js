@@ -37,33 +37,38 @@ export class Journalism extends React.Component {
   renderArticle(p) {
     return (
       <li key={p._id} className='article-card'>
-        <img src={p.imageUrl} alt="" />
+        <div className='img-container'>
+          <img src={p.imageUrl} alt="" />
+        </div>
         <div>
           <div className='heading-with-btn'>
             <h3>
               <Link
                 onClick={() => this.handleButtonClick(p)}
                 to={`/journalism/${p._id}`}
-              >{p.title}
+              >
+                <span>{p.title}</span>
+                {p.releaseDate && <p className='small-tab'>{moment(p.releaseDate).format('DD MMM YYYY')}</p>}
               </Link>
             </h3>
-            {p.releaseDate && <p className='small-tab'>{moment(p.releaseDate).format('DD MMM YYYY')}</p>}
           </div>
         
-          <Link
-            onClick={() => this.handleButtonClick(p)}
-            to={`/journalism/${p._id}`}
-            className='btn btn-sm btn-view'
-          >
-            View
-          </Link>
-          <Link
-            onClick={() => this.handleButtonClick(p)}
-            to={`/journalism/${p._id}/edit`}
-            className='btn btn-sm btn-edit'
-          >
-            Edit
-          </Link>
+          <div className='btns-always-inline'>
+            <Link
+              onClick={() => this.handleButtonClick(p)}
+              to={`/journalism/${p._id}`}
+              className='btn btn-sm btn-view'
+            >
+              View
+            </Link>
+            <Link
+              onClick={() => this.handleButtonClick(p)}
+              to={`/journalism/${p._id}/edit`}
+              className='btn btn-sm btn-edit'
+            >
+              Edit
+            </Link>
+          </div>
         </div>
       </li>
     );

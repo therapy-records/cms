@@ -3,7 +3,6 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
 import { Link } from 'react-router-dom';
 import configureMockStore from 'redux-mock-store';
-import moment from 'moment';
 import ConnectedNews, { News } from './index';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
@@ -12,7 +11,7 @@ import {
   selectNewsHasFetched
 } from '../../../selectors/news';
 import { selectUiStateLoading } from '../../../selectors/uiState';
-
+import { getFirstImageInArticle } from '../../../utils/news';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -52,14 +51,15 @@ describe('(Component) News - Home', () => {
       const p = props.articles[key];
       return (
         <li key={p._id} className='article-card'>
-          <img />
+          <div className='img-container'>
+            <img src={getFirstImageInArticle(p)} alt={p.title} />
+          </div>
           <div>
-            <div className='heading-with-btn'>
-              <h3><Link to={`/news/${p._id}`}>{p.title}</Link></h3>
-              {p.createdAt && <p className='small-tab'>{moment(p.createdAt).fromNow()}</p>}
+            <h3><Link to={`/news/${p._id}`}>{p.title}</Link></h3>
+            <div className='btns-always-inline'>
+              <Link to={`/news/${p._id}`} className='btn btn-sm btn-view'>View</Link>
+              <Link to={`/news/${p._id}/edit`} className='btn btn-sm btn-edit'>Edit</Link>
             </div>
-            <Link to={`/news/${p._id}`} className='btn btn-sm btn-view'>View</Link>
-            <Link to={`/news/${p._id}/edit`} className='btn btn-sm btn-edit'>Edit</Link>
           </div>
         </li>
       )

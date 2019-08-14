@@ -29,7 +29,7 @@ describe('(Utils) form', () => {
     describe('when the article does not have any images', () => {
       it('should return a placeholder image', () => {
         const result = getFirstImageInArticle({}, true);
-        const expected = 'http://via.placeholder.com/100x137/C8C8C8/777?text=No+image&color=EEEEEE';
+        const expected = 'http://via.placeholder.com/150x137/EEE/999?text=No+image&color=EEEEEE';
         expect(result).to.eq(expected);
       });
     });

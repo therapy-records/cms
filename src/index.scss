@@ -12,6 +12,7 @@ body {
   width: 100%;
   height: 100%;
   font-family: $font-main;
+  font-size: 16px;
 }
 
 body {
@@ -48,7 +49,7 @@ body {
   justify-content: flex-start;
   flex-direction: column;
   width: 100%;
-  @media(min-width: 900px) {
+  @media(min-width: $bp-md) {
     flex-direction: row;
     justify-content: space-between;
   }
@@ -57,14 +58,14 @@ body {
     width: 100%;
   }
   > .col-first {
-    @media(min-width: 900px) {
+    @media(min-width: $bp-md) {
       width: 12%;
       min-width: $sidebar-width;
       max-width: $sidebar-width;
     }
   }
   > .col-last {
-    @media(min-width: 900px) {
+    @media(min-width: $bp-md) {
       width: 88%;
       align-items: center;
       display: flex;
@@ -96,10 +97,10 @@ body {
 .container {
   max-width: 1000px;
   padding: 1em;
-  @media(min-width: 600px) {
+  @media(min-width: $bp-sm) {
     padding: 2em;
   }
-  @media(min-width: 900px) {
+  @media(min-width: $bp-md) {
     padding-top: 3.5em;
   }
 }
@@ -148,7 +149,7 @@ textarea {
   border: solid 1px #b7b7b7;
   font-size: 1em;
   &:focus {
-    outline: auto 3px #AFAFAF;
+    outline: solid 3px #111;
   }
 }
 
@@ -159,7 +160,7 @@ textarea {
   padding: 7px 20px;
   font-weight: 300;
   transition:all 0.3s ease;
-  @media(min-width: 600px) {
+  @media(min-width: $bp-sm) {
     padding: 5px 15px;
   }
 }
@@ -198,7 +199,7 @@ button,
   transition: all .3s ease;
   font-family: $font-main;
   text-align: center;
-  @media (min-width: 600px) {
+  @media (min-width: $bp-sm) {
     width: auto;
   }
   &:hover,
@@ -273,7 +274,8 @@ button,
 
 .btn-sm {
   font-size: .95em;
-  padding: .5em;
+  padding-top: .6em;
+  padding-bottom: .6em;
 }
 
 button[disabled] {
@@ -296,10 +298,13 @@ button[disabled] {
 .btn + .btn {
   margin-top: .5em;
   margin-bottom: 0;
-  @media (min-width: 600px) {
+  @media (min-width: $bp-sm) {
     margin-top: 0;
     margin-left: 1em;
   }
+}
+.btns-always-inline .btn + .btn {
+  margin-left: 1em;
 }
 
 a {
@@ -329,7 +334,7 @@ h1 {
 
 h2 {
   font-size: 2em;
-  @media(min-width: 600px) {
+  @media(min-width: $bp-sm) {
     font-size: 2.5em;
   }
 }
@@ -369,7 +374,7 @@ li {
       margin-bottom: 4em;
     }
   }
-  @media(min-width: 600px) {
+  @media(min-width: $bp-sm) {
     flex-direction: row;
     > div {
       width: 50%;
@@ -461,22 +466,22 @@ label {
 iframe {
   width: 100%;
   min-height: 250px;
-  @media(min-width: 600px) {
+  @media(min-width: $bp-sm) {
     min-height: 400px;
   }
 }
 
 .heading-with-btns {
-  @media(min-width: 600px) {
+  @media(min-width: $bp-sm) {
     display: flex;
     width: 100%;
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
-    + div {
-      padding-right: 1em;
-    }
     .action-btns {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start;
       min-width: 161px;
     }
   }
@@ -484,7 +489,7 @@ iframe {
 
 .heading-with-btns.long-heading {
   display: block;
-  @media(min-width: 1100px) {
+  @media(min-width: $bp-lg) {
     display: flex;
     width: 100%;
     flex-direction: row;
@@ -562,21 +567,54 @@ iframe {
   > div {
     width: 100%;
   }
-  img {
+  .img-container {
     display: none;
-    @media(min-width: 600px) {
+    @media(min-width: $bp-xs) {
       display: block;
-      max-width: 100px;
+      min-height: 150px;
+      max-width: 150px;
+      min-height: 120px;
       margin-right: 1em;
     }
-    @media(min-width: 600px) {
+    @media(min-width: $bp-sm) {
       margin-right: 2em;
     }
   }
+
+  img {
+    width: 100%;
+  }
+
   h3 {
     margin-top: 0;
     margin-bottom: .15em;
     letter-spacing: .5px;
+    @media(min-width: $bp-sm) {
+      margin-bottom: .5em;
+    }
+    a {
+      display: flex;
+      justify-content: space-between;
+      span {
+        @media(min-width: $bp-md) {
+          max-width: 78%;
+        }
+      }
+    }
+    .small-tab {
+      display: none;
+      @media(min-width: $bp-md) {
+        display: block;
+        justify-content: center;
+        text-align: center;
+        min-width: 100px;
+        max-height: 25px;
+        margin-top: 3px;
+        margin-left: .5em;
+        font-size: .45em;
+        font-weight: normal;
+      }
+    }
   }
   .btn {
     width: 30%;

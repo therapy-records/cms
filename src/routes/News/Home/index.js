@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux'
-import moment from 'moment';
+import { connect } from 'react-redux';
 import { fetchNewsArticles } from '../../../actions/news';
 import { setSelectedNewsArticle } from '../../../actions/newsArticle';
 import { resetPromiseState } from '../../../actions/uiState';
@@ -50,33 +49,34 @@ export class News extends React.Component {
   renderArticle(article) {
     return (
       <li key={article._id} className='article-card'>
-        <img src={getFirstImageInArticle(article)} alt={article.title} />
+        <div className='img-container'>
+          <img src={getFirstImageInArticle(article)} alt={article.title} />
+        </div>
         <div>
-          <div className='heading-with-btn'>
-            <h3>
-              <Link
-                onClick={() => this.handleButtonClick(article)}
-                to={`/news/${article._id}`}
-              >{article.title}
-              </Link>
-            </h3>
-            {article.createdAt && <p className='small-tab'>{moment(article.createdAt).fromNow()}</p>}
-          </div>
+          <h3>
+            <Link
+              onClick={() => this.handleButtonClick(article)}
+              to={`/news/${article._id}`}
+            >{article.title}
+            </Link>
+          </h3>
 
-          <Link
-            onClick={() => this.handleButtonClick(article)}
-            to={`/news/${article._id}`}
-            className='btn btn-sm btn-view'
-          >
-            View
-          </Link>
-          <Link
-            onClick={() => this.handleButtonClick(article)}
-            to={`/news/${article._id}/edit`}
-            className='btn btn-sm btn-edit'
-          >
-            Edit
-          </Link>
+          <div className='btns-always-inline'>
+            <Link
+              onClick={() => this.handleButtonClick(article)}
+              to={`/news/${article._id}`}
+              className='btn btn-sm btn-view'
+            >
+              View
+            </Link>
+            <Link
+              onClick={() => this.handleButtonClick(article)}
+              to={`/news/${article._id}/edit`}
+              className='btn btn-sm btn-edit'
+            >
+              Edit
+            </Link>
+          </div>
         </div>
       </li>
     );

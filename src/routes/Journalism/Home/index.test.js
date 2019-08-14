@@ -66,30 +66,35 @@ describe('(Component) Journalism - Home', () => {
         const p = props.articles[key]; // eslint-disable-line
         return (
           <li key={p._id} className='article-card'>
-            <img src={p.imageUrl} />
+            <div className='img-container'>
+              <img src={p.imageUrl} />
+            </div>
             <div>
               <div className='heading-with-btn'>
                 <h3>
                   <Link
                     to={`/journalism/${p._id}`}
-                  >{p.title}
+                  >
+                    <span>{p.title}</span>
+                    {p.releaseDate && <p className='small-tab'>{moment(p.releaseDate).format('DD MMM YYYY')}</p>}
                   </Link>
                 </h3>
-                {p.releaseDate && <p className='small-tab'>{moment(p.releaseDate).format('DD MMM YYYY')}</p>}
               </div>
 
-              <Link
-                to={`/journalism/${p._id}`}
-                className='btn btn-sm btn-view'
-              >
-                View
-              </Link>
-              <Link
-                to={`/journalism/${p._id}/edit`}
-                className='btn btn-sm btn-edit'
-              >
-                Edit
-              </Link>
+              <div className='btns-always-inline'>
+                <Link
+                  to={`/journalism/${p._id}`}
+                  className='btn btn-sm btn-view'
+                >
+                  View
+                </Link>
+                <Link
+                  to={`/journalism/${p._id}/edit`}
+                  className='btn btn-sm btn-edit'
+                >
+                  Edit
+                </Link>
+              </div>
             </div>
           </li>
         )
