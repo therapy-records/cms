@@ -16,7 +16,7 @@
   opacity: 0;
   z-index: -1;
   padding-top: 4em;
-  @media(min-width: 768px) {
+  @media(min-width: $bp-sm) {
     width: calc(100% - #{$sidebar-width});
     max-width: calc(100% - #{$sidebar-width});
     padding-top: 0;
@@ -38,7 +38,7 @@
   width: 2.5em;
   height: 2.5em;
   position: relative;
-  @media(min-width: 768px) {
+  @media(min-width: $bp-sm) {
     margin: 10em auto 2.5em auto;
   }
 }

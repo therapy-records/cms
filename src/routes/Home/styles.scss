@@ -18,16 +18,16 @@
   align-items: flex-start;
   padding-top: 9em;
   margin-top: -1em;
-  @media(min-height: 600px) and (min-width: 768px) {
+  @media(min-height: 600px) and (min-width: $bp-sm) {
     padding-top: 4.8em;
   }
-  @media(min-width: 768px) {
+  @media(min-width: $bp-sm) {
     align-items: center;
   }
   > div {
     width: 100%;
     max-width: 300px;
-    @media(min-width: 768px) {
+    @media(min-width: $bp-sm) {
       margin-top: -5em;
     }
   }

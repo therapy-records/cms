@@ -3,13 +3,13 @@
 .login-form {
 
   .text-input-container {
-    @media(min-width: 768px) {
+    @media(min-width: $bp-sm) {
       position: relative;
     }
   }
 
   .form-error {
-    @media(min-width: 768px) {
+    @media(min-width: $bp-sm) {
       position: absolute;
       top: .2em;
       right: calc(-70%);

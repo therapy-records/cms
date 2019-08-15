@@ -12,13 +12,13 @@
 }
 
 .col-1 {
-  @media(min-width: $bp-sm) {
+  @media(min-width: $bp-xs) {
     flex: 1 550px;
     padding-right: 3em;
   }
 }
 .col-2 {
-  @media(min-width: $bp-sm) {
+  @media(min-width: $bp-xs) {
     flex: 1 250px;
     justify-content: flex-end;
   }
@@ -37,14 +37,14 @@
     border: solid 1px #EEE;
     padding: 2em;
     box-shadow: 0 3px 22px #CACACA;
-    @media(min-width: 768px) {
+    @media(min-width: $bp-sm) {
       width: calc(100% + 4em);
       margin-right: -2em;
       margin-left: -2em;
     }  
   }
   .row {
-    @media(min-width: 768px) {
+    @media(min-width: $bp-sm) {
       margin-bottom: 3em;
     }
     &.last {

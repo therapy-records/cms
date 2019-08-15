@@ -31,7 +31,7 @@
     color: #FFF;
     opacity: .6;
     transition: all .3s ease;
-    @media(min-width: 768px) {
+    @media(min-width: $bp-sm) {
       padding: .6em .8em;
     }
     &:hover,
@@ -72,7 +72,7 @@
     font-weight: 300;
     margin-bottom: 1em;
     display: none;
-    @media(min-width: 768px) {
+    @media(min-width: $bp-sm) {
       display: block;
     }
     a {
@@ -97,7 +97,7 @@
   opacity: 1;
   .btn-close {
     display: block;
-    @media(min-width: 768px) {
+    @media(min-width: $bp-sm) {
       display: none;
     }
   }

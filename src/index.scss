@@ -76,14 +76,14 @@ body {
 
 .row {
   margin-bottom: 2.5em;
-  @media(min-width: 768px) {
+  @media(min-width: $bp-sm) {
     margin-bottom: 1.5em;
   }
 }
 
 .row-large {
   margin-bottom: 2.5em;
-  @media(min-width: 768px) {
+  @media(min-width: $bp-sm) {
     margin-bottom: 4em;
   }
   input {
@@ -97,7 +97,7 @@ body {
 .container {
   max-width: 1000px;
   padding: 1em;
-  @media(min-width: $bp-sm) {
+  @media(min-width: $bp-xs) {
     padding: 2em;
   }
   @media(min-width: $bp-md) {
@@ -171,7 +171,7 @@ textarea {
   font-weight: 300;
   transition:all 0.3s ease;
   animation: formErrorFade .3s ease;
-  @media(min-width: $bp-sm) {
+  @media(min-width: $bp-xs) {
     padding: 5px 15px;
   }
 }
@@ -210,7 +210,7 @@ button,
   transition: all .3s ease;
   font-family: $font-main;
   text-align: center;
-  @media (min-width: $bp-sm) {
+  @media (min-width: $bp-xs) {
     width: auto;
   }
   &:hover,
@@ -309,7 +309,7 @@ button[disabled] {
 .btn + .btn {
   margin-top: .5em;
   margin-bottom: 0;
-  @media (min-width: $bp-sm) {
+  @media (min-width: $bp-xs) {
     margin-top: 0;
     margin-left: 1em;
   }
@@ -345,7 +345,7 @@ h1 {
 
 h2 {
   font-size: 2em;
-  @media(min-width: $bp-sm) {
+  @media(min-width: $bp-xs) {
     font-size: 2.5em;
   }
 }
@@ -381,11 +381,11 @@ li {
   flex-direction: column;
   > div {
     margin-bottom: 2.5em;
-    @media(min-width: 768px) {
+    @media(min-width: $bp-sm) {
       margin-bottom: 4em;
     }
   }
-  @media(min-width: $bp-sm) {
+  @media(min-width: $bp-xs) {
     flex-direction: row;
     > div {
       width: 50%;
@@ -477,13 +477,13 @@ label {
 iframe {
   width: 100%;
   min-height: 250px;
-  @media(min-width: $bp-sm) {
+  @media(min-width: $bp-xs) {
     min-height: 400px;
   }
 }
 
 .heading-with-btns {
-  @media(min-width: $bp-sm) {
+  @media(min-width: $bp-xs) {
     display: flex;
     width: 100%;
     flex-direction: row;
@@ -580,14 +580,14 @@ iframe {
   }
   .img-container {
     display: none;
-    @media(min-width: $bp-xs) {
+    @media(min-width: $bp-xxs) {
       display: block;
       min-height: 150px;
       max-width: 150px;
       min-height: 120px;
       margin-right: 1em;
     }
-    @media(min-width: $bp-sm) {
+    @media(min-width: $bp-xs) {
       margin-right: 2em;
     }
   }
@@ -600,7 +600,7 @@ iframe {
     margin-top: 0;
     margin-bottom: .15em;
     letter-spacing: .5px;
-    @media(min-width: $bp-sm) {
+    @media(min-width: $bp-xs) {
       margin-bottom: .5em;
     }
     a {
@@ -634,7 +634,7 @@ iframe {
     display: inline-flex;
     justify-content: center;
     margin-bottom: 0;
-    @media(min-width: 768px) {
+    @media(min-width: $bp-sm) {
       width: auto;
     }
   }
