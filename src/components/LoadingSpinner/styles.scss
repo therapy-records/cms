@@ -1,3 +1,5 @@
+@import 'styles/variables.scss';
+
 // https://github.com/tobiasahlin/SpinKit
 
 .loading-spinner-overlay {
@@ -15,15 +17,15 @@
   z-index: -1;
   padding-top: 4em;
   @media(min-width: 768px) {
-    width: calc(100% - 150px);
+    width: calc(100% - #{$sidebar-width});
+    max-width: calc(100% - #{$sidebar-width});
     padding-top: 0;
-    align-items: center;
   }
 }
 
 .loading-spinner-overlay-ignore-sidebar {
   width: 100%;
-  padding-left: 150px;
+  padding-left: 0;
 }
 
 .loading-spinner-overlay-active {
@@ -32,10 +34,14 @@
 }
 
 .sk-circle {
-  margin: 40px auto;
-  width: 40px;
-  height: 40px;
-  position: relative; }
+  margin: 2.5em auto;
+  width: 2.5em;
+  height: 2.5em;
+  position: relative;
+  @media(min-width: 768px) {
+    margin: 10em auto 2.5em auto;
+  }
+}
   .sk-circle .sk-child {
     width: 100%;
     height: 100%;
@@ -147,8 +153,8 @@
             
 .loading-spinner-overlay {
   .sk-circle {
-    width: 100px;
-    height: 100px;
+    width: 6.25em;
+    height: 6.25em;
     .sk-child:before {
       background-color: #000;
     }
