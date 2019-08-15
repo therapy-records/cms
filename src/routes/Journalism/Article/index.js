@@ -15,6 +15,7 @@ import ArticleHeader from '../../../components/ArticleHeader';
 import { selectSelectedJournalismArticle } from '../../../selectors/journalism';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import redirect from '../../../utils/redirect';
+import './style.css';
 
 export class Article extends React.Component {
   componentWillMount() {
@@ -79,19 +80,22 @@ export class Article extends React.Component {
               longHeading
             />
 
-            <div className='row-large'>
-              <p>{article.copy}</p>
-              <p><a href={article.externalLink} target='_blank'>{article.externalLink}</a></p>
-            </div>
+            <div className='article-journalism-flex-root'>
 
-            {article.imageUrl &&
-              <div className='row-large img-container'>
+              <div className='image-container'>
                 <img
                   src={article.imageUrl}
                   alt={`Fiona Ross - ${article.title}`}
                 />
               </div>
-            }
+
+              <div>
+                <p>{article.copy}</p>
+                <p><a href={article.externalLink} target='_blank'>{article.externalLink}</a></p>
+              </div>
+
+            </div>
+
 
           </div>
         )}

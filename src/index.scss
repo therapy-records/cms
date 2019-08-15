@@ -483,24 +483,30 @@ iframe {
 }
 
 .heading-with-btns {
+  margin-bottom: 2em;
   @media(min-width: $bp-xs) {
     display: flex;
     width: 100%;
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
-    .action-btns {
+  }
+
+  .action-btns {
+    @media(min-width: $bp-xs) {
       display: flex;
-      justify-content: flex-end;
       align-items: flex-start;
       min-width: 161px;
+    }
+    @media(min-width: $bp-md) {
+      justify-content: flex-end;
     }
   }
 }
 
 .heading-with-btns.long-heading {
   display: block;
-  @media(min-width: $bp-lg) {
+  @media(min-width: $bp-md) {
     display: flex;
     width: 100%;
     flex-direction: row;
@@ -554,15 +560,6 @@ iframe {
   }
   li {
     list-style-type: none;
-  }
-}
-
-.article-journalism {
-  .img-container {
-    margin-bottom: .5em;
-  }
-  img {
-    max-width: 500px;
   }
 }
 
