@@ -2,9 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-15';
-import configureMockStore from 'redux-mock-store';
-import ConnectedSidebar, { Sidebar, mapDispatchToProps } from './Sidebar';
-import { userLogout } from '../../reducers/user'
+import { Sidebar } from './Sidebar';
 
 Enzyme.configure({ adapter: new Adapter() });
 

@@ -42,7 +42,7 @@ export class Datepicker extends React.Component {
     const _moment = m;
 
     return (
-      <div className='datepicker max-width-50'>
+      <div className='datepicker'>
         <div>
           <h5>{title}</h5>
         </div>

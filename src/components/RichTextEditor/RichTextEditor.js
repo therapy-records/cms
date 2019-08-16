@@ -53,12 +53,14 @@ class _RichTextEditor extends React.Component {
 
       {touched && error && (<p>Copy is {error}</p>)}
 
+      <div className='react-rte-container'>
         <RichTextEditor
           toolbarConfig={RTE_TOOLBAR_CONFIG}
           value={this.state.value}
           placeholder='This month has been fantastic...'
           onChange={this.handleOnChange}
         />
+      </div>
 
       </div>
     );
