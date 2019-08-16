@@ -96,7 +96,7 @@ export class Sidebar extends React.PureComponent {
           </button>
 
           <h1>
-            <NavLink to='/'>FR-CMS</NavLink>
+            <NavLink to='/dashboard'>FR-CMS</NavLink>
           </h1>
 
           <NavLink

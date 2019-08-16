@@ -20,7 +20,7 @@ describe('(Component) Sidebar', () => {
   it('should render a title', () => {
     wrapper = shallow(<Sidebar {...props} />)
     const actual = wrapper.containsMatchingElement(
-      <NavLink to='/'>FR-CMS</NavLink>
+      <NavLink to='/dashboard'>FR-CMS</NavLink>
     );
     expect(actual).to.equal(true);
   });
