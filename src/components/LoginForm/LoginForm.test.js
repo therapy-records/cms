@@ -75,7 +75,8 @@ describe('(Component) LoginForm', () => {
         error: undefined,
         pristine: false,
         submitting: false,
-        promiseLoading: false
+        promiseLoading: false,
+        invalid: false
       }
       const buttonWrapper = shallow(<LoginForm {...props} />);
       const actual = buttonWrapper.containsMatchingElement(

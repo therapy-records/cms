@@ -221,40 +221,6 @@ describe('(Component) News - Article', () => {
       
       describe('sections', () => {
 
-        describe('when a section does NOT have copy and images', () => {
-          it('should NOT render a `cols-container` class', () => {
-            wrapper.setProps({
-              article: {
-                title: 'test',
-                sections: [
-                  {
-                    images: []
-                  }
-                ]
-              }
-            });
-            const firstListItem = wrapper.find('li').first();
-            expect(firstListItem.hasClass('')).to.eq(true);
-            // expect(wrapper.find('.cols-container').length).to.eq(0);
-          });
-        });
-
-        it('should render an image for each section', () => {
-          const actual = wrapper.containsAllMatchingElements([
-            <img
-              key={mockArticle.sections[0].images[0].url}
-              src={mockArticle.sections[0].images[0].url}
-              alt='Fiona Ross'
-            />,
-            <img
-              key={mockArticle.sections[1].images[1].url}
-              src={mockArticle.sections[1].images[1].url}
-              alt='Fiona Ross'
-            />
-          ]);
-          expect(actual).to.equal(true);
-        });
-
         it('should render `copy` for each section', () => {
           const actual = wrapper.containsAllMatchingElements([
             <div
@@ -270,6 +236,22 @@ describe('(Component) News - Article', () => {
               }
             />
             ]);
+          expect(actual).to.equal(true);
+        });
+
+        it('should render an image for each section', () => {
+          const actual = wrapper.containsAllMatchingElements([
+            <img
+              key={mockArticle.sections[0].images[0].url}
+              src={mockArticle.sections[0].images[0].url}
+              alt='Fiona Ross'
+            />,
+            <img
+              key={mockArticle.sections[1].images[1].url}
+              src={mockArticle.sections[1].images[1].url}
+              alt='Fiona Ross'
+            />
+          ]);
           expect(actual).to.equal(true);
         });
 

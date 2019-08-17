@@ -96,12 +96,15 @@ body {
 
 .container {
   max-width: 1000px;
-  padding: 1em;
+  padding: 0 1em 1em;
   @media(min-width: $bp-xs) {
-    padding: 2em;
+    padding: 0 2em 2em;
   }
   @media(min-width: $bp-md) {
-    padding-top: 3.5em;
+      padding-top: 1em;
+  }
+  @media(min-width: $bp-xlg) {
+    padding-top: 3em;
   }
 }
 
@@ -307,7 +310,6 @@ button[disabled] {
 }
 
 .btn + .btn {
-  margin-top: .5em;
   margin-bottom: 0;
   @media (min-width: $bp-xs) {
     margin-top: 0;
@@ -355,6 +357,7 @@ h3 {
 }
 
 p {
+  margin-top: 0;
   margin-bottom: 1em;
 }
 
@@ -374,26 +377,6 @@ ol {
 
 li {
   margin-bottom: .5em;
-}
-
-.cols-container {
-  display: flex;
-  flex-direction: column;
-  > div {
-    margin-bottom: 2.5em;
-    @media(min-width: $bp-sm) {
-      margin-bottom: 4em;
-    }
-  }
-  @media(min-width: $bp-xs) {
-    flex-direction: row;
-    > div {
-      width: 50%;
-      &:first-child {
-        padding-right: 1em;
-      }
-    }
-  }
 }
 
 .col-clear {
@@ -502,6 +485,23 @@ iframe {
       justify-content: flex-end;
     }
   }
+
+  button,
+  .btn {
+    width: auto;
+  }
+  .btn + .btn {
+    margin-left: 1em;    
+  }
+
+  .small-tab {
+    display: none;
+    @media(min-width: $bp-sm) {
+      display: inline-flex;
+      position: relative;
+      top: -.8em;
+    }
+  }
 }
 
 .heading-with-btns.long-heading {
@@ -532,8 +532,58 @@ iframe {
 }
 
 .row-alternating-columns {
-  .cols-container:nth-child(even) {
-    flex-direction: row-reverse;
+  > li {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 2.5em 0;
+    margin-bottom: 0;
+    border-bottom: solid 1px #B7B7B7;
+    @media(min-width: $bp-xxs) {
+      flex-direction: row-reverse;
+    }
+    &:first-child {
+      padding-top: 0;
+    }
+    &:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    &:nth-child(even) {
+      flex-direction: column;
+      @media(min-width: $bp-xxs) {
+        flex-direction: row;
+      }
+    }
+    > div {
+      flex: 1 1 30%;
+    }
+  }
+  .images {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 -1em;
+    padding-right: 2em;
+    > li {
+      width: 100%;
+      max-width: 100%;
+      padding: 0 1em 1em;
+      margin-bottom: 0;
+    }
+  }
+  > li.has-multiple-images {
+    display: block;
+    > div {
+      flex: initial;
+    }
+    .images {
+      padding-right: 0;
+      padding-top: 2.5em;
+      > li {
+        width: 50%;
+        max-width: 50%;
+      }
+    }
   }
 }
 

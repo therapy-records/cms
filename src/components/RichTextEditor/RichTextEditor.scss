@@ -1,3 +1,5 @@
+@import 'styles/variables.scss';
+
 .react-rte-container > div {
   border: solid 1px #B7B7B7;
 }
@@ -8,6 +10,7 @@
 
 .DraftEditor-root {
   z-index: 0;
+  font-family: $font-main;
 }
 
 .DraftEditor-editorContainer .public-DraftEditor-content {

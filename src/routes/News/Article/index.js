@@ -82,34 +82,35 @@ export class Article extends React.Component {
             <ul className='row-large row-alternating-columns'>
               {article.sections.map((section, index) => {
                 const hasImages = section.images.length > 0;
+                const hasMultipleImages = section.images.length > 1;
                 const hasCopy = section.copy;
-                const hasCopyAndImages = (hasCopy && hasImages);
 
                 return (
                   <li
                     key={index}
-                    className={hasCopyAndImages ? 'cols-container' : ''}
+                    className={hasMultipleImages ? 'has-multiple-images' : ''}
                   >
+                  
+                    {hasCopy &&
+                      <div
+                        dangerouslySetInnerHTML={this.renderHtml(section.copy)}
+                      />
+                    }
 
                     {hasImages && 
                       <div>
-                        <ul>
+                        <ul className='images'>
                           {section.images.map(image => {
                             return image.url && (
-                              <img
-                                key={image.url}
-                                src={image.url}
-                                alt='Fiona Ross'
-                              />
+                              <li key={image.url}>
+                                <img
+                                  src={image.url}
+                                  alt='Fiona Ross'
+                                />
+                              </li>
                             )
                           })}
                         </ul>
-                      </div>
-                    }
-
-                    {hasCopy &&
-                      <div>
-                        <div dangerouslySetInnerHTML={this.renderHtml(section.copy)} />
                       </div>
                     }
 
