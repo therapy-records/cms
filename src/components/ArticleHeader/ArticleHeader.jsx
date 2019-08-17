@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import ArticleDeleteModal from '../ArticleDeleteModal';
+import './styles.css';
 
 class ArticleHeader extends Component {
   constructor() {

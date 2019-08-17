@@ -1,0 +1,67 @@
+@import 'styles/variables.scss';
+
+.heading-with-btns {
+  margin-bottom: 2em;
+  @media(min-width: $bp-xs) {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .action-btns {
+    @media(min-width: $bp-xs) {
+      display: flex;
+      align-items: flex-start;
+      min-width: 161px;
+    }
+    @media(min-width: $bp-md) {
+      justify-content: flex-end;
+    }
+  }
+
+  button,
+  .btn {
+    width: auto;
+  }
+  .btn + .btn {
+    margin-left: 1em;    
+  }
+
+  .small-tab {
+    display: none;
+    @media(min-width: $bp-md) {
+      display: inline-flex;
+      position: relative;
+      top: -.8em;
+    }
+  }
+}
+
+.heading-with-btns.long-heading {
+  display: block;
+  @media(min-width: $bp-md) {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1em;
+    
+    .btn {
+      width: auto;
+      position: relative;
+      top: 4px;
+    }
+
+    + div {
+      flex-basis: 80%;
+    }
+
+    .action-btns {
+      min-width: 161px;
+    }
+
+  }
+}

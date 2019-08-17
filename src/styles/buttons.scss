@@ -1,0 +1,138 @@
+@import 'styles/variables.scss';
+
+button:disabled,
+button[disabled] {
+  cursor: default;
+}
+
+button,
+.btn,
+a {
+  &:focus {
+    outline: auto 3px #AFAFAF;
+  }
+}
+
+button,
+.btn {
+  border: 0 none;
+  display: inline-block;
+  background: $color-blue-1;
+  color: #FFF;
+  font-weight: 300;
+  margin: 0 0 .5em 0;
+  padding: .8em 1em;
+  width: 100%;
+  font-size: 1em;
+  text-decoration: none;
+  appearance: none;
+  cursor: pointer;
+  transition: all .3s ease;
+  font-family: $font-main;
+  text-align: center;
+  @media (min-width: $bp-xs) {
+    width: auto;
+  }
+  &:hover,
+  &:focus {
+    color: #FFF;
+    background: $color-blue-2;
+    text-decoration: none;
+  }
+
+  &.btn-danger {
+    background: $color-red-1;
+    color: #FFF;
+    &:hover,
+    &:focus {
+      background: $color-red-2;
+    }  
+  }
+  &.btn-sm-remove {
+    position: relative;
+    font-size: 0;
+    &::before {
+      content: 'x';
+      display: block;
+      position: absolute;
+      top: -11px;
+      width: 28px;
+      height: 28px;
+      left: -20px;
+      line-height: 23px;
+      font-size: 16px;
+      color: #FFF;
+      background: #cb0000;
+      z-index: 999999;
+      border: solid 1px #FFF;
+      border-radius: 1em;
+    }
+  }
+}
+
+.button-link {
+  padding: 0;
+  text-decoration: underline;
+  background: none;
+  color: $color-blue-2;
+  &:hover,
+  &:focus {
+    background: none;
+    color: $color-blue-1;
+  }
+}
+
+.btn-burger {
+  background: none;
+  color: #000;
+  font-size: 1.5em;
+  padding: .5em;
+  transition: all .6s ease;
+  width: auto;
+  &:hover,
+  &:focus,
+  &.active {
+    color: #000;
+    background: none;
+  }
+  &:focus,
+  &.active {
+    outline: 0 none;
+    opacity: .2;
+    transform: rotate(360deg);
+  }
+}
+
+.btn-sm {
+  font-size: .95em;
+  padding-top: .6em;
+  padding-bottom: .6em;
+}
+
+button[disabled] {
+  opacity: .7;
+  &:hover,
+  &:focus {
+    background: $color-blue-1;
+  }
+}
+
+.btn-lg {
+  padding: 1.5em 2em;
+  width: 100%;
+}
+
+.btn-width-auto {
+  width: auto;
+}
+
+.btn + .btn {
+  margin-bottom: 0;
+  @media (min-width: $bp-xs) {
+    margin-top: 0;
+    margin-left: 1em;
+  }
+}
+.btns-always-inline .btn + .btn {
+  margin-left: 1em;
+}

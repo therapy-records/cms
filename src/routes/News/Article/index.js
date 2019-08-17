@@ -77,6 +77,7 @@ export class Article extends React.Component {
               promiseLoading={promiseLoading}
               showEditButton
               showDeleteButton
+              longHeading
             />
 
             <ul className='row-large row-alternating-columns'>

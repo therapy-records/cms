@@ -1,9 +1,23 @@
 @import 'styles/variables.scss';
 
-.text-input-flex-container {
-  display: flex;
+input,
+textarea {
+  width: 100%;
+  padding: 0.8em;
+  margin-bottom: 1em;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: solid 1px #b7b7b7;
+  font-size: 1em;
+  &:focus {
+    outline: solid 3px #111;
+  }
 }
 
+textarea {
+  max-width: 100%;
+}
 
 .required {
   color: $color-red-3;
@@ -11,4 +25,26 @@
   position: relative;
   top: -5px;
   font-weight: 300;
+}
+
+@keyframes formErrorFade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.form-error {
+  display: inline-block;
+  background: $color-red-1;
+  color: #FFF;
+  padding: 7px 20px;
+  font-weight: 300;
+  transition:all 0.3s ease;
+  animation: formErrorFade .3s ease;
+  @media(min-width: $bp-xs) {
+    padding: 5px 15px;
+  }
 }

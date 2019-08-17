@@ -1,0 +1,110 @@
+@import 'styles/variables.scss';
+
+a {
+  color: $color-blue-2;
+  &:hover,
+  &:focus {
+    color: $color-blue-1;
+  }
+}
+
+h1,h2,h3,h4,h5,h6 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font: {
+    weight: 500;
+    size: 1em;
+  }
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+}
+
+h1 {
+  font-size: 1.5em;
+}
+
+h2 {
+  font-size: 2em;
+  @media(min-width: $bp-xs) {
+    font-size: 2.5em;
+  }
+}
+
+h3 {
+  font-size: 1.8em;
+}
+
+h5,
+label {
+  font-size: 1em;
+  margin-bottom: .5em;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+ul,
+ol {
+  margin:0 0 0 1em;
+  padding:0;
+}
+
+li {
+  margin-bottom: .5em;
+}
+
+label {
+  font-weight: 500;
+}
+
+small,
+.small {
+  font-size: 75%;
+}
+
+label {
+  display: block;
+  text-align: left;
+}
+
+img {
+  max-width: 100%;
+}
+
+.no-list-style {
+  list-style-type: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+.small-tab {
+  display: inline-flex;
+  margin: 0 1em 0 0;
+  margin-bottom: 1em;
+  padding: .4em .5em;
+  background: #E3E3E3;
+  color: #878787;
+  font-size: .8em;
+  border-radius: 3px;
+  opacity: .6;
+
+  &.inline {
+    display: inline-flex;
+    background: none;
+    color: #C2C2C2;
+    margin-left: 0.5em;
+  }
+}
