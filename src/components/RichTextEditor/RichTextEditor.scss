@@ -11,8 +11,14 @@
 .DraftEditor-root {
   z-index: 0;
   font-family: $font-main;
+  font-size: 1em;
+}
+
+.public-DraftEditorPlaceholder-hasFocus {
+  color: #9197a3;
 }
 
 .DraftEditor-editorContainer .public-DraftEditor-content {
   min-height: 150px;
 }
+

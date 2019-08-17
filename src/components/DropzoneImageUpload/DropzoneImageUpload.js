@@ -143,7 +143,7 @@ export class DropzoneImageUpload extends React.Component {
     } = this.state;
 
     return (
-      <div>
+      <div className='dropzone-container'>
         <h5>{title}
           {required && <span className='required'>*</span>}
           &nbsp;

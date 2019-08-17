@@ -1,5 +1,9 @@
 @import 'styles/variables.scss';
 
+.dropzone-container {  
+  margin-bottom: 2em;
+}
+
 .flex-root {
   @media(min-width: $bp-sm) {
     display: flex;

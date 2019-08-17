@@ -25,23 +25,28 @@
 }
 
 .news-article-form-section-heading {
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  margin-bottom: 1em;
+  @media(min-width: $bp-xs) {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+  }
+  button {
+    width: auto;
+  }
 }
 
 .news-form-section {
   &.news-form-section-large {
     border: solid 1px #EEE;
-    padding: 2em;
+    padding: 2em 2em .5em;
     box-shadow: 0 3px 22px #CACACA;
-    @media(min-width: $bp-sm) {
-      width: calc(100% + 4em);
-      margin-right: -2em;
-      margin-left: -2em;
-    }  
+    width: calc(100% + 4em);
+    margin-right: -2em;
+    margin-left: -2em;
   }
   .row {
     @media(min-width: $bp-sm) {

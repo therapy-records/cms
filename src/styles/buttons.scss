@@ -73,6 +73,7 @@ button,
 .button-link {
   padding: 0;
   text-decoration: underline;
+  text-align: left;
   background: none;
   color: $color-blue-2;
   &:hover,
@@ -89,6 +90,7 @@ button,
   padding: .5em;
   transition: all .6s ease;
   width: auto;
+  margin-bottom: 0;
   &:hover,
   &:focus,
   &.active {
@@ -135,4 +137,9 @@ button[disabled] {
 }
 .btns-always-inline .btn + .btn {
   margin-left: 1em;
+}
+
+.row-buttons button {
+  margin-right: 1em;
+  margin-bottom: 1.5em;
 }
