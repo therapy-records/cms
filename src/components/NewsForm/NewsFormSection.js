@@ -41,6 +41,7 @@ export class NewsFormSection extends Component {
         <div className='row-large'>
           <button
             type="button"
+            className='btn-new-section'
             onClick={() => {
               fields.push(EMPTY_ARTICLE_SECTION_OBJ);
               setTimeout(() => {

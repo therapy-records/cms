@@ -26,20 +26,32 @@ h1 {
 }
 
 h2 {
-  font-size: 2em;
+  font-size: 1.6em;
   @media(min-width: $bp-xs) {
+    font-size: 2em;
+  }
+  @media(min-width: $bp-xlg) {
     font-size: 2.5em;
   }
 }
 
 h3 {
-  font-size: 1.8em;
+  font-size: 1.5em;
+  @media(min-width: $bp-xs) {
+    font-size: 1.7em;
+  }
+  @media(min-width: $bp-xlg) {
+    font-size: 1.8em;
+  }
 }
 
 h5,
 label {
-  font-size: 1em;
   margin-bottom: .5em;
+  font-size: 1em;
+  @media(min-width: $bp-xs) {
+    font-size: 1.2em;
+  }
 }
 
 p {

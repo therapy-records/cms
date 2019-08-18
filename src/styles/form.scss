@@ -9,9 +9,12 @@ textarea {
   -webkit-appearance: none;
   -moz-appearance: none;
   border: solid 1px #b7b7b7;
-  font-size: 1em;
+  font-size: .9em;
   &:focus {
     outline: solid 3px #111;
+  }
+  @media (min-width: $bp-xs) {
+    font-size: 1em;
   }
 }
 

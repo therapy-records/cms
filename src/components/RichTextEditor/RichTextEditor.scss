@@ -11,7 +11,10 @@
 .DraftEditor-root {
   z-index: 0;
   font-family: $font-main;
-  font-size: 1em;
+  font-size: .9em;
+  @media (min-width: $bp-xs) {
+    font-size: 1em;
+  }
 }
 
 .public-DraftEditorPlaceholder-hasFocus {

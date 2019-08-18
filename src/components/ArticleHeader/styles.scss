@@ -14,7 +14,7 @@
     @media(min-width: $bp-xs) {
       display: flex;
       align-items: flex-start;
-      min-width: 161px;
+      min-width: 81px;
     }
     @media(min-width: $bp-md) {
       justify-content: flex-end;
@@ -60,7 +60,7 @@
     }
 
     .action-btns {
-      min-width: 161px;
+      min-width: 81px;
     }
 
   }

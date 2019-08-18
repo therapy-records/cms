@@ -30,8 +30,10 @@ button,
   transition: all .3s ease;
   font-family: $font-main;
   text-align: center;
+  font-size: .9em;
   @media (min-width: $bp-xs) {
     width: auto;
+    font-size: 1em;
   }
   &:hover,
   &:focus {
@@ -106,9 +108,12 @@ button,
 }
 
 .btn-sm {
-  font-size: .95em;
+  font-size: .8em;
   padding-top: .6em;
   padding-bottom: .6em;
+  @media (min-width: $bp-xs) {
+    font-size: .95em;
+  }
 }
 
 button[disabled] {

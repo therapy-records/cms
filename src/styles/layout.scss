@@ -72,7 +72,7 @@ body {
 
 .row-large {
   margin-bottom: 2.5em;
-  @media(min-width: $bp-sm) {
+  @media(min-width: $bp-md) {
     margin-bottom: 4em;
   }
   input {
@@ -91,6 +91,10 @@ body {
   }
   @media(min-width: $bp-md) {
       padding-top: 1em;
+  }
+  @media(min-width: $bp-lg) {
+    max-width: 80%;
+    padding-top: 2em;
   }
   @media(min-width: $bp-xlg) {
     padding-top: 3em;
