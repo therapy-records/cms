@@ -1,9 +1,5 @@
 @import 'styles/variables.scss';
 
-.dropzone-container {  
-  margin-bottom: 2em;
-}
-
 .flex-root {
   @media(min-width: $bp-sm) {
     display: flex;
@@ -16,6 +12,43 @@
     width: 50%;
     max-width: 50%;
   }
+}
+
+.gallery-images-flex-root {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  @media(min-width: $bp-sm) {
+    margin-top: -0.3em;
+    padding-left: 0.25em;
+  }
+}
+
+.gallery-image-upload-item {
+  padding: 0.25em;
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  flex: 1 0 25%;
+  width: 25%;
+  max-width: 25%;
+  @media(min-width: $bp-sm) {
+    flex: 1 0 50%;
+    width: 50%;
+    max-width: 50%;
+  }
+  @media(min-width: $bp-md) {
+    flex: 1 0 33%;
+    width: 33%;
+    max-width: 33.333%;
+  }
+  .btn-sm-remove {
+    z-index: 1;
+  }
+}
+
+.dropzone-container {  
+  margin-bottom: 2em;
 }
 
 .dropzone {

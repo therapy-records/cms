@@ -6,7 +6,6 @@ import RichTextEditor from '../RichTextEditor';
 import TextInput from '../../components/TextInput';
 import { required } from '../../utils/form';
 import { NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS } from '../../utils/news';
-import './NewsFormSectionField.css';
 
 export class NewsFormSectionField extends Component {
   constructor(props) {
