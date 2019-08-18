@@ -6,11 +6,21 @@
 @import 'styles/buttons.scss';
 @import 'styles/modal.scss';
 
-.ButtonWrap__root___1EO_R {
-  z-index: 1 !important; // maybe unsafe, without there is overflow/z-index issue
-}
-
 .row-alternating-columns {
+
+  .images {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 -1em;
+    > li {
+      width: 100%;
+      max-width: 100%;
+      padding: 0 1em 1em;
+      margin-bottom: 0;
+    }
+  }
+
   > li {
     display: flex;
     flex-direction: column-reverse;
@@ -27,27 +37,22 @@
       padding-bottom: 0;
       border-bottom: none;
     }
+    &:nth-child(odd) {
+      .images {
+        padding-right: 2em;
+      }
+    }
     &:nth-child(even) {
       flex-direction: column;
       @media(min-width: $bp-xxs) {
         flex-direction: row;
       }
+      .images {
+        padding-left: 2em;
+      }
     }
     > div {
       flex: 1 1 30%;
-    }
-  }
-  .images {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin: 0 -1em;
-    padding-right: 2em;
-    > li {
-      width: 100%;
-      max-width: 100%;
-      padding: 0 1em 1em;
-      margin-bottom: 0;
     }
   }
   > li.has-multiple-images {
@@ -58,6 +63,7 @@
     .images {
       padding-right: 0;
       padding-top: 2.5em;
+      padding-left: 0;
       > li {
         width: 50%;
         max-width: 50%;
