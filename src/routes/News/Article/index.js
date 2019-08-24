@@ -85,11 +85,12 @@ export class Article extends React.Component {
                 const hasImages = section.images.length > 0;
                 const hasMultipleImages = section.images.length > 1;
                 const hasCopy = section.copy;
+                const hasVideo = section.videoEmbed
 
                 return (
                   <li
                     key={index}
-                    className={hasMultipleImages ? 'has-multiple-images' : ''}
+                    className={(hasMultipleImages || hasVideo) ? 'single-column-layout' : ''}
                   >
                   
                     {hasCopy &&
@@ -115,7 +116,7 @@ export class Article extends React.Component {
                       </div>
                     }
 
-                    {section.videoEmbed &&
+                    {hasVideo &&
                       <div>
                         <div dangerouslySetInnerHTML={this.renderHtml(section.videoEmbed)} />
                       </div>
