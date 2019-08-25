@@ -51,7 +51,7 @@ describe('(Component) RichTextEditor', () => {
   describe('rendering', () => {
     it('should render a title', () => {
       const actual = wrapper.containsMatchingElement(
-        <h5>{props.title} <span className='required'>*</span></h5>
+        <h5>{props.title}<span className='required'>*</span></h5>
       );
       expect(actual).to.eq(true);
     });
