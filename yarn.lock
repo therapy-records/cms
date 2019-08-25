@@ -2907,9 +2907,9 @@ eslint-config-react-app@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/eslint-config-react-app/-/eslint-config-react-app-2.1.0.tgz#23c909f71cbaff76b945b831d2d814b8bde169eb"
 
-eslint-config-standard@^11.0.0:
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-standard/-/eslint-config-standard-11.0.0.tgz#87ee0d3c9d95382dc761958cbb23da9eea31e0ba"
+eslint-config-standard@^14.0.1:
+  version "14.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-standard/-/eslint-config-standard-14.0.1.tgz#375c3636fb4bd453cb95321d873de12e4eef790b"
 
 eslint-import-resolver-node@^0.3.1:
   version "0.3.2"

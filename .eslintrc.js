@@ -15,7 +15,10 @@ module.exports = {
         "no-console": 0,
         "react/jsx-uses-react": 1,
         "react/jsx-uses-vars": 1,
-        "react/prop-types": ["error", { ignore: ['store']}]
+        "react/prop-types": ["error", { ignore: ['store']}],
+        "no-async-promise-executor": 0,
+        "no-misleading-character-class": 0,
+        "no-useless-catch": 0
     },
     "globals": {
         "localStorage": true,
@@ -23,5 +26,8 @@ module.exports = {
     },
     "env": {
         "jest": true
-    }
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018
+    },
 };
