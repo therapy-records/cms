@@ -1,4 +1,4 @@
-const envProd = process.NODE_ENV === 'production';
+const envProd = process.env.NODE_ENV === 'production';
 export const API_ROOT_DEV = 'http://localhost:4040/api/';
 export const API_ROOT_PROD = 'https://fr-cms-api.herokuapp.com/api/';
 
