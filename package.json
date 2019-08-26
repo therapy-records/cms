@@ -5,6 +5,7 @@
   "scripts": {
     "start-js": "node scripts/start.js",
     "start": "node server.js",
+    "develop": "npm-run-all -p watch-css start-js",
     "build-js": "node scripts/build.js",
     "build": "npm-run-all build-css build-js",
     "lint": "./node_modules/.bin/eslint --ignore-pattern '/src/**/*.test.js' ./src/. ",
