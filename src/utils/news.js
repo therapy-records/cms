@@ -29,7 +29,7 @@ export const getFirstImageInArticle = (article) => {
   if (sectionsWithImages.length) {
     return sectionsWithImages[0];
   }
-  return 'http://via.placeholder.com/150x137/EEE/999?text=No+image&color=EEEEEE';
+  return 'https://via.placeholder.com/150x137/EEE/999?text=No+image&color=EEEEEE';
 };
 
 export const removeEmptyImageUrls = sections => {
