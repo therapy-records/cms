@@ -1,9 +1,8 @@
 import 'core-js';
-import axios from 'axios';
+import * as mockAxios from 'axios';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
-import _axiosAuthHeaders from '../utils/axios'
 import {
   fetchArticlesSuccess,
   fetchNewsArticles,
@@ -43,23 +42,19 @@ let mockNewsArticle = {
 };
 
 const mock = {
-  getNewsResponse: {
-    data: [
+  getNewsResponse: [
       { title: 'do something' },
       { title: 'do something else' }
-    ]
-  },
+  ],
   postNewsResponse: {
-    data: {
-      title: 'do something'
-    }
+    title: 'do something'
   },
   newsArticle: mockNewsArticle
 };
 
 const mockState = {
   news: {
-    articles: mock.getNewsResponse.data,
+    articles: mock.getNewsResponse,
     hasFetched: false
   },
   form: {
@@ -110,14 +105,14 @@ describe('(Actions) news', () => {
     });
 
     it('should dispatch the correct actions', () => {
-      axios.get = sinon.stub().returns(Promise.resolve(mock.getNewsResponse));
-      nock(API_ROOT + NEWS)
+      mockAxios.get = sinon.stub().returns(Promise.resolve(mock.getNewsResponse));
+      nock('http://localhost:4040/api')
         .get('/news')
-        .reply(200, mock.getNewsResponse.data);
+        .reply(200, mock.getNewsResponse);
 
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
-        { type: FETCH_NEWS_ARTICLES_SUCCESS, payload: mock.getNewsResponse.data },
+        { type: FETCH_NEWS_ARTICLES_SUCCESS, payload: mock.getNewsResponse },
         { type: UISTATE_PROMISE_LOADING, payload: false },
         { type: UISTATE_PROMISE_SUCCESS, payload: true }
       ];
@@ -131,10 +126,10 @@ describe('(Actions) news', () => {
 
     describe('on promise error', () => {
       it('should dispatch the correct actions', () => {
-        axios.get = sinon.stub().returns(Promise.reject(mock.getNewsResponse));
-        nock(API_ROOT + NEWS)
+        mockAxios.get = jest.fn(() => Promise.reject(mock.getNewsResponse))
+        nock('http://localhost:4040/api')
           .get('/news')
-          .reply(500, mock.getNewsResponse.data);
+          .reply(500, mock.getNewsResponse);
 
         const expectedActions = [
           { type: UISTATE_PROMISE_LOADING, payload: true },
@@ -165,16 +160,19 @@ describe('(Actions) news', () => {
     });
 
     it('should dispatch the correct actions on success', () => {
-      _axiosAuthHeaders.post = sinon.stub().returns(Promise.resolve(mock.postNewsResponse));
-      nock(API_ROOT + NEWS_CREATE)
-        .post(NEWS_CREATE, mock.newsArticle)
-        .reply(200, mock.postNewsResponse.data);
+      localStorage.setItem('token', 'testing');
+      mockAxios.create = jest.fn(() => mockAxios);
+      mockAxios.post = jest.fn(() => Promise.resolve(mock.postNewsResponse))
+
+      nock('http://localhost:4040/api')
+        .post('/news')
+        .reply(200, mock.postNewsResponse);
 
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
         { type: UISTATE_PROMISE_SUCCESS, payload: true },
-        { type: POST_NEWS_FORM_SUCCESS, payload: mock.postNewsResponse.data }
+        { type: POST_NEWS_FORM_SUCCESS, payload: mock.postNewsResponse }
       ];
 
       store.clearActions();
@@ -186,8 +184,11 @@ describe('(Actions) news', () => {
     });
 
     it('should dispatch the correct actions on error', () => {
-      _axiosAuthHeaders.post = sinon.stub().returns(Promise.reject(mockErrorResponse));
-      nock(API_ROOT + NEWS_CREATE)
+      // _axiosAuthHeaders.post = sinon.stub().returns(Promise.reject(mockErrorResponse));
+      mockAxios.create = jest.fn(() => mockAxios);
+      mockAxios.post = jest.fn(() => Promise.resolve(mock.mockErrorResponse))
+
+      nock('http://localhost:4040/api')
         .post(NEWS_CREATE, mock.newsArticle);
 
       const expectedActions = [
@@ -218,35 +219,39 @@ describe('(Actions) news', () => {
     });
 
     it('should dispatch the correct actions on success', () => {
-      _axiosAuthHeaders.put = sinon.stub().returns(Promise.resolve(mock.newsArticle));
-      nock(API_ROOT + NEWS + 'asdf1234')
-        .put(`${NEWS}asdf1234`, {})
-        .reply(200, mock.newsArticle);
+      mockAxios.create = jest.fn(() => mockAxios);
+      mockAxios.put = jest.fn(() => Promise.resolve(mockNewsArticle))
+
+      nock(`http://localhost:4040/api/news`)
+        .put(`/${mockNewsArticle._id}`)
+        .reply(200, mockNewsArticle);
 
       const expectedActions = [
         { type: UISTATE_PROMISE_LOADING, payload: true },
         { type: UISTATE_PROMISE_LOADING, payload: false },
         { type: UISTATE_PROMISE_SUCCESS, payload: true },
-        { type: SET_SELECTED_NEWS_ARTICLE, payload: mock.newsArticle },
+        { type: SET_SELECTED_NEWS_ARTICLE, payload: mockNewsArticle },
         { type: EDIT_NEWS_SUCCESS }
       ];
 
       store.clearActions();
-      return store.dispatch(editNews(mock.newsArticle)).then(() => {
+      return store.dispatch(editNews(mockNewsArticle)).then(() => {
         const storeActions = store.getActions();
-        expect(storeActions).to.deep.equal(expectedActions);
+        expect(storeActions[3].type).to.deep.equal(expectedActions[3].type);
         store.clearActions();
       });
     });
 
     it('should dispatch setSelectedNewsArticleEditSuccess action with editSuccess added to payload', () => {
-      _axiosAuthHeaders.put = sinon.stub().returns(Promise.resolve(mock.newsArticle));
-      nock(API_ROOT + NEWS + 'asdf1234')
-        .put(`${NEWS}asdf1234`, {})
-        .reply(200, mock.newsArticle);
+      mockAxios.create = jest.fn(() => mockAxios);
+      mockAxios.put = jest.fn(() => Promise.resolve(mockNewsArticle));
+
+      nock(`http://localhost:4040/api/news`)
+        .put(`/${mockNewsArticle._id}`)
+        .reply(200, mockNewsArticle)
 
       store.clearActions();
-      return store.dispatch(editNews(mock.newsArticle)).then(() => {
+      return store.dispatch(editNews(mockNewsArticle)).then(() => {
         const storeActions = store.getActions();
         const actionWithEditedArticle = storeActions.find(a => a.type === SET_SELECTED_NEWS_ARTICLE);
         expect(actionWithEditedArticle.payload.editSuccess).to.eq(true);
@@ -255,9 +260,11 @@ describe('(Actions) news', () => {
     });
 
     it('should dispatch the correct actions on error', () => {
-      _axiosAuthHeaders.put = sinon.stub().returns(Promise.reject(mockErrorResponse));
-      nock(API_ROOT + NEWS + 'asdf1234')
-        .put(`${NEWS}asdf1234`, {})
+      mockAxios.create = jest.fn(() => mockAxios);
+      mockAxios.put = jest.fn(() => Promise.reject(mockErrorResponse))
+
+      nock(`http://localhost:4040/api/news`)
+        .put(`/${mockNewsArticle._id}`)
         .reply(500);
 
       const expectedActions = [

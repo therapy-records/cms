@@ -1,5 +1,4 @@
 import axios from 'axios';
-import _axiosAuthHeaders from '../utils/axios'
 import {
   API_ROOT,
   NEWS,
@@ -18,7 +17,6 @@ import {
 
 import { setSelectedNewsArticleEditSuccess } from '../actions/newsArticle';
 import { removeEmptyImageUrls } from '../utils/news';
-
 
 export function fetchArticlesSuccess(data) {
   return {
@@ -69,7 +67,15 @@ export const postNews = () => {
     const formObj = getFormObj();
     formObj.sections = removeEmptyImageUrls(formObj.sections);
 
-    return _axiosAuthHeaders.post(
+    const token = localStorage.getItem('token');
+    const _axios = axios.create({
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      }
+    });
+
+    return _axios.post(
       API_ROOT + NEWS_CREATE,
       JSON.stringify(formObj)
     ).then(
@@ -101,7 +107,15 @@ export const editNews = (postToEdit) => {
     postToEdit.title = formObj.title;
     postToEdit.sections = removeEmptyImageUrls(formObj.sections);
 
-    return _axiosAuthHeaders.put(
+    const token = localStorage.getItem('token');
+    const _axios = axios.create({
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      }
+    });
+
+    return _axios.put(
       API_ROOT + NEWS + '/' + postToEdit._id,
       JSON.stringify(postToEdit)
     ).then(
