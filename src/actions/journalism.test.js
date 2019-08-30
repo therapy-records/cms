@@ -3,17 +3,12 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 import * as mockAxios from 'axios';
-import _axiosAuthHeaders from '../utils/axios'
 import {
   fetchJournalismArticlesSuccess,
   fetchJournalismArticles,
   postJournalism,
   editJournalism
 } from './journalism';
-import {
-  API_ROOT,
-  JOURNALISM
-} from '../constants';
 import {
   UISTATE_PROMISE_LOADING,
   UISTATE_PROMISE_SUCCESS,
@@ -214,10 +209,11 @@ describe('(Actions) journalism', () => {
     });
 
     it('should dispatch the correct actions on success', () => {
-      _axiosAuthHeaders.put = sinon.stub().returns(Promise.resolve(mockArticle));
+      mockAxios.create = jest.fn(() => mockAxios);
+      mockAxios.put = jest.fn(() => Promise.resolve(mockArticle))
 
-      nock('http://localhost:4040/api/journalism/asdf1234')
-        .put('/journalism/asdf1234', {})
+      nock(`http://localhost:4040/api/journalism`)
+        .put(`/${mockArticle._id}`)
         .reply(200, mockArticle);
 
       const expectedActions = [
@@ -237,9 +233,11 @@ describe('(Actions) journalism', () => {
     });
 
     it('should dispatch SET_SELECTED_JOURNALISM_ARTICLE action with editSuccess added to payload', () => {
-      _axiosAuthHeaders.put = sinon.stub().returns(Promise.resolve(mockArticle));
-      nock(API_ROOT + JOURNALISM + 'asdf1234')
-        .put(`${JOURNALISM}asdf1234`, {})
+      mockAxios.create = jest.fn(() => mockAxios);
+      mockAxios.put = jest.fn(() => Promise.resolve(mockArticle));
+
+      nock(`http://localhost:4040/api/journalism`)
+        .put(`/${mockArticle._id}`)
         .reply(200, mockArticle);
 
       store.clearActions();
@@ -252,9 +250,11 @@ describe('(Actions) journalism', () => {
     });
 
     it('should dispatch the correct actions on error', () => {
-      _axiosAuthHeaders.put = sinon.stub().returns(Promise.reject(mockErrorResponse));
-      nock(API_ROOT + JOURNALISM + 'asdf1234')
-        .put(`${JOURNALISM}asdf1234`, {})
+      mockAxios.create = jest.fn(() => mockAxios);
+      mockAxios.put = jest.fn(() => Promise.reject(mockErrorResponse));
+
+      nock(`http://localhost:4040/api/journalism`)
+        .put(`/${mockArticle._id}`)
         .reply(500);
 
       const expectedActions = [

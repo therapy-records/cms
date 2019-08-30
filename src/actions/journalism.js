@@ -1,5 +1,4 @@
 import axios from 'axios';
-import _axiosAuthHeaders from '../utils/axios'
 import {
   API_ROOT,
   JOURNALISM,
@@ -109,7 +108,15 @@ export const editJournalism = (postToEdit) => {
     postToEdit.copy = reduxFormObj.copy;
     postToEdit.imageUrl = reduxFormObj.imageUrl;
 
-    return _axiosAuthHeaders.put(
+    const token = localStorage.getItem('token');
+    const _axios = axios.create({
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token
+      }
+    });
+
+    return _axios.put(
       API_ROOT + JOURNALISM + '/' + postToEdit._id,
       JSON.stringify(postToEdit)
     ).then(
