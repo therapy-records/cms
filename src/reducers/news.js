@@ -1,6 +1,7 @@
 import {
   FETCH_NEWS_ARTICLES_SUCCESS,
-  POST_NEWS_FORM_SUCCESS
+  POST_NEWS_FORM_SUCCESS,
+  EDIT_NEWS_SUCCESS
 } from '../constants/actions';
 
 /* eslint-disable no-return-assign */
@@ -20,7 +21,13 @@ const ACTION_HANDLERS = {
       articlesArray = [...state.articles, ...articlesArray]
     }
     return { ...state, articles: articlesArray }
-  }
+  },
+  [EDIT_NEWS_SUCCESS]: (state, action) => {
+    return {
+      ...state,
+      editSuccess: action.payload
+    }
+  },
 }
 /* eslint-enable no-return-assign */
 
@@ -29,7 +36,8 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 const initialState = {
   hasFetched: false,
-  articles: null
+  articles: null,
+  editSuccess: false
 };
 
 export default function newsReducer(state = initialState, action) {

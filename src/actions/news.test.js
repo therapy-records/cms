@@ -10,8 +10,6 @@ import {
   editNews
 } from '../actions/news';
 import {
-  API_ROOT,
-  NEWS,
   NEWS_CREATE
 } from '../constants';
 import {
@@ -231,30 +229,13 @@ describe('(Actions) news', () => {
         { type: UISTATE_PROMISE_LOADING, payload: false },
         { type: UISTATE_PROMISE_SUCCESS, payload: true },
         { type: SET_SELECTED_NEWS_ARTICLE, payload: mockNewsArticle },
-        { type: EDIT_NEWS_SUCCESS }
+        { type: EDIT_NEWS_SUCCESS, payload: true }
       ];
 
       store.clearActions();
       return store.dispatch(editNews(mockNewsArticle)).then(() => {
         const storeActions = store.getActions();
         expect(storeActions[3].type).to.deep.equal(expectedActions[3].type);
-        store.clearActions();
-      });
-    });
-
-    it('should dispatch setSelectedNewsArticleEditSuccess action with editSuccess added to payload', () => {
-      mockAxios.create = jest.fn(() => mockAxios);
-      mockAxios.put = jest.fn(() => Promise.resolve(mockNewsArticle));
-
-      nock(`http://localhost:4040/api/news`)
-        .put(`/${mockNewsArticle._id}`)
-        .reply(200, mockNewsArticle)
-
-      store.clearActions();
-      return store.dispatch(editNews(mockNewsArticle)).then(() => {
-        const storeActions = store.getActions();
-        const actionWithEditedArticle = storeActions.find(a => a.type === SET_SELECTED_NEWS_ARTICLE);
-        expect(actionWithEditedArticle.payload.editSuccess).to.eq(true);
         store.clearActions();
       });
     });

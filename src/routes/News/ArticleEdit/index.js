@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { resetPromiseState } from '../../../actions/uiState';
-import { editNews } from '../../../actions/news';
+import { editNews, editNewsSuccess } from '../../../actions/news';
 import {
   destroySelectedNewsArticle,
   fetchSingleNewsArticle
 } from '../../../actions/newsArticle';
-import { selectSelectedNewsArticle } from '../../../selectors/news';
+import {
+  selectSelectedNewsArticle,
+  selectNewsEditSuccess
+} from '../../../selectors/news';
 import {
   selectUiStateLoading,
   selectUiStateSuccess
@@ -26,6 +29,7 @@ export class ArticleEdit extends React.Component {
   componentWillUnmount() {
     this.props.resetPromiseState();
     this.props.onDestroyArticle();
+    this.props.onResetEditSuccess();
   }
 
   componentWillMount() {
@@ -53,6 +57,7 @@ export class ArticleEdit extends React.Component {
       article,
       promiseLoading,
       promiseSuccess,
+      editSuccess,
       location
     } = this.props;
 
@@ -73,7 +78,7 @@ export class ArticleEdit extends React.Component {
           fullScreen
         />
 
-        {!promiseLoading && (promiseSuccess && article.editSuccess) &&
+        {(!promiseLoading && promiseSuccess && editSuccess) &&
           <div>
             <h2>Successfully updated! <small>🚀</small></h2>
             <div className='inline-flex'>
@@ -89,7 +94,7 @@ export class ArticleEdit extends React.Component {
           </div>
         }
 
-        {(!promiseLoading && !article.editSuccess) &&
+        {(!promiseLoading && !editSuccess) &&
          (!promiseLoading && !article.isDeleted) &&
           <NewsForm
             articleId={article._id}
@@ -106,9 +111,11 @@ ArticleEdit.propTypes = {
   onEditArticle: PropTypes.func.isRequired,
   onFetchArticle: PropTypes.func.isRequired,
   onDestroyArticle: PropTypes.func.isRequired,
+  onResetEditSuccess: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
   promiseSuccess: PropTypes.bool,
+  editSuccess: PropTypes.bool,
   resetPromiseState: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
@@ -119,6 +126,7 @@ const mapDispatchToProps = {
   onEditArticle: (article) => editNews(article),
   onFetchArticle: (id) => fetchSingleNewsArticle(id),
   onDestroyArticle: () => destroySelectedNewsArticle(),
+  onResetEditSuccess: () => editNewsSuccess(false),
   resetPromiseState: () => resetPromiseState()
 }
 
@@ -126,6 +134,7 @@ const mapStateToProps = (state, props) => ({
   article: selectSelectedNewsArticle(state),
   promiseLoading: selectUiStateLoading(state),
   promiseSuccess: selectUiStateSuccess(state),
+  editSuccess: selectNewsEditSuccess(state),
   state: state.location
 });
 

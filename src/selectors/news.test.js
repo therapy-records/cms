@@ -1,6 +1,7 @@
 
 import {
   selectNewsHasFetched,
+  selectNewsEditSuccess,
   selectNewsArticles,
   selectNewsArticlesReverse,
   filterNewsArticlesArticle,
@@ -46,7 +47,8 @@ const mockArticles = [
 const mockState = {
   news: {
     articles: mockArticles,
-    hasFetched: false
+    hasFetched: false,
+    editSuccess: false
   },
   selectedNewsArticle: mockSelectedNewsArticle
 };
@@ -67,6 +69,13 @@ describe('(Selectors) news', () => {
   describe('selectNewsHasFetched', () => {
     it('should return news articles', () => {
       const actual = selectNewsHasFetched(mockState);
+      expect(actual).to.deep.eq(false);
+    });
+  });
+
+  describe('selectNewsEditSuccess', () => {
+    it('should return editSucess', () => {
+      const actual = selectNewsEditSuccess(mockState);
       expect(actual).to.deep.eq(false);
     });
   });

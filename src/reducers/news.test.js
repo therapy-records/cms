@@ -1,7 +1,8 @@
 import newsReducer from '../reducers/news';
 import {
   fetchArticlesSuccess,
-  postNewsSuccess
+  postNewsSuccess,
+  editNewsSuccess
 } from '../actions/news';
 
 let mockNewsArticle = {
@@ -56,7 +57,8 @@ describe('(Reducer) news', () => {
     expect(state).to.deep.equal(
       {
         articles: null,
-        hasFetched: false
+        hasFetched: false,
+        editSuccess: false
       }
     );
   });
@@ -97,6 +99,23 @@ describe('(Reducer) news', () => {
           mockArticle2
         ],
         hasFetched: false
+      });
+    });
+  });
+
+  describe('EDIT_NEWS_SUCCESS', () => {
+    it('should update state', () => {
+      let state = newsReducer(mockState.news, editNewsSuccess(true));
+      expect(state).to.deep.eq({
+        articles: mockState.news.articles,
+        hasFetched: false,
+        editSuccess: true
+      });
+      state = newsReducer(mockState.news, editNewsSuccess(false));
+      expect(state).to.deep.eq({
+        articles: mockState.news.articles,
+        hasFetched: false,
+        editSuccess: false
       });
     });
   });

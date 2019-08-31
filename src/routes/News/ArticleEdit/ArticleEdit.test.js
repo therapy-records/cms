@@ -22,6 +22,7 @@ describe('(Component) News - ArticleEdit', () => {
     onFetchArticle: () => { },
     onDestroyArticle: () => {},
     resetPromiseState: () => {},
+    onResetEditSuccess: () => {},
     article: { title: 'test', _id: 'asdf1234' },
     location: {
       pathname: 'article/edit'
@@ -56,6 +57,16 @@ describe('(Component) News - ArticleEdit', () => {
         wrapper.unmount();
         expect(onDestroyArticleSpy).to.have.been.called;
         expect(onDestroyArticleSpy).to.have.been.calledOnce;
+      });
+
+      it('should call onResetEditSuccess', () => {
+        const onResetEditSuccessSpy = sinon.spy();
+        wrapper.setProps({
+          onResetEditSuccess: onResetEditSuccessSpy
+        });
+        wrapper.unmount();
+        expect(onResetEditSuccessSpy).to.have.been.called;
+        expect(onResetEditSuccessSpy).to.have.been.calledOnce;
       });
     });
 
@@ -141,11 +152,11 @@ describe('(Component) News - ArticleEdit', () => {
       });
     });
 
-    describe('when article is successfully posted, promise not loading and article.editSuccess', () => {
+    describe('when article is successfully posted, promise not loading and props.editSuccess', () => {
       beforeEach(() => {
         props.promiseLoading = false;
         props.promiseSuccess = true;
-        props.article.editSuccess = true;
+        props.editSuccess = true;
         wrapper = shallow(<ArticleEdit {...props} />);
       });
 
@@ -210,6 +221,9 @@ describe('(Component) News - ArticleEdit', () => {
       location: {},
       selectedNewsArticle: {
         test: true
+      },
+      news: {
+        editSuccess: false
       }
     };
     let renderedProps;
@@ -231,6 +245,7 @@ describe('(Component) News - ArticleEdit', () => {
       expect(renderedProps.article).to.eq(selectSelectedNewsArticle(mockStoreState));
       expect(renderedProps.promiseLoading).to.eq(selectUiStateLoading(mockStoreState));
       expect(renderedProps.promiseSuccess).to.eq(selectUiStateSuccess(mockStoreState));
+      expect(renderedProps.editSuccess).to.eq(mockStoreState.news.editSuccess);
       expect(renderedProps.location).to.eq(mockStoreState.location);
     });
   });

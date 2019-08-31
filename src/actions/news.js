@@ -31,8 +31,8 @@ export function postNewsSuccess(data) {
   }
 }
 
-export function editNewsSuccess() {
-  return { type: EDIT_NEWS_SUCCESS }
+export function editNewsSuccess(bool) {
+  return { type: EDIT_NEWS_SUCCESS, payload: bool }
 }
 
 export const fetchNewsArticles = () => {
@@ -120,11 +120,10 @@ export const editNews = (postToEdit) => {
       JSON.stringify(postToEdit)
     ).then(
       (data) => {
-        postToEdit.editSuccess = true;
         dispatch(promiseLoading(false));
         dispatch(promiseSuccess(true));
         dispatch(setSelectedNewsArticleEditSuccess(postToEdit))
-        dispatch(editNewsSuccess());
+        dispatch(editNewsSuccess(true));
       }, (err) => {
         dispatch(promiseLoading(false));
         dispatch(promiseError());

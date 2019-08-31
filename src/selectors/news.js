@@ -6,6 +6,8 @@ state.news
 
 export const selectNewsHasFetched = (state) => state.news.hasFetched;
 
+export const selectNewsEditSuccess = (state) => state.news.editSuccess;
+
 export const selectNewsArticles = (state) => state.news.articles;
 
 export const selectNewsArticlesReverse = createSelector(
