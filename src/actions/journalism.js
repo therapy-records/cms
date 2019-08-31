@@ -30,8 +30,8 @@ export function postJournalismSuccess(data) {
   }
 }
 
-export function editJournalismSuccess() {
-  return { type: EDIT_JOURNALISM_SUCCESS }
+export function editJournalismSuccess(bool) {
+  return { type: EDIT_JOURNALISM_SUCCESS, payload: bool }
 }
 
 export const fetchJournalismArticles = () => {
@@ -121,11 +121,10 @@ export const editJournalism = (postToEdit) => {
       JSON.stringify(postToEdit)
     ).then(
       (data) => {
-        postToEdit.editSuccess = true;
         dispatch(promiseLoading(false));
         dispatch(promiseSuccess(true));
         dispatch(setSelectedJournalismArticle(postToEdit));
-        dispatch(editJournalismSuccess());
+        dispatch(editJournalismSuccess(true));
       }, (err) => {
         dispatch(promiseLoading(false));
         dispatch(promiseError());

@@ -27,7 +27,7 @@ const ACTION_HANDLERS = {
       ...state,
       editSuccess: action.payload
     }
-  },
+  }
 }
 /* eslint-enable no-return-assign */
 

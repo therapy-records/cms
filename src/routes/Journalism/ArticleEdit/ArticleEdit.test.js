@@ -10,7 +10,10 @@ import {
 selectUiStateLoading,
 selectUiStateSuccess
 } from '../../../selectors/uiState';
-import {selectSelectedJournalismArticle} from '../../../selectors/journalism';
+import {
+  selectSelectedJournalismArticle,
+  selectJournalismEditSuccess
+} from '../../../selectors/journalism';
 import redirect from '../../../utils/redirect';
 
 Enzyme.configure({adapter: new Adapter()});
@@ -22,6 +25,7 @@ describe('(Component) Journalism - ArticleEdit', () => {
     onFetchArticle: () => {},
     onDestroyArticle: () => {},
     resetPromiseState: () => {},
+    onResetEditSuccess: () => {},
     article: {title: 'test', _id: 'asdf1234'},
     location: {
         pathname: 'article/edit'
@@ -56,6 +60,16 @@ describe('(Component) Journalism - ArticleEdit', () => {
         wrapper.unmount();
         expect(onDestroyArticleSpy).to.have.been.called;
         expect(onDestroyArticleSpy).to.have.been.calledOnce;
+      });
+
+      it('should call onResetEditSuccess', () => {
+        const onResetEditSuccessSpy = sinon.spy();
+        wrapper.setProps({
+          onResetEditSuccess: onResetEditSuccessSpy
+        });
+        wrapper.unmount();
+        expect(onResetEditSuccessSpy).to.have.been.called;
+        expect(onResetEditSuccessSpy).to.have.been.calledOnce;
       });
     });
 
@@ -139,11 +153,11 @@ describe('(Component) Journalism - ArticleEdit', () => {
       });
     });
 
-    describe('when article is successfully posted, promise not loading and article.editSuccess', () => {
+    describe('when article is successfully posted, promise not loading and editSuccess', () => {
       beforeEach(() => {
         props.promiseLoading = false;
         props.promiseSuccess = true;
-        props.article.editSuccess = true;
+        props.editSuccess = true;
         wrapper = shallow(<ArticleEdit {...props} />);
       });
 
@@ -203,6 +217,9 @@ describe('(Component) Journalism - ArticleEdit', () => {
       location: {},
       selectedJournalismArticle: {
         test: true
+      },
+      journalism: {
+        editSuccess: false
       }
     };
     let renderedProps;
@@ -224,6 +241,7 @@ describe('(Component) Journalism - ArticleEdit', () => {
       expect(renderedProps.article).to.eq(selectSelectedJournalismArticle(mockStoreState));
       expect(renderedProps.promiseLoading).to.eq(selectUiStateLoading(mockStoreState));
       expect(renderedProps.promiseSuccess).to.eq(selectUiStateSuccess(mockStoreState));
+      expect(renderedProps.editSuccess).to.eq(selectJournalismEditSuccess(mockStoreState));
       expect(renderedProps.location).to.eq(mockStoreState.location);
     });
   });

@@ -221,30 +221,13 @@ describe('(Actions) journalism', () => {
         { type: UISTATE_PROMISE_LOADING, payload: false },
         { type: UISTATE_PROMISE_SUCCESS, payload: true },
         { type: SET_SELECTED_JOURNALISM_ARTICLE, payload: mockArticle },
-        { type: EDIT_JOURNALISM_SUCCESS }
+        { type: EDIT_JOURNALISM_SUCCESS, payload: true }
       ];
 
       store.clearActions();
       return store.dispatch(editJournalism(mockArticle)).then(() => {
         const storeActions = store.getActions();
         expect(storeActions[3].type).to.deep.equal(expectedActions[3].type);
-        store.clearActions();
-      });
-    });
-
-    it('should dispatch SET_SELECTED_JOURNALISM_ARTICLE action with editSuccess added to payload', () => {
-      mockAxios.create = jest.fn(() => mockAxios);
-      mockAxios.put = jest.fn(() => Promise.resolve(mockArticle));
-
-      nock(`http://localhost:4040/api/journalism`)
-        .put(`/${mockArticle._id}`)
-        .reply(200, mockArticle);
-
-      store.clearActions();
-      return store.dispatch(editJournalism(mockArticle)).then(() => {
-        const storeActions = store.getActions();
-        const actionWithEditedArticle = storeActions.find(a => a.type === SET_SELECTED_JOURNALISM_ARTICLE);
-        expect(actionWithEditedArticle.payload.editSuccess).to.eq(true);
         store.clearActions();
       });
     });
@@ -270,4 +253,5 @@ describe('(Actions) journalism', () => {
       });
     });
   });
+
 });

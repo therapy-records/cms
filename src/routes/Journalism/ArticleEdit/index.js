@@ -7,8 +7,14 @@ import {
   destroySelectedJournalismArticle,
   fetchSingleJournalismArticle
 } from '../../../actions/journalismArticle';
-import { editJournalism } from '../../../actions/journalism';
-import { selectSelectedJournalismArticle } from '../../../selectors/journalism';
+import {
+  editJournalism,
+  editJournalismSuccess
+} from '../../../actions/journalism';
+import {
+  selectSelectedJournalismArticle,
+  selectJournalismEditSuccess
+} from '../../../selectors/journalism';
 import {
   selectUiStateLoading,
   selectUiStateSuccess
@@ -27,6 +33,7 @@ export class ArticleEdit extends React.Component {
   componentWillUnmount() {
     this.props.resetPromiseState();
     this.props.onDestroyArticle();
+    this.props.onResetEditSuccess();
   }
   
   componentWillMount() {
@@ -54,6 +61,7 @@ export class ArticleEdit extends React.Component {
       article,
       promiseLoading,
       promiseSuccess,
+      editSuccess,
       location
     } = this.props;
 
@@ -74,7 +82,7 @@ export class ArticleEdit extends React.Component {
           fullScreen
         />
 
-        {!promiseLoading && (promiseSuccess && article.editSuccess) &&
+        {!promiseLoading && (promiseSuccess && editSuccess) &&
           <div>
             <h2>Successfully updated! <small>🚀</small></h2>
             <Link to='/journalism' className='btn'>Go to Journalism</Link>
@@ -88,7 +96,7 @@ export class ArticleEdit extends React.Component {
           </div>
         }
 
-        {(!promiseLoading && !article.editSuccess) &&
+        {(!promiseLoading && !editSuccess) &&
          (!promiseLoading && !article.isDeleted) &&
           <JournalismForm
             articleId={article._id}
@@ -105,9 +113,11 @@ ArticleEdit.propTypes = {
   onEditArticle: PropTypes.func.isRequired,
   onDestroyArticle: PropTypes.func.isRequired,
   onFetchArticle: PropTypes.func.isRequired,
+  onResetEditSuccess: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
   promiseSuccess: PropTypes.bool,
+  editSuccess: PropTypes.bool,
   resetPromiseState: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
@@ -118,6 +128,7 @@ const mapStateToProps = (state, props) => ({
   article: selectSelectedJournalismArticle(state),
   promiseLoading: selectUiStateLoading(state),
   promiseSuccess: selectUiStateSuccess(state),
+  editSuccess: selectJournalismEditSuccess(state),
   state: state.location
 });
 
@@ -125,6 +136,7 @@ const mapDispatchToProps = {
   onEditArticle: (article) => editJournalism(article),
   onFetchArticle: (id) => fetchSingleJournalismArticle(id),
   onDestroyArticle: () => destroySelectedJournalismArticle(),
+  onResetEditSuccess: () => editJournalismSuccess(false),
   resetPromiseState: () => resetPromiseState()
 };
 

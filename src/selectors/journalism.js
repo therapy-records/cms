@@ -6,6 +6,8 @@ state.journalism
 
 export const selectJournalismHasFetched = (state) => state.journalism.hasFetched;
 
+export const selectJournalismEditSuccess = (state) => state.journalism.editSuccess;
+
 export const selectJournalismArticles = (state) => state.journalism.articles;
 
 export const selectJournalismArticlesReverse = createSelector(
