@@ -2,8 +2,7 @@ import axios from 'axios';
 import {
   API_ROOT,
   JOURNALISM,
-  JOURNALISM_CREATE,
-  JOUNALISM_FIELD_COPY_MAX_LENGTH
+  JOURNALISM_CREATE
 } from '../constants';
 import {
   FETCH_JOURNALISM_ARTICLES_SUCCESS,
@@ -74,9 +73,6 @@ export const postJournalism = () => {
     });
 
     const formObj = getFormObj();
-    if (formObj.copy.length === JOUNALISM_FIELD_COPY_MAX_LENGTH) {
-      formObj.copy = `${formObj.copy}...`;
-    }
 
     return _axios.post(
       API_ROOT + JOURNALISM_CREATE,
@@ -109,9 +105,6 @@ export const editJournalism = (postToEdit) => {
     const reduxFormObj = getFormValues();
     postToEdit.title = reduxFormObj.title;
     postToEdit.copy = reduxFormObj.copy;
-    if (postToEdit.copy.length === JOUNALISM_FIELD_COPY_MAX_LENGTH) {
-      postToEdit.copy = `${postToEdit.copy}...`;
-    }
 
     postToEdit.imageUrl = reduxFormObj.imageUrl;
 
