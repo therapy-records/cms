@@ -109,6 +109,10 @@ export const editJournalism = (postToEdit) => {
     const reduxFormObj = getFormValues();
     postToEdit.title = reduxFormObj.title;
     postToEdit.copy = reduxFormObj.copy;
+    if (postToEdit.copy.length === JOUNALISM_FIELD_COPY_MAX_LENGTH) {
+      postToEdit.copy = `${postToEdit.copy}...`;
+    }
+
     postToEdit.imageUrl = reduxFormObj.imageUrl;
 
     const token = localStorage.getItem('token');
