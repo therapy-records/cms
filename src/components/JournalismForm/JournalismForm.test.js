@@ -12,6 +12,7 @@ import DropzoneImageUpload from '../DropzoneImageUpload';
 import { required } from '../../utils/form';
 import { selectJournalismFormValues } from '../../selectors/form';
 import { selectUiStateLoading } from '../../selectors/uiState';
+import { JOUNALISM_FIELD_COPY_MAX_LENGTH } from '../../constants';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -149,7 +150,7 @@ describe('(Component) JournalismForm', () => {
                type='text'
                placeholder='Jazz In Europe Magazine'
                label='Short excerpt'
-               maxLength={50}
+               maxLength={JOUNALISM_FIELD_COPY_MAX_LENGTH}
                validate={required}
                required
         />

@@ -17,7 +17,10 @@ import Datepicker from '../Datepicker/Datepicker';
 import DropzoneImageUpload from '../DropzoneImageUpload';
 import TextInput from '../TextInput';
 import { required } from '../../utils/form';
-import { JOURNALISM_FORM } from '../../constants';
+import {
+  JOURNALISM_FORM,
+  JOUNALISM_FIELD_COPY_MAX_LENGTH
+} from '../../constants';
 
 export const JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS = {
   width: 400,
@@ -87,7 +90,7 @@ export class JournalismForm extends React.Component {
                  type='text'
                  placeholder='Jazz In Europe Magazine'
                  label='Short excerpt'
-                 maxLength={50}
+                 maxLength={JOUNALISM_FIELD_COPY_MAX_LENGTH}
                  validate={required}
                  required
           />

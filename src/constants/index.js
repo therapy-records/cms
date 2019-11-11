@@ -16,3 +16,5 @@ export const AUTH_LOGIN = AUTH + '/login';
 
 export const NEWS_FORM = 'NEWS_FORM';
 export const JOURNALISM_FORM = 'JOURNALISM_FORM';
+
+export const JOUNALISM_FIELD_COPY_MAX_LENGTH = 50;
