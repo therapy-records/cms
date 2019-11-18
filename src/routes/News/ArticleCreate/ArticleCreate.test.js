@@ -1,6 +1,6 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import Adapter from 'enzyme-adapter-react-16';
 import configureMockStore from 'redux-mock-store';
 import { Link } from 'react-router-dom';
 import ConnectedArticleCreate, { ArticleCreate } from './index';
@@ -133,7 +133,7 @@ describe('(Component) News - ArticleCreate', () => {
     });
 
     it('should map state to props', () => {
-      renderedProps = wrapper.props();
+      renderedProps = wrapper.dive().props();
       expect(renderedProps.promiseLoading).to.eq(selectUiStateLoading(mockStoreState));
       expect(renderedProps.promiseSuccess).to.eq(selectUiStateSuccess(mockStoreState));
       expect(renderedProps.location).to.eq(mockStoreState.location);

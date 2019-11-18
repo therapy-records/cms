@@ -1,6 +1,6 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import Adapter from 'enzyme-adapter-react-16';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import configureMockStore from 'redux-mock-store';
@@ -254,7 +254,7 @@ describe('(Component) Journalism - Home', () => {
     });
 
     it('should map state to props', () => {
-      renderedProps = wrapper.props();
+      renderedProps = wrapper.dive().props();
       expect(renderedProps.promiseLoading).to.eq(selectUiStateLoading(mockStoreState));
       expect(renderedProps.hasFetchedArticles).to.eq(selectJournalismHasFetched(mockStoreState));
       expect(renderedProps.article).to.eq(selectSelectedJournalismArticle(mockStoreState));

@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Field } from 'redux-form';
 import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import Adapter from 'enzyme-adapter-react-16';
 import { LoginForm } from './LoginForm';
 import TextInput from '../../components/TextInput';
 import LoadingSpinner from '../../components/LoadingSpinner';

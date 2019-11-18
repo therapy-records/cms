@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import sinon from 'sinon'
 import { Field } from 'redux-form';
 import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import Adapter from 'enzyme-adapter-react-16';
 import configureMockStore from 'redux-mock-store';
 import TextInput from '../TextInput/TextInput';
 import Datepicker from '../Datepicker/Datepicker';
@@ -257,7 +257,7 @@ describe('(Component) JournalismForm', () => {
     });
 
     it('should map state to props', () => {
-      renderedProps = wrapper.props();
+      renderedProps = wrapper.dive().props();
       expect(renderedProps.formValues).to.eq(selectJournalismFormValues(mockStoreState));
       expect(renderedProps.promiseLoading).to.eq(selectUiStateLoading(mockStoreState));
     });

@@ -2,7 +2,7 @@ import React from 'react'
 import { expect } from 'chai';
 
 import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import Adapter from 'enzyme-adapter-react-16';
 import TextInput from './TextInput';
 
 Enzyme.configure({ adapter: new Adapter() });

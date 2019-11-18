@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import Adapter from 'enzyme-adapter-react-16';
 import moment from 'moment';
 import ArticleHeader from './index';
 import ArticleDeleteModal from '../ArticleDeleteModal';

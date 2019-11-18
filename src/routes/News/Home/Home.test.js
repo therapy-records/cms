@@ -1,6 +1,6 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import Adapter from 'enzyme-adapter-react-16';
 import { Link } from 'react-router-dom';
 import configureMockStore from 'redux-mock-store';
 import ConnectedNews, { News } from './index';
@@ -218,7 +218,7 @@ describe('(Component) News - Home', () => {
     });   
 
     it('should map state to props', () => {
-      renderedProps = wrapper.props();
+      renderedProps = wrapper.dive().props();
       expect(renderedProps.promiseLoading).to.eq(selectUiStateLoading(mockStoreState));
       expect(renderedProps.hasFetchedArticles).to.eq(selectNewsHasFetched(mockStoreState));
       expect(renderedProps.articles).to.eq(selectNewsArticlesReverse(mockStoreState));

@@ -3,7 +3,7 @@ import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import { Route } from 'react-router-dom';
 import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import Adapter from 'enzyme-adapter-react-16';
 import Routes, { Router, ConnectedRouter, NotFound } from './routes';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import StickyError from './components/StickyError/StickyError';
@@ -212,8 +212,8 @@ describe('Router', () => {
   describe('ConnectedRouter', () => {
     it('should have correct mapped props', () => {
       const connectedRoutes = shallow(<ConnectedRouter store={mockStore} />);
-      expect(connectedRoutes.prop('isAuth')).to.eq(mockState.user.isAuth);
-      expect(connectedRoutes.prop('onAuthCheck')).to.be.a('function');
+      expect(connectedRoutes.dive().prop('isAuth')).to.eq(mockState.user.isAuth);
+      expect(connectedRoutes.dive().prop('onAuthCheck')).to.be.a('function');
     });
   });
 

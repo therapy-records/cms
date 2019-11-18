@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import Adapter from 'enzyme-adapter-react-16';
 import InputMoment from 'input-moment';
 import moment from 'moment';
 import Datepicker from './Datepicker';

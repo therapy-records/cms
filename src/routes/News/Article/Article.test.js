@@ -1,6 +1,6 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import Adapter from 'enzyme-adapter-react-16';
 import configureMockStore from 'redux-mock-store';
 import ConnectedArticle, { Article } from './index';
 import LoadingSpinner from '../../../components/LoadingSpinner';
@@ -295,7 +295,7 @@ describe('(Component) News - Article', () => {
     });
 
     it('should map state to props', () => {
-      renderedProps = wrapper.props();
+      renderedProps = wrapper.dive().props();
       expect(renderedProps.article).to.eq(selectSelectedNewsArticle(mockStoreState)),
       expect(renderedProps.promiseLoading).to.eq(selectUiStateLoading(mockStoreState)),
       expect(renderedProps.promiseSuccess).to.eq(selectUiStateSuccess(mockStoreState))
