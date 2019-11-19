@@ -15,10 +15,10 @@ export class Home extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps, nextProps) {
+  componentDidUpdate(prevProps) {
     const { isAuth } = this.props;
 
-    if (prevProps.isAuth !== isAuth) {
+    if ((prevProps.isAuth !== isAuth) && isAuth) {
       const url = (this.props.location.state && this.props.location.state.from.pathname) || '/dashboard';
       this.doRedirect(url);
     }

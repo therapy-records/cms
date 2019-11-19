@@ -3,15 +3,18 @@ import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
 class ProtectedRoute extends React.PureComponent {
+
   componentDidMount() {
-    if (this.props.isAuth === null ||
-        this.props.isAuth === false) {
+    if (!this.props.isAuth) {
       this.props.onAuthCheck();
     }
   }
 
-  componentWillUpdate() {
-    this.props.onAuthCheck();
+  componentDidUpdate(prevProps) {
+    const { isAuth } = this.props;
+    if ((prevProps.isAuth !== isAuth) && !isAuth) {
+      this.props.onAuthCheck();
+    }
   }
 
   render() {
@@ -43,6 +46,6 @@ ProtectedRoute.propTypes = {
   location: PropTypes.object,
   onAuthCheck: PropTypes.func.isRequired,
   isAuth: PropTypes.bool
-}
+};
 
 export default ProtectedRoute;
