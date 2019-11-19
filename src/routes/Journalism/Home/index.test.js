@@ -189,7 +189,7 @@ describe('(Component) Journalism - Home', () => {
   });
 
   describe('methods', () => {
-    describe('componentWillMount', () => {
+    describe('componentDidMount', () => {
       it('should call onFetchNewsArticles when props.hasFetchedArticles is FALSE', () => {
         const onFetchJournalismArticlesSpy = sinon.spy();
         wrapper.setProps({
@@ -197,7 +197,7 @@ describe('(Component) Journalism - Home', () => {
             onFetchJournalismArticles: onFetchJournalismArticlesSpy
         });
 
-        wrapper.instance().componentWillMount();
+        wrapper.instance().componentDidMount();
         expect(onFetchJournalismArticlesSpy.calledOnce).to.eq(true);
       });
     });

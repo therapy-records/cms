@@ -18,7 +18,7 @@ import redirect from '../../../utils/redirect';
 import './style.css';
 
 export class Article extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const propsArticle = this.props.article;
     const paramsId = this.props.match.params.id;
     const noArticle = !propsArticle ||

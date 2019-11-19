@@ -15,7 +15,7 @@ import LoadingSpinner from '../../../components/LoadingSpinner';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
 
 export class Journalism extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const {
       hasFetchedArticles,
       onFetchJournalismArticles

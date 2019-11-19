@@ -57,7 +57,7 @@ describe('(Component) Journalism - Article', () => {
         expect(props.onDestroyArticle).to.have.been.called;
       });
     });
-    describe('componentWillMount', () => {
+    describe('componentDidMount', () => {
       describe('when an article does not exist / article._id is undefined', () => {
         beforeEach(() => {
           props = baseProps;
