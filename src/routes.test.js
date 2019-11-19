@@ -10,7 +10,6 @@ import StickyError from './components/StickyError/StickyError';
 import Sidebar from './components/Sidebar/Sidebar';
 import Home from './routes/Home';
 import Dashboard from './routes/Dashboard';
-import Press from './routes/Press';
 import NewsHome from './routes/News/Home';
 import NewsArticle from './routes/News/Article';
 import NewsArticleEdit from './routes/News/ArticleEdit';
@@ -19,6 +18,8 @@ import JournalismHome from './routes/Journalism/Home';
 import JournalismArticle from './routes/Journalism/Article';
 import JournalismArticleEdit from './routes/Journalism/ArticleEdit';
 import JournalismArticleCreate from './routes/Journalism/ArticleCreate';
+import Press from './routes/Press';
+import Collaborators from './routes/Collaborators';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -74,19 +75,6 @@ describe('Router', () => {
       <ProtectedRoute
         path="/dashboard"
         component={Dashboard}
-        isAuth={props.isAuth}
-        onAuthCheck={props.onAuthCheck}
-        exact
-      />
-    );
-    expect(actual).to.equal(true);
-  });
-
-  it('should render press route', () => {
-    const actual = wrapper.containsMatchingElement(
-      <ProtectedRoute
-        path="/press"
-        component={Press}
         isAuth={props.isAuth}
         onAuthCheck={props.onAuthCheck}
         exact
@@ -191,6 +179,32 @@ describe('Router', () => {
       <ProtectedRoute
         path="/journalism/:id/edit"
         component={JournalismArticleEdit}
+        isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
+        exact
+      />
+    );
+    expect(actual).to.equal(true);
+  });
+
+  it('should render press route', () => {
+    const actual = wrapper.containsMatchingElement(
+      <ProtectedRoute
+        path="/press"
+        component={Press}
+        isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
+        exact
+      />
+    );
+    expect(actual).to.equal(true);
+  });
+
+  it('should render collaborators route', () => {
+    const actual = wrapper.containsMatchingElement(
+      <ProtectedRoute
+        path="/collaborators"
+        component={Collaborators}
         isAuth={props.isAuth}
         onAuthCheck={props.onAuthCheck}
         exact
