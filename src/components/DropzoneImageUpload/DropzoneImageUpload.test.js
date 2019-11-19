@@ -1,6 +1,6 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import Adapter from 'enzyme-adapter-react-16';
 import DropzoneImageUpload from './DropzoneImageUpload';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -33,18 +33,6 @@ describe('(Component) DropzoneImageUpload', () => {
             existingImages: mockExistingImages
           });
           wrapper.instance().componentDidMount();
-          expect(wrapper.state().images).to.deep.eq(mockExistingImages);
-        });
-      });
-    });
-
-    describe('componentWillReceiveProps', () => {
-      describe('when there is props.existingImages', () => {
-        it('should set state', () => {
-          const mockExistingImages = ['http://test.com/image.jpg'];
-          wrapper.setProps({
-            existingImages: mockExistingImages
-          });
           expect(wrapper.state().images).to.deep.eq(mockExistingImages);
         });
       });
@@ -114,9 +102,11 @@ describe('(Component) DropzoneImageUpload', () => {
         wrapper.setProps({
           input: {
             onChange: onChangeSpy
-          }
+          },
+          existingImages: mockInitImageState
         });
-        wrapper.setState({ images: mockInitImageState });
+
+        wrapper.instance().componentDidMount();
         wrapper.instance().removeSingleImage(imageToRemove);
         expect(wrapper.state().images).to.deep.eq([
           mockInitImageState[0],

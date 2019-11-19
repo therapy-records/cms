@@ -57,11 +57,11 @@ describe('(Component) NewsFormSectionField', () => {
 
   describe('methods', () => {
 
-    describe('componentWillMount', () => {
+    describe('componentDidMount', () => {
       it('should call onToggleShowImageUpload when images exist', () => {
         const onToggleShowImageUploadSpy = sinon.spy();
         wrapper.instance().onToggleShowImageUpload = onToggleShowImageUploadSpy;
-        wrapper.instance().componentWillMount();
+        wrapper.instance().componentDidMount();
         expect(onToggleShowImageUploadSpy).to.have.been.called;
       });
 
@@ -83,7 +83,7 @@ describe('(Component) NewsFormSectionField', () => {
           }
         });
         wrapper.instance().onToggleShowVideoEmbed = onToggleShowVideoEmbedSpy;
-        wrapper.instance().componentWillMount();
+        wrapper.instance().componentDidMount();
         expect(onToggleShowVideoEmbedSpy).to.have.been.called;
       });
 

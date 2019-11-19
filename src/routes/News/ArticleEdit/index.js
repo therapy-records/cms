@@ -32,7 +32,7 @@ export class ArticleEdit extends React.Component {
     this.props.onResetEditSuccess();
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const {article, match} = this.props;
     const paramsId = match.params.id;
     if (!article || !article._id) {

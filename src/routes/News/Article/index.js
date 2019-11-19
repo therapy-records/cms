@@ -18,7 +18,7 @@ import LoadingSpinner from '../../../components/LoadingSpinner';
 import redirect from '../../../utils/redirect';
 
 export class Article extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const propsArticle = this.props.article;
     const paramsId = this.props.match.params.id;
     const noArticle = !propsArticle ||

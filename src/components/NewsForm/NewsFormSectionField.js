@@ -18,7 +18,7 @@ export class NewsFormSectionField extends Component {
     this.onToggleShowVideoEmbed = this.onToggleShowVideoEmbed.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const {
       fields,
       sectionIndex
@@ -33,11 +33,11 @@ export class NewsFormSectionField extends Component {
 
     if (sectionImages.length) {
       sectionImagesArray = [
-        ...sectionImages.map(imageObj => (imageObj.url && imageObj.url.length))
+        ...sectionImages.map(imageObj => imageObj.url)
       ];
     }
-
-    const existingImages = sectionImagesArray.length > 1;
+  
+    const existingImages = sectionImagesArray.length >= 1;
 
     if (existingImages) {
       this.onToggleShowImageUpload();

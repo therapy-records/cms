@@ -19,7 +19,7 @@ const dateIsBefore = (a, b) => {
 };
 
 export class News extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const {
       hasFetchedArticles,
       onFetchNewsArticles

@@ -27,12 +27,14 @@ export class DropzoneImageUpload extends React.Component {
     }
   }
 
-  componentWillReceiveProps(props) {
-    if (props.existingImages) {
+  componentDidUpdate(prevProps) {
+    const { existingImages } = this.props;
+    if (prevProps.existingImages !== existingImages) {
       this.setState({
-        images: [...props.existingImages]
+        images: [...existingImages]
       });
     }
+
   }
 
   handleImageResponseUrl(url) {

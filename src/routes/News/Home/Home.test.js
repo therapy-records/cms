@@ -157,7 +157,7 @@ describe('(Component) News - Home', () => {
 
   describe('methods', () => {
 
-    describe('componentWillMount', () => {
+    describe('componentDidMount', () => {
       it('should call onFetchNewsArticles when props.hasFetchedArticles is FALSE', () => {
         const onFetchNewsArticlesSpy = sinon.spy();
         wrapper = shallow(<News {...props} />);
@@ -166,7 +166,7 @@ describe('(Component) News - Home', () => {
           hasFetchedArticles: false,
           onFetchNewsArticles: onFetchNewsArticlesSpy
         });
-        wrapper.instance().componentWillMount();
+        wrapper.instance().componentDidMount();
         expect(onFetchNewsArticlesSpy.calledOnce).to.eq(true);
       });
     });

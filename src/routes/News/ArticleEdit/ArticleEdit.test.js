@@ -70,7 +70,7 @@ describe('(Component) News - ArticleEdit', () => {
       });
     });
 
-    describe('componentWillMount', () => {
+    describe('componentDidMount', () => {
       it('should call onFetchArticle if there is no article', () => {
         const onFetchArticleSpy = sinon.spy();
         wrapper = shallow(
