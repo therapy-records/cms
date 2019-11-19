@@ -201,7 +201,7 @@ export class DropzoneImageUpload extends React.Component {
             {invalidDimensions.map((message, index) =>
               <li
                 key={index}
-                className={index === 0 && 'form-error'}
+                className={index === 0 ? 'form-error': ''}
               >
                 {message}
               </li>
