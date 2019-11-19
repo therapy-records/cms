@@ -9,28 +9,25 @@ import LoadingSpinner from '../../components/LoadingSpinner';
 import './styles.css';
 
 export class Home extends React.Component {
-  componentWillMount() {
-    if (this.props.isAuth === true) {
-      this.props.history.push({
-        pathname: '/dashboard'
-      });
-    }
-  }
-
   componentDidMount() {
-    if (this.props.isAuth === null ||
-      this.props.isAuth === false) {
+    if (!this.props.isAuth) {
       this.props.onAuthCheck();
     }
   }
 
-  componentWillReceiveProps(props) {
-    const fromPath = (props.location.state && props.location.state.from.pathname) || '/dashboard';
-    if (props.isAuth === true) {
-      props.history.push({
-        pathname: fromPath
-      });
+  componentDidUpdate(prevProps, nextProps) {
+    const { isAuth } = this.props;
+
+    if (prevProps.isAuth !== isAuth) {
+      const url = (this.props.location.state && this.props.location.state.from.pathname) || '/dashboard';
+      this.doRedirect(url);
     }
+  }
+
+  doRedirect(url) {
+    this.props.history.push({
+        pathname: url
+    });
   }
 
   render() {
@@ -44,8 +41,8 @@ export class Home extends React.Component {
     return (
       <div className='container home-container'>
         <div>
-
-          {(isAuth || isAuth === null) &&
+        
+        {(isAuth || isAuth === null) &&
             <div>
               <LoadingSpinner
                 active

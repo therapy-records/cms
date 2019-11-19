@@ -1,6 +1,6 @@
 import React from 'react'
 import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import Adapter from 'enzyme-adapter-react-16';
 import configureMockStore from 'redux-mock-store';
 import ConnectedHome, { Home } from './index'
 import LoadingSpinner from '../../components/LoadingSpinner';
@@ -94,79 +94,71 @@ describe('(Component) Home', () => {
       });
     });
 
-    describe('componentWillReceiveProps', () => {
-      describe('when there is location.state.from.pathname', () => {
-        it('should push from.pathname to props.history', () => {
-          props.location = {
-            state: {
-              from: { pathname: 'test' }
-            }
-          };
-          const historyPushSpy = sinon.spy();
-          props.history.pathname = 'test';
-          
+    describe('componentDidUpdate', () => {
+      let doRedirectSpy;
+      beforeEach(() => {
+        doRedirectSpy = sinon.spy();
+        wrapper = shallow(<Home {...props} />);
+        wrapper.instance().doRedirect = doRedirectSpy;
 
-          wrapper = shallow(<Home {...props} />);
+        const mockPrevProps = { isAuth: false };
+        wrapper.setProps(mockPrevProps);
+        wrapper.instance().componentDidUpdate(mockPrevProps);
+      });
+
+      describe('when props.isAuth is true', () => {
+
+        it('should call doRedirect', () => {
           wrapper.setProps({
-            location: {
-              state: {
-                from: { pathname: 'random-route' }
-              }
-            },
-            history: {
-              ...props.history,
-              push: historyPushSpy
-            }
+            isAuth: true
           });
-          expect(historyPushSpy).to.have.been.calledWith({
-            pathname: 'random-route'
-          });
+          expect(doRedirectSpy).to.have.been.called;
+          expect(doRedirectSpy).to.have.been.calledWith('/dashboard');
         });
 
-        describe('when isAuth is true', () => {
-          it('should not push from.pathname', () => {
-            const historyPushSpy = sinon.spy();
+        describe('when there is a previous pathname in props', () => {
+          it('should call doRedirect with previous pathname', () => {
+            const mockPathname = '/test';
             wrapper.setProps({
               isAuth: true,
               location: {
                 state: {
-                  from: { pathname: 'test' }
+                  from: { pathname: mockPathname }
                 }
-              },
-              history: {
-                ...props.history,
-                push: historyPushSpy
               }
             });
-            expect(historyPushSpy).to.have.been.calledOnce;
-            expect(historyPushSpy).to.have.been.calledWith({
-              pathname: 'test'
-            });
+            expect(doRedirectSpy).to.have.been.called;
+            expect(doRedirectSpy).to.have.been.calledWith(mockPathname);
           });
         });
-      });
 
-      describe('when there is no location.state.from.pathname', () => {
-        it('should push `/dashboard` to props.history', () => {
-          props.location = {};
-          wrapper = shallow(<Home {...props} />);
-          const historyPushSpy = sinon.spy();
-          wrapper.setProps({
-            isAuth: true,
-            history: {
-              ...props.history,
-              push: historyPushSpy
-            }
-          });
-          expect(historyPushSpy).to.have.been.calledOnce;
-          expect(historyPushSpy).to.have.been.calledWith({
-            pathname: '/dashboard'
-          });
-        });
       });
     });
 
+    describe('doRedirect', () => {
+      it('should call props.history.push with given param', () => {
+        const mockPathname = '/test';
+        const historyPushSpy = sinon.spy();
+        wrapper = shallow(
+          <Home
+            {...props}
+            history={{
+              ...props.history,
+              push: historyPushSpy
+            }}
+          />
+        );
+        wrapper.instance().doRedirect(mockPathname);
+        expect(historyPushSpy).to.have.been.calledOnce;
+        expect(historyPushSpy).to.have.been.calledWith({
+          pathname: mockPathname
+        });
+      });
+
+    });
+
   });
+
   describe('ConnectedArticle', () => {
     const mockStore = configureMockStore();
     const mockStoreState = {
@@ -194,7 +186,7 @@ describe('(Component) Home', () => {
     });
 
     it('should map state to props', () => {
-      renderedProps = wrapper.props();
+      renderedProps = wrapper.dive().props();
       expect(renderedProps.promiseLoading).to.eq(selectUiStateLoading(mockStoreState));
       expect(renderedProps.isAuth).to.eq(mockStoreState.user.isAuth);
       expect(renderedProps.authError).to.eq(mockStoreState.user.authError);
