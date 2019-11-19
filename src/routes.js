@@ -7,7 +7,6 @@ import StickyError from './components/StickyError/StickyError';
 import Sidebar from './components/Sidebar/Sidebar';
 import Home from './routes/Home';
 import Dashboard from './routes/Dashboard';
-import Press from './routes/Press';
 import NewsHome from './routes/News/Home';
 import NewsArticle from './routes/News/Article';
 import NewsArticleEdit from './routes/News/ArticleEdit';
@@ -16,6 +15,8 @@ import JournalismHome from './routes/Journalism/Home';
 import JournalismArticle from './routes/Journalism/Article';
 import JournalismArticleEdit from './routes/Journalism/ArticleEdit';
 import JournalismArticleCreate from './routes/Journalism/ArticleCreate';
+import Press from './routes/Press';
+import Collaborators from './routes/Collaborators';
 import { authCheck } from './actions/auth';
 import './index.css';
 
@@ -49,14 +50,6 @@ export class Router extends Component {
                 <ProtectedRoute
                   path="/dashboard"
                   component={Dashboard}
-                  isAuth={isAuth}
-                  onAuthCheck={onAuthCheck}
-                  exact
-                />
-
-                <ProtectedRoute
-                  path="/press"
-                  component={Press}
                   isAuth={isAuth}
                   onAuthCheck={onAuthCheck}
                   exact
@@ -121,6 +114,22 @@ export class Router extends Component {
                 <ProtectedRoute
                   path="/journalism/:id/edit"
                   component={JournalismArticleEdit}
+                  isAuth={isAuth}
+                  onAuthCheck={onAuthCheck}
+                  exact
+                />
+
+                <ProtectedRoute
+                  path="/press"
+                  component={Press}
+                  isAuth={isAuth}
+                  onAuthCheck={onAuthCheck}
+                  exact
+                />
+
+                <ProtectedRoute
+                  path="/collaborators"
+                  component={Collaborators}
                   isAuth={isAuth}
                   onAuthCheck={onAuthCheck}
                   exact

@@ -221,6 +221,19 @@ describe('(Component) Sidebar', () => {
       );
       expect(actual).to.eq(true);
     });
+
+    it('should render a link to collaborators', () => {
+      const actual = wrapper.containsMatchingElement(
+        <NavLink
+          to='/collaborators'
+          activeClassName='route--active'
+          onClick={wrapper.instance().handleOnClickNavItem}
+        >
+          🌈 Collaborators
+        </NavLink>
+      );
+      expect(actual).to.eq(true);
+    });
   });
 
   describe('logout button', () => {

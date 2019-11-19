@@ -1,22 +1,22 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Press from './index';
+import Collaborators from './index';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('(Component) Press - Home', () => {
+describe('(Component) Collaborators - Home', () => {
   let wrapper;
 
   beforeEach(() => {
     wrapper = shallow(
-      <Press />
+      <Collaborators />
     );
   })
 
   it('should render a page title', () => {
     const actual = wrapper.containsMatchingElement(
-      <h2>Press 📢</h2>
+      <h2>Collaborators 🌈</h2>
     );
     expect(actual).to.equal(true);
   });
