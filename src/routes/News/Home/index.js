@@ -11,8 +11,8 @@ import {
 } from '../../../selectors/news';
 import { selectUiStateLoading } from '../../../selectors/uiState';
 import LoadingSpinner from '../../../components/LoadingSpinner';
+import List from '../../../components/List';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
-import { getFirstImageInArticle } from '../../../utils/news';
 
 const dateIsBefore = (a, b) => {
   return new Date(b.createdAt) - new Date(a.createdAt)
@@ -46,42 +46,6 @@ export class News extends React.Component {
     this.props.onSetSelectedNewsArticle(postObj);
   }
 
-  renderArticle(article) {
-    return (
-      <li key={article._id} className='article-card'>
-        <div className='img-container'>
-          <img src={getFirstImageInArticle(article)} alt={article.title} />
-        </div>
-        <div>
-          <h3>
-            <Link
-              onClick={() => this.handleButtonClick(article)}
-              to={`/news/${article._id}`}
-            >{article.title}
-            </Link>
-          </h3>
-
-          <div className='btns-always-inline'>
-            <Link
-              onClick={() => this.handleButtonClick(article)}
-              to={`/news/${article._id}`}
-              className='btn btn-sm btn-view'
-            >
-              View
-            </Link>
-            <Link
-              onClick={() => this.handleButtonClick(article)}
-              to={`/news/${article._id}/edit`}
-              className='btn btn-sm btn-edit'
-            >
-              Edit
-            </Link>
-          </div>
-        </div>
-      </li>
-    );
-  }
-
   render() {
     const {
       promiseLoading,
@@ -113,12 +77,14 @@ export class News extends React.Component {
 
             {
               hasCombinedArticles ? (
-                <div>
-                  <ul className='cancel-margin'>
-                    {_combinedArticles.map((p) => this.renderArticle(p))}
-                  </ul>
-
-                </div>
+                <List
+                  data={articles}
+                  route='news'
+                  onItemClick={this.handleButtonClick}
+                  onViewButtonClick={this.handleButtonClick}
+                  onEditButtonClick={this.handleButtonClick}
+                  itemsHaveMultipleImages
+                />
               ) : (
                 <div>
                   <EmptyArticlesMessage type='news' />

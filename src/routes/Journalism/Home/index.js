@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
+// import moment from 'moment';
 import { fetchJournalismArticles } from '../../../actions/journalism';
 import { setSelectedJournalismArticle } from '../../../actions/journalismArticle';
 import { resetPromiseState } from '../../../actions/uiState';
@@ -13,8 +13,13 @@ import {
 import { selectUiStateLoading } from '../../../selectors/uiState';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
+import List from '../../../components/List';
 
 export class Journalism extends React.Component {
+  constructor() {
+    super();
+    this.handleButtonClick = this.handleButtonClick.bind(this);
+  }
   componentDidMount() {
     const {
       hasFetchedArticles,
@@ -32,46 +37,6 @@ export class Journalism extends React.Component {
 
   handleButtonClick(postObj) {
     this.props.onSetSelectedJournalismArticle(postObj);
-  }
-
-  renderArticle(p) {
-    return (
-      <li key={p._id} className='article-card'>
-        <div className='img-container'>
-          <img src={p.imageUrl} alt="" />
-        </div>
-        <div>
-          <div className='heading-with-btn'>
-            <h3>
-              <Link
-                onClick={() => this.handleButtonClick(p)}
-                to={`/journalism/${p._id}`}
-              >
-                <span>{p.title}</span>
-                {p.releaseDate && <p className='small-tab'>{moment(p.releaseDate).format('DD MMM YYYY')}</p>}
-              </Link>
-            </h3>
-          </div>
-        
-          <div className='btns-always-inline'>
-            <Link
-              onClick={() => this.handleButtonClick(p)}
-              to={`/journalism/${p._id}`}
-              className='btn btn-sm btn-view'
-            >
-              View
-            </Link>
-            <Link
-              onClick={() => this.handleButtonClick(p)}
-              to={`/journalism/${p._id}/edit`}
-              className='btn btn-sm btn-edit'
-            >
-              Edit
-            </Link>
-          </div>
-        </div>
-      </li>
-    );
   }
 
   render() {
@@ -103,12 +68,15 @@ export class Journalism extends React.Component {
             </div>
 
             {hasArticles
-              ? <div>
-                <ul className='cancel-margin'>
-                  {articles.map((p) => this.renderArticle(p))}
-                </ul>
-              </div>
-              : (
+              ? (
+                <List
+                  data={articles}
+                  route='journalism'
+                  onItemClick={this.handleButtonClick}
+                  onViewButtonClick={this.handleButtonClick}
+                  onEditButtonClick={this.handleButtonClick}
+                />
+              ) : (
                 <div>
                   <EmptyArticlesMessage type='journalism' />
                 </div>

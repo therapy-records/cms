@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_COLLABORATORS } from '../../../queries';
 import LoadingSpinner from '../../../components/LoadingSpinner';
+import List from '../../../components/List';
 import ErrorMessage from '../../../components/ErrorMessage';
 
 const Collaborators = () => {
@@ -14,7 +15,7 @@ const Collaborators = () => {
 
   return (
     <div className='container'>
-
+  
       <div className='heading-with-btns'>
         <div>
           <h2>Collaborators 🌈</h2>
@@ -31,26 +32,35 @@ const Collaborators = () => {
 
       {error && <ErrorMessage />}
 
-      {data && data.collaborators.map(collab => (
-        <li
-          key={collab._id}
-          className='article-card'
-        >
+      {(data && data.collaborators) && (
+        <List
+          data={data.collaborators}
+          route='collaborators'
+        />
+      )}
 
-          <div className='img-container'>
-            <img src={collab.avatarUrl} alt={collab.name} />
-          </div>
+      {/* 
+        {data && data.collaborators.map(collab => (
+          <li
+            key={collab._id}
+            className='article-card'
+          >
 
-          <div>
-            <h3><Link to={`/collaborators/${collab._id}`}>{collab.name}</Link></h3>
-            <div className='btns-always-inline'>
-              <Link to={`/collaborators/${collab._id}`} className='btn btn-sm btn-view'>View</Link>
-              <Link to={`/collaborators/${collab._id}/edit`} className='btn btn-sm btn-edit'>Edit</Link>
+            <div className='img-container'>
+              <img src={collab.avatarUrl} alt={collab.name} />
             </div>
-          </div>
 
-        </li>
-      ))}
+            <div>
+              <h3><Link to={`/collaborators/${collab._id}`}>{collab.name}</Link></h3>
+              <div className='btns-always-inline'>
+                <Link to={`/collaborators/${collab._id}`} className='btn btn-sm btn-view'>View</Link>
+                <Link to={`/collaborators/${collab._id}/edit`} className='btn btn-sm btn-edit'>Edit</Link>
+              </div>
+            </div>
+
+          </li>
+        ))}
+      */}
 
     </div>
   );

@@ -2,10 +2,10 @@ import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
 import configureMockStore from 'redux-mock-store';
 import ConnectedJournalism, { Journalism } from './index';
 import LoadingSpinner from '../../../components/LoadingSpinner';
+import List from '../../../components/List';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
 import {
   selectJournalismHasFetched,
@@ -61,97 +61,17 @@ describe('(Component) Journalism - Home', () => {
       expect(actual).to.equal(true);
     });
 
-    it('should render list of journalismArticles', () => {
-      const expectedArticle = (key) => {
-        const p = props.articles[key]; // eslint-disable-line
-        return (
-          <li key={p._id} className='article-card'>
-            <div className='img-container'>
-              <img src={p.imageUrl} />
-            </div>
-            <div>
-              <div className='heading-with-btn'>
-                <h3>
-                  <Link
-                    to={`/journalism/${p._id}`}
-                  >
-                    <span>{p.title}</span>
-                    {p.releaseDate && <p className='small-tab'>{moment(p.releaseDate).format('DD MMM YYYY')}</p>}
-                  </Link>
-                </h3>
-              </div>
-
-              <div className='btns-always-inline'>
-                <Link
-                  to={`/journalism/${p._id}`}
-                  className='btn btn-sm btn-view'
-                >
-                  View
-                </Link>
-                <Link
-                  to={`/journalism/${p._id}/edit`}
-                  className='btn btn-sm btn-edit'
-                >
-                  Edit
-                </Link>
-              </div>
-            </div>
-          </li>
-        )
-      };
-      const child0 = wrapper.containsMatchingElement(expectedArticle(0));
-      expect(child0).to.equal(true);
-      const child1 = wrapper.containsMatchingElement(expectedArticle(1));
-      expect(child1).to.equal(true);
-      const child2 = wrapper.containsMatchingElement(expectedArticle(2));
-      expect(child2).to.equal(true);
-    });
-
-    describe('article', () => {
-      describe('heading button', () => {
-        it('should call handleButtonClick', () => {
-          let _props = baseProps;
-          const handleButtonClickSpy = sinon.spy();
-          wrapper = shallow(<Journalism {..._props} />);
-          wrapper.instance().handleButtonClick = handleButtonClickSpy;
-          const lastArticle = wrapper.find('.article-card').last();
-          const button = lastArticle.find(Link).first();
-          button.simulate('click');
-          expect(handleButtonClickSpy).to.have.been.called;
-          const expectedCalledWith = mockJournalismArticles[mockJournalismArticles.length - 1];
-          expect(handleButtonClickSpy).to.have.been.calledWith(expectedCalledWith);
-        });
-      });
-
-      describe('view button', () => {
-        it('should call handleButtonClick', () => {
-          let _props = baseProps;
-          const handleButtonClickSpy = sinon.spy();
-          wrapper = shallow(<Journalism {..._props} />);
-          wrapper.instance().handleButtonClick = handleButtonClickSpy;
-          const lastArticle = wrapper.find('.article-card').last();
-          const viewButton = lastArticle.find('.btn-view');
-          viewButton.simulate('click');
-          expect(handleButtonClickSpy).to.have.been.called;
-          const expectedCalledWith = mockJournalismArticles[mockJournalismArticles.length - 1];
-          expect(handleButtonClickSpy).to.have.been.calledWith(expectedCalledWith);
-        });
-      });
-
-      describe('edit button', () => {
-        it('should call handleButtonClick', () => {
-          let _props = baseProps;
-          const handleButtonClickSpy = sinon.spy();
-          wrapper = shallow(<Journalism {..._props} />);
-          wrapper.instance().handleButtonClick = handleButtonClickSpy;
-          const lastArticle = wrapper.find('.article-card').last();
-          const editButton = lastArticle.find('.btn-edit');
-          editButton.simulate('click');
-          expect(handleButtonClickSpy).to.have.been.called;
-          const expectedCalledWith = mockJournalismArticles[mockJournalismArticles.length - 1];
-          expect(handleButtonClickSpy).to.have.been.calledWith(expectedCalledWith);
-        });
-      });
+    it('should render <List />', () => {
+      const actual = wrapper.containsMatchingElement(
+        <List
+          data={props.articles}
+          route='journalism'
+          onItemClick={wrapper.instance().handleButtonClick}
+          onViewButtonClick={wrapper.instance().handleButtonClick}
+          onEditButtonClick={wrapper.instance().handleButtonClick}
+        />
+      );
+      expect(actual).to.equal(true);
     });
 
     describe('when promiseLoading is false', () => {

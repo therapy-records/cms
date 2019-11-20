@@ -12,6 +12,7 @@ export const NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS = {
   height: 350
 };
 
+// TODO: refactor so it's not news/'article.sections' specific
 export const getFirstImageInArticle = (article) => {
   const { sections } = article;
   const sectionsWithImages = [];
