@@ -16,7 +16,7 @@ import JournalismArticle from './routes/Journalism/Article';
 import JournalismArticleEdit from './routes/Journalism/ArticleEdit';
 import JournalismArticleCreate from './routes/Journalism/ArticleCreate';
 import Press from './routes/Press';
-import Collaborators from './routes/Collaborators';
+import Collaborators from './routes/Collaborators/Home';
 import { authCheck } from './actions/auth';
 import './index.css';
 

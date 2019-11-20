@@ -20,11 +20,4 @@ describe('(Component) Collaborators - Home', () => {
     );
     expect(actual).to.equal(true);
   });
-
-  it('should render a coming soon message', () => {
-    const actual = wrapper.containsMatchingElement(
-      <p>Coming soon...</p>
-    );
-    expect(actual).to.equal(true);
-  });
 });
