@@ -6,7 +6,7 @@ export class ErrorComponent extends React.Component {
     return (
       <div>
         <h3>Oh no :(</h3>
-        <p>Sorry, we couldn{'\''}t find that page.</p>
+        <p>Sorry, something has gone wrong.</p>
         <br />
         <Link to='/'>Go home</Link>
 

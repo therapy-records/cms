@@ -20,4 +20,3 @@ ReactDOM.render(
   </ApolloProvider>,
   DOM_ROOT
 );
-
