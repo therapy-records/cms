@@ -116,6 +116,10 @@ button,
   }
 }
 
+.btn-xs {
+  font-size: .85em;
+}
+
 button[disabled] {
   opacity: .7;
   &:hover,
@@ -129,10 +133,6 @@ button[disabled] {
   width: 100%;
 }
 
-.btn-width-auto {
-  width: auto;
-}
-
 .btn + .btn {
   margin-bottom: 0;
   @media (min-width: $bp-xs) {
@@ -140,8 +140,12 @@ button[disabled] {
     margin-left: 1em;
   }
 }
-.btns-always-inline .btn + .btn {
-  margin-left: 1em;
+
+.btns-always-inline .btn {
+  width: auto;
+  + .btn {
+    margin-left: 1em;
+  }
 }
 
 .row-buttons button {

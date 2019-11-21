@@ -1,0 +1,29 @@
+@import 'styles/variables.scss';
+
+.list {
+  margin: 0;
+  > li {
+    list-style-type: none;
+  }
+  &.list-with-columns {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    @media(min-width: $bp-sm) {
+      margin: 0 -1em;
+      width: calc(100% + 2em);
+    }
+
+    > li {
+      width: 100%;
+      @media(min-width: $bp-sm) {
+        max-width: 50%;
+      }
+      @media(min-width: $bp-xlg) {
+        max-width: 33.333%;
+      }
+    }
+  }
+}

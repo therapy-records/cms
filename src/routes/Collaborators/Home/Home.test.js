@@ -6,8 +6,9 @@ import { BrowserRouter, Link } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
 import Collaborators from './index';
 import { GET_COLLABORATORS } from '../../../queries';
-import ErrorMessage from '../../../components/ErrorMessage';
 import LoadingSpinner from '../../../components/LoadingSpinner';
+import ErrorMessage from '../../../components/ErrorMessage';
+import List from '../../../components/List';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -50,7 +51,20 @@ describe('(Component) Collaborators - Home', () => {
 
     it('should render a link to create', () => {
       const actual = wrapper.containsMatchingElement(
-        <Link to='journalism/create'>Create</Link>
+        <Link to='collaborators/create'>Create</Link>
+      );
+      expect(actual).to.equal(true);
+    });
+
+    it('should render <List />', async() => {
+      await wait(0); // wait for response
+      wrapper.update();
+      const actual = wrapper.containsMatchingElement(
+        <List
+          data={mocks[0].result.data.collaborators}
+          route='collaborators'
+          columns
+        />
       );
       expect(actual).to.equal(true);
     });
