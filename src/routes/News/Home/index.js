@@ -19,6 +19,11 @@ const dateIsBefore = (a, b) => {
 };
 
 export class News extends React.Component {
+  constructor() {
+    super();
+    this.handleButtonClick = this.handleButtonClick.bind(this);
+  }
+
   componentDidMount() {
     const {
       hasFetchedArticles,

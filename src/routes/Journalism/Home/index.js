@@ -20,6 +20,7 @@ export class Journalism extends React.Component {
     super();
     this.handleButtonClick = this.handleButtonClick.bind(this);
   }
+
   componentDidMount() {
     const {
       hasFetchedArticles,
