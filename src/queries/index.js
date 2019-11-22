@@ -9,3 +9,32 @@ export const GET_COLLABORATORS = gql`
     }
   }
 `;
+
+export const GET_COLLABORATOR = gql`
+  query ($id: ID!){
+      collaborator(_id: $id) {
+        name,
+        about,
+        avatarUrl,
+        collabOn,
+        urls {
+          website,
+          facebook,
+          instagram,
+          twitter,
+          soundcloud,
+          bio,
+          email,
+          phone,
+          other {
+            url,
+            title
+          }
+        }
+      }
+  }
+`;
+
+
+
+

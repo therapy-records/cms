@@ -17,6 +17,7 @@ import JournalismArticleEdit from './routes/Journalism/ArticleEdit';
 import JournalismArticleCreate from './routes/Journalism/ArticleCreate';
 import Press from './routes/Press';
 import Collaborators from './routes/Collaborators/Home';
+import CollaboratorView from './routes/Collaborators/View';
 import { authCheck } from './actions/auth';
 import './index.css';
 
@@ -130,6 +131,14 @@ export class Router extends Component {
                 <ProtectedRoute
                   path="/collaborators"
                   component={Collaborators}
+                  isAuth={isAuth}
+                  onAuthCheck={onAuthCheck}
+                  exact
+                />
+
+                <ProtectedRoute
+                  path="/collaborators/:id"
+                  component={CollaboratorView}
                   isAuth={isAuth}
                   onAuthCheck={onAuthCheck}
                   exact
