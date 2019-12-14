@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import configureMockStore from 'redux-mock-store';
@@ -30,11 +29,16 @@ describe('(Component) Journalism - Article', () => {
       onDeleteArticle: sinon.spy(),
       onDestroyArticle: sinon.spy(),
       onFetchArticle: sinon.spy(),
-      params: { id: 123 },
+      onSetSelectedJournalismArticle: sinon.spy(),
       article: mockArticle,
       match: {
         params: {
           id: 1234
+        }
+      },
+      history: {
+        location: {
+          pathname: '/test/1234'
         }
       },
       promiseLoading: false
@@ -42,21 +46,25 @@ describe('(Component) Journalism - Article', () => {
   props = baseProps;
 
   describe('methods', () => {
-    describe('componentWillUnmount', () => {
-      it('should call resetPromiseState', () => {
-        props.resetPromiseState = sinon.spy();
+
+    describe('componentDidUpdate', () => {
+      beforeEach(() => {
+        props = baseProps;
+        props.article = {};
+        props.onFetchArticle = sinon.spy();
         wrapper = shallow(<Article {...props} />);
-        wrapper.instance().componentWillUnmount();
-        expect(props.resetPromiseState).to.have.been.called;
       });
 
-      it('should call onDestroyArticle', () => {
-        props.onDestroyArticle = sinon.spy();
+      it('should call onSetSelectedJournalismArticle', () => {
+        props = baseProps;
+        props.article = { _id: 456 };
+        props.onSetSelectedJournalismArticle = sinon.spy();
         wrapper = shallow(<Article {...props} />);
-        wrapper.instance().componentWillUnmount();
-        expect(props.onDestroyArticle).to.have.been.called;
+        wrapper.instance().componentDidUpdate();
+        expect(props.onSetSelectedJournalismArticle.calledOnce).to.eq(true);
       });
     });
+      
     describe('componentDidMount', () => {
       describe('when an article does not exist / article._id is undefined', () => {
         beforeEach(() => {
@@ -74,7 +82,6 @@ describe('(Component) Journalism - Article', () => {
         it('should call onFetchArticle', () => {
           props = baseProps;
           props.article = { _id: 456 };
-          props.params = { id: 123 };
           props.onFetchArticle = sinon.spy();
           wrapper = shallow(<Article {...props} />);
           expect(props.onFetchArticle.calledOnce).to.eq(true);
@@ -85,10 +92,35 @@ describe('(Component) Journalism - Article', () => {
         it('should call onFetchArticle', () => {
           props = baseProps;
           props.article = { _id: 456 };
-          props.params = {};
           props.onFetchArticle = sinon.spy();
           wrapper = shallow(<Article {...props} />);
           expect(props.onFetchArticle.calledOnce).to.eq(true);
+        });
+      });
+    });
+
+    describe('componentWillUnmount', () => {
+      it('should call resetPromiseState', () => {
+        props.resetPromiseState = sinon.spy();
+        wrapper = shallow(<Article {...props} />);
+        wrapper.instance().componentWillUnmount();
+        expect(props.resetPromiseState).to.have.been.called;
+      });
+
+      it('should call onDestroyArticle', () => {
+        props.onDestroyArticle = sinon.spy();
+        wrapper = shallow(<Article {...props} />);
+        wrapper.instance().componentWillUnmount();
+        expect(props.onDestroyArticle).to.have.been.called;
+      });
+
+      describe('when location.pathname includes `edit`', () => {
+        it('should NOT call onDestroyArticle', () => {
+          props.onDestroyArticle = sinon.spy();
+          props.history.location.pathname = '/test/1234/edit'
+          wrapper = shallow(<Article {...props} />);
+          wrapper.instance().componentWillUnmount();
+          expect(props.onDestroyArticle).to.not.have.been.called;
         });
       });
     });
@@ -162,7 +194,6 @@ describe('(Component) Journalism - Article', () => {
     it('should call onFetchArticle', () => {
       props = baseProps;
       props.article = { _id: 456 };
-      props.params = { id: 123 };
       props.onFetchArticle = sinon.spy();
       wrapper = shallow(<Article {...props} />);
       expect(props.onFetchArticle.calledOnce).to.eq(true);
@@ -173,7 +204,6 @@ describe('(Component) Journalism - Article', () => {
     it('should call onFetchArticle', () => {
       props = baseProps;
       props.article = { _id: 456 };
-      props.params = {};
       props.onFetchArticle = sinon.spy();
       wrapper = shallow(<Article {...props} />);
       expect(props.onFetchArticle.calledOnce).to.eq(true);

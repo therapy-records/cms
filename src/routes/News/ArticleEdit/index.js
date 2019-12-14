@@ -28,7 +28,10 @@ export class ArticleEdit extends React.Component {
 
   componentWillUnmount() {
     this.props.resetPromiseState();
-    this.props.onDestroyArticle();
+    const { match } = this.props;
+    if (!match.params.id) {
+      this.props.onDestroyArticle();
+    }
     this.props.onResetEditSuccess();
   }
 

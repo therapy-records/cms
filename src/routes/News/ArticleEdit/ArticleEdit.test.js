@@ -49,24 +49,19 @@ describe('(Component) News - ArticleEdit', () => {
         expect(resetPromiseStateSpy).to.have.been.calledOnce;
       });
 
-      it('should call onDestroyArticle', () => {
-        const onDestroyArticleSpy = sinon.spy();
-        wrapper.setProps({
-          onDestroyArticle: onDestroyArticleSpy
+      describe('when there is no props.match.params.id', () => {
+        it('should call onDestroyArticle', () => {
+          const onDestroyArticleSpy = sinon.spy();
+          wrapper.setProps({
+            onDestroyArticle: onDestroyArticleSpy,
+            match: {
+              params: {}
+            }
+          });
+          wrapper.unmount();
+          expect(onDestroyArticleSpy).to.have.been.called;
+          expect(onDestroyArticleSpy).to.have.been.calledOnce;
         });
-        wrapper.unmount();
-        expect(onDestroyArticleSpy).to.have.been.called;
-        expect(onDestroyArticleSpy).to.have.been.calledOnce;
-      });
-
-      it('should call onResetEditSuccess', () => {
-        const onResetEditSuccessSpy = sinon.spy();
-        wrapper.setProps({
-          onResetEditSuccess: onResetEditSuccessSpy
-        });
-        wrapper.unmount();
-        expect(onResetEditSuccessSpy).to.have.been.called;
-        expect(onResetEditSuccessSpy).to.have.been.calledOnce;
       });
     });
 

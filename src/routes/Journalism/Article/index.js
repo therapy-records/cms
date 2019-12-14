@@ -5,7 +5,8 @@ import { resetPromiseState } from '../../../actions/uiState';
 import {
   deleteJournalismArticle,
   fetchSingleJournalismArticle,
-  destroySelectedJournalismArticle
+  destroySelectedJournalismArticle,
+  setSelectedJournalismArticle
 } from '../../../actions/journalismArticle';
 import {
   selectUiStateLoading,
@@ -31,9 +32,19 @@ export class Article extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    const { article } = this.props;
+    if (article && article._id) {
+      this.props.onSetSelectedJournalismArticle(article);
+    }
+  }
+
   componentWillUnmount() {
     this.props.resetPromiseState();
-    this.props.onDestroyArticle();
+    const { pathname } = this.props.history.location;
+    if (!pathname.includes('edit')) {
+      this.props.onDestroyArticle();
+    }
   }
 
   renderHtml(data) {
@@ -111,7 +122,7 @@ Article.propTypes = {
   onFetchArticle: PropTypes.func.isRequired,
   resetPromiseState: PropTypes.func.isRequired,
   onDestroyArticle: PropTypes.func.isRequired,
-  params: PropTypes.object,
+  onSetSelectedJournalismArticle: PropTypes.func.isRequired,
   match: PropTypes.object,
   history: PropTypes.object
 }
@@ -120,8 +131,9 @@ const mapDispatchToProps = {
   onFetchArticle: (id) => fetchSingleJournalismArticle(id),
   onDeleteArticle: (id) => deleteJournalismArticle(id),
   resetPromiseState: () => resetPromiseState(),
-  onDestroyArticle: () => destroySelectedJournalismArticle()
-}
+  onDestroyArticle: () => destroySelectedJournalismArticle(),
+  onSetSelectedJournalismArticle: (article) => setSelectedJournalismArticle(article)
+};
 
 const mapStateToProps = (state, props) => ({
   article: selectSelectedJournalismArticle(state),

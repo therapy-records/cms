@@ -43,8 +43,8 @@ describe('(Component) News - Article', () => {
       resetPromiseState: sinon.spy(),
       onDestroyArticle: sinon.spy(),
       onFetchArticle: sinon.spy(),
+      onSetSelectedNewsArticle: sinon.spy(),
       promiseLoading: false,
-      params: { id: 123 },
       history: {
         location: {
           pathname: 'news/123456789'
@@ -64,7 +64,7 @@ describe('(Component) News - Article', () => {
   });
 
   describe('methods', () => {
-    describe('componentWillUnmount', () => {
+    describe('componentDidUpdate', () => {
       const resetPromiseStateSpy = sinon.spy();
       const onDestroyArticleSpy = sinon.spy();
       beforeEach(() => {
@@ -74,16 +74,49 @@ describe('(Component) News - Article', () => {
         });
       });
 
+      // it('should call onDestroyArticle', () => {
+      //   wrapper = shallow(<Article {...props} />);
+      //   wrapper.unmount();
+      //   expect(onDestroyArticleSpy.calledOnce).to.eq(true);
+      // });
+
+      it('should call onSetSelectedNewsArticle', () => {
+        props = baseProps;
+        props.article = { _id: 456 };
+        props.onSetSelectedNewsArticle = sinon.spy();
+        wrapper = shallow(<Article {...props} />);
+        wrapper.instance().componentDidUpdate();
+        expect(props.onSetSelectedNewsArticle.calledOnce).to.eq(true);
+      });
+
+    });
+
+    describe('componentWillUnmount', () => {
+
       it('should call resetPromiseState', () => {
-        wrapper.unmount();
-        expect(resetPromiseStateSpy.calledOnce).to.eq(true);
+        props.resetPromiseState = sinon.spy();
+        wrapper = shallow(<Article {...props} />);
+        wrapper.instance().componentWillUnmount();
+        expect(props.resetPromiseState).to.have.been.called;
       });
 
       it('should call onDestroyArticle', () => {
+        props.onDestroyArticle = sinon.spy();
         wrapper = shallow(<Article {...props} />);
-        wrapper.unmount();
-        expect(onDestroyArticleSpy.calledOnce).to.eq(true);
+        wrapper.instance().componentWillUnmount();
+        expect(props.onDestroyArticle).to.have.been.called;
       });
+
+      describe('when location.pathname includes `edit`', () => {
+        it('should NOT call onDestroyArticle', () => {
+          props.onDestroyArticle = sinon.spy();
+          props.history.location.pathname = '/test/1234/edit'
+          wrapper = shallow(<Article {...props} />);
+          wrapper.instance().componentWillUnmount();
+          expect(props.onDestroyArticle).to.not.have.been.called;
+        });
+      });
+
     });
 
     describe('renderHtml', () => {
@@ -168,7 +201,6 @@ describe('(Component) News - Article', () => {
       it('should call onFetchArticle', () => {
         props = baseProps;
         props.article = { _id: 456 };
-        props.params = { id: 123 };
         props.onFetchArticle = sinon.spy();
         wrapper = shallow(<Article {...props} />);
         expect(props.onFetchArticle.calledOnce).to.eq(true);
@@ -179,7 +211,6 @@ describe('(Component) News - Article', () => {
       it('should call onFetchArticle', () => {
         props = baseProps;
         props.article = { _id: 456 };
-        props.params = {};
         props.onFetchArticle = sinon.spy();
         wrapper = shallow(<Article {...props} />);
         expect(props.onFetchArticle.calledOnce).to.eq(true);
