@@ -132,11 +132,27 @@ export class Sidebar extends React.PureComponent {
           </NavLink>
 
           <NavLink
+            to='/gigs'
+            activeClassName='route--active'
+            onClick={this.handleOnClickNavItem}
+          >
+            🗓️ Gigs
+          </NavLink>
+
+          <NavLink
             to='/collaborators'
             activeClassName='route--active'
             onClick={this.handleOnClickNavItem}
           >
             🌈 Collaborators
+          </NavLink>
+
+          <NavLink
+            to='/videos'
+            activeClassName='route--active'
+            onClick={this.handleOnClickNavItem}
+          >
+            📽️ Videos
           </NavLink>
 
           <button onClick={() => { onLogout(); }} className='btn-logout'>📪 Log out</button>
