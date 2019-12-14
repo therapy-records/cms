@@ -8,30 +8,40 @@ CMS UI to manage artist albums, news, bookings, releases and more
 - yarn `1.6.0`or greater
 - [cms-api](https://github.com/therapy-records/cms-api) cloned locally
 
-
 ## Available scripts
 
 ### Run the app locally
+
 ```sh
 yarn develop
 ```
 
 ### Unit tests
+
 ```sh
 yarn test
 ```
 
 ### Test coverage
+
 ```sh
 yarn test-coverage
 ```
 
+### Linting
+
+```sh
+yarn lint
+```
+
 ### Build locally for production
+
 ```sh
 yarn build
 ```
 
 ### Run locally in production mode
+
 ```sh
 yarn start
 ```
