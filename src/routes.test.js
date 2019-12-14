@@ -19,7 +19,9 @@ import JournalismArticle from './routes/Journalism/Article';
 import JournalismArticleEdit from './routes/Journalism/ArticleEdit';
 import JournalismArticleCreate from './routes/Journalism/ArticleCreate';
 import Press from './routes/Press';
+import Gigs from './routes/Gigs';
 import Collaborators from './routes/Collaborators';
+import Videos from './routes/Videos';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -200,11 +202,37 @@ describe('Router', () => {
     expect(actual).to.equal(true);
   });
 
+  it('should render gigs route', () => {
+    const actual = wrapper.containsMatchingElement(
+      <ProtectedRoute
+        path="/gigs"
+        component={Gigs}
+        isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
+        exact
+      />
+    );
+    expect(actual).to.equal(true);
+  });
+
   it('should render collaborators route', () => {
     const actual = wrapper.containsMatchingElement(
       <ProtectedRoute
         path="/collaborators"
         component={Collaborators}
+        isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
+        exact
+      />
+    );
+    expect(actual).to.equal(true);
+  });
+
+  it('should render videos route', () => {
+    const actual = wrapper.containsMatchingElement(
+      <ProtectedRoute
+        path="/videos"
+        component={Videos}
         isAuth={props.isAuth}
         onAuthCheck={props.onAuthCheck}
         exact

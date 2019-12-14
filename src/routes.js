@@ -16,7 +16,9 @@ import JournalismArticle from './routes/Journalism/Article';
 import JournalismArticleEdit from './routes/Journalism/ArticleEdit';
 import JournalismArticleCreate from './routes/Journalism/ArticleCreate';
 import Press from './routes/Press';
+import Gigs from './routes/Gigs';
 import Collaborators from './routes/Collaborators';
+import Videos from './routes/Videos';
 import { authCheck } from './actions/auth';
 import './index.css';
 
@@ -128,8 +130,24 @@ export class Router extends Component {
                 />
 
                 <ProtectedRoute
+                  path="/gigs"
+                  component={Gigs}
+                  isAuth={isAuth}
+                  onAuthCheck={onAuthCheck}
+                  exact
+                />
+
+                <ProtectedRoute
                   path="/collaborators"
                   component={Collaborators}
+                  isAuth={isAuth}
+                  onAuthCheck={onAuthCheck}
+                  exact
+                />
+
+                <ProtectedRoute
+                  path="/videos"
+                  component={Videos}
                   isAuth={isAuth}
                   onAuthCheck={onAuthCheck}
                   exact
