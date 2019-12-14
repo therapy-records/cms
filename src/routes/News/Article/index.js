@@ -11,7 +11,8 @@ import {
 import {
   deleteNewsArticle,
   fetchSingleNewsArticle,
-  destroySelectedNewsArticle
+  destroySelectedNewsArticle,
+  setSelectedNewsArticle
 } from '../../../actions/newsArticle';
 import ArticleHeader from '../../../components/ArticleHeader';
 import LoadingSpinner from '../../../components/LoadingSpinner';
@@ -31,9 +32,19 @@ export class Article extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    const { article } = this.props;
+    if (article && article._id) {
+      this.props.onSetSelectedNewsArticle(article);
+    }
+  }
+
   componentWillUnmount() {
     this.props.resetPromiseState();
-    this.props.onDestroyArticle();
+    const { pathname } = this.props.history.location;
+    if (!pathname.includes('edit')) {
+      this.props.onDestroyArticle();
+    }
   }
 
   renderHtml(data) {
@@ -144,6 +155,7 @@ Article.propTypes = {
   onFetchArticle: PropTypes.func.isRequired,
   resetPromiseState: PropTypes.func.isRequired,
   onDestroyArticle: PropTypes.func.isRequired,
+  onSetSelectedNewsArticle: PropTypes.func.isRequired,
   params: PropTypes.object
 }
 
@@ -152,7 +164,8 @@ const mapDispatchToProps = {
   onFetchNewsArticles: () => fetchNewsArticles(),
   onDeleteArticle: (id) => deleteNewsArticle(id),
   resetPromiseState: () => resetPromiseState(),
-  onDestroyArticle: () => destroySelectedNewsArticle()
+  onDestroyArticle: () => destroySelectedNewsArticle(),
+  onSetSelectedNewsArticle: (article) => setSelectedNewsArticle(article)
 }
 
 const mapStateToProps = (state, props) => ({
