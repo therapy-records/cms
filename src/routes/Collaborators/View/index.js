@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { GET_COLLABORATOR } from '../../../queries';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import ErrorMessage from '../../../components/ErrorMessage';
+import Collaborator from './Collaborator';
 import './CollaboratorsView.css';
 
 const CollaboratorView = ({match}) => {
@@ -19,10 +20,6 @@ const CollaboratorView = ({match}) => {
       id: collabId
     }
   });
-
-  const renderHtml = data => {
-    return { __html: data };
-  };
 
   return (
     <article className='container'>
@@ -48,7 +45,7 @@ const CollaboratorView = ({match}) => {
               </button>
 
               <Link
-                to='/test'
+                to={`/collaborators/${collabId}/edit`}
                 className='btn btn-edit'
               >Edit
               </Link>
@@ -56,68 +53,7 @@ const CollaboratorView = ({match}) => {
             
           </div>
 
-          <div>
-            <img
-              src={data.collaborator.avatarUrl}
-              alt={data.collaborator.name}
-            />
-
-            <div dangerouslySetInnerHTML={renderHtml(data.collaborator.about)} />
-
-            {(data.collaborator.collabOn && data.collaborator.collabOn.length > 0) && <p>Collaborations: {data.collaborator.collabOn}</p>}
-
-            {data.collaborator.urls && (
-              <ul>
-                {Object.keys(data.collaborator.urls).map(urlKey => {
-                  const urlValue = data.collaborator.urls[urlKey];
-
-                  if (urlValue && urlKey !== 'other') {
-                    return (
-                      <li key={urlKey}>
-                        
-                        <span>{urlKey}:&nbsp;</span>
-
-                        {urlKey === 'phone' && (
-                          <span>{urlValue}</span>
-                        )}
-
-                        {urlKey !== 'phone' && (
-                          <a
-                            href={urlValue}
-                            target='_blank'
-                          >
-                            {urlValue}
-                          </a>
-                        )}
-
-                      </li>
-                    )
-                  } else if (urlKey === 'other' && urlValue.length > 0) {
-                    return (
-                      <li key={urlKey}>
-                        <ul className="collaborator-urls-other">
-                          {urlValue.map((urlObj) => (
-                            <li key={urlObj.title}>
-                              {urlObj.title}:&nbsp;
-                              <a
-                                href={urlObj.url}
-                                target='_blank'
-                              >
-                                {urlObj.url}
-                              </a>
-                            </li>
-                          ))}
-                        </ul>
-                      </li>
-                    )
-                  }
-
-                  return null;
-                })}
-              </ul>
-            )}
-
-          </div>
+          <Collaborator {...data.collaborator} />
 
         </div>
       )}

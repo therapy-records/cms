@@ -8,6 +8,7 @@ import { GET_COLLABORATOR } from '../../../queries';
 import CollaboratorView from './index';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import ErrorMessage from '../../../components/ErrorMessage';
+import Collaborator from './Collaborator';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -20,19 +21,18 @@ let mocks = [
     result: {
       data: {
         collaborator: {
-          _id: 'test',
           name: 'test',
           about: '<p>test</p>',
           avatarUrl: 'test.com',
           urls: [],
-          collabOn: 'test' 
+          collabOn: []
         }
       }
     }
   }
 ];
 
-describe('(Component) CollaboratorView - Home', () => {
+describe('(Component) CollaboratorView', () => {
   let wrapper,
       props = {
         match: {
@@ -71,33 +71,20 @@ describe('(Component) CollaboratorView - Home', () => {
       expect(actual).to.equal(true);
     });
 
-    it('should render a Link to delete', async() => {
+    it('should render a Link to edit', async() => {
       await wait(0); // wait for response
       wrapper.update();
       const actual = wrapper.containsMatchingElement(
-        <Link to='/test'>Edit</Link>
+        <Link to={`/collaborators/${props.match.params.id}/edit`}>Edit</Link>
       );
       expect(actual).to.equal(true);
     });
 
-    it('should render an image', async() => {
+    it('should render <Collaborator />', async() => {
       await wait(0); // wait for response
       wrapper.update();
       const actual = wrapper.containsMatchingElement(
-        <img
-          src={mocks[0].result.data.collaborator.avatarUrl}
-          alt={mocks[0].result.data.collaborator.name}
-        />
-      );
-      expect(actual).to.equal(true);
-    });
-
-    it('should render about html', async() => {
-      await wait(0); // wait for response
-      wrapper.update();
-      console.log('YOOOO \n', wrapper.debug());
-      const actual = wrapper.containsMatchingElement(
-        <div dangerouslySetInnerHTML={{__html: mocks[0].result.data.collaborator.about}} />
+        <Collaborator {...mocks[0].result.data.collaborator}/>
       );
       expect(actual).to.equal(true);
     });
