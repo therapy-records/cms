@@ -35,6 +35,16 @@ export const GET_COLLABORATOR = gql`
   }
 `;
 
-
-
-
+export const GET_STATS = gql`
+  {
+    news {
+      title
+    },
+    journalism {
+      title
+    },
+    collaborators {
+      name
+    }
+  }
+`;

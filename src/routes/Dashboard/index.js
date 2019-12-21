@@ -9,33 +9,34 @@ import { selectNewsArticles } from '../../selectors/news';
 import { selectUiStateLoading } from '../../selectors/uiState';
 import { selectJournalismArticles } from '../../selectors/journalism';
 import LoadingSpinner from '../../components/LoadingSpinner';
+import Stats from './components/Stats';
 import './style.css';
 
 export class Dashboard extends React.Component {
-  componentWillUnmount() {
-    this.props.resetPromiseState();
-  }
+  // componentWillUnmount() {
+  //   this.props.resetPromiseState();
+  // }
 
-  componentDidMount() {
-    const {
-      newsArticles,
-      journalismArticles,
-      onFetchNewsArticles,
-      onFetchJournalismArticles
-    } = this.props;
-    if (newsArticles === null) {
-      onFetchNewsArticles();
-    }
+  // componentDidMount() {
+  //   const {
+  //     newsArticles,
+  //     journalismArticles,
+  //     onFetchNewsArticles,
+  //     onFetchJournalismArticles
+  //   } = this.props;
+  //   if (newsArticles === null) {
+  //     onFetchNewsArticles();
+  //   }
 
-    if (journalismArticles === null) {
-      onFetchJournalismArticles();
-    }
-  }
+  //   if (journalismArticles === null) {
+  //     onFetchJournalismArticles();
+  //   }
+  // }
 
   render() {
     const {
-      newsArticles,
-      journalismArticles,
+      // newsArticles,
+      // journalismArticles,
       promiseLoading
     } = this.props;
 
@@ -52,13 +53,7 @@ export class Dashboard extends React.Component {
           <Link to='journalism/create' className='btn'>Create Journalism</Link>
         </div>
 
-        <h3>Stats</h3>
-        {(newsArticles || journalismArticles) &&
-          <ul>
-            {newsArticles && <li>{newsArticles.length} News articles</li>}
-            {journalismArticles && <li>{journalismArticles.length} Journalism articles</li>}
-          </ul>
-        }
+        <Stats />
       </div>
     )
   }
