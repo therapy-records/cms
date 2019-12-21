@@ -22,7 +22,7 @@ let mocks = [
         collaborator: {
           _id: 'test',
           name: 'test',
-          about: 'test',
+          about: '<p>test</p>',
           avatarUrl: 'test.com',
           urls: [],
           collabOn: 'test' 
@@ -76,6 +76,28 @@ describe('(Component) CollaboratorView - Home', () => {
       wrapper.update();
       const actual = wrapper.containsMatchingElement(
         <Link to='/test'>Edit</Link>
+      );
+      expect(actual).to.equal(true);
+    });
+
+    it('should render an image', async() => {
+      await wait(0); // wait for response
+      wrapper.update();
+      const actual = wrapper.containsMatchingElement(
+        <img
+          src={mocks[0].result.data.collaborator.avatarUrl}
+          alt={mocks[0].result.data.collaborator.name}
+        />
+      );
+      expect(actual).to.equal(true);
+    });
+
+    it('should render about html', async() => {
+      await wait(0); // wait for response
+      wrapper.update();
+      console.log('YOOOO \n', wrapper.debug());
+      const actual = wrapper.containsMatchingElement(
+        <div dangerouslySetInnerHTML={{__html: mocks[0].result.data.collaborator.about}} />
       );
       expect(actual).to.equal(true);
     });

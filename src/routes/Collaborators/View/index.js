@@ -10,8 +10,6 @@ import './CollaboratorsView.css';
 const CollaboratorView = ({match}) => {
   const { id: collabId } = match.params;
 
-  console.log('collab id: ', collabId);
-
   const {
     loading,
     error,
@@ -21,6 +19,10 @@ const CollaboratorView = ({match}) => {
       id: collabId
     }
   });
+
+  const renderHtml = data => {
+    return { __html: data };
+  };
 
   return (
     <article className='container'>
@@ -60,19 +62,14 @@ const CollaboratorView = ({match}) => {
               alt={data.collaborator.name}
             />
 
-            <p>{data.collaborator.about}</p>
+            <div dangerouslySetInnerHTML={renderHtml(data.collaborator.about)} />
 
             {(data.collaborator.collabOn && data.collaborator.collabOn.length > 0) && <p>Collaborations: {data.collaborator.collabOn}</p>}
-
-
-            {/* TODO: urls.other.map */}
 
             {data.collaborator.urls && (
               <ul>
                 {Object.keys(data.collaborator.urls).map(urlKey => {
                   const urlValue = data.collaborator.urls[urlKey];
-                  console.log('urlkey: ', urlKey);
-                  console.log('urlValue: ', urlValue);
 
                   if (urlValue && urlKey !== 'other') {
                     return (
@@ -84,7 +81,7 @@ const CollaboratorView = ({match}) => {
                           <span>{urlValue}</span>
                         )}
 
-                        {(urlKey !== 'phone' && urlKey !== 'other') && (
+                        {urlKey !== 'phone' && (
                           <a
                             href={urlValue}
                             target='_blank'
