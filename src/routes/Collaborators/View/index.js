@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { GET_COLLABORATOR } from '../../../queries';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import ErrorMessage from '../../../components/ErrorMessage';
+import './CollaboratorsView.css';
 
 const CollaboratorView = ({match}) => {
   const { id: collabId } = match.params;
@@ -61,7 +62,7 @@ const CollaboratorView = ({match}) => {
 
             <p>{data.collaborator.about}</p>
 
-            {data.collaborator.collabOn && <p>collab on: {data.collaborator.collabOn}</p>}
+            {(data.collaborator.collabOn && data.collaborator.collabOn.length > 0) && <p>Collaborations: {data.collaborator.collabOn}</p>}
 
 
             {/* TODO: urls.other.map */}
@@ -70,19 +71,50 @@ const CollaboratorView = ({match}) => {
               <ul>
                 {Object.keys(data.collaborator.urls).map(urlKey => {
                   const urlValue = data.collaborator.urls[urlKey];
-                  if (urlValue) {
+                  console.log('urlkey: ', urlKey);
+                  console.log('urlValue: ', urlValue);
+
+                  if (urlValue && urlKey !== 'other') {
                     return (
                       <li key={urlKey}>
-                        {urlKey}:&nbsp;
-                        <a
-                          href={urlValue}
-                          target='_blank'
-                        >
-                          {urlValue}
-                        </a>
+                        
+                        <span>{urlKey}:&nbsp;</span>
+
+                        {urlKey === 'phone' && (
+                          <span>{urlValue}</span>
+                        )}
+
+                        {(urlKey !== 'phone' && urlKey !== 'other') && (
+                          <a
+                            href={urlValue}
+                            target='_blank'
+                          >
+                            {urlValue}
+                          </a>
+                        )}
+
+                      </li>
+                    )
+                  } else if (urlKey === 'other' && urlValue.length > 0) {
+                    return (
+                      <li key={urlKey}>
+                        <ul className="collaborator-urls-other">
+                          {urlValue.map((urlObj) => (
+                            <li key={urlObj.title}>
+                              {urlObj.title}:&nbsp;
+                              <a
+                                href={urlObj.url}
+                                target='_blank'
+                              >
+                                {urlObj.url}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
                       </li>
                     )
                   }
+
                   return null;
                 })}
               </ul>
