@@ -1,14 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { fetchNewsArticles } from '../../actions/news';
-import { fetchJournalismArticles } from '../../actions/journalism';
-import { resetPromiseState } from '../../actions/uiState';
-import { selectNewsArticles } from '../../selectors/news';
-import { selectUiStateLoading } from '../../selectors/uiState';
-import { selectJournalismArticles } from '../../selectors/journalism';
-import LoadingSpinner from '../../components/LoadingSpinner';
 import Stats from './components/Stats';
 import './style.css';
 
@@ -34,18 +25,9 @@ export class Dashboard extends React.Component {
   // }
 
   render() {
-    const {
-      // newsArticles,
-      // journalismArticles,
-      promiseLoading
-    } = this.props;
 
     return (
       <div className='container dashboard'>
-        <LoadingSpinner
-          active={promiseLoading}
-          fullScreen
-        />
 
         <h2>Welcome back <span className='wave'>👋</span></h2>
         <div className='ctas'>
@@ -59,25 +41,4 @@ export class Dashboard extends React.Component {
   }
 }
 
-Dashboard.propTypes = {
-  newsArticles: PropTypes.array,
-  onFetchNewsArticles: PropTypes.func.isRequired,
-  resetPromiseState: PropTypes.func.isRequired,
-  journalismArticles: PropTypes.array,
-  onFetchJournalismArticles: PropTypes.func.isRequired,
-  promiseLoading: PropTypes.bool
-}
-
-const mapStateToProps = (state) => ({
-  newsArticles: selectNewsArticles(state),
-  journalismArticles: selectJournalismArticles(state),
-  promiseLoading: selectUiStateLoading(state)
-})
-
-const mapDispatchToProps = {
-  onFetchNewsArticles: () => fetchNewsArticles(),
-  onFetchJournalismArticles: () => fetchJournalismArticles(),
-  resetPromiseState: () => resetPromiseState()
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
+export default Dashboard;
