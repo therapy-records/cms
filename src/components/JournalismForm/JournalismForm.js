@@ -57,7 +57,7 @@ export class JournalismForm extends React.Component {
     const submitButtonCopy = isEditForm ? 'Update article' : 'Post article';
 
     return (
-      <section className='root article-create'>
+      <section className='article-create'>
 
         <ArticleHeader
           baseUrl='/journalism'

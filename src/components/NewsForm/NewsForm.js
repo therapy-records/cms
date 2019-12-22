@@ -53,7 +53,7 @@ export class NewsForm extends React.Component {
     const submitButtonCopy = isEditForm ? 'Update article' : 'Post monthly update';
 
     return (
-      <section className='root article-create'>
+      <section className='article-create'>
 
         <ArticleHeader
           baseUrl='/news'
