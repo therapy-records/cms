@@ -20,6 +20,8 @@ import JournalismArticleEdit from './routes/Journalism/ArticleEdit';
 import JournalismArticleCreate from './routes/Journalism/ArticleCreate';
 import Press from './routes/Press';
 import Collaborators from './routes/Collaborators/Home';
+import CollaboratorsCreate from './routes/Collaborators/Create';
+import CollaboratorsView from './routes/Collaborators/View';
 import Gigs from './routes/Gigs';
 import Videos from './routes/Videos';
 
@@ -220,6 +222,32 @@ describe('Router', () => {
       <ProtectedRoute
         path="/collaborators"
         component={Collaborators}
+        isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
+        exact
+      />
+    );
+    expect(actual).to.equal(true);
+  });
+
+  it('should render collaborators create route', () => {
+    const actual = wrapper.containsMatchingElement(
+      <ProtectedRoute
+        path="/collaborators/create"
+        component={CollaboratorsCreate}
+        isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
+        exact
+      />
+    );
+    expect(actual).to.equal(true);
+  });
+
+  it('should render collaborators view route', () => {
+    const actual = wrapper.containsMatchingElement(
+      <ProtectedRoute
+        path="/collaborators/:id"
+        component={CollaboratorsView}
         isAuth={props.isAuth}
         onAuthCheck={props.onAuthCheck}
         exact

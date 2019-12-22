@@ -25,7 +25,8 @@ module.exports = {
         "Headers": true
     },
     "env": {
-        "jest": true
+        "jest": true,
+        "browser": 1
     },
     "parserOptions": {
         "ecmaVersion": 2018
