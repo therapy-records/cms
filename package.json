@@ -95,8 +95,7 @@
     "nock": "^9.2.5",
     "redux-mock-store": "^1.5.3",
     "sinon": "^4.5.0",
-    "sinon-chai": "^3.0.0",
-    "waait": "^1.0.5"
+    "sinon-chai": "^3.0.0"
   },
   "jest": {
     "collectCoverageFrom": [
