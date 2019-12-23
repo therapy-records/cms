@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TextInputV2 from '../TextInputV2';
+import TextInput from '../FormElements/TextInput';
 
 export const CollaboratorForm = props => {
   const {
@@ -19,7 +19,7 @@ export const CollaboratorForm = props => {
       <form onSubmit={handleSubmit} encType='multipart/form-data'>
 
         <div className='row-large'>
-          <TextInputV2
+          <TextInput
             type='text'
             placeholder='Phil Collins'
             label='Name'
@@ -29,7 +29,7 @@ export const CollaboratorForm = props => {
         </div>
 
         <div className='row-large'>
-          <TextInputV2
+          <TextInput
             type='text'
             placeholder='Lorem ipsum...'
             label='About'

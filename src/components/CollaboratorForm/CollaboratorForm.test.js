@@ -2,7 +2,7 @@ import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import CollaboratorForm from './index';
-import TextInputV2 from '../TextInputV2';
+import TextInput from '../FormElements/TextInput';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -25,7 +25,7 @@ describe('(Component) CollaboratorForm', () => {
 
     it('should render a name field', () => {
       const actual = wrapper.containsMatchingElement(
-        <TextInputV2
+        <TextInput
           type='text'
           placeholder='Phil Collins'
           label='Name'
@@ -38,7 +38,7 @@ describe('(Component) CollaboratorForm', () => {
 
     it('should render an about field', () => {
       const actual = wrapper.containsMatchingElement(
-        <TextInputV2
+        <TextInput
           type='text'
           placeholder='Lorem ipsum...'
           label='About'

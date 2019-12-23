@@ -3,11 +3,11 @@ import { expect } from 'chai';
 
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import TextInputV2 from './index';
+import TextInput from './index';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('(Component) TextInputV2', () => {
+describe('(Component) TextInput', () => {
   let wrapper;
   const props = {
     id: 'test',
@@ -27,7 +27,7 @@ describe('(Component) TextInputV2', () => {
 
   beforeEach(() => {
     wrapper = shallow(
-      <TextInputV2 {...props} />
+      <TextInput {...props} />
     );
   });
 
