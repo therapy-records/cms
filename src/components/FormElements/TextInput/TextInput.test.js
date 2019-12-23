@@ -31,20 +31,6 @@ describe('(Component) TextInput', () => {
     );
   });
 
-  it('should render an input with props', () => {
-    const actual = wrapper.containsMatchingElement(
-      <input
-        id={props.id}
-        name={props.name}
-        placeholder={props.placeholder}
-        type={props.type}
-        autoFocus={props.autoFocus}
-        maxLength={props.maxLength}
-      />
-    )
-    expect(actual).to.eq(true);
-  });
-
   it('should render a label with props', () => {
     const actual = wrapper.containsMatchingElement(
       <label>{props.label}</label>
@@ -62,6 +48,31 @@ describe('(Component) TextInput', () => {
         <span className='required'>*</span>
       )
       expect(actual).to.eq(true);
+    });
+  });
+
+  it('should render an input with props', () => {
+    const actual = wrapper.containsMatchingElement(
+      <input
+        id={props.id}
+        name={props.name}
+        placeholder={props.placeholder}
+        type={props.type}
+        autoFocus={props.autoFocus}
+        maxLength={props.maxLength}
+      />
+    )
+    expect(actual).to.eq(true);
+  });
+
+  describe('onChange', () => {
+    it('should update the input value', () => {
+      let input = wrapper.find('input');
+      input.simulate('change', {
+        target: { value: 'testing' }
+      });
+      input = wrapper.find('input');
+      expect(input.prop('value')).to.eq('testing');
     });
   });
 

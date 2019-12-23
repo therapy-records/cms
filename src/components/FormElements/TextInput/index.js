@@ -1,5 +1,5 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const textInput = ({
   label,
@@ -11,7 +11,11 @@ const textInput = ({
   required,
   maxLength,
   error
-}) => (
+}) => {
+
+  const [value, setValue] = useState('');
+
+  return (
     <div className='text-input-container'>
 
       {(label && !hideLabel) && <label htmlFor={name}>{label}{required && <span className='required'>*</span>}</label>}
@@ -23,12 +27,14 @@ const textInput = ({
         type={type}
         autoFocus={autoFocus}
         maxLength={maxLength}
-        value="testing"
+        value={value}
+        onChange={e => setValue(e.target.value)}
       />
 
       {error && <span className='form-error'>{label} is {error}</span>}
     </div>
   );
+};
 
 textInput.propTypes = {
   label: PropTypes.string.isRequired,
