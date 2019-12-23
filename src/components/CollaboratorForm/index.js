@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TextInput from '../FormElements/TextInput';
+import TextInputsList from '../FormElements/TextInputsList';
 
 export const CollaboratorForm = props => {
   const {
@@ -11,6 +12,12 @@ export const CollaboratorForm = props => {
     ev.preventDefault();
     // const form = ev.target;
     // const data = new FormData(form);
+    // for (var pair of data.entries()) {
+    //   console.log(pair[0] + ', ' + pair[1]);
+    // }
+    // console.log('data name ', data.get('name'));
+    // console.log('data about ', data.get('about'));
+    // console.log('data collabOn ', data.get('collabOn'));
   }
 
   const submitButtonCopy = isEditForm ? 'Update Collaborator' : 'Add Collaborator';
@@ -43,7 +50,11 @@ export const CollaboratorForm = props => {
         </div>
 
         <div className='row-large'>
-          <p>CollabOn here...</p>
+          <TextInputsList
+            label="Collaborated on"
+            items={['', '']}
+            name='collabOn'
+          />
         </div>
 
         <div className='row-large'>

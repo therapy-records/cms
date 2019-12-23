@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const textInput = ({
+const TextInput = ({
   label,
   name,
   placeholder,
@@ -10,10 +10,19 @@ const textInput = ({
   type,
   required,
   maxLength,
-  error
+  error,
+  value: initValue,
+  onChange
 }) => {
 
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(initValue);
+
+  const handleOnChange = value => {
+    setValue(value);
+    if (onChange) {
+      onChange(value);
+    }
+  }
 
   return (
     <div className='text-input-container'>
@@ -28,7 +37,7 @@ const textInput = ({
         autoFocus={autoFocus}
         maxLength={maxLength}
         value={value}
-        onChange={e => setValue(e.target.value)}
+        onChange={e => handleOnChange(e.target.value)}
       />
 
       {error && <span className='form-error'>{label} is {error}</span>}
@@ -36,17 +45,23 @@ const textInput = ({
   );
 };
 
-textInput.propTypes = {
-  label: PropTypes.string.isRequired,
+TextInput.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  label: PropTypes.string,
   placeholder: PropTypes.string,
   props: PropTypes.object,
   hideLabel: PropTypes.bool,
   autoFocus: PropTypes.bool,
   required: PropTypes.bool,
   maxLength: PropTypes.number,
-  error: PropTypes.string
-}
+  error: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func
+};
 
-export default textInput;
+TextInput.defaultProps = {
+  value: ''
+};
+
+export default TextInput;

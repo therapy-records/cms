@@ -3,6 +3,7 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import CollaboratorForm from './index';
 import TextInput from '../FormElements/TextInput';
+import TextInputsList from '../FormElements/TextInputsList';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -44,6 +45,17 @@ describe('(Component) CollaboratorForm', () => {
           label='About'
           name='about'
           required
+        />
+      );
+      expect(actual).to.equal(true);
+    });
+
+    it('should render a collabOn field', () => {
+      const actual = wrapper.containsMatchingElement(
+        <TextInputsList
+          label="Collaborated on"
+          items={['', '']}
+          name='collabOn'
         />
       );
       expect(actual).to.equal(true);

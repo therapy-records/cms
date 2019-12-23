@@ -1,6 +1,5 @@
 import React from 'react'
 import { expect } from 'chai';
-
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import TextInput from './index';
@@ -73,6 +72,18 @@ describe('(Component) TextInput', () => {
       });
       input = wrapper.find('input');
       expect(input.prop('value')).to.eq('testing');
+    });
+    it('should call props.onChange', () => {
+      const onChangeSpy = sinon.spy();
+      wrapper.setProps({
+        onChange: onChangeSpy
+      });
+      let input = wrapper.find('input');
+      input.simulate('change', {
+        target: { value: 'testing' }
+      });
+      expect(onChangeSpy).to.have.been.calledOnce;
+      expect(onChangeSpy).to.have.been.calledWith('testing');
     });
   });
 
