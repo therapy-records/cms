@@ -3,42 +3,19 @@ import { Link } from 'react-router-dom';
 import Stats from './components/Stats';
 import './style.css';
 
-export class Dashboard extends React.Component {
-  // componentWillUnmount() {
-  //   this.props.resetPromiseState();
-  // }
+const Dashboard = () => (
+  <div className='container dashboard'>
 
-  // componentDidMount() {
-  //   const {
-  //     newsArticles,
-  //     journalismArticles,
-  //     onFetchNewsArticles,
-  //     onFetchJournalismArticles
-  //   } = this.props;
-  //   if (newsArticles === null) {
-  //     onFetchNewsArticles();
-  //   }
+    <h2>Welcome back <span className='wave'>👋</span></h2>
 
-  //   if (journalismArticles === null) {
-  //     onFetchJournalismArticles();
-  //   }
-  // }
+    <div className='ctas'>
+      <Link to='news/create' className='btn'>Create News</Link>
+      <Link to='journalism/create' className='btn'>Create Journalism</Link>
+      <Link to='collaborators/create' className='btn'>Add Collaborator</Link>
+    </div>
 
-  render() {
-
-    return (
-      <div className='container dashboard'>
-
-        <h2>Welcome back <span className='wave'>👋</span></h2>
-        <div className='ctas'>
-          <Link to='news/create' className='btn'>Create News</Link>
-          <Link to='journalism/create' className='btn'>Create Journalism</Link>
-        </div>
-
-        <Stats />
-      </div>
-    )
-  }
-}
+    <Stats />
+  </div>
+);
 
 export default Dashboard;

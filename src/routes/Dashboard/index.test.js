@@ -37,6 +37,13 @@ describe('(Component) Dashboard', () => {
       expect(actual).to.be.true;
     });
 
+    it('should render a link to create a collaborator', () => {
+      const actual = wrapper.containsMatchingElement(
+        <Link to='collaborators/create'>Add Collaborator</Link>
+      );
+      expect(actual).to.be.true;
+    });
+
     it('should render <Stats />', () => {
       const actual = wrapper.containsMatchingElement(
         <Stats />
