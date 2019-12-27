@@ -23,8 +23,8 @@ import {
 } from '../../constants';
 
 export const JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS = {
-  width: 400,
-  height: 400
+  width: 600,
+  height: 600
 };
 
 export class JournalismForm extends React.Component {
