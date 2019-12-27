@@ -2,6 +2,56 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TextInput from '../FormElements/TextInput';
 import TextInputsList from '../FormElements/TextInputsList';
+import { handleFormData } from '../../utils/graphql-form';
+
+const COLLABORATOR_COLLABON_FIELDS = [
+  { value: '' },
+  { value: '' }
+];
+
+const COLLABORATOR_URL_FIELDS = [
+  {
+    label: 'Website',
+    id: 'website',
+    value: ''
+  },
+  {
+    
+    label: 'Facebook',
+    id: 'facebook',
+    value: ''
+  },
+  {
+    label: 'Twitter',
+    id: 'twitter',
+    value: ''
+  },
+  {
+    label: 'Instagram',
+    id: 'instagram',
+    value: ''
+  },
+  {
+    label: 'SoundCloud',
+    id: 'soundcloud',
+    value: ''
+  },
+  {
+    label: 'Bio',
+    id: 'bio',
+    value: ''
+  },
+  {
+    label: 'Email',
+    id: 'email',
+    value: ''
+  },
+  {
+    label: 'Phone',
+    id: 'phone',
+    value: ''
+  }
+];
 
 export const CollaboratorForm = props => {
   const {
@@ -10,14 +60,9 @@ export const CollaboratorForm = props => {
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    // const form = ev.target;
-    // const data = new FormData(form);
-    // for (var pair of data.entries()) {
-    //   console.log(pair[0] + ', ' + pair[1]);
-    // }
-    // console.log('data name ', data.get('name'));
-    // console.log('data about ', data.get('about'));
-    // console.log('data collabOn ', data.get('collabOn'));
+    const form = ev.target;
+    const postData = handleFormData(form);
+    console.log('post data \n', postData);
   }
 
   const submitButtonCopy = isEditForm ? 'Update Collaborator' : 'Add Collaborator';
@@ -51,14 +96,20 @@ export const CollaboratorForm = props => {
 
         <div className='row-large'>
           <TextInputsList
-            label="Collaborated on"
-            items={['', '']}
+            fieldsetLegend="Collaborated on"
+            items={COLLABORATOR_COLLABON_FIELDS}
             name='collabOn'
+            showAddRemove
           />
         </div>
 
         <div className='row-large'>
-          <p>URLs here...</p>
+          <TextInputsList
+            heading="URLs"
+            items={COLLABORATOR_URL_FIELDS}
+            name='urls'
+          />
+
         </div>
 
         <div className='row-large'>

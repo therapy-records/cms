@@ -1,0 +1,16 @@
+.text-inputs-list {
+  li {
+    list-style-type: none;
+  }
+}
+
+.text-inputs-list-with-add-remove {
+  li {
+    display: flex;
+    flex-direction: row;
+    button {
+      margin-bottom: 0;
+      margin-left: 1em;
+    }
+  }
+}

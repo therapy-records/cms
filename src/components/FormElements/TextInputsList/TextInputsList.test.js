@@ -10,11 +10,14 @@ describe('(Component) TextInputsList', () => {
   const props = {
     name: 'collaborators',
     label: 'Collaborated on',
+    fieldsetLegend: 'collaborators',
+    heading: 'URLs',
     items: [
       'testA',
       'testB',
       'testC'
-    ]
+    ],
+    showAddRemove: true
   };
 
   beforeEach(() => {
@@ -23,14 +26,22 @@ describe('(Component) TextInputsList', () => {
     );
   });
 
-  it('should render a legend', () => {
+  it('should render a fieldset legend', () => {
     const actual = wrapper.containsMatchingElement(
-      <legend>{props.label}</legend>
+      <legend>{props.fieldsetLegend}</legend>
     );
     expect(actual).to.eq(true);
   });
 
-  it('should render a list of inputs and `remove` button from props', () => {
+  it('should render a heading', () => {
+    const actual = wrapper.containsMatchingElement(
+      <h3>{props.heading}</h3>
+    );
+    expect(actual).to.eq(true);
+  });
+
+
+  it('should render a list of inputs and `remove` button', () => {
     const actual = wrapper.containsAllMatchingElements([
       <li>
         <input
@@ -54,13 +65,6 @@ describe('(Component) TextInputsList', () => {
         <button>Remove</button>
       </li>
     ]);
-    expect(actual).to.eq(true);
-  });
-
-  it('should render a hidden input', () => {
-    const actual = wrapper.containsMatchingElement(
-      <input type='hidden' name={props.name} value={props.items} />
-    );
     expect(actual).to.eq(true);
   });
 

@@ -1,5 +1,6 @@
 import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
+import './TextInputsList.css';
 
 function init(initialItems) {
   return { listItems: initialItems };
@@ -11,7 +12,7 @@ function reducer(state, action) {
       return {
         listItems: [
           ...state.listItems,
-          ''
+          { value: '' }
         ]
       }
     }
@@ -20,7 +21,7 @@ function reducer(state, action) {
       const newListItems = [
         ...state.listItems
       ];
-      newListItems[index] = value
+      newListItems[index].value = value
 
       return {
         listItems: newListItems
@@ -40,38 +41,45 @@ function reducer(state, action) {
 }
 
 const TextInputsList = ({
-  label,
   name,
-  items
+  items,
+  fieldsetLegend,
+  heading,
+  showAddRemove
 }) => {
   const [state, dispatch] = useReducer(reducer, items, init);
 
   const handleOnChange = (index, value) => {
-    let updatedListItems = state.listItems;
-    updatedListItems[index] = value;
     dispatch({ type: 'edit', payload: { index, value } });
   };
 
   const { listItems } = state;
 
   return (
-    <div>
+    <div className={showAddRemove ? 'text-inputs-list-with-add-remove' : 'text-inputs-list'}>
       <fieldset>
-        <legend>{label}</legend>
+
+        {fieldsetLegend && <legend>{fieldsetLegend}</legend>}
+
+        {heading && <h3>{heading}</h3>}
 
         <ul>
           {listItems.map((item, index) => {
             const key = `${name}-${index}`;
+            const id = item.id ? `${name}.${item.id}` : `${name}.${index}`;
             return (
               <li key={key}>
+                {item.label && <label htmlFor={id}>{item.label}</label>}
                 <input
-                  id={key}
-                  name={key}
+                  id={id}
+                  name={id}
                   type='text'
-                  value={item}
+                  value={item.value}
                   onChange={ev => handleOnChange(index, ev.target.value)}
                 />
-                <button onClick={() => dispatch({ type: 'remove', payload: { index }})}>Remove</button>
+                {showAddRemove &&
+                  <button onClick={() => dispatch({ type: 'remove', payload: { index }})}>Remove</button>
+                }
               </li>
             )
           })}
@@ -79,17 +87,26 @@ const TextInputsList = ({
         </ul>
       </fieldset>
 
-      <input type='hidden' name={name} value={listItems} />
+      {showAddRemove &&
+        <button onClick={() => dispatch({ type: 'add' })}>Add</button>
+      }
 
-      <button onClick={() => dispatch({ type: 'add' })}>Add</button>
     </div>
   );
 };
 
 TextInputsList.propTypes = {
-  label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  items: PropTypes.array.isRequired
+  items: PropTypes.array.isRequired,
+  fieldsetLegend: PropTypes.string,
+  heading: PropTypes.string,
+  showAddRemove: PropTypes.bool
+};
+
+TextInputsList.defaultProps = {
+  fieldsetLegend: '',
+  heading: '',
+  showAddRemove: false
 };
 
 export default TextInputsList;
