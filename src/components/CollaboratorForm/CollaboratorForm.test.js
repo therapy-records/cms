@@ -4,6 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import CollaboratorForm from './index';
 import TextInput from '../FormElements/TextInput';
 import TextInputsList from '../FormElements/TextInputsList';
+import COLLABORATOR_FIELDS from './fields';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -50,16 +51,28 @@ describe('(Component) CollaboratorForm', () => {
       expect(actual).to.equal(true);
     });
 
-    // it('should render a collabOn field', () => {
-    //   const actual = wrapper.containsMatchingElement(
-    //     <TextInputsList
-    //       label="Collaborated on"
-    //       items={['', '']}
-    //       name='collabOn'
-    //     />
-    //   );
-    //   expect(actual).to.equal(true);
-    // });
+    it('should render a collabOn field', () => {
+      const actual = wrapper.containsMatchingElement(
+        <TextInputsList
+          fieldsetLegend="Collaborated on"
+          items={COLLABORATOR_FIELDS.collabOn}
+          name='collabOn'
+          showAddRemove
+        />
+      );
+      expect(actual).to.equal(true);
+    });
+
+    it('should render a urls field', () => {
+      const actual = wrapper.containsMatchingElement(
+        <TextInputsList
+          heading="URLs"
+          items={COLLABORATOR_FIELDS.urls}
+          name='urls'
+        />
+      );
+      expect(actual).to.equal(true);
+    });
 
     describe('submit button', () => {
       it('should render', () => {

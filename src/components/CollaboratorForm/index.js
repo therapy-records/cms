@@ -3,55 +3,7 @@ import PropTypes from 'prop-types';
 import TextInput from '../FormElements/TextInput';
 import TextInputsList from '../FormElements/TextInputsList';
 import { handleFormData } from '../../utils/graphql-form';
-
-const COLLABORATOR_COLLABON_FIELDS = [
-  { value: '' },
-  { value: '' }
-];
-
-const COLLABORATOR_URL_FIELDS = [
-  {
-    label: 'Website',
-    id: 'website',
-    value: ''
-  },
-  {
-    
-    label: 'Facebook',
-    id: 'facebook',
-    value: ''
-  },
-  {
-    label: 'Twitter',
-    id: 'twitter',
-    value: ''
-  },
-  {
-    label: 'Instagram',
-    id: 'instagram',
-    value: ''
-  },
-  {
-    label: 'SoundCloud',
-    id: 'soundcloud',
-    value: ''
-  },
-  {
-    label: 'Bio',
-    id: 'bio',
-    value: ''
-  },
-  {
-    label: 'Email',
-    id: 'email',
-    value: ''
-  },
-  {
-    label: 'Phone',
-    id: 'phone',
-    value: ''
-  }
-];
+import COLLABORATOR_FIELDS from './fields';
 
 export const CollaboratorForm = props => {
   const {
@@ -97,7 +49,7 @@ export const CollaboratorForm = props => {
         <div className='row-large'>
           <TextInputsList
             fieldsetLegend="Collaborated on"
-            items={COLLABORATOR_COLLABON_FIELDS}
+            items={COLLABORATOR_FIELDS.collabOn}
             name='collabOn'
             showAddRemove
           />
@@ -106,7 +58,7 @@ export const CollaboratorForm = props => {
         <div className='row-large'>
           <TextInputsList
             heading="URLs"
-            items={COLLABORATOR_URL_FIELDS}
+            items={COLLABORATOR_FIELDS.urls}
             name='urls'
           />
 
