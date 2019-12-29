@@ -58,6 +58,7 @@ export const CollaboratorForm = props => {
             }}
             showSingleHiddenInputValue
             multiple={false}
+            ctaCopy='Drag & drop image'
           />
         </div>
 

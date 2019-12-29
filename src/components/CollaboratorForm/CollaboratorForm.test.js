@@ -63,6 +63,7 @@ describe('(Component) CollaboratorForm', () => {
             }}
             showSingleHiddenInputValue
             multiple={false}
+            ctaCopy='Drag & drop image'
           />
       );
       expect(actual).to.eq(true);

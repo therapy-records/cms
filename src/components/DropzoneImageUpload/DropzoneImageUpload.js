@@ -63,25 +63,33 @@ export class DropzoneImageUpload extends React.Component {
     upload.end((err, response) => {
       if (response.body.secure_url !== '') {
         if (this.validMinimumImageDimensions(response.body)) {
-            this.setState({
-              images: [
-                ...this.state.images,
-                ...[this.handleImageResponseUrl(response.body.secure_url)]
-              ],
-              isLoading: false
-            }, () => {
-              const {images} = this.state;
-              const lastImageInState = images[images.length - 1];
-              const imageIndex = images.indexOf(lastImageInState);
-              if (this.props.input && this.props.input.onChange) {
-                this.props.input.onChange(lastImageInState);
-              } else if (this.props.onChange) {
-                this.props.onChange(
-                  lastImageInState,
-                  imageIndex
-                ); 
-              }
-            });
+          let updatedImagesArray = [];
+          if (this.props.multiple) {
+            updatedImagesArray = [
+              ...this.state.images,
+              ...[this.handleImageResponseUrl(response.body.secure_url)]
+            ];
+          } else {
+            updatedImagesArray = [
+              ...[this.handleImageResponseUrl(response.body.secure_url)]
+            ]
+          }
+          this.setState({
+            images: updatedImagesArray,
+            isLoading: false
+          }, () => {
+            const { images } = this.state;
+            const lastImageInState = images[images.length - 1];
+            const imageIndex = images.indexOf(lastImageInState);
+            if (this.props.input && this.props.input.onChange) {
+              this.props.input.onChange(lastImageInState);
+            } else if (this.props.onChange) {
+              this.props.onChange(
+                lastImageInState,
+                imageIndex
+              );
+            }
+          });
         } else {
           const message = {
             tooSmall: `Image too small (width: ${response.body.width} height: ${response.body.height})`,
