@@ -1,5 +1,6 @@
 import {
   containsNumber,
+  isAString,
   isEmptyString
 } from './strings';
 
@@ -13,6 +14,24 @@ describe('(Utils) strings', () => {
 
     it('should return false when a string does NOT contain a number', () => {
       expect(containsNumber('test')).to.eq(false);
+    });
+
+  });
+
+  describe('isAString', () => {
+
+    it('should return true when is a string', () => {
+      expect(isAString("")).to.eq(true);
+      expect(isAString('')).to.eq(true);
+      expect(isAString('test')).to.eq(true);
+    });
+
+    it('should return false when NOT a string', () => {
+      expect(isAString(0)).to.eq(false);
+      expect(isAString(true)).to.eq(false);
+      expect(isAString({})).to.eq(false);
+      expect(isAString([])).to.eq(false);
+      expect(isAString(() => {})).to.eq(false);
     });
 
   });

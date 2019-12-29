@@ -50,16 +50,16 @@ describe('(Component) CollaboratorForm', () => {
       expect(actual).to.equal(true);
     });
 
-    it('should render a collabOn field', () => {
-      const actual = wrapper.containsMatchingElement(
-        <TextInputsList
-          label="Collaborated on"
-          items={['', '']}
-          name='collabOn'
-        />
-      );
-      expect(actual).to.equal(true);
-    });
+    // it('should render a collabOn field', () => {
+    //   const actual = wrapper.containsMatchingElement(
+    //     <TextInputsList
+    //       label="Collaborated on"
+    //       items={['', '']}
+    //       name='collabOn'
+    //     />
+    //   );
+    //   expect(actual).to.equal(true);
+    // });
 
     describe('submit button', () => {
       it('should render', () => {

@@ -1,5 +1,6 @@
 import {
   containsNumber,
+  isAString,
   isEmptyString
 } from './strings';
 
@@ -35,40 +36,51 @@ export const formatChildField = (fieldId, fieldValue) => {
       [grandChildFieldId]: fieldValue
     }
   }
-  return [
-    fieldValue
-  ];
+  return fieldValue;
 };
 
-export const handleChildField = (fieldId, fieldValue, childFields) => {
+////////////////
+////////////////
+////
+// TODO: simplify/change naming conventions
+////
+////////////////
+////////////////
+
+export const handleChildFieldArray = (allChildFields, fieldValue, childFieldId) => {
+  if (isEmptyString(fieldValue)) {
+    return allChildFields;
+  }
+
+  if (allChildFields[childFieldId]) {
+    allChildFields[childFieldId] = [
+      ...allChildFields[childFieldId],
+      fieldValue
+    ]
+  } else {
+    allChildFields = {
+      ...allChildFields,
+      [childFieldId]: [
+        fieldValue
+      ]
+    }
+  }
+  return allChildFields;
+};
+
+export const handleChildField = (fieldId, fieldValue, allChildFields) => {
   const { childFieldId } = getChildFieldIds(fieldId);
   const formattedChildField = formatChildField(fieldId, fieldValue);
 
-  if (Array.isArray(formattedChildField)) {
-    if (isEmptyString(formattedChildField[0])) {
-      return childFields;
-    }
-
-    if (childFields[childFieldId]) {
-      childFields[childFieldId] = [
-        ...childFields[childFieldId],
-        ...formattedChildField
-      ]
-    } else {
-      childFields = {
-        ...childFields,
-        [childFieldId]: [
-          ...formattedChildField
-        ]
-      }
-    }
+  if(isAString(formattedChildField)) {
+    allChildFields = handleChildFieldArray(allChildFields, fieldValue, childFieldId);
   } else {
-    childFields[childFieldId] = {
-      ...childFields[childFieldId],
+    allChildFields[childFieldId] = {
+      ...allChildFields[childFieldId],
       ...formattedChildField
     };
   }
-  return childFields;
+  return allChildFields;
 }
 
 export const handleFormData = form => {
@@ -80,7 +92,6 @@ export const handleFormData = form => {
     let fieldId = pair[0];
     const fieldValue = pair[1];
 
-    // TODOD: maybe this can be simplified along with handleChildField?
     if (isChildField(fieldId)) {
       fieldsWithChildren = handleChildField(
         fieldId,
