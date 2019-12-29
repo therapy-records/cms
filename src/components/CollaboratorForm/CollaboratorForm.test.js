@@ -1,9 +1,10 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import CollaboratorForm from './index';
+import CollaboratorForm, { AVATAR_MINIMUM_DIMENSIONS } from './index';
 import TextInput from '../FormElements/TextInput';
 import TextInputsList from '../FormElements/TextInputsList';
+import DropzoneImageUpload from '../DropzoneImageUpload';
 import COLLABORATOR_FIELDS from './fields';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -49,6 +50,22 @@ describe('(Component) CollaboratorForm', () => {
         />
       );
       expect(actual).to.equal(true);
+    });
+
+    it('should render an avatar field', () => {
+      const actual = wrapper.containsMatchingElement(
+        <DropzoneImageUpload
+            title="Avatar"
+            component={DropzoneImageUpload}
+            minImageDimensions={AVATAR_MINIMUM_DIMENSIONS}
+            inputProps={{
+              name: 'avatarUrl'
+            }}
+            showSingleHiddenInputValue
+            multiple={false}
+          />
+      );
+      expect(actual).to.eq(true);
     });
 
     it('should render a collabOn field', () => {

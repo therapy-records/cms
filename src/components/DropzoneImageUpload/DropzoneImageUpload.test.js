@@ -14,7 +14,10 @@ describe('(Component) DropzoneImageUpload', () => {
         height: 400
       },
       ctaCopy: 'Drag/drop',
-      required: true
+      required: true,
+      inputProps: {
+        name: 'test'
+      }
     };
 
   beforeEach(() => {
@@ -246,6 +249,25 @@ describe('(Component) DropzoneImageUpload', () => {
           <li key={0} className='form-error'>error message A</li>,
           <li key={1}>error message B</li>
         ]);
+        expect(actual).to.eq(true);
+      });
+    });
+
+    describe('with props.showSingleHiddenInputValue', () => {
+      it('should render a hidden input field with value from images state', () => {
+        const mockImage = 'http://test.com/test.jpg';
+        wrapper.setProps({ showSingleHiddenInputValue: true });
+        wrapper.setState({
+          images: [mockImage]
+        });
+
+        const actual = wrapper.containsMatchingElement(
+          <input
+            type='hidden'
+            value={mockImage}
+            {...props.inputProps}
+          />
+        );
         expect(actual).to.eq(true);
       });
     });

@@ -135,7 +135,10 @@ export class DropzoneImageUpload extends React.Component {
       title,
       minImageDimensions,
       ctaCopy,
-      required
+      required,
+      inputProps,
+      showSingleHiddenInputValue,
+      multiple
     } = this.props;
 
     const {
@@ -160,7 +163,8 @@ export class DropzoneImageUpload extends React.Component {
               onDrop={this.handleOnDrop.bind(this)} // eslint-disable-line
               className={isLoading ? 'dropzone dropzone-active' : `dropzone ${images && 'dropzone-existing-image'}`}
               activeClassName='dropzone-active'
-              multiple
+              inputProps={inputProps}
+              multiple={multiple}
             >
               <div className='dropzone-cta'>
                 {ctaCopy ? <span>{ctaCopy}</span> : <span>Drag &amp; drop images</span>}
@@ -192,6 +196,14 @@ export class DropzoneImageUpload extends React.Component {
                   return null;
                 })}
               </ul>
+              {showSingleHiddenInputValue &&
+                <input
+                  type='hidden'
+                  value={images[images.length - 1]}
+                  {...inputProps}
+                />
+              }
+
             </div>
           : null}
         </div>
@@ -220,11 +232,14 @@ DropzoneImageUpload.propTypes = {
   input: PropTypes.shape({
     onChange: PropTypes.func
   }),
+  inputProps: PropTypes.object,
   title: PropTypes.string.isRequired,
   required: PropTypes.bool,
   existingImages: PropTypes.array,
   minImageDimensions: PropTypes.object,
-  ctaCopy: PropTypes.string
+  ctaCopy: PropTypes.string,
+  showSingleHiddenInputValue: PropTypes.bool,
+  multiple: PropTypes.bool
 };
 
 DropzoneImageUpload.defaultProps = {
@@ -234,7 +249,10 @@ DropzoneImageUpload.defaultProps = {
   required: false,
   existingImages: [],
   minImageDimensions: {},
-  ctaCopy: ''
+  ctaCopy: '',
+  inputProps: {},
+  showSingleHiddenInputValue: false,
+  multiple: true
 };
 
 export default DropzoneImageUpload;

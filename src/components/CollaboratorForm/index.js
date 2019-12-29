@@ -1,9 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TextInput from '../FormElements/TextInput';
-import TextInputsList from '../FormElements/TextInputsList';
 import { handleFormData } from '../../utils/graphql-form';
 import COLLABORATOR_FIELDS from './fields';
+import TextInput from '../FormElements/TextInput';
+import TextInputsList from '../FormElements/TextInputsList';
+import DropzoneImageUpload from '../DropzoneImageUpload';
+
+export const AVATAR_MINIMUM_DIMENSIONS = {
+  width: 111,
+  height: 111
+};
 
 export const CollaboratorForm = props => {
   const {
@@ -43,7 +49,16 @@ export const CollaboratorForm = props => {
         </div>
 
         <div className='row-large'>
-          <p>Avatar here...</p>
+          <DropzoneImageUpload
+            title="Avatar"
+            component={DropzoneImageUpload}
+            minImageDimensions={AVATAR_MINIMUM_DIMENSIONS}
+            inputProps={{
+              name: 'avatarUrl'
+            }}
+            showSingleHiddenInputValue
+            multiple={false}
+          />
         </div>
 
         <div className='row-large'>

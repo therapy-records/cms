@@ -13,9 +13,9 @@ describe('(Component) TextInputsList', () => {
     fieldsetLegend: 'collaborators',
     heading: 'URLs',
     items: [
-      'testA',
-      'testB',
-      'testC'
+      { value: 'testA' },
+      { value: 'testB' },
+      { value: 'testB' },
     ],
     showAddRemove: true
   };
@@ -43,24 +43,24 @@ describe('(Component) TextInputsList', () => {
 
   it('should render a list of inputs and `remove` button', () => {
     const actual = wrapper.containsAllMatchingElements([
-      <li>
+      <li key={0}>
         <input
           type='text'
-          value={props.items[0]}
+          value={props.items[0].value}
         />
         <button>Remove</button>
       </li>,
-      <li>
+      <li key={1}>
         <input
           type='text'
-          value={props.items[1]}
+          value={props.items[1].value}
         />
         <button>Remove</button>
       </li>,
-      <li>
+      <li key={2}>
         <input
           type='text'
-          value={props.items[2]}
+          value={props.items[2].value}
         />
         <button>Remove</button>
       </li>
