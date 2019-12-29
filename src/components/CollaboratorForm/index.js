@@ -5,6 +5,7 @@ import COLLABORATOR_FIELDS from './fields';
 import TextInput from '../FormElements/TextInput';
 import TextInputsList from '../FormElements/TextInputsList';
 import DropzoneImageUpload from '../DropzoneImageUpload';
+import RichTextEditor from '../RichTextEditor';
 
 export const AVATAR_MINIMUM_DIMENSIONS = {
   width: 111,
@@ -39,12 +40,10 @@ export const CollaboratorForm = props => {
         </div>
 
         <div className='row-large'>
-          <TextInput
-            type='text'
-            placeholder='Lorem ipsum...'
-            label='About'
+          <RichTextEditor
+            title='About'
             name='about'
-            required
+            showSingleHiddenInputValue
           />
         </div>
 

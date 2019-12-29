@@ -5,6 +5,7 @@ import CollaboratorForm, { AVATAR_MINIMUM_DIMENSIONS } from './index';
 import TextInput from '../FormElements/TextInput';
 import TextInputsList from '../FormElements/TextInputsList';
 import DropzoneImageUpload from '../DropzoneImageUpload';
+import RichTextEditor from '../RichTextEditor';
 import COLLABORATOR_FIELDS from './fields';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -41,12 +42,10 @@ describe('(Component) CollaboratorForm', () => {
 
     it('should render an about field', () => {
       const actual = wrapper.containsMatchingElement(
-        <TextInput
-          type='text'
-          placeholder='Lorem ipsum...'
-          label='About'
+        <RichTextEditor
+          title='About'
           name='about'
-          required
+          showSingleHiddenInputValue
         />
       );
       expect(actual).to.equal(true);

@@ -20,10 +20,13 @@ describe('(Component) RichTextEditor', () => {
     },
     onChangeSpy;
 
+  beforeEach(() => {
+    wrapper = shallow(<_RichTextEditor {...props} />);
+  });
+
   describe('methods', () => {
     describe('handleOnChange', () => {
       beforeEach(() => {
-        wrapper = shallow(<_RichTextEditor {...props} />);
         onChangeSpy = sinon.spy();
         wrapper.setProps({
           input: {
@@ -67,6 +70,29 @@ describe('(Component) RichTextEditor', () => {
         });
         const actual = wrapper.containsMatchingElement(
           <p>Copy is {mockError}</p>
+        );
+        expect(actual).to.eq(true);
+      });
+    });
+
+    describe('when there is props.showSingleHiddenInputValue and a value in state', () => {
+      it('should render a hidden input with value as HTML string', () => {
+        const mockValue = 'test value';
+        const mockName = 'myField';
+        wrapper = shallow(
+          <_RichTextEditor
+            name={mockName}
+            showSingleHiddenInputValue
+            value={mockValue}
+          />
+        );
+
+        const actual = wrapper.containsMatchingElement(
+          <input
+            type='hidden'
+            name={mockName}
+            value={mockValue}
+          />
         );
         expect(actual).to.eq(true);
       });

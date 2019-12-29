@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import RichTextEditor from 'react-rte'
 import './RichTextEditor.css'
+import { isAString } from '../../utils/strings';
 
 const RTE_TOOLBAR_CONFIG = {
   display: ['INLINE_STYLE_BUTTONS', 'LINK_BUTTONS', 'BLOCK_TYPE_BUTTONS'],
@@ -20,18 +21,26 @@ class _RichTextEditor extends React.Component {
   constructor(props){
     super(props);
     this.handleOnChange = this.handleOnChange.bind(this);
+    const initValue = (this.props.input && this.props.input.value) || this.props.value;
     this.state = {
-      value: this.props.input.value ?
-        RichTextEditor.createValueFromString(this.props.input.value, 'html') :
+      value: initValue ?
+        RichTextEditor.createValueFromString(initValue, 'html') :
         RichTextEditor.createValueFromString('', 'html')
     }
   }
 
   handleOnChange(value){
-    const {onChange} = this.props.input;
+    const {
+      input,
+      onChange
+    } = this.props;
 
     this.setState({ value });
-    if (onChange) {
+    if (input && input.onChange) {
+      input.onChange(
+        value.toString('html')
+      );
+    } else if (onChange) {
       onChange(
         value.toString('html')
       );
@@ -41,26 +50,40 @@ class _RichTextEditor extends React.Component {
   render() {
     const {
       title,
-      meta
+      meta,
+      name,
+      showSingleHiddenInputValue
     } = this.props;
 
-    const {touched, error} = meta;
+    const stateValueAsHtml = this.state.value.toString('html');
+    const renderHiddenInput = (showSingleHiddenInputValue &&
+                              isAString(stateValueAsHtml));
 
     return (
       <div>
 
-      {title && <h5>{title}<span className='required'>*</span></h5>}
+        {title && <h5>{title}<span className='required'>*</span></h5>}
 
-      {touched && error && (<p>Copy is {error}</p>)}
+        {(meta && meta.touched && meta.error) && (
+          <p>Copy is {meta.error}</p>
+        )}
 
-      <div className='react-rte-container'>
-        <RichTextEditor
-          toolbarConfig={RTE_TOOLBAR_CONFIG}
-          value={this.state.value}
-          placeholder='This month has been fantastic...'
-          onChange={this.handleOnChange}
-        />
-      </div>
+        <div className='react-rte-container'>
+          <RichTextEditor
+            toolbarConfig={RTE_TOOLBAR_CONFIG}
+            value={this.state.value}
+            placeholder='This month has been fantastic...'
+            onChange={this.handleOnChange}
+          />
+        </div>
+
+        {renderHiddenInput &&
+          <input
+            type='hidden'
+            name={name}
+            value={stateValueAsHtml}
+          />
+        }
 
       </div>
     );
@@ -68,10 +91,23 @@ class _RichTextEditor extends React.Component {
 }
 
 _RichTextEditor.propTypes = {
-  input: PropTypes.object.isRequired,
-  meta: PropTypes.object.isRequired,
+  input: PropTypes.object,
+  meta: PropTypes.object,
   value: PropTypes.string,
-  title: PropTypes.string
-}
+  title: PropTypes.string,
+  onChange: PropTypes.func,
+  name: PropTypes.string,
+  showSingleHiddenInputValue: PropTypes.bool
+};
+
+_RichTextEditor.defaultProps = {
+  input: {},
+  meta: {},
+  value: '',
+  title: '',
+  onChange: () => {},
+  name: '',
+  showSingleHiddenInputValue: false
+};
 
 export default _RichTextEditor;
