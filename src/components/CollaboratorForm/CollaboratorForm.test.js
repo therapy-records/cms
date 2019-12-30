@@ -2,6 +2,7 @@ import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import CollaboratorForm, { AVATAR_MINIMUM_DIMENSIONS } from './index';
+import { CREATE_COLLABORATOR } from '../../mutations';
 import TextInput from '../FormElements/TextInput';
 import TextInputsList from '../FormElements/TextInputsList';
 import DropzoneImageUpload from '../DropzoneImageUpload';
@@ -12,19 +13,21 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) CollaboratorForm', () => {
   let wrapper,
-    props = {
-      formValues: {
-        title: 'Test Person'
-      },
-      location: {
-        pathname: '/collaborators/create'
-      }
-    }
+      props = {
+        isEditForm: true
+      };
 
   describe('rendering', () => {
 
     beforeEach(() => {
       wrapper = shallow(<CollaboratorForm {...props} />);
+    });
+
+    it('should render <Form /> with correct props', () => {
+      const form = wrapper.find('Form');
+      expect(form.length).to.eq(1);
+      expect(form.prop('mutation')).to.eq(CREATE_COLLABORATOR);
+      expect(form.prop('isEditForm')).to.eq(props.isEditForm);
     });
 
     it('should render a name field', () => {
@@ -36,6 +39,19 @@ describe('(Component) CollaboratorForm', () => {
           name='name'
           required
         />
+      );
+      expect(actual).to.equal(true);
+    });
+
+    it('should render a role field', () => {
+      const actual = wrapper.containsMatchingElement(
+        <TextInput
+            type='text'
+            placeholder='e.g Saxophonist'
+            label='Role'
+            name='role'
+            required
+          />
       );
       expect(actual).to.equal(true);
     });
@@ -89,28 +105,6 @@ describe('(Component) CollaboratorForm', () => {
         />
       );
       expect(actual).to.equal(true);
-    });
-
-    describe('submit button', () => {
-      it('should render', () => {
-        const actual = wrapper.containsMatchingElement(
-          <button type='submit'>Add Collaborator</button>
-        );
-        expect(actual).to.equal(true);
-      });
-
-      describe('when it\'s an `edit` form', () => {
-        it('should render submit button copy', () => {
-          wrapper.setProps({
-            isEditForm: true
-          });
-          const actual = wrapper.containsMatchingElement(
-            <button type='submit'>Update Collaborator</button>
-          );
-          expect(actual).to.equal(true);
-        });
-
-      });
     });
 
   });
