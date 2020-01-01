@@ -89,17 +89,6 @@ describe('(Utils) graphql-form', () => {
       }
     };
 
-    describe('with an empty string fieldValue param', () => {
-      it('should return the passed `allChildFields`', () => {
-        const result = handleChildFieldArray(
-          mockAllChildFields,
-          '',
-          'someFieldId'
-        );
-        expect(result).to.deep.eq(mockAllChildFields);
-      });
-    });
-
     describe('when there is an existing array for a given fieldId', () => {
       it('should add a fieldValue to the array', () => {
         const mockFieldValue = 'testing';

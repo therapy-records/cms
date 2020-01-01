@@ -1,7 +1,6 @@
 import {
   containsNumber,
-  isAString,
-  isEmptyString
+  isAString
 } from './strings';
 
 export const isChildField = fieldId => {
@@ -48,10 +47,6 @@ export const formatChildField = (fieldId, fieldValue) => {
 ////////////////
 
 export const handleChildFieldArray = (allChildFields, fieldValue, childFieldId) => {
-  if (isEmptyString(fieldValue)) {
-    return allChildFields;
-  }
-
   if (allChildFields[childFieldId]) {
     allChildFields[childFieldId] = [
       ...allChildFields[childFieldId],
