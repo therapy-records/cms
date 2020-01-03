@@ -45,14 +45,6 @@ function reducer(state, action) {
   }
 }
 
-const sanitizeFields = fields => {
-  return fields.map((f) => ({
-    id: f.id,
-    required: f.required,
-    value: f.value || ''
-  }))
-};
-
 const Form = ({
   mutation,
   fields,
@@ -61,7 +53,7 @@ const Form = ({
 
   const [state, dispatch] = useReducer(
     reducer,
-    sanitizeFields(fields),
+    fields,
     init
   );
 
@@ -84,6 +76,16 @@ const Form = ({
       }
     });
     dispatch({ type: 'isFormValid' });
+  }
+
+  const handleFieldError = field => {
+    const { required, value } = field;
+
+    if (required &&
+        (!value ||
+        isEmptyString(value))) {
+      return 'This field is required';
+    }
   }
 
   const handleSubmit = (ev) => {
@@ -124,11 +126,12 @@ const Form = ({
 
       <form onSubmit={handleSubmit} encType='multipart/form-data'>
 
-        {fields.map((field) => (
+        {state.fields.map((field) => (
           <div key={field.id} className='row-large'>
             <FormField
               {...field}
               onChange={(value) => handleFieldValueChange(field.id, value)}
+              error={handleFieldError(field)}
             />
           </div>
         ))}

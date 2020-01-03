@@ -18,7 +18,8 @@ const FormField = ({
   minImageDimensions,
   fieldsetLegend,
   items,
-  onChange
+  onChange,
+  error
 }) => {
   if (component === 'TextInput') {
     return (
@@ -29,6 +30,7 @@ const FormField = ({
         name={id}
         required={required}
         onChange={onChange}
+        error={error}
       />
     )
   } else if (component === 'RichTextEditor') {
@@ -91,7 +93,8 @@ FormField.propTypes = {
   }),
   fieldsetLegend: PropTypes.string,
   items: PropTypes.array,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  error: PropTypes.string
 };
 
 FormField.defaultProps = {
@@ -104,7 +107,8 @@ FormField.defaultProps = {
   minImageDimensions: {},
   fieldsetLegend: '',
   items: [],
-  onChange: () => {}
+  onChange: () => {},
+  error: ''
 };
 
 export default FormField;

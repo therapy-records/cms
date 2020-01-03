@@ -33,7 +33,8 @@ describe('(Component) FormField', () => {
           component: 'TextInput',
           placeholder: 'testing',
           label: 'Test',
-          required: true
+          required: true,
+          error: 'This is required'
         };
         wrapper.setProps({
           ...mockField,
@@ -48,6 +49,7 @@ describe('(Component) FormField', () => {
             name={mockField.id}
             required={mockField.required}
             onChange={mockOnChange}
+            error={mockField.error}
           />
         );
         expect(actual).to.eq(true);
