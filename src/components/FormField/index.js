@@ -17,7 +17,8 @@ const FormField = ({
   ctaCopy,
   minImageDimensions,
   fieldsetLegend,
-  items
+  items,
+  onChange
 }) => {
   if (component === 'TextInput') {
     return (
@@ -27,6 +28,7 @@ const FormField = ({
         label={label}
         name={id}
         required={required}
+        onChange={onChange}
       />
     )
   } else if (component === 'RichTextEditor') {
@@ -88,7 +90,8 @@ FormField.propTypes = {
     height: PropTypes.number
   }),
   fieldsetLegend: PropTypes.string,
-  items: PropTypes.array
+  items: PropTypes.array,
+  onChange: PropTypes.func
 };
 
 FormField.defaultProps = {
@@ -100,7 +103,8 @@ FormField.defaultProps = {
   ctaCopy: '',
   minImageDimensions: {},
   fieldsetLegend: '',
-  items: []
+  items: [],
+  onChange: () => {}
 };
 
 export default FormField;

@@ -1,41 +1,57 @@
-// import React, { useState } from 'react';
-import React from 'react';
+import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
 import { useMutation } from '@apollo/react-hooks';
-import { handleFormData } from '../../utils/graphql-form';
 import FormField from '../FormField';
+import { handleFormData } from '../../utils/graphql-form';
+import { isEmptyString } from '../../utils/strings';
 
-/*
-for each form field...
-on change.. dispatch in <Form />, updates value in reducer
-*/
+function init(initFields) {
+  return {
+    fields: initFields,
+    isValid: false
+  };
+}
 
-// function init(initFormValues) {
-//   return { formValues: initFormValues };
-// }
+function reducer(state, action) {
+  switch (action.type) {
+    case 'updateFieldValue': {
+      const { id, value } = action.payload;
 
-// function reducer(state, action) {
-//   switch (action.type) {
-//     case 'updateFormValue': {
-//       const {
-//         id,
-//         value
-//       } = action.payload;
+      const updatedFields = state.fields;
+      const formField = updatedFields.find(f => f.id === id);
+      formField.value = value;
 
-//       const formField = state.formValues.find(f => f.id === id);
-//       formField.value = value;
-//       return {
-//         formValues: [
-//           ...state.formValues,
-//           formField
-//         ]
-//       }
-//     }
+      return {
+        fields: updatedFields
+      }
+    }
 
-//     default:
-//       throw new Error();
-//   }
-// }
+    case 'isFormValid': {
+      const requiredFields = state.fields.filter(f => f.required);
+      const invalidRequiredFields = fields => fields.filter(f => (
+        !f.value ||
+        isEmptyString(f.value)
+      ));
+      const totalInvalidRequiredFields = invalidRequiredFields(requiredFields).length;
+
+      return {
+        ...state,
+        isValid: totalInvalidRequiredFields === 0
+      }
+    }
+
+    default:
+      throw new Error();
+  }
+}
+
+const sanitizeFields = fields => {
+  return fields.map((f) => ({
+    id: f.id,
+    required: f.required,
+    value: f.value || ''
+  }))
+};
 
 const Form = ({
   mutation,
@@ -43,12 +59,13 @@ const Form = ({
   isEditForm
 }) => {
 
-  // const [ submitDisabled, setSubmitDisabled ] = useState(true);
-  // const [ submitDisabled ] = useState(true);
-  // const [ formValues, setFormV ] = useState(true);
+  const [state, dispatch] = useReducer(
+    reducer,
+    sanitizeFields(fields),
+    init
+  );
 
-  // use reducer
-  // const [state, dispatch] = useReducer(reducer, formFields, init);
+  const { isValid } = state;
 
   const [
     postForm,
@@ -57,6 +74,17 @@ const Form = ({
       error
     }
   ] = useMutation(mutation);
+
+  const handleFieldValueChange = (fieldId, value) => {
+    dispatch({
+      type: 'updateFieldValue',
+      payload: {
+        id: fieldId,
+        value
+      }
+    });
+    dispatch({ type: 'isFormValid' });
+  }
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
@@ -96,14 +124,12 @@ const Form = ({
 
       <form onSubmit={handleSubmit} encType='multipart/form-data'>
 
-        {/* children */}
-
         {fields.map((field) => (
-          <div
-            key={field.id}
-            className='row-large'
-          >
-            <FormField {...field} />
+          <div key={field.id} className='row-large'>
+            <FormField
+              {...field}
+              onChange={(value) => handleFieldValueChange(field.id, value)}
+            />
           </div>
         ))}
 
@@ -111,6 +137,7 @@ const Form = ({
           <button
             type='submit'
             className='btn-lg btn-submit'
+            disabled={!isValid}
           >{submitButtonCopy}
           </button>
         </div>

@@ -17,6 +17,7 @@ describe('(Component) FormField', () => {
         type: 'text',
         component: 'TextInput'
       };
+  const mockOnChange = () => { };
 
   describe('rendering', () => {
 
@@ -34,7 +35,10 @@ describe('(Component) FormField', () => {
           label: 'Test',
           required: true
         };
-        wrapper.setProps({...mockField});
+        wrapper.setProps({
+          ...mockField,
+          onChange: mockOnChange
+        });
 
         const actual = wrapper.containsMatchingElement(
           <TextInput
@@ -43,6 +47,7 @@ describe('(Component) FormField', () => {
             label={mockField.label}
             name={mockField.id}
             required={mockField.required}
+            onChange={mockOnChange}
           />
         );
         expect(actual).to.eq(true);
