@@ -5,7 +5,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import { BrowserRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
 import Form from './index';
-import TextInput from '../FormElements/TextInput';
+import FormField from '../FormField';
 import { CREATE_COLLABORATOR } from '../../mutations';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -32,15 +32,16 @@ let mocks = [
 describe('(Component) Form', () => {
   let wrapper;
   const props = {
-    children: (
-      <TextInput
-        type='text'
-        placeholder='test'
-        label='Test'
-        name='name'
-        required
-      />
-    ),
+    fields: [
+      {
+        id: 'name',
+        type: 'text',
+        component: 'TextInput',
+        label: 'Name',
+        placeholder: 'Phil Collins',
+        required: true
+      }
+    ],
     mutation: CREATE_COLLABORATOR
   }
 
@@ -63,9 +64,9 @@ describe('(Component) Form', () => {
       );
     })
 
-    it('should render a form with children', () => {
+    it('should render a FormField from prop.fields', () => {
       const actual = wrapper.containsMatchingElement(
-        props.children
+        <FormField {...props.fields[0]} />
       );
       expect(actual).to.equal(true);
     });

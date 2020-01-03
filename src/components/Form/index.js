@@ -1,13 +1,54 @@
+// import React, { useState } from 'react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useMutation } from '@apollo/react-hooks';
 import { handleFormData } from '../../utils/graphql-form';
+import FormField from '../FormField';
+
+/*
+for each form field...
+on change.. dispatch in <Form />, updates value in reducer
+*/
+
+// function init(initFormValues) {
+//   return { formValues: initFormValues };
+// }
+
+// function reducer(state, action) {
+//   switch (action.type) {
+//     case 'updateFormValue': {
+//       const {
+//         id,
+//         value
+//       } = action.payload;
+
+//       const formField = state.formValues.find(f => f.id === id);
+//       formField.value = value;
+//       return {
+//         formValues: [
+//           ...state.formValues,
+//           formField
+//         ]
+//       }
+//     }
+
+//     default:
+//       throw new Error();
+//   }
+// }
 
 const Form = ({
-  children,
   mutation,
+  fields,
   isEditForm
 }) => {
+
+  // const [ submitDisabled, setSubmitDisabled ] = useState(true);
+  // const [ submitDisabled ] = useState(true);
+  // const [ formValues, setFormV ] = useState(true);
+
+  // use reducer
+  // const [state, dispatch] = useReducer(reducer, formFields, init);
 
   const [
     postForm,
@@ -34,7 +75,6 @@ const Form = ({
         console.log('*** errors ', errors);
       }
     )
-    
   }
 
   const submitButtonCopy = isEditForm ? 'Update' : 'Add';
@@ -56,7 +96,16 @@ const Form = ({
 
       <form onSubmit={handleSubmit} encType='multipart/form-data'>
 
-        {children}
+        {/* children */}
+
+        {fields.map((field) => (
+          <div
+            key={field.id}
+            className='row-large'
+          >
+            <FormField {...field} />
+          </div>
+        ))}
 
         <div className='row-large'>
           <button
@@ -72,8 +121,8 @@ const Form = ({
 };
 
 Form.propTypes = {
-  children: PropTypes.node.isRequired,
   mutation: PropTypes.object.isRequired,
+  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
   isEditForm: PropTypes.bool
 };
 
