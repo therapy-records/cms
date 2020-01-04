@@ -87,14 +87,4 @@ describe('(Component) TextInput', () => {
     });
   });
 
-  it('should render an error', () => {
-    const mockErrorMessage = 'this is incorrect';
-    wrapper.setProps({
-      error: mockErrorMessage
-    });
-    const actual = wrapper.containsMatchingElement(
-      <span className='form-error'>{props.label} is {mockErrorMessage}</span>
-    )
-    expect(actual).to.eq(true);
-  });
 });

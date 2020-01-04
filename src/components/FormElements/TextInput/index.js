@@ -10,7 +10,6 @@ const TextInput = ({
   type,
   required,
   maxLength,
-  error,
   value: initValue,
   onChange
 }) => {
@@ -40,7 +39,6 @@ const TextInput = ({
         onChange={e => handleOnChange(e.target.value)}
       />
 
-      {error && <span className='form-error'>{label} is {error}</span>}
     </div>
   );
 };
@@ -55,7 +53,6 @@ TextInput.propTypes = {
   autoFocus: PropTypes.bool,
   required: PropTypes.bool,
   maxLength: PropTypes.number,
-  error: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func
 };

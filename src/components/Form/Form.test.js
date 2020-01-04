@@ -73,7 +73,6 @@ describe('(Component) Form', () => {
       expect(formField.prop('placeholder')).to.eq(fieldObj.placeholder);
       expect(formField.prop('required')).to.eq(fieldObj.required);
       expect(formField.prop('onChange')).to.be.a('function');
-      expect(formField.prop('error')).to.eq(handleFieldError(fieldObj));
     });
 
     describe('submit button', () => {

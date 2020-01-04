@@ -1,92 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TextInput from '../FormElements/TextInput';
-import TextInputsList from '../FormElements/TextInputsList';
-import DropzoneImageUpload from '../DropzoneImageUpload';
-import RichTextEditor from '../RichTextEditor';
+import FormInput from './FormInput';
 
-const FormField = ({
-  id,
-  type,
-  component,
-  label,
-  title,
-  heading,
-  placeholder,
-  required,
-  ctaCopy,
-  minImageDimensions,
-  fieldsetLegend,
-  items,
-  onChange,
-  error,
-  dirty,
-  touched
-}) => {
-  if (component === 'TextInput') {
-    return (
-      <TextInput
-        type={type}
-        placeholder={placeholder}
-        label={label}
-        name={id}
-        required={required}
-        onChange={onChange}
-        error={(touched && error || dirty && error) ? error : ''}
-      />
-    )
-  } else if (component === 'RichTextEditor') {
-    return (
-      <RichTextEditor
-        title={title}
-        name={id}
-        onChange={onChange}
-        error={(touched && error || dirty && error) ? error : ''}
-        showSingleHiddenInputValue
-      />
-    )
-  } else if (component === 'ImageUpload') {
-    return (
-      <DropzoneImageUpload
-        title={title}
-        component={DropzoneImageUpload}
-        minImageDimensions={minImageDimensions}
-        inputProps={{
-          name: id
-        }}
-        showSingleHiddenInputValue
-        multiple={false}
-        ctaCopy={ctaCopy}
-        onChange={onChange}
-        error={(touched && error || dirty && error) ? error : ''}
-      />
-    )
-  } else if (component === 'TextInputsList') {
-    if (type === 'arrayOfStrings') {
-      return (
-        <TextInputsList
-          fieldsetLegend={fieldsetLegend}
-          items={items}
-          name={id}
-          showAddRemove
-          onChange={onChange}
-          error={(touched && error || dirty && error) ? error : ''}
-          required={required}
-        />
-      )
-    }
-    return (
-      <TextInputsList
-        heading={heading}
-        items={items}
-        name={id}
-        onChange={onChange}
-        error={(touched && error || dirty && error) ? error : ''}
-        required={required}
-      />
-    )
-  }
-  return null;
+const FormField = props => {
+  const {
+    touched,
+    error
+  } = props;
+
+  return (
+    <div>
+      <FormInput {...props} />
+      {touched && error && <span className='form-error'>{error}</span>}
+    </div>
+  );
 }
 
 FormField.propTypes = {
