@@ -1,5 +1,6 @@
 import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
+import { arrayOfObjectsHasValues } from '../../../utils/arrays';
 import './TextInputsList.css';
 
 function init(initialItems) {
@@ -45,12 +46,19 @@ const TextInputsList = ({
   items,
   fieldsetLegend,
   heading,
-  showAddRemove
+  showAddRemove,
+  onChange,
+  error,
+  required
 }) => {
   const [state, dispatch] = useReducer(reducer, items, init);
 
   const handleOnChange = (index, value) => {
     dispatch({ type: 'edit', payload: { index, value } });
+    if (onChange) {
+      // onChange(value);
+      onChange(state.listItems);
+    }
   };
 
   const { listItems } = state;
@@ -91,6 +99,18 @@ const TextInputsList = ({
         <button onClick={() => dispatch({ type: 'add' })}>Add</button>
       }
 
+      {required && <p>this is a required field....</p>}
+
+      {(required && !arrayOfObjectsHasValues(listItems)) && ( 
+        <span className='form-error'>Field is required</span>
+      )}
+
+      {error && (
+        <div>
+          <span className='form-error'>{error}</span>
+        </div>
+      )}
+
     </div>
   );
 };
@@ -100,13 +120,19 @@ TextInputsList.propTypes = {
   items: PropTypes.array.isRequired,
   fieldsetLegend: PropTypes.string,
   heading: PropTypes.string,
-  showAddRemove: PropTypes.bool
+  showAddRemove: PropTypes.bool,
+  onChange: PropTypes.func,
+  error: PropTypes.string,
+  required: PropTypes.bool
 };
 
 TextInputsList.defaultProps = {
   fieldsetLegend: '',
   heading: '',
-  showAddRemove: false
+  showAddRemove: false,
+  onChange: () => {},
+  error: '',
+  required: false
 };
 
 export default TextInputsList;

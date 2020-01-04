@@ -19,7 +19,9 @@ const FormField = ({
   fieldsetLegend,
   items,
   onChange,
-  error
+  error,
+  dirty,
+  touched
 }) => {
   if (component === 'TextInput') {
     return (
@@ -30,7 +32,7 @@ const FormField = ({
         name={id}
         required={required}
         onChange={onChange}
-        error={error}
+        error={(touched && error || dirty && error) ? error : ''}
       />
     )
   } else if (component === 'RichTextEditor') {
@@ -39,7 +41,7 @@ const FormField = ({
         title={title}
         name={id}
         onChange={onChange}
-        error={error}
+        error={(touched && error || dirty && error) ? error : ''}
         showSingleHiddenInputValue
       />
     )
@@ -56,7 +58,7 @@ const FormField = ({
         multiple={false}
         ctaCopy={ctaCopy}
         onChange={onChange}
-        error={error}
+        error={(touched && error || dirty && error) ? error : ''}
       />
     )
   } else if (component === 'TextInputsList') {
@@ -67,6 +69,9 @@ const FormField = ({
           items={items}
           name={id}
           showAddRemove
+          onChange={onChange}
+          error={(touched && error || dirty && error) ? error : ''}
+          required={required}
         />
       )
     }
@@ -75,6 +80,9 @@ const FormField = ({
         heading={heading}
         items={items}
         name={id}
+        onChange={onChange}
+        error={(touched && error || dirty && error) ? error : ''}
+        required={required}
       />
     )
   }
@@ -98,7 +106,9 @@ FormField.propTypes = {
   fieldsetLegend: PropTypes.string,
   items: PropTypes.array,
   onChange: PropTypes.func,
-  error: PropTypes.string
+  error: PropTypes.string,
+  touched: PropTypes.bool,
+  dirty: PropTypes.bool
 };
 
 FormField.defaultProps = {
@@ -112,7 +122,9 @@ FormField.defaultProps = {
   fieldsetLegend: '',
   items: [],
   onChange: () => {},
-  error: ''
+  error: '',
+  touched: false,
+  dirty: false
 };
 
 export default FormField;

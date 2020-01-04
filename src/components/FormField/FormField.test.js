@@ -129,15 +129,21 @@ describe('(Component) FormField', () => {
           items: [
             { value: 'test', id: 'test1' },
             { value: 'test', id: 'test2' }
-          ]
+          ],
+          error: 'Required field'
         };
-        wrapper.setProps({ ...mockField });
+        wrapper.setProps({
+          ...mockField,
+          onChange: mockOnChange
+        });
 
         const actual = wrapper.containsMatchingElement(
           <TextInputsList
             heading={mockField.heading}
             items={mockField.items}
             name={mockField.id}
+            onChange={mockOnChange}
+            error={mockField.error}
           />
         );
         expect(actual).to.eq(true);
@@ -150,15 +156,22 @@ describe('(Component) FormField', () => {
             component: 'TextInputsList',
             type: 'arrayOfStrings',
             fieldsetLegend: 'Test',
-            items: [ 'a', 'b', 'c' ]
+            items: [ 'a', 'b', 'c' ],
+            error: 'Required field'
           };
-          wrapper.setProps({ ...mockField });
+
+          wrapper.setProps({
+            ...mockField,
+            onChange: mockOnChange
+          });
 
           const actual = wrapper.containsMatchingElement(
             <TextInputsList
               fieldsetLegend={mockField.fieldsetLegend}
               items={mockField.items}
               name={mockField.id}
+              onChange={mockOnChange}
+              error={mockField.error}
               showAddRemove
             />
           );

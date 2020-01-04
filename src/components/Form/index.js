@@ -4,6 +4,35 @@ import { useMutation } from '@apollo/react-hooks';
 import FormField from '../FormField';
 import { handleFormData } from '../../utils/graphql-form';
 import { isEmptyString } from '../../utils/strings';
+// import { arrayOfObjectsHasValues } from '../../utils/arrays';
+
+// export const arrayOfObjectsHasValues = (arr = []) => {
+//   console.log('******************************************UTIL ARRAY: ', arr);
+//   // console.log('--------- UTIL arrayOfObjectsHasValues INIT ARRAY ', arr);
+//   const itemsWithValues = [];
+//   arr.map(i => {
+//     // (i.value &&
+//     // !isEmptyString(i.value)));
+//     if (i.value) {
+
+//       if (i.value.length > 0) {
+//         console.log(`UTIL pushinng, ${i.value} is NOT an empty string`)
+//         itemsWithValues.push(i);
+//       } else {
+//         console.log(`UTIL not pushinng. ${i.value} is empty string`);
+//       }
+//     }
+//     // return null;
+//   });
+//   console.log('UTIL itemsWithValues ', itemsWithValues);
+//   // console.log('--------- UTIL arrayOfObjectsHasValues arr ', itemsWithValues);
+//   // console.log('--------- UTIL arrayOfObjectsHasValues arr length ', itemsWithValues.length);
+//   if (itemsWithValues.length >= 1) {
+//     return true;
+//   }
+//   return false;
+// };
+
 
 function init(initFields) {
   return {
@@ -20,6 +49,12 @@ function reducer(state, action) {
       const updatedFields = state.fields;
       const formField = updatedFields.find(f => f.id === id);
       formField.value = value;
+      if (formField.value) {
+        formField.dirty = true;
+      }
+      if (!formField.touched) {
+        formField.touched = true;
+      }
 
       return {
         fields: updatedFields
@@ -34,24 +69,24 @@ function reducer(state, action) {
       ));
       const totalInvalidRequiredFields = invalidRequiredFields(requiredFields).length;
 
+      const updatedFields = state.fields;
+      updatedFields.map(formField => {
+        if (formField.required &&
+          (!formField.value || isEmptyString(formField.value))) {
+          formField.error = 'This field is required';
+        } else {
+          formField.error = null;
+        }
+      });
+
       return {
-        ...state,
+        fields: updatedFields,
         isValid: totalInvalidRequiredFields === 0
       }
     }
 
     default:
       throw new Error();
-  }
-}
-
-export const handleFieldError = field => {
-  const { required, value } = field;
-
-  if (required &&
-    (!value ||
-      isEmptyString(value))) {
-    return 'This field is required';
   }
 }
 
@@ -94,17 +129,23 @@ const Form = ({
     const postData = handleFormData(form);
     postData.avatarUrl = 'https://via.placeholder.com/250'; // TEMP
 
-    postForm({
-      variables: { input: postData },
-      errorPolicy: 'all'
-    }).then(
-      result => {
-        console.log('*** success');
-      },
-      (errors) => {
-        console.log('*** errors ', errors);
-      }
-    )
+    dispatch({ type: 'isFormValid' });
+
+    if (state.isValid) {
+      postForm({
+        variables: { input: postData },
+        errorPolicy: 'all'
+      }).then(
+        result => {
+          console.log('*** success');
+        },
+        (errors) => {
+          console.log('*** errors ', errors);
+        }
+      )
+    } else {
+      console.log('form not valid, not submitting')
+    }
   }
 
   const submitButtonCopy = isEditForm ? 'Update' : 'Add';
@@ -131,7 +172,6 @@ const Form = ({
             <FormField
               {...field}
               onChange={(value) => handleFieldValueChange(field.id, value)}
-              error={handleFieldError(field)}
             />
           </div>
         ))}
@@ -140,7 +180,7 @@ const Form = ({
           <button
             type='submit'
             className='btn-lg btn-submit'
-            disabled={!isValid}
+            disabled={isValid}
           >{submitButtonCopy}
           </button>
         </div>
