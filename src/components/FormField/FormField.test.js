@@ -61,14 +61,20 @@ describe('(Component) FormField', () => {
         const mockField = {
           id: 'test',
           component: 'RichTextEditor',
-          title: 'Test'
+          title: 'Test',
+          error: 'This is required'
         };
-        wrapper.setProps({...mockField});
+        wrapper.setProps({
+          ...mockField,
+          onChange: mockOnChange
+        });
 
         const actual = wrapper.containsMatchingElement(
           <RichTextEditor
             title={mockField.title}
             name={mockField.id}
+            onChange={mockOnChange}
+            error={mockField.error}
             showSingleHiddenInputValue
           />
         );
@@ -86,9 +92,13 @@ describe('(Component) FormField', () => {
             width: 10,
             height: 10
           },
-          ctaCopy: 'Drop it like it\'s hot'
+          ctaCopy: 'Drop it like it\'s hot',
+          error: 'Required field'
         };
-        wrapper.setProps({ ...mockField });
+        wrapper.setProps({
+          ...mockField,
+          onChange: mockOnChange
+        });
 
         const actual = wrapper.containsMatchingElement(
           <DropzoneImageUpload
@@ -101,6 +111,8 @@ describe('(Component) FormField', () => {
             showSingleHiddenInputValue
             multiple={false}
             ctaCopy={mockField.ctaCopy}
+            onChange={mockOnChange}
+            error={mockField.error}
           />
         );
         expect(actual).to.eq(true);

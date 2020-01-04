@@ -69,7 +69,18 @@ describe('(Component) RichTextEditor', () => {
           }
         });
         const actual = wrapper.containsMatchingElement(
-          <p>Copy is {mockError}</p>
+          <span>Copy is {mockError}</span>
+        );
+        expect(actual).to.eq(true);
+      });
+    });
+
+    describe('when there is props.error', () => {
+      it('should render the error', () => {
+        const mockError = 'required';
+        wrapper.setProps({ error: mockError });
+        const actual = wrapper.containsMatchingElement(
+          <span>Copy is {mockError}</span>
         );
         expect(actual).to.eq(true);
       });

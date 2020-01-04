@@ -45,6 +45,16 @@ function reducer(state, action) {
   }
 }
 
+export const handleFieldError = field => {
+  const { required, value } = field;
+
+  if (required &&
+    (!value ||
+      isEmptyString(value))) {
+    return 'This field is required';
+  }
+}
+
 const Form = ({
   mutation,
   fields,
@@ -76,16 +86,6 @@ const Form = ({
       }
     });
     dispatch({ type: 'isFormValid' });
-  }
-
-  const handleFieldError = field => {
-    const { required, value } = field;
-
-    if (required &&
-        (!value ||
-        isEmptyString(value))) {
-      return 'This field is required';
-    }
   }
 
   const handleSubmit = (ev) => {

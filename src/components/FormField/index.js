@@ -38,6 +38,8 @@ const FormField = ({
       <RichTextEditor
         title={title}
         name={id}
+        onChange={onChange}
+        error={error}
         showSingleHiddenInputValue
       />
     )
@@ -53,6 +55,8 @@ const FormField = ({
         showSingleHiddenInputValue
         multiple={false}
         ctaCopy={ctaCopy}
+        onChange={onChange}
+        error={error}
       />
     )
   } else if (component === 'TextInputsList') {

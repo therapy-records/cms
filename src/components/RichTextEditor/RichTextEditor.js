@@ -52,20 +52,24 @@ class _RichTextEditor extends React.Component {
       title,
       meta,
       name,
-      showSingleHiddenInputValue
+      showSingleHiddenInputValue,
+      error
     } = this.props;
 
     const stateValueAsHtml = this.state.value.toString('html');
     const renderHiddenInput = (showSingleHiddenInputValue &&
                               isAString(stateValueAsHtml));
 
+    const metaError = meta && meta.touched && meta.error;
+    const errorMessage = metaError || error;
+
     return (
       <div>
 
         {title && <h5>{title}<span className='required'>*</span></h5>}
 
-        {(meta && meta.touched && meta.error) && (
-          <p>Copy is {meta.error}</p>
+        {errorMessage && (
+          <span className='form-error'>Copy is {errorMessage}</span>
         )}
 
         <div className='react-rte-container'>
@@ -97,7 +101,8 @@ _RichTextEditor.propTypes = {
   title: PropTypes.string,
   onChange: PropTypes.func,
   name: PropTypes.string,
-  showSingleHiddenInputValue: PropTypes.bool
+  showSingleHiddenInputValue: PropTypes.bool,
+  error: PropTypes.string
 };
 
 _RichTextEditor.defaultProps = {
@@ -107,7 +112,8 @@ _RichTextEditor.defaultProps = {
   title: '',
   onChange: () => {},
   name: '',
-  showSingleHiddenInputValue: false
+  showSingleHiddenInputValue: false,
+  error: ''
 };
 
 export default _RichTextEditor;

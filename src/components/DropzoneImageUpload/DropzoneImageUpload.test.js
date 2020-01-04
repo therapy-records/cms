@@ -246,9 +246,20 @@ describe('(Component) DropzoneImageUpload', () => {
           ]
         });
         const actual = wrapper.containsAllMatchingElements([
-          <li key={0} className='form-error'>error message A</li>,
+          <li key={0}>error message A</li>,
           <li key={1}>error message B</li>
         ]);
+        expect(actual).to.eq(true);
+      });
+    });
+
+    describe('with props.error', () => {
+      it('should render the error', () => {
+        const mockError = 'Image is required';
+        wrapper.setProps({ error: mockError });
+        const actual = wrapper.containsMatchingElement(
+          <span>{mockError}</span>
+        );
         expect(actual).to.eq(true);
       });
     });

@@ -1,11 +1,9 @@
 import React from 'react';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-// import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
-import Form from './index';
-import FormField from '../FormField';
+import Form, { handleFieldError } from './index';
 import { CREATE_COLLABORATOR } from '../../mutations';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -65,10 +63,17 @@ describe('(Component) Form', () => {
     })
 
     it('should render a FormField from prop.fields', () => {
-      const actual = wrapper.containsMatchingElement(
-        <FormField {...props.fields[0]} />
-      );
-      expect(actual).to.equal(true);
+      const fieldObj = props.fields[0];
+      const formField = wrapper.find('FormField');
+      expect(formField.length).to.eq(1);
+      expect(formField.prop('id')).to.eq(fieldObj.id);
+      expect(formField.prop('type')).to.eq(fieldObj.type);
+      expect(formField.prop('component')).to.eq(fieldObj.component);
+      expect(formField.prop('label')).to.eq(fieldObj.label);
+      expect(formField.prop('placeholder')).to.eq(fieldObj.placeholder);
+      expect(formField.prop('required')).to.eq(fieldObj.required);
+      expect(formField.prop('onChange')).to.be.a('function');
+      expect(formField.prop('error')).to.eq(handleFieldError(fieldObj));
     });
 
     describe('submit button', () => {
