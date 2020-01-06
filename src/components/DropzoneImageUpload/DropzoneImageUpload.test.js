@@ -253,17 +253,6 @@ describe('(Component) DropzoneImageUpload', () => {
       });
     });
 
-    describe('with props.error', () => {
-      it('should render the error', () => {
-        const mockError = 'Image is required';
-        wrapper.setProps({ error: mockError });
-        const actual = wrapper.containsMatchingElement(
-          <span>{mockError}</span>
-        );
-        expect(actual).to.eq(true);
-      });
-    });
-
     describe('with props.showSingleHiddenInputValue', () => {
       it('should render a hidden input field with value from images state', () => {
         const mockImage = 'http://test.com/test.jpg';

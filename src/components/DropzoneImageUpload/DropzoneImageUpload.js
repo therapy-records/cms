@@ -146,8 +146,7 @@ export class DropzoneImageUpload extends React.Component {
       required,
       inputProps,
       showSingleHiddenInputValue,
-      multiple,
-      error
+      multiple
     } = this.props;
 
     const {
@@ -230,8 +229,6 @@ export class DropzoneImageUpload extends React.Component {
           </ul>
         : null}
 
-        {error && <span className='form-error'>{error}</span>}
-
       </div>
     )
   }
@@ -250,8 +247,7 @@ DropzoneImageUpload.propTypes = {
   minImageDimensions: PropTypes.object,
   ctaCopy: PropTypes.string,
   showSingleHiddenInputValue: PropTypes.bool,
-  multiple: PropTypes.bool,
-  error: PropTypes.string
+  multiple: PropTypes.bool
 };
 
 DropzoneImageUpload.defaultProps = {
@@ -264,8 +260,7 @@ DropzoneImageUpload.defaultProps = {
   ctaCopy: '',
   inputProps: {},
   showSingleHiddenInputValue: false,
-  multiple: true,
-  error: ''
+  multiple: true
 };
 
 export default DropzoneImageUpload;

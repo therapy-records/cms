@@ -75,17 +75,6 @@ describe('(Component) RichTextEditor', () => {
       });
     });
 
-    describe('when there is props.error', () => {
-      it('should render the error', () => {
-        const mockError = 'required';
-        wrapper.setProps({ error: mockError });
-        const actual = wrapper.containsMatchingElement(
-          <span>Copy is {mockError}</span>
-        );
-        expect(actual).to.eq(true);
-      });
-    });
-
     describe('when there is props.showSingleHiddenInputValue and a value in state', () => {
       it('should render a hidden input with value as HTML string', () => {
         const mockValue = 'test value';
