@@ -3,6 +3,7 @@ import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { act } from 'react-dom/test-utils';
 import { MockedProvider } from '@apollo/react-testing';
+import { BrowserRouter } from 'react-router-dom';
 import Form from './index';
 import Sticky from '../Sticky/Sticky';
 import LoadingSpinner from '../LoadingSpinner';
@@ -12,9 +13,9 @@ Enzyme.configure({ adapter: new Adapter() });
 
 const mockQueryVariables = {
   name: 'test',
+  avatarUrl: 'https://via.placeholder.com/250',
   role: 'test',
-  about: 'test',
-  avatarUrl: 'https://via.placeholder.com/250'
+  about: 'test'
 };
 
 let mocks = [
@@ -81,12 +82,15 @@ describe('(Component) Form', () => {
     wrapper.find('input#avatarUrl').simulate('change', { target: { value: mockQueryVariables.avatarUrl } });
   };
 
+
   describe('when there are no errors', () => {
     beforeEach(() => {
       wrapper = mount(
-        <MockedProvider mocks={mocks} addTypename={false}>
-          <Form {...props} />
-        </MockedProvider>
+        <BrowserRouter>
+          <MockedProvider mocks={mocks} addTypename={false}>
+            <Form {...props} />
+          </MockedProvider>
+        </BrowserRouter>
       );
     })
 
@@ -141,9 +145,11 @@ describe('(Component) Form', () => {
       describe('when it\'s an `edit` form', () => {
         beforeEach(() => {
           wrapper = mount(
-            <MockedProvider mocks={mocks}>
-              <Form {...props} isEditForm />
-            </MockedProvider>
+            <BrowserRouter>
+              <MockedProvider mocks={mocks} addTypename={false}>
+                <Form {...props} isEditForm />
+              </MockedProvider>
+            </BrowserRouter>
           );
         });
 
@@ -159,13 +165,39 @@ describe('(Component) Form', () => {
 
   });
 
-  describe('when the graphQL query is loading', () => {
+  // TODO test. issues getting the success response back from query. Loads of others having similar issue.
+  // describe('when the graphQL query is a success', () => {
+  //   it('should render <FormSuccess />', async() => {
 
+  //     wrapper = mount(
+  //       <BrowserRouter>
+  //         <MockedProvider mocks={mocks}>
+  //           <Form {...props} />
+  //         </MockedProvider>
+  //       </BrowserRouter>
+  //     );
+
+  //     completeRequiredFields(wrapper);
+  //     wrapper.find('form').simulate('submit');
+
+  //     await actions(wrapper, () => {
+  //       wrapper.update();
+  //       const actual = wrapper.containsMatchingElement(
+  //         <FormSuccess formRoute='Collaborators' />
+  //       );
+  //       expect(actual).to.eq(true);
+  //     });
+  //   });
+  // });
+
+  describe('when the graphQL query is loading', () => {
     it('should render <LoadingSpinner />', async() => {
       wrapper = mount(
-        <MockedProvider mocks={mocks}>
-          <Form {...props} />
-        </MockedProvider>
+        <BrowserRouter>
+          <MockedProvider mocks={mocks} addTypename={false}>
+            <Form {...props} />
+          </MockedProvider>
+        </BrowserRouter>
       );
 
       completeRequiredFields(wrapper);
@@ -194,9 +226,11 @@ describe('(Component) Form', () => {
       }];
 
       wrapper = mount(
-        <MockedProvider mocks={mocks} addTypename={false}>
-          <Form {...props} />
-        </MockedProvider>
+        <BrowserRouter>
+          <MockedProvider mocks={mocks} addTypename={false}>
+            <Form {...props} />
+          </MockedProvider>
+        </BrowserRouter>
       );
 
       completeRequiredFields(wrapper);
@@ -214,6 +248,5 @@ describe('(Component) Form', () => {
       });
     });
   });
-
 
 });

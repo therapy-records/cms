@@ -6,11 +6,13 @@ import { handleFormData } from '../../utils/graphql-form';
 import { isEmptyString } from '../../utils/strings';
 import Sticky from '../Sticky/Sticky';
 import LoadingSpinner from '../LoadingSpinner';
+import FormSuccess from './FormSuccess';
 
 function init(initFields) {
   return {
     fields: initFields,
-    isValid: false
+    isValid: false,
+    submitSuccess: false
   };
 }
 
@@ -58,6 +60,22 @@ function reducer(state, action) {
       }
     }
 
+    case 'submitSuccess': {
+      return {
+        ...state,
+        submitSuccess: true
+      }
+    }
+
+    // TODO: make sure no fields will have values etc
+    case 'resetForm': {
+      return {
+        ...state,
+        isValid: false,
+        submitSuccess: false
+      }
+    }
+
     default:
       throw new Error();
   }
@@ -75,7 +93,7 @@ const Form = ({
     init
   );
 
-  const { isValid } = state;
+  const { isValid, submitSuccess } = state;
 
   const [
     postForm,
@@ -109,7 +127,7 @@ const Form = ({
         variables: { input: postData }
       }).then(
         result => {
-          console.log('*** success');
+          dispatch({ type: 'submitSuccess' });
         },
         (errors) => {
           // removing this causes issues in unit test
@@ -118,9 +136,10 @@ const Form = ({
     } else {
       console.log('form not valid, not submitting')
     }
-  }
+  };
 
   const submitButtonCopy = isEditForm ? 'Update' : 'Add';
+  const showForm = !loading && !submitSuccess;
 
   return (
     <div>
@@ -130,7 +149,7 @@ const Form = ({
         fullScreen
       />
 
-      {!loading && (
+      {showForm && (
         <div>
         
           {error && (
@@ -157,11 +176,14 @@ const Form = ({
                 disabled={!isValid}
               >{submitButtonCopy}
               </button>
-              {loading && <p>loading</p>}
             </div>
 
           </form>
         </div>
+      )}
+
+      {submitSuccess && (
+        <FormSuccess formRoute='Collaborators' />
       )}
 
     </div>
