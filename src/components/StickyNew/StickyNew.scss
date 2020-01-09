@@ -1,0 +1,19 @@
+@import 'styles/variables.scss';
+
+.sticky-new {    
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    width: 100%;
+    padding-left: $sidebar-width;
+    p {
+      margin: 0;
+    }
+    > .inner {
+      padding: 1em;
+      text-align: center;
+      background: darkred;
+      color: #FFF;
+    }
+}

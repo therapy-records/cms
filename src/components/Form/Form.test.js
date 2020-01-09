@@ -5,7 +5,7 @@ import { act } from 'react-dom/test-utils';
 import { MockedProvider } from '@apollo/react-testing';
 import { BrowserRouter } from 'react-router-dom';
 import Form from './index';
-import Sticky from '../Sticky/Sticky';
+import StickyNew from '../StickyNew';
 import LoadingSpinner from '../LoadingSpinner';
 import { CREATE_COLLABORATOR } from '../../mutations';
 
@@ -238,9 +238,9 @@ describe('(Component) Form', () => {
       await actions(wrapper, () => {
         wrapper.update();
         const actual = wrapper.containsMatchingElement(
-          <Sticky>
-            <p>Form is invalid</p>
-          </Sticky>
+          <StickyNew>
+            <p>Sorry, something has gone wrong.</p>
+          </StickyNew>
         );
         expect(actual).to.equal(true);
       });

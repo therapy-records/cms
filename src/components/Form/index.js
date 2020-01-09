@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/react-hooks';
 import FormField from '../FormField';
 import { handleFormData } from '../../utils/graphql-form';
 import { isEmptyString } from '../../utils/strings';
-import Sticky from '../Sticky/Sticky';
+import StickyNew from '../StickyNew';
 import LoadingSpinner from '../LoadingSpinner';
 import FormSuccess from './FormSuccess';
 
@@ -161,11 +161,11 @@ const Form = ({
 
       {showForm && (
         <div>
-        
+
           {error && (
-            <Sticky>
-              <p>Form is invalid</p>
-            </Sticky>
+            <StickyNew>
+              <p>Sorry, something has gone wrong.</p>
+            </StickyNew>
           )}
 
           <form onSubmit={handleSubmit} encType='multipart/form-data'>
