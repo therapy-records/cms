@@ -1,9 +1,10 @@
 import React from 'react';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { BrowserRouter } from 'react-router-dom';
+import { act } from 'react-dom/test-utils';
 import { MockedProvider } from '@apollo/react-testing';
-import Form, { handleFieldError } from './index';
+import Form from './index';
+import Sticky from '../Sticky/Sticky';
 import { CREATE_COLLABORATOR } from '../../mutations';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -14,14 +15,17 @@ let mocks = [
       query: CREATE_COLLABORATOR,
       variables: {
         name: 'test',
-        avatarUrl: 'test.com'
+        role: 'test',
+        about: 'test',
+        avatarUrl: 'https://via.placeholder.com/250'
       }
     },
     result: {
       data: {
-        _id: 'abc1',
         name: 'test',
-        avatarUrl: 'test.com'
+        role: 'test',
+        about: 'test',
+        avatarUrl: 'https://via.placeholder.com/250'
       }
     }
   }
@@ -36,21 +40,42 @@ describe('(Component) Form', () => {
         type: 'text',
         component: 'TextInput',
         label: 'Name',
-        placeholder: 'Phil Collins',
+        required: true
+      },
+      {
+        id: 'role',
+        type: 'text',
+        component: 'TextInput',
+        label: 'Role',
+        required: true
+      },
+      {
+        id: 'about',
+        type: 'text',
+        component: 'TextInput',
+        label: 'About',
+        required: true
+      },
+      {
+        id: 'avatarUrl',
+        type: 'text',
+        component: 'TextInput',
+        label: 'Avatar Url',
         required: true
       }
     ],
     mutation: CREATE_COLLABORATOR
   }
 
-  // const actions = async (wrapper, _actions) => {
-  //   await act(async () => {
-  //     await (new Promise(resolve => setTimeout(resolve, 0)));
-  //     _actions();
-  //     wrapper.update();
-  //   });
-  // };
+  const actions = async(wrapper, _actions) => {
+    await act(async() => {
+      await (new Promise(resolve => setTimeout(resolve, 0)));
+      _actions();
+      wrapper.update();
+    });
+  };
 
+  /*
   describe('when there are no errors', () => {
     beforeEach(() => {
       wrapper = mount(
@@ -105,5 +130,48 @@ describe('(Component) Form', () => {
     });
 
   });
+  */
+
+  describe('when the graphQL query errors', () => {
+    it('should render <ErrorMessage />', async() => {
+      mocks = [{
+        request: {
+          query: CREATE_COLLABORATOR,
+          variables: {
+            name: 'test',
+            role: 'test',
+            about: 'test',
+            avatarUrl: 'https://via.placeholder.com/250'
+            // collabOn: ['a', 'b']
+          }
+        },
+        error: new Error('Oh no')
+      }];
+
+      wrapper = mount(
+        <MockedProvider mocks={mocks} addTypename={false}>
+          <Form {...props} />
+        </MockedProvider>
+      );
+
+      wrapper.find('input#name').simulate('change', { target: { value: 'test' } });
+      wrapper.find('input#role').simulate('change', { target: { value: 'test' } });
+      wrapper.find('input#about').simulate('change', { target: { value: 'test' } });
+      wrapper.find('input#avatarUrl').simulate('change', { target: { value: 'https://via.placeholder.com/250' } });
+
+      wrapper.find('form').simulate('submit');
+
+      await actions(wrapper, () => {
+        wrapper.update();
+        const actual = wrapper.containsMatchingElement(
+          <Sticky>
+            <p>Form is invalid</p>
+          </Sticky>
+        );
+        expect(actual).to.equal(true);
+      });
+    });
+  });
+
 
 });
