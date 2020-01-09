@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const FormSuccess = ({ formRoute }) => (
+const FormSuccess = ({ formRoute, onReset }) => (
   <div>
     <h3>Success! <small>🚀</small></h3>
 
@@ -14,7 +14,8 @@ const FormSuccess = ({ formRoute }) => (
       >Go to {formRoute}
       </Link>
 
-      <button>
+      <button
+        onClick={onReset}>
         Create another 
       </button>
     </div>
@@ -22,7 +23,8 @@ const FormSuccess = ({ formRoute }) => (
 );
 
 FormSuccess.propTypes = {
-  formRoute: PropTypes.string.isRequired
+  formRoute: PropTypes.string.isRequired,
+  onReset: PropTypes.func.isRequired
 };
 
 export default FormSuccess;

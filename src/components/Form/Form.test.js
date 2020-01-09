@@ -182,10 +182,8 @@ describe('(Component) Form', () => {
 
   //     await actions(wrapper, () => {
   //       wrapper.update();
-  //       const actual = wrapper.containsMatchingElement(
-  //         <FormSuccess formRoute='Collaborators' />
-  //       );
-  //       expect(actual).to.eq(true);
+  //       const formSuccess = wrapper.find('FormSuccess');
+  //       expect(formSuccess.length).to.eq(1); 
   //     });
   //   });
   // });

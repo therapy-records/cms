@@ -9,7 +9,8 @@ Enzyme.configure({ adapter: new Adapter() });
 describe('(Component) FormSuccess', () => {
   let wrapper;
   const props = {
-    formRoute: 'Test'
+    formRoute: 'Test',
+    onReset: () => {}
   };
 
   beforeEach(() => {
@@ -32,7 +33,9 @@ describe('(Component) FormSuccess', () => {
 
   it('should render a button', () => {
     const actual = wrapper.containsMatchingElement(
-      <button>
+      <button
+        onClick={props.onReset}
+      >
         Create another
       </button>
     );

@@ -67,10 +67,20 @@ function reducer(state, action) {
       }
     }
 
-    // TODO: make sure no fields will have values etc
     case 'resetForm': {
+      const updatedFields = state.fields;
+      updatedFields.map(formField => {
+        if (formField.items) {
+          formField.items.map(item => {
+            item.value = '';
+          });
+        }
+        formField.value = '';
+      });
+
       return {
         ...state,
+        fields: updatedFields,
         isValid: false,
         submitSuccess: false
       }
@@ -183,7 +193,10 @@ const Form = ({
       )}
 
       {submitSuccess && (
-        <FormSuccess formRoute='Collaborators' />
+        <FormSuccess
+          formRoute='Collaborators'
+          onReset={() => dispatch({ type: 'resetForm' })}
+        />
       )}
 
     </div>
