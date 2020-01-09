@@ -105,7 +105,6 @@ const Form = ({
     dispatch({ type: 'isFormValid' });
 
     if (state.isValid) {
-      console.log('form is valid, submitting!');
       postForm({
         variables: { input: postData }
       }).then(
@@ -122,8 +121,6 @@ const Form = ({
   }
 
   const submitButtonCopy = isEditForm ? 'Update' : 'Add';
-
-  // console.log('error ? ', error);
 
   return (
     <div>
@@ -157,7 +154,7 @@ const Form = ({
               <button
                 type='submit'
                 className='btn-lg btn-submit'
-                disabled={isValid}
+                disabled={!isValid}
               >{submitButtonCopy}
               </button>
               {loading && <p>loading</p>}

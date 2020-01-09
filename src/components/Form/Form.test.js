@@ -5,28 +5,26 @@ import { act } from 'react-dom/test-utils';
 import { MockedProvider } from '@apollo/react-testing';
 import Form from './index';
 import Sticky from '../Sticky/Sticky';
+import LoadingSpinner from '../LoadingSpinner';
 import { CREATE_COLLABORATOR } from '../../mutations';
 
 Enzyme.configure({ adapter: new Adapter() });
+
+const mockQueryVariables = {
+  name: 'test',
+  role: 'test',
+  about: 'test',
+  avatarUrl: 'https://via.placeholder.com/250'
+};
 
 let mocks = [
   {
     request: {
       query: CREATE_COLLABORATOR,
-      variables: {
-        name: 'test',
-        role: 'test',
-        about: 'test',
-        avatarUrl: 'https://via.placeholder.com/250'
-      }
+      variables: mockQueryVariables
     },
     result: {
-      data: {
-        name: 'test',
-        role: 'test',
-        about: 'test',
-        avatarUrl: 'https://via.placeholder.com/250'
-      }
+      data: mockQueryVariables
     }
   }
 ];
@@ -40,6 +38,7 @@ describe('(Component) Form', () => {
         type: 'text',
         component: 'TextInput',
         label: 'Name',
+        placeholder: 'test',
         required: true
       },
       {
@@ -75,21 +74,25 @@ describe('(Component) Form', () => {
     });
   };
 
-  /*
+  const completeRequiredFields = wrapper => {
+    wrapper.find('input#name').simulate('change', { target: { value: 'test' } });
+    wrapper.find('input#role').simulate('change', { target: { value: 'test' } });
+    wrapper.find('input#about').simulate('change', { target: { value: 'test' } });
+    wrapper.find('input#avatarUrl').simulate('change', { target: { value: mockQueryVariables.avatarUrl } });
+  };
+
   describe('when there are no errors', () => {
     beforeEach(() => {
       wrapper = mount(
-        <BrowserRouter>
-          <MockedProvider mocks={mocks} addTypename={false}>
-            <Form {...props} />
-          </MockedProvider>
-        </BrowserRouter>
+        <MockedProvider mocks={mocks} addTypename={false}>
+          <Form {...props} />
+        </MockedProvider>
       );
     })
 
     it('should render a FormField from prop.fields', () => {
       const fieldObj = props.fields[0];
-      const formField = wrapper.find('FormField');
+      const formField = wrapper.find('FormField').first();
       expect(formField.length).to.eq(1);
       expect(formField.prop('id')).to.eq(fieldObj.id);
       expect(formField.prop('type')).to.eq(fieldObj.type);
@@ -108,14 +111,39 @@ describe('(Component) Form', () => {
         expect(actual).to.equal(true);
       });
 
+      describe('when form is invalid', () => {
+        it('should be disabled', () => {
+          const actual = wrapper.containsMatchingElement(
+            <button
+              type='submit'
+              disabled
+            >Add
+            </button>
+          );
+          expect(actual).to.equal(true);
+        });
+      });
+
+      describe('when form is valid', () => {
+        it('should NOT be disabled', () => {
+          completeRequiredFields(wrapper);
+          const actual = wrapper.containsMatchingElement(
+            <button
+              type='submit'
+              disabled={false}
+            >Add
+            </button>
+          );
+          expect(actual).to.equal(true);
+        });
+      });
+
       describe('when it\'s an `edit` form', () => {
         beforeEach(() => {
           wrapper = mount(
-            <BrowserRouter>
-              <MockedProvider mocks={mocks} addTypename={false}>
-                <Form {...props} isEditForm />
-              </MockedProvider>
-            </BrowserRouter>
+            <MockedProvider mocks={mocks}>
+              <Form {...props} isEditForm />
+            </MockedProvider>
           );
         });
 
@@ -130,20 +158,37 @@ describe('(Component) Form', () => {
     });
 
   });
-  */
+
+  describe('when the graphQL query is loading', () => {
+
+    it('should render <LoadingSpinner />', async() => {
+      wrapper = mount(
+        <MockedProvider mocks={mocks}>
+          <Form {...props} />
+        </MockedProvider>
+      );
+
+      completeRequiredFields(wrapper);
+      wrapper.find('form').simulate('submit');
+
+      await actions(wrapper, () => {
+        const actual = wrapper.containsMatchingElement(
+          <LoadingSpinner
+            active
+            fullScreen
+          />
+        );
+        expect(actual).to.equal(true);
+      });
+    });
+  });
 
   describe('when the graphQL query errors', () => {
     it('should render <ErrorMessage />', async() => {
       mocks = [{
         request: {
           query: CREATE_COLLABORATOR,
-          variables: {
-            name: 'test',
-            role: 'test',
-            about: 'test',
-            avatarUrl: 'https://via.placeholder.com/250'
-            // collabOn: ['a', 'b']
-          }
+          variables: mockQueryVariables
         },
         error: new Error('Oh no')
       }];
@@ -154,10 +199,7 @@ describe('(Component) Form', () => {
         </MockedProvider>
       );
 
-      wrapper.find('input#name').simulate('change', { target: { value: 'test' } });
-      wrapper.find('input#role').simulate('change', { target: { value: 'test' } });
-      wrapper.find('input#about').simulate('change', { target: { value: 'test' } });
-      wrapper.find('input#avatarUrl').simulate('change', { target: { value: 'https://via.placeholder.com/250' } });
+      completeRequiredFields(wrapper);
 
       wrapper.find('form').simulate('submit');
 
