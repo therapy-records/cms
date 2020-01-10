@@ -180,12 +180,12 @@ const Form = ({
             ))}
 
             <div className='row-large'>
-              <button
+              <input
                 type='submit'
                 className='btn-lg btn-submit'
                 disabled={!isValid}
-              >{submitButtonCopy}
-              </button>
+                value={submitButtonCopy}
+              />
             </div>
 
           </form>

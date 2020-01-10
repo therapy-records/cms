@@ -14,7 +14,8 @@ a {
 }
 
 button,
-.btn {
+.btn,
+input[type="submit"] {
   border: 0 none;
   display: inline-block;
   background: $color-blue-1;
@@ -120,7 +121,8 @@ button,
   font-size: .85em;
 }
 
-button[disabled] {
+button[disabled],
+input[type="submit"]:disabled {
   opacity: .7;
   &:hover,
   &:focus {
@@ -128,7 +130,8 @@ button[disabled] {
   }
 }
 
-.btn-lg {
+.btn-lg,
+input[type="submit"] {
   padding: 1.5em 2em;
   width: 100%;
 }

@@ -110,7 +110,10 @@ describe('(Component) Form', () => {
     describe('submit button', () => {
       it('should render', () => {
         const actual = wrapper.containsMatchingElement(
-          <button type='submit'>Add</button>
+          <input
+            type='submit'
+            value='Add'
+          />
         );
         expect(actual).to.equal(true);
       });
@@ -118,11 +121,11 @@ describe('(Component) Form', () => {
       describe('when form is invalid', () => {
         it('should be disabled', () => {
           const actual = wrapper.containsMatchingElement(
-            <button
+            <input
               type='submit'
               disabled
-            >Add
-            </button>
+              value='Add'
+            />
           );
           expect(actual).to.equal(true);
         });
@@ -132,11 +135,11 @@ describe('(Component) Form', () => {
         it('should NOT be disabled', () => {
           completeRequiredFields(wrapper);
           const actual = wrapper.containsMatchingElement(
-            <button
+            <input
               type='submit'
               disabled={false}
-            >Add
-            </button>
+              value='Add'
+            />
           );
           expect(actual).to.equal(true);
         });
@@ -155,7 +158,10 @@ describe('(Component) Form', () => {
 
         it('should render submit button copy', () => {
           const actual = wrapper.containsMatchingElement(
-            <button type='submit'>Update</button>
+            <input
+              type='submit'
+              value='Update'
+            />
           );
           expect(actual).to.equal(true);
         });
