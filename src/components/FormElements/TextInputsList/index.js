@@ -86,7 +86,10 @@ const TextInputsList = ({
                   onChange={ev => handleOnChange(index, ev.target.value)}
                 />
                 {showAddRemove &&
-                  <button onClick={() => dispatch({ type: 'remove', payload: { index }})}>Remove</button>
+                  <button
+                    type='button'
+                    onClick={() => dispatch({ type: 'remove', payload: { index }})}
+                  >Remove</button>
                 }
               </li>
             )
@@ -96,7 +99,10 @@ const TextInputsList = ({
       </fieldset>
 
       {showAddRemove &&
-        <button onClick={() => dispatch({ type: 'add' })}>Add</button>
+        <button
+          type='button'
+          onClick={() => dispatch({ type: 'add' })}
+        >Add</button>
       }
 
       {required && <p>this is a required field....</p>}
