@@ -134,7 +134,7 @@ export class JournalismForm extends React.Component {
 
           <div className='row-large'>
             <button type='submit'
-              className='btn-lg btn-submit'
+              className='btn-lg'
               disabled={error || pristine || submitting || error || invalid}
               onClick={() => this.handleSubmit()}>
               {submitButtonCopy}

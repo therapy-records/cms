@@ -182,7 +182,7 @@ const Form = ({
             <div className='row-large'>
               <input
                 type='submit'
-                className='btn-lg btn-submit'
+                className='btn-lg'
                 disabled={!isValid}
                 value={submitButtonCopy}
               />
