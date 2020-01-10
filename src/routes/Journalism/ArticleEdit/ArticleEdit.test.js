@@ -2,7 +2,6 @@ import React from 'react'
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import configureMockStore from 'redux-mock-store';
-import {Link} from 'react-router-dom';
 import ConnectedArticleEdit, {ArticleEdit} from './index';
 import JournalismForm from '../../../components/JournalismForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
@@ -14,6 +13,7 @@ import {
   selectSelectedJournalismArticle,
   selectJournalismEditSuccess
 } from '../../../selectors/journalism';
+import FormSuccess from '../../../components/FormSuccess';
 import redirect from '../../../utils/redirect';
 
 Enzyme.configure({adapter: new Adapter()});
@@ -166,11 +166,13 @@ describe('(Component) Journalism - ArticleEdit', () => {
         wrapper = shallow(<ArticleEdit {...props} />);
       });
 
-      it('should show success message and link', () => {
-        const actual = wrapper.containsAllMatchingElements([
-          <h2>Successfully updated! <small>🚀</small></h2>,
-          <Link to='/journalism'>Go to Journalism</Link>
-        ]);
+      it('should render <FormSuccess />', () => {
+        const actual = wrapper.containsMatchingElement(
+          <FormSuccess
+            title='Journalism'
+            createCopy='Create another article'
+          />
+        );
         expect(actual).to.equal(true);
       });
     });

@@ -18,6 +18,7 @@ import {
 } from '../../../selectors/uiState';
 import NewsForm from '../../../components/NewsForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
+import FormSuccess from '../../../components/FormSuccess';
 import redirect from '../../../utils/redirect';
 
 export class ArticleEdit extends React.Component {
@@ -82,12 +83,10 @@ export class ArticleEdit extends React.Component {
         />
 
         {(!promiseLoading && promiseSuccess && editSuccess) &&
-          <div>
-            <h2>Successfully updated! <small>🚀</small></h2>
-            <div className='inline-flex'>
-              <Link to='/news'>Go to News</Link>
-            </div>
-          </div>
+          <FormSuccess
+            title='News'
+            createCopy='Create another article'
+          />
         }
 
         {(article && article.isDeleted) &&

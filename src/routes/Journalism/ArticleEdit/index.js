@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { resetPromiseState } from '../../../actions/uiState';
 import {
@@ -19,6 +18,7 @@ import {
   selectUiStateLoading,
   selectUiStateSuccess
 } from '../../../selectors/uiState';
+import FormSuccess from '../../../components/FormSuccess';
 import JournalismForm from '../../../components/JournalismForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import redirect from '../../../utils/redirect';
@@ -87,10 +87,10 @@ export class ArticleEdit extends React.Component {
         />
 
         {!promiseLoading && (promiseSuccess && editSuccess) &&
-          <div>
-            <h2>Successfully updated! <small>🚀</small></h2>
-            <Link to='/journalism' className='btn'>Go to Journalism</Link>
-          </div>
+          <FormSuccess
+            title='Journalism'
+            createCopy='Create another article'
+          />
         }
 
         {(article && article.isDeleted) &&

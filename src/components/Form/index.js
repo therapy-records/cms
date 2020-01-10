@@ -6,7 +6,7 @@ import { handleFormData } from '../../utils/graphql-form';
 import { isEmptyString } from '../../utils/strings';
 import StickyNew from '../StickyNew';
 import LoadingSpinner from '../LoadingSpinner';
-import FormSuccess from './FormSuccess';
+import FormSuccess from '../FormSuccess';
 
 function init(initFields) {
   return {
@@ -194,7 +194,8 @@ const Form = ({
 
       {submitSuccess && (
         <FormSuccess
-          formRoute='Collaborators'
+          title='Collaborators'
+          createCopy='Create another Collaborator'
           onReset={() => dispatch({ type: 'resetForm' })}
         />
       )}

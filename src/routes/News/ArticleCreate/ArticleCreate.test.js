@@ -2,10 +2,10 @@ import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import configureMockStore from 'redux-mock-store';
-import { Link } from 'react-router-dom';
 import ConnectedArticleCreate, { ArticleCreate } from './index';
 import NewsForm from '../../../components/NewsForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
+import FormSuccess from '../../../components/FormSuccess';
 import {
   selectUiStateLoading,
   selectUiStateSuccess
@@ -85,27 +85,15 @@ describe('(Component) News - ArticleCreate', () => {
         });
       });
 
-      it('should render success message and link', () => {
+      it('should render <FormSuccess /', () => {
         const actual = wrapper.containsMatchingElement(
-          <h2>Successfully created! <small>🚀</small></h2>
+          <FormSuccess
+            title='News'
+            createCopy='Create another article'
+            onReset={wrapper.instance().handleOnReset}
+          />
         );
         expect(actual).to.equal(true);
-      });
-
-      it('should render a link to news page', () => {
-        const actual = wrapper.containsMatchingElement(
-          <Link to='/news' className='btn'>Go to news</Link>
-        );
-        expect(actual).to.eq(true);
-      });
-
-      it('should render a `create another article` button', () => {
-        const actual = wrapper.containsMatchingElement(
-          <button
-            onClick={wrapper.instance().handleOnReset}
-          >Create another article</button>
-        );
-        expect(actual).to.eq(true);
       });
     });
   });

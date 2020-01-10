@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { postJournalism } from '../../../actions/journalism';
 import { resetPromiseState } from '../../../actions/uiState';
@@ -8,6 +7,7 @@ import {
   selectUiStateLoading,
   selectUiStateSuccess
 } from '../../../selectors/uiState';
+import FormSuccess from '../../../components/FormSuccess';
 import JournalismForm from '../../../components/JournalismForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
@@ -42,13 +42,11 @@ export class ArticleCreate extends React.Component {
         />
 
         {!promiseLoading && promiseSuccess &&
-          <div>
-            <h2>Successfully created! <small>🚀</small></h2>
-            <div className='inline-flex'>
-              <Link to='/journalism' className='btn'>Go to Journalism</Link>
-              <button onClick={this.handleOnReset}>Create another article</button>
-            </div>
-          </div>
+          <FormSuccess
+            title='Journalism'
+            createCopy='Create another article'
+            onReset={this.handleOnReset}
+          />
         }
 
         {!promiseLoading && !promiseSuccess &&

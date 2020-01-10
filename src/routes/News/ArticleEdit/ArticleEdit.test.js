@@ -10,7 +10,7 @@ import {
   selectUiStateLoading,
   selectUiStateSuccess
 } from '../../../selectors/uiState';
-import { selectSelectedNewsArticle } from '../../../selectors/news';
+import FormSuccess from '../../../components/FormSuccess';
 import redirect from '../../../utils/redirect';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -155,11 +155,13 @@ describe('(Component) News - ArticleEdit', () => {
         wrapper = shallow(<ArticleEdit {...props} />);
       });
 
-      it('should show success message and link', () => {
-        const actual = wrapper.containsAllMatchingElements([
-          <h2>Successfully updated! <small>🚀</small></h2>,
-          <Link to='/news'>Go to News</Link>
-        ]);
+      it('should render <FormSuccess />', () => {
+        const actual = wrapper.containsMatchingElement(
+          <FormSuccess
+            title='News'
+            createCopy='Create another article'
+          />
+        );
         expect(actual).to.equal(true);
       });
 
