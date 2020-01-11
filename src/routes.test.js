@@ -22,6 +22,7 @@ import Press from './routes/Press';
 import Collaborators from './routes/Collaborators/Home';
 import CollaboratorsCreate from './routes/Collaborators/Create';
 import CollaboratorsView from './routes/Collaborators/View';
+import CollaboratorEdit from './routes/Collaborators/Edit';
 import Gigs from './routes/Gigs';
 import Videos from './routes/Videos';
 
@@ -255,6 +256,20 @@ describe('Router', () => {
     );
     expect(actual).to.equal(true);
   });
+
+  it('should render collaborators view route', () => {
+    const actual = wrapper.containsMatchingElement(
+      <ProtectedRoute
+        path="/collaborators/:id/edit"
+        component={CollaboratorEdit}
+        isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
+        exact
+      />
+    );
+    expect(actual).to.equal(true);
+  });
+
 
   it('should render videos route', () => {
     const actual = wrapper.containsMatchingElement(

@@ -19,6 +19,7 @@ import Press from './routes/Press';
 import Collaborators from './routes/Collaborators/Home';
 import CollaboratorsCreate from './routes/Collaborators/Create';
 import CollaboratorView from './routes/Collaborators/View';
+import CollaboratorEdit from './routes/Collaborators/Edit';
 import Gigs from './routes/Gigs';
 import Videos from './routes/Videos';
 import { authCheck } from './actions/auth';
@@ -158,6 +159,14 @@ export class Router extends Component {
                 <ProtectedRoute
                   path="/collaborators/:id"
                   component={CollaboratorView}
+                  isAuth={isAuth}
+                  onAuthCheck={onAuthCheck}
+                  exact
+                />
+
+                <ProtectedRoute
+                  path="/collaborators/:id/edit"
+                  component={CollaboratorEdit}
                   isAuth={isAuth}
                   onAuthCheck={onAuthCheck}
                   exact
