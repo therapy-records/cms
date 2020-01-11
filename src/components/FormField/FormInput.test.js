@@ -7,7 +7,6 @@ import TextInputsList from '../FormElements/TextInputsList';
 import DropzoneImageUpload from '../DropzoneImageUpload';
 import RichTextEditor from '../RichTextEditor';
 
-
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) FormInput', () => {

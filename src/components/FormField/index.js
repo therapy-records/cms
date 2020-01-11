@@ -1,16 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FormInput from './FormInput';
+import FormFieldLabel from './FormFieldLabel';
+import FieldsetLegend from './FieldsetLegend';
 
 const FormField = props => {
   const {
+    id,
+    label,
+    required,
+    fieldsetLegend,
     touched,
     error
   } = props;
 
   return (
     <div>
+
+      {fieldsetLegend ? (
+        <FieldsetLegend
+          id={id}
+          legend={fieldsetLegend}
+          required={required}
+        />
+      ): (
+        <FormFieldLabel
+          id={id}
+          label={label}
+          required={required}
+        />
+      )}
+
       <FormInput {...props} />
+
       {touched && error && <span className='form-error'>{error}</span>}
     </div>
   );

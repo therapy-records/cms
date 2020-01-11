@@ -3,6 +3,8 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import FormField from './index';
 import FormInput from './FormInput';
+import FormFieldLabel from './FormFieldLabel';
+import FieldsetLegend from './FieldsetLegend';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -36,6 +38,40 @@ describe('(Component) FormField', () => {
       <FormInput {...props} />
     );
     expect(actual).to.eq(true);
+  });
+
+  describe('with props.label', () => {
+    it('should render <FormLabel />', () => {
+      const mockLabel = 'oh no';
+      wrapper.setProps({
+        label: mockLabel
+      });
+      const actual = wrapper.containsMatchingElement(
+        <FormFieldLabel
+          id={props.id}
+          label={mockLabel}
+          required={props.required}
+        />
+      );
+      expect(actual).to.eq(true);
+    });
+  });
+
+  describe('with props.fieldsetLegend', () => {
+    it('should render <FieldsetLegend />', () => {
+      const mockFieldsetLegend = 'oh no';
+      wrapper.setProps({
+        fieldsetLegend: mockFieldsetLegend
+      });
+      const actual = wrapper.containsMatchingElement(
+        <FieldsetLegend
+          id={props.id}
+          legend={mockFieldsetLegend}
+          required={props.required}
+        />
+      );
+      expect(actual).to.eq(true);
+    });
   });
 
   describe('with props.touched', () => {

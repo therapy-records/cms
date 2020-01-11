@@ -40,13 +40,6 @@ describe('(Component) TextInputsList', () => {
     );
   });
 
-  it('should render a fieldset legend', () => {
-    const actual = wrapper.containsMatchingElement(
-      <legend>{props.fieldsetLegend}</legend>
-    );
-    expect(actual).to.eq(true);
-  });
-
   it('should render a heading', () => {
     const actual = wrapper.containsMatchingElement(
       <h5>{props.heading}</h5>

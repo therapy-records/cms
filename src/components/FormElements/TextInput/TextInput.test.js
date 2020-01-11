@@ -11,7 +11,6 @@ describe('(Component) TextInput', () => {
   const props = {
     id: 'test',
     name: 'test',
-    label: 'testing',
     type: 'text',
     placeholder: 'All the things',
     props: {
@@ -20,7 +19,6 @@ describe('(Component) TextInput', () => {
     },
     hideLabel: false,
     autoFocus: false,
-    required: false,
     maxLength: 10
   };
 
@@ -28,26 +26,6 @@ describe('(Component) TextInput', () => {
     wrapper = shallow(
       <TextInput {...props} />
     );
-  });
-
-  it('should render a label with props', () => {
-    const actual = wrapper.containsMatchingElement(
-      <label>{props.label}</label>
-    )
-    expect(actual).to.eq(true);
-  });
-
-  describe('with required prop', () => {
-    it('should render a label with required star', () => {
-      wrapper.setProps({
-        required: true
-      });
-      const label = wrapper.find('label');
-      const actual = label.containsMatchingElement(
-        <span className='required'>*</span>
-      )
-      expect(actual).to.eq(true);
-    });
   });
 
   it('should render an input with props', () => {

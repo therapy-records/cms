@@ -67,8 +67,6 @@ const TextInputsList = ({
     <div className={showAddRemove ? 'text-inputs-list-with-add-remove' : 'text-inputs-list'}>
       <fieldset>
 
-        {fieldsetLegend && <legend>{fieldsetLegend}</legend>}
-
         {heading && <h5>{heading}</h5>}
 
         <ul>
@@ -105,8 +103,6 @@ const TextInputsList = ({
           onClick={() => dispatch({ type: 'add' })}
         >Add</button>
       }
-
-      {required && <p>this is a required field....</p>}
 
       {(required && !arrayOfObjectsHasValues(listItems)) && ( 
         <span className='form-error'>Field is required</span>
