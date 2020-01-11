@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import FormInput from './FormInput';
 import FormFieldLabel from './FormFieldLabel';
 import FieldsetLegend from './FieldsetLegend';
+import FieldError from '../FormElements/FieldError';
 
 const FormField = props => {
   const {
@@ -52,7 +53,12 @@ const FormField = props => {
 
       <FormInput {...props} />
 
-      {touched && error && <span className='form-error'>{error}</span>}
+      {(touched && error) && (
+        <FieldError
+          error={error}
+        />
+      )}
+
     </div>
   );
 }

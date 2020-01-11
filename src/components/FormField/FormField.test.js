@@ -5,6 +5,7 @@ import FormField from './index';
 import FormInput from './FormInput';
 import FormFieldLabel from './FormFieldLabel';
 import FieldsetLegend from './FieldsetLegend';
+import FieldError from '../FormElements/FieldError';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -87,15 +88,15 @@ describe('(Component) FormField', () => {
     });
   });
 
-  describe('with props.touched', () => {
-    it('should render error', () => {
+  describe('with props.touched and props.error', () => {
+    it('should render <FieldError />', () => {
       const mockError = 'oh no';
       wrapper.setProps({
         error: mockError,
         touched: true
       });
       const actual = wrapper.containsMatchingElement(
-        <span>{mockError}</span>
+        <FieldError error={mockError} />
       );
       expect(actual).to.eq(true);
     });
