@@ -1,6 +1,32 @@
+@import 'styles/variables.scss';
+
 .text-inputs-list {
+  h5 {
+    margin-bottom: 1.5em;
+  }
+  ul {
+    margin: 0;
+    @media(min-width: $bp-md) {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
   li {
     list-style-type: none;
+    margin-bottom: 1em;
+
+    @media(min-width: $bp-md) {
+      width: 50%;
+      &:nth-child(odd) {
+        padding-right: 1em;
+      }
+      &:nth-child(even) {
+        padding-left: 1em;
+      }
+    }
+  }
+  label {
+    font-size: 1em;
   }
 }
 

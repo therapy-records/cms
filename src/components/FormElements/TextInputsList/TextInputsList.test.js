@@ -35,7 +35,7 @@ describe('(Component) TextInputsList', () => {
 
   it('should render a heading', () => {
     const actual = wrapper.containsMatchingElement(
-      <h3>{props.heading}</h3>
+      <h5>{props.heading}</h5>
     );
     expect(actual).to.eq(true);
   });

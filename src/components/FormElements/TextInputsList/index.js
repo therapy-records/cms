@@ -69,7 +69,7 @@ const TextInputsList = ({
 
         {fieldsetLegend && <legend>{fieldsetLegend}</legend>}
 
-        {heading && <h3>{heading}</h3>}
+        {heading && <h5>{heading}</h5>}
 
         <ul>
           {listItems.map((item, index) => {
