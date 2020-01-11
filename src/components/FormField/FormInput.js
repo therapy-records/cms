@@ -34,7 +34,6 @@ const FormInput = ({
   } else if (component === 'RichTextEditor') {
     return (
       <RichTextEditor
-        title={title}
         name={id}
         onChange={onChange}
         showSingleHiddenInputValue

@@ -17,7 +17,7 @@ describe('(Component) FormField', () => {
         label: '',
         title: 'Testing',
         placeholder: '',
-        required: false,
+        required: true,
         ctaCopy: '',
         minImageDimensions: {},
         fieldsetLegend: '',
@@ -60,7 +60,10 @@ describe('(Component) FormField', () => {
   describe('with props.title', () => {
     it('should render <h5 />', () => {
       const actual = wrapper.containsMatchingElement(
-        <h5>{props.title}</h5>
+        <h5>
+          {props.title}
+          <span className='required'>*</span>
+        </h5>
       );
       expect(actual).to.eq(true);
     });

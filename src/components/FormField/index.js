@@ -27,7 +27,10 @@ const FormField = props => {
     */}
 
       {title &&
-        <h5>{title}</h5>
+        <h5>
+          {title}
+          {required && <span className='required'>*</span>}
+        </h5>
       }
 
       {fieldsetLegend && (

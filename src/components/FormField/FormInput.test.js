@@ -67,7 +67,6 @@ describe('(Component) FormInput', () => {
 
         const actual = wrapper.containsMatchingElement(
           <RichTextEditor
-            title={mockField.title}
             name={mockField.id}
             onChange={mockOnChange}
             showSingleHiddenInputValue
