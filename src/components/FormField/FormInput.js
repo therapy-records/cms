@@ -18,7 +18,8 @@ const FormInput = ({
   minImageDimensions,
   fieldsetLegend,
   items,
-  onChange
+  onChange,
+  value
 }) => {
   if (component === 'TextInput') {
     return (
@@ -29,6 +30,7 @@ const FormInput = ({
         name={id}
         required={required}
         onChange={onChange}
+        value={value}
       />
     )
   } else if (component === 'RichTextEditor') {
@@ -64,6 +66,7 @@ const FormInput = ({
           showAddRemove
           onChange={onChange}
           required={required}
+          value={value}
         />
       )
     }
@@ -74,6 +77,7 @@ const FormInput = ({
         name={id}
         onChange={onChange}
         required={required}
+        value={value}
       />
     )
   }
@@ -96,7 +100,8 @@ FormInput.propTypes = {
   }),
   fieldsetLegend: PropTypes.string,
   items: PropTypes.array,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  value: PropTypes.string
 };
 
 FormInput.defaultProps = {
@@ -109,7 +114,8 @@ FormInput.defaultProps = {
   minImageDimensions: {},
   fieldsetLegend: '',
   items: [],
-  onChange: () => { }
+  onChange: () => { },
+  value: ''
 };
 
 export default FormInput;

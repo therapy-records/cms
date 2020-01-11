@@ -47,6 +47,7 @@ describe('(Component) FormInput', () => {
             name={mockField.id}
             required={mockField.required}
             onChange={mockOnChange}
+            value={mockField.value}
           />
         );
         expect(actual).to.eq(true);
@@ -134,6 +135,7 @@ describe('(Component) FormInput', () => {
             items={mockField.items}
             name={mockField.id}
             onChange={mockOnChange}
+            value={mockField.value}
           />
         );
         expect(actual).to.eq(true);
@@ -160,6 +162,7 @@ describe('(Component) FormInput', () => {
               items={mockField.items}
               name={mockField.id}
               onChange={mockOnChange}
+              value={mockField.value}
               showAddRemove
             />
           );

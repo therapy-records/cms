@@ -83,7 +83,8 @@ FormField.propTypes = {
   onChange: PropTypes.func,
   error: PropTypes.string,
   touched: PropTypes.bool,
-  dirty: PropTypes.bool
+  dirty: PropTypes.bool,
+  value: PropTypes.string
 };
 
 FormField.defaultProps = {
@@ -100,7 +101,8 @@ FormField.defaultProps = {
   onChange: () => {},
   error: '',
   touched: false,
-  dirty: false
+  dirty: false,
+  value: ''
 };
 
 export default FormField;
