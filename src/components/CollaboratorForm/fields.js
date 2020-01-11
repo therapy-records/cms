@@ -54,42 +54,58 @@ const COLLABORATOR_FIELDS = [
       {
         label: 'Website',
         id: 'website',
-        value: ''
+        type: 'text',
+        value: '',
+        placeholder: 'http://collaborator.com'
       },
       {
         label: 'Facebook',
         id: 'facebook',
-        value: ''
+        type: 'text',
+        value: '',
+        placeholder: 'http://facebook.com/example'
       },
       {
         label: 'Twitter',
         id: 'twitter',
-        value: ''
+        type: 'text',
+        value: '',
+        placeholder: 'http://twitter.com/example'
       },
       {
         label: 'Instagram',
         id: 'instagram',
-        value: ''
+        type: 'text',
+        value: '',
+        placeholder: 'http://instagram.com/example'
       },
       {
         label: 'SoundCloud',
         id: 'soundcloud',
-        value: ''
+        type: 'text',
+        value: '',
+        placeholder: 'http://soundcloud.com/example'
       },
       {
         label: 'Bio',
         id: 'bio',
-        value: ''
+        type: 'text',
+        value: '',
+        placeholder: 'http://website.com/example'
       },
       {
         label: 'Email',
         id: 'email',
-        value: ''
+        type: 'email',
+        value: '',
+        placeholder: 'example@collaborator.com'
       },
       {
         label: 'Phone',
         id: 'phone',
-        value: ''
+        type: 'tel',
+        value: '',
+        placeholder: '+441234567890'
       }
     ]
   }

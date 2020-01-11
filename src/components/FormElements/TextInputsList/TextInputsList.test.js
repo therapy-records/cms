@@ -13,9 +13,23 @@ describe('(Component) TextInputsList', () => {
     fieldsetLegend: 'collaborators',
     heading: 'URLs',
     items: [
-      { value: 'testA' },
-      { value: 'testB' },
-      { value: 'testB' },
+      {
+        id: 'test',
+        value: 'testA',
+        type: 'text',
+        placeholder: 'test'
+      },
+      {
+        id: 'test',
+        value: 'testB',
+        type: 'tel',
+        placeholder: 'test'
+      },
+      {
+        value: 'testB',
+        type: 'email',
+        placeholder: 'test',
+      }
     ],
     showAddRemove: true
   };
@@ -45,22 +59,31 @@ describe('(Component) TextInputsList', () => {
     const actual = wrapper.containsAllMatchingElements([
       <li key={0}>
         <input
-          type='text'
+          id={`${props.name}.${props.items[0].id}`}
+          name={`${props.name}.${props.items[0].id}`}
+          type={props.items[0].type}
           value={props.items[0].value}
+          placeholder={props.items[0].placeholder}
         />
         <button>Remove</button>
       </li>,
       <li key={1}>
         <input
-          type='text'
+          id={`${props.name}.${props.items[1].id}`}
+          name={`${props.name}.${props.items[1].id}`}
+          type={props.items[1].type}
           value={props.items[1].value}
+          placeholder={props.items[1].placeholder}
         />
         <button>Remove</button>
       </li>,
       <li key={2}>
         <input
-          type='text'
+          id={`${props.name}.2`}
+          name={`${props.name}.2`}
+          type={props.items[2].type}
           value={props.items[2].value}
+          placeholder={props.items[2].placeholder}
         />
         <button>Remove</button>
       </li>

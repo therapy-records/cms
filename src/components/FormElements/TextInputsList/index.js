@@ -81,8 +81,9 @@ const TextInputsList = ({
                 <input
                   id={id}
                   name={id}
-                  type='text'
+                  type={item.type}
                   value={item.value}
+                  placeholder={item.placeholder}
                   onChange={ev => handleOnChange(index, ev.target.value)}
                 />
                 {showAddRemove &&
