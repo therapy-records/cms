@@ -26,13 +26,14 @@ const COLLABORATOR_FIELDS = [
     id: 'avatarUrl',
     type: 'text',
     component: 'ImageUpload',
-    title: 'Avatar',
+    label: 'Avatar',
     required: true,
     ctaCopy: 'Drag & drop image',
     minImageDimensions: {
       width: 111,
       height: 111
-    }
+    },
+    helpText: 'must be at least 111px by 111px'
   },
   {
     id: 'collabOn',

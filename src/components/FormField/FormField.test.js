@@ -15,13 +15,13 @@ describe('(Component) FormField', () => {
         component: 'Test',
         type: 'text',
         label: '',
-        title: '',
-        heading: '',
+        title: 'Testing',
         placeholder: '',
         required: false,
         ctaCopy: '',
         minImageDimensions: {},
         fieldsetLegend: '',
+        helpText: 'input must be in XYZ format',
         items: [],
         onChange: () => { },
         error: '',
@@ -40,23 +40,6 @@ describe('(Component) FormField', () => {
     expect(actual).to.eq(true);
   });
 
-  describe('with props.label', () => {
-    it('should render <FormLabel />', () => {
-      const mockLabel = 'oh no';
-      wrapper.setProps({
-        label: mockLabel
-      });
-      const actual = wrapper.containsMatchingElement(
-        <FormFieldLabel
-          id={props.id}
-          label={mockLabel}
-          required={props.required}
-        />
-      );
-      expect(actual).to.eq(true);
-    });
-  });
-
   describe('with props.fieldsetLegend', () => {
     it('should render <FieldsetLegend />', () => {
       const mockFieldsetLegend = 'oh no';
@@ -68,6 +51,33 @@ describe('(Component) FormField', () => {
           id={props.id}
           legend={mockFieldsetLegend}
           required={props.required}
+        />
+      );
+      expect(actual).to.eq(true);
+    });
+  });
+
+  describe('with props.title', () => {
+    it('should render <h5 />', () => {
+      const actual = wrapper.containsMatchingElement(
+        <h5>{props.title}</h5>
+      );
+      expect(actual).to.eq(true);
+    });
+  });
+
+  describe('with props.label', () => {
+    it('should render <FormLabel />', () => {
+      const mockLabel = 'oh no';
+      wrapper.setProps({
+        label: mockLabel
+      });
+      const actual = wrapper.containsMatchingElement(
+        <FormFieldLabel
+          id={props.id}
+          label={mockLabel}
+          required={props.required}
+          helpText={props.helpText}
         />
       );
       expect(actual).to.eq(true);

@@ -10,7 +10,8 @@ describe('(Component) FormFieldLabel', () => {
       props = {
         id: 'test',
         label: 'Testing',
-        required: true
+        required: true,
+        helpText: 'input must be in XYZ format'
       };
   
   beforeEach(() => {
@@ -22,7 +23,9 @@ describe('(Component) FormFieldLabel', () => {
   it('should render', () => {
     const actual = wrapper.containsMatchingElement(
       <label htmlFor={props.id}>
-        {props.label}<span className='required'>*</span>
+        {props.label}
+        <span className='required'>*</span>
+        <span><small>({props.helpText})</small></span>
       </label>
     );
     expect(actual).to.eq(true);

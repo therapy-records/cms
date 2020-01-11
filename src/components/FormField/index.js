@@ -8,8 +8,10 @@ const FormField = props => {
   const {
     id,
     label,
-    required,
+    title,
     fieldsetLegend,
+    helpText,
+    required,
     touched,
     error
   } = props;
@@ -17,17 +19,31 @@ const FormField = props => {
   return (
     <div>
 
-      {fieldsetLegend ? (
+    {/*
+      NOTE:
+      title is temporary and only used for RichTextEditor
+      when TextEditor is upgraded (and uses semantic text input and label)
+      this can be removed
+    */}
+
+      {title &&
+        <h5>{title}</h5>
+      }
+
+      {fieldsetLegend && (
         <FieldsetLegend
           id={id}
           legend={fieldsetLegend}
           required={required}
         />
-      ): (
+      )}
+
+      {label && (
         <FormFieldLabel
           id={id}
           label={label}
           required={required}
+          helpText={helpText}
         />
       )}
 
@@ -53,6 +69,7 @@ FormField.propTypes = {
     height: PropTypes.number
   }),
   fieldsetLegend: PropTypes.string,
+  helpText: PropTypes.string,
   items: PropTypes.array,
   onChange: PropTypes.func,
   error: PropTypes.string,
@@ -69,6 +86,7 @@ FormField.defaultProps = {
   ctaCopy: '',
   minImageDimensions: {},
   fieldsetLegend: '',
+  helpText: '',
   items: [],
   onChange: () => {},
   error: '',

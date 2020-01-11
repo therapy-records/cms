@@ -157,13 +157,15 @@ export class DropzoneImageUpload extends React.Component {
 
     return (
       <div className='dropzone-container'>
-        <h5>{title}
-          {required && <span className='required'>*</span>}
-          &nbsp;
-          {minImageDimensions &&
-            <span className='dropzone-image-dimension-notice'><small>(must be at least {minImageDimensions.width}px by {minImageDimensions.height}px)</small></span>
-          }
-        </h5>
+        {title &&  (
+          <h5>{title}
+            {required && <span className='required'>*</span>}
+            &nbsp;
+            {minImageDimensions &&
+              <span className='help-text'><small>(must be at least {minImageDimensions.width}px by {minImageDimensions.height}px)</small></span>
+            }
+          </h5>
+        )}
 
         <div className='flex-root'>
           <div>

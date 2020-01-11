@@ -1,5 +1,17 @@
 @import 'styles/variables.scss';
 
+label {
+  display: block;
+  text-align: left;
+}
+
+h5,
+label {
+  .help-text {
+    opacity: .5;
+  }
+}
+
 input,
 textarea {
   width: 100%;
