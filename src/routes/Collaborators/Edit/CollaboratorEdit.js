@@ -19,10 +19,6 @@ const CollaboratorEdit = ({ match }) => {
     }
   });
 
-  if (data && data.collaborator) {
-    console.log('data.collaborator ', data.collaborator);
-  }
-
   return (
     <article className='container'>
 
