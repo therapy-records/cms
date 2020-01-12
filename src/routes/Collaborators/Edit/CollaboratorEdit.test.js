@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
 import CollaboratorEdit from './index';
 import { GET_COLLABORATOR } from '../../../queries';
-import { CREATE_COLLABORATOR } from '../../../mutations';
+import { EDIT_COLLABORATOR } from '../../../mutations';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import ErrorMessage from '../../../components/ErrorMessage';
 import CollaboratorForm from '../../../components/CollaboratorForm';
@@ -88,14 +88,13 @@ describe('(Component) CollaboratorEdit', () => {
         wrapper.update();
         const actual = wrapper.containsMatchingElement(
           <CollaboratorForm
-            mutation={CREATE_COLLABORATOR}
+            mutation={EDIT_COLLABORATOR}
             isEditForm
           />
         );
         expect(actual).to.equal(true);
       });
     });
-
 
   });
 

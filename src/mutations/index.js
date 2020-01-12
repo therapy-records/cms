@@ -11,3 +11,15 @@ export const CREATE_COLLABORATOR = gql`
     }
   }
 `;
+
+export const EDIT_COLLABORATOR = gql`
+  mutation($input: CollaboratorInput) {
+    editCollaborator(input: $input) {
+      name,
+      avatarUrl,
+      collabOn,
+      role,
+      about
+    }
+  }
+`;

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_COLLABORATOR } from '../../../queries';
-import { CREATE_COLLABORATOR } from '../../../mutations';
+import { EDIT_COLLABORATOR } from '../../../mutations';
 import CollaboratorForm from '../../../components/CollaboratorForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import ErrorMessage from '../../../components/ErrorMessage';
@@ -55,7 +55,7 @@ const CollaboratorEdit = ({ match }) => {
           </div>
 
           <CollaboratorForm
-            mutation={CREATE_COLLABORATOR}
+            mutation={EDIT_COLLABORATOR}
             isEditForm
           />
 
