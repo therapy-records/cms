@@ -6,7 +6,7 @@ import CollaboratorForm from '../../../components/CollaboratorForm';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('(Component) Collaborators - Create', () => {
+describe('(Component) CollaboratorCreate', () => {
   let wrapper,
       props = {
         formValues: {
@@ -15,7 +15,7 @@ describe('(Component) Collaborators - Create', () => {
         location: {
           pathname: '/collaborators/create'
         }
-      }
+      };
 
   describe('rendering', () => {
 

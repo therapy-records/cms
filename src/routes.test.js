@@ -21,7 +21,7 @@ import JournalismArticleCreate from './routes/Journalism/ArticleCreate';
 import Press from './routes/Press';
 import Collaborators from './routes/Collaborators/Home';
 import CollaboratorsCreate from './routes/Collaborators/Create';
-import CollaboratorsView from './routes/Collaborators/View';
+import CollaboratorView from './routes/Collaborators/View';
 import CollaboratorEdit from './routes/Collaborators/Edit';
 import Gigs from './routes/Gigs';
 import Videos from './routes/Videos';
@@ -248,7 +248,7 @@ describe('Router', () => {
     const actual = wrapper.containsMatchingElement(
       <ProtectedRoute
         path="/collaborators/:id"
-        component={CollaboratorsView}
+        component={CollaboratorView}
         isAuth={props.isAuth}
         onAuthCheck={props.onAuthCheck}
         exact

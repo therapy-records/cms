@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter, Link } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
-import Collaborators from './index';
+import CollaboratorsHome from './index';
 import { GET_COLLABORATORS } from '../../../queries';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import ErrorMessage from '../../../components/ErrorMessage';
@@ -28,7 +28,7 @@ let mocks = [
   }
 ];
 
-describe('(Component) Collaborators - Home', () => {
+describe('(Component) CollaboratorsHome', () => {
   let wrapper;
 
   const actions = async(wrapper, _actions) => {
@@ -44,7 +44,7 @@ describe('(Component) Collaborators - Home', () => {
       wrapper = mount(
         <BrowserRouter>
           <MockedProvider mocks={mocks} addTypename={false}>
-            <Collaborators />
+            <CollaboratorsHome />
           </MockedProvider>
         </BrowserRouter>
       );
@@ -91,7 +91,7 @@ describe('(Component) Collaborators - Home', () => {
       wrapper = mount(
         <BrowserRouter>
           <MockedProvider mocks={mocks} addTypename={false}>
-            <Collaborators />
+            <CollaboratorsHome />
           </MockedProvider>
         </BrowserRouter>
       );
@@ -120,7 +120,7 @@ describe('(Component) Collaborators - Home', () => {
       wrapper = mount(
         <BrowserRouter>
           <MockedProvider mocks={mocks} addTypename={false}>
-            <Collaborators />
+            <CollaboratorsHome />
           </MockedProvider>
         </BrowserRouter>
       );
