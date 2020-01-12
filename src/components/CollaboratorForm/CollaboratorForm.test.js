@@ -3,15 +3,18 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import CollaboratorForm from './index';
 import Form from '../Form';
-import COLLABORATOR_FIELDS from './fields';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) CollaboratorForm', () => {
   let wrapper,
       props = {
-        isEditForm: true,
-        mutation: {}
+        mutation: {},
+        fields: [
+          { id: 'test' },
+          { id: 'testing' }
+        ],
+        isEditForm: true
       };
 
   describe('rendering', () => {
@@ -24,7 +27,7 @@ describe('(Component) CollaboratorForm', () => {
       const actual = wrapper.containsMatchingElement(
         <Form
           mutation={props.mutation}
-          fields={COLLABORATOR_FIELDS}
+          fields={props.fields}
           isEditForm={props.isEditForm}
         />
       );

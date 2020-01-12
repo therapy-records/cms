@@ -1,6 +1,7 @@
 import React from 'react';
 import ArticleHeader from '../../../components/ArticleHeader';
 import { CollaboratorForm } from '../../../components/CollaboratorForm';
+import COLLABORATOR_FIELDS from '../../../components/CollaboratorForm/fields';
 import { CREATE_COLLABORATOR } from '../../../mutations';
 
 const CollaboratorCreate = () => (
@@ -17,6 +18,7 @@ const CollaboratorCreate = () => (
 
     <CollaboratorForm
       mutation={CREATE_COLLABORATOR}
+      fields={COLLABORATOR_FIELDS}
     />
 
   </article>

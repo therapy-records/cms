@@ -4,8 +4,10 @@ import { useQuery } from '@apollo/react-hooks';
 import { GET_COLLABORATOR } from '../../../queries';
 import { EDIT_COLLABORATOR } from '../../../mutations';
 import CollaboratorForm from '../../../components/CollaboratorForm';
+import COLLABORATOR_FIELDS from '../../../components/CollaboratorForm/fields';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import ErrorMessage from '../../../components/ErrorMessage';
+import { mapFieldsWithValues } from '../../../utils/form';
 
 const CollaboratorEdit = ({ match }) => {
   const { id: collabId } = match.params;
@@ -56,6 +58,7 @@ const CollaboratorEdit = ({ match }) => {
 
           <CollaboratorForm
             mutation={EDIT_COLLABORATOR}
+            fields={mapFieldsWithValues(COLLABORATOR_FIELDS, data.collaborator)}
             isEditForm
           />
 
