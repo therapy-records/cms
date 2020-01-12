@@ -3,6 +3,7 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import CollaboratorCreate from './index';
 import CollaboratorForm from '../../../components/CollaboratorForm';
+import { CREATE_COLLABORATOR } from '../../../mutations';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -28,7 +29,9 @@ describe('(Component) CollaboratorCreate', () => {
 
     it('should render <CollaboratorForm />', () => {
       const actual = wrapper.containsMatchingElement(
-        <CollaboratorForm />
+        <CollaboratorForm
+          mutation={CREATE_COLLABORATOR}
+        />
       );
       expect(actual).to.equal(true);
     });

@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CREATE_COLLABORATOR } from '../../mutations';
 import COLLABORATOR_FIELDS from './fields';
 import Form from '../Form';
 
-export const CollaboratorForm = ({ isEditForm }) => (
+export const CollaboratorForm = ({
+  mutation,
+  isEditForm
+}) => (
   <Form
-    mutation={CREATE_COLLABORATOR}
+    mutation={mutation}
     fields={COLLABORATOR_FIELDS}
     isEditForm={isEditForm}
   />
@@ -14,6 +16,7 @@ export const CollaboratorForm = ({ isEditForm }) => (
 
 
 CollaboratorForm.propTypes = {
+  mutation: PropTypes.object.isRequired,
   isEditForm: PropTypes.bool
 };
 

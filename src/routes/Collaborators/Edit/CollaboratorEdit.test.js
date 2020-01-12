@@ -4,8 +4,9 @@ import Adapter from 'enzyme-adapter-react-16';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
-import { GET_COLLABORATOR } from '../../../queries';
 import CollaboratorEdit from './index';
+import { GET_COLLABORATOR } from '../../../queries';
+import { CREATE_COLLABORATOR } from '../../../mutations';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import ErrorMessage from '../../../components/ErrorMessage';
 import CollaboratorForm from '../../../components/CollaboratorForm';
@@ -49,7 +50,8 @@ describe('(Component) CollaboratorEdit', () => {
         params: {
           id: 'test'
         }
-      }
+      },
+      mutation: {}
     };
 
   const actions = async(wrapper, _actions) => {
@@ -85,7 +87,10 @@ describe('(Component) CollaboratorEdit', () => {
       await actions(wrapper, () => {
         wrapper.update();
         const actual = wrapper.containsMatchingElement(
-          <CollaboratorForm isEditForm />
+          <CollaboratorForm
+            mutation={CREATE_COLLABORATOR}
+            isEditForm
+          />
         );
         expect(actual).to.equal(true);
       });
