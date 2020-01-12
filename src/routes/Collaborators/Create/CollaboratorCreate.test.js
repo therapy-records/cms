@@ -7,20 +7,12 @@ import CollaboratorForm from '../../../components/CollaboratorForm';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) CollaboratorCreate', () => {
-  let wrapper,
-      props = {
-        formValues: {
-          title: 'Test Person'
-        },
-        location: {
-          pathname: '/collaborators/create'
-        }
-      };
+  let wrapper;
 
   describe('rendering', () => {
 
     beforeEach(() => {
-      wrapper = shallow(<CollaboratorCreate {...props} />);
+      wrapper = shallow(<CollaboratorCreate />);
     });
 
     describe('<ArticleHeader />', () => {
@@ -32,22 +24,6 @@ describe('(Component) CollaboratorCreate', () => {
         expect(articleHeader.prop('showDeleteButton')).to.eq(false);
       });
 
-      describe('when it\'s an `edit` form', () => {
-        beforeEach(() => {
-          wrapper.setProps({
-            location: {
-              pathname: 'test/edit'
-            }
-          })
-        });
-
-        it('should render correct props', () => {
-          const articleHeader = wrapper.find('ArticleHeader');
-          expect(articleHeader.prop('heading')).to.eq(`Editing TEST 🌈`);
-          expect(articleHeader.prop('showDeleteButton')).to.eq(true);
-        });
-
-      });
     });
 
     it('should render <CollaboratorForm />', () => {
