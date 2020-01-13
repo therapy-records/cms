@@ -1,7 +1,7 @@
 import {
   required,
   isFieldArray,
-  isFieldArrayWithValuesToMap,
+  isFieldArrayWithValues,
   mapFieldsWithValues
 } from './form';
 
@@ -41,7 +41,7 @@ describe('(Utils) form', () => {
 
   });
 
-  describe('isFieldArrayWithValuesToMap', () => {
+  describe('isFieldArrayWithValues', () => {
     describe('when a given object has a matching ID with at least one value in a child object', () => {
       it('should return true', () => {
         const mockField = {
@@ -75,7 +75,7 @@ describe('(Utils) form', () => {
             test: null,
           }
         };
-        const result = isFieldArrayWithValuesToMap(mockField, mockValuesObj);
+        const result = isFieldArrayWithValues(mockField.id, mockValuesObj);
         expect(result).to.eq(true);
       });
     });
@@ -99,7 +99,7 @@ describe('(Utils) form', () => {
             'testing'
           ]
         };
-        const result = isFieldArrayWithValuesToMap(mockField, mockValuesObj);
+        const result = isFieldArrayWithValues(mockField.id, mockValuesObj);
         expect(result).to.eq(true);
       });
     });
