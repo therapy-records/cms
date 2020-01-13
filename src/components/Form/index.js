@@ -94,7 +94,8 @@ function reducer(state, action) {
 const Form = ({
   mutation,
   fields,
-  isEditForm
+  isEditForm,
+  mutateId
 }) => {
 
   const [state, dispatch] = useReducer(
@@ -128,13 +129,19 @@ const Form = ({
     ev.preventDefault();
     const form = ev.target;
     const postData = handleFormData(form);
-    postData.avatarUrl = 'https://via.placeholder.com/250'; // TEMP
 
     dispatch({ type: 'isFormValid' });
 
     if (state.isValid) {
+      const variablesObj = {
+        input: postData
+      };
+      if (mutateId) {
+        variablesObj.id = mutateId;
+      }
+
       postForm({
-        variables: { input: postData }
+        variables: variablesObj
       }).then(
         result => {
           dispatch({ type: 'submitSuccess' });
@@ -207,11 +214,13 @@ const Form = ({
 Form.propTypes = {
   mutation: PropTypes.object.isRequired,
   fields: PropTypes.arrayOf(PropTypes.object).isRequired,
-  isEditForm: PropTypes.bool
+  isEditForm: PropTypes.bool,
+  mutateId: PropTypes.string
 };
 
 Form.defaultProps = {
-  isEditForm: false
+  isEditForm: false,
+  mutateId: null
 };
 
 export default Form;

@@ -13,8 +13,9 @@ export const CREATE_COLLABORATOR = gql`
 `;
 
 export const EDIT_COLLABORATOR = gql`
-  mutation($input: CollaboratorInput) {
-    editCollaborator(input: $input) {
+  mutation($id: ID!, $input: CollaboratorInput) {
+    editCollaborator(_id: $id, input: $input) {
+      _id,
       name,
       avatarUrl,
       collabOn,

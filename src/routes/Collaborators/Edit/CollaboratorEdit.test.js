@@ -7,8 +7,8 @@ import { MockedProvider } from '@apollo/react-testing';
 import CollaboratorEdit from './index';
 import { GET_COLLABORATOR } from '../../../queries';
 import { EDIT_COLLABORATOR } from '../../../mutations';
-import CollaboratorForm from '../../../components/CollaboratorForm';
-import COLLABORATOR_FIELDS from '../../../components/CollaboratorForm/fields';
+import Form from '../../../components/Form';
+import COLLABORATOR_FIELDS from '../../../formFields/collaborator';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import ErrorMessage from '../../../components/ErrorMessage';
 import { mapFieldsWithValues } from '../../../utils/form';
@@ -85,15 +85,17 @@ describe('(Component) CollaboratorEdit', () => {
       });
     });
 
-    it('should render <CollaboratorForm />', async() => {
+    it('should render <Form />', async() => {
       await actions(wrapper, () => {
         wrapper.update();
         const actual = wrapper.containsMatchingElement(
-          <CollaboratorForm
+          <Form
             mutation={EDIT_COLLABORATOR}
             fields={mapFieldsWithValues(COLLABORATOR_FIELDS, mocks[0].result.data.collaborator)}
+            mutateId={props.match.params.id}
             isEditForm
           />
+
         );
         expect(actual).to.equal(true);
       });
