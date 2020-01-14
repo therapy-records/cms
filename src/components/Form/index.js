@@ -20,10 +20,11 @@ function reducer(state, action) {
   switch (action.type) {
     case 'updateFieldValue': {
       const { id, value } = action.payload;
-
       const updatedFields = state.fields;
       const formField = updatedFields.find(f => f.id === id);
-      formField.value = value;
+      
+      formField.value = value.toString();
+
       if (formField.value) {
         formField.dirty = true;
       }
