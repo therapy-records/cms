@@ -2,6 +2,9 @@ import {
   required,
   isFieldArray,
   isFieldArrayWithValues,
+  mapFieldArrayOfObjectsWithValues,
+  mapFieldArrayOfStringsWithValues,
+  mapFieldArray,
   mapFieldsWithValues
 } from './form';
 
@@ -48,20 +51,8 @@ describe('(Utils) form', () => {
           id: 'urls',
           type: 'arrayOfObjects',
           items: [
-            {
-              label: 'Website',
-              id: 'website',
-              type: 'text',
-              value: '',
-              placeholder: 'test.com' 
-            },
-            {
-              label: 'Instagram',
-              id: 'instagram',
-              type: 'text',
-              value: '',
-              placeholder: 'instagram.com/example'
-            }
+            { id: 'website' },
+            { id: 'instagram' }
           ]
         };
 
@@ -106,29 +97,167 @@ describe('(Utils) form', () => {
 
   });
 
-  // describe('mapFieldsWithValues', () => {
-  //   it('should add a value property to each field that matches in given array', () => {
-  //     const mockFields = [
-  //       { id: 'name' },
-  //       { id: 'about' },
-  //       { id: 'somethingElse' },
-  //       { id: 'test' }
-  //     ];
-  //     const mockValuesObj = {
-  //       name: 'testing',
-  //       about: 'hello world',
-  //       test: 'this is a test'
-  //     };
+  describe('mapFieldArrayOfObjectsWithValues', () => {
+    describe('when given a field with items array and an object that has matching ID with a value', () => {
+      it('should return the field with updated value', () => {
+        const mockField = {
+          id: 'urls',
+          type: 'arrayOfObjects',
+          items: [
+            { id: 'website', value: '' },
+            { id: 'instagram', value: '' }
+          ]
+        };
 
-  //     const result = mapFieldsWithValues(mockFields, mockValuesObj);
-  //     const expected = [
-  //       { id: 'name', value: mockValuesObj.name },
-  //       { id: 'about', value: mockValuesObj.about },
-  //       { id: 'somethingElse' },
-  //       { id: 'test', value: mockValuesObj.test }
-  //     ];
-  //     expect(result).to.deep.eq(expected);
-  //   });
-  // });
+        const mockValuesObj = {
+          title: 'test',
+          role: 'testing',
+          urls: {
+            something: null,
+            website: 'test.com',
+            instagram: 'instagram.com'
+          }
+        };
+        const result = mapFieldArrayOfObjectsWithValues(mockField, mockValuesObj);
+        expect(result).to.deep.eq({
+          ...mockField,
+          items: [
+            { id: 'website', value: mockValuesObj.urls.website },
+            { id: 'instagram', value: mockValuesObj.urls.instagram }
+          ]
+        });
+      });
+    });
+  });
 
+  describe('mapFieldArrayOfStringsWithValues', () => {
+
+    describe('when given a field with items array and an object with array of strings', () => {
+      it('should return the field with updated items array from valuesObject', () => {
+        const mockField = {
+          id: 'listOfThings',
+          type: 'arrayOfStrings',
+          items: [
+            { value: '' },
+            { value: '' }
+          ]
+        };
+        const mockValuesObj = {
+          title: 'test',
+          role: 'testing',
+          listOfThings: [
+            'a',
+            'b',
+            'c'
+          ]
+        };
+        const result = mapFieldArrayOfStringsWithValues(mockField, mockValuesObj);
+        expect(result).to.deep.eq({
+          ...mockField,
+          items: [
+            {value: 'a' },
+            {value: 'b' },
+            {value: 'c' }
+          ]
+        })
+      });
+    });
+  });
+
+  describe('mapFieldArray', () => {
+    describe('when the field type is `arrayOfObjects`', () => {
+      it('should return the mapped field', () => {
+        const mockField = {
+          id: 'urls',
+          type: 'arrayOfObjects',
+          items: [
+            { id: 'website', value: '' },
+            { id: 'instagram', value: '' }
+          ]
+        };
+        const mockValuesObj = {
+          title: 'testing',
+          urls: {
+            website: 'test.com',
+            instagram: null
+          }
+        };
+        const result = mapFieldArray(mockField, mockValuesObj);
+        const expected = mapFieldArrayOfObjectsWithValues(mockField, mockValuesObj);
+        expect(result).to.deep.eq(expected);
+      });
+    });
+
+    describe('when the field type is `arrayOfStrings`', () => {
+      it('should return the mapped field', () => {
+        const mockField = {
+          id: 'listOfThings',
+          type: 'arrayOfStrings',
+          items: []
+        };
+
+        const mockValuesObj = {
+          title: 'testing',
+          listOfThings: [
+            'a',
+            'b',
+            'c'
+          ]
+        };
+        const result = mapFieldArray(mockField, mockValuesObj);
+        const expected = mapFieldArrayOfStringsWithValues(mockField, mockValuesObj);
+        expect(result).to.deep.eq(expected);
+      });
+    });
+
+  });
+
+  describe('mapFieldsWithValues', () => {
+    it('should return string or array mapped fields', () => {
+      const mockFieldsArray = [
+        { id: 'a', type: 'string' },
+        { id: 'b', type: 'string' },
+        {
+          id: 'c',
+          type: 'arrayOfObjects',
+          items: [
+            { id: 'website', value: '' },
+            { id: 'instagram', value: '' }
+          ]
+        },
+        {
+          id: 'd',
+          type: 'arrayOfStrings',
+          // items: []
+          items: [
+            { value: '' },
+            { value: '' }
+          ]
+        }
+      ];
+
+      const mockValuesObj = {
+        a: 'testing',
+        b: 'test',
+        c: {
+          website: 'test.com',
+          instagram: 'testing.com'
+        },
+        d: [
+          'test',
+          'testing'
+        ]
+      };
+
+      const result = mapFieldsWithValues(mockFieldsArray, mockValuesObj);
+
+      const expected = [
+        { id: 'a', type: 'string', value: mockValuesObj.a },
+        { id: 'b', type: 'string', value: mockValuesObj.b },
+        { ...mapFieldArrayOfObjectsWithValues(mockFieldsArray[2], mockValuesObj) },
+        { ...mapFieldArrayOfStringsWithValues(mockFieldsArray[3], mockValuesObj) }
+      ];
+      expect(result).to.deep.eq(expected);
+    });
+  });
 });
