@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import { act } from 'react-dom/test-utils';
 import { MockedProvider } from '@apollo/react-testing';
 import { BrowserRouter } from 'react-router-dom';
-import Form, { initReducerState } from './index';
+import Form from './Form';
 import StickyNew from '../StickyNew';
 import LoadingSpinner from '../LoadingSpinner';
 import { CREATE_COLLABORATOR } from '../../mutations';
