@@ -70,6 +70,7 @@ describe('(Component) FormInput', () => {
           <RichTextEditor
             name={mockField.id}
             onChange={mockOnChange}
+            value={mockField.value}
             showSingleHiddenInputValue
           />
         );
@@ -87,7 +88,8 @@ describe('(Component) FormInput', () => {
             width: 10,
             height: 10
           },
-          ctaCopy: 'Drop it like it\'s hot'
+          ctaCopy: 'Drop it like it\'s hot',
+          value: ''
         };
         wrapper.setProps({
           ...mockField,
@@ -106,6 +108,7 @@ describe('(Component) FormInput', () => {
             multiple={false}
             ctaCopy={mockField.ctaCopy}
             onChange={mockOnChange}
+            existingImages={[mockField.value]}
           />
         );
         expect(actual).to.eq(true);

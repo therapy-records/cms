@@ -38,6 +38,7 @@ const FormInput = ({
       <RichTextEditor
         name={id}
         onChange={onChange}
+        value={value}
         showSingleHiddenInputValue
       />
     )
@@ -54,6 +55,7 @@ const FormInput = ({
         multiple={false}
         ctaCopy={ctaCopy}
         onChange={onChange}
+        existingImages={[value]}
       />
     )
   } else if (component === 'TextInputsList') {
