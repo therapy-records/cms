@@ -43,8 +43,7 @@ const COLLABORATOR_FIELDS = [
     items: [
       { value: '' },
       { value: '' }
-    ],
-    required: true
+    ]
   },
   {
     id: 'urls',

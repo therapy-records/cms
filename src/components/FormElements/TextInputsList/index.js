@@ -1,6 +1,5 @@
 import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
-import { arrayOfObjectsHasValues } from '../../../utils/arrays';
 import './TextInputsList.css';
 
 function init(initialItems) {
@@ -47,9 +46,7 @@ const TextInputsList = ({
   fieldsetLegend,
   heading,
   showAddRemove,
-  onChange,
-  error,
-  required
+  onChange
 }) => {
   const [state, dispatch] = useReducer(reducer, items, init);
 
@@ -104,16 +101,6 @@ const TextInputsList = ({
         >Add</button>
       }
 
-      {(required && !arrayOfObjectsHasValues(listItems)) && ( 
-        <span className='form-error'>Field is required</span>
-      )}
-
-      {error && (
-        <div>
-          <span className='form-error'>{error}</span>
-        </div>
-      )}
-
     </div>
   );
 };
@@ -124,18 +111,14 @@ TextInputsList.propTypes = {
   fieldsetLegend: PropTypes.string,
   heading: PropTypes.string,
   showAddRemove: PropTypes.bool,
-  onChange: PropTypes.func,
-  error: PropTypes.string,
-  required: PropTypes.bool
+  onChange: PropTypes.func
 };
 
 TextInputsList.defaultProps = {
   fieldsetLegend: '',
   heading: '',
   showAddRemove: false,
-  onChange: () => {},
-  error: '',
-  required: false
+  onChange: () => {}
 };
 
 export default TextInputsList;

@@ -91,13 +91,4 @@ describe('(Component) TextInputsList', () => {
     expect(actual).to.eq(true);
   });
 
-  it('should render an error message', () => {
-    const mockError = 'This is required';
-    wrapper.setProps({ error: mockError });
-    const actual = wrapper.containsMatchingElement(
-      <span>{mockError}</span>
-    );
-    expect(actual).to.eq(true);
-  });
-
 });
