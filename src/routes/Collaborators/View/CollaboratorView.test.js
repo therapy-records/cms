@@ -8,7 +8,7 @@ import { GET_COLLABORATOR } from '../../../queries';
 import { DELETE_COLLABORATOR } from '../../../mutations';
 import CollaboratorView from './index';
 import LoadingSpinner from '../../../components/LoadingSpinner';
-import ErrorMessage from '../../../components/ErrorMessage';
+import StickyNew from '../../../components/StickyNew';
 import Collaborator from './Collaborator';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -162,7 +162,9 @@ describe('(Component) CollaboratorView', () => {
       await actions(wrapper, () => {
         wrapper.update();
         const actual = wrapper.containsMatchingElement(
-          <ErrorMessage />
+          <StickyNew>
+            <p>Sorry, something has gone wrong.</p>
+          </StickyNew>
         );
         expect(actual).to.equal(true);
       });

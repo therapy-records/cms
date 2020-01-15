@@ -11,6 +11,7 @@ describe('(Component) FormSuccess', () => {
   const props = {
     baseUrl: '/collaborators',
     copy: {
+      success: 'Congratulations!',
       homeLink: 'Go to Collaborators',
       createLink: 'Create another Collaborator',
     },
@@ -25,7 +26,39 @@ describe('(Component) FormSuccess', () => {
     );
   });
 
-  it('should render a <Link /> to props.baseUrl', () => {
+  describe('success message', () => {
+    it('should render from props', () => {
+      const actual = wrapper.containsMatchingElement(
+        <h3>{props.copy.success} <small>🚀</small></h3>
+      );
+      expect(actual).to.eq(true);
+    });
+
+    describe('when no success copy prop', () => { 
+      it('should render default copy', () => {
+        const mockCopy = {
+          homeLink: props.copy.homeLink
+        };
+
+        wrapper = mount(
+          <BrowserRouter>
+            <FormSuccess
+              baseUrl={props.baseUrl}
+              copy={mockCopy}
+            />
+          </BrowserRouter>
+        );
+
+        const actual = wrapper.containsMatchingElement(
+          <h3>Success! <small>🚀</small></h3>
+        );
+        expect(actual).to.eq(true);
+      });
+    });
+
+  });
+
+  it('should render a <Link />', () => {
     const actual = wrapper.containsMatchingElement(
       <Link
         to={props.baseUrl}

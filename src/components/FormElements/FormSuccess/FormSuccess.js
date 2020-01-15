@@ -8,11 +8,12 @@ const FormSuccess = ({
   onReset
 }) => {
 
-  const showResetButton = (onReset && copy.homeLink);
+  const heading = copy.success || 'Success!';
+  const showResetButton = (onReset && copy.createLink);
 
   return (
     <div>
-      <h3>Success! <small>🚀</small></h3>
+      <h3>{heading} <small>🚀</small></h3>
 
       <div className='inline-flex'>
 
@@ -22,12 +23,12 @@ const FormSuccess = ({
         >{copy.homeLink}
         </Link>
 
-        {showResetButton &&
+        {showResetButton && (
           <button
             onClick={onReset}
           >{copy.createLink}
           </button>
-        }
+        )}
 
       </div>
     </div>
@@ -37,6 +38,7 @@ const FormSuccess = ({
 FormSuccess.propTypes = {
   baseUrl: PropTypes.string.isRequired,
   copy: PropTypes.shape({
+    success: PropTypes.string,
     homeLink: PropTypes.string,
     createLink: PropTypes.string
   }).isRequired,

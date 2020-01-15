@@ -8,9 +8,10 @@ import { GET_COLLABORATOR } from '../../../queries';
 import { DELETE_COLLABORATOR } from '../../../mutations';
 import ArticleHeader from '../../../components/ArticleHeader';
 import LoadingSpinner from '../../../components/LoadingSpinner';
-import ErrorMessage from '../../../components/ErrorMessage';
+import StickyNew from '../../../components/StickyNew';
 import Collaborator from './Collaborator';
 import './CollaboratorView.css';
+import FormSuccess from '../../../components/FormElements/FormSuccess';
 
 const CollaboratorView = ({ match }) => {
   const { id: collabId } = match.params;
@@ -29,7 +30,8 @@ const CollaboratorView = ({ match }) => {
     deleteCollaborator,
     {
       loading: mutationLoading,
-      error: mutationError
+      error: mutationError,
+      data: deletedData
     }
   ] = useMutation(DELETE_COLLABORATOR);
 
@@ -39,18 +41,42 @@ const CollaboratorView = ({ match }) => {
     })
   }
 
+  const hasData = (data && data.collaborator);
+  const deleteSuccess = (deletedData && deletedData.deleteCollaborator._id);
+  const isLoading = (queryLoading || mutationLoading);
+  const hasError = (queryError || mutationError);
+
+  const renderPageContent = (hasData &&
+                             !isLoading &&
+                             !deleteSuccess);
 
   return (
     <article className='container'>
 
-      <LoadingSpinner
-        active={queryLoading || mutationLoading}
-        fullScreen
-      />
+      {isLoading && (
+        <LoadingSpinner
+          active
+          fullScreen
+        />
+      )}
 
-      {(queryError || mutationError) && <ErrorMessage />}
+      {deleteSuccess && (
+        <FormSuccess
+          baseUrl='/collaborators'
+          copy={{
+            success: 'Successfully Deleted',
+            homeLink: 'Go to Collaborators'
+          }}
+        />
+      )}
 
-      {(data && data.collaborator) && (
+      {hasError && (
+        <StickyNew>
+          <p>Sorry, something has gone wrong.</p>
+        </StickyNew>
+      )}
+
+      {renderPageContent && (
         <div>
 
           <ArticleHeader
@@ -65,7 +91,6 @@ const CollaboratorView = ({ match }) => {
 
         </div>
       )}
-
 
     </article>
   );
