@@ -24,3 +24,11 @@ export const EDIT_COLLABORATOR = gql`
     }
   }
 `;
+
+export const DELETE_COLLABORATOR = gql`
+  mutation($id: ID!) {
+    deleteCollaborator(_id: $id) {
+      _id
+    }
+  }
+`;

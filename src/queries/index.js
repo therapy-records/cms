@@ -13,6 +13,7 @@ export const GET_COLLABORATORS = gql`
 export const GET_COLLABORATOR = gql`
   query ($id: ID!){
       collaborator(_id: $id) {
+        _id,
         name,
         role,
         about,

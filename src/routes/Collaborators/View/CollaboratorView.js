@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { useQuery } from '@apollo/react-hooks';
+import {
+  useQuery,
+  useMutation
+} from '@apollo/react-hooks';
 import { GET_COLLABORATOR } from '../../../queries';
+import { DELETE_COLLABORATOR } from '../../../mutations';
+import ArticleHeader from '../../../components/ArticleHeader';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import ErrorMessage from '../../../components/ErrorMessage';
 import Collaborator from './Collaborator';
@@ -12,8 +16,8 @@ const CollaboratorView = ({ match }) => {
   const { id: collabId } = match.params;
 
   const {
-    loading,
-    error,
+    loading: queryLoading,
+    error: queryError,
     data
   } = useQuery(GET_COLLABORATOR, {
     variables: {
@@ -21,37 +25,41 @@ const CollaboratorView = ({ match }) => {
     }
   });
 
+  const [
+    deleteCollaborator,
+    {
+      loading: mutationLoading,
+      error: mutationError
+    }
+  ] = useMutation(DELETE_COLLABORATOR);
+
+  const handleOnDelete = (mutation, id) => {
+    mutation({
+      variables: { id }
+    })
+  }
+
+
   return (
     <article className='container'>
 
       <LoadingSpinner
-        active={loading}
+        active={queryLoading || mutationLoading}
         fullScreen
       />
 
-      {error && <ErrorMessage />}
+      {(queryError || mutationError) && <ErrorMessage />}
 
       {(data && data.collaborator) && (
         <div>
-          <div className='heading-with-btns'>
-            <div>
-              <h2>{data.collaborator.name}</h2>
-            </div>
 
-            <div className='action-btns'>
-              <button
-                className='btn btn-danger'
-              >Delete
-              </button>
-
-              <Link
-                to={`/collaborators/${collabId}/edit`}
-                className='btn btn-edit'
-              >Edit
-              </Link>
-            </div>
-
-          </div>
+          <ArticleHeader
+            baseUrl='/collaborators'
+            article={{}}
+            onDeleteArticle={() => handleOnDelete(deleteCollaborator, data.collaborator._id)}
+            heading={data.collaborator.name}
+            showDeleteButton
+          />
 
           <Collaborator {...data.collaborator} />
 

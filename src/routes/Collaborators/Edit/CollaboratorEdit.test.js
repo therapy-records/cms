@@ -27,6 +27,7 @@ let mocks = [
     result: {
       data: {
         collaborator: {
+          _id: '1234',
           name: 'test',
           about: '<p>test</p>',
           avatarUrl: 'test.com',
@@ -53,7 +54,7 @@ describe('(Component) CollaboratorEdit', () => {
     props = {
       match: {
         params: {
-          id: 'test'
+          id: '1234'
         }
       },
       mutation: {}

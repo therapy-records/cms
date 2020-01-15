@@ -2,9 +2,10 @@ import React from 'react';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { act } from 'react-dom/test-utils';
-import { BrowserRouter, Link } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
 import { GET_COLLABORATOR } from '../../../queries';
+import { DELETE_COLLABORATOR } from '../../../mutations';
 import CollaboratorView from './index';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import ErrorMessage from '../../../components/ErrorMessage';
@@ -16,11 +17,12 @@ let mocks = [
   {
     request: {
       query: GET_COLLABORATOR,
-      variables: { id: 'test' }
+      variables: { id: '1234' }
     },
     result: {
       data: {
         collaborator: {
+          _id: '1234',
           name: 'test',
           role: 'testing',
           about: '<p>test</p>',
@@ -40,6 +42,17 @@ let mocks = [
         }
       }
     }
+  },
+  {
+    request: {
+      query: DELETE_COLLABORATOR,
+      variables: { id: '1234' }
+    },
+    result: {
+      data: {
+        _id: '1234'
+      }
+    }
   }
 ];
 
@@ -48,7 +61,7 @@ describe('(Component) CollaboratorView', () => {
       props = {
         match: {
           params: {
-            id: 'test'
+            id: '1234'
           }
         }
       };
@@ -81,24 +94,16 @@ describe('(Component) CollaboratorView', () => {
         expect(actual).to.equal(true);
       });
     });
-
-    it('should render a button to delete', async() => {
+    
+    it('should render <ArticleHeader />', async() => {
       await actions(wrapper, () => {
         wrapper.update();
-        const actual = wrapper.containsMatchingElement(
-          <button>Delete</button>
-        );
-        expect(actual).to.equal(true);
-      });
-    });
-
-    it('should render a Link to edit', async() => {
-      await actions(wrapper, () => {
-        wrapper.update();
-        const actual = wrapper.containsMatchingElement(
-          <Link to={`/collaborators/${props.match.params.id}/edit`}>Edit</Link>
-        );
-        expect(actual).to.equal(true);
+        const articleHeader = wrapper.find('ArticleHeader');
+        expect(articleHeader.prop('baseUrl')).to.eq('/collaborators');
+        expect(articleHeader.prop('article')).to.deep.eq({});
+        expect(articleHeader.prop('onDeleteArticle')).to.be.a('function');
+        expect(articleHeader.prop('heading')).to.eq(mocks[0].result.data.collaborator.name);
+        expect(articleHeader.prop('showDeleteButton')).to.eq(true);
       });
     });
 
