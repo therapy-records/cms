@@ -9,8 +9,11 @@ Enzyme.configure({ adapter: new Adapter() });
 describe('(Component) FormSuccess', () => {
   let wrapper;
   const props = {
-    title: 'Test',
-    createCopy: 'Create another article',
+    baseUrl: '/collaborators',
+    copy: {
+      homeLink: 'Go to Collaborators',
+      createLink: 'Create another Collaborator',
+    },
     onReset: () => {}
   };
 
@@ -22,11 +25,11 @@ describe('(Component) FormSuccess', () => {
     );
   });
 
-  it('should render a <Link />', () => {
+  it('should render a <Link /> to props.baseUrl', () => {
     const actual = wrapper.containsMatchingElement(
       <Link
-        to={`/${props.title.toLowerCase()}`}
-      >Go to {props.title}
+        to={props.baseUrl}
+      >{props.copy.homeLink}
       </Link>
     );
     expect(actual).to.eq(true);
@@ -37,7 +40,7 @@ describe('(Component) FormSuccess', () => {
       <button
         onClick={props.onReset}
       >
-        {props.createCopy}
+        {props.copy.createLink}
       </button>
     );
     expect(actual).to.eq(true);

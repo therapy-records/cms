@@ -12,6 +12,8 @@ const Form = ({
   mutation,
   fields,
   mutateId,
+  baseUrl,
+  successCopy,
   refetchQueries,
   isEditForm
 }) => {
@@ -123,8 +125,8 @@ const Form = ({
 
       {submitSuccess && (
         <FormSuccess
-          title='Collaborators'
-          createCopy='Create another Collaborator'
+          baseUrl={baseUrl}
+          successCopy={successCopy}
           onReset={() => dispatch({ type: 'resetForm' })}
         />
       )}
@@ -136,14 +138,19 @@ const Form = ({
 Form.propTypes = {
   mutation: PropTypes.object.isRequired,
   fields: PropTypes.arrayOf(PropTypes.object).isRequired,
-  refetchQueries: PropTypes.arrayOf(PropTypes.object),
+  baseUrl: PropTypes.string.isRequired,
+  successCopy: PropTypes.shape({
+    homeLink: PropTypes.string.isRequired,
+    createLink: PropTypes.string
+  }),
   mutateId: PropTypes.string,
+  refetchQueries: PropTypes.arrayOf(PropTypes.object),
   isEditForm: PropTypes.bool
 };
 
 Form.defaultProps = {
-  refetchQueries: [],
   mutateId: null,
+  refetchQueries: [],
   isEditForm: false
 };
 

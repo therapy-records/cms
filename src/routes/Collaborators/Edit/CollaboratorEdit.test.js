@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
-import CollaboratorEdit from './index';
+import CollaboratorEdit from './CollaboratorEdit';
 import {
   GET_COLLABORATOR,
   GET_COLLABORATORS
@@ -22,13 +22,14 @@ let mocks = [
   {
     request: {
       query: GET_COLLABORATOR,
-      variables: { id: 'test' }
+      variables: { id: '1234' }
     },
     result: {
       data: {
         collaborator: {
           _id: '1234',
           name: 'test',
+          role: 'testing',
           about: '<p>test</p>',
           avatarUrl: 'test.com',
           urls: {
@@ -57,7 +58,10 @@ describe('(Component) CollaboratorEdit', () => {
           id: '1234'
         }
       },
-      mutation: {}
+      baseUrl: '/collaborators',
+      successCopy: {
+        homeLink: 'Go to Collaborators'
+      }
     };
 
   const actions = async(wrapper, _actions) => {
@@ -100,6 +104,8 @@ describe('(Component) CollaboratorEdit', () => {
             refetchQueries={[
               { query: GET_COLLABORATORS }
             ]}
+            baseUrl={props.baseUrl}
+            successCopy={props.successCopy}
             isEditForm
           />
 
@@ -107,7 +113,6 @@ describe('(Component) CollaboratorEdit', () => {
         expect(actual).to.equal(true);
       });
     });
-
   });
 
   describe('when the graphQL query is loading', () => {

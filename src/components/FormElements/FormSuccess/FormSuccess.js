@@ -3,35 +3,43 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const FormSuccess = ({
-  title,
-  createCopy,
+  baseUrl,
+  copy,
   onReset
-}) => (
-  <div>
-    <h3>Success! <small>🚀</small></h3>
+}) => {
 
-    <div className='inline-flex'>
+  const showResetButton = (onReset && copy.homeLink);
 
-      <Link
-        to={`/${title.toLowerCase()}`}
-        className='btn'
-      >Go to {title}
-      </Link>
+  return (
+    <div>
+      <h3>Success! <small>🚀</small></h3>
 
-      {onReset && 
-        <button
-          onClick={onReset}>
-          {createCopy}
-        </button>
-      }
+      <div className='inline-flex'>
 
+        <Link
+          to={baseUrl}
+          className='btn'
+        >{copy.homeLink}
+        </Link>
+
+        {showResetButton &&
+          <button
+            onClick={onReset}
+          >{copy.createLink}
+          </button>
+        }
+
+      </div>
     </div>
-  </div>
-);
+  );
+}
 
 FormSuccess.propTypes = {
-  title: PropTypes.string.isRequired,
-  createCopy: PropTypes.string.isRequired,
+  baseUrl: PropTypes.string.isRequired,
+  copy: PropTypes.shape({
+    homeLink: PropTypes.string.isRequired,
+    createLink: PropTypes.string
+  }),
   onReset: PropTypes.func
 };
 

@@ -66,6 +66,10 @@ const CollaboratorEdit = ({ match }) => {
             refetchQueries={[
               { query: GET_COLLABORATORS }
             ]}
+            baseUrl='/collaborators'
+            successCopy={{
+              homeLink: 'Go to Collaborators'
+            }}
             isEditForm
           />
 

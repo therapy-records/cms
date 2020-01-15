@@ -65,7 +65,12 @@ describe('(Component) Form', () => {
         required: true
       }
     ],
-    mutation: CREATE_COLLABORATOR
+    mutation: CREATE_COLLABORATOR,
+    baseUrl: '/test',
+    successCopy: {
+      homeLink: 'Go to Collaborators',
+      createLink: 'Create another Collaborator'
+    }
   }
 
   const actions = async(wrapper, _actions) => {

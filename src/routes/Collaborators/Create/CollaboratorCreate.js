@@ -19,6 +19,11 @@ const CollaboratorCreate = () => (
     <Form
       mutation={CREATE_COLLABORATOR}
       fields={COLLABORATOR_FIELDS}
+      baseUrl='/collaborators'
+      successCopy={{
+        homeLink: 'Go to Collaborators',
+        createLink: 'Create another Collaborator'
+      }}
     />
 
   </article>
