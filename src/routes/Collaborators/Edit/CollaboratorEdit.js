@@ -36,7 +36,7 @@ const CollaboratorEdit = ({ match }) => {
         <div>
           <div className='heading-with-btns'>
             <div>
-              <h2>{data.collaborator.name}</h2>
+              <h2>Edit Collaborator</h2>
             </div>
 
             {/*

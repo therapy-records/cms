@@ -79,7 +79,7 @@ describe('(Component) CollaboratorEdit', () => {
       await actions(wrapper, () => {
         wrapper.update();
         const actual = wrapper.containsMatchingElement(
-          <h2>{mocks[0].result.data.collaborator.name}</h2>
+          <h2>Edit Collaborator</h2>
         );
         expect(actual).to.equal(true);
       });
