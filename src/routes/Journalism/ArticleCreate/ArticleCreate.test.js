@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import configureMockStore from 'redux-mock-store';
 import ConnectedArticleCreate, { ArticleCreate } from './index';
 import JournalismForm from '../../../components/JournalismForm';
-import FormSuccess from '../../../components/FormSuccess';
+import FormSuccess from '../../../components/FormElements/FormSuccess';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import {
   selectUiStateLoading,

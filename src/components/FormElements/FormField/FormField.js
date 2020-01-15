@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FormInput from './FormInput';
-import FormFieldLabel from './FormFieldLabel';
-import FieldsetLegend from './FieldsetLegend';
-import FieldError from '../FormElements/FieldError';
+import FormFieldInput from '../FormFieldInput';
+import FormFieldLabel from '../FormFieldLabel';
+import FieldsetLegend from '../FieldsetLegend';
+import FormFieldError from '../FormFieldError'; 
 
 const FormField = props => {
   const {
@@ -20,7 +20,7 @@ const FormField = props => {
   return (
     <div>
 
-    {/*
+      {/*
       NOTE:
       title is temporary and only used for RichTextEditor
       when TextEditor is upgraded (and uses semantic text input and label)
@@ -51,10 +51,10 @@ const FormField = props => {
         />
       )}
 
-      <FormInput {...props} />
+      <FormFieldInput {...props} />
 
       {(touched && error) && (
-        <FieldError
+        <FormFieldError
           error={error}
         />
       )}
@@ -98,7 +98,7 @@ FormField.defaultProps = {
   fieldsetLegend: '',
   helpText: '',
   items: [],
-  onChange: () => {},
+  onChange: () => { },
   error: '',
   touched: false,
   dirty: false,

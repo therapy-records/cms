@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TextInput from '../FormElements/TextInput';
-import TextInputsList from '../FormElements/TextInputsList';
-import DropzoneImageUpload from '../DropzoneImageUpload';
-import RichTextEditor from '../RichTextEditor';
+import TextInput from '../TextInput';
+import TextInputsList from '../TextInputsList';
+import DropzoneImageUpload from '../../DropzoneImageUpload';
+import RichTextEditor from '../../RichTextEditor';
 
-const FormInput = ({
+const FormFieldInput = ({
   id,
   type,
   component,
@@ -86,7 +86,7 @@ const FormInput = ({
   return null;
 }
 
-FormInput.propTypes = {
+FormFieldInput.propTypes = {
   id: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   component: PropTypes.string.isRequired,
@@ -106,7 +106,7 @@ FormInput.propTypes = {
   value: PropTypes.string
 };
 
-FormInput.defaultProps = {
+FormFieldInput.defaultProps = {
   label: '',
   title: '',
   heading: '',
@@ -120,4 +120,4 @@ FormInput.defaultProps = {
   value: ''
 };
 
-export default FormInput;
+export default FormFieldInput;

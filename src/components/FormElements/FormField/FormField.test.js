@@ -2,10 +2,10 @@ import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import FormField from './index';
-import FormInput from './FormInput';
-import FormFieldLabel from './FormFieldLabel';
-import FieldsetLegend from './FieldsetLegend';
-import FieldError from '../FormElements/FieldError';
+import FormFieldInput from '../FormFieldInput';
+import FormFieldLabel from '../FormFieldLabel';
+import FieldsetLegend from '../FieldsetLegend';
+import FormFieldError from '../FormFieldError';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -34,9 +34,9 @@ describe('(Component) FormField', () => {
     wrapper = shallow(<FormField {...props} />);
   });
 
-  it('should render <FormInput />', () => {
+  it('should render <FormFieldInput />', () => {
     const actual = wrapper.containsMatchingElement(
-      <FormInput {...props} />
+      <FormFieldInput {...props} />
     );
     expect(actual).to.eq(true);
   });
@@ -89,14 +89,14 @@ describe('(Component) FormField', () => {
   });
 
   describe('with props.touched and props.error', () => {
-    it('should render <FieldError />', () => {
+    it('should render <FormFieldError />', () => {
       const mockError = 'oh no';
       wrapper.setProps({
         error: mockError,
         touched: true
       });
       const actual = wrapper.containsMatchingElement(
-        <FieldError error={mockError} />
+        <FormFieldError error={mockError} />
       );
       expect(actual).to.eq(true);
     });

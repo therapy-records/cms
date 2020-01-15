@@ -1,15 +1,15 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import FormInput from './FormInput';
-import TextInput from '../FormElements/TextInput';
-import TextInputsList from '../FormElements/TextInputsList';
-import DropzoneImageUpload from '../DropzoneImageUpload';
-import RichTextEditor from '../RichTextEditor';
+import FormFieldInput from './FormFieldInput';
+import TextInput from '../TextInput';
+import TextInputsList from '../TextInputsList';
+import DropzoneImageUpload from '../../DropzoneImageUpload';
+import RichTextEditor from '../../RichTextEditor';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('(Component) FormInput', () => {
+describe('(Component) FormFieldInput', () => {
   let wrapper,
     props = {
       id: 'test',
@@ -21,7 +21,7 @@ describe('(Component) FormInput', () => {
   describe('rendering', () => {
 
     beforeEach(() => {
-      wrapper = shallow(<FormInput {...props} />);
+      wrapper = shallow(<FormFieldInput {...props} />);
     });
 
     describe('when field.component is `TextInput`', () => {

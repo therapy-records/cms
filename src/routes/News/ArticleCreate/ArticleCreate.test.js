@@ -5,7 +5,7 @@ import configureMockStore from 'redux-mock-store';
 import ConnectedArticleCreate, { ArticleCreate } from './index';
 import NewsForm from '../../../components/NewsForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
-import FormSuccess from '../../../components/FormSuccess';
+import FormSuccess from '../../../components/FormElements/FormSuccess';
 import {
   selectUiStateLoading,
   selectUiStateSuccess

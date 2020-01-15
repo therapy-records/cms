@@ -2,11 +2,11 @@ import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
 import { useMutation } from '@apollo/react-hooks';
 import formReducer, { initReducerState } from './reducer';
-import FormField from '../FormField';
+import FormField from '../FormElements/FormField';
 import { handleFormData } from '../../utils/graphql-form';
 import StickyNew from '../StickyNew';
 import LoadingSpinner from '../LoadingSpinner';
-import FormSuccess from '../FormSuccess';
+import FormSuccess from '../FormElements/FormSuccess';
 
 const Form = ({
   mutation,

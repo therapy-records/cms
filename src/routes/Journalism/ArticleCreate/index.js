@@ -7,7 +7,7 @@ import {
   selectUiStateLoading,
   selectUiStateSuccess
 } from '../../../selectors/uiState';
-import FormSuccess from '../../../components/FormSuccess';
+import FormSuccess from '../../../components/FormElements/FormSuccess';
 import JournalismForm from '../../../components/JournalismForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 

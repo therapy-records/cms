@@ -8,7 +8,7 @@ import {
   selectUiStateSuccess
 } from '../../../selectors/uiState';
 import NewsForm from '../../../components/NewsForm';
-import FormSuccess from '../../../components/FormSuccess';
+import FormSuccess from '../../../components/FormElements/FormSuccess';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
 export class ArticleCreate extends React.Component {

@@ -13,7 +13,7 @@ import {
   selectSelectedJournalismArticle,
   selectJournalismEditSuccess
 } from '../../../selectors/journalism';
-import FormSuccess from '../../../components/FormSuccess';
+import FormSuccess from '../../../components/FormElements/FormSuccess';
 import redirect from '../../../utils/redirect';
 
 Enzyme.configure({adapter: new Adapter()});

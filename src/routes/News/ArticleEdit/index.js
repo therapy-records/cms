@@ -17,7 +17,7 @@ import {
 } from '../../../selectors/uiState';
 import NewsForm from '../../../components/NewsForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
-import FormSuccess from '../../../components/FormSuccess';
+import FormSuccess from '../../../components/FormElements/FormSuccess';
 import redirect from '../../../utils/redirect';
 
 export class ArticleEdit extends React.Component {
