@@ -9,6 +9,7 @@ let wrapper;
 const mock = {
   name: 'Testing',
   avatarUrl: 'test.com',
+  role: 'test',
   about: '<p>test</p>',
   collabOn: [
     'testA',
@@ -34,6 +35,13 @@ describe('(Component) Collaborator', () => {
           src={mock.avatarUrl}
           alt={mock.name}
         />
+      );
+      expect(actual).to.equal(true);
+    });
+
+    it('should render role paragraph',() => {
+      const actual = wrapper.containsMatchingElement(
+        <p>{mock.role}</p>
       );
       expect(actual).to.equal(true);
     });

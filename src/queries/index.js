@@ -14,6 +14,7 @@ export const GET_COLLABORATOR = gql`
   query ($id: ID!){
       collaborator(_id: $id) {
         name,
+        role,
         about,
         avatarUrl,
         collabOn,

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 const Collaborator = ({
   name,
+  role,
   avatarUrl,
   about,
   collabOn,
@@ -19,6 +20,8 @@ const Collaborator = ({
         src={avatarUrl}
         alt={name}
       />
+
+      {role && <p>{role}</p>}
 
       {about && <div dangerouslySetInnerHTML={renderHtml(about)} />}
 
@@ -88,6 +91,7 @@ const Collaborator = ({
 
 Collaborator.propTypes = {
   name: PropTypes.string.isRequired,
+  role: PropTypes.string,
   avatarUrl: PropTypes.string.isRequired,
   about: PropTypes.string,
   collabOn: PropTypes.arrayOf(PropTypes.string),
@@ -95,6 +99,7 @@ Collaborator.propTypes = {
 };
 
 Collaborator.defaultProps = {
+  role: '',
   about: '',
   collabOn: [],
   urls: {}

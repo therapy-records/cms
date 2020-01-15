@@ -22,6 +22,7 @@ let mocks = [
       data: {
         collaborator: {
           name: 'test',
+          role: 'testing',
           about: '<p>test</p>',
           avatarUrl: 'test.com',
           urls: {
