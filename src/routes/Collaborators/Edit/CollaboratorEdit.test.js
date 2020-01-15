@@ -5,7 +5,10 @@ import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
 import CollaboratorEdit from './index';
-import { GET_COLLABORATOR } from '../../../queries';
+import {
+  GET_COLLABORATOR,
+  GET_COLLABORATORS
+} from '../../../queries';
 import { EDIT_COLLABORATOR } from '../../../mutations';
 import Form from '../../../components/Form';
 import COLLABORATOR_FIELDS from '../../../formFields/collaborator';
@@ -93,6 +96,9 @@ describe('(Component) CollaboratorEdit', () => {
             mutation={EDIT_COLLABORATOR}
             fields={mapFieldsWithValues(COLLABORATOR_FIELDS, mocks[0].result.data.collaborator)}
             mutateId={props.match.params.id}
+            refetchQueries={[
+              { query: GET_COLLABORATORS }
+            ]}
             isEditForm
           />
 

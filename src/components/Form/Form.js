@@ -11,8 +11,9 @@ import FormSuccess from '../FormElements/FormSuccess';
 const Form = ({
   mutation,
   fields,
-  isEditForm,
-  mutateId
+  mutateId,
+  refetchQueries,
+  isEditForm
 }) => {
 
   const [state, dispatch] = useReducer(
@@ -29,7 +30,9 @@ const Form = ({
       loading,
       error
     }
-  ] = useMutation(mutation);
+  ] = useMutation(mutation, {
+    refetchQueries
+  });
 
   const handleFieldValueChange = (fieldId, value) => {
     dispatch({
@@ -133,13 +136,15 @@ const Form = ({
 Form.propTypes = {
   mutation: PropTypes.object.isRequired,
   fields: PropTypes.arrayOf(PropTypes.object).isRequired,
-  isEditForm: PropTypes.bool,
-  mutateId: PropTypes.string
+  refetchQueries: PropTypes.arrayOf(PropTypes.object),
+  mutateId: PropTypes.string,
+  isEditForm: PropTypes.bool
 };
 
 Form.defaultProps = {
-  isEditForm: false,
-  mutateId: null
+  refetchQueries: [],
+  mutateId: null,
+  isEditForm: false
 };
 
 export default Form;

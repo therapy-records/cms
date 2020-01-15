@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useQuery } from '@apollo/react-hooks';
-import { GET_COLLABORATOR } from '../../../queries';
+import {
+  GET_COLLABORATOR,
+  GET_COLLABORATORS
+} from '../../../queries';
 import { EDIT_COLLABORATOR } from '../../../mutations';
 import Form from '../../../components/Form';
 import COLLABORATOR_FIELDS from '../../../formFields/collaborator';
@@ -60,6 +63,9 @@ const CollaboratorEdit = ({ match }) => {
             mutation={EDIT_COLLABORATOR}
             fields={mapFieldsWithValues(COLLABORATOR_FIELDS, data.collaborator)}
             mutateId={collabId}
+            refetchQueries={[
+              { query: GET_COLLABORATORS }
+            ]}
             isEditForm
           />
 
