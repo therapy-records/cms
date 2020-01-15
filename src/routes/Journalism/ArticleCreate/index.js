@@ -43,8 +43,11 @@ export class ArticleCreate extends React.Component {
 
         {!promiseLoading && promiseSuccess &&
           <FormSuccess
-            title='Journalism'
-            createCopy='Create another article'
+            baseUrl='/journalism'
+            copy={{
+              homeLink: 'Go to Journalism',
+              createLink: 'Create another article',
+            }}
             onReset={this.handleOnReset}
           />
         }

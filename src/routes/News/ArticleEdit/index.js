@@ -83,8 +83,10 @@ export class ArticleEdit extends React.Component {
 
         {(!promiseLoading && promiseSuccess && editSuccess) &&
           <FormSuccess
-            title='News'
-            createCopy='Create another article'
+            baseUrl='/news'
+            copy={{
+              homeLink: 'Go to News'
+            }}
           />
         }
 

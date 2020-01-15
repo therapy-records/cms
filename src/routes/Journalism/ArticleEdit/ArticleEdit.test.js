@@ -169,8 +169,10 @@ describe('(Component) Journalism - ArticleEdit', () => {
       it('should render <FormSuccess />', () => {
         const actual = wrapper.containsMatchingElement(
           <FormSuccess
-            title='Journalism'
-            createCopy='Create another article'
+            baseUrl='/journalism'
+            copy={{
+              homeLink: 'Go to Journalism'
+            }}
           />
         );
         expect(actual).to.equal(true);

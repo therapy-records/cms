@@ -88,8 +88,11 @@ describe('(Component) News - ArticleCreate', () => {
       it('should render <FormSuccess /', () => {
         const actual = wrapper.containsMatchingElement(
           <FormSuccess
-            title='News'
-            createCopy='Create another article'
+            baseUrl='/news'
+            copy={{
+              homeLink: 'Go to News',
+              createLink: 'Create another article',
+            }}
             onReset={wrapper.instance().handleOnReset}
           />
         );

@@ -37,9 +37,9 @@ const FormSuccess = ({
 FormSuccess.propTypes = {
   baseUrl: PropTypes.string.isRequired,
   copy: PropTypes.shape({
-    homeLink: PropTypes.string.isRequired,
+    homeLink: PropTypes.string,
     createLink: PropTypes.string
-  }),
+  }).isRequired,
   onReset: PropTypes.func
 };
 

@@ -140,9 +140,9 @@ Form.propTypes = {
   fields: PropTypes.arrayOf(PropTypes.object).isRequired,
   baseUrl: PropTypes.string.isRequired,
   successCopy: PropTypes.shape({
-    homeLink: PropTypes.string.isRequired,
+    homeLink: PropTypes.string,
     createLink: PropTypes.string
-  }),
+  }).isRequired,
   mutateId: PropTypes.string,
   refetchQueries: PropTypes.arrayOf(PropTypes.object),
   isEditForm: PropTypes.bool
