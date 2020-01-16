@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { arrayOfStringsHasValues } from '../../../utils/arrays';
 
 const Collaborator = ({
   name,
@@ -14,6 +15,8 @@ const Collaborator = ({
     return { __html: htmlData };
   };
 
+  const hasCollabOn = arrayOfStringsHasValues(collabOn);
+
   return (
     <div>
       <img
@@ -25,7 +28,7 @@ const Collaborator = ({
 
       {about && <div dangerouslySetInnerHTML={renderHtml(about)} />}
 
-      {(collabOn && collabOn.length > 0) && (
+      {hasCollabOn && (
         <div>
           <p>Collaborations:</p>
           <ul>

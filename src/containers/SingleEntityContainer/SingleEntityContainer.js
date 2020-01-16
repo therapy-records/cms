@@ -4,8 +4,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  useQuery
-  // useMutation
+  useQuery,
+  useMutation
 } from '@apollo/react-hooks';
 import ArticleHeader from '../../components/ArticleHeader';
 import LoadingSpinner from '../../components/LoadingSpinner';
@@ -15,11 +15,11 @@ import FormSuccess from '../../components/FormElements/FormSuccess';
 const SingleEntityContainer = ({
   baseUrl,
   entityName,
+  id,
   component,
   query,
-  queryVariables,
   mutation,
-  mutationVariables
+  renderEditLink
 }) => {
 
   const {
@@ -27,43 +27,36 @@ const SingleEntityContainer = ({
     error: queryError,
     data: queryData
   } = useQuery(query, {
-    variables: queryVariables
+    variables: {
+      id
+    }
   });
 
-  // const handleOnDelete = (mutation, id) => {
-  //   mutation({
-  //     variables: { id }
-  //   })
-  // }
-
-  // const [
-  //   executeMutation,
-  //   {
-  //     loading: mutationLoading,
-  //     error: mutationError,
-  //     data: mutationData
-  //   }
-  // ] = useMutation(mutation);
+  const [
+    executeMutation,
+    {
+      loading: mutationLoading,
+      error: mutationError,
+      data: mutationData
+    }
+  ] = useMutation(mutation, {
+    variables: {
+      id
+    }
+  });
  
-  const hasData = (queryData && queryData[entityName]);
+  const hasQueryData = (queryData && queryData[entityName]);
 
-  // const deleteSuccess = (deletedData && deletedData.deleteCollaborator._id);
-  // const isLoading = (queryLoading || mutationLoading);
-  // const hasError = (queryError || mutationError);
-  const isLoading = queryLoading;
-  const hasError = queryError;
+  const mutationSuccess = (mutationData && Object.keys(mutationData).length);
+  const isLoading = (queryLoading || mutationLoading);
+  const hasError = (queryError || mutationError);
 
-  // const hasData = true;
-  // const isLoading = false;
-  const deleteSuccess = false;
-  // const hasError = false;
-
-  const renderPageContent = (hasData &&
+  const renderPageContent = (hasQueryData &&
                             !isLoading &&
-                            !deleteSuccess);
+                            !mutationSuccess);
 
   let heading = '';
-  if (hasData) {
+  if (hasQueryData) {
     heading = queryData[entityName].heading || 
               queryData[entityName].title ||
               queryData[entityName].name;
@@ -79,11 +72,11 @@ const SingleEntityContainer = ({
         />
       )}
 
-      {deleteSuccess && (
+      {mutationSuccess && (
         <FormSuccess
           baseUrl={baseUrl}
           copy={{
-            success: 'Successfully Deleted',
+            success: 'Successfully mutated',
             homeLink: `Go to ${entityName}`
           }}
         />
@@ -100,9 +93,13 @@ const SingleEntityContainer = ({
 
           <ArticleHeader
             baseUrl={baseUrl}
-            article={{}}
+            article={{
+              _id: queryData[entityName]._id
+            }}
             heading={heading}
+            onDeleteArticle={() => executeMutation()}
             showDeleteButton
+            showEditButton={renderEditLink}
           />
 
           {component({
@@ -120,21 +117,20 @@ const SingleEntityContainer = ({
 SingleEntityContainer.propTypes = {
   baseUrl: PropTypes.string.isRequired,
   entityName: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   component: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.element,
     PropTypes.node
   ]).isRequired,
   query: PropTypes.object.isRequired,
-  queryVariables: PropTypes.object,
   mutation: PropTypes.object,
-  mutationVariables: PropTypes.object
+  renderEditLink: PropTypes.bool
 };
 
 SingleEntityContainer.defaultProps = {
-  queryVariables: {},
   mutation: {},
-  mutationVariables: {}
+  renderEditLink: false
 };
 
 export default SingleEntityContainer;

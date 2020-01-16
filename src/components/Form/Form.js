@@ -126,7 +126,7 @@ const Form = ({
       {submitSuccess && (
         <FormSuccess
           baseUrl={baseUrl}
-          successCopy={successCopy}
+          copy={successCopy}
           onReset={() => dispatch({ type: 'resetForm' })}
         />
       )}

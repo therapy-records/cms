@@ -5,10 +5,10 @@ import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
 import { GET_COLLABORATOR } from '../../queries';
+import { DELETE_COLLABORATOR } from '../../mutations';
 import SingleEntityContainer from './index';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import StickyNew from '../../components/StickyNew';
-import ArticleHeader from '../../components/ArticleHeader';
 import Collaborator from '../../routes/Collaborators/View/Collaborator';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -43,17 +43,17 @@ let mocks = [
       }
     }
   },
-  // {
-  //   request: {
-  //     query: DELETE_COLLABORATOR,
-  //     variables: { id: '1234' }
-  //   },
-  //   result: {
-  //     data: {
-  //       _id: '1234'
-  //     }
-  //   }
-  // }
+  {
+    request: {
+      query: DELETE_COLLABORATOR,
+      variables: { id: '1234' }
+    },
+    result: {
+      data: {
+        _id: '1234'
+      }
+    }
+  }
 ];
 
 describe('(Container) SingleEntityContainer', () => {
@@ -61,11 +61,11 @@ describe('(Container) SingleEntityContainer', () => {
     props = {
       baseUrl: '/collaborators',
       entityName: 'collaborator',
+      id: '1234',
       component: Collaborator,
       query: GET_COLLABORATOR,
-      queryVariables: {
-        id: '1234'
-      }
+      mutation: DELETE_COLLABORATOR,
+      renderEditLink: true
     };
 
   const actions = async(wrapper, _actions) => {
@@ -90,15 +90,15 @@ describe('(Container) SingleEntityContainer', () => {
     it('should render <ArticleHeader />', async() => {
       await actions(wrapper, () => {
         wrapper.update();
-        const actual = wrapper.containsMatchingElement(
-          <ArticleHeader
-            baseUrl={props.baseUrl}
-            article={{}}
-            heading={mocks[0].result.data[props.entityName].name}
-            showDeleteButton
-          />
-        );
-        expect(actual).to.equal(true);
+        const articleHeader = wrapper.find('ArticleHeader');
+        expect(articleHeader.prop('baseUrl')).to.eq(props.baseUrl);
+        expect(articleHeader.prop('article')).to.deep.eq({
+          _id: mocks[0].result.data[props.entityName]._id
+        });
+        expect(articleHeader.prop('heading')).to.eq(mocks[0].result.data[props.entityName].name);
+        expect(articleHeader.prop('showDeleteButton')).to.eq(true);
+        expect(articleHeader.prop('onDeleteArticle')).to.be.a('function');
+        expect(articleHeader.prop('showEditButton')).to.eq(props.renderEditLink);
       });
     });
 
