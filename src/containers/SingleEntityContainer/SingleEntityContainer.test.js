@@ -9,7 +9,7 @@ import { DELETE_COLLABORATOR } from '../../mutations';
 import SingleEntityContainer from './index';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import StickyNew from '../../components/StickyNew';
-import Collaborator from '../../routes/Collaborators/View/Collaborator';
+import CollaboratorDetails from '../../components/CollaboratorDetails';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -62,7 +62,7 @@ describe('(Container) SingleEntityContainer', () => {
       baseUrl: '/collaborators',
       entityName: 'collaborator',
       id: '1234',
-      component: Collaborator,
+      component: CollaboratorDetails,
       query: GET_COLLABORATOR,
       mutation: DELETE_COLLABORATOR,
       renderEditLink: true

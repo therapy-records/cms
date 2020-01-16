@@ -5,7 +5,7 @@ import { GET_COLLABORATOR } from '../../../queries';
 import { DELETE_COLLABORATOR } from '../../../mutations';
 import CollaboratorView from './CollaboratorView';
 import SingleEntityContainer from '../../../containers/SingleEntityContainer';
-import Collaborator from './Collaborator';
+import CollaboratorDetails from '../../../components/CollaboratorDetails';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -31,7 +31,7 @@ describe('(Component) CollaboratorView', () => {
         baseUrl='/collaborators'
         entityName='collaborator'
         id={props.match.params.id}
-        component={Collaborator}
+        component={CollaboratorDetails}
         query={GET_COLLABORATOR}
         mutation={DELETE_COLLABORATOR}
         renderEditLink

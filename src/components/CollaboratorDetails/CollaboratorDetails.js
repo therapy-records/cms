@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { arrayOfStringsHasValues } from '../../../utils/arrays';
+import { arrayOfStringsHasValues } from '../../utils/arrays';
 
-const Collaborator = ({
+const CollaboratorDetails = ({
   name,
   role,
   avatarUrl,
@@ -94,7 +94,7 @@ const Collaborator = ({
   );
 };
 
-Collaborator.propTypes = {
+CollaboratorDetails.propTypes = {
   name: PropTypes.string.isRequired,
   role: PropTypes.string,
   avatarUrl: PropTypes.string.isRequired,
@@ -103,11 +103,11 @@ Collaborator.propTypes = {
   urls: PropTypes.object
 };
 
-Collaborator.defaultProps = {
+CollaboratorDetails.defaultProps = {
   role: '',
   about: '',
   collabOn: [],
   urls: {}
 };
 
-export default Collaborator;
+export default CollaboratorDetails;

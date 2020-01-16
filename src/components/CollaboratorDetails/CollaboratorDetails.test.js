@@ -1,7 +1,7 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Collaborator from './Collaborator';
+import CollaboratorDetails from './CollaboratorDetails';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -21,15 +21,15 @@ const mock = {
   }
 };
 
-describe('(Component) Collaborator', () => {
+describe('(Component) CollaboratorDetails', () => {
   beforeEach(() => {
     wrapper = shallow(
-      <Collaborator {...mock} />
+      <CollaboratorDetails {...mock} />
     );
   });
 
   describe('rendering', () => {
-    it('should render an image',() => {
+    it('should render an image', () => {
       const actual = wrapper.containsMatchingElement(
         <img
           src={mock.avatarUrl}
@@ -39,7 +39,7 @@ describe('(Component) Collaborator', () => {
       expect(actual).to.equal(true);
     });
 
-    it('should render role paragraph',() => {
+    it('should render role paragraph', () => {
       const actual = wrapper.containsMatchingElement(
         <p>{mock.role}</p>
       );
@@ -89,21 +89,21 @@ describe('(Component) Collaborator', () => {
       });
 
       describe('when a url is `phone`', () => {
-          it('should render a list item without url', () => {
-            const mockPhone = '0123456789';
-            wrapper.setProps({
-              urls: {
-                phone: mockPhone
-              }
-            });
-            const actual = wrapper.containsMatchingElement(
-              <li>
-                <span>phone:&nbsp;</span>
-                <span>{mockPhone}</span>
-              </li>
-            );
-            expect(actual).to.eq(true);
+        it('should render a list item without url', () => {
+          const mockPhone = '0123456789';
+          wrapper.setProps({
+            urls: {
+              phone: mockPhone
+            }
           });
+          const actual = wrapper.containsMatchingElement(
+            <li>
+              <span>phone:&nbsp;</span>
+              <span>{mockPhone}</span>
+            </li>
+          );
+          expect(actual).to.eq(true);
+        });
       });
 
       describe('when a url is `other`', () => {

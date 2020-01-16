@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { GET_COLLABORATOR } from '../../../queries';
 import { DELETE_COLLABORATOR } from '../../../mutations';
 import SingleEntityContainer from '../../../containers/SingleEntityContainer';
-import Collaborator from './Collaborator';
+import CollaboratorDetails from '../../../components/CollaboratorDetails';
 import './CollaboratorView.css';
 
 const CollaboratorViewNew = ({
@@ -16,7 +16,7 @@ const CollaboratorViewNew = ({
       baseUrl='/collaborators'
       entityName='collaborator'
       id={id}
-      component={Collaborator}
+      component={CollaboratorDetails}
       query={GET_COLLABORATOR}
       mutation={DELETE_COLLABORATOR}
       renderEditLink
