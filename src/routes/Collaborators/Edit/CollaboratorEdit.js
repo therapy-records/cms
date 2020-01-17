@@ -1,92 +1,49 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useQuery } from '@apollo/react-hooks';
+import QueryContainer from '../../../containers/QueryContainer';
+import { EDIT_COLLABORATOR } from '../../../mutations';
 import {
   GET_COLLABORATOR,
   GET_COLLABORATORS
 } from '../../../queries';
-import { EDIT_COLLABORATOR } from '../../../mutations';
 import Form from '../../../components/Form';
 import COLLABORATOR_FIELDS from '../../../formFields/collaborator';
-import LoadingSpinner from '../../../components/LoadingSpinner';
-import ErrorMessage from '../../../components/ErrorMessage';
 import { mapFieldsWithValues } from '../../../utils/form';
 
-const CollaboratorEdit = ({ match }) => {
-  const { id: collabId } = match.params;
-
-  const {
-    loading,
-    error,
-    data
-  } = useQuery(GET_COLLABORATOR, {
-    variables: {
-      id: collabId
-    }
-  });
+const CollabEditNew = ({ match }) => {
+  const { id } = match.params;
 
   return (
-    <article className='container'>
+    <QueryContainer
+      query={GET_COLLABORATOR}
+      queryVariables={{ id }}
+      entityName='collaborator'
+      render={data => (
 
-      <LoadingSpinner
-        active={loading}
-        fullScreen
-      />
+        <Form
+          mutation={EDIT_COLLABORATOR}
+          fields={mapFieldsWithValues(COLLABORATOR_FIELDS, data)}
+          mutateId={id}
+          refetchQueries={[
+            { query: GET_COLLABORATORS }
+          ]}
+          baseUrl='/collaborators'
+          successCopy={{
+            homeLink: 'Go to Collaborators'
+          }}
+          isEditForm
+        />
 
-      {error && <ErrorMessage />}
-
-      {(data && data.collaborator) && (
-        <div>
-          <div className='heading-with-btns'>
-            <div>
-              <h2>Edit Collaborator</h2>
-            </div>
-
-            {/*
-            <div className='action-btns'>
-              <button
-                className='btn btn-danger'
-              >Delete
-              </button>
-
-              <Link
-                to={`/collaborators/${collabId}/edit`}
-                className='btn btn-edit'
-              >Edit
-              </Link>
-            </div>
-            */}
-
-          </div>
-
-          <Form
-            mutation={EDIT_COLLABORATOR}
-            fields={mapFieldsWithValues(COLLABORATOR_FIELDS, data.collaborator)}
-            mutateId={collabId}
-            refetchQueries={[
-              { query: GET_COLLABORATORS }
-            ]}
-            baseUrl='/collaborators'
-            successCopy={{
-              homeLink: 'Go to Collaborators'
-            }}
-            isEditForm
-          />
-
-
-        </div>
       )}
-
-
-    </article>
+    >
+    </QueryContainer>
   );
-};
+}
 
-
-CollaboratorEdit.propTypes = {
+CollabEditNew.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.object
   })
 };
 
-export default CollaboratorEdit;
+export default CollabEditNew;

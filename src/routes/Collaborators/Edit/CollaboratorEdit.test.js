@@ -12,8 +12,6 @@ import {
 import { EDIT_COLLABORATOR } from '../../../mutations';
 import Form from '../../../components/Form';
 import COLLABORATOR_FIELDS from '../../../formFields/collaborator';
-import LoadingSpinner from '../../../components/LoadingSpinner';
-import ErrorMessage from '../../../components/ErrorMessage';
 import { mapFieldsWithValues } from '../../../utils/form';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -57,10 +55,6 @@ describe('(Component) CollaboratorEdit', () => {
         params: {
           id: '1234'
         }
-      },
-      baseUrl: '/collaborators',
-      successCopy: {
-        homeLink: 'Go to Collaborators'
       }
     };
 
@@ -72,96 +66,45 @@ describe('(Component) CollaboratorEdit', () => {
     });
   }
 
-  describe('when there are no errors', () => {
-    beforeEach(() => {
-      wrapper = mount(
-        <BrowserRouter>
-          <MockedProvider mocks={mocks} addTypename={false}>
-            <CollaboratorEdit {...props} />
-          </MockedProvider>
-        </BrowserRouter>
-      );
-    })
-
-    it('should render a page title', async() => {
-      await actions(wrapper, () => {
-        wrapper.update();
-        const actual = wrapper.containsMatchingElement(
-          <h2>Edit Collaborator</h2>
-        );
-        expect(actual).to.equal(true);
-      });
-    });
-
-    it('should render <Form />', async() => {
-      await actions(wrapper, () => {
-        wrapper.update();
-        const actual = wrapper.containsMatchingElement(
-          <Form
-            mutation={EDIT_COLLABORATOR}
-            fields={mapFieldsWithValues(COLLABORATOR_FIELDS, mocks[0].result.data.collaborator)}
-            mutateId={props.match.params.id}
-            refetchQueries={[
-              { query: GET_COLLABORATORS }
-            ]}
-            baseUrl={props.baseUrl}
-            successCopy={props.successCopy}
-            isEditForm
-          />
-
-        );
-        expect(actual).to.equal(true);
-      });
-    });
+  beforeEach(() => {
+    wrapper = mount(
+      <BrowserRouter>
+        <MockedProvider mocks={mocks} addTypename={false}>
+          <CollaboratorEdit {...props} />
+        </MockedProvider>
+      </BrowserRouter>
+    );
   });
 
-  describe('when the graphQL query is loading', () => {
-
-    it('should render <LoadingSpinner />', async() => {
-      wrapper = mount(
-        <BrowserRouter>
-          <MockedProvider mocks={mocks} addTypename={false}>
-            <CollaboratorEdit {...props} />
-          </MockedProvider>
-        </BrowserRouter>
-      );
-
-      await actions(wrapper, () => {
-        const actual = wrapper.containsMatchingElement(
-          <LoadingSpinner
-            active
-            fullScreen
-          />
-        );
-        expect(actual).to.equal(true);
-      });
+  it('should render <QueryContainer />', () => {
+    const queryContainer = wrapper.find('QueryContainer');
+    expect(queryContainer.length).to.eq(1);
+    expect(queryContainer.prop('query')).to.eq(GET_COLLABORATOR);
+    expect(queryContainer.prop('queryVariables')).to.deep.eq({
+      id: props.match.params.id
     });
+    expect(queryContainer.prop('entityName')).to.eq('collaborator');
   });
 
-  describe('when the graphQL query errors', () => {
-    it('should render <ErrorMessage />', async() => {
-      mocks = [{
-        request: {
-          query: GET_COLLABORATOR
-        },
-        error: new Error('Something went wrong')
-      }];
-
-      wrapper = mount(
-        <BrowserRouter>
-          <MockedProvider mocks={mocks} addTypename={false}>
-            <CollaboratorEdit {...props} />
-          </MockedProvider>
-        </BrowserRouter>
+  it('should render <Form />', async() => {
+    await actions(wrapper, () => {
+      wrapper.update();
+      const actual = wrapper.containsMatchingElement(
+        <Form
+          mutation={EDIT_COLLABORATOR}
+          fields={mapFieldsWithValues(COLLABORATOR_FIELDS, mocks[0].result.data.collaborator)}
+          mutateId={props.match.params.id}
+          refetchQueries={[
+            { query: GET_COLLABORATORS }
+          ]}
+          baseUrl='/collaborators'
+          successCopy={{
+            homeLink: 'Go to Collaborators'
+          }}
+          isEditForm
+        />
       );
-
-      await actions(wrapper, () => {
-        wrapper.update();
-        const actual = wrapper.containsMatchingElement(
-          <ErrorMessage />
-        );
-        expect(actual).to.equal(true);
-      });
+      expect(actual).to.equal(true);
     });
   });
 
