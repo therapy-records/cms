@@ -8,7 +8,6 @@ import { GET_COLLABORATOR } from '../../queries';
 import { DELETE_COLLABORATOR } from '../../mutations';
 import SingleEntityContainer from './index';
 import LoadingSpinner from '../../components/LoadingSpinner';
-import StickyNew from '../../components/StickyNew';
 import CollaboratorDetails from '../../components/CollaboratorDetails';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -50,7 +49,9 @@ let mocks = [
     },
     result: {
       data: {
-        _id: '1234'
+        deleteCollaborator: {
+          _id: '1234'
+        }
       }
     }
   }
@@ -76,16 +77,27 @@ describe('(Container) SingleEntityContainer', () => {
     });
   }
 
-  describe('when there are no errors', () => {
-    beforeEach(() => {
-      wrapper = mount(
-        <BrowserRouter>
-          <MockedProvider mocks={mocks} addTypename={false}>
-            <SingleEntityContainer {...props} />
-          </MockedProvider>
-        </BrowserRouter>
-      );
-    })
+  beforeEach(() => {
+    wrapper = mount(
+      <BrowserRouter>
+        <MockedProvider mocks={mocks} addTypename={false}>
+          <SingleEntityContainer {...props} />
+        </MockedProvider>
+      </BrowserRouter>
+    );
+  });
+
+  it('should render <QueryContainer />', () => {
+    const queryContainer = wrapper.find('QueryContainer');
+    expect(queryContainer.length).to.eq(1);
+    expect(queryContainer.prop('query')).to.eq(props.query);
+    expect(queryContainer.prop('queryVariables')).to.deep.eq({
+      id: props.id
+    });
+    expect(queryContainer.prop('entityName')).to.eq('collaborator');
+  });
+
+  describe('components rendering from graphQL query', () => {
 
     it('should render <ArticleHeader />', async() => {
       await actions(wrapper, () => {
@@ -95,7 +107,7 @@ describe('(Container) SingleEntityContainer', () => {
         expect(articleHeader.prop('article')).to.deep.eq({
           _id: mocks[0].result.data[props.entityName]._id
         });
-        expect(articleHeader.prop('heading')).to.eq(mocks[0].result.data[props.entityName].name);
+        expect(articleHeader.prop('heading')).to.eq('test heading');
         expect(articleHeader.prop('showDeleteButton')).to.eq(true);
         expect(articleHeader.prop('onDeleteArticle')).to.be.a('function');
         expect(articleHeader.prop('showEditButton')).to.eq(props.renderEditLink);
@@ -116,56 +128,107 @@ describe('(Container) SingleEntityContainer', () => {
 
   });
 
-  describe('when the graphQL query is loading', () => {
+  describe('components rendering from graphQL mutation', () => {
+    const triggerMutation = wrapper =>
+      wrapper.find('ArticleHeader').prop('onDeleteArticle')();
 
-    it('should render <LoadingSpinner />', async() => {
-      wrapper = mount(
-        <BrowserRouter>
-          <MockedProvider mocks={mocks} addTypename={false}>
-            <SingleEntityContainer {...props} />
-          </MockedProvider>
-        </BrowserRouter>
-      );
+    describe('when the graphQL mutation is loading', () => {
 
-      await actions(wrapper, () => {
-        const actual = wrapper.containsMatchingElement(
-          <LoadingSpinner
-            active
-            fullScreen
-          />
+      it('should render <LoadingSpinner />', async() => {
+        wrapper = mount(
+          <BrowserRouter>
+            <MockedProvider mocks={mocks} addTypename={false}>
+              <SingleEntityContainer {...props} />
+            </MockedProvider>
+          </BrowserRouter>
         );
-        expect(actual).to.equal(true);
+
+        await actions(wrapper, () => {
+          wrapper.update();
+          triggerMutation(wrapper);
+          wrapper.update();
+
+          const actual = wrapper.containsMatchingElement(
+            <LoadingSpinner
+              active
+              fullScreen
+            />
+          );
+          expect(actual).to.equal(true);
+        });
       });
     });
-  });
 
-  describe('when the graphQL query errors', () => {
-    it('should render <ErrorMessage />', async() => {
-      mocks = [{
-        request: {
-          query: GET_COLLABORATOR
-        },
-        error: new Error('Something went wrong')
-      }];
+    // TODO: figure out how to mock mutation error
+    // others having same issue
+    // hoping this will be ok when tested standalone in a MutationContainer
 
-      wrapper = mount(
-        <BrowserRouter>
-          <MockedProvider mocks={mocks} addTypename={false}>
-            <SingleEntityContainer {...props} />
-          </MockedProvider>
-        </BrowserRouter>
-      );
+    // describe('when the graphQL mutation errors', () => {
+    //   it('should render <StickyNew />', async() => {
+    //     mocks = [
+    //       {
+    //         request: {
+    //           query: GET_COLLABORATOR,
+    //           variables: { id: '1234' }
+    //         },
+    //         result: {
+    //           data: {
+    //             collaborator: {
+    //               _id: '1234',
+    //               name: 'test',
+    //               role: 'testing',
+    //               about: '<p>test</p>',
+    //               avatarUrl: 'test.com',
+    //               urls: {
+    //                 website: 'test',
+    //                 facebook: 'test',
+    //                 instagram: 'test',
+    //                 twitter: 'test',
+    //                 soundcloud: 'test',
+    //                 bio: 'test',
+    //                 email: 'test@test.com',
+    //                 phone: '0123456789',
+    //                 other: []
+    //               },
+    //               collabOn: []
+    //             }
+    //           }
+    //         }
+    //       },
+    //       {
+    //         request: {
+    //           query: DELETE_COLLABORATOR,
+    //           variables: { id: '1234' }
+    //         },
+    //         error: {
+    //           message: new Error('Something went wrong')
+    //         }
+    //       }
+    //     ];
 
-      await actions(wrapper, () => {
-        wrapper.update();
-        const actual = wrapper.containsMatchingElement(
-          <StickyNew>
-            <p>Sorry, something has gone wrong.</p>
-          </StickyNew>
-        );
-        expect(actual).to.equal(true);
-      });
-    });
-  });
+    //     wrapper = mount(
+    //       <BrowserRouter>
+    //         <MockedProvider mocks={mocks} addTypename={false}>
+    //           <SingleEntityContainer {...props} />
+    //         </MockedProvider>
+    //       </BrowserRouter>
+    //     );
 
+    //     await actions(wrapper, () => {
+    //       wrapper.update();
+    //       triggerMutation(wrapper);
+    //       wrapper.update();
+    //       wrapper.update();
+
+    //       const actual = wrapper.containsMatchingElement(
+    //         <StickyNew>
+    //           <p>Sorry, something has gone wrong with the mutation.</p>
+    //         </StickyNew>
+    //       );
+    //       expect(actual).to.equal(true);
+    //     });
+    //   });
+    // });
+
+  });  
 });

@@ -10,7 +10,7 @@ import Form from '../../../components/Form';
 import COLLABORATOR_FIELDS from '../../../formFields/collaborator';
 import { mapFieldsWithValues } from '../../../utils/form';
 
-const CollabEditNew = ({ match }) => {
+const CollaboratorEdit = ({ match }) => {
   const { id } = match.params;
 
   return (
@@ -40,10 +40,10 @@ const CollabEditNew = ({ match }) => {
   );
 }
 
-CollabEditNew.propTypes = {
+CollaboratorEdit.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.object
   })
 };
 
-export default CollabEditNew;
+export default CollaboratorEdit;

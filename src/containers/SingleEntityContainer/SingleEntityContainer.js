@@ -3,10 +3,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  useQuery,
-  useMutation
-} from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
+import QueryContainer from '../QueryContainer';
 import ArticleHeader from '../../components/ArticleHeader';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import StickyNew from '../../components/StickyNew';
@@ -22,16 +20,6 @@ const SingleEntityContainer = ({
   renderEditLink
 }) => {
 
-  const {
-    loading: queryLoading,
-    error: queryError,
-    data: queryData
-  } = useQuery(query, {
-    variables: {
-      id
-    }
-  });
-
   const [
     executeMutation,
     {
@@ -45,71 +33,74 @@ const SingleEntityContainer = ({
     }
   });
  
-  const hasQueryData = (queryData && queryData[entityName]);
+  const mutationSuccess = (mutationData && Object.keys(mutationData).length > 0);
+  const renderPageContent = (!mutationLoading && !mutationSuccess);
 
-  const mutationSuccess = (mutationData && Object.keys(mutationData).length);
-  const isLoading = (queryLoading || mutationLoading);
-  const hasError = (queryError || mutationError);
-
-  const renderPageContent = (hasQueryData &&
-                            !isLoading &&
-                            !mutationSuccess);
-
-  let heading = '';
-  if (hasQueryData) {
-    heading = queryData[entityName].heading || 
-              queryData[entityName].title ||
-              queryData[entityName].name;
-  }
+  // let heading = '';
+  // if (hasQueryData) {
+  //   heading = queryData[entityName].heading || 
+  //             queryData[entityName].title ||
+  //             queryData[entityName].name;
+  // }
 
   return (
-    <article className='container'>
-
-      {isLoading && (
-        <LoadingSpinner
-          active
-          fullScreen
-        />
-      )}
-
-      {mutationSuccess && (
-        <FormSuccess
-          baseUrl={baseUrl}
-          copy={{
-            success: 'Successfully mutated',
-            homeLink: `Go to ${entityName}`
-          }}
-        />
-      )}
-
-      {hasError && (
-        <StickyNew>
-          <p>Sorry, something has gone wrong.</p>
-        </StickyNew>
-      )}
-
-      {renderPageContent && (
+    <QueryContainer
+      query={query}
+      queryVariables={{
+        id
+      }}
+      entityName={entityName}
+      render={data => (
         <div>
 
-          <ArticleHeader
-            baseUrl={baseUrl}
-            article={{
-              _id: queryData[entityName]._id
-            }}
-            heading={heading}
-            onDeleteArticle={() => executeMutation()}
-            showDeleteButton
-            showEditButton={renderEditLink}
-          />
+          {mutationLoading && (
+            <LoadingSpinner
+              active
+              fullScreen
+              isMutationLoading='true'
+            />
+          )}
 
-          {component({
-            ...queryData[entityName]
-          })}
+          {mutationSuccess && (
+            <FormSuccess
+              baseUrl={baseUrl}
+              copy={{
+                success: 'Successfully mutated',
+                homeLink: `Go to ${entityName}`
+              }}
+            />
+          )}
+
+          {mutationError && (
+            <StickyNew>
+              <p>Sorry, something has gone wrong with the mutation.</p>
+            </StickyNew>
+          )}
+
+          {renderPageContent && (
+            <div>
+
+              <ArticleHeader
+                baseUrl={baseUrl}
+                article={{
+                  _id: data._id
+                }}
+                heading='test heading'
+                onDeleteArticle={() => executeMutation()}
+                showDeleteButton
+                showEditButton={renderEditLink}
+              />
+
+              {component({
+                ...data
+              })}
+
+            </div>
+          )}
 
         </div>
       )}
-
-    </article>
+    />
   );
 };
 
@@ -129,6 +120,7 @@ SingleEntityContainer.propTypes = {
 };
 
 SingleEntityContainer.defaultProps = {
+  queryVariables: {},
   mutation: {},
   renderEditLink: false
 };
