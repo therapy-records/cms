@@ -5,7 +5,7 @@ import ArticleHeader from '../../components/ArticleHeader';
 const SingleEntityContent = ({
   baseUrl,
   data,
-  component,
+  render,
   executeMutation,
   renderEditLink,
   renderDeleteButton
@@ -23,7 +23,7 @@ const SingleEntityContent = ({
         showDeleteButton={renderDeleteButton}
       />
 
-      {component({
+      {render({
         ...data
       })}
 
@@ -33,11 +33,7 @@ const SingleEntityContent = ({
 SingleEntityContent.propTypes = {
   baseUrl: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
-  component: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.element,
-    PropTypes.node
-  ]).isRequired,
+  render: PropTypes.func.isRequired,
   executeMutation: PropTypes.func,
   renderEditLink: PropTypes.bool,
   renderDeleteButton: PropTypes.bool

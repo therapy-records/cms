@@ -49,7 +49,7 @@ describe('(Container) SingleEntityContainer', () => {
       baseUrl: '/collaborators',
       entityName: 'collaborator',
       id: '1234',
-      component: CollaboratorDetails,
+      render: CollaboratorDetails,
       query: GET_COLLABORATOR,
       renderEditLink: true
     };
@@ -91,7 +91,7 @@ describe('(Container) SingleEntityContainer', () => {
         expect(singleEntityContent.length).to.eq(1);
         expect(singleEntityContent.prop('baseUrl')).to.eq(props.baseUrl);
         expect(singleEntityContent.prop('data')).to.deep.eq(mocks[0].result.data[props.entityName]);
-        expect(singleEntityContent.prop('component')).to.eq(props.component);
+        expect(singleEntityContent.prop('render')).to.eq(props.render);
         expect(singleEntityContent.prop('renderEditLink')).to.eq(props.renderEditLink);
       });
     });
@@ -153,7 +153,7 @@ describe('(Container) SingleEntityContainer', () => {
           expect(singleEntityContent.prop('baseUrl')).to.eq(props.baseUrl);
           expect(singleEntityContent.prop('data')).to.deep.eq(mocks[0].result.data[props.entityName]);
           expect(singleEntityContent.prop('executeMutation')).to.be.a('function');
-          expect(singleEntityContent.prop('component')).to.eq(props.component);
+          expect(singleEntityContent.prop('render')).to.eq(props.render);
           expect(singleEntityContent.prop('renderEditLink')).to.eq(props.renderEditLink);
           expect(singleEntityContent.prop('renderDeleteButton')).to.eq(true);
         });

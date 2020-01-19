@@ -1,44 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import QueryContainer from '../../../containers/QueryContainer';
-import { EDIT_COLLABORATOR } from '../../../mutations';
 import {
   GET_COLLABORATOR,
   GET_COLLABORATORS
 } from '../../../queries';
-import Form from '../../../components/Form';
-import COLLABORATOR_FIELDS from '../../../formFields/collaborator';
-import { mapFieldsWithValues } from '../../../utils/form';
+import {
+  EDIT_COLLABORATOR,
+  DELETE_COLLABORATOR
+} from '../../../mutations';
+import SingleEntityContainer from '../../../containers/SingleEntityContainer';
+import CollaboratorForm from '../../../components/CollaboratorForm';
 
 const CollaboratorEdit = ({ match }) => {
   const { id } = match.params;
 
   return (
-    <QueryContainer
-      query={GET_COLLABORATOR}
-      queryVariables={{ id }}
+    <SingleEntityContainer
+      baseUrl='/collaborators'
       entityName='collaborator'
-      render={data => (
-
-        <Form
+      id={id}
+      render={entityData => (
+        <CollaboratorForm
           mutation={EDIT_COLLABORATOR}
-          fields={mapFieldsWithValues(COLLABORATOR_FIELDS, data)}
-          mutateId={id}
+          collabValues={entityData}
+          id={id}
           refetchQueries={[
             { query: GET_COLLABORATORS }
           ]}
-          baseUrl='/collaborators'
-          successCopy={{
-            homeLink: 'Go to Collaborators'
-          }}
           isEditForm
         />
-
       )}
-    >
-    </QueryContainer>
+      query={GET_COLLABORATOR}
+      mutation={DELETE_COLLABORATOR}
+      renderEditLink
+    />
   );
-}
+};
 
 CollaboratorEdit.propTypes = {
   match: PropTypes.shape({

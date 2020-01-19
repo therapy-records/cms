@@ -8,7 +8,7 @@ const SingleEntityContainer = ({
   baseUrl,
   entityName,
   id,
-  component,
+  render,
   query,
   mutation,
   renderEditLink
@@ -23,7 +23,7 @@ const SingleEntityContainer = ({
         id
       }}
       entityName={entityName}
-      render={data => (
+      render={queryData => (
         <div>
           {renderMutationContainer ? (
             <MutationContainer
@@ -36,9 +36,9 @@ const SingleEntityContainer = ({
               render={({ executeMutation }) => (
                 <SingleEntityContent
                   baseUrl={baseUrl}
-                  data={data}
+                  data={queryData}
                   executeMutation={executeMutation}
-                  component={component}
+                  render={render}
                   renderEditLink={renderEditLink}
                   renderDeleteButton
                 />
@@ -47,8 +47,8 @@ const SingleEntityContainer = ({
           ) : (
               <SingleEntityContent
                 baseUrl={baseUrl}
-                data={data}
-                component={component}
+                data={queryData}
+                render={render}
                 renderEditLink={renderEditLink}
               />
             )}
@@ -62,11 +62,7 @@ SingleEntityContainer.propTypes = {
   baseUrl: PropTypes.string.isRequired,
   entityName: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  component: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.element,
-    PropTypes.node
-  ]).isRequired,
+  render: PropTypes.func,
   query: PropTypes.object.isRequired,
   mutation: PropTypes.object,
   renderEditLink: PropTypes.bool

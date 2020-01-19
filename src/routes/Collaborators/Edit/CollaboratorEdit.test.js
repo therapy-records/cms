@@ -5,14 +5,16 @@ import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
 import CollaboratorEdit from './CollaboratorEdit';
+import SingleEntityContainer from '../../../containers/SingleEntityContainer';
 import {
   GET_COLLABORATOR,
   GET_COLLABORATORS
 } from '../../../queries';
-import { EDIT_COLLABORATOR } from '../../../mutations';
-import Form from '../../../components/Form';
-import COLLABORATOR_FIELDS from '../../../formFields/collaborator';
-import { mapFieldsWithValues } from '../../../utils/form';
+import {
+  EDIT_COLLABORATOR,
+  DELETE_COLLABORATOR
+} from '../../../mutations';
+import CollaboratorForm from '../../../components/CollaboratorForm';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -76,6 +78,23 @@ describe('(Component) CollaboratorEdit', () => {
     );
   });
 
+  it('should render <SingleEntityContainer />', async() => {
+    await actions(wrapper, () => {
+      wrapper.update();
+      const actual = wrapper.containsMatchingElement(
+        <SingleEntityContainer
+          baseUrl='/collaborators'
+          entityName='collaborator'
+          id={props.match.params.id}
+          query={GET_COLLABORATOR}
+          mutation={DELETE_COLLABORATOR}
+          renderEditLink
+        />
+      );
+      expect(actual).to.equal(true);
+    });
+  });
+
   it('should render <QueryContainer />', () => {
     const queryContainer = wrapper.find('QueryContainer');
     expect(queryContainer.length).to.eq(1);
@@ -86,22 +105,19 @@ describe('(Component) CollaboratorEdit', () => {
     expect(queryContainer.prop('entityName')).to.eq('collaborator');
   });
 
-  it('should render <Form />', async() => {
+  it('should render <CollaboratorForm /> from <SingleEntityContainer /> render prop ', async() => {
     await actions(wrapper, () => {
       wrapper.update();
       const actual = wrapper.containsMatchingElement(
-        <Form
+        <CollaboratorForm
           mutation={EDIT_COLLABORATOR}
-          fields={mapFieldsWithValues(COLLABORATOR_FIELDS, mocks[0].result.data.collaborator)}
-          mutateId={props.match.params.id}
+          collabValues={mocks[0].result.data.collaborator}
+          id={props.match.params.id}
           refetchQueries={[
             { query: GET_COLLABORATORS }
           ]}
-          baseUrl='/collaborators'
-          successCopy={{
-            homeLink: 'Go to Collaborators'
-          }}
           isEditForm
+
         />
       );
       expect(actual).to.equal(true);

@@ -15,7 +15,7 @@ describe('(Container Component) SingleEntityContent', () => {
           name: 'Test',
           about: '<p>test</p>'
         },
-        component: CollaboratorDetails,
+        render: CollaboratorDetails,
         executeMutation: () => {},
         renderEditLink: true,
         renderDeleteButton: true
@@ -39,9 +39,9 @@ describe('(Container Component) SingleEntityContent', () => {
     expect(articleHeader.prop('onDeleteArticle')).to.be.a('function');
   });
 
-  it('should render component from props with data from query', () => {
+  it('should render component from props.render with data from query', () => {
     const actual = wrapper.containsMatchingElement(
-      props.component({
+      props.render({
         ...props.data
       })
     );

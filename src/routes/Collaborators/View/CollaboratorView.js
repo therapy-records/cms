@@ -6,7 +6,7 @@ import SingleEntityContainer from '../../../containers/SingleEntityContainer';
 import CollaboratorDetails from '../../../components/CollaboratorDetails';
 import './CollaboratorView.css';
 
-const CollaboratorViewNew = ({
+const CollaboratorView = ({
   match
 }) => {
   const { id } = match.params;
@@ -16,18 +16,20 @@ const CollaboratorViewNew = ({
       baseUrl='/collaborators'
       entityName='collaborator'
       id={id}
-      component={CollaboratorDetails}
+      render={entityData => (
+        <CollaboratorDetails {...entityData} />
+      )}
       query={GET_COLLABORATOR}
       mutation={DELETE_COLLABORATOR}
       renderEditLink
     />
   );
-}
+};
 
-CollaboratorViewNew.propTypes = {
+CollaboratorView.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.object
   })
 };
 
-export default CollaboratorViewNew;
+export default CollaboratorView;
