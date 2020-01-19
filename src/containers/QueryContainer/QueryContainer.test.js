@@ -9,39 +9,12 @@ import { GET_COLLABORATOR } from '../../queries'
 import LoadingSpinner from '../../components/LoadingSpinner';
 import StickyNew from '../../components/StickyNew';
 import CollaboratorDetails from '../../components/CollaboratorDetails';
+import { MOCK_GET_COLLABORATOR } from '../../mocks/collaborators.mock';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 let mocks = [
-  {
-    request: {
-      query: GET_COLLABORATOR,
-      variables: { id: '1234' }
-    },
-    result: {
-      data: {
-        collaborator: {
-          _id: '1234',
-          name: 'test',
-          role: 'testing',
-          about: '<p>test</p>',
-          avatarUrl: 'test.com',
-          urls: {
-            website: 'test',
-            facebook: 'test',
-            instagram: 'test',
-            twitter: 'test',
-            soundcloud: 'test',
-            bio: 'test',
-            email: 'test@test.com',
-            phone: '0123456789',
-            other: []
-          },
-          collabOn: []
-        }
-      }
-    }
-  }
+  MOCK_GET_COLLABORATOR
 ];
 
 describe('(Container) QueryContainer', () => {

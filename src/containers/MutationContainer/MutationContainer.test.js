@@ -8,24 +8,12 @@ import { MockedProvider } from '@apollo/react-testing';
 import MutationContainer from './MutationContainer';
 import { DELETE_COLLABORATOR } from '../../mutations'
 import LoadingSpinner from '../../components/LoadingSpinner';
-import FormSuccess from '../../components/FormElements/FormSuccess';
+import { MOCK_DELETE_COLLABORATOR } from '../../mocks/collaborators.mock';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 let mocks = [
-  {
-    request: {
-      query: DELETE_COLLABORATOR,
-      variables: { id: '1234' }
-    },
-    result: {
-      data: {
-        deleteCollaborator: {
-          _id: '1234'
-        }
-      }
-    }
-  }
+  MOCK_DELETE_COLLABORATOR
 ];
 
 const MockComponent = ({ executeMutation }) => (

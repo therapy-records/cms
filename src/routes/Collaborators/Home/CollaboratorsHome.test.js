@@ -9,23 +9,12 @@ import { GET_COLLABORATORS } from '../../../queries';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import ErrorMessage from '../../../components/ErrorMessage';
 import List from '../../../components/List';
+import { MOCK_GET_COLLABORATORS } from '../../../mocks/collaborators.mock';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 let mocks = [
-  {
-    request: {
-      query: GET_COLLABORATORS
-    },
-    result: {
-      data: {
-        collaborators: [
-          { _id: 'abc1', name: 'test', avatarUrl: 'test.com' },
-          { _id: 'abc2', name: 'testing', avatarUrl: 'test.com' }
-        ]
-      }
-    }
-  }
+  MOCK_GET_COLLABORATORS
 ];
 
 describe('(Component) CollaboratorsHome', () => {
