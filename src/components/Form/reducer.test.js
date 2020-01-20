@@ -141,4 +141,14 @@ describe('(Component) Form - reducer', () => {
     });
   });
 
+  describe('default', () => {
+    it('should return state', () => {
+      const action = formReducer(
+        initState,
+        { type: 'test' }
+      );
+      expect(action).to.eq(initState);
+    });
+  });
+
 });

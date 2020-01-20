@@ -25,8 +25,13 @@ describe('(Component) List', () => {
   let wrapper,
       props = {
         route: 'test-route',
-        data: mockData
-      }
+        data: mockData,
+        onItemClick: sinon.spy(),
+        onViewButtonClick: sinon.spy(),
+        onEditButtonClick: sinon.spy(),
+        columns: true
+      };
+
   beforeEach(() => {
     wrapper = shallow(
       <List {...props} />
@@ -45,6 +50,7 @@ describe('(Component) List', () => {
     expect(firstListItem.prop('onItemClick')).to.be.a('function');
     expect(firstListItem.prop('onViewButtonClick')).to.be.a('function');
     expect(firstListItem.prop('onEditButtonClick')).to.be.a('function');
+    expect(firstListItem.prop('cardDesign')).to.eq(props.columns);
   });
 
   describe('when `columns` prop is passed', () => {
@@ -66,6 +72,37 @@ describe('(Component) List', () => {
       const firstListItem = listItems.first();
       expect(firstListItem.prop('imageUrl')).to.eq(getFirstImageInArticle(firstListItem));
     });
+  });
+
+  describe('<ListItem /> click events/props', () => {
+
+    describe('onItemClick', () => {
+      it('should call props.onItemClick', () => {
+        const listItem = wrapper.find('ListItem').first();
+        listItem.prop('onItemClick')();
+        expect(props.onItemClick).to.have.been.called;
+        expect(props.onItemClick).to.have.been.calledWith(props.data[0]);
+      });
+    });
+
+    describe('onViewButtonClick', () => {
+      it('should call props.onViewButtonClick', () => {
+        const listItem = wrapper.find('ListItem').first();
+        listItem.prop('onViewButtonClick')();
+        expect(props.onViewButtonClick).to.have.been.called;
+        expect(props.onViewButtonClick).to.have.been.calledWith(props.data[0]);
+      });
+    });
+
+    describe('onEditButtonClick', () => {
+      it('should call props.onEditButtonClick', () => {
+        const listItem = wrapper.find('ListItem').first();
+        listItem.prop('onEditButtonClick')();
+        expect(props.onEditButtonClick).to.have.been.called;
+        expect(props.onEditButtonClick).to.have.been.calledWith(props.data[0]);
+      });
+    });
+
   });
 
 });

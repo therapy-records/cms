@@ -1,44 +1,7 @@
 import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
+import reducer, { initReducerState } from './reducer';
 import './TextInputsList.css';
-
-function init(initialItems) {
-  return { listItems: initialItems };
-}
-
-function reducer(state, action) {
-  switch (action.type) {
-    case 'add': {
-      return {
-        listItems: [
-          ...state.listItems,
-          { value: '' }
-        ]
-      }
-    }
-    case 'edit': {
-      const { index, value } = action.payload;
-      const newListItems = [
-        ...state.listItems
-      ];
-      newListItems[index].value = value
-
-      return {
-        listItems: newListItems
-      };
-    }
-    case 'remove': {
-      const newListItems = state.listItems;
-      newListItems.splice(action.payload.index, 1);
-      return {
-        listItems: newListItems
-      };
-    }
-
-    default:
-      throw new Error();
-  }
-}
 
 const TextInputsList = ({
   name,
@@ -48,12 +11,15 @@ const TextInputsList = ({
   showAddRemove,
   onChange
 }) => {
-  const [state, dispatch] = useReducer(reducer, items, init);
+  const [state, dispatch] = useReducer(
+    reducer,
+    items,
+    initReducerState
+  );
 
   const handleOnChange = (index, value) => {
     dispatch({ type: 'edit', payload: { index, value } });
     if (onChange) {
-      // onChange(value);
       onChange(state.listItems);
     }
   };
