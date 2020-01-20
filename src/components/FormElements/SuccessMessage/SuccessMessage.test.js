@@ -2,11 +2,11 @@ import React from 'react';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { BrowserRouter, Link } from 'react-router-dom';
-import FormSuccess from './';
+import SuccessMessage from './';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('(Component) FormSuccess', () => {
+describe('(Component) SuccessMessage', () => {
   let wrapper;
   const props = {
     baseUrl: '/collaborators',
@@ -21,7 +21,7 @@ describe('(Component) FormSuccess', () => {
   beforeEach(() => {
     wrapper = mount(
       <BrowserRouter>
-        <FormSuccess {...props} />
+        <SuccessMessage {...props} />
       </BrowserRouter>
     );
   });
@@ -42,7 +42,7 @@ describe('(Component) FormSuccess', () => {
 
         wrapper = mount(
           <BrowserRouter>
-            <FormSuccess
+            <SuccessMessage
               baseUrl={props.baseUrl}
               copy={mockCopy}
             />

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useMutation } from '@apollo/react-hooks';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import StickyNew from '../../components/StickyNew';
-import FormSuccess from '../../components/FormElements/FormSuccess';
+import SuccessMessage from '../../components/FormElements/SuccessMessage';
 
 const MutationContainer = ({
   baseUrl,
@@ -44,7 +44,7 @@ const MutationContainer = ({
       )}
 
       {mutationSuccess && (
-        <FormSuccess
+        <SuccessMessage
           baseUrl={baseUrl}
           copy={{
             success: 'Successfully mutated',

@@ -5,7 +5,7 @@ import configureMockStore from 'redux-mock-store';
 import ConnectedArticleCreate, { ArticleCreate } from './index';
 import NewsForm from '../../../components/NewsForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
-import FormSuccess from '../../../components/FormElements/FormSuccess';
+import SuccessMessage from '../../../components/FormElements/SuccessMessage';
 import {
   selectUiStateLoading,
   selectUiStateSuccess
@@ -85,9 +85,9 @@ describe('(Component) News - ArticleCreate', () => {
         });
       });
 
-      it('should render <FormSuccess /', () => {
+      it('should render <SuccessMessage />', () => {
         const actual = wrapper.containsMatchingElement(
-          <FormSuccess
+          <SuccessMessage
             baseUrl='/news'
             copy={{
               homeLink: 'Go to News',

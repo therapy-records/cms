@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const FormSuccess = ({
+const SuccessMessage = ({
   baseUrl,
   copy,
   onReset
@@ -35,7 +35,7 @@ const FormSuccess = ({
   );
 }
 
-FormSuccess.propTypes = {
+SuccessMessage.propTypes = {
   baseUrl: PropTypes.string.isRequired,
   copy: PropTypes.shape({
     success: PropTypes.string,
@@ -45,8 +45,8 @@ FormSuccess.propTypes = {
   onReset: PropTypes.func
 };
 
-FormSuccess.defaultProps = {
+SuccessMessage.defaultProps = {
   onReset: () => {}
 };
 
-export default FormSuccess;
+export default SuccessMessage;

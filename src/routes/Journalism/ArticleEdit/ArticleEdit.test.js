@@ -13,7 +13,7 @@ import {
   selectSelectedJournalismArticle,
   selectJournalismEditSuccess
 } from '../../../selectors/journalism';
-import FormSuccess from '../../../components/FormElements/FormSuccess';
+import SuccessMessage from '../../../components/FormElements/SuccessMessage';
 import redirect from '../../../utils/redirect';
 
 Enzyme.configure({adapter: new Adapter()});
@@ -166,9 +166,9 @@ describe('(Component) Journalism - ArticleEdit', () => {
         wrapper = shallow(<ArticleEdit {...props} />);
       });
 
-      it('should render <FormSuccess />', () => {
+      it('should render <SuccessMessage />', () => {
         const actual = wrapper.containsMatchingElement(
-          <FormSuccess
+          <SuccessMessage
             baseUrl='/journalism'
             copy={{
               homeLink: 'Go to Journalism'

@@ -17,7 +17,7 @@ import {
 } from '../../../selectors/uiState';
 import NewsForm from '../../../components/NewsForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
-import FormSuccess from '../../../components/FormElements/FormSuccess';
+import SuccessMessage from '../../../components/FormElements/SuccessMessage';
 import redirect from '../../../utils/redirect';
 
 export class ArticleEdit extends React.Component {
@@ -82,7 +82,7 @@ export class ArticleEdit extends React.Component {
         />
 
         {(!promiseLoading && promiseSuccess && editSuccess) &&
-          <FormSuccess
+          <SuccessMessage
             baseUrl='/news'
             copy={{
               homeLink: 'Go to News'

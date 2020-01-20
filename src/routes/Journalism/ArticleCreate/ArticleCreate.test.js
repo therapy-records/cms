@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import configureMockStore from 'redux-mock-store';
 import ConnectedArticleCreate, { ArticleCreate } from './index';
 import JournalismForm from '../../../components/JournalismForm';
-import FormSuccess from '../../../components/FormElements/FormSuccess';
+import SuccessMessage from '../../../components/FormElements/SuccessMessage';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import {
   selectUiStateLoading,
@@ -86,9 +86,9 @@ describe('(Component) Journalism - ArticleCreate', () => {
         });
       });
 
-      it('should render <FormSuccess />', () => {
+      it('should render <SuccessMessage />', () => {
         const actual = wrapper.containsMatchingElement(
-          <FormSuccess
+          <SuccessMessage
             baseUrl='/journalism'
             copy={{
               homeLink: 'Go to Journalism',

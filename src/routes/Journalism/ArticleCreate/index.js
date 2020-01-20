@@ -7,7 +7,7 @@ import {
   selectUiStateLoading,
   selectUiStateSuccess
 } from '../../../selectors/uiState';
-import FormSuccess from '../../../components/FormElements/FormSuccess';
+import SuccessMessage from '../../../components/FormElements/SuccessMessage';
 import JournalismForm from '../../../components/JournalismForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
@@ -42,7 +42,7 @@ export class ArticleCreate extends React.Component {
         />
 
         {!promiseLoading && promiseSuccess &&
-          <FormSuccess
+          <SuccessMessage
             baseUrl='/journalism'
             copy={{
               homeLink: 'Go to Journalism',

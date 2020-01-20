@@ -18,7 +18,7 @@ import {
   selectUiStateLoading,
   selectUiStateSuccess
 } from '../../../selectors/uiState';
-import FormSuccess from '../../../components/FormElements/FormSuccess';
+import SuccessMessage from '../../../components/FormElements/SuccessMessage';
 import JournalismForm from '../../../components/JournalismForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import redirect from '../../../utils/redirect';
@@ -87,7 +87,7 @@ export class ArticleEdit extends React.Component {
         />
 
         {!promiseLoading && (promiseSuccess && editSuccess) &&
-          <FormSuccess
+          <SuccessMessage
             baseUrl='/journalism'
             copy={{
               homeLink: 'Go to Journalism'

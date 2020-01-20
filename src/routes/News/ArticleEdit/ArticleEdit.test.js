@@ -9,7 +9,7 @@ import {
   selectUiStateLoading,
   selectUiStateSuccess
 } from '../../../selectors/uiState';
-import FormSuccess from '../../../components/FormElements/FormSuccess';
+import SuccessMessage from '../../../components/FormElements/SuccessMessage';
 import redirect from '../../../utils/redirect';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -154,9 +154,9 @@ describe('(Component) News - ArticleEdit', () => {
         wrapper = shallow(<ArticleEdit {...props} />);
       });
 
-      it('should render <FormSuccess />', () => {
+      it('should render <SuccessMessage />', () => {
         const actual = wrapper.containsMatchingElement(
-          <FormSuccess
+          <SuccessMessage
             baseUrl='/news'
             copy={{
               homeLink: 'Go to News'

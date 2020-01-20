@@ -6,7 +6,7 @@ import FormField from '../FormElements/FormField';
 import { handleFormData } from '../../utils/graphql-form';
 import StickyNew from '../StickyNew';
 import LoadingSpinner from '../LoadingSpinner';
-import FormSuccess from '../FormElements/FormSuccess';
+import SuccessMessage from '../FormElements/SuccessMessage';
 
 const Form = ({
   mutation,
@@ -124,7 +124,7 @@ const Form = ({
       )}
 
       {submitSuccess && (
-        <FormSuccess
+        <SuccessMessage
           baseUrl={baseUrl}
           copy={successCopy}
           onReset={() => dispatch({ type: 'resetForm' })}

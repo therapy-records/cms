@@ -180,7 +180,7 @@ describe('(Component) Form', () => {
 
     // TODO test. issues getting the success response back from query. Loads of others having similar issue.
     // describe('when the graphQL query is a success', () => {
-    //   it('should render <FormSuccess />', async() => {
+    //   it('should render <SuccessMessage />', async() => {
 
     //     wrapper = mount(
     //       <BrowserRouter>
@@ -195,8 +195,8 @@ describe('(Component) Form', () => {
 
     //     await actions(wrapper, () => {
     //       wrapper.update();
-    //       const formSuccess = wrapper.find('FormSuccess');
-    //       expect(formSuccess.length).to.eq(1); 
+    //       const successMessage = wrapper.find('SuccessMessage');
+    //       expect(successMessage.length).to.eq(1);
     //     });
     //   });
     // });

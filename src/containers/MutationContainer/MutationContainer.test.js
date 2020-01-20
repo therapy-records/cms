@@ -98,7 +98,7 @@ describe('(Container) MutationContainer', () => {
 
   // describe('when the graphQL mutation is successful', () => {
 
-  //   it('should render <FormSuccess />', async() => {
+  //   it('should render <SuccessMessage />', async() => {
   //     wrapper = mount(
   //       <BrowserRouter>
   //         <MockedProvider mocks={mocks} addTypename={false}>
@@ -113,10 +113,10 @@ describe('(Container) MutationContainer', () => {
 
   //     await actions(wrapper, () => {
   //       wrapper.update();
-  //       const formSuccess = wrapper.find('FormSuccess');
-  //       expect(formSuccess.length).to.eq(1);
+  //       const successMessage = wrapper.find('SuccessMessage');
+  //       expect(successMessage.length).to.eq(1);
   //       const actual = wrapper.containsMatchingElement(
-  //         <FormSuccess
+  //         <SuccessMessage
   //           baseUrl={props.baseUrl}
   //           copy={{
   //             success: 'Successfully mutated',

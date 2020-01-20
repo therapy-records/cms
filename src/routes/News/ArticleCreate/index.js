@@ -8,7 +8,7 @@ import {
   selectUiStateSuccess
 } from '../../../selectors/uiState';
 import NewsForm from '../../../components/NewsForm';
-import FormSuccess from '../../../components/FormElements/FormSuccess';
+import SuccessMessage from '../../../components/FormElements/SuccessMessage';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 
 export class ArticleCreate extends React.Component {
@@ -42,7 +42,7 @@ export class ArticleCreate extends React.Component {
         />
 
         {!promiseLoading && promiseSuccess &&
-          <FormSuccess
+          <SuccessMessage
             baseUrl='/news'
             copy={{
               homeLink: 'Go to News',
