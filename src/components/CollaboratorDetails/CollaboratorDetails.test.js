@@ -106,41 +106,6 @@ describe('(Component) CollaboratorDetails', () => {
         });
       });
 
-      describe('when a url is `other`', () => {
-        it('should render a list of `other` urls', () => {
-          const mockOtherUrls = [
-            { title: 'testA', url: 'testa.com' },
-            { title: 'testB', url: 'testb.com' }
-          ];
-          wrapper.setProps({
-            urls: {
-              other: mockOtherUrls
-            }
-          });
-          const actual = wrapper.containsAllMatchingElements([
-            <li key={mockOtherUrls[0]}>
-              {mockOtherUrls[0].title}:&nbsp;
-              <a
-                href={mockOtherUrls[0].url}
-                target='_blank'
-              >
-                {mockOtherUrls[0].url}
-              </a>
-            </li>,
-            <li key={mockOtherUrls[1]}>
-              {mockOtherUrls[1].title}:&nbsp;
-              <a
-                href={mockOtherUrls[1].url}
-                target='_blank'
-              >
-                {mockOtherUrls[1].url}
-              </a>
-            </li>
-          ]);
-          expect(actual).to.eq(true);
-        });
-      });
-
     });
   });
 });

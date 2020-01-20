@@ -87,6 +87,13 @@ const COLLABORATOR_FIELDS = [
         placeholder: 'http://soundcloud.com/example'
       },
       {
+        label: 'Bandcamp',
+        id: 'bandcamp',
+        type: 'text',
+        value: '',
+        placeholder: 'https://bandcamp.com'
+      },
+      {
         label: 'Bio',
         id: 'bio',
         type: 'text',

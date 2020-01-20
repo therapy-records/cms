@@ -14,9 +14,6 @@ export const mapFieldArrayOfObjectsWithValues = (field, valuesObj) => {
 
   Object.keys(valuesObj[fieldId]).forEach(key => {
 
-    // TODO: 'other' needs alignment with API/model/UI
-    if (key === 'other') return null;
-
     const valueExists = valuesObj[fieldId][key];
     if (valueExists) {
       const childField = field.items.find(child => child.id === key);

@@ -25,13 +25,10 @@ export const GET_COLLABORATOR = gql`
           instagram,
           twitter,
           soundcloud,
+          bandcamp,
           bio,
           email,
-          phone,
-          other {
-            url,
-            title
-          }
+          phone
         }
       }
   }

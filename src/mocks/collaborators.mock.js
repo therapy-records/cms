@@ -37,10 +37,10 @@ export const MOCK_GET_COLLABORATOR = {
           instagram: 'test',
           twitter: 'test',
           soundcloud: 'test',
+          bandcamp: 'test',
           bio: 'test',
           email: 'test@test.com',
-          phone: '0123456789',
-          other: []
+          phone: '0123456789'
         },
         collabOn: []
       }

@@ -44,7 +44,7 @@ const CollaboratorDetails = ({
           {Object.keys(urls).map(urlKey => {
             const urlValue = urls[urlKey];
 
-            if (urlValue && urlKey !== 'other') {
+            if (urlValue) {
               return (
                 <li key={urlKey}>
 
@@ -63,24 +63,6 @@ const CollaboratorDetails = ({
                     </a>
                   )}
 
-                </li>
-              )
-            } else if (urlKey === 'other' && urlValue.length > 0) {
-              return (
-                <li key={urlKey}>
-                  <ul className="collaborator-urls-other">
-                    {urlValue.map((urlObj) => (
-                      <li key={urlObj.title}>
-                        {urlObj.title}:&nbsp;
-                        <a
-                          href={urlObj.url}
-                          target='_blank'
-                        >
-                          {urlObj.url}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
                 </li>
               )
             }
