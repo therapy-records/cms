@@ -227,7 +227,7 @@ describe('(Component) Form', () => {
     });
 
     describe('when the graphQL query errors', () => {
-      it('should render <ErrorMessage />', async() => {
+      it('should render <StickyNew />', async() => {
         mocks = [{
           request: {
             query: CREATE_COLLABORATOR,

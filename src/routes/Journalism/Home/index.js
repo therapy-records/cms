@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-// import moment from 'moment';
 import { fetchJournalismArticles } from '../../../actions/journalism';
 import { setSelectedJournalismArticle } from '../../../actions/journalismArticle';
 import { resetPromiseState } from '../../../actions/uiState';

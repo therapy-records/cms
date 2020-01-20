@@ -21,8 +21,10 @@ const ListItem = ({
     buttonClassName += 'btn-xs';
   }
 
+  const containerClassName = cardDesign ? 'list-item-card' : 'list-item-row';
+
   return (
-    <li className={cardDesign ? 'list-item-card' : 'list-item-row'}>
+    <li className={containerClassName}>
 
       <div className='img-container'>
         <img src={imageUrl} alt={title} />

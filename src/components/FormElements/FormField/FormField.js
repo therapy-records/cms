@@ -21,11 +21,11 @@ const FormField = props => {
     <div>
 
       {/*
-      NOTE:
-      title is temporary and only used for RichTextEditor
-      when TextEditor is upgraded (and uses semantic text input and label)
-      this can be removed
-    */}
+        NOTE:
+        title is temporary and only used for RichTextEditor
+        when TextEditor is upgraded (and uses semantic text input and label)
+        this can be removed
+      */}
 
       {title &&
         <h5>
