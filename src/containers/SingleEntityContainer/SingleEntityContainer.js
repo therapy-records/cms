@@ -15,33 +15,35 @@ const SingleEntityContainer = ({
 }) => {
 
   return (
-    <QueryContainer
-      query={query}
-      queryVariables={{
-        id
-      }}
-      entityName={entityName}
-      render={queryData => (
-        <MutationContainer
-          mutation={mutation}
-          mutationVariables={{
-            id
-          }}
-          entityName={entityName}
-          baseUrl={baseUrl}
-          render={({ executeMutation }) => (
-            <SingleEntityContent
-              baseUrl={baseUrl}
-              data={queryData}
-              executeMutation={executeMutation}
-              render={render}
-              renderEditLink={renderEditLink}
-              renderDeleteButton
-            />
-          )}
-        />
-      )}
-    />
+    <article className='container'>
+      <QueryContainer
+        query={query}
+        queryVariables={{
+          id
+        }}
+        entityName={entityName}
+        render={queryData => (
+          <MutationContainer
+            mutation={mutation}
+            mutationVariables={{
+              id
+            }}
+            entityName={entityName}
+            baseUrl={baseUrl}
+            render={({ executeMutation }) => (
+              <SingleEntityContent
+                baseUrl={baseUrl}
+                data={queryData}
+                executeMutation={executeMutation}
+                render={render}
+                renderEditLink={renderEditLink}
+                renderDeleteButton
+              />
+            )}
+          />
+        )}
+      />
+    </article>
   );
 };
 

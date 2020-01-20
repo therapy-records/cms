@@ -25,7 +25,7 @@ const QueryContainer = ({
   const renderContent = (hasData && !loading);
 
   return (
-    <article className='container'>
+    <div>
 
       {loading && (
         <LoadingSpinner
@@ -46,7 +46,7 @@ const QueryContainer = ({
         )
       )}
 
-    </article>
+    </div>
   );
 };
 
