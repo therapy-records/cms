@@ -16,7 +16,8 @@ import {
 Enzyme.configure({ adapter: new Adapter() });
 
 let mocks = [
-  MOCK_GET_COLLABORATOR
+  MOCK_GET_COLLABORATOR,
+  MOCK_DELETE_COLLABORATOR
 ];
 
 describe('(Container) SingleEntityContainer', () => {
@@ -27,7 +28,8 @@ describe('(Container) SingleEntityContainer', () => {
       id: '1234',
       render: CollaboratorDetails,
       query: GET_COLLABORATOR,
-      renderEditLink: true
+      renderEditLink: true,
+      mutation: DELETE_COLLABORATOR
     };
 
   const actions = async(wrapper, _actions) => {
@@ -60,6 +62,21 @@ describe('(Container) SingleEntityContainer', () => {
 
   describe('with graphQL query success', () => {
 
+    it('should render <MutationContainer />', async() => {
+      await actions(wrapper, () => {
+        wrapper.update();
+
+        const mutationContainer = wrapper.find('MutationContainer');
+        expect(mutationContainer.length).to.eq(1);
+        expect(mutationContainer.prop('mutation')).to.eq(props.mutation);
+        expect(mutationContainer.prop('mutationVariables')).to.deep.eq({
+          id: props.id
+        });
+        expect(mutationContainer.prop('entityName')).to.eq('collaborator');
+        expect(mutationContainer.prop('baseUrl')).to.eq(props.baseUrl);
+      });
+    });
+
     it('should render <SingleEntityContent />', async() => {
       await actions(wrapper, () => {
         wrapper.update();
@@ -67,62 +84,11 @@ describe('(Container) SingleEntityContainer', () => {
         expect(singleEntityContent.length).to.eq(1);
         expect(singleEntityContent.prop('baseUrl')).to.eq(props.baseUrl);
         expect(singleEntityContent.prop('data')).to.deep.eq(mocks[0].result.data[props.entityName]);
+        expect(singleEntityContent.prop('executeMutation')).to.be.a('function');
         expect(singleEntityContent.prop('render')).to.eq(props.render);
         expect(singleEntityContent.prop('renderEditLink')).to.eq(props.renderEditLink);
+        expect(singleEntityContent.prop('renderDeleteButton')).to.eq(true);
       });
-    });
-
-    describe('when a mutation is passed through props', () => {
-
-      mocks = [
-        ...mocks,
-        MOCK_DELETE_COLLABORATOR
-      ];
-
-      props = {
-        ...props,
-        mutation: DELETE_COLLABORATOR
-      };
-
-      beforeEach(() => {
-        wrapper = mount(
-          <BrowserRouter>
-            <MockedProvider mocks={mocks} addTypename={false}>
-              <SingleEntityContainer {...props} />
-            </MockedProvider>
-          </BrowserRouter>
-        );
-      });
-
-      it('should render <MutationContainer />', async() => {
-        await actions(wrapper, () => {
-          wrapper.update();
-
-          const mutationContainer = wrapper.find('MutationContainer');
-          expect(mutationContainer.length).to.eq(1);
-          expect(mutationContainer.prop('mutation')).to.eq(props.mutation);
-          expect(mutationContainer.prop('mutationVariables')).to.deep.eq({
-            id: props.id
-          });
-          expect(mutationContainer.prop('entityName')).to.eq('collaborator');
-          expect(mutationContainer.prop('baseUrl')).to.eq(props.baseUrl);
-        });
-      });
-
-      it('should render <SingleEntityContent />', async() => {
-        await actions(wrapper, () => {
-          wrapper.update();
-          const singleEntityContent = wrapper.find('SingleEntityContent');
-          expect(singleEntityContent.length).to.eq(1);
-          expect(singleEntityContent.prop('baseUrl')).to.eq(props.baseUrl);
-          expect(singleEntityContent.prop('data')).to.deep.eq(mocks[0].result.data[props.entityName]);
-          expect(singleEntityContent.prop('executeMutation')).to.be.a('function');
-          expect(singleEntityContent.prop('render')).to.eq(props.render);
-          expect(singleEntityContent.prop('renderEditLink')).to.eq(props.renderEditLink);
-          expect(singleEntityContent.prop('renderDeleteButton')).to.eq(true);
-        });
-      });
-
     });
 
   });

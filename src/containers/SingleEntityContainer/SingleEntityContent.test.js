@@ -16,7 +16,7 @@ describe('(Container Component) SingleEntityContent', () => {
           about: '<p>test</p>'
         },
         render: CollaboratorDetails,
-        executeMutation: () => {},
+        executeMutation: sinon.spy(),
         renderEditLink: true,
         renderDeleteButton: true
       };
@@ -27,16 +27,30 @@ describe('(Container Component) SingleEntityContent', () => {
     );
   });
 
-  it('should render <ArticleHeader />', () => {
-    const articleHeader = wrapper.find('ArticleHeader');
-    expect(articleHeader.prop('baseUrl')).to.eq(props.baseUrl);
-    expect(articleHeader.prop('article')).to.deep.eq({
-      _id: props.data._id
+  describe('<ArticleHeader />', () => {
+    let articleHeader;
+    beforeEach(() => {
+      articleHeader = wrapper.find('ArticleHeader');
     });
-    expect(articleHeader.prop('heading')).to.eq('test heading');
-    expect(articleHeader.prop('showEditButton')).to.eq(props.renderEditLink);
-    expect(articleHeader.prop('showDeleteButton')).to.eq(props.renderDeleteButton);
-    expect(articleHeader.prop('onDeleteArticle')).to.be.a('function');
+
+    it('should render', () => {
+      expect(articleHeader.prop('baseUrl')).to.eq(props.baseUrl);
+      expect(articleHeader.prop('article')).to.deep.eq({
+        _id: props.data._id
+      });
+      expect(articleHeader.prop('heading')).to.eq('test heading');
+      expect(articleHeader.prop('showEditButton')).to.eq(props.renderEditLink);
+      expect(articleHeader.prop('showDeleteButton')).to.eq(props.renderDeleteButton);
+    });
+
+    describe('when articleHeader onDeleteArticle prop is triggered', () => {
+      it('should call props.executeMutation', () => {
+        expect(articleHeader.prop('onDeleteArticle')).to.be.a('function');
+        articleHeader.prop('onDeleteArticle')();
+        expect(props.executeMutation).to.have.been.called;
+      });
+    });
+
   });
 
   it('should render component from props.render with data from query', () => {
@@ -47,6 +61,5 @@ describe('(Container Component) SingleEntityContent', () => {
     );
     expect(actual).to.equal(true);
   });
-
 
 });

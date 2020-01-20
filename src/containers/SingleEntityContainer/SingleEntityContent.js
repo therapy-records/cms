@@ -34,13 +34,12 @@ SingleEntityContent.propTypes = {
   baseUrl: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
   render: PropTypes.func.isRequired,
-  executeMutation: PropTypes.func,
+  executeMutation: PropTypes.func.isRequired,
   renderEditLink: PropTypes.bool,
   renderDeleteButton: PropTypes.bool
 };
 
 SingleEntityContent.defaultProps = {
-  executeMutation: () => {},
   renderEditLink: false,
   renderDeleteButton: false
 };
