@@ -7,26 +7,26 @@ import { BrowserRouter } from 'react-router-dom';
 import Form from './Form';
 import StickyNew from '../StickyNew';
 import LoadingSpinner from '../LoadingSpinner';
-import { CREATE_COLLABORATOR } from '../../mutations';
+import { EDIT_COLLABORATOR } from '../../mutations';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-const mockQueryVariables = {
+const MOCK_QUERY_VARIABLES = {
+  id: '1234',
   name: 'test',
   avatarUrl: 'https://via.placeholder.com/250',
   role: 'test',
   about: 'test'
 };
 
-// TODO: update with mutateId
 let mocks = [
   {
     request: {
-      query: CREATE_COLLABORATOR,
-      variables: mockQueryVariables
+      query: EDIT_COLLABORATOR,
+      variables: MOCK_QUERY_VARIABLES
     },
     result: {
-      data: mockQueryVariables
+      data: MOCK_QUERY_VARIABLES
     }
   }
 ];
@@ -65,7 +65,8 @@ describe('(Component) Form', () => {
         required: true
       }
     ],
-    mutation: CREATE_COLLABORATOR,
+    mutation: EDIT_COLLABORATOR,
+    mutateId: '1234',
     baseUrl: '/test',
     successCopy: {
       homeLink: 'Go to Collaborators',
@@ -85,7 +86,7 @@ describe('(Component) Form', () => {
     wrapper.find('input#name').simulate('change', { target: { value: 'test' } });
     wrapper.find('input#role').simulate('change', { target: { value: 'test' } });
     wrapper.find('input#about').simulate('change', { target: { value: 'test' } });
-    wrapper.find('input#avatarUrl').simulate('change', { target: { value: mockQueryVariables.avatarUrl } });
+    wrapper.find('input#avatarUrl').simulate('change', { target: { value: MOCK_QUERY_VARIABLES.avatarUrl } });
   };
 
   describe('rendering', () => {
@@ -230,8 +231,11 @@ describe('(Component) Form', () => {
       it('should render <StickyNew />', async() => {
         mocks = [{
           request: {
-            query: CREATE_COLLABORATOR,
-            variables: mockQueryVariables
+            query: EDIT_COLLABORATOR,
+            variables: {
+              ...MOCK_QUERY_VARIABLES,
+              id: props.mutateId
+            }
           },
           error: new Error('Oh no')
         }];
