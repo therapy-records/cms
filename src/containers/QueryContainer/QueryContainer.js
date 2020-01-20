@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useQuery } from '@apollo/react-hooks';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import StickyNew from '../../components/StickyNew';
+import { isEmptyString } from '../../utils/strings';
 
 const QueryContainer = ({
   entityName,
@@ -19,9 +20,9 @@ const QueryContainer = ({
     variables: queryVariables
   });
 
-  const hasData = (queryData && queryData[entityName]);
+  const hasData = (entityName && !isEmptyString(entityName)) ? (queryData && queryData[entityName]) : queryData;
 
-  const renderContent = (hasData && !loading)
+  const renderContent = (hasData && !loading);
 
   return (
     <article className='container'>
@@ -41,7 +42,7 @@ const QueryContainer = ({
 
       {renderContent && (
         render(
-          queryData[entityName]
+          (entityName && !isEmptyString(entityName)) ? queryData[entityName] : queryData
         )
       )}
 
@@ -51,14 +52,15 @@ const QueryContainer = ({
 
 
 QueryContainer.propTypes = {
-  entityName: PropTypes.string.isRequired,
   query: PropTypes.object.isRequired,
   queryVariables: PropTypes.object,
   render: PropTypes.func.isRequired,
+  entityName: PropTypes.string
 };
 
 QueryContainer.defaultProps = {
-  queryVariables: {}
+  queryVariables: {},
+  entityName: ''
 };
 
 export default QueryContainer;

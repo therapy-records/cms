@@ -1,30 +1,24 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import QueryContainer from '../../../containers/QueryContainer';
 import { GET_STATS } from '../../../queries';
 
-const Stats = () => {
-  const {
-    loading,
-    error,
-    data
-  } = useQuery(GET_STATS);
+const Stats = () => (
+  <div>
 
+    <h3>Stats</h3>
 
-  return (
-    <div>
-
-      <h3>Stats</h3>
-
-      {!loading && !error && (
+    <QueryContainer
+      query={GET_STATS}
+      render={queryData => (
         <ul>
-          {data.news && <li>{data.news.length} News articles</li>}
-          {data.journalism && <li>{data.journalism.length} Journalism articles</li>}
-          {data.collaborators && <li>{data.collaborators.length} Collaborators</li>}
+          <li>{queryData.news.length} News articles</li>
+          <li>{queryData.journalism.length} Journalism articles</li>
+          <li>{queryData.collaborators.length} Collaborators</li>
         </ul>
       )}
+    />
 
-    </div>
-  );
-}
+  </div>
+);
 
 export default Stats

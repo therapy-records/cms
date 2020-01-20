@@ -5,17 +5,32 @@ import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
 import QueryContainer from './QueryContainer';
-import { GET_COLLABORATOR } from '../../queries'
+import {
+  GET_COLLABORATOR,
+  GET_STATS
+} from '../../queries'
 import LoadingSpinner from '../../components/LoadingSpinner';
 import StickyNew from '../../components/StickyNew';
 import CollaboratorDetails from '../../components/CollaboratorDetails';
 import { MOCK_GET_COLLABORATOR } from '../../mocks/collaborators.mock';
+import { MOCK_GET_STATS } from '../../mocks/stats.mock';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 let mocks = [
-  MOCK_GET_COLLABORATOR
+  MOCK_GET_COLLABORATOR,
+  MOCK_GET_STATS
 ];
+
+const MockComponent = ({ data }) => {
+  return (
+    <ul>
+      {data && data.news.map(i => (
+        <li key={i}>{test}</li>
+      ))}
+    </ul>
+  )
+}
 
 describe('(Container) QueryContainer', () => {
   let wrapper,
@@ -39,7 +54,7 @@ describe('(Container) QueryContainer', () => {
   }
 
   describe('when there are no errors', () => {
-    beforeEach(() => {
+    it('should render a component passed through props.render with query data/props', async() => {
       wrapper = mount(
         <BrowserRouter>
           <MockedProvider mocks={mocks} addTypename={false}>
@@ -47,15 +62,43 @@ describe('(Container) QueryContainer', () => {
           </MockedProvider>
         </BrowserRouter>
       );
-    })
 
-    it('should render a component passed through props.render with query data/props', async() => {
       await actions(wrapper, () => {
         wrapper.update();
         const actual = wrapper.containsMatchingElement(
           <CollaboratorDetails {...mocks[0].result.data[props.entityName]} />
         );
         expect(actual).to.equal(true);
+      });
+    });
+
+    describe('when there is no props.entityName', () => {
+      it('should render a component passed through props.render without entityName', async() => {
+
+        const noEntityNameProps = {
+          query: GET_STATS,
+          render: queryData => (
+            <MockComponent data={queryData} />
+          )
+        };
+
+        wrapper = mount(
+          <BrowserRouter>
+            <MockedProvider mocks={mocks} addTypename={false}>
+              <QueryContainer
+                {...noEntityNameProps}
+              />
+            </MockedProvider>
+          </BrowserRouter>
+        );
+
+        await actions(wrapper, () => {
+          wrapper.update();
+          const actual = wrapper.containsMatchingElement(
+            <MockComponent data={mocks[1].result.data} />
+          );
+          expect(actual).to.equal(true);
+        });
       });
     });
   });
