@@ -26,7 +26,7 @@ const MockComponent = ({ data }) => {
   return (
     <ul>
       {data && data.news.map(i => (
-        <li key={i}>{test}</li>
+        <li key={i.title}>test</li>
       ))}
     </ul>
   )
