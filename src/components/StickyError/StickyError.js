@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import './StickyNew.css';
+import './StickyError.css';
 
-const StickyNew = ({children}) => (
+const StickyError = ({children}) => (
   <div className='sticky-new'>
     <div className='inner'>
       {children}
@@ -10,8 +10,8 @@ const StickyNew = ({children}) => (
   </div>
 );
 
-StickyNew.propTypes = {
+StickyError.propTypes = {
   children: PropTypes.element
 };
 
-export default StickyNew;
+export default StickyError;

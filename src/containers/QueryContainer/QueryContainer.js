@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useQuery } from '@apollo/react-hooks';
 import LoadingSpinner from '../../components/LoadingSpinner';
-import StickyNew from '../../components/StickyNew';
+import StickyError from '../../components/StickyError';
 import { isEmptyString } from '../../utils/strings';
 
 const QueryContainer = ({
@@ -35,9 +35,9 @@ const QueryContainer = ({
       )}
 
       {error && (
-        <StickyNew>
+        <StickyError>
           <p>Sorry, something has gone wrong.</p>
-        </StickyNew>
+        </StickyError>
       )}
 
       {renderContent && (

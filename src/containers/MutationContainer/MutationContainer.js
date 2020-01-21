@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useMutation } from '@apollo/react-hooks';
 import LoadingSpinner from '../../components/LoadingSpinner';
-import StickyNew from '../../components/StickyNew';
+import StickyError from '../../components/StickyError';
 import SuccessMessage from '../../components/FormElements/SuccessMessage';
 
 const MutationContainer = ({
@@ -38,9 +38,9 @@ const MutationContainer = ({
       )}
 
       {error && (
-        <StickyNew>
+        <StickyError>
           <p>Sorry, something has gone wrong.</p>
-        </StickyNew>
+        </StickyError>
       )}
 
       {mutationSuccess && (

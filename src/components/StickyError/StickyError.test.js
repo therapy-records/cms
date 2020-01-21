@@ -1,11 +1,11 @@
 import React from 'react';
-import StickyNew from './';
+import StickyError from './';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('(Component) StickyNew', () => {
+describe('(Component) StickyError', () => {
   let wrapper,
   props = {
     children: <p>test</p>
@@ -13,7 +13,7 @@ describe('(Component) StickyNew', () => {
 
   describe('rendering', () => {
       beforeEach(() => {
-        wrapper = shallow(<StickyNew {...props} />);
+        wrapper = shallow(<StickyError {...props} />);
       });
 
       it('should render children', () => {

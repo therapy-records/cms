@@ -10,7 +10,7 @@ import {
   GET_STATS
 } from '../../queries'
 import LoadingSpinner from '../../components/LoadingSpinner';
-import StickyNew from '../../components/StickyNew';
+import StickyError from '../../components/StickyError';
 import CollaboratorDetails from '../../components/CollaboratorDetails';
 import { MOCK_GET_COLLABORATOR } from '../../mocks/collaborators.mock';
 import { MOCK_GET_STATS } from '../../mocks/stats.mock';
@@ -127,7 +127,7 @@ describe('(Container) QueryContainer', () => {
   });
 
   describe('when the graphQL query errors', () => {
-    it('should render <StickyNew />', async() => {
+    it('should render <StickyError />', async() => {
       mocks = [{
         request: {
           query: GET_COLLABORATOR
@@ -146,9 +146,9 @@ describe('(Container) QueryContainer', () => {
       await actions(wrapper, () => {
         wrapper.update();
         const actual = wrapper.containsMatchingElement(
-          <StickyNew>
+          <StickyError>
             <p>Sorry, something has gone wrong.</p>
-          </StickyNew>
+          </StickyError>
         );
         expect(actual).to.equal(true);
       });

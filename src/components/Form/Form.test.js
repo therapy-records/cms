@@ -5,7 +5,7 @@ import { act } from 'react-dom/test-utils';
 import { MockedProvider } from '@apollo/react-testing';
 import { BrowserRouter } from 'react-router-dom';
 import Form from './Form';
-import StickyNew from '../StickyNew';
+import StickyError from '../StickyError';
 import LoadingSpinner from '../LoadingSpinner';
 import { EDIT_COLLABORATOR } from '../../mutations';
 
@@ -228,7 +228,7 @@ describe('(Component) Form', () => {
     });
 
     describe('when the graphQL query errors', () => {
-      it('should render <StickyNew />', async() => {
+      it('should render <StickyError />', async() => {
         mocks = [{
           request: {
             query: EDIT_COLLABORATOR,
@@ -255,9 +255,9 @@ describe('(Component) Form', () => {
         await actions(wrapper, () => {
           wrapper.update();
           const actual = wrapper.containsMatchingElement(
-            <StickyNew>
+            <StickyError>
               <p>Sorry, something has gone wrong.</p>
-            </StickyNew>
+            </StickyError>
           );
           expect(actual).to.equal(true);
         });

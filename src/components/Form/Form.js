@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/react-hooks';
 import formReducer, { initReducerState } from './reducer';
 import FormField from '../FormElements/FormField';
 import { handleFormData } from '../../utils/graphql-form';
-import StickyNew from '../StickyNew';
+import StickyError from '../StickyError';
 import LoadingSpinner from '../LoadingSpinner';
 import SuccessMessage from '../FormElements/SuccessMessage';
 
@@ -94,9 +94,9 @@ const Form = ({
         <div>
 
           {error && (
-            <StickyNew>
+            <StickyError>
               <p>Sorry, something has gone wrong.</p>
-            </StickyNew>
+            </StickyError>
           )}
 
           <form onSubmit={handleSubmit} encType='multipart/form-data'>
