@@ -36,46 +36,42 @@ describe('(Component) CollaboratorsHome', () => {
     );
   });
 
-  describe('when there are no errors', () => {
 
-    it('should render a page title', () => {
+  it('should render a page title', () => {
+    const actual = wrapper.containsMatchingElement(
+      <h2>Collaborators 🌈</h2>
+    );
+    expect(actual).to.equal(true);
+  });
+
+  it('should render a link to create', () => {
+    const actual = wrapper.containsMatchingElement(
+      <Link to='collaborators/create'>Create</Link>
+    );
+    expect(actual).to.equal(true);
+  });
+
+  it('should render <QueryContainer />', () => {
+    const queryContainer = wrapper.find('QueryContainer');
+    expect(queryContainer.length).to.eq(1);
+    expect(queryContainer.prop('query')).to.eq(GET_COLLABORATORS);
+    expect(queryContainer.prop('entityName')).to.eq('collaborators');
+  });
+
+  it('should render <List /> from <SingleEntityContainer /> render prop', async() => {
+    await actions(wrapper, () => {
+      wrapper.update();
+
       const actual = wrapper.containsMatchingElement(
-        <h2>Collaborators 🌈</h2>
+        <List
+          data={mocks[0].result.data.collaborators}
+          route='collaborators'
+          columns
+        />
       );
       expect(actual).to.equal(true);
+
     });
-
-    it('should render a link to create', () => {
-      const actual = wrapper.containsMatchingElement(
-        <Link to='collaborators/create'>Create</Link>
-      );
-      expect(actual).to.equal(true);
-    });
-
-    it('should render <QueryContainer />', () => {
-      const queryContainer = wrapper.find('QueryContainer');
-      expect(queryContainer.length).to.eq(1);
-      expect(queryContainer.prop('query')).to.eq(GET_COLLABORATORS);
-      expect(queryContainer.prop('entityName')).to.eq('collaborators');
-    });
-
-    it('should render <List /> from <SingleEntityContainer /> render prop', async() => {
-      await actions(wrapper, () => {
-        wrapper.update();
-
-        const actual = wrapper.containsMatchingElement(
-          <List
-            data={mocks[0].result.data.collaborators}
-            route='collaborators'
-            columns
-          />
-        );
-        expect(actual).to.equal(true);
-
-      });
-    });
-
-
   });
 
 });

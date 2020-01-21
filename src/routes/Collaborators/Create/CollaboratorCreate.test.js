@@ -17,16 +17,13 @@ describe('(Component) CollaboratorCreate', () => {
       wrapper = shallow(<CollaboratorCreate />);
     });
 
-    describe('<ArticleHeader />', () => {
-      it('should render', () => {
-        const articleHeader = wrapper.find('ArticleHeader');
-        expect(articleHeader.length).to.eq(1);
-        expect(articleHeader.prop('baseUrl')).to.eq('/collaborators');
-        expect(articleHeader.prop('heading')).to.eq('Add Collaborator 🌈');
-        expect(articleHeader.prop('showDeleteButton')).to.eq(false);
-      });
-
+    it('should render a page title', () => {
+      const actual = wrapper.containsMatchingElement(
+        <h2>Add Collaborator 🌈</h2>
+      );
+      expect(actual).to.equal(true);
     });
+
 
     it('should render <CollaboratorForm />', () => {
       const actual = wrapper.containsMatchingElement(
