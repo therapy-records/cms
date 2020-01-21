@@ -3,7 +3,7 @@ import { Provider, connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
-import StickyError from './components/StickyError/StickyError';
+import StickyAuthError from './components/StickyAuthError';
 import Sidebar from './components/Sidebar/Sidebar';
 import Home from './routes/Home';
 import Dashboard from './routes/Dashboard';
@@ -35,7 +35,7 @@ export class Router extends Component {
       <BrowserRouter>
         <div>
 
-          <StickyError />
+          <StickyAuthError />
 
           <div className="main-container">
 

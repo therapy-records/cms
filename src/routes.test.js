@@ -6,7 +6,7 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Routes, { Router, ConnectedRouter, NotFound } from './routes';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
-import StickyError from './components/StickyError/StickyError';
+import StickyAuthError from './components/StickyAuthError';
 import Sidebar from './components/Sidebar/Sidebar';
 import Home from './routes/Home';
 import Dashboard from './routes/Dashboard';
@@ -50,9 +50,9 @@ describe('Router', () => {
     wrapper = shallow(<Router {...props} />);
   });
 
-  it('should render <StickyError />', () => {
+  it('should render <StickyAuthError />', () => {
     const actual = wrapper.containsMatchingElement(
-      <StickyError />
+      <StickyAuthError />
     );
     expect(actual).to.equal(true);
   });

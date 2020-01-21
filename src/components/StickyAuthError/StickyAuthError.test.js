@@ -2,12 +2,12 @@ import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import configureMockStore from 'redux-mock-store';
-import ConnectedStickyError, { StickyError } from './StickyError';
+import ConnectedStickyAuthError, { StickyAuthError } from './StickyAuthError';
 import Sticky from '../Sticky/Sticky';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('(Component) StickyError', () => {
+describe('(Component) StickyAuthError', () => {
   let wrapper,
     props = {
       message: 'Something has gone wrong'
@@ -16,7 +16,7 @@ describe('(Component) StickyError', () => {
   describe('rendering', () => {
 
     beforeEach(() => {
-      wrapper = shallow(<StickyError {...props} />);
+      wrapper = shallow(<StickyAuthError {...props} />);
     });
 
     it('should render <Sticky /> with props.message', () => {
@@ -36,7 +36,7 @@ describe('(Component) StickyError', () => {
     });
   });
 
-  describe('ConnectedStickyError', () => {
+  describe('ConnectedStickyAuthError', () => {
     const mockStore = configureMockStore();
     const mockStoreState = {
       errorAlert: {
@@ -49,7 +49,7 @@ describe('(Component) StickyError', () => {
     beforeEach(() => {
       store = mockStore(mockStoreState);
       wrapper = shallow(
-        <ConnectedStickyError
+        <ConnectedStickyAuthError
           store={store}
         />
       );
