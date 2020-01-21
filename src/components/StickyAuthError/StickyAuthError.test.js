@@ -3,7 +3,6 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import configureMockStore from 'redux-mock-store';
 import ConnectedStickyAuthError, { StickyAuthError } from './StickyAuthError';
-import Sticky from '../Sticky/Sticky';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -19,11 +18,11 @@ describe('(Component) StickyAuthError', () => {
       wrapper = shallow(<StickyAuthError {...props} />);
     });
 
-    it('should render <Sticky /> with props.message', () => {
+    it('should render with props.message', () => {
       const actual = wrapper.containsMatchingElement(
-        <Sticky>
+        <div className='sticky-auth-error'>
           <p>{props.message}</p>
-        </Sticky>
+        </div>
       );
       expect(actual).to.eq(true);
     });

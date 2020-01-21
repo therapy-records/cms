@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Sticky from '../Sticky/Sticky';
+import './StickyAuthError.css';
 
 export class StickyAuthError extends PureComponent {
   render() {
@@ -12,9 +12,9 @@ export class StickyAuthError extends PureComponent {
     }
 
     return (
-      <Sticky>
+      <div className='sticky-auth-error'>
         <p>{message}</p>
-      </Sticky>
+      </div>
     );
   }
 }
