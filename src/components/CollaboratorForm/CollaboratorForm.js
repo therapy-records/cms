@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Form from '../Form';
 import COLLABORATOR_FIELDS from '../../formFields/collaborator';
-import { mapFieldsWithValues } from '../../utils/form';
+import mapFieldsWithValues from '../../utils/form-field-mappings';
 
 const CollaboratorForm = ({
   mutation,

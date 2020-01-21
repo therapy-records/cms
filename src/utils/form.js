@@ -1,69 +1,39 @@
-import { objectHasValues } from './objects';
+import {
+  isChildField,
+  handleChildField
+} from './form-field-child-handler';
 
+// NOTE: remove in future, this is only used for redux-form fields.
 export const required = value => value ? undefined : 'required';
 
-export const isFieldArray = fieldType => fieldType.includes('arrayOf');
+const handleFormData = form => {
+  const data = new FormData(form);
+  let postData = {};
+  let fieldsWithChildren = {};
 
-export const isFieldArrayWithValues = (fieldId, valuesObj) =>
-  valuesObj[fieldId] && 
-  (objectHasValues(valuesObj[fieldId]) ||
-  valuesObj[fieldId].length > 0);
+  for (const pair of data.entries()) {
+    let fieldId = pair[0];
+    const fieldValue = pair[1];
 
-export const mapFieldArrayOfObjectsWithValues = (field, valuesObj) => {
-  const fieldId = field.id;
-
-  Object.keys(valuesObj[fieldId]).forEach(key => {
-
-    const valueExists = valuesObj[fieldId][key];
-    if (valueExists) {
-      const childField = field.items.find(child => child.id === key);
-      childField.value = valuesObj[fieldId][key];
-    }
-  });
-  return field;
-};
-
-export const mapFieldArrayOfStringsWithValues = (field, valuesObj) => {
-  let itemsArrayOfStrings = [];
-  valuesObj[field.id].forEach(str => {
-    itemsArrayOfStrings = [
-      ...itemsArrayOfStrings,
-      { value: str }
-    ]
-  });
-  field.items = itemsArrayOfStrings;
-  return field;
-};
-
-export const mapFieldArray = (field, valuesObj) => {
-  if (isFieldArrayWithValues(field.id, valuesObj)) {
-
-    if (field.type === 'arrayOfObjects') {
-      field = mapFieldArrayOfObjectsWithValues(
-        field,
-        valuesObj
+    if (isChildField(fieldId)) {
+      fieldsWithChildren = handleChildField(
+        fieldId,
+        fieldValue,
+        fieldsWithChildren
       );
     } else {
-      field = mapFieldArrayOfStringsWithValues(
-        field,
-        valuesObj
-      );
-    }
-  }
-  return field;
-};
-
-export const mapFieldsWithValues = (fields, valuesObj) =>
-  fields.map(field => {
-    const fieldId = field.id;
-
-    if (isFieldArray(field.type)) {
-      field = mapFieldArray(field, valuesObj);
-    } else {
-      const value = valuesObj[fieldId];
-      if (value) {
-        field.value = value;
+      postData = {
+        ...postData,
+        [fieldId]: fieldValue
       }
     }
-    return field;
-  });
+
+    postData = {
+      ...postData,
+      ...fieldsWithChildren
+    }
+  }
+  return postData;
+};
+
+export default handleFormData;

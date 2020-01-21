@@ -6,7 +6,7 @@ import Form from '../Form';
 import COLLABORATOR_FIELDS from '../../formFields/collaborator';
 import { GET_COLLABORATORS } from '../../queries';
 import { EDIT_COLLABORATOR } from '../../mutations';
-import { mapFieldsWithValues } from '../../utils/form';
+import mapFieldsWithValues from '../../utils/form-field-mappings';
 
 Enzyme.configure({ adapter: new Adapter() });
 

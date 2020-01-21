@@ -25,7 +25,7 @@ export const getChildFieldIds = fieldId => {
     childFieldId,
     grandChildFieldId
   }
-}
+};
 
 export const formatChildField = (fieldId, fieldValue) => {
   const { grandChildFieldId } = getChildFieldIds(fieldId);
@@ -38,13 +38,7 @@ export const formatChildField = (fieldId, fieldValue) => {
   return fieldValue;
 };
 
-////////////////
-////////////////
-////
 // TODO: simplify/change naming conventions
-////
-////////////////
-////////////////
 
 export const handleChildFieldArray = (allChildFields, fieldValue, childFieldId) => {
   if (allChildFields[childFieldId]) {
@@ -67,7 +61,7 @@ export const handleChildField = (fieldId, fieldValue, allChildFields) => {
   const { childFieldId } = getChildFieldIds(fieldId);
   const formattedChildField = formatChildField(fieldId, fieldValue);
 
-  if(isAString(formattedChildField)) {
+  if (isAString(formattedChildField)) {
     allChildFields = handleChildFieldArray(allChildFields, fieldValue, childFieldId);
   } else {
     allChildFields[childFieldId] = {
@@ -76,34 +70,4 @@ export const handleChildField = (fieldId, fieldValue, allChildFields) => {
     };
   }
   return allChildFields;
-}
-
-export const handleFormData = form => {
-  const data = new FormData(form);
-  let postData = {};
-  let fieldsWithChildren = {};
-
-  for (const pair of data.entries()) {
-    let fieldId = pair[0];
-    const fieldValue = pair[1];
-
-    if (isChildField(fieldId)) {
-      fieldsWithChildren = handleChildField(
-        fieldId,
-        fieldValue,
-        fieldsWithChildren
-      );
-    } else {
-      postData = {
-        ...postData,
-        [fieldId]: fieldValue
-      }
-    }
-
-    postData = {
-      ...postData,
-      ...fieldsWithChildren
-    }
-  }
-  return postData;
 };
