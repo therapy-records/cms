@@ -6,8 +6,6 @@ import { BrowserRouter, Link } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
 import CollaboratorsHome from './index';
 import { GET_COLLABORATORS } from '../../../queries';
-import LoadingSpinner from '../../../components/LoadingSpinner';
-import ErrorMessage from '../../../components/ErrorMessage';
 import List from '../../../components/List';
 import { MOCK_GET_COLLABORATORS } from '../../../mocks/collaborators.mock';
 
@@ -28,16 +26,17 @@ describe('(Component) CollaboratorsHome', () => {
     });
   };
 
+  beforeEach(() => {
+    wrapper = mount(
+      <BrowserRouter>
+        <MockedProvider mocks={mocks} addTypename={false}>
+          <CollaboratorsHome />
+        </MockedProvider>
+      </BrowserRouter>
+    );
+  });
+
   describe('when there are no errors', () => {
-    beforeEach(() => {
-      wrapper = mount(
-        <BrowserRouter>
-          <MockedProvider mocks={mocks} addTypename={false}>
-            <CollaboratorsHome />
-          </MockedProvider>
-        </BrowserRouter>
-      );
-    })
 
     it('should render a page title', () => {
       const actual = wrapper.containsMatchingElement(
@@ -53,9 +52,17 @@ describe('(Component) CollaboratorsHome', () => {
       expect(actual).to.equal(true);
     });
 
-    it('should render <List />', async() => {
+    it('should render <QueryContainer />', () => {
+      const queryContainer = wrapper.find('QueryContainer');
+      expect(queryContainer.length).to.eq(1);
+      expect(queryContainer.prop('query')).to.eq(GET_COLLABORATORS);
+      expect(queryContainer.prop('entityName')).to.eq('collaborators');
+    });
+
+    it('should render <List /> from <SingleEntityContainer /> render prop', async() => {
       await actions(wrapper, () => {
         wrapper.update();
+
         const actual = wrapper.containsMatchingElement(
           <List
             data={mocks[0].result.data.collaborators}
@@ -64,64 +71,11 @@ describe('(Component) CollaboratorsHome', () => {
           />
         );
         expect(actual).to.equal(true);
+
       });
     });
 
-  });
 
-  describe('when the graphQL query is loading', () => {
-    it('should render <LoadingSpinner />', async() => {
-      mocks = [{
-        request: {
-          query: GET_COLLABORATORS
-        }
-      }];
-
-      wrapper = mount(
-        <BrowserRouter>
-          <MockedProvider mocks={mocks} addTypename={false}>
-            <CollaboratorsHome />
-          </MockedProvider>
-        </BrowserRouter>
-      );
-
-      await actions(wrapper, () => {
-        const actual = wrapper.containsMatchingElement(
-          <LoadingSpinner
-            active
-            fullScreen
-          />
-        );
-        expect(actual).to.equal(true);
-      });
-    });
-  });
-  
-  describe('when the graphQL query errors', () => {
-    it('should render <ErrorMessage />', async() => {
-      mocks = [{
-        request: {
-          query: GET_COLLABORATORS
-        },
-        error: new Error('Something went wrong')
-      }];
-
-      wrapper = mount(
-        <BrowserRouter>
-          <MockedProvider mocks={mocks} addTypename={false}>
-            <CollaboratorsHome />
-          </MockedProvider>
-        </BrowserRouter>
-      );
-
-      await actions(wrapper, () => {
-        wrapper.update();
-        const actual = wrapper.containsMatchingElement(
-          <ErrorMessage />
-        );
-        expect(actual).to.equal(true);
-      });
-    });
   });
 
 });
