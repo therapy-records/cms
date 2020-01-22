@@ -26,7 +26,7 @@ describe('(Component) ArticleDeleteModal', () => {
         overlayClassName='modal-overlay'
       >
         <div>
-          <h4>Are you sure you want to delete this article?</h4>
+          <h4>Are you sure you want to delete?</h4>
           <p>It will be gone forever!</p>
           <button
             className='btn btn-danger cancel-margin'
