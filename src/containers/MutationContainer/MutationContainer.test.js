@@ -35,6 +35,10 @@ describe('(Container) MutationContainer', () => {
         mutationVariables: {
           id: '1234'
         },
+        successCopy: {
+          success: 'Successfully deleted.',
+          homeLink: 'Go to Collaborators'
+        },
         render: ({ executeMutation }) => (
           <MockComponent executeMutation={executeMutation} />
         )

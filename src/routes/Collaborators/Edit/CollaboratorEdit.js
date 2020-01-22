@@ -32,6 +32,10 @@ const CollaboratorEdit = ({ match }) => {
       )}
       query={GET_COLLABORATOR}
       mutation={DELETE_COLLABORATOR}
+      mutationSuccessCopy={{
+        success: 'Successfully deleted.',
+        homeLink: 'Go to Collaborators'
+      }}
       renderEditLink
     />
   );

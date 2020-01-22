@@ -10,7 +10,8 @@ const MutationContainer = ({
   entityName,
   mutation,
   render,
-  mutationVariables
+  mutationVariables,
+  successCopy
 }) => {
 
   const [
@@ -46,10 +47,7 @@ const MutationContainer = ({
       {mutationSuccess && (
         <SuccessMessage
           baseUrl={baseUrl}
-          copy={{
-            success: 'Successfully mutated',
-            homeLink: `Go to ${entityName}`
-          }}
+          copy={successCopy}
         />
       )}
 
@@ -69,7 +67,12 @@ MutationContainer.propTypes = {
   entityName: PropTypes.string.isRequired,
   mutation: PropTypes.object.isRequired,
   render: PropTypes.func.isRequired,
-  mutationVariables: PropTypes.object
+  mutationVariables: PropTypes.object,
+  successCopy: PropTypes.shape({
+    success: PropTypes.string,
+    homeLink: PropTypes.string,
+    createLink: PropTypes.string
+  }).isRequired
 };
 
 MutationContainer.defaultProps = {

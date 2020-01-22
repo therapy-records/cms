@@ -11,6 +11,7 @@ const SingleEntityContainer = ({
   render,
   query,
   mutation,
+  mutationSuccessCopy,
   renderEditLink
 }) => {
 
@@ -28,6 +29,7 @@ const SingleEntityContainer = ({
             mutationVariables={{
               id
             }}
+            successCopy={mutationSuccessCopy}
             entityName={entityName}
             baseUrl={baseUrl}
             render={({ executeMutation }) => (
@@ -51,14 +53,20 @@ SingleEntityContainer.propTypes = {
   baseUrl: PropTypes.string.isRequired,
   entityName: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  render: PropTypes.func,
+  render: PropTypes.func.isRequired,
   query: PropTypes.object.isRequired,
   mutation: PropTypes.object.isRequired,
+  mutationSuccessCopy: PropTypes.shape({
+    success: PropTypes.string,
+    homeLink: PropTypes.string,
+    createLink: PropTypes.string
+  }),
   renderEditLink: PropTypes.bool
 };
 
 SingleEntityContainer.defaultProps = {
   queryVariables: {},
+  mutationSuccessCopy: {},
   renderEditLink: false
 };
 

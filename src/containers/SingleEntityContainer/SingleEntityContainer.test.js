@@ -29,7 +29,11 @@ describe('(Container) SingleEntityContainer', () => {
       render: CollaboratorDetails,
       query: GET_COLLABORATOR,
       renderEditLink: true,
-      mutation: DELETE_COLLABORATOR
+      mutation: DELETE_COLLABORATOR,
+      mutationSuccessCopy: {
+        success: 'Successfully deleted.',
+        homeLink: 'Go to Collaborators'
+      }
     };
 
   const actions = async(wrapper, _actions) => {
@@ -74,6 +78,7 @@ describe('(Container) SingleEntityContainer', () => {
         });
         expect(mutationContainer.prop('entityName')).to.eq('collaborator');
         expect(mutationContainer.prop('baseUrl')).to.eq(props.baseUrl);
+        expect(mutationContainer.prop('successCopy')).to.deep.eq(props.mutationSuccessCopy);
       });
     });
 

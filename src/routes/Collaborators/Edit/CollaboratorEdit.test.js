@@ -51,31 +51,23 @@ describe('(Component) CollaboratorEdit', () => {
     );
   });
 
-  it('should render <SingleEntityContainer />', async() => {
-    await actions(wrapper, () => {
-      wrapper.update();
-      const actual = wrapper.containsMatchingElement(
-        <SingleEntityContainer
-          baseUrl='/collaborators'
-          entityName='collaborator'
-          id={props.match.params.id}
-          query={GET_COLLABORATOR}
-          mutation={DELETE_COLLABORATOR}
-          renderEditLink
-        />
-      );
-      expect(actual).to.equal(true);
+  it('should render <SingleEntityContainer />', () => {
+    const singleEntityContainer = wrapper.find('SingleEntityContainer');
+    expect(singleEntityContainer.length).to.eq(1);
+    // expect(singleEntityContainer.prop('query')).to.eq(GET_COLLABORATOR);
+    // expect(singleEntityContainer.prop('queryVariables')).to.deep.eq({
+    //   id: props.match.params.id
+    // });
+    expect(singleEntityContainer.prop('baseUrl')).to.eq('/collaborators');
+    expect(singleEntityContainer.prop('entityName')).to.eq('collaborator');
+    expect(singleEntityContainer.prop('id')).to.eq(props.match.params.id);
+    expect(singleEntityContainer.prop('query')).to.eq(GET_COLLABORATOR);
+    expect(singleEntityContainer.prop('mutation')).to.eq(DELETE_COLLABORATOR);
+    expect(singleEntityContainer.prop('mutationSuccessCopy')).to.deep.eq({
+      success: 'Successfully deleted.',
+      homeLink: 'Go to Collaborators'
     });
-  });
-
-  it('should render <QueryContainer />', () => {
-    const queryContainer = wrapper.find('QueryContainer');
-    expect(queryContainer.length).to.eq(1);
-    expect(queryContainer.prop('query')).to.eq(GET_COLLABORATOR);
-    expect(queryContainer.prop('queryVariables')).to.deep.eq({
-      id: props.match.params.id
-    });
-    expect(queryContainer.prop('entityName')).to.eq('collaborator');
+    expect(singleEntityContainer.prop('renderEditLink')).to.eq(true);
   });
 
   it('should render <CollaboratorForm /> from <SingleEntityContainer /> render prop ', async() => {
@@ -90,7 +82,6 @@ describe('(Component) CollaboratorEdit', () => {
             { query: GET_COLLABORATORS }
           ]}
           isEditForm
-
         />
       );
       expect(actual).to.equal(true);
