@@ -2,11 +2,12 @@ import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import CollaboratorDetails from './CollaboratorDetails';
+import CollaboratorUrls from './CollaboratorUrls';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 let wrapper;
-const mock = {
+const props = {
   name: 'Testing',
   avatarUrl: 'test.com',
   role: 'test',
@@ -24,7 +25,7 @@ const mock = {
 describe('(Component) CollaboratorDetails', () => {
   beforeEach(() => {
     wrapper = shallow(
-      <CollaboratorDetails {...mock} />
+      <CollaboratorDetails {...props} />
     );
   });
 
@@ -32,8 +33,8 @@ describe('(Component) CollaboratorDetails', () => {
     it('should render an image', () => {
       const actual = wrapper.containsMatchingElement(
         <img
-          src={mock.avatarUrl}
-          alt={mock.name}
+          src={props.avatarUrl}
+          alt={props.name}
         />
       );
       expect(actual).to.equal(true);
@@ -41,71 +42,32 @@ describe('(Component) CollaboratorDetails', () => {
 
     it('should render role paragraph', () => {
       const actual = wrapper.containsMatchingElement(
-        <p>{mock.role}</p>
+        <p>{props.role}</p>
       );
       expect(actual).to.equal(true);
     });
 
     it('should render about html', () => {
       const actual = wrapper.containsMatchingElement(
-        <div dangerouslySetInnerHTML={{ __html: mock.about }} />
+        <div dangerouslySetInnerHTML={{ __html: props.about }} />
       );
       expect(actual).to.equal(true);
     });
 
     it('should render a list from collabOn array', () => {
       const actual = wrapper.containsAllMatchingElements([
-        <li key={mock.collabOn[0]}>{mock.collabOn[0]}</li>,
-        <li key={mock.collabOn[1]}>{mock.collabOn[1]}</li>
+        <li key={props.collabOn[0]}>{props.collabOn[0]}</li>,
+        <li key={props.collabOn[1]}>{props.collabOn[1]}</li>
       ]);
       expect(actual).to.equal(true);
     });
 
-
-    describe('urls list', () => {
-      it('should render', () => {
-        const urlKeys = Object.keys(mock.urls);
-        const actual = wrapper.containsAllMatchingElements([
-          <li key={urlKeys[0]}>
-            <span>{urlKeys[0]}:&nbsp;</span>
-            <a
-              href={mock.urls[urlKeys[0]]}
-              target='_blank'
-            >
-              {mock.urls[urlKeys[0]]}
-            </a>
-          </li>,
-          <li key={urlKeys[1]}>
-            <span>{urlKeys[1]}:&nbsp;</span>
-            <a
-              href={mock.urls[urlKeys[1]]}
-              target='_blank'
-            >
-              {mock.urls[urlKeys[1]]}
-            </a>
-          </li>
-        ]);
-        expect(actual).to.equal(true);
-      });
-
-      describe('when a url is `phone`', () => {
-        it('should render a list item without url', () => {
-          const mockPhone = '0123456789';
-          wrapper.setProps({
-            urls: {
-              phone: mockPhone
-            }
-          });
-          const actual = wrapper.containsMatchingElement(
-            <li>
-              <span>phone:&nbsp;</span>
-              <span>{mockPhone}</span>
-            </li>
-          );
-          expect(actual).to.eq(true);
-        });
-      });
-
+    it('should render <CollaboratorUrls />', () => {
+      const actual = wrapper.containsMatchingElement(
+        <CollaboratorUrls urls={props.urls} />
+      );
+      expect(actual).to.equal(true);
     });
+
   });
 });

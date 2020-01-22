@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { arrayOfStringsHasValues } from '../../utils/arrays';
+import CollaboratorUrls from './CollaboratorUrls';
 
 const CollaboratorDetails = ({
   name,
@@ -40,36 +41,7 @@ const CollaboratorDetails = ({
       )}
 
       {urls &&
-        <ul>
-          {Object.keys(urls).map(urlKey => {
-            const urlValue = urls[urlKey];
-
-            if (urlValue) {
-              return (
-                <li key={urlKey}>
-
-                  <span>{urlKey}:&nbsp;</span>
-
-                  {urlKey === 'phone' && (
-                    <span>{urlValue}</span>
-                  )}
-
-                  {urlKey !== 'phone' && (
-                    <a
-                      href={urlValue}
-                      target='_blank'
-                    >
-                      {urlValue}
-                    </a>
-                  )}
-
-                </li>
-              )
-            }
-
-            return null;
-          })}
-        </ul>
+        <CollaboratorUrls urls={urls} />
       }
 
     </div>
