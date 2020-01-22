@@ -2,6 +2,7 @@ import React from 'react';
 import Form from '../../../components/Form';
 import COLLABORATOR_FIELDS from '../../../formFields/collaborator';
 import { CREATE_COLLABORATOR } from '../../../mutations';
+import { GET_COLLABORATORS } from '../../../queries';
 
 const CollaboratorCreate = () => (
   <article className='container'>
@@ -14,6 +15,9 @@ const CollaboratorCreate = () => (
 
     <Form
       mutation={CREATE_COLLABORATOR}
+      refetchQueries={[
+        { query: GET_COLLABORATORS }
+      ]}
       fields={COLLABORATOR_FIELDS}
       baseUrl='/collaborators'
       successCopy={{

@@ -5,6 +5,7 @@ import CollaboratorCreate from './index';
 import Form from '../../../components/Form';
 import COLLABORATOR_FIELDS from '../../../formFields/collaborator';
 import { CREATE_COLLABORATOR } from '../../../mutations';
+import { GET_COLLABORATORS } from '../../../queries';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -29,6 +30,9 @@ describe('(Component) CollaboratorCreate', () => {
       const actual = wrapper.containsMatchingElement(
         <Form
           mutation={CREATE_COLLABORATOR}
+          refetchQueries={[
+            { query: GET_COLLABORATORS }
+          ]}
           fields={COLLABORATOR_FIELDS}
           baseUrl='/collaborators'
           successCopy={{
