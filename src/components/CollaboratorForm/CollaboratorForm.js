@@ -18,6 +18,7 @@ const CollaboratorForm = ({
       refetchQueries={refetchQueries}
       baseUrl='/collaborators'
       successCopy={{
+        success: isEditForm ? 'Successfully updated!' : '',
         homeLink: 'Go to Collaborators'
       }}
       isEditForm={isEditForm}

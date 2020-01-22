@@ -21,8 +21,7 @@ describe('(Component) CollaboratorForm', () => {
       mutateId: '1234',
       refetchQueries: [
         GET_COLLABORATORS
-      ],
-      isEditForm: true
+      ]
     };
 
   beforeEach(() => {
@@ -40,12 +39,36 @@ describe('(Component) CollaboratorForm', () => {
         refetchQueries={props.refetchQueries}
         baseUrl='/collaborators'
         successCopy={{
+          success: '',
           homeLink: 'Go to Collaborators'
         }}
-        isEditForm={props.isEditForm}
       />
     );
     expect(actual).to.equal(true);
+  });
+
+  describe('with props.isEditForm', () => {
+    it('should render <Form /> with correct props', () => {
+      wrapper.setProps({
+        isEditForm: true
+      });
+
+      const actual = wrapper.containsMatchingElement(
+        <Form
+          mutation={props.mutation}
+          fields={mapFieldsWithValues(COLLABORATOR_FIELDS, props.collabValues)}
+          mutateId={props.id}
+          refetchQueries={props.refetchQueries}
+          baseUrl='/collaborators'
+          successCopy={{
+            success: 'Successfully updated!',
+            homeLink: 'Go to Collaborators'
+          }}
+          isEditForm
+        />
+      );
+      expect(actual).to.equal(true);
+    });
   });
 
 });
