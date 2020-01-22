@@ -124,3 +124,17 @@ body {
 .cancel-margin {
   margin: 0;
 }
+
+.flex-root {
+  @media(min-width: $bp-sm) {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.flex-root > div {
+  @media(min-width: $bp-sm) {
+    width: 50%;
+    max-width: 50%;
+  }
+}

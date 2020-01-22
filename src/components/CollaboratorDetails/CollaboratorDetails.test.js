@@ -40,16 +40,25 @@ describe('(Component) CollaboratorDetails', () => {
       expect(actual).to.equal(true);
     });
 
-    it('should render role paragraph', () => {
-      const actual = wrapper.containsMatchingElement(
+    it('should render role', () => {
+      const actual = wrapper.containsAllMatchingElements([
+        <h4>What they do</h4>,
         <p>{props.role}</p>
-      );
+      ]);
       expect(actual).to.equal(true);
     });
 
-    it('should render about html', () => {
-      const actual = wrapper.containsMatchingElement(
+    it('should render about', () => {
+      const actual = wrapper.containsAllMatchingElements([
+        <h4>About</h4>,
         <div dangerouslySetInnerHTML={{ __html: props.about }} />
+      ]);
+      expect(actual).to.equal(true);
+    });
+
+    it('should render a heading for collabOn', () => {
+      const actual = wrapper.containsMatchingElement(
+        <h4>Collaborations</h4>
       );
       expect(actual).to.equal(true);
     });

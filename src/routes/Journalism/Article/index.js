@@ -91,22 +91,25 @@ export class Article extends React.Component {
               longHeading
             />
 
-            <div className='article-journalism-flex-root'>
+            <div className='entity-container'>
 
-              <div className='image-container'>
-                <img
-                  src={article.imageUrl}
-                  alt={`Fiona Ross - ${article.title}`}
-                />
-              </div>
+              <div className='flex-root'>
 
-              <div>
-                <p>{article.copy}</p>
-                <p><a href={article.externalLink} target='_blank'>{article.externalLink}</a></p>
+                <div className='entity-image-container'>
+                  <img
+                    src={article.imageUrl}
+                    alt={`Fiona Ross - ${article.title}`}
+                  />
+                </div>
+
+                <div>
+                  <p>{article.copy}</p>
+                  <p><a href={article.externalLink} target='_blank'>{article.externalLink}</a></p>
+                </div>
+
               </div>
 
             </div>
-
 
           </div>
         )}

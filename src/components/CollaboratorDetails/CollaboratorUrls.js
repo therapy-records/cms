@@ -1,37 +1,48 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { objectHasValues } from '../../utils/objects'
 
-const CollaboratorUrls = ({ urls }) => (
-  <ul>
-    {Object.keys(urls).map(urlKey => {
-      const urlValue = urls[urlKey];
-      const isPhone = key => key === 'phone';
+const CollaboratorUrls = ({ urls }) => {
 
-      if (urlValue) {
-        return (
-          <li key={urlKey}>
+  if (objectHasValues(urls)) {
+    return (
+      <div>
+        <h4>Links</h4>
 
-            <span>{urlKey}:&nbsp;</span>
+        <ul>
+          {Object.keys(urls).map(urlKey => {
+            const urlValue = urls[urlKey];
+            const isPhone = key => key === 'phone';
 
-            {isPhone(urlKey) ? (
-              <span>{urlValue}</span>
-            ) : (
-                <a
-                  href={urlValue}
-                  target='_blank'
-                >
-                  {urlValue}
-                </a>
-            )}
+            if (urlValue) {
+              return (
+                <li key={urlKey}>
 
-          </li>
-        )
-      }
+                  <span>{urlKey}:&nbsp;</span>
 
-      return null;
-    })}
-  </ul>
-)
+                  {isPhone(urlKey) ? (
+                    <span>{urlValue}</span>
+                  ) : (
+                      <a
+                        href={urlValue}
+                        target='_blank'
+                      >
+                        {urlValue}
+                      </a>
+                  )}
+
+                </li>
+              )
+            }
+
+            return null;
+          })}
+        </ul>
+      </div>
+    )
+  }
+  return null;
+};
 
 CollaboratorUrls.propTypes = {
   urls: PropTypes.object.isRequired

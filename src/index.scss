@@ -103,4 +103,33 @@
   }
 }
 
+.entity-container .flex-root {
+  > div {
+    &:first-child {
+      @media(min-width: $bp-md) {
+        width: 30%;
+        max-width: 30%;
+      }
+    }
+    &:last-child {
+      @media(min-width: $bp-md) {
+        width: 70%;
+        max-width: 70%;
+      }
+    }
+  }
+}
 
+.entity-container ul {
+  margin-bottom: 2em;
+}
+
+div.entity-image-container {
+  max-width: 300px;
+  margin: 0 0 2em;
+  @media(min-width: $bp-md) {
+    // max-width: 100%;
+    margin: 0 0 2em 0;
+    padding-right: 2em;
+  }
+}

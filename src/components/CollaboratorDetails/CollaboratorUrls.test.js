@@ -22,7 +22,14 @@ describe('(Component) CollaboratorUrls', () => {
     );
   });
 
-  it('should render', () => {
+  it('should render a heading', () => {
+    const actual = wrapper.containsMatchingElement(
+      <h4>Links</h4>
+    );
+    expect(actual).to.eq(true);
+  });
+
+  it('should render a list', () => {
     const urlKeys = Object.keys(props.urls);
     const actual = wrapper.containsAllMatchingElements([
       <li key={urlKeys[0]}>
@@ -62,6 +69,17 @@ describe('(Component) CollaboratorUrls', () => {
         </li>
       );
       expect(actual).to.eq(true);
+    });
+  });
+
+  describe('when the urls object has no values', () => {
+    it('should return null', () => {
+      wrapper.setProps({
+        urls: {
+          
+        }
+      });
+      expect(wrapper.type()).to.eq(null);
     });
   });
 
