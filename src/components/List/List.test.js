@@ -3,6 +3,7 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import List from './index';
 import { getFirstImageInArticle } from '../../utils/news';
+import entityHeading from '../../utils/entityHeading';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -43,7 +44,7 @@ describe('(Component) List', () => {
     expect(listItems.length).to.eq(mockData.length);
     const firstListItem = listItems.first();
     expect(firstListItem.prop('_id')).to.eq(mockData[0]._id);
-    expect(firstListItem.prop('title')).to.eq(mockData[0].title);
+    expect(firstListItem.prop('title')).to.eq(entityHeading(mockData[0]));
     expect(firstListItem.prop('imageUrl')).to.eq(mockData[0].imageUrl);
     expect(firstListItem.prop('date')).to.eq(mockData[0].date);
     expect(firstListItem.prop('route')).to.eq(props.route);

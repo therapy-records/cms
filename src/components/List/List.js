@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ListItem from './ListItem';
 import { getFirstImageInArticle } from '../../utils/news';
+import entityHeading from '../../utils/entityHeading';
 import './List.css';
 
 // TODO: refactor data models so there is no need for 
@@ -29,16 +30,13 @@ const List = ({
     <ul className={className}>
       {data.map(item => {
         const {
-          heading,
-          title,
-          name,
           date,
           releaseDate,
           imageUrl,
           avatarUrl
         } = item;
 
-        const itemTitle = heading || title || name;
+        const itemTitle = entityHeading(item);
         const itemDate = date || releaseDate;
         const itemImageUrl = itemsHaveMultipleImages ? getFirstImageInArticle(item) : (imageUrl || avatarUrl);
 
