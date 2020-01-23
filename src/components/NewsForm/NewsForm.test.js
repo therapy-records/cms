@@ -58,7 +58,7 @@ describe('(Component) NewsForm', () => {
         expect(articleHeader.length).to.eq(1);
         expect(articleHeader.prop('baseUrl')).to.eq('/news');
         expect(articleHeader.prop('article')).to.eq(props.formValues);
-        expect(articleHeader.prop('onDeleteArticle')).to.be.a('function');
+        expect(articleHeader.prop('onDeleteArticle')).to.eq(null);
         expect(articleHeader.prop('heading')).to.eq('Create News 🗞️');
         expect(articleHeader.prop('promiseLoading')).to.eq(props.promiseLoading);
         expect(articleHeader.prop('showDeleteButton')).to.eq(false);

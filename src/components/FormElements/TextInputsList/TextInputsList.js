@@ -86,7 +86,7 @@ TextInputsList.defaultProps = {
   fieldsetLegend: '',
   heading: '',
   showAddRemove: false,
-  onChange: () => { }
+  onChange: null
 };
 
 export default TextInputsList;

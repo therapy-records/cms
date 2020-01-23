@@ -115,7 +115,7 @@ ArticleHeader.propTypes = {
 
 ArticleHeader.defaultProps = {
   heading: '',
-  onDeleteArticle: () => {},
+  onDeleteArticle: null,
   promiseLoading: false,
   showEditButton: false,
   showDeleteButton: false,

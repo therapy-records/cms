@@ -58,7 +58,7 @@ export class NewsForm extends React.Component {
         <ArticleHeader
           baseUrl='/news'
           article={formValues}
-          onDeleteArticle={isEditForm ? () => onDeleteArticle(articleId) : () => {}}
+          onDeleteArticle={isEditForm ? () => onDeleteArticle(articleId) : null}
           promiseLoading={promiseLoading}
           heading={isEditForm ? `Editing ${formValues && formValues.title} 🗞️` : 'Create News 🗞️'}
           showDeleteButton={isEditForm}

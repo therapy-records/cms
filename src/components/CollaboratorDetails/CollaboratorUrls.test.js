@@ -72,7 +72,7 @@ describe('(Component) CollaboratorUrls', () => {
     });
   });
 
-  describe('when the urls object has no values', () => {
+  describe('when urls object has no values', () => {
     it('should return null', () => {
       wrapper.setProps({
         urls: {

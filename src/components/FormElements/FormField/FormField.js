@@ -98,7 +98,7 @@ FormField.defaultProps = {
   fieldsetLegend: '',
   helpText: '',
   items: [],
-  onChange: () => { },
+  onChange: null,
   error: '',
   touched: false,
   dirty: false,

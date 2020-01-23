@@ -31,7 +31,7 @@ describe('(Component) ArticleDeleteModal', () => {
           <button
             className='btn btn-danger cancel-margin'
             onClick={props.onDeleteArticle}
-          >Delete article</button>
+          >Delete</button>
         </div>
       </ReactModal>
     );

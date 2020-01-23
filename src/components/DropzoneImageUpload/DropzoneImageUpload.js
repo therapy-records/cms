@@ -253,8 +253,8 @@ DropzoneImageUpload.propTypes = {
 };
 
 DropzoneImageUpload.defaultProps = {
-  onChange: () => {},
-  onRemove: () => { },
+  onChange: null,
+  onRemove: null,
   input: {},
   required: false,
   existingImages: [],

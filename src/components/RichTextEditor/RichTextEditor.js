@@ -107,7 +107,7 @@ _RichTextEditor.defaultProps = {
   meta: {},
   value: '',
   title: '',
-  onChange: () => {},
+  onChange: null,
   name: '',
   showSingleHiddenInputValue: false
 };

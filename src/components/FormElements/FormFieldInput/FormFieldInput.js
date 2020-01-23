@@ -116,7 +116,7 @@ FormFieldInput.defaultProps = {
   minImageDimensions: {},
   fieldsetLegend: '',
   items: [],
-  onChange: () => { },
+  onChange: null,
   value: ''
 };
 

@@ -28,7 +28,7 @@ class ArticleDeleteModal extends React.Component {
           <button
             className='btn btn-danger cancel-margin'
             onClick={onDeleteArticle}
-          >Delete article</button>
+          >Delete</button>
         </div>
       </ReactModal>
     )

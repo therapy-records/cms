@@ -173,6 +173,20 @@ describe('(Component) FormFieldInput', () => {
         });
       });
 
+      describe('when field.component/type is not recognized', () => {
+        it('should return null', () => {
+          const mockField = {
+            component: 'testt',
+            type: 'test'
+          };
+
+          wrapper.setProps({ ...mockField });
+
+          expect(wrapper.type()).to.eq(null);
+        });
+      });
+
+
     });
 
   });

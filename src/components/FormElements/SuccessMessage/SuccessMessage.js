@@ -46,7 +46,7 @@ SuccessMessage.propTypes = {
 };
 
 SuccessMessage.defaultProps = {
-  onReset: () => {}
+  onReset: null
 };
 
 export default SuccessMessage;

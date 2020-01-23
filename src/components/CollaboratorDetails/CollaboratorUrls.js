@@ -34,8 +34,6 @@ const CollaboratorUrls = ({ urls }) => {
                 </li>
               )
             }
-
-            return null;
           })}
         </ul>
       </div>
