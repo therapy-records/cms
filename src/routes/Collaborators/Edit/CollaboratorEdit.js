@@ -36,7 +36,6 @@ const CollaboratorEdit = ({ match }) => {
         success: 'Successfully deleted.',
         homeLink: 'Go to Collaborators'
       }}
-      renderEditLink
     />
   );
 };

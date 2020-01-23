@@ -5,7 +5,6 @@ import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
 import CollaboratorEdit from './CollaboratorEdit';
-import SingleEntityContainer from '../../../containers/SingleEntityContainer';
 import {
   GET_COLLABORATOR,
   GET_COLLABORATORS
@@ -54,10 +53,6 @@ describe('(Component) CollaboratorEdit', () => {
   it('should render <SingleEntityContainer />', () => {
     const singleEntityContainer = wrapper.find('SingleEntityContainer');
     expect(singleEntityContainer.length).to.eq(1);
-    // expect(singleEntityContainer.prop('query')).to.eq(GET_COLLABORATOR);
-    // expect(singleEntityContainer.prop('queryVariables')).to.deep.eq({
-    //   id: props.match.params.id
-    // });
     expect(singleEntityContainer.prop('baseUrl')).to.eq('/collaborators');
     expect(singleEntityContainer.prop('entityName')).to.eq('collaborator');
     expect(singleEntityContainer.prop('id')).to.eq(props.match.params.id);
@@ -67,7 +62,6 @@ describe('(Component) CollaboratorEdit', () => {
       success: 'Successfully deleted.',
       homeLink: 'Go to Collaborators'
     });
-    expect(singleEntityContainer.prop('renderEditLink')).to.eq(true);
   });
 
   it('should render <CollaboratorForm /> from <SingleEntityContainer /> render prop ', async() => {

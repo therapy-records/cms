@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useMutation } from '@apollo/react-hooks';
 import formReducer, { initReducerState } from './reducer';
@@ -36,6 +36,12 @@ const Form = ({
     refetchQueries
   });
 
+  useEffect(() => {
+    return () => {
+      dispatch({ type: 'resetForm' });
+    };
+  }, []);
+
   const handleFieldValueChange = (fieldId, value) => {
     dispatch({
       type: 'updateFieldValue',
@@ -72,8 +78,6 @@ const Form = ({
           // removing this causes issues in unit test
         }
       )
-    } else {
-      console.log('form not valid, not submitting')
     }
   };
 
