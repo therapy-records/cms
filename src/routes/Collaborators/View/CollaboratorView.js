@@ -25,7 +25,6 @@ const CollaboratorView = ({
         success: 'Successfully deleted.',
         homeLink: 'Go to Collaborators'
       }}
-      renderEditLink
     />
   );
 };

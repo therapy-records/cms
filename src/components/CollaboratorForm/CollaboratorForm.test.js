@@ -47,10 +47,10 @@ describe('(Component) CollaboratorForm', () => {
     expect(actual).to.equal(true);
   });
 
-  describe('with props.isEditForm', () => {
+  describe('with props.isEdit', () => {
     it('should render <Form /> with correct props', () => {
       wrapper.setProps({
-        isEditForm: true
+        isEdit: true
       });
 
       const actual = wrapper.containsMatchingElement(
@@ -64,7 +64,7 @@ describe('(Component) CollaboratorForm', () => {
             success: 'Successfully updated!',
             homeLink: 'Go to Collaborators'
           }}
-          isEditForm
+          isEdit
         />
       );
       expect(actual).to.equal(true);

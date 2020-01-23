@@ -3,6 +3,7 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import SingleEntityContent from './SingleEntityContent';
 import CollaboratorDetails from '../../components/CollaboratorDetails';
+import entityHeading from '../../utils/entityHeading';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -17,7 +18,7 @@ describe('(Container Component) SingleEntityContent', () => {
         },
         render: CollaboratorDetails,
         executeMutation: sinon.spy(),
-        renderEditLink: true,
+        // isEdit: true,
         renderDeleteButton: true
       };
 
@@ -38,8 +39,8 @@ describe('(Container Component) SingleEntityContent', () => {
       expect(articleHeader.prop('article')).to.deep.eq({
         _id: props.data._id
       });
-      expect(articleHeader.prop('heading')).to.eq('test heading');
-      expect(articleHeader.prop('showEditButton')).to.eq(props.renderEditLink);
+      expect(articleHeader.prop('heading')).to.eq(entityHeading(props.data));
+      expect(articleHeader.prop('showEditButton')).to.eq(true);
       expect(articleHeader.prop('showDeleteButton')).to.eq(props.renderDeleteButton);
     });
 
@@ -51,6 +52,19 @@ describe('(Container Component) SingleEntityContent', () => {
       });
     });
 
+  });
+
+  describe('with props.isEdit', () => {
+    beforeEach(() => {
+      wrapper.setProps({
+        isEdit: true
+      });
+    });
+    it('should pass a different heading prop', () => {
+      const articleHeader = wrapper.find('ArticleHeader');
+      const expected = `Editing ${entityHeading(props.data)}`; 
+      expect(articleHeader.prop('heading')).to.eq(expected);
+    });
   });
 
   it('should render component from props.render with data from query', () => {

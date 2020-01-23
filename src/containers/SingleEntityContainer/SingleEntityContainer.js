@@ -12,7 +12,7 @@ const SingleEntityContainer = ({
   query,
   mutation,
   mutationSuccessCopy,
-  renderEditLink
+  isEdit
 }) => {
 
   return (
@@ -38,7 +38,7 @@ const SingleEntityContainer = ({
                 data={queryData}
                 executeMutation={executeMutation}
                 render={render}
-                renderEditLink={renderEditLink}
+                isEdit={isEdit}
                 renderDeleteButton
               />
             )}
@@ -61,13 +61,13 @@ SingleEntityContainer.propTypes = {
     homeLink: PropTypes.string,
     createLink: PropTypes.string
   }),
-  renderEditLink: PropTypes.bool
+  isEdit: PropTypes.bool
 };
 
 SingleEntityContainer.defaultProps = {
   queryVariables: {},
   mutationSuccessCopy: {},
-  renderEditLink: false
+  isEdit: false
 };
 
 export default SingleEntityContainer;

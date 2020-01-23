@@ -1,15 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ArticleHeader from '../../components/ArticleHeader';
+import entityHeading from '../../utils/entityHeading';
 
 const SingleEntityContent = ({
   baseUrl,
   data,
   render,
   executeMutation,
-  renderEditLink,
+  isEdit,
   renderDeleteButton
-}) => (
+}) => {
+
+  const heading = isEdit ? `Editing ${entityHeading(data)}` : entityHeading(data);
+
+  return (
     <div>
 
       <ArticleHeader
@@ -17,8 +22,8 @@ const SingleEntityContent = ({
         article={{
           _id: data._id
         }}
-        heading='test heading'
-        showEditButton={renderEditLink}
+        heading={heading}
+        showEditButton={!isEdit}
         onDeleteArticle={() => executeMutation()}
         showDeleteButton={renderDeleteButton}
       />
@@ -28,19 +33,20 @@ const SingleEntityContent = ({
       })}
 
     </div>
-);
+  );
+}
 
 SingleEntityContent.propTypes = {
   baseUrl: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
   render: PropTypes.func.isRequired,
   executeMutation: PropTypes.func.isRequired,
-  renderEditLink: PropTypes.bool,
+  isEdit: PropTypes.bool,
   renderDeleteButton: PropTypes.bool
 };
 
 SingleEntityContent.defaultProps = {
-  renderEditLink: false,
+  isEdit: false,
   renderDeleteButton: false
 };
 

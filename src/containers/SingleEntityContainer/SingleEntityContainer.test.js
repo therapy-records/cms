@@ -28,7 +28,7 @@ describe('(Container) SingleEntityContainer', () => {
       id: '1234',
       render: CollaboratorDetails,
       query: GET_COLLABORATOR,
-      renderEditLink: true,
+      isEdit: true,
       mutation: DELETE_COLLABORATOR,
       mutationSuccessCopy: {
         success: 'Successfully deleted.',
@@ -91,7 +91,7 @@ describe('(Container) SingleEntityContainer', () => {
         expect(singleEntityContent.prop('data')).to.deep.eq(mocks[0].result.data[props.entityName]);
         expect(singleEntityContent.prop('executeMutation')).to.be.a('function');
         expect(singleEntityContent.prop('render')).to.eq(props.render);
-        expect(singleEntityContent.prop('renderEditLink')).to.eq(props.renderEditLink);
+        expect(singleEntityContent.prop('isEdit')).to.eq(props.isEdit);
         expect(singleEntityContent.prop('renderDeleteButton')).to.eq(true);
       });
     });

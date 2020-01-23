@@ -19,6 +19,8 @@ const CollaboratorEdit = ({ match }) => {
       baseUrl='/collaborators'
       entityName='collaborator'
       id={id}
+      query={GET_COLLABORATOR}
+      isEdit
       render={entityData => (
         <CollaboratorForm
           mutation={EDIT_COLLABORATOR}
@@ -27,10 +29,9 @@ const CollaboratorEdit = ({ match }) => {
           refetchQueries={[
             { query: GET_COLLABORATORS }
           ]}
-          isEditForm
+          isEdit
         />
       )}
-      query={GET_COLLABORATOR}
       mutation={DELETE_COLLABORATOR}
       mutationSuccessCopy={{
         success: 'Successfully deleted.',

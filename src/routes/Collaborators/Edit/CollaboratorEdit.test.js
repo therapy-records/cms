@@ -29,7 +29,8 @@ describe('(Component) CollaboratorEdit', () => {
         params: {
           id: '1234'
         }
-      }
+      },
+      isEdit: true
     };
 
   const actions = async(wrapper, _actions) => {
@@ -62,6 +63,7 @@ describe('(Component) CollaboratorEdit', () => {
       success: 'Successfully deleted.',
       homeLink: 'Go to Collaborators'
     });
+    expect(singleEntityContainer.prop('isEdit')).to.eq(props.isEdit);
   });
 
   it('should render <CollaboratorForm /> from <SingleEntityContainer /> render prop ', async() => {
@@ -75,7 +77,7 @@ describe('(Component) CollaboratorEdit', () => {
           refetchQueries={[
             { query: GET_COLLABORATORS }
           ]}
-          isEditForm
+          isEdit
         />
       );
       expect(actual).to.equal(true);

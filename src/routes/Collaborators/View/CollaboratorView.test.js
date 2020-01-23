@@ -7,7 +7,6 @@ import { MockedProvider } from '@apollo/react-testing';
 import { GET_COLLABORATOR } from '../../../queries';
 import { DELETE_COLLABORATOR } from '../../../mutations';
 import CollaboratorView from './CollaboratorView';
-import SingleEntityContainer from '../../../containers/SingleEntityContainer';
 import CollaboratorDetails from '../../../components/CollaboratorDetails';
 import { MOCK_GET_COLLABORATOR } from '../../../mocks/collaborators.mock';
 
@@ -57,7 +56,6 @@ describe('(Component) CollaboratorView', () => {
       success: 'Successfully deleted.',
       homeLink: 'Go to Collaborators'
     });
-    expect(singleEntityContainer.prop('renderEditLink')).to.eq(true);
   });
 
   it('should render <CollaboratorDetails /> from <SingleEntityContainer /> render prop ', async() => {

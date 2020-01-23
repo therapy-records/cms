@@ -9,7 +9,7 @@ const CollaboratorForm = ({
   collabValues,
   id,
   refetchQueries,
-  isEditForm
+  isEdit
 }) => (
     <Form
       mutation={mutation}
@@ -18,10 +18,10 @@ const CollaboratorForm = ({
       refetchQueries={refetchQueries}
       baseUrl='/collaborators'
       successCopy={{
-        success: isEditForm ? 'Successfully updated!' : '',
+        success: isEdit ? 'Successfully updated!' : '',
         homeLink: 'Go to Collaborators'
       }}
-      isEditForm={isEditForm}
+      isEdit={isEdit}
     />
 );
 
@@ -30,13 +30,13 @@ CollaboratorForm.propTypes = {
   collabValues: PropTypes.object.isRequired,
   id: PropTypes.string,
   refetchQueries: PropTypes.arrayOf(PropTypes.object),
-  isEditForm: PropTypes.bool
+  isEdit: PropTypes.bool
 };
 
 CollaboratorForm.defaultProps = {
   id: '',
   refetchQueries: [],
-  isEditForm: false
+  isEdit: false
 };
 
 export default CollaboratorForm;
