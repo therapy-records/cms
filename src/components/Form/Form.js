@@ -13,9 +13,9 @@ const Form = ({
   fields,
   mutateId,
   baseUrl,
+  submitButtonCopy,
   successCopy,
-  refetchQueries,
-  isEditForm
+  refetchQueries
 }) => {
 
   const [state, dispatch] = useReducer(
@@ -81,7 +81,6 @@ const Form = ({
     }
   };
 
-  const submitButtonCopy = isEditForm ? 'Update' : 'Add';
   const showForm = !loading && !submitSuccess;
 
   return (
@@ -143,19 +142,18 @@ Form.propTypes = {
   mutation: PropTypes.object.isRequired,
   fields: PropTypes.arrayOf(PropTypes.object).isRequired,
   baseUrl: PropTypes.string.isRequired,
+  submitButtonCopy: PropTypes.string.isRequired,
   successCopy: PropTypes.shape({
     homeLink: PropTypes.string,
     createLink: PropTypes.string
   }).isRequired,
   mutateId: PropTypes.string,
-  refetchQueries: PropTypes.arrayOf(PropTypes.object),
-  isEditForm: PropTypes.bool
+  refetchQueries: PropTypes.arrayOf(PropTypes.object)
 };
 
 Form.defaultProps = {
   mutateId: null,
-  refetchQueries: [],
-  isEditForm: false
+  refetchQueries: []
 };
 
 export default Form;

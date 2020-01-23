@@ -15,6 +15,7 @@ const CollaboratorForm = ({
       mutateId={id}
       refetchQueries={refetchQueries}
       baseUrl='/collaborators'
+      submitButtonCopy={isEdit ? 'Update Collaborator' : 'Add Collaborator'}
       successCopy={{
         success: isEdit ? 'Successfully updated!' : 'Successfully created!',
         homeLink: 'Go to Collaborators',

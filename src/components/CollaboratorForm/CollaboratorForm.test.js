@@ -36,6 +36,7 @@ describe('(Component) CollaboratorForm', () => {
         mutateId={props.id}
         refetchQueries={props.refetchQueries}
         baseUrl='/collaborators'
+        submitButtonCopy='Add Collaborator'
         successCopy={{
           success: 'Successfully created!',
           homeLink: 'Go to Collaborators',
@@ -59,6 +60,7 @@ describe('(Component) CollaboratorForm', () => {
           mutateId={props.id}
           refetchQueries={props.refetchQueries}
           baseUrl='/collaborators'
+          submitButtonCopy='Update Collaborator'
           successCopy={{
             success: 'Successfully updated!',
             homeLink: 'Go to Collaborators',

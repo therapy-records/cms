@@ -68,6 +68,7 @@ describe('(Component) Form', () => {
     mutation: EDIT_COLLABORATOR,
     mutateId: '1234',
     baseUrl: '/test',
+    submitButtonCopy: 'Submit this form',
     successCopy: {
       homeLink: 'Go to Collaborators',
       createLink: 'Create another Collaborator'
@@ -120,7 +121,7 @@ describe('(Component) Form', () => {
           const actual = wrapper.containsMatchingElement(
             <input
               type='submit'
-              value='Add'
+              value={props.submitButtonCopy}
             />
           );
           expect(actual).to.equal(true);
@@ -132,7 +133,7 @@ describe('(Component) Form', () => {
               <input
                 type='submit'
                 disabled
-                value='Add'
+                value={props.submitButtonCopy}
               />
             );
             expect(actual).to.equal(true);
@@ -146,35 +147,13 @@ describe('(Component) Form', () => {
               <input
                 type='submit'
                 disabled={false}
-                value='Add'
+                value={props.submitButtonCopy}
               />
             );
             expect(actual).to.equal(true);
           });
         });
 
-        describe('when it\'s an `edit` form', () => {
-          beforeEach(() => {
-            wrapper = mount(
-              <BrowserRouter>
-                <MockedProvider mocks={mocks} addTypename={false}>
-                  <Form {...props} isEditForm />
-                </MockedProvider>
-              </BrowserRouter>
-            );
-          });
-
-          it('should render submit button copy', () => {
-            const actual = wrapper.containsMatchingElement(
-              <input
-                type='submit'
-                value='Update'
-              />
-            );
-            expect(actual).to.equal(true);
-          });
-
-        });
       });
 
     });
