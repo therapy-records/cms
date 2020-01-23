@@ -14,6 +14,8 @@ import {
   DELETE_COLLABORATOR
 } from '../../../mutations';
 import CollaboratorForm from '../../../components/CollaboratorForm';
+import COLLABORATOR_FIELDS from '../../../formFields/collaborator';
+import mapFieldsWithValues from '../../../utils/form-field-mappings';
 import { MOCK_GET_COLLABORATOR } from '../../../mocks/collaborators.mock';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -72,7 +74,7 @@ describe('(Component) CollaboratorEdit', () => {
       const actual = wrapper.containsMatchingElement(
         <CollaboratorForm
           mutation={EDIT_COLLABORATOR}
-          collabValues={mocks[0].result.data.collaborator}
+          fields={mapFieldsWithValues(COLLABORATOR_FIELDS, mocks[0].result.data.collaborator)}
           id={props.match.params.id}
           refetchQueries={[
             { query: GET_COLLABORATORS }

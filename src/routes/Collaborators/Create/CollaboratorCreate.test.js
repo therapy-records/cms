@@ -2,7 +2,7 @@ import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import CollaboratorCreate from './index';
-import Form from '../../../components/Form';
+import CollaboratorForm from '../../../components/CollaboratorForm';
 import COLLABORATOR_FIELDS from '../../../formFields/collaborator';
 import { CREATE_COLLABORATOR } from '../../../mutations';
 import { GET_COLLABORATORS } from '../../../queries';
@@ -28,17 +28,13 @@ describe('(Component) CollaboratorCreate', () => {
 
     it('should render <CollaboratorForm />', () => {
       const actual = wrapper.containsMatchingElement(
-        <Form
+        <CollaboratorForm
           mutation={CREATE_COLLABORATOR}
           refetchQueries={[
             { query: GET_COLLABORATORS }
           ]}
           fields={COLLABORATOR_FIELDS}
           baseUrl='/collaborators'
-          successCopy={{
-            homeLink: 'Go to Collaborators',
-            createLink: 'Create another Collaborator'
-          }}
         />
       );
       expect(actual).to.equal(true);

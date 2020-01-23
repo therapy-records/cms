@@ -1,25 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Form from '../Form';
-import COLLABORATOR_FIELDS from '../../formFields/collaborator';
-import mapFieldsWithValues from '../../utils/form-field-mappings';
 
 const CollaboratorForm = ({
   mutation,
-  collabValues,
+  fields,
   id,
   refetchQueries,
   isEdit
 }) => (
     <Form
       mutation={mutation}
-      fields={mapFieldsWithValues(COLLABORATOR_FIELDS, collabValues)}
+      fields={fields}
       mutateId={id}
       refetchQueries={refetchQueries}
       baseUrl='/collaborators'
       successCopy={{
-        success: isEdit ? 'Successfully updated!' : '',
-        homeLink: 'Go to Collaborators'
+        success: isEdit ? 'Successfully updated!' : 'Successfully created!',
+        homeLink: 'Go to Collaborators',
+        createLink: isEdit ? 'Create a Collaborator' : 'Create another Collaborator'
       }}
       isEdit={isEdit}
     />
@@ -27,7 +26,7 @@ const CollaboratorForm = ({
 
 CollaboratorForm.propTypes = {
   mutation: PropTypes.object.isRequired,
-  collabValues: PropTypes.object.isRequired,
+  fields: PropTypes.arrayOf(PropTypes.object).isRequired,
   id: PropTypes.string,
   refetchQueries: PropTypes.arrayOf(PropTypes.object),
   isEdit: PropTypes.bool

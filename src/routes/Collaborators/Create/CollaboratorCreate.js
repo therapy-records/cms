@@ -1,8 +1,8 @@
 import React from 'react';
-import Form from '../../../components/Form';
 import COLLABORATOR_FIELDS from '../../../formFields/collaborator';
 import { CREATE_COLLABORATOR } from '../../../mutations';
 import { GET_COLLABORATORS } from '../../../queries';
+import CollaboratorForm from '../../../components/CollaboratorForm';
 
 const CollaboratorCreate = () => (
   <article className='container'>
@@ -13,17 +13,13 @@ const CollaboratorCreate = () => (
 
     <div className='col-clear' />
 
-    <Form
+    <CollaboratorForm
       mutation={CREATE_COLLABORATOR}
       refetchQueries={[
         { query: GET_COLLABORATORS }
       ]}
       fields={COLLABORATOR_FIELDS}
       baseUrl='/collaborators'
-      successCopy={{
-        homeLink: 'Go to Collaborators',
-        createLink: 'Create another Collaborator'
-      }}
     />
 
   </article>
