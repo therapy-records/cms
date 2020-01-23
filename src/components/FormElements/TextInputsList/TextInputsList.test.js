@@ -30,8 +30,7 @@ describe('(Component) TextInputsList', () => {
         type: 'email',
         placeholder: 'test',
       }
-    ],
-    showAddRemove: true
+    ]
   };
 
   beforeEach(() => {
@@ -40,6 +39,11 @@ describe('(Component) TextInputsList', () => {
     );
   });
 
+  it('should render correct container class name', () => {
+    expect(wrapper.find('.text-inputs-list').length).to.eq(1);
+  });
+
+
   it('should render a heading', () => {
     const actual = wrapper.containsMatchingElement(
       <h5>{props.heading}</h5>
@@ -47,48 +51,61 @@ describe('(Component) TextInputsList', () => {
     expect(actual).to.eq(true);
   });
 
+  describe('with props.showAddRemove', () => {
+    beforeEach(() => {
+      wrapper.setProps({
+        showAddRemove: true
+      });
+    });
 
-  it('should render a list of inputs and `remove` button', () => {
-    const actual = wrapper.containsAllMatchingElements([
-      <li key={0}>
-        <input
-          id={`${props.name}.${props.items[0].id}`}
-          name={`${props.name}.${props.items[0].id}`}
-          type={props.items[0].type}
-          value={props.items[0].value}
-          placeholder={props.items[0].placeholder}
-        />
-        <button>Remove</button>
-      </li>,
-      <li key={1}>
-        <input
-          id={`${props.name}.${props.items[1].id}`}
-          name={`${props.name}.${props.items[1].id}`}
-          type={props.items[1].type}
-          value={props.items[1].value}
-          placeholder={props.items[1].placeholder}
-        />
-        <button>Remove</button>
-      </li>,
-      <li key={2}>
-        <input
-          id={`${props.name}.2`}
-          name={`${props.name}.2`}
-          type={props.items[2].type}
-          value={props.items[2].value}
-          placeholder={props.items[2].placeholder}
-        />
-        <button>Remove</button>
-      </li>
-    ]);
-    expect(actual).to.eq(true);
-  });
+    it('should render correct container class name', () => {
+      expect(wrapper.find('.text-inputs-list').length).to.eq(1);
+      expect(wrapper.find('.text-inputs-list-with-add-remove').length).to.eq(1);
+    });
 
-  it('should render an `add` button', () => {
-    const actual = wrapper.containsMatchingElement(
-      <button>Add</button>
-    );
-    expect(actual).to.eq(true);
+    it('should render a list of inputs and `remove` button', () => {
+      const actual = wrapper.containsAllMatchingElements([
+        <li key={0}>
+          <input
+            id={`${props.name}.${props.items[0].id}`}
+            name={`${props.name}.${props.items[0].id}`}
+            type={props.items[0].type}
+            value={props.items[0].value}
+            placeholder={props.items[0].placeholder}
+          />
+          <button>Remove</button>
+        </li>,
+        <li key={1}>
+          <input
+            id={`${props.name}.${props.items[1].id}`}
+            name={`${props.name}.${props.items[1].id}`}
+            type={props.items[1].type}
+            value={props.items[1].value}
+            placeholder={props.items[1].placeholder}
+          />
+          <button>Remove</button>
+        </li>,
+        <li key={2}>
+          <input
+            id={`${props.name}.2`}
+            name={`${props.name}.2`}
+            type={props.items[2].type}
+            value={props.items[2].value}
+            placeholder={props.items[2].placeholder}
+          />
+          <button>Remove</button>
+        </li>
+      ]);
+      expect(actual).to.eq(true);
+    });
+
+    it('should render an `add` button', () => {
+      const actual = wrapper.containsMatchingElement(
+        <button>Add</button>
+      );
+      expect(actual).to.eq(true);
+    });
+
   });
 
 });

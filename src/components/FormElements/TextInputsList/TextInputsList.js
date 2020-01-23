@@ -26,7 +26,7 @@ const TextInputsList = ({
 
   const { listItems } = state;
 
-  const containerClassName = showAddRemove ? 'text-inputs-list-with-add-remove' : 'text-inputs-list';
+  const containerClassName = showAddRemove ? 'text-inputs-list text-inputs-list-with-add-remove' : 'text-inputs-list';
 
   return (
     <div className={containerClassName}>

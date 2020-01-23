@@ -28,15 +28,18 @@
   label {
     font-size: 1em;
   }
-}
 
-.text-inputs-list-with-add-remove {
-  li {
-    display: flex;
-    flex-direction: row;
-    button {
-      margin-bottom: 0;
-      margin-left: 1em;
+  &.text-inputs-list-with-add-remove {
+    li {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      padding: 0;
+      button {
+        margin-bottom: 0;
+        margin-left: 1em;
+      }
     }
   }
 }
+

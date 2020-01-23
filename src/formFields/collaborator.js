@@ -11,7 +11,7 @@ const COLLABORATOR_FIELDS = [
     id: 'role',
     type: 'text',
     component: 'TextInput',
-    label: 'Role',
+    label: 'What they do',
     placeholder: 'e.g Saxophonist',
     required: true
   },
@@ -49,7 +49,7 @@ const COLLABORATOR_FIELDS = [
     id: 'urls',
     type: 'arrayOfObjects',
     component: 'TextInputsList',
-    heading: 'URLs',
+    heading: 'Links',
     items: [
       {
         label: 'Website',
