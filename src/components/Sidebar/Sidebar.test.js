@@ -209,6 +209,19 @@ describe('(Component) Sidebar', () => {
       expect(actual).to.eq(true);
     });
 
+    it('should render a link to collaborators', () => {
+      const actual = wrapper.containsMatchingElement(
+        <NavLink
+          to='/collaborators'
+          activeClassName='route--active'
+          onClick={wrapper.instance().handleOnClickNavItem}
+        >
+          🌈 Collaborators
+        </NavLink>
+      );
+      expect(actual).to.eq(true);
+    });
+
     it('should render a link to press', () => {
       const actual = wrapper.containsMatchingElement(
         <NavLink
@@ -230,19 +243,6 @@ describe('(Component) Sidebar', () => {
           onClick={wrapper.instance().handleOnClickNavItem}
         >
           🗓️ Gigs
-        </NavLink>
-      );
-      expect(actual).to.eq(true);
-    });
-
-    it('should render a link to collaborators', () => {
-      const actual = wrapper.containsMatchingElement(
-        <NavLink
-          to='/collaborators'
-          activeClassName='route--active'
-          onClick={wrapper.instance().handleOnClickNavItem}
-        >
-          🌈 Collaborators
         </NavLink>
       );
       expect(actual).to.eq(true);
