@@ -6,7 +6,7 @@ import { BrowserRouter, Link } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
 import CollaboratorsHome from './index';
 import { GET_COLLABORATORS } from '../../../queries';
-import List from '../../../components/List';
+import SortableList from '../../../components/SortableList';
 import { MOCK_GET_COLLABORATORS } from '../../../mocks/collaborators.mock';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -58,15 +58,14 @@ describe('(Component) CollaboratorsHome', () => {
     expect(queryContainer.prop('entityName')).to.eq('collaborators');
   });
 
-  it('should render <List /> from <SingleEntityContainer /> render prop', async() => {
+  it('should render <SortableList /> from <SingleEntityContainer /> render prop', async() => {
     await actions(wrapper, () => {
       wrapper.update();
 
       const actual = wrapper.containsMatchingElement(
-        <List
-          data={mocks[0].result.data.collaborators}
+        <SortableList
+          items={mocks[0].result.data.collaborators}
           route='collaborators'
-          columns
         />
       );
       expect(actual).to.equal(true);

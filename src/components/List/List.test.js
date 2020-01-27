@@ -2,8 +2,9 @@ import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import List from './index';
-import { getFirstImageInArticle } from '../../utils/news';
-import entityHeading from '../../utils/entityHeading';
+import listItemPropsHandler from '../../utils/list-item-props-handler';
+// import { getFirstImageInArticle } from '../../utils/news';
+// import entityHeading from '../../utils/entityHeading';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -39,21 +40,6 @@ describe('(Component) List', () => {
     );
   });
 
-  it('should render multiple <ListItem />', () => {
-    const listItems = wrapper.find('ListItem');
-    expect(listItems.length).to.eq(mockData.length);
-    const firstListItem = listItems.first();
-    expect(firstListItem.prop('_id')).to.eq(mockData[0]._id);
-    expect(firstListItem.prop('title')).to.eq(entityHeading(mockData[0]));
-    expect(firstListItem.prop('imageUrl')).to.eq(mockData[0].imageUrl);
-    expect(firstListItem.prop('date')).to.eq(mockData[0].date);
-    expect(firstListItem.prop('route')).to.eq(props.route);
-    expect(firstListItem.prop('onItemClick')).to.be.a('function');
-    expect(firstListItem.prop('onViewButtonClick')).to.be.a('function');
-    expect(firstListItem.prop('onEditButtonClick')).to.be.a('function');
-    expect(firstListItem.prop('cardDesign')).to.eq(props.columns);
-  });
-
   describe('when `columns` prop is passed', () => {
     it('should add correct className to UL container', () => {
       wrapper.setProps({
@@ -64,15 +50,30 @@ describe('(Component) List', () => {
     });
   });
 
-  describe('when `itemsHaveMultipleImages` prop is passed', () => {
-    it('should render correct image from getFirstImageInArticle util function', () => {
-      wrapper.setProps({
-        itemsHaveMultipleImages: true
-      });
-      const listItems = wrapper.find('ListItem');
-      const firstListItem = listItems.first();
-      expect(firstListItem.prop('imageUrl')).to.eq(getFirstImageInArticle(firstListItem));
-    });
+  it('should render multiple <ListItem />', () => {
+    const listItems = wrapper.find('ListItem');
+    expect(listItems.length).to.eq(mockData.length);
+    const firstListItem = listItems.first();
+    expect(firstListItem.prop('_id')).to.eq(mockData[0]._id);
+    expect(firstListItem.prop('title')).to.eq(
+      listItemPropsHandler({ item: mockData[0] }).title
+    );
+    expect(firstListItem.prop('imageUrl')).to.eq(
+      listItemPropsHandler({ item: mockData[0] }).imageUrl
+    );
+    expect(firstListItem.prop('date')).to.eq(
+      listItemPropsHandler({ item: mockData[0] }).date
+    );
+    expect(firstListItem.prop('route')).to.eq(
+      listItemPropsHandler({
+        item: mockData[0],
+        route: props.route
+      }).route
+    );
+
+    expect(firstListItem.prop('onItemClick')).to.be.a('function');
+    expect(firstListItem.prop('onViewButtonClick')).to.be.a('function');
+    expect(firstListItem.prop('onEditButtonClick')).to.be.a('function');
   });
 
   describe('<ListItem /> click events/props', () => {

@@ -1,15 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ListItem from './ListItem';
-import { getFirstImageInArticle } from '../../utils/news';
-import entityHeading from '../../utils/entityHeading';
+import listItemPropsHandler from '../../utils/list-item-props-handler';
 import './List.css';
-
-// TODO: refactor data models so there is no need for 
-// heading || title || name
-// date || releaseDate
-// imageUrl || avatarUrl
-// etc.
 
 const List = ({
   data,
@@ -28,33 +21,20 @@ const List = ({
 
   return (
     <ul className={className}>
-      {data.map(item => {
-        const {
-          date,
-          releaseDate,
-          imageUrl,
-          avatarUrl
-        } = item;
-
-        const itemTitle = entityHeading(item);
-        const itemDate = date || releaseDate;
-        const itemImageUrl = itemsHaveMultipleImages ? getFirstImageInArticle(item) : (imageUrl || avatarUrl);
-
-        return (
-          <ListItem
-            key={item._id}
-            _id={item._id}
-            title={itemTitle}
-            imageUrl={itemImageUrl}
-            date={itemDate}
-            route={route}
-            onItemClick={() => onItemClick && onItemClick(item)}
-            onViewButtonClick={() => onViewButtonClick && onViewButtonClick(item)}
-            onEditButtonClick={() => onEditButtonClick && onEditButtonClick(item)}
-            cardDesign={columns}
-          />
-        );
-      })}
+      {data.map(item => (
+        <ListItem
+          key={item._id}
+          {...listItemPropsHandler({
+            item,
+            route,
+            itemsHaveMultipleImages,
+            cardDesign: columns
+          })}
+          onItemClick={() => onItemClick && onItemClick(item)}
+          onViewButtonClick={() => onViewButtonClick && onViewButtonClick(item)}
+          onEditButtonClick={() => onEditButtonClick && onEditButtonClick(item)}
+        />
+      ))}
     </ul>
   );
 };

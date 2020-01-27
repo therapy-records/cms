@@ -4,6 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import ListItem from './ListItem';
+import DragHandle from '../DragHandle';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -18,12 +19,20 @@ describe('(Component) ListItem', () => {
         onItemClick: () => {},
         onViewButtonClick: () => {},
         onEditButtonClick: () => {},
+        isDraggable: true
       }
 
   beforeEach(() => {
     wrapper = shallow(
       <ListItem {...props} />
     );
+  });
+
+  it('should render <DragHandle />', () => {
+    const actual = wrapper.containsMatchingElement(
+      <DragHandle />
+    );
+    expect(actual).to.eq(true);
   });
 
   it('should render an image', () => {

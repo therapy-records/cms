@@ -2,8 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import QueryContainer from '../../../containers/QueryContainer';
 import { GET_COLLABORATORS } from '../../../queries';
-import CollaboratorsList from '../../../components/CollaboratorsList';
+// import CollaboratorsList from '../../../components/CollaboratorsList';
 // import List from '../../../components/List'; 
+import SortableList from '../../../components/SortableList'; 
 
 const CollaboratorsHome = () => (
   <div className='container'>
@@ -17,13 +18,27 @@ const CollaboratorsHome = () => (
       </div>
     </div>
 
-    <QueryContainer
+    {/*
+      <QueryContainer
       query={GET_COLLABORATORS}
       entityName='collaborators'
       render={queryData => (
         <CollaboratorsList items={queryData} />
       )}
     />
+    */}
+
+    <QueryContainer
+      query={GET_COLLABORATORS}
+      entityName='collaborators'
+      render={queryData => (
+        <SortableList
+          items={queryData}
+          route='collaborators'
+        />
+      )}
+    />
+
 
   </div>
 )

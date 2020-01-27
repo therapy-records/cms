@@ -2,13 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import { SortableHandle } from 'react-sortable-hoc';
-
+import DragHandle from '../DragHandle';
 import './ListItem.css';
-
-const DragHandle = SortableHandle(() => (
-  <div className='btn-burger btn-draggable'>&#9776;</div>
-));
 
 const ListItem = ({
   _id,
@@ -19,7 +14,8 @@ const ListItem = ({
   onItemClick,
   onViewButtonClick,
   onEditButtonClick,
-  cardDesign
+  cardDesign,
+  isDraggable
 }) => {
 
   let buttonClassName = 'btn ';
@@ -32,7 +28,7 @@ const ListItem = ({
   return (
     <li className={containerClassName}>
 
-      <DragHandle />
+      {isDraggable && <DragHandle />}
 
       <div className='img-container'>
         <img src={imageUrl} alt={title} />
@@ -87,7 +83,8 @@ ListItem.propTypes = {
   onItemClick: PropTypes.func,
   onViewButtonClick: PropTypes.func,
   onEditButtonClick: PropTypes.func,
-  cardDesign: PropTypes.bool
+  cardDesign: PropTypes.bool,
+  isDraggable: PropTypes.bool
 };
 
 ListItem.defaultProps = {
@@ -95,7 +92,8 @@ ListItem.defaultProps = {
   onItemClick: null,
   onViewButtonClick: null,
   onEditButtonClick: null,
-  cardDesign: false
+  cardDesign: false,
+  isDraggable: false
 };
 
 export default ListItem;
