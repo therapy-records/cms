@@ -108,6 +108,10 @@ input[type="submit"] {
   }
 }
 
+.btn-draggable {
+  cursor: move;
+}
+
 .btn-sm {
   font-size: .8em;
   padding-top: .6em;

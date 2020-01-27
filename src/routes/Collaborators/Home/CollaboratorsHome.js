@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import QueryContainer from '../../../containers/QueryContainer';
 import { GET_COLLABORATORS } from '../../../queries';
-
-import List from '../../../components/List';
+import CollaboratorsList from '../../../components/CollaboratorsList';
+// import List from '../../../components/List'; 
 
 const CollaboratorsHome = () => (
   <div className='container'>
@@ -21,11 +21,7 @@ const CollaboratorsHome = () => (
       query={GET_COLLABORATORS}
       entityName='collaborators'
       render={queryData => (
-        <List
-          data={queryData}
-          route='collaborators'
-          columns
-        />
+        <CollaboratorsList items={queryData} />
       )}
     />
 

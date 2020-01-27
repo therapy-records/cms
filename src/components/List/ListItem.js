@@ -2,7 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import { SortableHandle } from 'react-sortable-hoc';
+
 import './ListItem.css';
+
+const DragHandle = SortableHandle(() => (
+  <div className='btn-burger btn-draggable'>&#9776;</div>
+));
 
 const ListItem = ({
   _id,
@@ -25,6 +31,8 @@ const ListItem = ({
 
   return (
     <li className={containerClassName}>
+
+      <DragHandle />
 
       <div className='img-container'>
         <img src={imageUrl} alt={title} />
