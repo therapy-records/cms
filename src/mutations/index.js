@@ -32,3 +32,12 @@ export const DELETE_COLLABORATOR = gql`
     }
   }
 `;
+
+export const EDIT_COLLABORATORS_ORDER_NUMBERS = gql`
+  mutation($input: CollaboratorOrderNumbersInput) {
+    editCollaboratorOrderNumbers(input: $input){
+      orderNumber,
+      _id
+    }
+  }
+`;

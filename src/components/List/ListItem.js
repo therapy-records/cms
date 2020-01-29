@@ -18,12 +18,16 @@ const ListItem = ({
   isDraggable
 }) => {
 
-  let buttonClassName = 'btn ';
+  let buttonClassName = 'btn';
   if (cardDesign) {
-    buttonClassName += 'btn-xs';
+    buttonClassName += ' btn-xs';
   }
 
-  const containerClassName = cardDesign ? 'list-item-card' : 'list-item-row';
+  let containerClassName = cardDesign ? 'list-item-card' : 'list-item-row';
+
+  if (isDraggable) {
+    containerClassName += ' list-item-card-is-draggable'
+  }
 
   return (
     <li className={containerClassName}>

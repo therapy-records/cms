@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { SortableContainer } from 'react-sortable-hoc';
-import arrayMove from 'array-move';
 import SortableItem from './SortableItem';
+import './SortableList.css';
 
 export const SortableListContainer = SortableContainer(({
   children,
   sortingActive
 }) => {
-  let className = 'list list-with-columns';
+  let className = 'list list-with-columns sortable-list';
   if (sortingActive) {
     className = `${className} sortable-list-active`;
   }
@@ -24,11 +24,13 @@ SortableListContainer.propTypes = {
   children: PropTypes.arrayOf(PropTypes.element).isRequired
 };
 
+
 const SortableListComponent = ({
   items,
-  route
+  route,
+  onSortingUpdated
 }) => {
-  const [ listItems, setListItems ] = useState(items);
+
   const [ sortingActive, setSortingActive ] = useState(false);
 
   const onSortStart = () => {
@@ -36,10 +38,8 @@ const SortableListComponent = ({
   }
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
-    setListItems(
-      arrayMove(listItems, oldIndex, newIndex)
-    )
     setSortingActive(false);
+    onSortingUpdated(oldIndex, newIndex);
   }
 
   return (
@@ -52,7 +52,7 @@ const SortableListComponent = ({
       helperClass='sortable-list-active-item'
       sortingActive={sortingActive}
     >
-      {listItems.map((item, index) => {
+      {items.map((item, index) => {
         return (
           <SortableItem
             key={`item-${item._id}`}
@@ -67,11 +67,11 @@ const SortableListComponent = ({
     </SortableListContainer>
   );
 }
-SortableListComponent.componentName = 'SortableListContainer';
 
 SortableListComponent.propTypes = {
   items: PropTypes.array.isRequired,
-  route: PropTypes.string.isRequired
+  route: PropTypes.string.isRequired,
+  onSortingUpdated: PropTypes.func.isRequired
 };
 
 export default SortableListComponent;

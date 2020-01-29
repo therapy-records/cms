@@ -11,8 +11,8 @@ export const MOCK_GET_COLLABORATORS = {
   result: {
     data: {
       collaborators: [
-        { _id: 'abc1', name: 'test', avatarUrl: 'test.com' },
-        { _id: 'abc2', name: 'testing', avatarUrl: 'test.com' }
+        { _id: 'abc1', name: 'test', avatarUrl: 'test.com', orderNumber: 1 },
+        { _id: 'abc2', name: 'testing', avatarUrl: 'test.com', orderNumber: 2 }
       ]
     }
   }

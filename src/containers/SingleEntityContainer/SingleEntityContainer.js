@@ -30,7 +30,6 @@ const SingleEntityContainer = ({
               id
             }}
             successCopy={mutationSuccessCopy}
-            entityName={entityName}
             baseUrl={baseUrl}
             render={({ executeMutation }) => (
               <SingleEntityContent

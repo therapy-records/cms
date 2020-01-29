@@ -7,7 +7,6 @@ import SuccessMessage from '../../components/FormElements/SuccessMessage';
 
 const MutationContainer = ({
   baseUrl,
-  entityName,
   mutation,
   render,
   mutationVariables,
@@ -64,7 +63,6 @@ const MutationContainer = ({
 
 MutationContainer.propTypes = {
   baseUrl: PropTypes.string.isRequired,
-  entityName: PropTypes.string.isRequired,
   mutation: PropTypes.object.isRequired,
   render: PropTypes.func.isRequired,
   mutationVariables: PropTypes.object,

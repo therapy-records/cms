@@ -27,6 +27,32 @@ describe('(Component) ListItem', () => {
       <ListItem {...props} />
     );
   });
+  
+  describe('container className', () => {
+
+    it('should have correct default className', () => {
+      const li = wrapper.find('li');
+      expect(li.hasClass('list-item-row')).to.eq(true);
+    });
+
+    describe('with cardDesign prop', () => {
+      it('should add className', () => {
+        wrapper.setProps({
+          cardDesign: true
+        });
+        const li = wrapper.find('li');
+        expect(li.hasClass('list-item-card')).to.eq(true);
+      });
+    });
+
+    describe('with isDraggable prop', () => {
+      it('should add className', () => {
+        const li = wrapper.find('li');
+        expect(li.hasClass('list-item-card-is-draggable')).to.eq(true);
+      });
+    });
+
+  });
 
   it('should render <DragHandle />', () => {
     const actual = wrapper.containsMatchingElement(
@@ -82,12 +108,10 @@ describe('(Component) ListItem', () => {
   });
 
   describe('with `cardDesign` prop', () => {
-    it('should add correct classNames', () => {
+    it('should add correct classNames to buttons', () => {
       wrapper.setProps({
         cardDesign: true
       });
-      const li = wrapper.find('li');
-      expect(li.hasClass('list-item-card')).to.eq(true);
 
       const btnsContainer = wrapper.find('.btns-container');
       const viewLink = btnsContainer.find('Link').first();

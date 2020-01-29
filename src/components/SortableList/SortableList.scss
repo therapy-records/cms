@@ -1,0 +1,22 @@
+.sortable-list {
+  border-top: dashed 3px #CCC;
+  border-right: dashed 3px #CCC;
+  border-left: dashed 3px #CCC;
+  .list-item-card-is-draggable {
+    border-bottom: dashed 3px #CCC;
+    &:nth-child(3n+1) {
+      border-right: dashed 3px #CCC;
+    }
+    &:nth-child(3n+2) {
+      border-right: dashed 3px #CCC;
+    }
+  }
+}
+
+.sortable-list-active {
+  user-select: none;
+}
+
+.sortable-list-active-item {
+  list-style-type: none;
+}

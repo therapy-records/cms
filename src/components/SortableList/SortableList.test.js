@@ -26,7 +26,8 @@ describe('(Component) SortableList', () => {
             date: '2020-01-01T11:17:02.883Z'
           }
         ],
-        route: 'test'
+        route: 'test',
+        onSortingUpdated: () => {}
       }
 
   beforeEach(() => {
@@ -47,7 +48,7 @@ describe('(Component) SortableList', () => {
       )
       const ul = wrapper.find('ul');
       expect(ul.length).to.eq(1);
-      expect(ul.hasClass('list list-with-columns sortable-list-active')).to.eq(true);
+      expect(ul.hasClass('list list-with-columns sortable-list sortable-list-active')).to.eq(true);
     });
   });
 

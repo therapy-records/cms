@@ -30,7 +30,6 @@ describe('(Container) MutationContainer', () => {
   let wrapper,
       props = {
         baseUrl: '/collaborators',
-        entityName: 'collaborator',
         mutation: DELETE_COLLABORATOR,
         mutationVariables: {
           id: '1234'

@@ -76,7 +76,6 @@ describe('(Container) SingleEntityContainer', () => {
         expect(mutationContainer.prop('mutationVariables')).to.deep.eq({
           id: props.id
         });
-        expect(mutationContainer.prop('entityName')).to.eq('collaborator');
         expect(mutationContainer.prop('baseUrl')).to.eq(props.baseUrl);
         expect(mutationContainer.prop('successCopy')).to.deep.eq(props.mutationSuccessCopy);
       });
