@@ -62,71 +62,44 @@ describe('(Component) CollaboratorsHome', () => {
     });
   });
 
-  it('should render a page title from <MutationContainer /> render prop', async() => {
+  it('should render <CollaboratorsHomeContent /> from <MutationContainer /> render prop', async() => {
     await actions(wrapper, () => {
       wrapper.update();
 
-      const actual = wrapper.containsMatchingElement(
-        <h2>Collaborators 🌈</h2>
-      );
-      expect(actual).to.equal(true);
+      const collaboratorsHomeContent = wrapper.find('CollaboratorsHomeContent');
+      expect(collaboratorsHomeContent.length).to.eq(1);
+      expect(collaboratorsHomeContent.prop('listItems')).to.deep.eq(mocks[0].result.data.collaborators);
+      expect(collaboratorsHomeContent.prop('executeMutation')).to.be.a('function');
+      expect(collaboratorsHomeContent.prop('onListOrderChanged')).to.be.a('function');
     });
   });
 
-  it('should render a button to change order from <MutationContainer /> render prop', async() => {
-    await actions(wrapper, () => {
-      wrapper.update();
-
-      const button = wrapper.find('button').first();
-      expect(button.text()).to.eq('Change order');
-    });
-  });
-
-
-  it('should render a link to create from <MutationContainer /> render prop', async() => {
-    await actions(wrapper, () => {
-      wrapper.update();
-
-      const actual = wrapper.containsMatchingElement(
-        <Link to='collaborators/create'>Create</Link>
-      );
-      expect(actual).to.equal(true);
-    });
-  });
-
-  it('should render <CollaboratorsList /> from <MutationContainer /> render prop', async() => {
-    await actions(wrapper, () => {
-      wrapper.update();
-
-      const collaboratorsList = wrapper.find('CollaboratorsList');
-      expect(collaboratorsList.length).to.eq(1);
-      expect(collaboratorsList.prop('listItems')).to.deep.eq(mocks[0].result.data.collaborators);
-      expect(collaboratorsList.prop('showSortableList')).to.eq(false);
-      expect(collaboratorsList.prop('onOrderChanged')).to.be.a('function');
-    });
-  });
-
-  describe('when `order` button is clicked', () => {
-
-    it('should change the button text', async() => {
+  describe('when <CollaboratorsHomeContent /> onListOrderChanged prop is called', () => {
+    it('should set the updated array (simplified) in <MutationContainer /> mutationVariables prop', async() => {
       await actions(wrapper, () => {
         wrapper.update();
-        const button = wrapper.find('button').first();
-        button.simulate('click');
-        expect(button.text()).to.eq('Update order');
-      });
-    });
+      
+        const collaboratorsHomeContent = wrapper.find('CollaboratorsHomeContent');
+        const mockListOrderArray = [
+          { name: 'a', orderNumber: '1', _id: '123' },
+          { name: 'b', orderNumber: '2', _id: '456' }
+        ];
 
-    it('should change <CollaboratorsList /> showSortableList prop', async() => {
-      await actions(wrapper, () => {
+        collaboratorsHomeContent.prop('onListOrderChanged')(mockListOrderArray);
         wrapper.update();
-        const button = wrapper.find('button').first();
-        button.simulate('click');
-        const collaboratorsList = wrapper.find('CollaboratorsList');
-        expect(collaboratorsList.prop('showSortableList')).to.eq(true);
-      });
-    });
 
+        const mutationContainer = wrapper.find('MutationContainer');
+        expect(mutationContainer.prop('mutationVariables')).to.deep.eq({
+          input: {
+            collaborators: [
+              { _id: '123', orderNumber: '1' },
+              { _id: '456', orderNumber: '2' }
+            ]
+          }
+        });
+      });
+
+    });
   });
 
 });
