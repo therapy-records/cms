@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import './StickyError.css';
 
 const StickyError = ({children}) => (
-  <div className='sticky-new'>
+  <div className='sticky-error'>
     <div className='inner'>
       {children}
     </div>
