@@ -37,6 +37,14 @@ describe('(Component) Datepicker', () => {
     expect(actual).to.equal(true);
   });
 
+  describe('when there is no props.initTime', () => {
+    it('should render the correct `moment` prop to <InputMoment />', () => {
+      wrapper.setProps({ initTime: null });
+      const inputMoment = wrapper.find('InputMoment');
+      expect(inputMoment.prop('moment')).to.deep.eq(moment(wrapper.state().m));
+    });
+  });
+
   describe('methods', () => {
 
     describe('componentDidMount', () => {

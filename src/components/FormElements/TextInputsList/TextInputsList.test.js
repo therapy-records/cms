@@ -1,6 +1,7 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import { act } from 'react-dom/test-utils';
 import TextInputsList from './index';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -30,7 +31,8 @@ describe('(Component) TextInputsList', () => {
         type: 'email',
         placeholder: 'test',
       }
-    ]
+    ],
+    onChange: sinon.spy()
   };
 
   beforeEach(() => {
@@ -106,6 +108,47 @@ describe('(Component) TextInputsList', () => {
       expect(actual).to.eq(true);
     });
 
+    describe('when clicking on `add` button', () => {
+      it('should add another list item', () => {
+        const button = wrapper.find('button').last();
+        button.simulate('click');
+        const listItems = wrapper.find('li');
+        expect(listItems.length).to.eq(props.items.length + 1);
+      });
+    });
+
+
+    describe('when clicking an item\'s remove button', () => {
+      it('should remove the list item', () => {
+        expect(props.items.length).to.eq(3);
+        const listItem = wrapper.find('li').first();
+        const button = listItem.find('button').last();
+        button.simulate('click');
+        const listItems = wrapper.find('li');
+        expect(props.items.length).to.eq(2);
+        expect(listItems.length).to.eq(props.items.length);
+      });
+    });
+
+  });
+
+  describe('when changing an item\'s input value', () => {
+    it('should call props.onChange with the value', () => {
+      const listItem = wrapper.find('li').first();
+      const input = listItem.find('input');
+
+      const mockEv = {
+        target: { value: 'new value' }
+      };
+
+      input.simulate('change', mockEv);
+
+      expect(props.onChange).to.have.been.calledOnce;
+
+      const expected = props.items;
+      expected[0].value = mockEv.target.value;
+      expect(props.onChange).to.have.been.calledWith(expected);
+    });
   });
 
 });
