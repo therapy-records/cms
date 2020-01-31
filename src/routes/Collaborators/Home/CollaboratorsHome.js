@@ -38,9 +38,9 @@ const CollaboratorsHome = () => {
                 collaborators: idsAndOrderNumbers
               }
             }}
+            stickySuccess
             successCopy={{
-              success: 'Ordering updated!',
-              homeLink: 'Go to Collaborators'
+              success: 'Ordering updated 🎉'
             }}
             render={({ executeMutation }) => (
               <CollaboratorsHomeContent

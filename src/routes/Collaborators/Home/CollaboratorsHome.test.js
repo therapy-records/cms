@@ -56,8 +56,7 @@ describe('(Component) CollaboratorsHome', () => {
         }
       });
       expect(mutationContainer.prop('successCopy')).to.deep.eq({
-        success: 'Ordering updated!',
-        homeLink: 'Go to Collaborators'
+        success: 'Ordering updated 🎉',
       });
     });
   });

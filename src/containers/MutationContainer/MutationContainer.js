@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useMutation } from '@apollo/react-hooks';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import StickyError from '../../components/StickyError';
+import StickySuccess from '../../components/StickySuccess';
 import SuccessMessage from '../../components/FormElements/SuccessMessage';
 
 const MutationContainer = ({
@@ -10,7 +11,8 @@ const MutationContainer = ({
   mutation,
   render,
   mutationVariables,
-  successCopy
+  successCopy,
+  stickySuccess
 }) => {
 
   const [
@@ -25,11 +27,19 @@ const MutationContainer = ({
   });
 
   const mutationSuccess = (data && Object.keys(data).length > 0);
-  const renderContent = (!loading && !mutationSuccess);
+  const renderStickySuccess = (mutationSuccess && stickySuccess);
+  const renderSuccessMessage = (mutationSuccess && !stickySuccess);
+  const renderContent = (!loading && !mutationSuccess) || renderStickySuccess;
 
   return (
     <div>
-    
+
+      {renderStickySuccess && (
+        <StickySuccess>
+          <p>{successCopy.success}</p>
+        </StickySuccess>
+      )}
+      
       {loading && (
         <LoadingSpinner
           active
@@ -43,7 +53,7 @@ const MutationContainer = ({
         </StickyError>
       )}
 
-      {mutationSuccess && (
+      {renderSuccessMessage && (
         <SuccessMessage
           baseUrl={baseUrl}
           copy={successCopy}
@@ -70,11 +80,13 @@ MutationContainer.propTypes = {
     success: PropTypes.string,
     homeLink: PropTypes.string,
     createLink: PropTypes.string
-  }).isRequired
+  }).isRequired,
+  stickySuccess: PropTypes.bool
 };
 
 MutationContainer.defaultProps = {
-  mutationVariables: {}
+  mutationVariables: {},
+  stickySuccess: false
 };
 
 export default MutationContainer;
