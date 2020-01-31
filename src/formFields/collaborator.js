@@ -31,10 +31,10 @@ const COLLABORATOR_FIELDS = [
     required: true,
     ctaCopy: 'Drag & drop image',
     minImageDimensions: {
-      width: 111,
-      height: 111
+      width: 250,
+      height: 250
     },
-    helpText: 'must be at least 111px by 111px'
+    helpText: 'must be at least 250px by 250px'
   },
   {
     id: 'collabOn',
