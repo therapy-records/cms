@@ -39,6 +39,7 @@ const FormFieldInput = ({
         name={id}
         onChange={onChange}
         value={value}
+        placeholder={placeholder}
         showSingleHiddenInputValue
       />
     )

@@ -20,7 +20,8 @@ const COLLABORATOR_FIELDS = [
     type: 'text',
     component: 'RichTextEditor',
     title: 'About',
-    required: true
+    required: true,
+    placeholder: 'Born and raised in...'
   },
   {
     id: 'avatarUrl',

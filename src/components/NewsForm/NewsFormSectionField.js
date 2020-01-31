@@ -112,6 +112,7 @@ export class NewsFormSectionField extends Component {
               title="Copy"
               component={RichTextEditor}
               validate={required}
+              placeholder='This month has been fantastic...'
               required
             />
           </div>

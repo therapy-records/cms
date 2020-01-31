@@ -157,6 +157,7 @@ describe('(Component) NewsFormSectionField', () => {
           title="Copy"
           component={RichTextEditor}
           validate={required}
+          placeholder='This month has been fantastic...'
           required
         />
       );

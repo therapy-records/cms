@@ -52,6 +52,7 @@ class _RichTextEditor extends React.Component {
       title,
       meta,
       name,
+      placeholder,
       showSingleHiddenInputValue
     } = this.props;
 
@@ -74,7 +75,7 @@ class _RichTextEditor extends React.Component {
           <RichTextEditor
             toolbarConfig={RTE_TOOLBAR_CONFIG}
             value={this.state.value}
-            placeholder='This month has been fantastic...'
+            placeholder={placeholder}
             onChange={this.handleOnChange}
           />
         </div>
@@ -99,6 +100,7 @@ _RichTextEditor.propTypes = {
   title: PropTypes.string,
   onChange: PropTypes.func,
   name: PropTypes.string,
+  placeholder: PropTypes.string,
   showSingleHiddenInputValue: PropTypes.bool
 };
 
@@ -109,6 +111,7 @@ _RichTextEditor.defaultProps = {
   title: '',
   onChange: null,
   name: '',
+  placeholder: '',
   showSingleHiddenInputValue: false
 };
 
