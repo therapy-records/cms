@@ -29,7 +29,11 @@ const CollaboratorEdit = ({ match }) => {
           fields={mapFieldsWithValues(COLLABORATOR_FIELDS, entityData)}
           id={id}
           refetchQueries={[
-            { query: GET_COLLABORATORS }
+            { query: GET_COLLABORATORS },
+            {
+              query: GET_COLLABORATOR,
+              variables: { id }
+            }
           ]}
           isEdit
         />

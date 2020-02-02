@@ -77,7 +77,13 @@ describe('(Component) CollaboratorEdit', () => {
           fields={mapFieldsWithValues(COLLABORATOR_FIELDS, mocks[0].result.data.collaborator)}
           id={props.match.params.id}
           refetchQueries={[
-            { query: GET_COLLABORATORS }
+            { query: GET_COLLABORATORS },
+            {
+              query: GET_COLLABORATOR,
+              variables: {
+                id: props.match.params.id
+              }
+            }
           ]}
           isEdit
         />
