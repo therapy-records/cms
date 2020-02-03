@@ -14,7 +14,7 @@ import {
   DELETE_COLLABORATOR
 } from '../../../mutations';
 import CollaboratorForm from '../../../components/CollaboratorForm';
-import COLLABORATOR_FIELDS from '../../../formFields/collaborator';
+import FormFields from '../../../formFields';
 import mapFieldsWithValues from '../../../utils/form-field-mappings';
 import { MOCK_GET_COLLABORATOR } from '../../../mocks/collaborators.mock';
 
@@ -74,7 +74,10 @@ describe('(Component) CollaboratorEdit', () => {
       const actual = wrapper.containsMatchingElement(
         <CollaboratorForm
           mutation={EDIT_COLLABORATOR}
-          fields={mapFieldsWithValues(COLLABORATOR_FIELDS, mocks[0].result.data.collaborator)}
+          fields={mapFieldsWithValues(
+            new FormFields().collaborator,
+            mocks[0].result.data.collaborator
+          )}
           id={props.match.params.id}
           refetchQueries={[
             { query: GET_COLLABORATORS },

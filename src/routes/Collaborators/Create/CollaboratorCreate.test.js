@@ -3,7 +3,7 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import CollaboratorCreate from './index';
 import CollaboratorForm from '../../../components/CollaboratorForm';
-import COLLABORATOR_FIELDS from '../../../formFields/collaborator';
+import FormFields from '../../../formFields';
 import { CREATE_COLLABORATOR } from '../../../mutations';
 import { GET_COLLABORATORS } from '../../../queries';
 
@@ -33,7 +33,7 @@ describe('(Component) CollaboratorCreate', () => {
           refetchQueries={[
             { query: GET_COLLABORATORS }
           ]}
-          fields={COLLABORATOR_FIELDS}
+          fields={new FormFields().collaborator}
           baseUrl='/collaborators'
         />
       );

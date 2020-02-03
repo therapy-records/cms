@@ -10,7 +10,7 @@ import {
 } from '../../../mutations';
 import SingleEntityContainer from '../../../containers/SingleEntityContainer';
 import CollaboratorForm from '../../../components/CollaboratorForm';
-import COLLABORATOR_FIELDS from '../../../formFields/collaborator';
+import FormFields from '../../../formFields';
 import mapFieldsWithValues from '../../../utils/form-field-mappings';
 
 const CollaboratorEdit = ({ match }) => {
@@ -26,7 +26,10 @@ const CollaboratorEdit = ({ match }) => {
       render={entityData => (
         <CollaboratorForm
           mutation={EDIT_COLLABORATOR}
-          fields={mapFieldsWithValues(COLLABORATOR_FIELDS, entityData)}
+          fields={mapFieldsWithValues(
+            new FormFields().collaborator,
+            entityData
+          )}
           id={id}
           refetchQueries={[
             { query: GET_COLLABORATORS },

@@ -117,6 +117,13 @@ const COLLABORATOR_FIELDS = [
       }
     ]
   }
-]
+];
 
-export default COLLABORATOR_FIELDS;
+class FormFields {
+  constructor() {
+    this.collaborator = COLLABORATOR_FIELDS;
+  }
+}
+
+export default FormFields;
+

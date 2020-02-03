@@ -1,5 +1,5 @@
 import React from 'react';
-import COLLABORATOR_FIELDS from '../../../formFields/collaborator';
+import FormFields from '../../../formFields';
 import { CREATE_COLLABORATOR } from '../../../mutations';
 import { GET_COLLABORATORS } from '../../../queries';
 import CollaboratorForm from '../../../components/CollaboratorForm';
@@ -14,11 +14,11 @@ const CollaboratorCreate = () => (
     <div className='col-clear' />
 
     <CollaboratorForm
+      fields={new FormFields().collaborator}
       mutation={CREATE_COLLABORATOR}
       refetchQueries={[
         { query: GET_COLLABORATORS }
       ]}
-      fields={COLLABORATOR_FIELDS}
       baseUrl='/collaborators'
     />
 
