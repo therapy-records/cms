@@ -12,7 +12,7 @@ const CollaboratorsHomeContent = ({
 
   const [showSortableList, toggleShowSortableList] = useState(false);
 
-  const buttonDisabled = (showSortableList && !listOrderHasChanged)
+  const buttonDisabled = (showSortableList && !listOrderHasChanged);
 
   return (
     <div>
@@ -38,7 +38,9 @@ const CollaboratorsHomeContent = ({
             {showSortableList ? 'Update order' : 'Change order'}
           </button>
 
-          <Link to='collaborators/create' className='btn'>Create</Link>
+          {!showSortableList && (
+            <Link to='collaborators/create' className='btn'>Create</Link>
+          )}
 
         </div>
       </div>

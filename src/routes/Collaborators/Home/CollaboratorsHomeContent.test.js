@@ -78,6 +78,13 @@ describe('(Component) CollaboratorsHomeContent', () => {
       expect(button.props().disabled).to.eq(true);
     });
 
+    it('should NOT render a link to create', () => {
+      const actual = wrapper.containsMatchingElement(
+        <Link to='collaborators/create'>Create</Link>
+      );
+      expect(actual).to.equal(false);
+    });
+
     it('should change <CollaboratorsList /> showSortableList prop', () => {
       const collaboratorsList = wrapper.find('CollaboratorsList');
       expect(collaboratorsList.prop('showSortableList')).to.eq(true);
