@@ -233,12 +233,9 @@ describe('(Component) Form', () => {
 
         await actions(wrapper, () => {
           wrapper.update();
-          const actual = wrapper.containsMatchingElement(
-            <StickyError>
-              <p>Sorry, something has gone wrong.</p>
-            </StickyError>
-          );
-          expect(actual).to.equal(true);
+          const stickyError = wrapper.find('StickyError');
+          expect(stickyError.prop('message')).to.eq('Sorry, something has gone wrong.');
+          expect(stickyError.prop('error')).to.exist;
         });
       });
     });

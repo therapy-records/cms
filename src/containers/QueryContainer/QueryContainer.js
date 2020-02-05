@@ -24,6 +24,8 @@ const QueryContainer = ({
 
   const renderContent = (hasData && !loading);
 
+  // const unauthError = error && String(error).includes('Unauthorized');
+
   return (
     <div>
 
@@ -35,9 +37,10 @@ const QueryContainer = ({
       )}
 
       {error && (
-        <StickyError>
-          <p>Sorry, something has gone wrong.</p>
-        </StickyError>
+        <StickyError
+          message='Sorry, something has gone wrong.'
+          error={error}
+        />
       )}
 
       {renderContent && (

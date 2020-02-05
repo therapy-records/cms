@@ -97,9 +97,10 @@ const Form = ({
         <div>
 
           {error && (
-            <StickyError>
-              <p>Sorry, something has gone wrong.</p>
-            </StickyError>
+            <StickyError
+              message='Sorry, something has gone wrong.'
+              error={error}
+            />
           )}
 
           <form onSubmit={handleSubmit} encType='multipart/form-data'>

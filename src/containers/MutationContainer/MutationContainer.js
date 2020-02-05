@@ -48,9 +48,10 @@ const MutationContainer = ({
       )}
 
       {error && (
-        <StickyError>
-          <p>Sorry, something has gone wrong.</p>
-        </StickyError>
+        <StickyError
+          message='Sorry, something has gone wrong.'
+          error={error}
+        />
       )}
 
       {renderSuccessMessage && (

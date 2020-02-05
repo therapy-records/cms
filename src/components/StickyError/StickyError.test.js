@@ -8,17 +8,33 @@ Enzyme.configure({ adapter: new Adapter() });
 describe('(Component) StickyError', () => {
   let wrapper,
   props = {
-    children: <p>test</p>
+    message: 'test'
   };
 
   describe('rendering', () => {
-      beforeEach(() => {
-        wrapper = shallow(<StickyError {...props} />);
-      });
+    beforeEach(() => {
+      wrapper = shallow(<StickyError {...props} />);
+    });
 
-      it('should render children', () => {
-        const actual = wrapper.containsMatchingElement(props.children)
+    it('should render copy from message prop', () => {
+      const actual = wrapper.containsMatchingElement(
+        <p>{props.message}</p>
+      );
+      expect(actual).to.eq(true);
+    });
+    
+    describe('when props.error contains `Unauthorized`', () => {
+      it('should render an unauthorized message', () => {
+        wrapper.setProps({
+          error: new Error('User is Unauthorized')
+        });
+        const actual = wrapper.containsMatchingElement(
+          <p>You are not authorized to perform this action.</p>
+        );
         expect(actual).to.eq(true);
       });
     });
+
+  });
+    
 });
