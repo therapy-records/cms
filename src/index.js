@@ -15,7 +15,14 @@ const client = new ApolloClient({
   uri: GRAPHQL_ROOT,
   cache: new InMemoryCache({
     addTypename: false
-  })
+  }),
+  request: operation => {
+    operation.setContext({
+      headers: {
+        authorization: localStorage.getItem('token')
+      }
+    })
+  }
 });
 
 ReactDOM.render(
