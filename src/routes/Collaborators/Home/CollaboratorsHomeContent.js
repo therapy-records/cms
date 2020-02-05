@@ -6,10 +6,13 @@ import CollaboratorsList from '../../../components/CollaboratorsList';
 const CollaboratorsHomeContent = ({
   listItems,
   executeMutation,
-  onListOrderChanged
+  onListOrderChanged,
+  listOrderHasChanged
 }) => {
-  
+
   const [showSortableList, toggleShowSortableList] = useState(false);
+
+  const buttonDisabled = (showSortableList && !listOrderHasChanged)
 
   return (
     <div>
@@ -30,6 +33,7 @@ const CollaboratorsHomeContent = ({
               }
             }}
             className='btn'
+            disabled={buttonDisabled}
           >
             {showSortableList ? 'Update order' : 'Change order'}
           </button>
@@ -42,7 +46,6 @@ const CollaboratorsHomeContent = ({
       <CollaboratorsList
         listItems={listItems}
         showSortableList={showSortableList}
-        // onOrderChanged={(reorderedList) => onListOrderChanged(reorderedList)}
         onOrderChanged={onListOrderChanged}
       />
 
@@ -53,7 +56,12 @@ const CollaboratorsHomeContent = ({
 CollaboratorsHomeContent.propTypes = {
   listItems: PropTypes.arrayOf(PropTypes.object).isRequired,
   executeMutation: PropTypes.func.isRequired,
-  onListOrderChanged: PropTypes.func.isRequired
+  onListOrderChanged: PropTypes.func.isRequired,
+  listOrderHasChanged: PropTypes.bool
+};
+
+CollaboratorsHomeContent.defaultProps = {
+  listOrderHasChanged: false
 };
 
 export default CollaboratorsHomeContent;

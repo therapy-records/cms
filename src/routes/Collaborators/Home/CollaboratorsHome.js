@@ -46,6 +46,7 @@ const CollaboratorsHome = () => {
               <CollaboratorsHomeContent
                 listItems={queryData}
                 executeMutation={executeMutation}
+                listOrderHasChanged={idsAndOrderNumbers.length > 0}
                 onListOrderChanged={handleSetIdsAndOrderNumbers}
               />
             )}

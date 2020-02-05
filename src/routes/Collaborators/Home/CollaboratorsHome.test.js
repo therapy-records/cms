@@ -69,6 +69,7 @@ describe('(Component) CollaboratorsHome', () => {
       expect(collaboratorsHomeContent.length).to.eq(1);
       expect(collaboratorsHomeContent.prop('listItems')).to.deep.eq(mocks[0].result.data.collaborators);
       expect(collaboratorsHomeContent.prop('executeMutation')).to.be.a('function');
+      expect(collaboratorsHomeContent.prop('listOrderHasChanged')).to.eq(false)
       expect(collaboratorsHomeContent.prop('onListOrderChanged')).to.be.a('function');
     });
   });
@@ -98,6 +99,24 @@ describe('(Component) CollaboratorsHome', () => {
         });
       });
 
+    });
+    
+    it('should set the <CollaboratorsHomeContent /> listOrderHasChanged prop to true', async() => {
+      await actions(wrapper, () => {
+        wrapper.update();
+
+        let collaboratorsHomeContent = wrapper.find('CollaboratorsHomeContent');
+        const mockListOrderArray = [
+          { name: 'a', orderNumber: '1', _id: '123' },
+          { name: 'b', orderNumber: '2', _id: '456' }
+        ];
+
+        collaboratorsHomeContent.prop('onListOrderChanged')(mockListOrderArray);
+        wrapper.update();
+
+        collaboratorsHomeContent = wrapper.find('CollaboratorsHomeContent');
+        expect(collaboratorsHomeContent.prop('listOrderHasChanged')).to.eq(true);
+      });
     });
   });
 
