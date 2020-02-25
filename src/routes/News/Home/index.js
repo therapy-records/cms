@@ -43,10 +43,6 @@ export class News extends React.Component {
     return articles.sort(dateIsBefore);
   }
 
-  // getCombinedArticles(newsFeed) {
-  //   this.orderArticles(newsFeed);
-  // }
-
   handleButtonClick(postObj) {
     this.props.onSetSelectedNewsArticle(postObj);
   }

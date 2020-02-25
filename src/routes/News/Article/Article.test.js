@@ -74,12 +74,6 @@ describe('(Component) News - Article', () => {
         });
       });
 
-      // it('should call onDestroyArticle', () => {
-      //   wrapper = shallow(<Article {...props} />);
-      //   wrapper.unmount();
-      //   expect(onDestroyArticleSpy.calledOnce).to.eq(true);
-      // });
-
       it('should call onSetSelectedNewsArticle', () => {
         props = baseProps;
         props.article = { _id: 456 };

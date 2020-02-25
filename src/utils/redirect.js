@@ -9,4 +9,3 @@ const redirectHistory = (history, pathname)  => {
 export default {
   redirectHistory
 };
-// export default redirect;

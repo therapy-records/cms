@@ -106,11 +106,6 @@ export class DropzoneImageUpload extends React.Component {
           });
         }
       }
-      // if (err) {
-      //   this.setState({
-      //     images: `Sorry, error ${err}`
-      //   });
-      // }
     });
   }
 

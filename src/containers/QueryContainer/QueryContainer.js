@@ -24,8 +24,6 @@ const QueryContainer = ({
 
   const renderContent = (hasData && !loading);
 
-  // const unauthError = error && String(error).includes('Unauthorized');
-
   return (
     <div>
 

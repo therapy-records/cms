@@ -3,8 +3,6 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import List from './index';
 import listItemPropsHandler from '../../utils/list-item-props-handler';
-// import { getFirstImageInArticle } from '../../utils/news';
-// import entityHeading from '../../utils/entityHeading';
 
 Enzyme.configure({ adapter: new Adapter() });
 

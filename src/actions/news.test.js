@@ -182,7 +182,6 @@ describe('(Actions) news', () => {
     });
 
     it('should dispatch the correct actions on error', () => {
-      // _axiosAuthHeaders.post = sinon.stub().returns(Promise.reject(mockErrorResponse));
       mockAxios.create = jest.fn(() => mockAxios);
       mockAxios.post = jest.fn(() => Promise.resolve(mock.mockErrorResponse))
 

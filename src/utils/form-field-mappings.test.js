@@ -208,7 +208,6 @@ describe('(Utils) form-field-mappings', () => {
         {
           id: 'd',
           type: 'arrayOfStrings',
-          // items: []
           items: [
             { value: '' },
             { value: '' }
