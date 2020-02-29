@@ -4,7 +4,10 @@ import Adapter from 'enzyme-adapter-react-16';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
-import { GET_COLLABORATOR } from '../../queries';
+import {
+  GET_COLLABORATOR,
+  GET_COLLABORATORS
+} from '../../queries';
 import { DELETE_COLLABORATOR } from '../../mutations';
 import SingleEntityContainer from './index';
 import CollaboratorDetails from '../../components/CollaboratorDetails';
@@ -25,6 +28,7 @@ describe('(Container) SingleEntityContainer', () => {
     props = {
       baseUrl: '/collaborators',
       entityName: 'collaborator',
+      entityCollection: 'collaborators',
       id: '1234',
       render: CollaboratorDetails,
       query: GET_COLLABORATOR,
@@ -33,6 +37,10 @@ describe('(Container) SingleEntityContainer', () => {
       mutationSuccessCopy: {
         success: 'Successfully deleted.',
         homeLink: 'Go to Collaborators'
+      },
+      mutationCacheUpdate: {
+        readQuery: GET_COLLABORATORS,
+        responseObjName: 'deleteCollaborator'
       }
     };
 
@@ -78,6 +86,7 @@ describe('(Container) SingleEntityContainer', () => {
         });
         expect(mutationContainer.prop('baseUrl')).to.eq(props.baseUrl);
         expect(mutationContainer.prop('successCopy')).to.deep.eq(props.mutationSuccessCopy);
+        expect(mutationContainer.prop('entityCollection')).to.deep.eq(props.entityCollection);
       });
     });
 

@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { GET_COLLABORATOR } from '../../../queries';
+import {
+  GET_COLLABORATOR,
+  GET_COLLABORATORS
+} from '../../../queries';
 import { DELETE_COLLABORATOR } from '../../../mutations';
 import SingleEntityContainer from '../../../containers/SingleEntityContainer';
 import CollaboratorDetails from '../../../components/CollaboratorDetails';
@@ -15,6 +18,7 @@ const CollaboratorView = ({
     <SingleEntityContainer
       baseUrl='/collaborators'
       entityName='collaborator'
+      entityCollection='collaborators'
       id={id}
       render={entityData => (
         <CollaboratorDetails {...entityData} />
@@ -24,6 +28,10 @@ const CollaboratorView = ({
       mutationSuccessCopy={{
         success: 'Successfully deleted.',
         homeLink: 'Go to Collaborators'
+      }}
+      mutationCacheUpdate={{
+        cacheQuery: GET_COLLABORATORS,
+        responseObjName: 'deleteCollaborator'
       }}
     />
   );

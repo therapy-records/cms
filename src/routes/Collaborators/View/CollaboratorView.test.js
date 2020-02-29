@@ -4,7 +4,10 @@ import Adapter from 'enzyme-adapter-react-16';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
-import { GET_COLLABORATOR } from '../../../queries';
+import {
+  GET_COLLABORATOR,
+  GET_COLLABORATORS
+} from '../../../queries';
 import { DELETE_COLLABORATOR } from '../../../mutations';
 import CollaboratorView from './CollaboratorView';
 import CollaboratorDetails from '../../../components/CollaboratorDetails';
@@ -49,12 +52,17 @@ describe('(Component) CollaboratorView', () => {
     expect(singleEntityContainer.length).to.eq(1);
     expect(singleEntityContainer.prop('baseUrl')).to.eq('/collaborators');
     expect(singleEntityContainer.prop('entityName')).to.eq('collaborator');
+    expect(singleEntityContainer.prop('entityCollection')).to.eq('collaborators');
     expect(singleEntityContainer.prop('id')).to.eq(props.match.params.id);
     expect(singleEntityContainer.prop('query')).to.eq(GET_COLLABORATOR);
     expect(singleEntityContainer.prop('mutation')).to.eq(DELETE_COLLABORATOR);
     expect(singleEntityContainer.prop('mutationSuccessCopy')).to.deep.eq({
       success: 'Successfully deleted.',
       homeLink: 'Go to Collaborators'
+    });
+    expect(singleEntityContainer.prop('mutationCacheUpdate')).to.deep.eq({
+      cacheQuery: GET_COLLABORATORS,
+      responseObjName: 'deleteCollaborator'
     });
   });
 

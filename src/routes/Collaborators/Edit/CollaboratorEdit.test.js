@@ -58,12 +58,17 @@ describe('(Component) CollaboratorEdit', () => {
     expect(singleEntityContainer.length).to.eq(1);
     expect(singleEntityContainer.prop('baseUrl')).to.eq('/collaborators');
     expect(singleEntityContainer.prop('entityName')).to.eq('collaborator');
+    expect(singleEntityContainer.prop('entityCollection')).to.eq('collaborators');
     expect(singleEntityContainer.prop('id')).to.eq(props.match.params.id);
     expect(singleEntityContainer.prop('query')).to.eq(GET_COLLABORATOR);
     expect(singleEntityContainer.prop('mutation')).to.eq(DELETE_COLLABORATOR);
     expect(singleEntityContainer.prop('mutationSuccessCopy')).to.deep.eq({
       success: 'Successfully deleted.',
       homeLink: 'Go to Collaborators'
+    });
+    expect(singleEntityContainer.prop('mutationCacheUpdate')).to.deep.eq({
+      cacheQuery: GET_COLLABORATORS,
+      responseObjName: 'deleteCollaborator'
     });
     expect(singleEntityContainer.prop('isEdit')).to.eq(props.isEdit);
   });

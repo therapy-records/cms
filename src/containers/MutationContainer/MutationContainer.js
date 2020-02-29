@@ -12,6 +12,8 @@ const MutationContainer = ({
   render,
   mutationVariables,
   successCopy,
+  entityCollection,
+  mutationCacheUpdate,
   stickySuccess
 }) => {
 
@@ -23,7 +25,24 @@ const MutationContainer = ({
       data
     }
   ] = useMutation(mutation, {
-    variables: mutationVariables
+    variables: mutationVariables,
+    update(cache, { data }) {
+      const shouldUpdateCache = (entityCollection &&
+                                 mutationCacheUpdate.cacheQuery &&
+                                 mutationCacheUpdate.responseObjName);
+
+      if (shouldUpdateCache) {
+        const { [entityCollection]: cacheData } = cache.readQuery({ query: mutationCacheUpdate.cacheQuery });
+
+        const updatedData = cacheData.filter(c => c._id !== data[mutationCacheUpdate.responseObjName]._id);
+        
+        cache.writeQuery({
+          query: mutationCacheUpdate.cacheQuery,
+          data: { [entityCollection]: updatedData }
+        });
+      }
+
+    }
   });
 
   const mutationSuccess = (data && Object.keys(data).length > 0);
@@ -82,12 +101,19 @@ MutationContainer.propTypes = {
     homeLink: PropTypes.string,
     createLink: PropTypes.string
   }).isRequired,
-  stickySuccess: PropTypes.bool
+  entityCollection: PropTypes.string,
+  stickySuccess: PropTypes.bool,
+  mutationCacheUpdate: PropTypes.shape({
+    readQuery: PropTypes.object,
+    responseObjName: PropTypes.string
+  })
 };
 
 MutationContainer.defaultProps = {
   mutationVariables: {},
-  stickySuccess: false
+  entityCollection: '',
+  stickySuccess: false,
+  mutationCacheUpdate: {}
 };
 
 export default MutationContainer;

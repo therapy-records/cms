@@ -20,6 +20,7 @@ const CollaboratorEdit = ({ match }) => {
     <SingleEntityContainer
       baseUrl='/collaborators'
       entityName='collaborator'
+      entityCollection='collaborators'
       id={id}
       query={GET_COLLABORATOR}
       isEdit
@@ -45,6 +46,10 @@ const CollaboratorEdit = ({ match }) => {
       mutationSuccessCopy={{
         success: 'Successfully deleted.',
         homeLink: 'Go to Collaborators'
+      }}
+      mutationCacheUpdate={{
+        cacheQuery: GET_COLLABORATORS,
+        responseObjName: 'deleteCollaborator'
       }}
     />
   );
