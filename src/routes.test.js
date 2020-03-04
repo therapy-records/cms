@@ -18,7 +18,7 @@ import JournalismHome from './routes/Journalism/Home';
 import JournalismArticle from './routes/Journalism/Article';
 import JournalismArticleEdit from './routes/Journalism/ArticleEdit';
 import JournalismArticleCreate from './routes/Journalism/ArticleCreate';
-import Press from './routes/Press';
+import PressHome from './routes/Press/Home';
 import Collaborators from './routes/Collaborators/Home';
 import CollaboratorsCreate from './routes/Collaborators/Create';
 import CollaboratorView from './routes/Collaborators/View';
@@ -196,20 +196,7 @@ describe('Router', () => {
     const actual = wrapper.containsMatchingElement(
       <ProtectedRoute
         path="/press"
-        component={Press}
-        isAuth={props.isAuth}
-        onAuthCheck={props.onAuthCheck}
-        exact
-      />
-    );
-    expect(actual).to.equal(true);
-  });
-
-  it('should render gigs route', () => {
-    const actual = wrapper.containsMatchingElement(
-      <ProtectedRoute
-        path="/gigs"
-        component={Gigs}
+        component={PressHome}
         isAuth={props.isAuth}
         onAuthCheck={props.onAuthCheck}
         exact
@@ -270,6 +257,18 @@ describe('Router', () => {
     expect(actual).to.equal(true);
   });
 
+  it('should render gigs route', () => {
+    const actual = wrapper.containsMatchingElement(
+      <ProtectedRoute
+        path="/gigs"
+        component={Gigs}
+        isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
+        exact
+      />
+    );
+    expect(actual).to.equal(true);
+  });
 
   it('should render videos route', () => {
     const actual = wrapper.containsMatchingElement(

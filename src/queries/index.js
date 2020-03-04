@@ -12,7 +12,7 @@ export const GET_COLLABORATORS = gql`
 `;
 
 export const GET_COLLABORATOR = gql`
-  query ($id: ID!){
+  query ($id: ID!) {
       collaborator(_id: $id) {
         _id,
         name,
@@ -32,6 +32,16 @@ export const GET_COLLABORATOR = gql`
           phone
         }
       }
+  }
+`;
+
+export const GET_PRESS = gql`
+  {
+    press {
+      _id,
+      author,
+      copy
+    }
   }
 `;
 
