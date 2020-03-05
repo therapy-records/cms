@@ -31,6 +31,7 @@ const PressHome = () => {
                   <p>{pressArticle.author}</p>
                   <p>{pressArticle.copy}</p>
                   <p>{pressArticle.externalLink}</p>
+                  <Link to={`press/${pressArticle._id}`} className='btn'>view</Link>
                 </li>
               ))}
             </ul>

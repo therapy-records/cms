@@ -12,7 +12,7 @@ export const GET_COLLABORATORS = gql`
 `;
 
 export const GET_COLLABORATOR = gql`
-  query ($id: ID!) {
+  query($id: ID!) {
       collaborator(_id: $id) {
         _id,
         name,
@@ -41,6 +41,18 @@ export const GET_PRESS = gql`
       _id,
       author,
       copy
+    }
+  }
+`;
+
+export const GET_PRESS_ARTICLE = gql`
+  query($id: ID!) {
+    pressArticle(_id: $id) {
+      _id,
+      author,
+      copy,
+      externalLink,
+      createdAt
     }
   }
 `;
