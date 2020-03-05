@@ -34,9 +34,11 @@ const ListItem = ({
 
       {isDraggable && <DragHandle />}
 
-      <div className='img-container'>
-        <img src={imageUrl} alt={title} />
-      </div>
+      {imageUrl &&
+        <div className='img-container'>
+          <img src={imageUrl} alt={title} />
+        </div>
+      }
 
       <div className='content-container'>
         <div className='content'>
@@ -81,7 +83,7 @@ const ListItem = ({
 ListItem.propTypes = {
   _id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  imageUrl: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string,
   route: PropTypes.string.isRequired,
   date: PropTypes.string,
   onItemClick: PropTypes.func,
@@ -92,6 +94,7 @@ ListItem.propTypes = {
 };
 
 ListItem.defaultProps = {
+  imageUrl: '',
   date: '',
   onItemClick: null,
   onViewButtonClick: null,

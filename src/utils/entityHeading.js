@@ -5,10 +5,11 @@ const entityHeading = entity => {
   const { 
     heading,
     title,
-    name
+    name,
+    author
   } = entity;
 
-  return heading || title || name;
+  return heading || title || name || author;
 }
 
 export default entityHeading

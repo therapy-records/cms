@@ -7,6 +7,7 @@ import { MockedProvider } from '@apollo/react-testing';
 import PressHome from './index';
 import { GET_PRESS } from '../../../queries';
 import { MOCK_GET_PRESS } from '../../../mocks/press.mock';
+import List from '../../../components/List';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -63,6 +64,17 @@ describe('(Component) PressHome', () => {
     });
   });
 
-  // TODO: should render list (need to think about list approach)
+  it('should render a link to create from <QueryContainer /> render prop', async() => {
+    await actions(wrapper, () => {
+      wrapper.update()
+      const actual = wrapper.containsMatchingElement(
+        <List
+          data={MOCK_GET_PRESS.result.data.press}
+          route='press'
+        />
+      );
+      expect(actual).to.eq(true);
+    });
+  });
 
 });

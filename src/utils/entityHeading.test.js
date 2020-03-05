@@ -21,7 +21,7 @@ describe('(Utils) entityHeading', () => {
     expect(result).to.eq(mockEntity.title);
   });
 
-  it('should return `title` when provided', () => {
+  it('should return `name` when provided', () => {
     const mockEntity = {
       heading: '',
       title: '',
@@ -32,5 +32,16 @@ describe('(Utils) entityHeading', () => {
     expect(result).to.eq(mockEntity.name);
   });
 
+  it('should return `author` when provided', () => {
+    const mockEntity = {
+      heading: '',
+      title: '',
+      name: '',
+      author: 'testing',
+      about: '<p>test</p>'
+    };
+    const result = entityHeading(mockEntity);
+    expect(result).to.eq(mockEntity.author);
+  });
 
 });
