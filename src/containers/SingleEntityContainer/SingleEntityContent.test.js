@@ -14,7 +14,10 @@ describe('(Container Component) SingleEntityContent', () => {
         data: {
           _id: '1234',
           name: 'Test',
-          about: '<p>test</p>'
+          about: '<p>test</p>',
+          author: 'test',
+          releaseDate: 'test',
+          createdA: 'test'
         },
         render: CollaboratorDetails,
         executeMutation: sinon.spy(),
@@ -37,7 +40,10 @@ describe('(Container Component) SingleEntityContent', () => {
     it('should render', () => {
       expect(articleHeader.prop('baseUrl')).to.eq(props.baseUrl);
       expect(articleHeader.prop('article')).to.deep.eq({
-        _id: props.data._id
+        _id: props.data._id,
+        author: props.data.author,
+        releaseDate: props.data.releaseDate,
+        createdAt: props.data.createdAt
       });
       expect(articleHeader.prop('heading')).to.eq(entityHeading(props.data));
       expect(articleHeader.prop('showEditButton')).to.eq(true);

@@ -52,7 +52,8 @@ export const GET_PRESS_ARTICLE = gql`
     pressArticle(_id: $id) {
       _id,
       author,
-      copy,
+      title,
+      excerpt,
       externalLink,
       releaseDate
     }

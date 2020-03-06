@@ -20,10 +20,11 @@ const PressView = ({
       id={id}
       render={entityData => (
         <div>
-          <p>author: {entityData.author}</p>
-          <p>copy: {entityData.copy}</p>
-          <p>link: {entityData.externalLink}</p>
-          <p>createdAt: {entityData.createdAt}</p>
+          <h4>Excerpt</h4>
+          <p>{entityData.excerpt}</p>
+
+          <h4>URL</h4>
+          <p><a href={entityData.externalLink} target='_blank'>{entityData.externalLink}</a></p>
         </div>
       )}
       query={GET_PRESS_ARTICLE}

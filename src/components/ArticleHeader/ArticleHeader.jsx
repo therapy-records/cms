@@ -56,6 +56,10 @@ class ArticleHeader extends Component {
               <h2>{article.title}</h2>
             }
 
+            {article.author &&
+              <p className='small-tab author'>{article.author}</p>
+            }
+
             {(article.releaseDate || article.createdAt) && (
               <p className='small-tab'>Released {moment(article.releaseDate || article.createdAt).format('DD MMM YYYY')}</p>
             )}

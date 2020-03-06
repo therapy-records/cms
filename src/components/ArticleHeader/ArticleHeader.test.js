@@ -30,6 +30,7 @@ describe('(Component) ArticleHeader', () => {
           copy: '<p>test</p>'
         }
       ],
+      author: 'test',
       releaseDate: '2019-08-10T11:17:02.883Z'
     },
     baseProps = {
@@ -116,6 +117,13 @@ describe('(Component) ArticleHeader', () => {
         );
         expect(actual).to.equal(true);
       });
+    });
+
+    it('should render `author`', () => {
+      const actual = wrapper.containsMatchingElement(
+        <p className='small-tab author'>{mockArticle.author}</p>
+      );
+      expect(actual).to.eq(true);
     });
 
     it('should render `releaseDate`', () => {

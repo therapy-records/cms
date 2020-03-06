@@ -20,7 +20,10 @@ const SingleEntityContent = ({
       <ArticleHeader
         baseUrl={baseUrl}
         article={{
-          _id: data._id
+          _id: data._id,
+          author: data.author,
+          releaseDate: data.releaseDate,
+          createdAt: data.createdAt
         }}
         heading={heading}
         showEditButton={!isEdit}
