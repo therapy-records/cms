@@ -40,7 +40,9 @@ export const GET_PRESS = gql`
     press {
       _id,
       author,
-      copy
+      title,
+      excerpt,
+      releaseDate
     }
   }
 `;
@@ -52,7 +54,7 @@ export const GET_PRESS_ARTICLE = gql`
       author,
       copy,
       externalLink,
-      createdAt
+      releaseDate
     }
   }
 `;

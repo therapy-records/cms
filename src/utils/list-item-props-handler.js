@@ -18,12 +18,15 @@ const listItemPropsHandler = ({
 
   const {
     _id,
+    author,
     imageUrl,
     avatarUrl,
+    excerpt,
     date,
     releaseDate
   } = item;
 
+  // TODO: rename itemTitle / item.title to `heading`
   const itemTitle = entityHeading(item);
   const itemDate = date || releaseDate;
   const itemImageUrl = itemsHaveMultipleImages ? getFirstImageInArticle(item) : (imageUrl || avatarUrl);
@@ -33,6 +36,8 @@ const listItemPropsHandler = ({
     key: _id,
     _id,
     title: itemTitle,
+    author,
+    excerpt,
     imageUrl: itemImageUrl,
     date: itemDate,
     route,

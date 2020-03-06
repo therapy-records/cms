@@ -7,8 +7,10 @@ import './ListItem.css';
 
 const ListItem = ({
   _id,
+  author,
   title,
   imageUrl,
+  excerpt,
   date,
   route,
   onItemClick,
@@ -17,11 +19,6 @@ const ListItem = ({
   cardDesign,
   isDraggable
 }) => {
-
-  let buttonClassName = 'btn';
-  if (cardDesign) {
-    buttonClassName += ' btn-xs';
-  }
 
   let containerClassName = cardDesign ? 'list-item-card' : 'list-item-row';
 
@@ -42,24 +39,29 @@ const ListItem = ({
 
       <div className='content-container'>
         <div className='content'>
-          <div className='heading-with-btn'>
+          <div>
+            <div className='small-tabs-container'>
+              {author && <p className='small-tab author'>{author}</p>}
+              {date && <p className='small-tab'>{moment(date).format('DD MMM YYYY')}</p>}
+            </div>
             <h3>
               <Link
                 onClick={onItemClick}
                 to={`/${route}/${_id}`}
               >
                 <span>{title}</span>
-                {date && <p className='small-tab'>{moment(date).format('DD MMM YYYY')}</p>}
               </Link>
             </h3>
           </div>
+
+          {excerpt && <p>{excerpt}</p>}
 
           <div className='btns-container btns-always-inline'>
 
             <Link
               onClick={onViewButtonClick}
               to={`/${route}/${_id}`}
-              className={buttonClassName}
+              className='btn btn-xs'
             >
               View
             </Link>
@@ -67,7 +69,7 @@ const ListItem = ({
             <Link
               onClick={onEditButtonClick}
               to={`/${route}/${_id}/edit`}
-              className={buttonClassName}
+              className='btn btn-xs'
             >
               Edit
             </Link>
@@ -83,8 +85,10 @@ const ListItem = ({
 ListItem.propTypes = {
   _id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  author: PropTypes.string,
   imageUrl: PropTypes.string,
   route: PropTypes.string.isRequired,
+  excerpt: PropTypes.string,
   date: PropTypes.string,
   onItemClick: PropTypes.func,
   onViewButtonClick: PropTypes.func,
@@ -94,7 +98,9 @@ ListItem.propTypes = {
 };
 
 ListItem.defaultProps = {
+  author: '',
   imageUrl: '',
+  excerpt: '',
   date: '',
   onItemClick: null,
   onViewButtonClick: null,

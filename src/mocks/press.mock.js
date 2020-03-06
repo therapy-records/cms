@@ -10,8 +10,8 @@ export const MOCK_GET_PRESS = {
   result: {
     data: {
       press: [
-        { _id: 'abc1', author: 'test', copy: 'test' },
-        { _id: 'abc2', author: 'testing', copy: 'test' }
+        { _id: 'abc1', author: 'test', title: 'test', excerpt: 'test', releaseDate: 'test' },
+        { _id: 'abc2', author: 'testing', title: 'testing', excerpt: 'test', releaseDate: 'test' }
       ]
     }
   }
@@ -25,10 +25,11 @@ export const MOCK_GET_PRESS_ARTICLE = {
     data: {
       pressArticle: {
         _id: 'abc1',
+        title: 'test title',
         author: 'test',
-        copy: 'test',
+        excerpt: 'test',
         externalLink: 'test.com',
-        createdAt: 'date'
+        releaseDate: 'date'
       }
     }
   }

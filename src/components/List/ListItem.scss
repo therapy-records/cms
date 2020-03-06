@@ -34,6 +34,19 @@
     word-break: break-word;
   }
 
+  .small-tabs-container {
+    @media(min-width: $bp-sm) {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+
+  .author {
+    color: #000;
+    opacity: 1;
+  }
+
   h3 {
     margin-top: 0;
     margin-bottom: .15em;

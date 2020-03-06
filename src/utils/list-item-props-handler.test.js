@@ -6,8 +6,10 @@ describe('(Utils) list-item-props-handler', () => {
   const mockItem = {
     title: 'testing',
     _id: '1234',
+    author: 'test',
     imageUrl: 'test.com/image.jpg',
-    date: 'test date'
+    date: 'test date',
+    excerpt: 'testing'
   };
   
   it('should return an object with correct properties/values', () => {
@@ -24,6 +26,8 @@ describe('(Utils) list-item-props-handler', () => {
       key: mockItem._id,
       _id: mockItem._id,
       title: entityHeading(mockItem),
+      author: mockItem.author,
+      excerpt: mockItem.excerpt,
       imageUrl: mockItem.imageUrl,
       date: mockItem.date,
       route: 'test',

@@ -12,7 +12,9 @@ describe('(Component) ListItem', () => {
   let wrapper,
       props = {
         _id: 'test',
+        author: 'test',
         title: 'testing',
+        excerpt: 'test',
         imageUrl: 'test.com',
         date: new Date().toISOString(),
         route: 'test',
@@ -67,8 +69,22 @@ describe('(Component) ListItem', () => {
     );
     expect(actual).to.eq(true);
   });
+  
+  it('should render author', () => {
+    const actual = wrapper.containsMatchingElement(
+      <p>{props.author}</p>
+    );
+    expect(actual).to.eq(true);
+  });
 
-  it('should render a heading with Link and date', () => {
+  it('should render a date', () => {
+    const actual = wrapper.containsMatchingElement(
+      <p className='small-tab'>{moment(props.date).format('DD MMM YYYY')}</p>
+    );
+    expect(actual).to.eq(true);
+  });
+
+  it('should render a heading with Link', () => {
     const actual = wrapper.containsMatchingElement(
       <h3>
         <Link
@@ -76,9 +92,15 @@ describe('(Component) ListItem', () => {
           to={`/${props.route}/${props._id}`}
         >
           <span>{props.title}</span>
-          <p className='small-tab'>{moment(props.date).format('DD MMM YYYY')}</p>
         </Link>
       </h3>
+    );
+    expect(actual).to.eq(true);
+  });
+
+  it('should render excerpt paragraph', () => {
+    const actual = wrapper.containsMatchingElement(
+      <p>{props.excerpt}</p>
     );
     expect(actual).to.eq(true);
   });
@@ -105,20 +127,6 @@ describe('(Component) ListItem', () => {
       </Link>
     );
     expect(actual).to.eq(true);
-  });
-
-  describe('with `cardDesign` prop', () => {
-    it('should add correct classNames to buttons', () => {
-      wrapper.setProps({
-        cardDesign: true
-      });
-
-      const btnsContainer = wrapper.find('.btns-container');
-      const viewLink = btnsContainer.find('Link').first();
-      const editLink = btnsContainer.find('Link').last();
-      expect(viewLink.hasClass('btn btn-xs')).to.eq(true);
-      expect(editLink.hasClass('btn btn-xs')).to.eq(true);
-    });
   });
   
 });

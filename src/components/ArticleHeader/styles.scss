@@ -14,10 +14,9 @@
     @media(min-width: $bp-xs) {
       display: flex;
       align-items: flex-start;
-      min-width: 161px;
     }
     @media(min-width: $bp-md) {
-      justify-content: flex-end;
+      justify-content: space-around;
       margin-left: 1em;
     }
   }
