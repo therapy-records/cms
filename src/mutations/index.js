@@ -42,6 +42,18 @@ export const EDIT_COLLABORATORS_ORDER_NUMBERS = gql`
   }
 `;
 
+export const CREATE_PRESS = gql`
+  mutation($input: PressInput) {
+    createPress(input: $input) {
+      author,
+      title,
+      excerpt,
+      externalLink,
+      releaseDate
+    }
+  }
+`;
+
 export const DELETE_PRESS_ARTICLE = gql`
   mutation($id: ID!) {
     deletePress(_id: $id) {

@@ -16,6 +16,7 @@ import JournalismArticle from './routes/Journalism/Article';
 import JournalismArticleEdit from './routes/Journalism/ArticleEdit';
 import JournalismArticleCreate from './routes/Journalism/ArticleCreate';
 import PressHome from './routes/Press/Home';
+import PressCreate from './routes/Press/Create';
 import PressView from './routes/Press/View';
 import CollaboratorsHome from './routes/Collaborators/Home';
 import CollaboratorsCreate from './routes/Collaborators/Create';
@@ -128,6 +129,14 @@ export class Router extends Component {
                 <ProtectedRoute
                   path="/press"
                   component={PressHome}
+                  isAuth={isAuth}
+                  onAuthCheck={onAuthCheck}
+                  exact
+                />
+
+                <ProtectedRoute
+                  path="/press/create"
+                  component={PressCreate}
                   isAuth={isAuth}
                   onAuthCheck={onAuthCheck}
                   exact

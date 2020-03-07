@@ -119,9 +119,45 @@ const COLLABORATOR_FIELDS = [
   }
 ];
 
+const PRESS_FIELDS = [
+  {
+    id: 'author',
+    type: 'text',
+    component: 'TextInput',
+    label: 'Author',
+    placeholder: 'Sky News',
+    required: true
+  },
+  {
+    id: 'title',
+    type: 'text',
+    component: 'TextInput',
+    label: 'Title',
+    placeholder: 'An interview with Fiona Ross',
+    required: true
+  },
+  {
+    id: 'excerpt',
+    type: 'text',
+    component: 'TextInput',
+    label: 'Excerpt',
+    placeholder: 'Fiona has gone from strength to strength since...',
+    required: true
+  },
+  {
+    id: 'externalLink',
+    type: 'text',
+    component: 'TextInput',
+    label: 'URL',
+    placeholder: 'http://skynews.com/fiona-ross',
+    required: true
+  }
+]
+
 class FormFields {
   constructor() {
     this.collaborator = COLLABORATOR_FIELDS;
+    this.press = PRESS_FIELDS;
   }
 }
 
