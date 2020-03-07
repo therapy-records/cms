@@ -11,6 +11,7 @@ const Dashboard = () => (
     <div className='ctas'>
       <Link to='news/create' className='btn'>Create News</Link>
       <Link to='journalism/create' className='btn'>Create Journalism</Link>
+      <Link to='press/create' className='btn'>Create Press</Link>
       <Link to='collaborators/create' className='btn'>Add Collaborator</Link>
     </div>
 

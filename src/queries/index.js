@@ -70,6 +70,9 @@ export const GET_STATS = gql`
     },
     collaborators {
       name
+    },
+    press {
+      author
     }
   }
 `;

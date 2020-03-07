@@ -20,6 +20,11 @@ export const MOCK_GET_STATS = {
         { name: 'a' },
         { name: 'b' },
         { name: 'c' }
+      ],
+      press: [
+        { author: 'a' },
+        { author: 'b' },
+        { author: 'c' }
       ]
     }
   }

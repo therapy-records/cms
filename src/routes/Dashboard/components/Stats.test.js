@@ -49,6 +49,7 @@ describe('(Component) Stats', () => {
         const actual = wrapper.containsAllMatchingElements([
           <li>{mocks[0].result.data.news.length} News articles</li>,
           <li>{mocks[0].result.data.journalism.length} Journalism articles</li>,
+          <li>{mocks[0].result.data.press.length} Press articles</li>,
           <li>{mocks[0].result.data.collaborators.length} Collaborators</li>
         ]);
       });

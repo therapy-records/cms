@@ -13,6 +13,7 @@ const Stats = () => (
         <ul>
           <li>{queryData.news.length} News articles</li>
           <li>{queryData.journalism.length} Journalism articles</li>
+          <li>{queryData.press.length} Press articles</li>
           <li>{queryData.collaborators.length} Collaborators</li>
         </ul>
       )}

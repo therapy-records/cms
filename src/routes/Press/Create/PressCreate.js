@@ -8,7 +8,7 @@ const CollaboratorCreate = () => (
   <article className='container'>
 
     <div className='heading-with-btns'>
-      <h2>Add Press 📢</h2>
+      <h2>Create Press 📢</h2>
     </div>
 
     <div className='col-clear' />
