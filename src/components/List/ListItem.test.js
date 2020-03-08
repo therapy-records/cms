@@ -79,7 +79,7 @@ describe('(Component) ListItem', () => {
 
   it('should render a date', () => {
     const actual = wrapper.containsMatchingElement(
-      <p className='small-tab'>{moment(props.date).format('DD MMM YYYY')}</p>
+      <p className='small-tab'>{moment(new Date(props.date)).format('DD MMM YYYY')}</p>
     );
     expect(actual).to.eq(true);
   });

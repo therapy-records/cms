@@ -42,7 +42,7 @@ const ListItem = ({
           <div>
             <div className='small-tabs-container'>
               {author && <p className='small-tab author'>{author}</p>}
-              {date && <p className='small-tab'>{moment(date).format('DD MMM YYYY')}</p>}
+              {date && <p className='small-tab'>{moment(new Date(date)).format('DD MMM YYYY')}</p>}
             </div>
             <h3>
               <Link
