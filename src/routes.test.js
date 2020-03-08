@@ -21,6 +21,7 @@ import JournalismArticleCreate from './routes/Journalism/ArticleCreate';
 import PressHome from './routes/Press/Home';
 import PressCreate from './routes/Press/Create';
 import PressView from './routes/Press/View';
+import PressEdit from './routes/Press/Edit';
 import Collaborators from './routes/Collaborators/Home';
 import CollaboratorsCreate from './routes/Collaborators/Create';
 import CollaboratorView from './routes/Collaborators/View';
@@ -225,6 +226,19 @@ describe('Router', () => {
       <ProtectedRoute
         path="/press/:id"
         component={PressView}
+        isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
+        exact
+      />
+    );
+    expect(actual).to.equal(true);
+  });
+
+  it('should render press edit route', () => {
+    const actual = wrapper.containsMatchingElement(
+      <ProtectedRoute
+        path="/press/:id/edit"
+        component={PressEdit}
         isAuth={props.isAuth}
         onAuthCheck={props.onAuthCheck}
         exact

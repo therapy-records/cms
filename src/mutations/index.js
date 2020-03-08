@@ -54,7 +54,20 @@ export const CREATE_PRESS = gql`
   }
 `;
 
-export const DELETE_PRESS_ARTICLE = gql`
+export const EDIT_PRESS = gql`
+  mutation($id: ID!, $input: PressInput) {
+    editPress(_id: $id, input: $input) {
+      _id,
+      author,
+      title,
+      excerpt,
+      externalLink,
+      releaseDate
+    }
+  }
+`;
+
+export const DELETE_PRESS = gql`
   mutation($id: ID!) {
     deletePress(_id: $id) {
       _id

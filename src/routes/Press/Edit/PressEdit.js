@@ -4,12 +4,16 @@ import {
   GET_PRESS,
   GET_PRESS_ARTICLE
 } from '../../../queries';
-import { DELETE_PRESS } from '../../../mutations';
+import {
+  EDIT_PRESS,
+  DELETE_PRESS
+} from '../../../mutations';
 import SingleEntityContainer from '../../../containers/SingleEntityContainer';
+import PressForm from '../../../components/PressForm';
+import FormFields from '../../../formFields';
+import mapFieldsWithValues from '../../../utils/form-field-mappings';
 
-const PressView = ({
-  match
-}) => {
+const PressEdit = ({ match }) => {
   const { id } = match.params;
 
   return (
@@ -18,16 +22,26 @@ const PressView = ({
       entityName='pressArticle'
       entityCollection='press'
       id={id}
-      render={entityData => (
-        <div>
-          <h4>Excerpt</h4>
-          <p>{entityData.excerpt}</p>
-
-          <h4>URL</h4>
-          <p><a href={entityData.externalLink} target='_blank'>{entityData.externalLink}</a></p>
-        </div>
-      )}
       query={GET_PRESS_ARTICLE}
+      isEdit
+      render={entityData => (
+        <PressForm
+          mutation={EDIT_PRESS}
+          fields={mapFieldsWithValues(
+            new FormFields().press,
+            entityData
+          )}
+          id={id}
+          refetchQueries={[
+            { query: GET_PRESS },
+            {
+              query: GET_PRESS_ARTICLE,
+              variables: { id }
+            }
+          ]}
+          isEdit
+        />
+      )}
       mutation={DELETE_PRESS}
       mutationSuccessCopy={{
         success: 'Successfully deleted.',
@@ -41,10 +55,10 @@ const PressView = ({
   );
 };
 
-PressView.propTypes = {
+PressEdit.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.object
   })
 };
 
-export default PressView;
+export default PressEdit;

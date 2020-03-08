@@ -5,7 +5,7 @@ import PressCreate from './index';
 import FormFields from '../../../formFields';
 import { CREATE_PRESS } from '../../../mutations';
 import { GET_PRESS } from '../../../queries';
-import Form from '../../../components/Form';
+import PressForm from '../../../components/PressForm';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -28,19 +28,12 @@ describe('(Component) PressCreate', () => {
 
     it('should render <Form />', () => {
       const actual = wrapper.containsMatchingElement(
-        <Form
-          mutation={CREATE_PRESS}
+        <PressForm
           fields={new FormFields().press}
+          mutation={CREATE_PRESS}
           refetchQueries={[
             { query: GET_PRESS }
           ]}
-          baseUrl='/press'
-          submitButtonCopy='Add Press'
-          successCopy={{
-            success: 'Successfully created!',
-            homeLink: 'Go to Press',
-            createLink: 'Create another Press article'
-          }}
         />
       );
       expect(actual).to.equal(true);

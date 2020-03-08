@@ -8,7 +8,7 @@ import {
   GET_PRESS,
   GET_PRESS_ARTICLE
 } from '../../../queries';
-import { DELETE_PRESS_ARTICLE } from '../../../mutations';
+import { DELETE_PRESS } from '../../../mutations';
 import PressView from './PressView';
 import { MOCK_GET_PRESS_ARTICLE } from '../../../mocks/press.mock';
 
@@ -57,7 +57,7 @@ describe('(Component) PressView', () => {
       expect(singleEntityContainer.prop('entityCollection')).to.eq('press');
       expect(singleEntityContainer.prop('id')).to.eq(props.match.params.id);
       expect(singleEntityContainer.prop('query')).to.eq(GET_PRESS_ARTICLE);
-      expect(singleEntityContainer.prop('mutation')).to.eq(DELETE_PRESS_ARTICLE);
+      expect(singleEntityContainer.prop('mutation')).to.eq(DELETE_PRESS);
       expect(singleEntityContainer.prop('mutationSuccessCopy')).to.deep.eq({
         success: 'Successfully deleted.',
         homeLink: 'Go to Press'
