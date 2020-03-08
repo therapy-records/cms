@@ -10,7 +10,7 @@ export class Datepicker extends React.Component {
     super(props);
     let initTime = (props.initTime && !isEmptyString(props.initTime)) && moment(props.initTime);
     if (props.value) {
-      initTime = moment(props.value);
+      initTime = moment(new Date(props.value));
     }
 
     this.state = {
