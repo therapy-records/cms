@@ -5,6 +5,7 @@ import { GET_PRESS } from '../../../queries';
 import List from '../../../components/List';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
 
+
 const PressHome = () => {
 
   return (
@@ -16,6 +17,7 @@ const PressHome = () => {
         render={(queryData) => {
 
           const hasArticles = (queryData && queryData !== null) && queryData.length;
+          const sortedQueryData = queryData.sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate)).reverse();
 
           return (
             <div>
@@ -33,7 +35,7 @@ const PressHome = () => {
 
               {hasArticles ? (
                 <List
-                  data={queryData}
+                  data={sortedQueryData}
                   route='press'
                 />
               ) : (

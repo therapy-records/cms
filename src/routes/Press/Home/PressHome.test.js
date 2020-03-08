@@ -66,10 +66,11 @@ describe('(Component) PressHome', () => {
 
   it('should render a link to create from <QueryContainer /> render prop', async() => {
     await actions(wrapper, () => {
+      const expectedData = MOCK_GET_PRESS.result.data.press.sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate)).reverse();
       wrapper.update()
       const actual = wrapper.containsMatchingElement(
         <List
-          data={MOCK_GET_PRESS.result.data.press}
+          data={expectedData}
           route='press'
         />
       );
