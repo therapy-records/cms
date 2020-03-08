@@ -1,13 +1,18 @@
-import React from 'react'
-import moment from 'moment'
-import PropTypes from 'prop-types'
-import InputMoment from 'input-moment'
-import './InputMoment.css'
+import React from 'react';
+import moment from 'moment';
+import PropTypes from 'prop-types';
+import InputMoment from 'input-moment';
+import { isEmptyString } from '../../utils/strings';
+import './InputMoment.css';
 
 export class Datepicker extends React.Component {
   constructor(props) {
     super(props);
-    const initTime = props.initTime && moment(props.initTime);
+    let initTime = (props.initTime && !isEmptyString(props.initTime)) && moment(props.initTime);
+    if (props.value) {
+      initTime = moment(props.value);
+    }
+
     this.state = {
       m: initTime || moment()
     }
@@ -17,24 +22,46 @@ export class Datepicker extends React.Component {
   componentDidMount() {
     const {
       initTime,
-      input
+      input,
+      onChange
     } = this.props;
     
     if (!initTime) {
-      input.onChange(this.state.m);
+      if (input && input.onChange) {
+        input.onChange(this.state.m);
+      } else if (onChange) {
+        onChange(
+          this.state.m
+        );
+      }
     }
   }
 
   handleChange(e) {
+    const {
+      input,
+      onChange
+    } = this.props;
+   
     this.setState({ m: e });
-    this.props.input.onChange(moment(e).toISOString());
+
+    if (input && input.onChange) {
+      input.onChange(moment(e).toISOString());
+    } else if (onChange) {
+      onChange(
+        moment(e).toISOString()
+      );
+    }
+
   }
 
   render() {
     const {
       input,
       initTime,
-      title
+      title,
+      name,
+      showSingleHiddenInputValue
     } = this.props;
 
     const { m } = this.state;
@@ -53,15 +80,36 @@ export class Datepicker extends React.Component {
             onChange={this.handleChange}
           />
         </div>
+
+        {showSingleHiddenInputValue &&
+          <input
+            type='hidden'
+            name={name}
+            value={initTime ? moment(initTime).toISOString() : moment(m).toISOString()}
+        />
+      }
       </div>
     );
   }
 }
 
 Datepicker.propTypes = {
-  input: PropTypes.object.isRequired,
+  input: PropTypes.object,
   initTime: PropTypes.any,
-  title: PropTypes.string
-}
+  title: PropTypes.string,
+  onChange: PropTypes.func,
+  showSingleHiddenInputValue: PropTypes.bool,
+  name: PropTypes.string,
+  value: PropTypes.string
+};
+
+Datepicker.defaultProps = {
+  initTime: '',
+  title: '',
+  onChange: null,
+  showSingleHiddenInputValue: false,
+  name: '',
+  value: ''
+};
 
 export default Datepicker;

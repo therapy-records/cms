@@ -4,6 +4,7 @@ import TextInput from '../TextInput';
 import TextInputsList from '../TextInputsList';
 import DropzoneImageUpload from '../../DropzoneImageUpload';
 import RichTextEditor from '../../RichTextEditor';
+import Datepicker from '../../Datepicker';
 
 const FormFieldInput = ({
   id,
@@ -59,6 +60,16 @@ const FormFieldInput = ({
         existingImages={[value]}
       />
     )
+  } else if (component === 'Datepicker') {
+    return (
+      <Datepicker
+        onChange={onChange}
+        name={id}
+        value={value}
+        showSingleHiddenInputValue
+      />
+    )
+    
   } else if (component === 'TextInputsList') {
     if (type === 'arrayOfStrings') {
       return (

@@ -1,11 +1,13 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import moment from 'moment';
 import FormFieldInput from './FormFieldInput';
 import TextInput from '../TextInput';
 import TextInputsList from '../TextInputsList';
 import DropzoneImageUpload from '../../DropzoneImageUpload';
 import RichTextEditor from '../../RichTextEditor';
+import Datepicker from '../../Datepicker';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -109,6 +111,30 @@ describe('(Component) FormFieldInput', () => {
             ctaCopy={mockField.ctaCopy}
             onChange={mockOnChange}
             existingImages={[mockField.value]}
+          />
+        );
+        expect(actual).to.eq(true);
+      });
+    });
+
+    describe('when field.component is `Datepicker`', () => {
+      it('should render <Datepicker />', () => {
+        const mockField = {
+          id: 'test',
+          component: 'Datepicker',
+          value: moment.now().toString()
+        };
+        wrapper.setProps({
+          ...mockField,
+          onChange: mockOnChange
+        });
+
+        const actual = wrapper.containsMatchingElement(
+          <Datepicker
+            onChange={mockOnChange}
+            name={mockField.id}
+            value={mockField.value}
+            showSingleHiddenInputValue
           />
         );
         expect(actual).to.eq(true);

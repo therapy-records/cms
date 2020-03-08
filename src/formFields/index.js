@@ -151,6 +151,13 @@ const PRESS_FIELDS = [
     label: 'URL',
     placeholder: 'http://skynews.com/fiona-ross',
     required: true
+  },
+  {
+    id: 'releaseDate',
+    type: 'text',
+    component: 'Datepicker',
+    label: 'Release Date',
+    required: true
   }
 ]
 
