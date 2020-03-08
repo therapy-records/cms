@@ -6,6 +6,7 @@ import FormFields from '../../../formFields';
 import { CREATE_PRESS } from '../../../mutations';
 import { GET_PRESS } from '../../../queries';
 import PressForm from '../../../components/PressForm';
+import { mapFields } from '../../../utils/form-field-mappings';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -29,7 +30,7 @@ describe('(Component) PressCreate', () => {
     it('should render <Form />', () => {
       const actual = wrapper.containsMatchingElement(
         <PressForm
-          fields={new FormFields().press}
+          fields={mapFields(new FormFields().press)}
           mutation={CREATE_PRESS}
           refetchQueries={[
             { query: GET_PRESS }

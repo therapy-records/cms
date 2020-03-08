@@ -66,4 +66,14 @@ export const mapFieldsWithValues = (fields, valuesObj) =>
     return field;
   });
 
+// for some reason, when creating multiple press articles
+// when <Form /> is rendered again, it can render old values.
+// this mapping works around this issue.
+// not a great solution as it doesn't fix the root cause.
+export const mapFields = fields =>
+  fields.map(f => ({
+    ...f,
+    value: ''
+  }));
+
 export default mapFieldsWithValues;

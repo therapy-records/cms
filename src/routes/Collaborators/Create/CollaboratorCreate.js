@@ -3,6 +3,7 @@ import FormFields from '../../../formFields';
 import { CREATE_COLLABORATOR } from '../../../mutations';
 import { GET_COLLABORATORS } from '../../../queries';
 import CollaboratorForm from '../../../components/CollaboratorForm';
+import { mapFields } from '../../../utils/form-field-mappings';
 
 const CollaboratorCreate = () => (
   <article className='container'>
@@ -14,7 +15,7 @@ const CollaboratorCreate = () => (
     <div className='col-clear' />
 
     <CollaboratorForm
-      fields={new FormFields().collaborator}
+      fields={mapFields(new FormFields().collaborator)}
       mutation={CREATE_COLLABORATOR}
       refetchQueries={[
         { query: GET_COLLABORATORS }

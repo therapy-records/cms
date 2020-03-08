@@ -3,7 +3,8 @@ import mapFieldsWithValues, {
   isFieldArrayWithValues,
   mapFieldArrayOfObjectsWithValues,
   mapFieldArrayOfStringsWithValues,
-  mapFieldArray
+  mapFieldArray,
+  mapFields
 } from './form-field-mappings';
 
 describe('(Utils) form-field-mappings', () => {
@@ -239,4 +240,21 @@ describe('(Utils) form-field-mappings', () => {
       expect(result).to.deep.eq(expected);
     });
   });
+
+  describe('mapFields', () => {
+    it('should return an array with empty value properties', () => {
+      const mockFields = [
+        { id: 'a', value: 'testing' },
+        { id: 'b', value: 'testing' },
+        { id: 'c', value: 'testing' }
+      ];
+      const result = mapFields(mockFields);
+      expect(result).to.deep.eq([
+        { id: 'a', value: '' },
+        { id: 'b', value: '' },
+        { id: 'c', value: '' }
+      ]);
+    });
+  });
+
 });
