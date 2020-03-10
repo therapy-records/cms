@@ -9,7 +9,7 @@ const SuccessMessage = ({
 }) => {
 
   const heading = copy.success || 'Success!';
-  const showResetButton = (onReset && copy.createLink);
+  const showCreateNew = (onReset && copy.createLink);
 
   return (
     <div>
@@ -20,15 +20,18 @@ const SuccessMessage = ({
         <Link
           to={baseUrl}
           className='btn'
+          onClick={onReset}
         >{copy.homeLink}
         </Link>
 
-        {showResetButton && (
-          <button
+        {showCreateNew &&
+          <Link
+            to={`${baseUrl}/create`}
+            className='btn'
             onClick={onReset}
           >{copy.createLink}
-          </button>
-        )}
+          </Link>
+        }
 
       </div>
     </div>

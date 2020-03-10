@@ -68,13 +68,14 @@ describe('(Component) SuccessMessage', () => {
     expect(actual).to.eq(true);
   });
 
-  it('should render a button', () => {
+  it('should render a <Link /> to create new', () => {
     const actual = wrapper.containsMatchingElement(
-      <button
+      <Link
+        to={`${props.baseUrl}/create`}
+        className='btn'
         onClick={props.onReset}
-      >
-        {props.copy.createLink}
-      </button>
+      >{props.copy.createLink}
+      </Link>
     );
     expect(actual).to.eq(true);
   });
