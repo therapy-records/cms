@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const TextInput = ({
+const TextArea = ({
   name,
   placeholder,
   hideLabel,
   autoFocus,
-  type,
   maxLength,
   value: initValue,
   onChange
@@ -24,24 +23,23 @@ const TextInput = ({
   return (
     <div className='text-input-container'>
 
-      <input
+      <textarea
         id={name}
         name={name}
         placeholder={placeholder}
-        type={type}
         autoFocus={autoFocus}
         maxLength={maxLength}
         value={value}
         onChange={e => handleOnChange(e.target.value)}
+        rows="2"
       />
 
     </div>
   );
 };
 
-TextInput.propTypes = {
+TextArea.propTypes = {
   name: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   hideLabel: PropTypes.bool,
   autoFocus: PropTypes.bool,
@@ -50,8 +48,8 @@ TextInput.propTypes = {
   onChange: PropTypes.func
 };
 
-TextInput.defaultProps = {
+TextArea.defaultProps = {
   value: ''
 };
 
-export default TextInput;
+export default TextArea;

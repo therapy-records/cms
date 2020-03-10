@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import TextArea from '../TextArea';
 import TextInput from '../TextInput';
 import TextInputsList from '../TextInputsList';
 import DropzoneImageUpload from '../../DropzoneImageUpload';
@@ -20,6 +21,7 @@ const FormFieldInput = ({
   fieldsetLegend,
   items,
   onChange,
+  maxLength,
   value
 }) => {
   if (component === 'TextInput') {
@@ -31,6 +33,18 @@ const FormFieldInput = ({
         name={id}
         required={required}
         onChange={onChange}
+        value={value}
+      />
+    )
+  } else if (component === 'TextArea') {
+    return (
+      <TextArea
+        placeholder={placeholder}
+        label={label}
+        name={id}
+        required={required}
+        onChange={onChange}
+        maxLength={maxLength}
         value={value}
       />
     )
@@ -115,6 +129,7 @@ FormFieldInput.propTypes = {
   fieldsetLegend: PropTypes.string,
   items: PropTypes.array,
   onChange: PropTypes.func,
+  maxLength: PropTypes.number,
   value: PropTypes.string
 };
 
@@ -129,6 +144,7 @@ FormFieldInput.defaultProps = {
   fieldsetLegend: '',
   items: [],
   onChange: null,
+  maxLength: null,
   value: ''
 };
 

@@ -75,7 +75,8 @@ body {
   @media(min-width: $bp-md) {
     margin-bottom: 4em;
   }
-  input {
+  input,
+  textarea {
     margin-bottom: 0;
   }
   .form-error {

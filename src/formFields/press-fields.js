@@ -18,10 +18,11 @@ const PRESS_FIELDS = [
   {
     id: 'excerpt',
     type: 'text',
-    component: 'TextInput',
+    component: 'TextArea',
     label: 'Excerpt',
     placeholder: 'Fiona has gone from strength to strength since...',
-    required: true
+    required: true,
+    maxLength: 150
   },
   {
     id: 'externalLink',

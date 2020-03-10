@@ -3,6 +3,7 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import moment from 'moment';
 import FormFieldInput from './FormFieldInput';
+import TextArea from '../TextArea';
 import TextInput from '../TextInput';
 import TextInputsList from '../TextInputsList';
 import DropzoneImageUpload from '../../DropzoneImageUpload';
@@ -49,6 +50,36 @@ describe('(Component) FormFieldInput', () => {
             name={mockField.id}
             required={mockField.required}
             onChange={mockOnChange}
+            value={mockField.value}
+          />
+        );
+        expect(actual).to.eq(true);
+      });
+    });
+
+    describe('when field.component is `TextArea`', () => {
+      it('should render <TextArea />', () => {
+        const mockField = {
+          id: 'test',
+          component: 'TextArea',
+          placeholder: 'testing',
+          label: 'Test',
+          required: true,
+          maxLength: 100
+        };
+        wrapper.setProps({
+          ...mockField,
+          onChange: mockOnChange
+        });
+
+        const actual = wrapper.containsMatchingElement(
+          <TextArea
+            placeholder={mockField.placeholder}
+            label={mockField.label}
+            name={mockField.id}
+            required={mockField.required}
+            onChange={mockOnChange}
+            maxLength={mockField.maxLength}
             value={mockField.value}
           />
         );

@@ -33,8 +33,6 @@ textInput.propTypes = {
   type: PropTypes.string.isRequired,
   meta: PropTypes.object.isRequired,
   placeholder: PropTypes.string,
-  props: PropTypes.object,
-  smallLabelSize: PropTypes.bool,
   hideLabel: PropTypes.bool,
   autoFocus: PropTypes.bool,
   required: PropTypes.bool,
