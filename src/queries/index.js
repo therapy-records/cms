@@ -1,5 +1,32 @@
 import { gql } from 'apollo-boost';
 
+
+export const GET_GIGS = gql`
+  {
+    gigs {
+      _id,
+      title,
+      location,
+      venue,
+      date,
+      ticketsUrl
+    }
+  }
+`
+
+export const GET_GIG = gql`
+  query($id: ID!) {
+    gig(_id: $id) {
+      _id,
+      title,
+      location,
+      venue,
+      date,
+      ticketsUrl
+    } 
+  }
+`
+
 export const GET_COLLABORATORS = gql`
   {
     collaborators {
