@@ -23,8 +23,8 @@ import {
 } from '../../constants';
 
 export const JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS = {
-  width: 600,
-  height: 600
+  width: 650,
+  height: 650
 };
 
 export class JournalismForm extends React.Component {
@@ -114,6 +114,7 @@ export class JournalismForm extends React.Component {
                    existingImages={formValues && formValues.imageUrl && [formValues.imageUrl]}
                    validate={required}
                    minImageDimensions={JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS}
+                   helpText='Dimensions must be equal'
                    ctaCopy='Drag & drop image'
                    required
             />

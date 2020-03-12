@@ -34,7 +34,7 @@ const COLLABORATOR_FIELDS = [
       width: 250,
       height: 250
     },
-    helpText: 'must be at least 250px by 250px'
+    helpText: 'Must be at least 250px by 250px'
   },
   {
     id: 'collabOn',
