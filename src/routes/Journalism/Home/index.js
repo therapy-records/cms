@@ -46,6 +46,13 @@ export class Journalism extends React.Component {
     } = this.props;
 
     const hasArticles = (articles && articles !== null) && articles.length;
+    let sortedArticles;
+    if (hasArticles) {
+      sortedArticles = articles.sort((a, b) =>
+        new Date(a.releaseDate) - new Date(b.releaseDate)
+      ).reverse();
+    }
+
 
     return (
       <div className='container'>
@@ -70,7 +77,7 @@ export class Journalism extends React.Component {
             {hasArticles
               ? (
                 <List
-                  data={articles}
+                data={sortedArticles}
                   route='journalism'
                   onItemClick={this.handleButtonClick}
                   onViewButtonClick={this.handleButtonClick}
