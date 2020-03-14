@@ -2,11 +2,11 @@ import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import ReactModal from 'react-modal';
-import ArticleDeleteModal from './ArticleDeleteModal';
+import DeleteModal from './DeleteModal';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('(Component) ArticleDeleteModal', () => {
+describe('(Component) DeleteModal', () => {
   let wrapper,
     props = {
       handleModalClose: () => {},
@@ -15,7 +15,7 @@ describe('(Component) ArticleDeleteModal', () => {
 
   it('should render <ReactModal />', () => {
     wrapper = shallow(
-      <ArticleDeleteModal {...props} />
+      <DeleteModal {...props} />
     );
     const actual = wrapper.containsMatchingElement(
       <ReactModal
@@ -44,7 +44,7 @@ describe('(Component) ArticleDeleteModal', () => {
         ...props,
         onDeleteArticle: sinon.spy()
       };
-      const buttonWrapper = shallow(<ArticleDeleteModal {...buttonProps} />);
+      const buttonWrapper = shallow(<DeleteModal {...buttonProps} />);
       const button = buttonWrapper.find('button');
       button.simulate('click');
       expect(buttonProps.onDeleteArticle.calledOnce).to.eq(true);

@@ -7,7 +7,7 @@ if (process.env.NODE_ENV !== 'test') {
   ReactModal.setAppElement('#root');
 }
 
-class ArticleDeleteModal extends React.Component {
+class DeleteModal extends React.Component {
   render() {
     const {
       handleModalClose,
@@ -35,10 +35,10 @@ class ArticleDeleteModal extends React.Component {
   }
 }
 
-ArticleDeleteModal.propTypes = {
+DeleteModal.propTypes = {
   handleModalClose: PropTypes.func.isRequired,
   onDeleteArticle: PropTypes.func.isRequired,
   promiseLoading: PropTypes.bool
 }
 
-export default ArticleDeleteModal
+export default DeleteModal

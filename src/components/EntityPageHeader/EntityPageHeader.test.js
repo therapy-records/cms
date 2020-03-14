@@ -4,7 +4,7 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import moment from 'moment';
 import EntityPageHeader from './index';
-import ArticleDeleteModal from '../ArticleDeleteModal';
+import DeleteModal from '../DeleteModal';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -193,9 +193,9 @@ describe('(Component) EntityPageHeader', () => {
         wrapper = shallow(<EntityPageHeader {...props} />);
       });
 
-      it('should not render <ArticleDeleteModal /> by default', () => {
+      it('should not render <DeleteModal /> by default', () => {
         const actual = wrapper.containsMatchingElement(
-          <ArticleDeleteModal
+          <DeleteModal
             handleModalClose={wrapper.instance().handleModalClose}
             onDeleteArticle={wrapper.instance().handleOnDeleteArticle}
           />
@@ -203,11 +203,11 @@ describe('(Component) EntityPageHeader', () => {
         expect(actual).to.equal(false);
       });
 
-      it('should set state and render <ArticleDeleteModal />', () => {
+      it('should set state and render <DeleteModal />', () => {
         const button = wrapper.find('button');
         button.simulate('click');
         const actual = wrapper.containsMatchingElement(
-          <ArticleDeleteModal
+          <DeleteModal
             handleModalClose={wrapper.instance().handleModalClose}
             onDeleteArticle={wrapper.instance().handleOnDeleteArticle}
           />

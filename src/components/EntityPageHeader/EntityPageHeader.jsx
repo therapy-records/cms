@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import ArticleDeleteModal from '../ArticleDeleteModal';
+import DeleteModal from '../DeleteModal';
 import './styles.css';
 
 class EntityPageHeader extends Component {
@@ -95,7 +95,7 @@ class EntityPageHeader extends Component {
         </div>
 
         {(showDeleteButton && !promiseLoading && isShowingModal) &&
-          <ArticleDeleteModal
+          <DeleteModal
             handleModalClose={this.handleModalClose}
             onDeleteArticle={this.handleOnDeleteArticle}
           />
