@@ -64,7 +64,6 @@ export class ArticleEdit extends React.Component {
       location
     } = this.props;
 
-    // todo: move to will/did update
     if (article && article.isDeleted) {
       redirect.redirectHistory(this.props.history, '/news');
     }
