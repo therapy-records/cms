@@ -5,6 +5,7 @@ import moment from 'moment';
 import DeleteModal from '../DeleteModal';
 import './styles.css';
 
+// TODO: use hooks
 class EntityPageHeader extends Component {
   constructor() {
     super();
@@ -32,12 +33,14 @@ class EntityPageHeader extends Component {
 
   render() {
     const {
-      baseUrl,
+      entityName,
       entity,
       heading,
       promiseLoading,
       showEditButton,
       showDeleteButton,
+      showCreateButton,
+      bespokeButton,
       longHeading
     } = this.props;
 
@@ -79,10 +82,22 @@ class EntityPageHeader extends Component {
 
               {showEditButton && (
                 <Link
-                  to={`${baseUrl}/${entity._id}/edit`}
-                  className='btn btn-edit'
+                  to={`/${entityName}/${entity._id}/edit`}
+                  className='btn'
                 >Edit
                 </Link>
+              )}
+
+              {showCreateButton && (
+                <Link
+                  to={`/${entityName}/create`}
+                  className='btn'
+                >Create
+                </Link>
+              )}
+
+              {bespokeButton && (
+                bespokeButton
               )}
 
             </div>
@@ -103,21 +118,26 @@ class EntityPageHeader extends Component {
 }
 
 EntityPageHeader.propTypes = {
-  baseUrl: PropTypes.string.isRequired,
   entity: PropTypes.object.isRequired,
   heading: PropTypes.string.isRequired,
+  entityName: PropTypes.string.isRequired,
   onDeleteEntity: PropTypes.func,
   promiseLoading: PropTypes.bool,
   showEditButton: PropTypes.bool,
   showDeleteButton: PropTypes.bool,
+  showCreateButton: PropTypes.bool,
+  bespokeButton: PropTypes.node,
   longHeading: PropTypes.bool
 };
 
 EntityPageHeader.defaultProps = {
+  entityName: '',
   onDeleteEntity: null,
   promiseLoading: false,
   showEditButton: false,
   showDeleteButton: false,
+  showCreateButton: false,
+  bespokeButton: null,
   longHeading: false
 };
 

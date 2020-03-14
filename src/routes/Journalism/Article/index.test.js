@@ -222,7 +222,7 @@ describe('(Component) Journalism - Article', () => {
       it('should render', () => {
         const entityPageHeader = wrapper.find('EntityPageHeader');
         expect(entityPageHeader.length).to.eq(1);
-        expect(entityPageHeader.prop('baseUrl')).to.eq('/journalism');
+        expect(entityPageHeader.prop('entityName')).to.eq('journalism');
         expect(entityPageHeader.prop('entity')).to.eq(mockArticle);
         expect(entityPageHeader.prop('heading')).to.eq(entityHeading(mockArticle));
         expect(entityPageHeader.prop('onDeleteEntity')).to.be.a('function');

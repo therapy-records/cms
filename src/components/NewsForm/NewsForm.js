@@ -56,7 +56,7 @@ export class NewsForm extends React.Component {
       <section className='article-create'>
 
         <EntityPageHeader
-          baseUrl='/news'
+          entityName='news'
           entity={formValues}
           heading={isEditForm ? `Editing ${formValues && formValues.title} 🗞️` : 'Create News 🗞️'}
           onDeleteEntity={isEditForm ? () => onDeleteEntity(articleId) : null}

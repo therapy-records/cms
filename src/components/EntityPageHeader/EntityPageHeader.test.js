@@ -34,13 +34,14 @@ describe('(Component) EntityPageHeader', () => {
       releaseDate: '2019-08-10T11:17:02.883Z'
     },
     baseProps = {
-      baseUrl: '/news',
       promiseLoading: false,
       entity: mockEntity,
+      entityName: 'press',
       heading: 'test',
       onDeleteEntity: sinon.spy(),
       showEditButton: true,
-      showDeleteButton: true
+      showDeleteButton: true,
+      showCreateButton: true
     };
   props = baseProps;
 
@@ -164,10 +165,10 @@ describe('(Component) EntityPageHeader', () => {
       });
     });
 
-    it('should be render an `edit` button', () => {
-      const editButton = wrapper.find(Link);
+    it('should render an `edit` button', () => {
+      const editButton = wrapper.find(Link).first();
       expect(editButton.length).to.eq(1);
-      const expectedTo = `${baseProps.baseUrl}/${baseProps.entity._id}/edit`;
+      const expectedTo = `/${baseProps.entityName}/${baseProps.entity._id}/edit`;
       expect(editButton.prop('to')).to.eq(expectedTo);
     });
 
@@ -203,6 +204,25 @@ describe('(Component) EntityPageHeader', () => {
         expect(actual).to.equal(true);
       });
     });
+
+    it('should render a `create` Link', () => {
+      const editButton = wrapper.find(Link).last();
+      expect(editButton.length).to.eq(1);
+      const expectedTo = `/${baseProps.entityName}/create`;
+      expect(editButton.prop('to')).to.eq(expectedTo);
+    });
+
+    describe('bespoke button', () => {
+      it('should render bespokeButton element', () => {
+        const mockBespokeButton = <button onClick={null}>test</button>;
+        wrapper.setProps({
+          bespokeButton: mockBespokeButton
+        });
+        const actual = wrapper.containsMatchingElement(mockBespokeButton);
+        expect(actual).to.eq(true);
+      });
+    });
+
   });
 
 });

@@ -55,7 +55,7 @@ describe('(Component) JournalismForm', () => {
     it('should render', () => {
       const entityPageHeader = wrapper.find('EntityPageHeader');
       expect(entityPageHeader.length).to.eq(1);
-      expect(entityPageHeader.prop('baseUrl')).to.eq('/journalism');
+      expect(entityPageHeader.prop('entityName')).to.eq('journalism');
       expect(entityPageHeader.prop('entity')).to.eq(props.formValues);
       expect(entityPageHeader.prop('onDeleteEntity')).to.be.a('function');
       expect(entityPageHeader.prop('heading')).to.eq('Create Journalism ✍️');
