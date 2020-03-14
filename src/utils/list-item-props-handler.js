@@ -23,7 +23,10 @@ const listItemPropsHandler = ({
     avatarUrl,
     excerpt,
     date,
-    releaseDate
+    releaseDate,
+    location,
+    venue,
+    ticketsUrl
   } = item;
 
   // TODO: rename itemTitle / item.title to `heading`
@@ -42,7 +45,10 @@ const listItemPropsHandler = ({
     date: itemDate,
     route,
     cardDesign,
-    isDraggable
+    isDraggable,
+    location,
+    venue,
+    ticketsUrl
   };
 };
 

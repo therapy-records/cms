@@ -23,6 +23,7 @@ const Gigs = () => {
           return (
             <div>
 
+              
               <div className='heading-with-btns'>
 
                 <div>
@@ -33,11 +34,12 @@ const Gigs = () => {
                   <Link to='gigs/create' className='btn'>Create</Link>
                 </div>
               </div>
+              
 
               {hasGigs ? (
                 <List
                   data={sortedQueryData}
-                  route='press'
+                  route='gigs'
                 />
               ) : (
                 <div>

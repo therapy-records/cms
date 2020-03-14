@@ -17,7 +17,10 @@ const ListItem = ({
   onViewButtonClick,
   onEditButtonClick,
   cardDesign,
-  isDraggable
+  isDraggable,
+  location,
+  venue,
+  ticketsUrl
 }) => {
 
   let containerClassName = cardDesign ? 'list-item-card' : 'list-item-row';
@@ -41,6 +44,10 @@ const ListItem = ({
         <div className='content'>
           <div>
             <div className='small-tabs-container'>
+              
+              {location ? location : ''}
+              {venue ? venue : ''}
+              {ticketsUrl ? ticketsUrl : ''}
               {author && <p className='small-tab author'>{author}</p>}
               {date && <p className='small-tab'>{moment(new Date(date)).format('DD MMM YYYY')}</p>}
             </div>
@@ -94,7 +101,10 @@ ListItem.propTypes = {
   onViewButtonClick: PropTypes.func,
   onEditButtonClick: PropTypes.func,
   cardDesign: PropTypes.bool,
-  isDraggable: PropTypes.bool
+  isDraggable: PropTypes.bool,
+  location: PropTypes.string,
+  venue: PropTypes.string.isRequired,
+  ticketsUrl: PropTypes.string
 };
 
 ListItem.defaultProps = {
@@ -106,7 +116,10 @@ ListItem.defaultProps = {
   onViewButtonClick: null,
   onEditButtonClick: null,
   cardDesign: false,
-  isDraggable: false
+  isDraggable: false,
+  location: '',
+  venue: '',
+  ticketsUrl: ''
 };
 
 export default ListItem;
