@@ -46,9 +46,9 @@ const ListItem = ({
             <div className='small-tabs-container'>
 
               
-              {location ? location : ''}
+              {/* {location ? location : ''}
               {venue ? venue : ''}
-              {ticketsUrl ? ticketsUrl : ''}
+              {ticketsUrl ? ticketsUrl : ''} */}
 
               {author && <p className='small-tab author'>{author}</p>}
               {date && <p className='small-tab'>{moment(new Date(date)).format('DD MMM YYYY')}</p>}
@@ -63,6 +63,40 @@ const ListItem = ({
             </h3>
           </div>
 
+          {/*  */}
+
+          {/* <div>
+        <div className="gigs-card">
+          <div className="left">
+            <p>{date}</p>
+            <p>{date}</p>
+          </div>
+
+          <div className="middle">
+            <p className="title-gig">
+              <Link to={_id}>{title}</Link>
+            </p>
+            <p>{date}</p>
+            <p>{venue}</p>
+            <p>{location}</p>
+            <p>Tickets: <a href={ticketsUrl}>{ticketsUrl}</a></p>
+          </div>  
+          <div className="right">
+            <div>
+              <Link className='btn btn-sm btn-view' >View</Link>
+            </div>
+            <div>
+              <Link className='btn btn-sm btn-view' >Edit</Link>
+            </div>
+            
+          </div>
+
+        </div>
+      </div> */}
+
+      {/*  */}
+
+          
           {excerpt && <p>{excerpt}</p>}
 
           <div className='btns-container btns-always-inline'>

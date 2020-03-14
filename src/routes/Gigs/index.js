@@ -1,11 +1,9 @@
-// import { connect } from 'react-redux';
 import React from 'react'
 import List from '../../components/List';
 import QueryContainer from '../../containers/QueryContainer';
 import { GET_GIGS } from "../../queries/index"
 import { Link } from 'react-router-dom';
 // import EmptyMessage from '../../components/EmptyMessage/EmptyMessage';
-
 
 const Gigs = () => {
 
@@ -27,7 +25,7 @@ const Gigs = () => {
               <div className='heading-with-btns'>
 
                 <div>
-                  <h2>Gigs 🗓️</h2>
+                  <h2>Gigss 🗓️</h2>
                 </div>
 
                 <div className='action-btns'>
