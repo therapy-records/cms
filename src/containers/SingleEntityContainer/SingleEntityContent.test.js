@@ -38,7 +38,7 @@ describe('(Container Component) SingleEntityContent', () => {
 
     it('should render', () => {
       expect(entityPageHeader.prop('baseUrl')).to.eq(props.baseUrl);
-      expect(entityPageHeader.prop('article')).to.deep.eq({
+      expect(entityPageHeader.prop('entity')).to.deep.eq({
         _id: props.data._id,
         author: props.data.author,
         releaseDate: props.data.releaseDate,

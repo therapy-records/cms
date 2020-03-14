@@ -26,14 +26,14 @@ class EntityPageHeader extends Component {
   }
 
   handleOnDelete() {
-    this.props.onDeleteEntity(this.props.article._id)
+    this.props.onDeleteEntity(this.props.entity._id)
     this.handleOnModalClose();
   }
 
   render() {
     const {
       baseUrl,
-      article,
+      entity,
       heading,
       promiseLoading,
       showEditButton,
@@ -52,16 +52,16 @@ class EntityPageHeader extends Component {
 
             <h2>{heading}</h2>
 
-            {article.author &&
-              <p className='small-tab author'>{article.author}</p>
+            {entity.author &&
+              <p className='small-tab author'>{entity.author}</p>
             }
 
-            {(article.releaseDate || article.createdAt) && (
-              <p className='small-tab'>Released {moment(article.releaseDate || article.createdAt).format('DD MMM YYYY')}</p>
+            {(entity.releaseDate || entity.createdAt) && (
+              <p className='small-tab'>Released {moment(entity.releaseDate || entity.createdAt).format('DD MMM YYYY')}</p>
             )}
 
-            {article.editedAt && (
-              <p className='small-tab'>Edited {moment(article.editedAt).fromNow()}</p>
+            {entity.editedAt && (
+              <p className='small-tab'>Edited {moment(entity.editedAt).fromNow()}</p>
             )}
 
           </div>
@@ -79,7 +79,7 @@ class EntityPageHeader extends Component {
 
               {showEditButton && (
                 <Link
-                  to={`${baseUrl}/${article._id}/edit`}
+                  to={`${baseUrl}/${entity._id}/edit`}
                   className='btn btn-edit'
                 >Edit
                 </Link>
@@ -104,7 +104,7 @@ class EntityPageHeader extends Component {
 
 EntityPageHeader.propTypes = {
   baseUrl: PropTypes.string.isRequired,
-  article: PropTypes.object.isRequired,
+  entity: PropTypes.object.isRequired,
   heading: PropTypes.string.isRequired,
   onDeleteEntity: PropTypes.func,
   promiseLoading: PropTypes.bool,

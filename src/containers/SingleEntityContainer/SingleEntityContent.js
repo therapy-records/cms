@@ -19,7 +19,7 @@ const SingleEntityContent = ({
 
       <EntityPageHeader
         baseUrl={baseUrl}
-        article={{
+        entity={{
           _id: data._id,
           author: data.author,
           releaseDate: data.releaseDate,

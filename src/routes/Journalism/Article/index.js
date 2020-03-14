@@ -84,7 +84,7 @@ export class Article extends React.Component {
 
             <EntityPageHeader
               baseUrl='/journalism'
-              article={article}
+              entity={article}
               heading={entityHeading(article)}
               onDeleteEntity={() => onDeleteEntity(article._id)}
               promiseLoading={promiseLoading}

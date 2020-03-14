@@ -11,7 +11,7 @@ Enzyme.configure({ adapter: new Adapter() });
 describe('(Component) EntityPageHeader', () => {
   let wrapper,
     props,
-    mockArticle = {
+    mockEntity = {
       _id: 'asdf1234',
       title: 'hello world',
       sections: [
@@ -36,7 +36,7 @@ describe('(Component) EntityPageHeader', () => {
     baseProps = {
       baseUrl: '/news',
       promiseLoading: false,
-      article: mockArticle,
+      entity: mockEntity,
       heading: 'test',
       onDeleteEntity: sinon.spy(),
       showEditButton: true,
@@ -73,7 +73,7 @@ describe('(Component) EntityPageHeader', () => {
         wrapper.instance().handleOnDelete();
         expect(onDeleteEntitySpy).to.have.been.calledOnce;
         expect(onDeleteEntitySpy).to.have.been.calledWith(
-          props.article._id
+          props.entity._id
         );
       });
 
@@ -109,25 +109,25 @@ describe('(Component) EntityPageHeader', () => {
 
     it('should render `author`', () => {
       const actual = wrapper.containsMatchingElement(
-        <p className='small-tab author'>{mockArticle.author}</p>
+        <p className='small-tab author'>{mockEntity.author}</p>
       );
       expect(actual).to.eq(true);
     });
 
     it('should render `releaseDate`', () => {
-      const expectedDate = moment(mockArticle.releaseDate).format('DD MMM YYYY');
+      const expectedDate = moment(mockEntity.releaseDate).format('DD MMM YYYY');
       const actual = wrapper.containsMatchingElement(
         <p className='small-tab'>Released {expectedDate}</p>
       );
       expect(actual).to.eq(true);
     });
 
-    describe('when article has `createdAt`', () => {
+    describe('when entity has `createdAt`', () => {
       it('should render `createdAt` with copy', () => {
         const mockDate = '2019-08-10T11:17:02.883Z';
         wrapper.setProps({
-          article: {
-            ...mockArticle,
+          entity: {
+            ...mockEntity,
             createdAt: mockDate
           }
         });
@@ -140,19 +140,19 @@ describe('(Component) EntityPageHeader', () => {
     });
 
     it('should render `releaseDate`', () => {
-      const expectedDate = moment(mockArticle.releaseDate).format('DD MMM YYYY');
+      const expectedDate = moment(mockEntity.releaseDate).format('DD MMM YYYY');
       const actual = wrapper.containsMatchingElement(
         <p className='small-tab'>Released {expectedDate}</p>
       );
       expect(actual).to.eq(true);
     });
 
-    describe('when an article has `editedAt`', () => {
+    describe('when an entity has `editedAt`', () => {
       it('should render `editedAt` with copy', () => {
         const mockDate = '2019-08-10T11:17:02.883Z';
         wrapper.setProps({
-          article: {
-            ...mockArticle,
+          entity: {
+            ...mockEntity,
             editedAt: mockDate
           }
         });
@@ -164,17 +164,17 @@ describe('(Component) EntityPageHeader', () => {
       });
     });
 
-    it('should be render an `edit article` button', () => {
+    it('should be render an `edit` button', () => {
       const editButton = wrapper.find(Link);
       expect(editButton.length).to.eq(1);
-      const expectedTo = `${baseProps.baseUrl}/${baseProps.article._id}/edit`;
+      const expectedTo = `${baseProps.baseUrl}/${baseProps.entity._id}/edit`;
       expect(editButton.prop('to')).to.eq(expectedTo);
     });
 
     describe('delete button', () => {
       beforeEach(() => {
         props = baseProps;
-        props.article = mockArticle;
+        props.entity = mockEntity;
         props.handleOnModalOpen = sinon.spy();
         props.handleOnModalClose = () => { };
         props.promiseLoading = false;

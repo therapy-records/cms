@@ -61,7 +61,7 @@ export class JournalismForm extends React.Component {
 
         <EntityPageHeader
           baseUrl='/journalism'
-          article={formValues}
+          entity={formValues}
           heading={isEditForm ? `Editing ${formValues && formValues.title} ✍️` : 'Create Journalism ✍️'}
           onDeleteEntity={isEditForm ? () => onDeleteEntity(articleId) : () => { }}
           promiseLoading={promiseLoading}
