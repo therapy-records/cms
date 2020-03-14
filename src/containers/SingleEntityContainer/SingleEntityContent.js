@@ -27,7 +27,7 @@ const SingleEntityContent = ({
         }}
         heading={heading}
         showEditButton={!isEdit}
-        onDeleteArticle={() => executeMutation()}
+        onDeleteEntity={() => executeMutation()}
         showDeleteButton={renderDeleteButton}
       />
 

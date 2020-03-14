@@ -21,7 +21,6 @@ describe('(Container Component) SingleEntityContent', () => {
         },
         render: CollaboratorDetails,
         executeMutation: sinon.spy(),
-        // isEdit: true,
         renderDeleteButton: true
       };
 
@@ -50,10 +49,10 @@ describe('(Container Component) SingleEntityContent', () => {
       expect(entityPageHeader.prop('showDeleteButton')).to.eq(props.renderDeleteButton);
     });
 
-    describe('when entityPageHeader onDeleteArticle prop is triggered', () => {
+    describe('when entityPageHeader onDeleteEntity prop is triggered', () => {
       it('should call props.executeMutation', () => {
-        expect(entityPageHeader.prop('onDeleteArticle')).to.be.a('function');
-        entityPageHeader.prop('onDeleteArticle')();
+        expect(entityPageHeader.prop('onDeleteEntity')).to.be.a('function');
+        entityPageHeader.prop('onDeleteEntity')();
         expect(props.executeMutation).to.have.been.called;
       });
     });

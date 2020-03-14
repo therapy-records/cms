@@ -9,8 +9,8 @@ Enzyme.configure({ adapter: new Adapter() });
 describe('(Component) DeleteModal', () => {
   let wrapper,
     props = {
-      handleModalClose: () => {},
-      onDeleteArticle: () => {}
+      onModalClose: () => {},
+      onDelete: () => {}
     }
 
   it('should render <ReactModal />', () => {
@@ -21,7 +21,7 @@ describe('(Component) DeleteModal', () => {
       <ReactModal
         isOpen
         shouldCloseOnOverlayClick
-        onRequestClose={props.handleModalClose}
+        onRequestClose={props.onModalClose}
         className='modal'
         overlayClassName='modal-overlay'
       >
@@ -30,7 +30,7 @@ describe('(Component) DeleteModal', () => {
           <p>It will be gone forever!</p>
           <button
             className='btn btn-danger cancel-margin'
-            onClick={props.onDeleteArticle}
+            onClick={props.onDelete}
           >Delete</button>
         </div>
       </ReactModal>
@@ -39,15 +39,15 @@ describe('(Component) DeleteModal', () => {
   });
 
   describe('delete button', () => {
-    it('should call props.onDeleteArticle onClick', () => {
+    it('should call props.handleOnDelete onClick', () => {
       const buttonProps = {
         ...props,
-        onDeleteArticle: sinon.spy()
+        onDelete: sinon.spy()
       };
       const buttonWrapper = shallow(<DeleteModal {...buttonProps} />);
       const button = buttonWrapper.find('button');
       button.simulate('click');
-      expect(buttonProps.onDeleteArticle.calledOnce).to.eq(true);
+      expect(buttonProps.onDelete.calledOnce).to.eq(true);
     });
   });
 });

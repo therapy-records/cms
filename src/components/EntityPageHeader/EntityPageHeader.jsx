@@ -12,22 +12,22 @@ class EntityPageHeader extends Component {
       isShowingModal: false
     };
 
-    this.handleModalOpen = this.handleModalOpen.bind(this);
-    this.handleModalClose = this.handleModalClose.bind(this);
-    this.handleOnDeleteArticle = this.handleOnDeleteArticle.bind(this);
+    this.handleOnModalOpen = this.handleOnModalOpen.bind(this);
+    this.handleOnModalClose = this.handleOnModalClose.bind(this);
+    this.handleOnDelete = this.handleOnDelete.bind(this);
   }
 
-  handleModalOpen() {
+  handleOnModalOpen() {
     this.setState({ isShowingModal: true })
   }
 
-  handleModalClose() {
+  handleOnModalClose() {
     this.setState({ isShowingModal: false })
   }
 
-  handleOnDeleteArticle() {
-    this.props.onDeleteArticle(this.props.article._id)
-    this.handleModalClose();
+  handleOnDelete() {
+    this.props.onDeleteEntity(this.props.article._id)
+    this.handleOnModalClose();
   }
 
   render() {
@@ -72,7 +72,7 @@ class EntityPageHeader extends Component {
               {showDeleteButton && (
                 <button
                   className='btn btn-danger'
-                  onClick={this.handleModalOpen}
+                  onClick={this.handleOnModalOpen}
                 >Delete
                 </button>
               )}
@@ -92,8 +92,8 @@ class EntityPageHeader extends Component {
 
         {(showDeleteButton && !promiseLoading && isShowingModal) &&
           <DeleteModal
-            handleModalClose={this.handleModalClose}
-            onDeleteArticle={this.handleOnDeleteArticle}
+            onModalClose={this.handleOnModalClose}
+            onDelete={this.handleOnDelete}
           />
         }
 
@@ -106,7 +106,7 @@ EntityPageHeader.propTypes = {
   baseUrl: PropTypes.string.isRequired,
   article: PropTypes.object.isRequired,
   heading: PropTypes.string.isRequired,
-  onDeleteArticle: PropTypes.func,
+  onDeleteEntity: PropTypes.func,
   promiseLoading: PropTypes.bool,
   showEditButton: PropTypes.bool,
   showDeleteButton: PropTypes.bool,
@@ -114,7 +114,7 @@ EntityPageHeader.propTypes = {
 };
 
 EntityPageHeader.defaultProps = {
-  onDeleteArticle: null,
+  onDeleteEntity: null,
   promiseLoading: false,
   showEditButton: false,
   showDeleteButton: false,

@@ -10,15 +10,15 @@ if (process.env.NODE_ENV !== 'test') {
 class DeleteModal extends React.Component {
   render() {
     const {
-      handleModalClose,
-      onDeleteArticle
+      onModalClose,
+      onDelete
     } = this.props;
 
     return (
       <ReactModal
         isOpen
         shouldCloseOnOverlayClick
-        onRequestClose={handleModalClose}
+        onRequestClose={onModalClose}
         className='modal'
         overlayClassName='modal-overlay'
       >
@@ -27,7 +27,7 @@ class DeleteModal extends React.Component {
           <p>It will be gone forever!</p>
           <button
             className='btn btn-danger cancel-margin'
-            onClick={onDeleteArticle}
+            onClick={onDelete}
           >Delete</button>
         </div>
       </ReactModal>
@@ -36,8 +36,8 @@ class DeleteModal extends React.Component {
 }
 
 DeleteModal.propTypes = {
-  handleModalClose: PropTypes.func.isRequired,
-  onDeleteArticle: PropTypes.func.isRequired,
+  onModalClose: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
   promiseLoading: PropTypes.bool
 }
 

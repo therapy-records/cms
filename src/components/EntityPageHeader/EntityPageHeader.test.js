@@ -38,7 +38,7 @@ describe('(Component) EntityPageHeader', () => {
       promiseLoading: false,
       article: mockArticle,
       heading: 'test',
-      onDeleteArticle: sinon.spy(),
+      onDeleteEntity: sinon.spy(),
       showEditButton: true,
       showDeleteButton: true
     };
@@ -50,38 +50,38 @@ describe('(Component) EntityPageHeader', () => {
 
   describe('methods', () => {
 
-    describe('handleModalOpen', () => {
+    describe('handleOnModalOpen', () => {
       it('should set state.isShowingModal to true', () => {
-        wrapper.instance().handleModalOpen();
+        wrapper.instance().handleOnModalOpen();
         expect(wrapper.instance().state.isShowingModal).to.eq(true);
       });
     });
 
-    describe('handleModalClose', () => {
+    describe('handleOnModalClose', () => {
       it('should set state.isShowingModal to false', () => {
-        wrapper.instance().handleModalClose();
+        wrapper.instance().handleOnModalClose();
         expect(wrapper.instance().state.isShowingModal).to.eq(false);
       });
     });
 
-    describe('handleOnDeleteArticle', () => {
-      it('should call props.onDeleteArticle', () => {
-        const onDeleteArticleSpy = sinon.spy();
+    describe('handleOnDelete', () => {
+      it('should call props.onDeleteEntity', () => {
+        const onDeleteEntitySpy = sinon.spy();
         wrapper.setProps({
-          onDeleteArticle: onDeleteArticleSpy
+          onDeleteEntity: onDeleteEntitySpy
         });
-        wrapper.instance().handleOnDeleteArticle();
-        expect(onDeleteArticleSpy).to.have.been.calledOnce;
-        expect(onDeleteArticleSpy).to.have.been.calledWith(
+        wrapper.instance().handleOnDelete();
+        expect(onDeleteEntitySpy).to.have.been.calledOnce;
+        expect(onDeleteEntitySpy).to.have.been.calledWith(
           props.article._id
         );
       });
 
-      it('should call handleModalClose', () => {
-        const handleModalCloseSpy = sinon.spy();
-        wrapper.instance().handleModalClose = handleModalCloseSpy;
-        wrapper.instance().handleOnDeleteArticle();
-        expect(handleModalCloseSpy).to.have.been.calledOnce;
+      it('should call handleOnModalClose', () => {
+        const handleOnModalCloseSpy = sinon.spy();
+        wrapper.instance().handleOnModalClose = handleOnModalCloseSpy;
+        wrapper.instance().handleOnDelete();
+        expect(handleOnModalCloseSpy).to.have.been.calledOnce;
       });
 
     });
@@ -171,12 +171,12 @@ describe('(Component) EntityPageHeader', () => {
       expect(editButton.prop('to')).to.eq(expectedTo);
     });
 
-    describe('delete article button', () => {
+    describe('delete button', () => {
       beforeEach(() => {
         props = baseProps;
         props.article = mockArticle;
-        props.handleModalOpen = sinon.spy();
-        props.handleModalClose = () => { };
+        props.handleOnModalOpen = sinon.spy();
+        props.handleOnModalClose = () => { };
         props.promiseLoading = false;
         wrapper = shallow(<EntityPageHeader {...props} />);
       });
@@ -184,8 +184,8 @@ describe('(Component) EntityPageHeader', () => {
       it('should not render <DeleteModal /> by default', () => {
         const actual = wrapper.containsMatchingElement(
           <DeleteModal
-            handleModalClose={wrapper.instance().handleModalClose}
-            onDeleteArticle={wrapper.instance().handleOnDeleteArticle}
+            onModalClose={wrapper.instance().handleOnModalClose}
+            onDelete={wrapper.instance().handleOnDelete}
           />
         );
         expect(actual).to.equal(false);
@@ -196,8 +196,8 @@ describe('(Component) EntityPageHeader', () => {
         button.simulate('click');
         const actual = wrapper.containsMatchingElement(
           <DeleteModal
-            handleModalClose={wrapper.instance().handleModalClose}
-            onDeleteArticle={wrapper.instance().handleOnDeleteArticle}
+            onModalClose={wrapper.instance().handleOnModalClose}
+            onDelete={wrapper.instance().handleOnDelete}
           />
         );
         expect(actual).to.equal(true);

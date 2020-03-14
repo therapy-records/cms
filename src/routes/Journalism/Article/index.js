@@ -56,7 +56,7 @@ export class Article extends React.Component {
     const {
       article,
       promiseLoading,
-      onDeleteArticle
+      onDeleteEntity
     } = this.props;
 
     // todo: move to will/did update
@@ -86,7 +86,7 @@ export class Article extends React.Component {
               baseUrl='/journalism'
               article={article}
               heading={entityHeading(article)}
-              onDeleteArticle={() => onDeleteArticle(article._id)}
+              onDeleteEntity={() => onDeleteEntity(article._id)}
               promiseLoading={promiseLoading}
               showEditButton
               showDeleteButton
@@ -121,7 +121,7 @@ export class Article extends React.Component {
 }
 
 Article.propTypes = {
-  onDeleteArticle: PropTypes.func.isRequired,
+  onDeleteEntity: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
   onFetchArticle: PropTypes.func.isRequired,
@@ -134,7 +134,7 @@ Article.propTypes = {
 
 const mapDispatchToProps = {
   onFetchArticle: (id) => fetchSingleJournalismArticle(id),
-  onDeleteArticle: (id) => deleteJournalismArticle(id),
+  onDeleteEntity: (id) => deleteJournalismArticle(id),
   resetPromiseState: () => resetPromiseState(),
   onDestroyArticle: () => destroySelectedJournalismArticle(),
   onSetSelectedJournalismArticle: (article) => setSelectedJournalismArticle(article)

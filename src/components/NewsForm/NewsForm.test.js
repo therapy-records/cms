@@ -21,7 +21,7 @@ describe('(Component) NewsForm', () => {
     handleModalClose: () => {},
     onSubmitForm: () => {},
     onAddArticleSection: () => {},
-    onDeleteArticle: () => {},
+    onDeleteEntity: () => {},
     promiseLoading: false,
     formValues: {
       title: '',
@@ -58,7 +58,7 @@ describe('(Component) NewsForm', () => {
         expect(entityPageHeader.length).to.eq(1);
         expect(entityPageHeader.prop('baseUrl')).to.eq('/news');
         expect(entityPageHeader.prop('article')).to.eq(props.formValues);
-        expect(entityPageHeader.prop('onDeleteArticle')).to.eq(null);
+        expect(entityPageHeader.prop('onDeleteEntity')).to.eq(null);
         expect(entityPageHeader.prop('heading')).to.eq('Create News 🗞️');
         expect(entityPageHeader.prop('promiseLoading')).to.eq(props.promiseLoading);
         expect(entityPageHeader.prop('showDeleteButton')).to.eq(false);
@@ -75,20 +75,20 @@ describe('(Component) NewsForm', () => {
 
         it('should render correct props', () => {
           const entityPageHeader = wrapper.find('EntityPageHeader');
-          expect(entityPageHeader.prop('onDeleteArticle')).to.be.a('function');
+          expect(entityPageHeader.prop('onDeleteEntity')).to.be.a('function');
           expect(entityPageHeader.prop('heading')).to.eq(`Editing ${props.formValues.title} 🗞️`);
           expect(entityPageHeader.prop('showDeleteButton')).to.eq(true);
         });
 
-        describe('onDeleteArticle prop', () => {
-          it('should call props.onDeleteArticle with article id', () => {
-            const onDeleteArticleSpy = sinon.spy();
+        describe('onDeleteEntity prop', () => {
+          it('should call props.onDeleteEntity with article id', () => {
+            const onDeleteEntitySpy = sinon.spy();
             wrapper.setProps({
-              onDeleteArticle: onDeleteArticleSpy
+              onDeleteEntity: onDeleteEntitySpy
             });
             const entityPageHeader = wrapper.find('EntityPageHeader');
-            entityPageHeader.props().onDeleteArticle();
-            expect(onDeleteArticleSpy).to.have.been.calledWith(props.articleId)
+            entityPageHeader.props().onDeleteEntity();
+            expect(onDeleteEntitySpy).to.have.been.calledWith(props.articleId)
           });
         });
 

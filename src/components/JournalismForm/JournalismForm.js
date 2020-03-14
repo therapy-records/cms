@@ -42,7 +42,7 @@ export class JournalismForm extends React.Component {
       location,
       promiseLoading,
       articleId,
-      onDeleteArticle
+      onDeleteEntity
     } = this.props;
 
     if (!formValues) return null;
@@ -63,7 +63,7 @@ export class JournalismForm extends React.Component {
           baseUrl='/journalism'
           article={formValues}
           heading={isEditForm ? `Editing ${formValues && formValues.title} ✍️` : 'Create Journalism ✍️'}
-          onDeleteArticle={isEditForm ? () => onDeleteArticle(articleId) : () => { }}
+          onDeleteEntity={isEditForm ? () => onDeleteEntity(articleId) : () => { }}
           promiseLoading={promiseLoading}
           showDeleteButton={isEditForm}
         />
@@ -150,7 +150,7 @@ export class JournalismForm extends React.Component {
 
 JournalismForm.propTypes = {
   onSubmitForm: PropTypes.func.isRequired,
-  onDeleteArticle: PropTypes.func.isRequired,
+  onDeleteEntity: PropTypes.func.isRequired,
   error: PropTypes.string,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
@@ -184,7 +184,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  onDeleteArticle: (id) => deleteJournalismArticle(id),
+  onDeleteEntity: (id) => deleteJournalismArticle(id),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InitFromStateForm)

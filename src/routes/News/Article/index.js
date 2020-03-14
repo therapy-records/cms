@@ -56,7 +56,7 @@ export class Article extends React.Component {
     const {
       article,
       promiseLoading,
-      onDeleteArticle
+      onDeleteEntity
     } = this.props;
 
     // todo: move to will/did update
@@ -86,7 +86,7 @@ export class Article extends React.Component {
               baseUrl='/news'
               article={article}
               heading={entityHeading(article)}
-              onDeleteArticle={() => onDeleteArticle(article._id)}
+              onDeleteEntity={() => onDeleteEntity(article._id)}
               promiseLoading={promiseLoading}
               showEditButton
               showDeleteButton
@@ -151,7 +151,7 @@ export class Article extends React.Component {
 Article.propTypes = {
   history: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
-  onDeleteArticle: PropTypes.func.isRequired,
+  onDeleteEntity: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
   onFetchArticle: PropTypes.func.isRequired,
@@ -164,7 +164,7 @@ Article.propTypes = {
 const mapDispatchToProps = {
   onFetchArticle: (id) => fetchSingleNewsArticle(id),
   onFetchNewsArticles: () => fetchNewsArticles(),
-  onDeleteArticle: (id) => deleteNewsArticle(id),
+  onDeleteEntity: (id) => deleteNewsArticle(id),
   resetPromiseState: () => resetPromiseState(),
   onDestroyArticle: () => destroySelectedNewsArticle(),
   onSetSelectedNewsArticle: (article) => setSelectedNewsArticle(article)
