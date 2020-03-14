@@ -1,14 +1,57 @@
+// import { connect } from 'react-redux';
 import React from 'react'
+import List from '../../components/List';
+import QueryContainer from '../../containers/QueryContainer';
+import { GET_GIGS } from "../../queries/index"
+import { Link } from 'react-router-dom';
+// import EmptyMessage from '../../components/EmptyMessage/EmptyMessage';
 
-class Gigs extends React.Component {
-  render() {
-    return (
-      <div className='container'>
-        <h2>Gigs 🗓️</h2>
-        <p>Coming soon...</p>
-      </div>
-    )
-  }
+
+const Gigs = () => {
+
+  return (
+    <div className='container'>
+
+      <QueryContainer
+        query={GET_GIGS}
+        entityName='gigs'
+        render={(queryData) => {
+
+          const hasGigs = (queryData && queryData !== null) && queryData.length;
+          const sortedQueryData = queryData.sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate)).reverse();
+
+          return (
+            <div>
+
+              <div className='heading-with-btns'>
+
+                <div>
+                  <h2>Gigs 🗓️</h2>
+                </div>
+
+                <div className='action-btns'>
+                  <Link to='gigs/create' className='btn'>Create</Link>
+                </div>
+              </div>
+
+              {hasGigs ? (
+                <List
+                  data={sortedQueryData}
+                  route='press'
+                />
+              ) : (
+                <div>
+                  {/* <EmptyArticlesMessage type='journalism' /> */}
+                </div>
+              )}
+
+            </div>
+          )
+        }}
+      />
+
+    </div>
+  )
 }
 
-export default Gigs
+export default Gigs;
