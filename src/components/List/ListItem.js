@@ -44,10 +44,12 @@ const ListItem = ({
         <div className='content'>
           <div>
             <div className='small-tabs-container'>
+
               
               {location ? location : ''}
               {venue ? venue : ''}
               {ticketsUrl ? ticketsUrl : ''}
+
               {author && <p className='small-tab author'>{author}</p>}
               {date && <p className='small-tab'>{moment(new Date(date)).format('DD MMM YYYY')}</p>}
             </div>
