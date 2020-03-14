@@ -16,6 +16,7 @@ import EntityPageHeader from '../../../components/EntityPageHeader';
 import { selectSelectedJournalismArticle } from '../../../selectors/journalism';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import redirect from '../../../utils/redirect';
+import entityHeading from '../../../utils/entityHeading';
 import './style.css';
 
 export class Article extends React.Component {
@@ -84,6 +85,7 @@ export class Article extends React.Component {
             <EntityPageHeader
               baseUrl='/journalism'
               article={article}
+              heading={entityHeading(article)}
               onDeleteArticle={() => onDeleteArticle(article._id)}
               promiseLoading={promiseLoading}
               showEditButton

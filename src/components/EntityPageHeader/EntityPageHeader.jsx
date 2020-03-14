@@ -50,11 +50,7 @@ class EntityPageHeader extends Component {
         <div className={containerClassName}>
           <div>
 
-            {heading ?
-              <h2>{heading}</h2>
-            :
-              <h2>{article.title}</h2>
-            }
+            <h2>{heading}</h2>
 
             {article.author &&
               <p className='small-tab author'>{article.author}</p>
@@ -109,7 +105,7 @@ class EntityPageHeader extends Component {
 EntityPageHeader.propTypes = {
   baseUrl: PropTypes.string.isRequired,
   article: PropTypes.object.isRequired,
-  heading: PropTypes.string,
+  heading: PropTypes.string.isRequired,
   onDeleteArticle: PropTypes.func,
   promiseLoading: PropTypes.bool,
   showEditButton: PropTypes.bool,
@@ -118,7 +114,6 @@ EntityPageHeader.propTypes = {
 };
 
 EntityPageHeader.defaultProps = {
-  heading: '',
   onDeleteArticle: null,
   promiseLoading: false,
   showEditButton: false,

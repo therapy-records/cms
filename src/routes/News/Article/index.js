@@ -17,6 +17,7 @@ import {
 import EntityPageHeader from '../../../components/EntityPageHeader';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import redirect from '../../../utils/redirect';
+import entityHeading from '../../../utils/entityHeading';
 
 export class Article extends React.Component {
   componentDidMount() {
@@ -84,6 +85,7 @@ export class Article extends React.Component {
             <EntityPageHeader
               baseUrl='/news'
               article={article}
+              heading={entityHeading(article)}
               onDeleteArticle={() => onDeleteArticle(article._id)}
               promiseLoading={promiseLoading}
               showEditButton

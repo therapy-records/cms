@@ -107,18 +107,6 @@ describe('(Component) EntityPageHeader', () => {
       expect(actual).to.equal(true);
     });
 
-    describe('when there is no props.heading', () => {
-      it('should render article.title', () => {
-        wrapper.setProps({
-          heading: undefined
-        });
-        const actual = wrapper.containsMatchingElement(
-          <h2>{mockArticle.title}</h2>
-        );
-        expect(actual).to.equal(true);
-      });
-    });
-
     it('should render `author`', () => {
       const actual = wrapper.containsMatchingElement(
         <p className='small-tab author'>{mockArticle.author}</p>

@@ -10,6 +10,7 @@ import {
 } from '../../../selectors/uiState';
 import { selectSelectedJournalismArticle } from '../../../selectors/journalism';
 import redirect from '../../../utils/redirect';
+import entityHeading from '../../../utils/entityHeading';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -223,6 +224,7 @@ describe('(Component) Journalism - Article', () => {
         expect(entityPageHeader.length).to.eq(1);
         expect(entityPageHeader.prop('baseUrl')).to.eq('/journalism');
         expect(entityPageHeader.prop('article')).to.eq(mockArticle);
+        expect(entityPageHeader.prop('heading')).to.eq(entityHeading(mockArticle));
         expect(entityPageHeader.prop('onDeleteArticle')).to.be.a('function');
         expect(entityPageHeader.prop('promiseLoading')).to.eq(props.promiseLoading);
         expect(entityPageHeader.prop('showEditButton')).to.eq(true);
