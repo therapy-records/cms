@@ -219,16 +219,16 @@ describe('(Component) News - Article', () => {
         });
       });
 
-      describe('<ArticleHeader />', () => {
+      describe('<EntityPageHeader />', () => {
         it('should render', () => {
-          const articleHeader = wrapper.find('ArticleHeader');
-          expect(articleHeader.length).to.eq(1);
-          expect(articleHeader.prop('baseUrl')).to.eq('/news');
-          expect(articleHeader.prop('article')).to.eq(mockArticle);
-          expect(articleHeader.prop('onDeleteArticle')).to.be.a('function');
-          expect(articleHeader.prop('promiseLoading')).to.eq(props.promiseLoading);
-          expect(articleHeader.prop('showEditButton')).to.eq(true);
-          expect(articleHeader.prop('showDeleteButton')).to.eq(true);
+          const entityPageHeader = wrapper.find('EntityPageHeader');
+          expect(entityPageHeader.length).to.eq(1);
+          expect(entityPageHeader.prop('baseUrl')).to.eq('/news');
+          expect(entityPageHeader.prop('article')).to.eq(mockArticle);
+          expect(entityPageHeader.prop('onDeleteArticle')).to.be.a('function');
+          expect(entityPageHeader.prop('promiseLoading')).to.eq(props.promiseLoading);
+          expect(entityPageHeader.prop('showEditButton')).to.eq(true);
+          expect(entityPageHeader.prop('showDeleteButton')).to.eq(true);
         });
 
         describe('onDeleteArticle prop', () => {
@@ -237,8 +237,8 @@ describe('(Component) News - Article', () => {
             wrapper.setProps({
               onDeleteArticle: onDeleteArticleSpy
             });
-            const articleHeader = wrapper.find('ArticleHeader');
-            articleHeader.props().onDeleteArticle();
+            const entityPageHeader = wrapper.find('EntityPageHeader');
+            entityPageHeader.props().onDeleteArticle();
             expect(onDeleteArticleSpy).to.have.been.calledWith(mockArticle._id)
           });
         });

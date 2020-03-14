@@ -31,29 +31,29 @@ describe('(Container Component) SingleEntityContent', () => {
     );
   });
 
-  describe('<ArticleHeader />', () => {
-    let articleHeader;
+  describe('<EntityPageHeader />', () => {
+    let entityPageHeader;
     beforeEach(() => {
-      articleHeader = wrapper.find('ArticleHeader');
+      entityPageHeader = wrapper.find('EntityPageHeader');
     });
 
     it('should render', () => {
-      expect(articleHeader.prop('baseUrl')).to.eq(props.baseUrl);
-      expect(articleHeader.prop('article')).to.deep.eq({
+      expect(entityPageHeader.prop('baseUrl')).to.eq(props.baseUrl);
+      expect(entityPageHeader.prop('article')).to.deep.eq({
         _id: props.data._id,
         author: props.data.author,
         releaseDate: props.data.releaseDate,
         createdAt: props.data.createdAt
       });
-      expect(articleHeader.prop('heading')).to.eq(entityHeading(props.data));
-      expect(articleHeader.prop('showEditButton')).to.eq(true);
-      expect(articleHeader.prop('showDeleteButton')).to.eq(props.renderDeleteButton);
+      expect(entityPageHeader.prop('heading')).to.eq(entityHeading(props.data));
+      expect(entityPageHeader.prop('showEditButton')).to.eq(true);
+      expect(entityPageHeader.prop('showDeleteButton')).to.eq(props.renderDeleteButton);
     });
 
-    describe('when articleHeader onDeleteArticle prop is triggered', () => {
+    describe('when entityPageHeader onDeleteArticle prop is triggered', () => {
       it('should call props.executeMutation', () => {
-        expect(articleHeader.prop('onDeleteArticle')).to.be.a('function');
-        articleHeader.prop('onDeleteArticle')();
+        expect(entityPageHeader.prop('onDeleteArticle')).to.be.a('function');
+        entityPageHeader.prop('onDeleteArticle')();
         expect(props.executeMutation).to.have.been.called;
       });
     });
@@ -67,9 +67,9 @@ describe('(Container Component) SingleEntityContent', () => {
       });
     });
     it('should pass a different heading prop', () => {
-      const articleHeader = wrapper.find('ArticleHeader');
+      const entityPageHeader = wrapper.find('EntityPageHeader');
       const expected = `Editing ${entityHeading(props.data)}`; 
-      expect(articleHeader.prop('heading')).to.eq(expected);
+      expect(entityPageHeader.prop('heading')).to.eq(expected);
     });
   });
 

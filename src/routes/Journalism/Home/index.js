@@ -72,7 +72,7 @@ export class Journalism extends React.Component {
               <div className='action-btns'>
                 <Link to='journalism/create' className='btn'>Create</Link>
               </div>
-            </div>
+          </div>
 
             {hasArticles
               ? (

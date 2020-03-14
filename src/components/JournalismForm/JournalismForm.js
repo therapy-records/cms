@@ -12,7 +12,7 @@ import {
 } from '../../selectors/journalism';
 import { selectJournalismFormValues } from '../../selectors/form';
 import { selectUiStateLoading } from '../../selectors/uiState';
-import ArticleHeader from '../ArticleHeader';
+import EntityPageHeader from '../EntityPageHeader';
 import Datepicker from '../Datepicker/Datepicker';
 import DropzoneImageUpload from '../DropzoneImageUpload';
 import TextInput from '../TextInput';
@@ -59,7 +59,7 @@ export class JournalismForm extends React.Component {
     return (
       <section className='article-create'>
 
-        <ArticleHeader
+        <EntityPageHeader
           baseUrl='/journalism'
           article={formValues}
           onDeleteArticle={isEditForm ? () => onDeleteArticle(articleId) : () => { }}

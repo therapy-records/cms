@@ -12,7 +12,7 @@ import {
   selectUiStateLoading,
   selectUiStateSuccess
 } from '../../../selectors/uiState';
-import ArticleHeader from '../../../components/ArticleHeader';
+import EntityPageHeader from '../../../components/EntityPageHeader';
 import { selectSelectedJournalismArticle } from '../../../selectors/journalism';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import redirect from '../../../utils/redirect';
@@ -81,7 +81,7 @@ export class Article extends React.Component {
         {(!promiseLoading && article && article.title && !article.isDeleted) && (
           <div>
 
-            <ArticleHeader
+            <EntityPageHeader
               baseUrl='/journalism'
               article={article}
               onDeleteArticle={() => onDeleteArticle(article._id)}

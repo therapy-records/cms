@@ -5,7 +5,7 @@ import moment from 'moment';
 import ArticleDeleteModal from '../ArticleDeleteModal';
 import './styles.css';
 
-class ArticleHeader extends Component {
+class EntityPageHeader extends Component {
   constructor() {
     super();
     this.state = {
@@ -106,7 +106,7 @@ class ArticleHeader extends Component {
   }
 }
 
-ArticleHeader.propTypes = {
+EntityPageHeader.propTypes = {
   baseUrl: PropTypes.string.isRequired,
   article: PropTypes.object.isRequired,
   heading: PropTypes.string,
@@ -117,7 +117,7 @@ ArticleHeader.propTypes = {
   longHeading: PropTypes.bool
 };
 
-ArticleHeader.defaultProps = {
+EntityPageHeader.defaultProps = {
   heading: '',
   onDeleteArticle: null,
   promiseLoading: false,
@@ -126,4 +126,4 @@ ArticleHeader.defaultProps = {
   longHeading: false
 };
 
-export default ArticleHeader;
+export default EntityPageHeader;

@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import moment from 'moment';
-import ArticleHeader from './index';
+import EntityPageHeader from './index';
 import ArticleDeleteModal from '../ArticleDeleteModal';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('(Component) ArticleHeader', () => {
+describe('(Component) EntityPageHeader', () => {
   let wrapper,
     props,
     mockArticle = {
@@ -45,7 +45,7 @@ describe('(Component) ArticleHeader', () => {
   props = baseProps;
 
   beforeEach(() => {
-    wrapper = shallow(<ArticleHeader {...props} />);
+    wrapper = shallow(<EntityPageHeader {...props} />);
   });
 
   describe('methods', () => {
@@ -89,7 +89,7 @@ describe('(Component) ArticleHeader', () => {
 
   describe('rendering', () => {
     beforeEach(() => {
-      wrapper = shallow(<ArticleHeader {...props} />);
+      wrapper = shallow(<EntityPageHeader {...props} />);
     });
 
     it('should render container class name', () => {
@@ -190,7 +190,7 @@ describe('(Component) ArticleHeader', () => {
         props.handleModalOpen = sinon.spy();
         props.handleModalClose = () => { };
         props.promiseLoading = false;
-        wrapper = shallow(<ArticleHeader {...props} />);
+        wrapper = shallow(<EntityPageHeader {...props} />);
       });
 
       it('should not render <ArticleDeleteModal /> by default', () => {

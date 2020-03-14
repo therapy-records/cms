@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ArticleHeader from '../../components/ArticleHeader';
+import EntityPageHeader from '../../components/EntityPageHeader';
 import entityHeading from '../../utils/entityHeading';
 
 const SingleEntityContent = ({
@@ -17,7 +17,7 @@ const SingleEntityContent = ({
   return (
     <div>
 
-      <ArticleHeader
+      <EntityPageHeader
         baseUrl={baseUrl}
         article={{
           _id: data._id,

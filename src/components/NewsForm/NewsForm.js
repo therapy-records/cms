@@ -10,7 +10,7 @@ import {
 import { selectNewsFormValues } from '../../selectors/form';
 import { selectUiStateLoading } from '../../selectors/uiState';
 import './NewsForm.css';
-import ArticleHeader from '../ArticleHeader';
+import EntityPageHeader from '../EntityPageHeader';
 import TextInput from '../TextInput';
 import { required } from '../../utils/form';
 import { EMPTY_ARTICLE_SECTION_OBJ } from '../../utils/news';
@@ -55,7 +55,7 @@ export class NewsForm extends React.Component {
     return (
       <section className='article-create'>
 
-        <ArticleHeader
+        <EntityPageHeader
           baseUrl='/news'
           article={formValues}
           onDeleteArticle={isEditForm ? () => onDeleteArticle(articleId) : null}
