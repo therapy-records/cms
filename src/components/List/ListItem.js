@@ -65,7 +65,7 @@ const ListItem = ({
 
           {/*  */}
 
-          {/* <div>
+          <div>
         <div className="gigs-card">
           <div className="left">
             <p>{date}</p>
@@ -92,7 +92,7 @@ const ListItem = ({
           </div>
 
         </div>
-      </div> */}
+      </div>
 
       {/*  */}
 

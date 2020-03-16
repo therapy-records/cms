@@ -25,7 +25,7 @@ const Gigs = () => {
               <div className='heading-with-btns'>
 
                 <div>
-                  <h2>Gigss 🗓️</h2>
+                  <h2>Gigs 🗓️</h2>
                 </div>
 
                 <div className='action-btns'>
