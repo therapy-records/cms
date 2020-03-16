@@ -14,7 +14,7 @@ import {
   destroySelectedNewsArticle,
   setSelectedNewsArticle
 } from '../../../actions/newsArticle';
-import EntityPageHeader from '../../../components/EntityPageHeader';
+import PageHeader from '../../../components/PageHeader';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import redirect from '../../../utils/redirect';
 import entityHeading from '../../../utils/entityHeading';
@@ -81,7 +81,7 @@ export class Article extends React.Component {
         {(!promiseLoading && article && article.title && !article.isDeleted) && (
           <div>
 
-            <EntityPageHeader
+            <PageHeader
               entityName='news'
               entity={article}
               heading={entityHeading(article)}

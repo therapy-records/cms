@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import EntityPageHeader from '../../components/EntityPageHeader';
+import PageHeader from '../../components/PageHeader';
 import entityHeading from '../../utils/entityHeading';
 
 const SingleEntityContent = ({
@@ -18,7 +18,7 @@ const SingleEntityContent = ({
   return (
     <div>
 
-      <EntityPageHeader
+      <PageHeader
         baseUrl={baseUrl}
         entityCollection={entityCollection}
         entity={{

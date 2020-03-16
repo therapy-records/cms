@@ -43,7 +43,7 @@ describe('(Component) JournalismForm', () => {
     });
   });
 
-  describe('<EntityPageHeader />', () => {
+  describe('<PageHeader />', () => {
     beforeEach(() => {
       wrapper = shallow(
         <JournalismForm
@@ -53,14 +53,14 @@ describe('(Component) JournalismForm', () => {
     });
 
     it('should render', () => {
-      const entityPageHeader = wrapper.find('EntityPageHeader');
-      expect(entityPageHeader.length).to.eq(1);
-      expect(entityPageHeader.prop('entityName')).to.eq('journalism');
-      expect(entityPageHeader.prop('entity')).to.eq(props.formValues);
-      expect(entityPageHeader.prop('onDeleteEntity')).to.be.a('function');
-      expect(entityPageHeader.prop('heading')).to.eq('Create Journalism ✍️');
-      expect(entityPageHeader.prop('promiseLoading')).to.eq(props.promiseLoading);
-      expect(entityPageHeader.prop('showDeleteButton')).to.eq(false);
+      const pageHeader = wrapper.find('PageHeader');
+      expect(pageHeader.length).to.eq(1);
+      expect(pageHeader.prop('entityName')).to.eq('journalism');
+      expect(pageHeader.prop('entity')).to.eq(props.formValues);
+      expect(pageHeader.prop('onDeleteEntity')).to.be.a('function');
+      expect(pageHeader.prop('heading')).to.eq('Create Journalism ✍️');
+      expect(pageHeader.prop('promiseLoading')).to.eq(props.promiseLoading);
+      expect(pageHeader.prop('showDeleteButton')).to.eq(false);
     });
 
     describe('when it\'s an `edit` form', () => {
@@ -73,10 +73,10 @@ describe('(Component) JournalismForm', () => {
       });
 
       it('should render correct props', () => {
-        const entityPageHeader = wrapper.find('EntityPageHeader');
-        expect(entityPageHeader.prop('onDeleteEntity')).to.be.a('function');
-        expect(entityPageHeader.prop('heading')).to.eq(`Editing ${baseProps.formValues.title} ✍️`);
-        expect(entityPageHeader.prop('showDeleteButton')).to.eq(true);
+        const pageHeader = wrapper.find('PageHeader');
+        expect(pageHeader.prop('onDeleteEntity')).to.be.a('function');
+        expect(pageHeader.prop('heading')).to.eq(`Editing ${baseProps.formValues.title} ✍️`);
+        expect(pageHeader.prop('showDeleteButton')).to.eq(true);
       });
 
       describe('onDeleteEntity prop', () => {
@@ -85,8 +85,8 @@ describe('(Component) JournalismForm', () => {
           wrapper.setProps({
             onDeleteEntity: onDeleteEntitySpy
           });
-          const entityPageHeader = wrapper.find('EntityPageHeader');
-          entityPageHeader.props().onDeleteEntity();
+          const pageHeader = wrapper.find('PageHeader');
+          pageHeader.props().onDeleteEntity();
           expect(onDeleteEntitySpy).to.have.been.calledWith(props.articleId)
         });
       });

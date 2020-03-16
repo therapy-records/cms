@@ -6,7 +6,7 @@ import DeleteModal from '../DeleteModal';
 import './styles.css';
 
 // TODO: use hooks
-class EntityPageHeader extends Component {
+class PageHeader extends Component {
   constructor() {
     super();
     this.state = {
@@ -117,7 +117,7 @@ class EntityPageHeader extends Component {
   }
 }
 
-EntityPageHeader.propTypes = {
+PageHeader.propTypes = {
   entity: PropTypes.object.isRequired,
   heading: PropTypes.string.isRequired,
   entityCollection: PropTypes.string.isRequired,
@@ -130,7 +130,7 @@ EntityPageHeader.propTypes = {
   longHeading: PropTypes.bool
 };
 
-EntityPageHeader.defaultProps = {
+PageHeader.defaultProps = {
   entityCollection: '',
   onDeleteEntity: null,
   promiseLoading: false,
@@ -141,4 +141,4 @@ EntityPageHeader.defaultProps = {
   longHeading: false
 };
 
-export default EntityPageHeader;
+export default PageHeader;

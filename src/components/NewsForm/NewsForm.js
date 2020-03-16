@@ -10,7 +10,7 @@ import {
 import { selectNewsFormValues } from '../../selectors/form';
 import { selectUiStateLoading } from '../../selectors/uiState';
 import './NewsForm.css';
-import EntityPageHeader from '../EntityPageHeader';
+import PageHeader from '../PageHeader';
 import TextInput from '../TextInput';
 import { required } from '../../utils/form';
 import { EMPTY_ARTICLE_SECTION_OBJ } from '../../utils/news';
@@ -55,7 +55,7 @@ export class NewsForm extends React.Component {
     return (
       <section className='article-create'>
 
-        <EntityPageHeader
+        <PageHeader
           entityName='news'
           entity={formValues}
           heading={isEditForm ? `Editing ${formValues && formValues.title} 🗞️` : 'Create News 🗞️'}

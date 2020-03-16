@@ -220,17 +220,17 @@ describe('(Component) News - Article', () => {
         });
       });
 
-      describe('<EntityPageHeader />', () => {
+      describe('<PageHeader />', () => {
         it('should render', () => {
-          const entityPageHeader = wrapper.find('EntityPageHeader');
-          expect(entityPageHeader.length).to.eq(1);
-          expect(entityPageHeader.prop('entityName')).to.eq('news');
-          expect(entityPageHeader.prop('entity')).to.eq(mockArticle);
-          expect(entityPageHeader.prop('heading')).to.eq(entityHeading(mockArticle));
-          expect(entityPageHeader.prop('onDeleteEntity')).to.be.a('function');
-          expect(entityPageHeader.prop('promiseLoading')).to.eq(props.promiseLoading);
-          expect(entityPageHeader.prop('showEditButton')).to.eq(true);
-          expect(entityPageHeader.prop('showDeleteButton')).to.eq(true);
+          const pageHeader = wrapper.find('PageHeader');
+          expect(pageHeader.length).to.eq(1);
+          expect(pageHeader.prop('entityName')).to.eq('news');
+          expect(pageHeader.prop('entity')).to.eq(mockArticle);
+          expect(pageHeader.prop('heading')).to.eq(entityHeading(mockArticle));
+          expect(pageHeader.prop('onDeleteEntity')).to.be.a('function');
+          expect(pageHeader.prop('promiseLoading')).to.eq(props.promiseLoading);
+          expect(pageHeader.prop('showEditButton')).to.eq(true);
+          expect(pageHeader.prop('showDeleteButton')).to.eq(true);
         });
 
         describe('onDeleteEntity prop', () => {
@@ -239,8 +239,8 @@ describe('(Component) News - Article', () => {
             wrapper.setProps({
               onDeleteEntity: onDeleteEntitySpy
             });
-            const entityPageHeader = wrapper.find('EntityPageHeader');
-            entityPageHeader.props().onDeleteEntity();
+            const pageHeader = wrapper.find('PageHeader');
+            pageHeader.props().onDeleteEntity();
             expect(onDeleteEntitySpy).to.have.been.calledWith(mockArticle._id)
           });
         });

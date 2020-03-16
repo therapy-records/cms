@@ -31,30 +31,30 @@ describe('(Container Component) SingleEntityContent', () => {
     );
   });
 
-  describe('<EntityPageHeader />', () => {
-    let entityPageHeader;
+  describe('<PageHeader />', () => {
+    let pageHeader;
     beforeEach(() => {
-      entityPageHeader = wrapper.find('EntityPageHeader');
+      pageHeader = wrapper.find('PageHeader');
     });
 
     it('should render', () => {
-      expect(entityPageHeader.prop('baseUrl')).to.eq(props.baseUrl);
-      expect(entityPageHeader.prop('entityCollection')).to.eq(props.entityCollection);
-      expect(entityPageHeader.prop('entity')).to.deep.eq({
+      expect(pageHeader.prop('baseUrl')).to.eq(props.baseUrl);
+      expect(pageHeader.prop('entityCollection')).to.eq(props.entityCollection);
+      expect(pageHeader.prop('entity')).to.deep.eq({
         _id: props.data._id,
         author: props.data.author,
         releaseDate: props.data.releaseDate,
         createdAt: props.data.createdAt
       });
-      expect(entityPageHeader.prop('heading')).to.eq(entityHeading(props.data));
-      expect(entityPageHeader.prop('showEditButton')).to.eq(true);
-      expect(entityPageHeader.prop('showDeleteButton')).to.eq(props.renderDeleteButton);
+      expect(pageHeader.prop('heading')).to.eq(entityHeading(props.data));
+      expect(pageHeader.prop('showEditButton')).to.eq(true);
+      expect(pageHeader.prop('showDeleteButton')).to.eq(props.renderDeleteButton);
     });
 
-    describe('when entityPageHeader onDeleteEntity prop is triggered', () => {
+    describe('when pageHeader onDeleteEntity prop is triggered', () => {
       it('should call props.executeMutation', () => {
-        expect(entityPageHeader.prop('onDeleteEntity')).to.be.a('function');
-        entityPageHeader.prop('onDeleteEntity')();
+        expect(pageHeader.prop('onDeleteEntity')).to.be.a('function');
+        pageHeader.prop('onDeleteEntity')();
         expect(props.executeMutation).to.have.been.called;
       });
     });
@@ -68,9 +68,9 @@ describe('(Container Component) SingleEntityContent', () => {
       });
     });
     it('should pass a different heading prop', () => {
-      const entityPageHeader = wrapper.find('EntityPageHeader');
+      const pageHeader = wrapper.find('PageHeader');
       const expected = `Editing ${entityHeading(props.data)}`; 
-      expect(entityPageHeader.prop('heading')).to.eq(expected);
+      expect(pageHeader.prop('heading')).to.eq(expected);
     });
   });
 

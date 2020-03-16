@@ -12,7 +12,7 @@ import {
   selectUiStateLoading,
   selectUiStateSuccess
 } from '../../../selectors/uiState';
-import EntityPageHeader from '../../../components/EntityPageHeader';
+import PageHeader from '../../../components/PageHeader';
 import { selectSelectedJournalismArticle } from '../../../selectors/journalism';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import redirect from '../../../utils/redirect';
@@ -81,7 +81,7 @@ export class Article extends React.Component {
         {(!promiseLoading && article && article.title && !article.isDeleted) && (
           <div>
 
-            <EntityPageHeader
+            <PageHeader
               entityName='journalism'
               entity={article}
               heading={entityHeading(article)}
