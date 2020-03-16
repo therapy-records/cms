@@ -26,7 +26,7 @@ const listItemPropsHandler = ({
     releaseDate,
     location,
     venue,
-    ticketsUrl
+    ticketsUrl,
   } = item;
 
   // TODO: rename itemTitle / item.title to `heading`
@@ -40,6 +40,7 @@ const listItemPropsHandler = ({
     _id,
     title: itemTitle,
     author,
+    tag: author || itemTitle,
     excerpt,
     imageUrl: itemImageUrl,
     date: itemDate,
