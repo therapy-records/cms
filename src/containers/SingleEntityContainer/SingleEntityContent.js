@@ -5,6 +5,7 @@ import entityHeading from '../../utils/entityHeading';
 
 const SingleEntityContent = ({
   baseUrl,
+  entityCollection,
   data,
   render,
   executeMutation,
@@ -19,6 +20,7 @@ const SingleEntityContent = ({
 
       <EntityPageHeader
         baseUrl={baseUrl}
+        entityCollection={entityCollection}
         entity={{
           _id: data._id,
           author: data.author,
@@ -41,6 +43,7 @@ const SingleEntityContent = ({
 
 SingleEntityContent.propTypes = {
   baseUrl: PropTypes.string.isRequired,
+  entityCollection: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
   render: PropTypes.func.isRequired,
   executeMutation: PropTypes.func.isRequired,

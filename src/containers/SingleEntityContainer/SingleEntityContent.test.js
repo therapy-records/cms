@@ -11,6 +11,7 @@ describe('(Container Component) SingleEntityContent', () => {
   let wrapper,
       props = {
         baseUrl: '/test',
+        entityCollection: 'collaborators',
         data: {
           _id: '1234',
           name: 'Test',
@@ -38,6 +39,7 @@ describe('(Container Component) SingleEntityContent', () => {
 
     it('should render', () => {
       expect(entityPageHeader.prop('baseUrl')).to.eq(props.baseUrl);
+      expect(entityPageHeader.prop('entityCollection')).to.eq(props.entityCollection);
       expect(entityPageHeader.prop('entity')).to.deep.eq({
         _id: props.data._id,
         author: props.data.author,

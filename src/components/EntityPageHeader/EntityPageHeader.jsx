@@ -33,7 +33,7 @@ class EntityPageHeader extends Component {
 
   render() {
     const {
-      entityName,
+      entityCollection,
       entity,
       heading,
       promiseLoading,
@@ -82,7 +82,7 @@ class EntityPageHeader extends Component {
 
               {showEditButton && (
                 <Link
-                  to={`/${entityName}/${entity._id}/edit`}
+                  to={`/${entityCollection}/${entity._id}/edit`}
                   className='btn'
                 >Edit
                 </Link>
@@ -90,7 +90,7 @@ class EntityPageHeader extends Component {
 
               {showCreateButton && (
                 <Link
-                  to={`/${entityName}/create`}
+                  to={`/${entityCollection}/create`}
                   className='btn'
                 >Create
                 </Link>
@@ -120,7 +120,7 @@ class EntityPageHeader extends Component {
 EntityPageHeader.propTypes = {
   entity: PropTypes.object.isRequired,
   heading: PropTypes.string.isRequired,
-  entityName: PropTypes.string.isRequired,
+  entityCollection: PropTypes.string.isRequired,
   onDeleteEntity: PropTypes.func,
   promiseLoading: PropTypes.bool,
   showEditButton: PropTypes.bool,
@@ -131,7 +131,7 @@ EntityPageHeader.propTypes = {
 };
 
 EntityPageHeader.defaultProps = {
-  entityName: '',
+  entityCollection: '',
   onDeleteEntity: null,
   promiseLoading: false,
   showEditButton: false,

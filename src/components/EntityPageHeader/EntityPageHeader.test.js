@@ -36,7 +36,7 @@ describe('(Component) EntityPageHeader', () => {
     baseProps = {
       promiseLoading: false,
       entity: mockEntity,
-      entityName: 'press',
+      entityCollection: 'collaborators',
       heading: 'test',
       onDeleteEntity: sinon.spy(),
       showEditButton: true,
@@ -168,7 +168,7 @@ describe('(Component) EntityPageHeader', () => {
     it('should render an `edit` button', () => {
       const editButton = wrapper.find(Link).first();
       expect(editButton.length).to.eq(1);
-      const expectedTo = `/${baseProps.entityName}/${baseProps.entity._id}/edit`;
+      const expectedTo = `/${baseProps.entityCollection}/${baseProps.entity._id}/edit`;
       expect(editButton.prop('to')).to.eq(expectedTo);
     });
 
@@ -208,7 +208,7 @@ describe('(Component) EntityPageHeader', () => {
     it('should render a `create` Link', () => {
       const editButton = wrapper.find(Link).last();
       expect(editButton.length).to.eq(1);
-      const expectedTo = `/${baseProps.entityName}/create`;
+      const expectedTo = `/${baseProps.entityCollection}/create`;
       expect(editButton.prop('to')).to.eq(expectedTo);
     });
 
