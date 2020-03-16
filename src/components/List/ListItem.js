@@ -36,6 +36,12 @@ const ListItem = ({
   console.log(dateArray)
   let dateNumb = dateArray[2];
   let month = dateArray[1];
+  let time = dateArray[4];
+  console.log(time)
+  // let splitted = time.split(":");
+  // splitted.pop();
+  // let rejoin = splitted.join(":");
+  // console.log(rejoin);
 
   // if there is a venue (means we are in gigs)then render the gigs design.
   if (venue){
@@ -62,9 +68,9 @@ const ListItem = ({
 
               <div className="middle">
                 <p className="title-gig">
-                  <Link to={_id}>{title}</Link>
+                  <Link to={_id}>{title} at {time} </Link>
                 </p>
-                <p>{date}</p>
+                {/* <p>{date}</p> */}
                 <p>{venue}</p>
                 <p>{location}</p>
                 <p>Tickets: <a href={ticketsUrl}>{ticketsUrl}</a></p>
