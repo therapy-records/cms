@@ -229,8 +229,8 @@ describe('(Component) News - Article', () => {
           expect(pageHeader.prop('heading')).to.eq(entityHeading(mockArticle));
           expect(pageHeader.prop('onDeleteEntity')).to.be.a('function');
           expect(pageHeader.prop('promiseLoading')).to.eq(props.promiseLoading);
-          expect(pageHeader.prop('showEditButton')).to.eq(true);
-          expect(pageHeader.prop('showDeleteButton')).to.eq(true);
+          expect(pageHeader.prop('renderEditButton')).to.eq(true);
+          expect(pageHeader.prop('renderDeleteButton')).to.eq(true);
         });
 
         describe('onDeleteEntity prop', () => {

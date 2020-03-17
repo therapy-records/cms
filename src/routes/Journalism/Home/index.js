@@ -68,7 +68,7 @@ export class Journalism extends React.Component {
             <PageHeader
               heading='Journalism ✍️'
               entityCollection='journalism'
-              showCreateButton
+            renderCreateButton
             />
 
             {hasArticles

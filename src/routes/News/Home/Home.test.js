@@ -70,7 +70,7 @@ describe('(Component) News - Home', () => {
         <PageHeader
           heading='News 🗞️️️️'
           entityCollection='news'
-          showCreateButton
+          renderCreateButton
         />
       );
       expect(actual).to.equal(true);

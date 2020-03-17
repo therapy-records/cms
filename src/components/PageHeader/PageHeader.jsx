@@ -37,16 +37,16 @@ class PageHeader extends Component {
       entity,
       heading,
       promiseLoading,
-      showEditButton,
-      showDeleteButton,
-      showCreateButton,
+      renderEditButton,
+      renderDeleteButton,
+      renderCreateButton,
       bespokeButton,
       longHeading
     } = this.props;
 
     const { isShowingModal } = this.state;
 
-    const containerClassName = longHeading ? 'heading-with-btns long-heading' : 'heading-with-btns';
+    const containerClassName = longHeading ? 'page-header long-heading' : 'page-header';
 
     return (
       <div>
@@ -69,7 +69,7 @@ class PageHeader extends Component {
 
           </div>
 
-          {(showCreateButton || showDeleteButton || showEditButton || bespokeButton) && (
+          {(renderCreateButton || renderDeleteButton || renderEditButton || bespokeButton) && (
             <div className='action-btns'>
 
 
@@ -78,7 +78,7 @@ class PageHeader extends Component {
               )}
 
 
-              {showDeleteButton && (
+              {renderDeleteButton && (
                 <button
                   className='btn btn-danger'
                   onClick={this.handleOnModalOpen}
@@ -86,7 +86,7 @@ class PageHeader extends Component {
                 </button>
               )}
 
-              {showEditButton && (
+              {renderEditButton && (
                 <Link
                   to={`/${entityCollection}/${entity._id}/edit`}
                   className='btn'
@@ -94,7 +94,7 @@ class PageHeader extends Component {
                 </Link>
               )}
 
-              {showCreateButton && (
+              {renderCreateButton && (
                 <Link
                   to={`/${entityCollection}/create`}
                   className='btn'
@@ -107,7 +107,7 @@ class PageHeader extends Component {
 
         </div>
 
-        {(showDeleteButton && !promiseLoading && isShowingModal) &&
+        {(renderDeleteButton && !promiseLoading && isShowingModal) &&
           <DeleteModal
             onModalClose={this.handleOnModalClose}
             onDelete={this.handleOnDelete}
@@ -125,9 +125,9 @@ PageHeader.propTypes = {
   entity: PropTypes.object,
   onDeleteEntity: PropTypes.func,
   promiseLoading: PropTypes.bool,
-  showEditButton: PropTypes.bool,
-  showDeleteButton: PropTypes.bool,
-  showCreateButton: PropTypes.bool,
+  renderEditButton: PropTypes.bool,
+  renderDeleteButton: PropTypes.bool,
+  renderCreateButton: PropTypes.bool,
   bespokeButton: PropTypes.node,
   longHeading: PropTypes.bool
 };
@@ -137,9 +137,9 @@ PageHeader.defaultProps = {
   entity: {},
   onDeleteEntity: null,
   promiseLoading: false,
-  showEditButton: false,
-  showDeleteButton: false,
-  showCreateButton: false,
+  renderEditButton: false,
+  renderDeleteButton: false,
+  renderCreateButton: false,
   bespokeButton: null,
   longHeading: false
 };

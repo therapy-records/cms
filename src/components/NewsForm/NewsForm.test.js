@@ -61,7 +61,7 @@ describe('(Component) NewsForm', () => {
         expect(pageHeader.prop('onDeleteEntity')).to.eq(null);
         expect(pageHeader.prop('heading')).to.eq('Create News 🗞️');
         expect(pageHeader.prop('promiseLoading')).to.eq(props.promiseLoading);
-        expect(pageHeader.prop('showDeleteButton')).to.eq(false);
+        expect(pageHeader.prop('renderDeleteButton')).to.eq(false);
       });
 
       describe('when it\'s an `edit` form', () => {
@@ -77,7 +77,7 @@ describe('(Component) NewsForm', () => {
           const pageHeader = wrapper.find('PageHeader');
           expect(pageHeader.prop('onDeleteEntity')).to.be.a('function');
           expect(pageHeader.prop('heading')).to.eq(`Editing ${props.formValues.title} 🗞️`);
-          expect(pageHeader.prop('showDeleteButton')).to.eq(true);
+          expect(pageHeader.prop('renderDeleteButton')).to.eq(true);
         });
 
         describe('onDeleteEntity prop', () => {

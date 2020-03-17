@@ -36,7 +36,7 @@ const CollaboratorsHomeContent = ({
             {showSortableList ? 'Update order' : 'Change order'}
           </button>
         }
-        showCreateButton={!showSortableList}
+        renderCreateButton={!showSortableList}
       />
 
       <CollaboratorsList

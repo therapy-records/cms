@@ -47,8 +47,8 @@ describe('(Container Component) SingleEntityContent', () => {
         createdAt: props.data.createdAt
       });
       expect(pageHeader.prop('heading')).to.eq(entityHeading(props.data));
-      expect(pageHeader.prop('showEditButton')).to.eq(true);
-      expect(pageHeader.prop('showDeleteButton')).to.eq(props.renderDeleteButton);
+      expect(pageHeader.prop('renderEditButton')).to.eq(true);
+      expect(pageHeader.prop('renderDeleteButton')).to.eq(props.renderDeleteButton);
     });
 
     describe('when pageHeader onDeleteEntity prop is triggered', () => {

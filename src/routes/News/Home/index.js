@@ -71,7 +71,7 @@ export class News extends React.Component {
             <PageHeader
               heading='News 🗞️️️️'
               entityCollection='news'
-              showCreateButton
+              renderCreateButton
             />
 
             {

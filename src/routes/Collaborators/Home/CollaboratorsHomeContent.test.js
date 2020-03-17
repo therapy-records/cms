@@ -40,7 +40,7 @@ describe('(Component) CollaboratorsHomeContent', () => {
       expect(pageHeader.length).to.eq(1);
       expect(pageHeader.prop('heading')).to.eq('Collaborators 🌈');
       expect(pageHeader.prop('entityCollection')).to.eq('collaborators');
-      expect(pageHeader.prop('showCreateButton')).to.eq(true);
+      expect(pageHeader.prop('renderCreateButton')).to.eq(true);
       expect(pageHeader.prop('bespokeButton')).to.be.an('object');
     });
 
@@ -67,9 +67,9 @@ describe('(Component) CollaboratorsHomeContent', () => {
         expect(button.props().disabled).to.eq(true);
       });
 
-      it('should change <PageHeader /> showCreateButton prop to false', () => {
+      it('should change <PageHeader /> renderCreateButton prop to false', () => {
         pageHeader = wrapper.find('PageHeader');
-        expect(pageHeader.prop('showCreateButton')).to.eq(false);
+        expect(pageHeader.prop('renderCreateButton')).to.eq(false);
       });
 
       it('should change <CollaboratorsList /> showSortableList prop', () => {

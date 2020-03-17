@@ -84,7 +84,7 @@ describe('(Component) Journalism - Home', () => {
           <PageHeader
             heading='Journalism ✍️'
             entityCollection='journalism'
-            showCreateButton
+            renderCreateButton
           />
         );
         expect(actual).to.eq(true);

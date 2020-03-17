@@ -61,7 +61,7 @@ export class NewsForm extends React.Component {
           heading={isEditForm ? `Editing ${formValues && formValues.title} 🗞️` : 'Create News 🗞️'}
           onDeleteEntity={isEditForm ? () => onDeleteEntity(articleId) : null}
           promiseLoading={promiseLoading}
-          showDeleteButton={isEditForm}
+          renderDeleteButton={isEditForm}
         />
 
         <div className='col-clear' />

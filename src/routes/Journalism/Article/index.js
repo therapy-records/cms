@@ -87,8 +87,8 @@ export class Article extends React.Component {
               heading={entityHeading(article)}
               onDeleteEntity={() => onDeleteEntity(article._id)}
               promiseLoading={promiseLoading}
-              showEditButton
-              showDeleteButton
+              renderEditButton
+              renderDeleteButton
               longHeading
             />
 

@@ -65,7 +65,7 @@ export class JournalismForm extends React.Component {
           heading={isEditForm ? `Editing ${formValues && formValues.title} ✍️` : 'Create Journalism ✍️'}
           onDeleteEntity={isEditForm ? () => onDeleteEntity(articleId) : () => { }}
           promiseLoading={promiseLoading}
-          showDeleteButton={isEditForm}
+          renderDeleteButton={isEditForm}
         />
 
         <form onSubmit={(e) => e.preventDefault()} encType='multipart/form-data'>

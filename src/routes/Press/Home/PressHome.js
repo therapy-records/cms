@@ -24,7 +24,7 @@ const PressHome = () => {
             
               <PageHeader
                 heading='Press 📢'
-                showCreateButton
+                renderCreateButton
               />
 
               {hasArticles ? (

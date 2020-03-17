@@ -50,7 +50,7 @@ describe('(Component) PressHome', () => {
       const actual = wrapper.containsMatchingElement(
         <PageHeader
           heading='Press 📢'
-          showCreateButton
+          renderCreateButton
         />
       );
       expect(actual).to.equal(true);

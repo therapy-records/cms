@@ -28,9 +28,9 @@ const SingleEntityContent = ({
           createdAt: data.createdAt
         }}
         heading={heading}
-        showEditButton={!isEdit}
+        renderEditButton={!isEdit}
         onDeleteEntity={() => executeMutation()}
-        showDeleteButton={renderDeleteButton}
+        renderDeleteButton={renderDeleteButton}
       />
 
       {render({

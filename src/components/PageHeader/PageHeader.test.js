@@ -39,9 +39,9 @@ describe('(Component) PageHeader', () => {
       entityCollection: 'collaborators',
       heading: 'test',
       onDeleteEntity: sinon.spy(),
-      showEditButton: true,
-      showDeleteButton: true,
-      showCreateButton: true
+      renderEditButton: true,
+      renderDeleteButton: true,
+      renderCreateButton: true
     };
   props = baseProps;
 
@@ -94,11 +94,11 @@ describe('(Component) PageHeader', () => {
     });
 
     it('should render container class name', () => {
-      expect(wrapper.find('.heading-with-btns').length).to.eq(1);
+      expect(wrapper.find('.page-header').length).to.eq(1);
       wrapper.setProps({
         longHeading: true
       });
-      expect(wrapper.find('.heading-with-btns.long-heading').length).to.eq(1);
+      expect(wrapper.find('.page-header.long-heading').length).to.eq(1);
     });
 
     it('should render props.heading', () => {
