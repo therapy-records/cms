@@ -2,15 +2,14 @@ import React from 'react';
 import FormFields from '../../../formFields';
 import { CREATE_COLLABORATOR } from '../../../mutations';
 import { GET_COLLABORATORS } from '../../../queries';
+import PageHeader from '../../../components/PageHeader';
 import CollaboratorForm from '../../../components/CollaboratorForm';
 import { mapFields } from '../../../utils/form-field-mappings';
 
 const CollaboratorCreate = () => (
   <article className='container'>
 
-    <div className='heading-with-btns'>
-      <h2>Add Collaborator 🌈</h2>
-    </div>
+    <PageHeader heading='Add Collaborator 🌈' />
 
     <div className='col-clear' />
 

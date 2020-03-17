@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import PageHeader from '../../../components/PageHeader';
 import CollaboratorsList from '../../../components/CollaboratorsList';
 
 const CollaboratorsHomeContent = ({
@@ -17,13 +18,10 @@ const CollaboratorsHomeContent = ({
   return (
     <div>
 
-      <div className='heading-with-btns'>
-
-        <div>
-          <h2>Collaborators 🌈</h2>
-        </div>
-
-        <div className='action-btns'>
+      <PageHeader
+        heading='Collaborators 🌈'
+        entityCollection='collaborators'
+        bespokeButton={
           <button
             onClick={() => {
               if (showSortableList) {
@@ -37,13 +35,9 @@ const CollaboratorsHomeContent = ({
           >
             {showSortableList ? 'Update order' : 'Change order'}
           </button>
-
-          {!showSortableList && (
-            <Link to='collaborators/create' className='btn'>Create</Link>
-          )}
-
-        </div>
-      </div>
+        }
+        showCreateButton={!showSortableList}
+      />
 
       <CollaboratorsList
         listItems={listItems}

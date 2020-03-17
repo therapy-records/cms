@@ -69,8 +69,14 @@ class PageHeader extends Component {
 
           </div>
 
-          {(showDeleteButton || showEditButton) && (
+          {(showCreateButton || showDeleteButton || showEditButton || bespokeButton) && (
             <div className='action-btns'>
+
+
+              {bespokeButton && (
+                bespokeButton
+              )}
+
 
               {showDeleteButton && (
                 <button
@@ -96,10 +102,6 @@ class PageHeader extends Component {
                 </Link>
               )}
 
-              {bespokeButton && (
-                bespokeButton
-              )}
-
             </div>
           )}
 
@@ -118,9 +120,9 @@ class PageHeader extends Component {
 }
 
 PageHeader.propTypes = {
-  entity: PropTypes.object.isRequired,
   heading: PropTypes.string.isRequired,
-  entityCollection: PropTypes.string.isRequired,
+  entityCollection: PropTypes.string,
+  entity: PropTypes.object,
   onDeleteEntity: PropTypes.func,
   promiseLoading: PropTypes.bool,
   showEditButton: PropTypes.bool,
@@ -132,6 +134,7 @@ PageHeader.propTypes = {
 
 PageHeader.defaultProps = {
   entityCollection: '',
+  entity: {},
   onDeleteEntity: null,
   promiseLoading: false,
   showEditButton: false,
