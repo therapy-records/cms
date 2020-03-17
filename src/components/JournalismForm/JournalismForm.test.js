@@ -122,6 +122,7 @@ describe('(Component) JournalismForm', () => {
           title='Article screenshot'
           existingImages={[props.formValues.imageUrl]}
           minImageDimensions={JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS}
+          helpText='Dimensions must be equal'
           ctaCopy='Drag & drop image'
           required
         />

@@ -25,7 +25,7 @@ describe('(Component) FormFieldLabel', () => {
       <label htmlFor={props.id}>
         {props.label}
         <span className='required'>*</span>
-        <span><small>({props.helpText})</small></span>
+        <span><small>{props.helpText}</small></span>
       </label>
     );
     expect(actual).to.eq(true);

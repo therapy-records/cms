@@ -13,7 +13,7 @@ const FormFieldLabel = ({
       <span className='required'>*</span>
     )}
     {helpText && (
-      <span className='help-text'><small>({helpText})</small></span>
+      <span className='help-text'><small>{helpText}</small></span>
     )}
   </label>
 )

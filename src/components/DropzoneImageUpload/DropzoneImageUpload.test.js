@@ -142,15 +142,28 @@ describe('(Component) DropzoneImageUpload', () => {
   });
 
   describe('rendering', () => {
-    it('should render a heading/title with `required` element and props.minImageDimensions copy', () => {
-      const actual = wrapper.containsMatchingElement(
-        <h5>{props.title}
-          <span className='required'>*</span>
+    describe('heading/title with help text', () => {
+      it('should render with `required` element and props.minImageDimensions copy', () => {
+        const actual = wrapper.containsMatchingElement(
+          <h5>{props.title}
+            <span className='required'>*</span>
           &nbsp;
-          <span><small>(must be at least {props.minImageDimensions.width}px by {props.minImageDimensions.height}px)</small></span>
-        </h5>
-      );
-      expect(actual).to.equal(true);
+          <span><small>Must be at least {props.minImageDimensions.width}px by {props.minImageDimensions.height}px</small></span>
+          </h5>
+        );
+        expect(actual).to.equal(true);
+      });
+      describe('when there is props.helpText', () => {
+        it('should render different copy with props.helpText', () => {
+          const mockHelpText = 'Dimensions must be equal';
+          wrapper.setProps({
+            helpText: mockHelpText
+          });
+          const helpText = wrapper.find('h5 .help-text').shallow().text();
+          const expected = `${mockHelpText} and be at least ${props.minImageDimensions.width}px by ${props.minImageDimensions.height}px`;
+          expect(helpText).to.equal(expected);
+        });
+      });
     });
 
     describe('when state.isLoading', () => {

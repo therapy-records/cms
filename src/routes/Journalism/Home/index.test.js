@@ -62,9 +62,13 @@ describe('(Component) Journalism - Home', () => {
     });
 
     it('should render <List />', () => {
+      const expectedDataProp = props.articles.sort((a, b) =>
+        new Date(a.releaseDate) - new Date(b.releaseDate)
+      ).reverse();
+     
       const actual = wrapper.containsMatchingElement(
         <List
-          data={props.articles}
+          data={expectedDataProp}
           route='journalism'
           onItemClick={wrapper.instance().handleButtonClick}
           onViewButtonClick={wrapper.instance().handleButtonClick}

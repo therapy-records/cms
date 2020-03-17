@@ -40,7 +40,7 @@ const PressHome = () => {
                 />
               ) : (
                 <div>
-                  <EmptyArticlesMessage type='journalism' />
+                  <EmptyArticlesMessage type='press' />
                 </div>
               )}
 
