@@ -41,6 +41,7 @@ describe('(Component) CollaboratorsHomeContent', () => {
       expect(pageHeader.prop('heading')).to.eq('Collaborators 🌈');
       expect(pageHeader.prop('entityCollection')).to.eq('collaborators');
       expect(pageHeader.prop('showCreateButton')).to.eq(true);
+      expect(pageHeader.prop('bespokeButton')).to.be.an('object');
     });
 
     it('should render a bespokeButton prop with correct copy', () => {
