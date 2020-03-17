@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { fetchJournalismArticles } from '../../../actions/journalism';
 import { setSelectedJournalismArticle } from '../../../actions/journalismArticle';
 import { resetPromiseState } from '../../../actions/uiState';
@@ -10,6 +9,7 @@ import {
   selectJournalismHasFetched
 } from '../../../selectors/journalism';
 import { selectUiStateLoading } from '../../../selectors/uiState';
+import PageHeader from '../../../components/PageHeader';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
 import List from '../../../components/List';
@@ -65,14 +65,11 @@ export class Journalism extends React.Component {
         {!promiseLoading &&
           <div>
 
-          <div className='heading-with-btns'>
-              <div>
-                <h2>Journalism ✍️</h2>
-              </div>
-              <div className='action-btns'>
-                <Link to='journalism/create' className='btn'>Create</Link>
-              </div>
-          </div>
+            <PageHeader
+              heading='Journalism ✍️'
+              entityCollection='journalism'
+              showCreateButton
+            />
 
             {hasArticles
               ? (

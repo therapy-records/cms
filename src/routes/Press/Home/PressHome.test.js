@@ -7,6 +7,7 @@ import { MockedProvider } from '@apollo/react-testing';
 import PressHome from './index';
 import { GET_PRESS } from '../../../queries';
 import { MOCK_GET_PRESS } from '../../../mocks/press.mock';
+import PageHeader from '../../../components/PageHeader';
 import List from '../../../components/List';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -43,28 +44,20 @@ describe('(Component) PressHome', () => {
     expect(queryContainer.prop('entityName')).to.eq('press');
   });
 
-  it('should render a page title from <QueryContainer /> render prop', async() => {
+  it('should render <PageHeader /> from <QueryContainer /> render prop', async() => {
     await actions(wrapper, () => {
       wrapper.update();
       const actual = wrapper.containsMatchingElement(
-        <h2>Press 📢</h2>
+        <PageHeader
+          heading='Press 📢'
+          showCreateButton
+        />
       );
       expect(actual).to.equal(true);
     });
   });
 
-
-  it('should render a link to create from <QueryContainer /> render prop', async() => {
-    await actions(wrapper, () => {
-      wrapper.update()
-      const actual = wrapper.containsMatchingElement(
-        <Link to='press/create' className='btn'>Create</Link>
-      );
-      expect(actual).to.eq(true);
-    });
-  });
-
-  it('should render a link to create from <QueryContainer /> render prop', async() => {
+  it('should render a <List /> from <QueryContainer /> render prop', async() => {
     await actions(wrapper, () => {
       const expectedData = MOCK_GET_PRESS.result.data.press.sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate)).reverse();
       wrapper.update()

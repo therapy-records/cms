@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchNewsArticles } from '../../../actions/news';
 import { setSelectedNewsArticle } from '../../../actions/newsArticle';
@@ -10,6 +9,7 @@ import {
   selectNewsHasFetched
 } from '../../../selectors/news';
 import { selectUiStateLoading } from '../../../selectors/uiState';
+import PageHeader from '../../../components/PageHeader';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import List from '../../../components/List';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
@@ -67,14 +67,12 @@ export class News extends React.Component {
 
         {!promiseLoading &&
           <div>
-            <div className='heading-with-btns'>
-              <div>
-                <h2>News 🗞️️️️</h2>
-              </div>
-              <div className='action-btns'>
-                <Link to='news/create' className='btn'>Create</Link>
-              </div>
-            </div>
+
+            <PageHeader
+              heading='News 🗞️️️️'
+              entityCollection='news'
+              showCreateButton
+            />
 
             {
               hasCombinedArticles ? (

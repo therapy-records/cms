@@ -5,6 +5,7 @@ import PressCreate from './index';
 import FormFields from '../../../formFields';
 import { CREATE_PRESS } from '../../../mutations';
 import { GET_PRESS } from '../../../queries';
+import PageHeader from '../../../components/PageHeader';
 import PressForm from '../../../components/PressForm';
 import { mapFields } from '../../../utils/form-field-mappings';
 
@@ -19,9 +20,9 @@ describe('(Component) PressCreate', () => {
       wrapper = shallow(<PressCreate />);
     });
 
-    it('should render a page title', () => {
+    it('should render <PageHeader />', () => {
       const actual = wrapper.containsMatchingElement(
-        <h2>Create Press 📢</h2>
+        <PageHeader heading='Create Press 📢' />
       );
       expect(actual).to.equal(true);
     });

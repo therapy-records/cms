@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import QueryContainer from '../../../containers/QueryContainer';
 import { GET_PRESS } from '../../../queries';
+import PageHeader from '../../../components/PageHeader';
 import List from '../../../components/List';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
 
@@ -20,18 +20,12 @@ const PressHome = () => {
           const sortedQueryData = queryData.sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate)).reverse();
 
           return (
-            <div>
-
-              <div className='heading-with-btns'>
-
-                <div>
-                  <h2>Press 📢</h2>
-                </div>
-
-                <div className='action-btns'>
-                  <Link to='press/create' className='btn'>Create</Link>
-                </div>
-              </div>
+            <div>          
+            
+              <PageHeader
+                heading='Press 📢'
+                showCreateButton
+              />
 
               {hasArticles ? (
                 <List
