@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const EmptyMessage = ({type}) => (
+const EmptyMessage = ({entityName}) => (
   <div>
-    <p>No {type} yet. <Link to={`${type}/create`}>Create new {type.substring(0, type.length - 1)}</Link></p>
+    <p>No {entityName} yet. <Link to={`${entityName}/create`}>{createCopy}</Link></p>
   </div>
 );
 

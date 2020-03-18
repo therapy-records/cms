@@ -3,7 +3,7 @@ import List from '../../components/List';
 import QueryContainer from '../../containers/QueryContainer';
 import { GET_GIGS } from "../../queries/index"
 import { Link } from 'react-router-dom';
-// import EmptyMessage from '../../components/EmptyMessage/EmptyMessage';
+import EmptyMessage from '../../components/EmptyMessage/EmptyMessage';
 
 const Gigs = () => {
 
@@ -15,7 +15,7 @@ const Gigs = () => {
         entityName='gigs'
         render={(queryData) => {
 
-          const hasGigs = (queryData && queryData !== null) && queryData.length;
+          const hasGigs = false
           const sortedQueryData = queryData.sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate)).reverse();
 
           return (
@@ -41,7 +41,9 @@ const Gigs = () => {
                 />
               ) : (
                 <div>
-                  {/* <EmptyArticlesMessage type='journalism' /> */}
+                  <EmptyMessage 
+                    entityName='journalism'
+                    createCopy='Create a new Journalism article' />
                 </div>
               )}
 
