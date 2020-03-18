@@ -10,8 +10,8 @@ const ListItem = ({
   author,
   title,
   imageUrl,
-  excerpt,
   date,
+  releaseDate,
   route,
   onItemClick,
   onViewButtonClick,
@@ -21,8 +21,8 @@ const ListItem = ({
   location,
   venue,
   ticketsUrl,
-  tag
-
+  description,
+  externalLink
 }) => {
 
   let containerClassName = cardDesign ? 'list-item-card' : 'list-item-row';
@@ -31,23 +31,8 @@ const ListItem = ({
     containerClassName += ' list-item-card-is-draggable'
   }
 
-  // For Gigs date
-  let dateArray = date.split(" ");
-  console.log(dateArray)
-  let dateNumb = dateArray[2];
-  let month = dateArray[1];
-  let time = dateArray[4];
-  console.log(time)
-  // let splitted = time.split(":");
-  // splitted.pop();
-  // let rejoin = splitted.join(":");
-  // console.log(rejoin);
-
-  // if there is a venue (means we are in gigs)then render the gigs design.
-  if (venue){
-       return (
-
-      <li className={containerClassName}>
+  return (
+    <li className={containerClassName}>
 
       {isDraggable && <DragHandle />}
 
@@ -57,109 +42,56 @@ const ListItem = ({
         </div>
       }
 
+      {date &&
+        <div className='img-container'>
+          {date}
+        </div>
+      }
+
       <div className='content-container'>
         <div className='content'>
           <div>
-        <div className="gigs-card">
-          <div className="left">
-            <p>{dateNumb}</p>
-            <p>{month}</p>
+            <div className='small-tabs-container'>
+              {author && <p className='small-tab author'>{author}</p>}
+              {releaseDate && <p className='small-tab'>{moment(new Date(releaseDate)).format('DD MMM YYYY')}</p>}
+            </div>
+            <h3>
+              <Link
+                onClick={onItemClick}
+                to={`/${route}/${_id}`}
+              >
+                <span>{title}</span>
+              </Link>
+            </h3>
           </div>
 
-              <div className="middle">
-                <p className="title-gig">
-                  <Link to={_id}>{title} at {time} </Link>
-                </p>
-                {/* <p>{date}</p> */}
-                <p>{venue}</p>
-                <p>{location}</p>
-                <p>Tickets: <a href={ticketsUrl}>{ticketsUrl}</a></p>
-                <div className="button">
-                  <div>
-                    <Link
-                      onClick={onViewButtonClick}
-                      to={`/${route}/${_id}`}
-                      className='btn btn-xs'
-                    >
-                      View
+          {description && <p>{description}</p>}
+          {externalLink && <p><a href={externalLink} target="_blank">{externalLink}</a></p>}
+
+          <div className='btns-container btns-always-inline'>
+
+            <Link
+              onClick={onViewButtonClick}
+              to={`/${route}/${_id}`}
+              className='btn btn-xs'
+            >
+              View
             </Link>
-                  </div>
-                  <div>
-                    <Link
-                      onClick={onEditButtonClick}
-                      to={`/${route}/${_id}/edit`}
-                      className='btn btn-xs'
-                    >
-                      Edit
+
+            <Link
+              onClick={onEditButtonClick}
+              to={`/${route}/${_id}/edit`}
+              className='btn btn-xs'
+            >
+              Edit
             </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
+
           </div>
         </div>
       </div>
 
     </li>
   );
-  
-  } else {
-    return (
-      <li className={containerClassName}>
-  
-        {isDraggable && <DragHandle />}
-  
-        {imageUrl &&
-          <div className='img-container'>
-            <img src={imageUrl} alt={title} />
-          </div>
-        }
-  
-        <div className='content-container'>
-          <div className='content'>
-            <div>
-              <div className='small-tabs-container'>
-                {author && <p className='small-tab author'>{author}</p>}
-                {date && <p className='small-tab'>{moment(new Date(date)).format('DD MMM YYYY')}</p>}
-              </div>
-              <h3>
-                <Link
-                  onClick={onItemClick}
-                  to={`/${route}/${_id}`}
-                >
-                  <span>{title}</span>
-                </Link>
-              </h3>
-            </div>
-  
-            {excerpt && <p>{excerpt}</p>}
-  
-            <div className='btns-container btns-always-inline'>
-  
-              <Link
-                onClick={onViewButtonClick}
-                to={`/${route}/${_id}`}
-                className='btn btn-xs'
-              >
-                View
-              </Link>
-  
-              <Link
-                onClick={onEditButtonClick}
-                to={`/${route}/${_id}/edit`}
-                className='btn btn-xs'
-              >
-                Edit
-              </Link>
-  
-            </div>
-          </div>
-        </div>
-  
-      </li>
-    );
-  }
-
 
 };
 
@@ -169,20 +101,25 @@ ListItem.propTypes = {
   author: PropTypes.string,
   imageUrl: PropTypes.string,
   route: PropTypes.string.isRequired,
-  excerpt: PropTypes.string,
   date: PropTypes.string,
+  releaseDate: PropTypes.string,
   onItemClick: PropTypes.func,
   onViewButtonClick: PropTypes.func,
   onEditButtonClick: PropTypes.func,
   cardDesign: PropTypes.bool,
-  isDraggable: PropTypes.bool
+  isDraggable: PropTypes.bool,
+  location: PropTypes.string,
+  venue: PropTypes.string,
+  ticketsUrl: PropTypes.string,
+  description: PropTypes.string,
+  externalLink: PropTypes.string
 };
 
 ListItem.defaultProps = {
   author: '',
   imageUrl: '',
-  excerpt: '',
   date: '',
+  releaseDate: '',
   onItemClick: null,
   onViewButtonClick: null,
   onEditButtonClick: null,
