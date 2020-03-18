@@ -149,3 +149,28 @@
     }
   }
 }
+
+
+.date {
+
+  :first-child {
+    font-size: 30px;
+    font-weight: normal;
+    color: black;
+    margin-bottom: 2px;
+  }
+  
+  p {
+      text-align: center; 
+      font-size: 27px;
+      font-weight: normal;
+      color: gray;
+      margin-bottom: 2px;
+  }
+  
+  :last-child {
+      margin-top: 0;
+      font-size: 25px;
+      color: lightgray;
+  }
+}
