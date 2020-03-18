@@ -22,14 +22,24 @@ const listItemPropsHandler = ({
     imageUrl,
     avatarUrl,
     excerpt,
+    releaseDate,
     date,
-    releaseDate
+    location,
+    venue,
+    externalLink,
+    ticketsUrl
   } = item;
 
   // TODO: rename itemTitle / item.title to `heading`
   const itemTitle = entityHeading(item);
-  const itemDate = date || releaseDate;
   const itemImageUrl = itemsHaveMultipleImages ? getFirstImageInArticle(item) : (imageUrl || avatarUrl);
+
+  let itemDescription = excerpt;
+
+  if (!excerpt && (venue && location)) {
+    itemDescription = `${venue}, ${location}`;
+  }
+  const itemExternalLink = externalLink || ticketsUrl;
 
   return {
     index: index,
@@ -37,12 +47,14 @@ const listItemPropsHandler = ({
     _id,
     title: itemTitle,
     author,
-    excerpt,
+    description: itemDescription,
     imageUrl: itemImageUrl,
-    date: itemDate,
+    date,
+    releaseDate,
     route,
     cardDesign,
-    isDraggable
+    isDraggable,
+    externalLink: itemExternalLink
   };
 };
 
