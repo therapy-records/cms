@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
 import PageHeader from '../../../components/PageHeader';
 import CollaboratorsList from '../../../components/CollaboratorsList';
 
