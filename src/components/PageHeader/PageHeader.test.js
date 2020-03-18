@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import moment from 'moment';
-import ArticleHeader from './index';
-import ArticleDeleteModal from '../ArticleDeleteModal';
+import PageHeader from './index';
+import DeleteModal from '../DeleteModal';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('(Component) ArticleHeader', () => {
+describe('(Component) PageHeader', () => {
   let wrapper,
     props,
-    mockArticle = {
+    mockEntity = {
       _id: 'asdf1234',
       title: 'hello world',
       sections: [
@@ -34,54 +34,55 @@ describe('(Component) ArticleHeader', () => {
       releaseDate: '2019-08-10T11:17:02.883Z'
     },
     baseProps = {
-      baseUrl: '/news',
       promiseLoading: false,
-      article: mockArticle,
+      entity: mockEntity,
+      entityCollection: 'collaborators',
       heading: 'test',
-      onDeleteArticle: sinon.spy(),
-      showEditButton: true,
-      showDeleteButton: true
+      onDeleteEntity: sinon.spy(),
+      renderEditButton: true,
+      renderDeleteButton: true,
+      renderCreateButton: true
     };
   props = baseProps;
 
   beforeEach(() => {
-    wrapper = shallow(<ArticleHeader {...props} />);
+    wrapper = shallow(<PageHeader {...props} />);
   });
 
   describe('methods', () => {
 
-    describe('handleModalOpen', () => {
+    describe('handleOnModalOpen', () => {
       it('should set state.isShowingModal to true', () => {
-        wrapper.instance().handleModalOpen();
+        wrapper.instance().handleOnModalOpen();
         expect(wrapper.instance().state.isShowingModal).to.eq(true);
       });
     });
 
-    describe('handleModalClose', () => {
+    describe('handleOnModalClose', () => {
       it('should set state.isShowingModal to false', () => {
-        wrapper.instance().handleModalClose();
+        wrapper.instance().handleOnModalClose();
         expect(wrapper.instance().state.isShowingModal).to.eq(false);
       });
     });
 
-    describe('handleOnDeleteArticle', () => {
-      it('should call props.onDeleteArticle', () => {
-        const onDeleteArticleSpy = sinon.spy();
+    describe('handleOnDelete', () => {
+      it('should call props.onDeleteEntity', () => {
+        const onDeleteEntitySpy = sinon.spy();
         wrapper.setProps({
-          onDeleteArticle: onDeleteArticleSpy
+          onDeleteEntity: onDeleteEntitySpy
         });
-        wrapper.instance().handleOnDeleteArticle();
-        expect(onDeleteArticleSpy).to.have.been.calledOnce;
-        expect(onDeleteArticleSpy).to.have.been.calledWith(
-          props.article._id
+        wrapper.instance().handleOnDelete();
+        expect(onDeleteEntitySpy).to.have.been.calledOnce;
+        expect(onDeleteEntitySpy).to.have.been.calledWith(
+          props.entity._id
         );
       });
 
-      it('should call handleModalClose', () => {
-        const handleModalCloseSpy = sinon.spy();
-        wrapper.instance().handleModalClose = handleModalCloseSpy;
-        wrapper.instance().handleOnDeleteArticle();
-        expect(handleModalCloseSpy).to.have.been.calledOnce;
+      it('should call handleOnModalClose', () => {
+        const handleOnModalCloseSpy = sinon.spy();
+        wrapper.instance().handleOnModalClose = handleOnModalCloseSpy;
+        wrapper.instance().handleOnDelete();
+        expect(handleOnModalCloseSpy).to.have.been.calledOnce;
       });
 
     });
@@ -89,15 +90,15 @@ describe('(Component) ArticleHeader', () => {
 
   describe('rendering', () => {
     beforeEach(() => {
-      wrapper = shallow(<ArticleHeader {...props} />);
+      wrapper = shallow(<PageHeader {...props} />);
     });
 
     it('should render container class name', () => {
-      expect(wrapper.find('.heading-with-btns').length).to.eq(1);
+      expect(wrapper.find('.page-header').length).to.eq(1);
       wrapper.setProps({
         longHeading: true
       });
-      expect(wrapper.find('.heading-with-btns.long-heading').length).to.eq(1);
+      expect(wrapper.find('.page-header.long-heading').length).to.eq(1);
     });
 
     it('should render props.heading', () => {
@@ -107,39 +108,27 @@ describe('(Component) ArticleHeader', () => {
       expect(actual).to.equal(true);
     });
 
-    describe('when there is no props.heading', () => {
-      it('should render article.title', () => {
-        wrapper.setProps({
-          heading: undefined
-        });
-        const actual = wrapper.containsMatchingElement(
-          <h2>{mockArticle.title}</h2>
-        );
-        expect(actual).to.equal(true);
-      });
-    });
-
     it('should render `author`', () => {
       const actual = wrapper.containsMatchingElement(
-        <p className='small-tab author'>{mockArticle.author}</p>
+        <p className='small-tab author'>{mockEntity.author}</p>
       );
       expect(actual).to.eq(true);
     });
 
     it('should render `releaseDate`', () => {
-      const expectedDate = moment(mockArticle.releaseDate).format('DD MMM YYYY');
+      const expectedDate = moment(mockEntity.releaseDate).format('DD MMM YYYY');
       const actual = wrapper.containsMatchingElement(
         <p className='small-tab'>Released {expectedDate}</p>
       );
       expect(actual).to.eq(true);
     });
 
-    describe('when article has `createdAt`', () => {
+    describe('when entity has `createdAt`', () => {
       it('should render `createdAt` with copy', () => {
         const mockDate = '2019-08-10T11:17:02.883Z';
         wrapper.setProps({
-          article: {
-            ...mockArticle,
+          entity: {
+            ...mockEntity,
             createdAt: mockDate
           }
         });
@@ -152,19 +141,19 @@ describe('(Component) ArticleHeader', () => {
     });
 
     it('should render `releaseDate`', () => {
-      const expectedDate = moment(mockArticle.releaseDate).format('DD MMM YYYY');
+      const expectedDate = moment(mockEntity.releaseDate).format('DD MMM YYYY');
       const actual = wrapper.containsMatchingElement(
         <p className='small-tab'>Released {expectedDate}</p>
       );
       expect(actual).to.eq(true);
     });
 
-    describe('when an article has `editedAt`', () => {
+    describe('when an entity has `editedAt`', () => {
       it('should render `editedAt` with copy', () => {
         const mockDate = '2019-08-10T11:17:02.883Z';
         wrapper.setProps({
-          article: {
-            ...mockArticle,
+          entity: {
+            ...mockEntity,
             editedAt: mockDate
           }
         });
@@ -176,45 +165,64 @@ describe('(Component) ArticleHeader', () => {
       });
     });
 
-    it('should be render an `edit article` button', () => {
-      const editButton = wrapper.find(Link);
+    it('should render an `edit` button', () => {
+      const editButton = wrapper.find(Link).first();
       expect(editButton.length).to.eq(1);
-      const expectedTo = `${baseProps.baseUrl}/${baseProps.article._id}/edit`;
+      const expectedTo = `/${baseProps.entityCollection}/${baseProps.entity._id}/edit`;
       expect(editButton.prop('to')).to.eq(expectedTo);
     });
 
-    describe('delete article button', () => {
+    describe('delete button', () => {
       beforeEach(() => {
         props = baseProps;
-        props.article = mockArticle;
-        props.handleModalOpen = sinon.spy();
-        props.handleModalClose = () => { };
+        props.entity = mockEntity;
+        props.handleOnModalOpen = sinon.spy();
+        props.handleOnModalClose = () => { };
         props.promiseLoading = false;
-        wrapper = shallow(<ArticleHeader {...props} />);
+        wrapper = shallow(<PageHeader {...props} />);
       });
 
-      it('should not render <ArticleDeleteModal /> by default', () => {
+      it('should not render <DeleteModal /> by default', () => {
         const actual = wrapper.containsMatchingElement(
-          <ArticleDeleteModal
-            handleModalClose={wrapper.instance().handleModalClose}
-            onDeleteArticle={wrapper.instance().handleOnDeleteArticle}
+          <DeleteModal
+            onModalClose={wrapper.instance().handleOnModalClose}
+            onDelete={wrapper.instance().handleOnDelete}
           />
         );
         expect(actual).to.equal(false);
       });
 
-      it('should set state and render <ArticleDeleteModal />', () => {
+      it('should set state and render <DeleteModal />', () => {
         const button = wrapper.find('button');
         button.simulate('click');
         const actual = wrapper.containsMatchingElement(
-          <ArticleDeleteModal
-            handleModalClose={wrapper.instance().handleModalClose}
-            onDeleteArticle={wrapper.instance().handleOnDeleteArticle}
+          <DeleteModal
+            onModalClose={wrapper.instance().handleOnModalClose}
+            onDelete={wrapper.instance().handleOnDelete}
           />
         );
         expect(actual).to.equal(true);
       });
     });
+
+    it('should render a `create` Link', () => {
+      const editButton = wrapper.find(Link).last();
+      expect(editButton.length).to.eq(1);
+      const expectedTo = `/${baseProps.entityCollection}/create`;
+      expect(editButton.prop('to')).to.eq(expectedTo);
+    });
+
+    describe('bespoke button', () => {
+      it('should render bespokeButton element', () => {
+        const mockBespokeButton = <button onClick={null}>test</button>;
+        wrapper.setProps({
+          bespokeButton: mockBespokeButton
+        });
+        const actual = wrapper.containsMatchingElement(mockBespokeButton);
+        expect(actual).to.eq(true);
+      });
+    });
+
   });
 
 });

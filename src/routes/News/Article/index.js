@@ -14,9 +14,10 @@ import {
   destroySelectedNewsArticle,
   setSelectedNewsArticle
 } from '../../../actions/newsArticle';
-import ArticleHeader from '../../../components/ArticleHeader';
+import PageHeader from '../../../components/PageHeader';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import redirect from '../../../utils/redirect';
+import entityHeading from '../../../utils/entityHeading';
 
 export class Article extends React.Component {
   componentDidMount() {
@@ -55,10 +56,9 @@ export class Article extends React.Component {
     const {
       article,
       promiseLoading,
-      onDeleteArticle
+      onDeleteEntity
     } = this.props;
 
-    // todo: move to will/did update
     if (article && article.isDeleted) {
       redirect.redirectHistory(this.props.history, '/news');
     }
@@ -81,13 +81,14 @@ export class Article extends React.Component {
         {(!promiseLoading && article && article.title && !article.isDeleted) && (
           <div>
 
-            <ArticleHeader
-              baseUrl='/news'
-              article={article}
-              onDeleteArticle={() => onDeleteArticle(article._id)}
+            <PageHeader
+              entityCollection='news'
+              entity={article}
+              heading={entityHeading(article)}
+              onDeleteEntity={() => onDeleteEntity(article._id)}
               promiseLoading={promiseLoading}
-              showEditButton
-              showDeleteButton
+              renderEditButton
+              renderDeleteButton
               longHeading
             />
 
@@ -149,7 +150,7 @@ export class Article extends React.Component {
 Article.propTypes = {
   history: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
-  onDeleteArticle: PropTypes.func.isRequired,
+  onDeleteEntity: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
   onFetchArticle: PropTypes.func.isRequired,
@@ -162,7 +163,7 @@ Article.propTypes = {
 const mapDispatchToProps = {
   onFetchArticle: (id) => fetchSingleNewsArticle(id),
   onFetchNewsArticles: () => fetchNewsArticles(),
-  onDeleteArticle: (id) => deleteNewsArticle(id),
+  onDeleteEntity: (id) => deleteNewsArticle(id),
   resetPromiseState: () => resetPromiseState(),
   onDestroyArticle: () => destroySelectedNewsArticle(),
   onSetSelectedNewsArticle: (article) => setSelectedNewsArticle(article)

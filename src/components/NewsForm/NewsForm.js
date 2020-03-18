@@ -10,7 +10,7 @@ import {
 import { selectNewsFormValues } from '../../selectors/form';
 import { selectUiStateLoading } from '../../selectors/uiState';
 import './NewsForm.css';
-import ArticleHeader from '../ArticleHeader';
+import PageHeader from '../PageHeader';
 import TextInput from '../TextInput';
 import { required } from '../../utils/form';
 import { EMPTY_ARTICLE_SECTION_OBJ } from '../../utils/news';
@@ -36,7 +36,7 @@ export class NewsForm extends React.Component {
       invalid,
       location,
       formValues,
-      onDeleteArticle,
+      onDeleteEntity,
       articleId,
       promiseLoading
     } = this.props;
@@ -55,13 +55,13 @@ export class NewsForm extends React.Component {
     return (
       <section className='article-create'>
 
-        <ArticleHeader
-          baseUrl='/news'
-          article={formValues}
-          onDeleteArticle={isEditForm ? () => onDeleteArticle(articleId) : null}
-          promiseLoading={promiseLoading}
+        <PageHeader
+          entityName='news'
+          entity={formValues}
           heading={isEditForm ? `Editing ${formValues && formValues.title} 🗞️` : 'Create News 🗞️'}
-          showDeleteButton={isEditForm}
+          onDeleteEntity={isEditForm ? () => onDeleteEntity(articleId) : null}
+          promiseLoading={promiseLoading}
+          renderDeleteButton={isEditForm}
         />
 
         <div className='col-clear' />
@@ -101,7 +101,7 @@ export class NewsForm extends React.Component {
 
 NewsForm.propTypes = {
   onSubmitForm: PropTypes.func.isRequired,
-  onDeleteArticle: PropTypes.func.isRequired,
+  onDeleteEntity: PropTypes.func.isRequired,
   articleId: PropTypes.string,
   error: PropTypes.string,
   pristine: PropTypes.bool,
@@ -133,7 +133,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  onDeleteArticle: (id) => deleteNewsArticle(id),
+  onDeleteEntity: (id) => deleteNewsArticle(id),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InitFromStateForm)

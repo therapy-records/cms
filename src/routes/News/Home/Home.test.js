@@ -1,9 +1,9 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { Link } from 'react-router-dom';
 import configureMockStore from 'redux-mock-store';
 import ConnectedNews, { News } from './index';
+import PageHeader from '../../../components/PageHeader';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import List from '../../../components/List';
 import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
@@ -65,16 +65,13 @@ describe('(Component) News - Home', () => {
 
   describe('when promiseLoading is false', () => {
 
-    it('should render a page title', () => {
+    it('should render <PageHeader />', () => {
       const actual = wrapper.containsMatchingElement(
-        <h2>News 🗞️️️️</h2>
-      );
-      expect(actual).to.equal(true);
-    });
-
-    it('should render a create button', () => {
-      const actual = wrapper.containsMatchingElement(
-        <Link to='news/create' className='btn'>Create</Link>
+        <PageHeader
+          heading='News 🗞️️️️'
+          entityCollection='news'
+          renderCreateButton
+        />
       );
       expect(actual).to.equal(true);
     });

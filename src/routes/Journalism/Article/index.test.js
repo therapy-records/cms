@@ -10,6 +10,7 @@ import {
 } from '../../../selectors/uiState';
 import { selectSelectedJournalismArticle } from '../../../selectors/journalism';
 import redirect from '../../../utils/redirect';
+import entityHeading from '../../../utils/entityHeading';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -26,7 +27,7 @@ describe('(Component) Journalism - Article', () => {
     },
     baseProps = {
       resetPromiseState: sinon.spy(),
-      onDeleteArticle: sinon.spy(),
+      onDeleteEntity: sinon.spy(),
       onDestroyArticle: sinon.spy(),
       onFetchArticle: sinon.spy(),
       onSetSelectedJournalismArticle: sinon.spy(),
@@ -217,28 +218,29 @@ describe('(Component) Journalism - Article', () => {
       wrapper = shallow(<Article {...props} />);
     });
 
-    describe('<ArticleHeader />', () => {
+    describe('<PageHeader />', () => {
       it('should render', () => {
-        const articleHeader = wrapper.find('ArticleHeader');
-        expect(articleHeader.length).to.eq(1);
-        expect(articleHeader.prop('baseUrl')).to.eq('/journalism');
-        expect(articleHeader.prop('article')).to.eq(mockArticle);
-        expect(articleHeader.prop('onDeleteArticle')).to.be.a('function');
-        expect(articleHeader.prop('promiseLoading')).to.eq(props.promiseLoading);
-        expect(articleHeader.prop('showEditButton')).to.eq(true);
-        expect(articleHeader.prop('showDeleteButton')).to.eq(true);
-        expect(articleHeader.prop('longHeading')).to.eq(true);
+        const pageHeader = wrapper.find('PageHeader');
+        expect(pageHeader.length).to.eq(1);
+        expect(pageHeader.prop('entityCollection')).to.eq('journalism');
+        expect(pageHeader.prop('entity')).to.eq(mockArticle);
+        expect(pageHeader.prop('heading')).to.eq(entityHeading(mockArticle));
+        expect(pageHeader.prop('onDeleteEntity')).to.be.a('function');
+        expect(pageHeader.prop('promiseLoading')).to.eq(props.promiseLoading);
+        expect(pageHeader.prop('renderEditButton')).to.eq(true);
+        expect(pageHeader.prop('renderDeleteButton')).to.eq(true);
+        expect(pageHeader.prop('longHeading')).to.eq(true);
       });
 
-      describe('onDeleteArticle prop', () => {
-        it('should call props.onDeleteArticle with article id', () => {
-          const onDeleteArticleSpy = sinon.spy();
+      describe('onDeleteEntity prop', () => {
+        it('should call props.onDeleteEntity with article id', () => {
+          const onDeleteEntitySpy = sinon.spy();
           wrapper.setProps({
-            onDeleteArticle: onDeleteArticleSpy
+            onDeleteEntity: onDeleteEntitySpy
           });
-          const articleHeader = wrapper.find('ArticleHeader');
-          articleHeader.props().onDeleteArticle();
-          expect(onDeleteArticleSpy).to.have.been.calledWith(mockArticle._id)
+          const pageHeader = wrapper.find('PageHeader');
+          pageHeader.props().onDeleteEntity();
+          expect(onDeleteEntitySpy).to.have.been.calledWith(mockArticle._id)
         });
       });
     });
