@@ -82,7 +82,7 @@ export class Article extends React.Component {
           <div>
 
             <PageHeader
-              entityName='journalism'
+              entityCollection='journalism'
               entity={article}
               heading={entityHeading(article)}
               onDeleteEntity={() => onDeleteEntity(article._id)}

@@ -24,6 +24,7 @@ const PressHome = () => {
             
               <PageHeader
                 heading='Press 📢'
+                entityCollection='press'
                 renderCreateButton
               />
 

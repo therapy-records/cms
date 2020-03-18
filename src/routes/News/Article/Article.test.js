@@ -224,7 +224,7 @@ describe('(Component) News - Article', () => {
         it('should render', () => {
           const pageHeader = wrapper.find('PageHeader');
           expect(pageHeader.length).to.eq(1);
-          expect(pageHeader.prop('entityName')).to.eq('news');
+          expect(pageHeader.prop('entityCollection')).to.eq('news');
           expect(pageHeader.prop('entity')).to.eq(mockArticle);
           expect(pageHeader.prop('heading')).to.eq(entityHeading(mockArticle));
           expect(pageHeader.prop('onDeleteEntity')).to.be.a('function');
