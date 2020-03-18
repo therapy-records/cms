@@ -105,7 +105,7 @@ describe('(Component) Journalism - Home', () => {
           />
         );
         const actual = wrapper.containsMatchingElement(
-          <EmptyArticlesMessage type='journalism' />
+          <EmptyMessage entityName='journalism' createCopy='Create a new Journalism article'/>
         );
         expect(actual).to.equal(true);
       });

@@ -15,7 +15,7 @@ const Gigs = () => {
         entityName='gigs'
         render={(queryData) => {
 
-          const hasGigs = false
+          const hasGigs = (queryData && queryData !== null) && queryData.length;
           const sortedQueryData = queryData.sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate)).reverse();
 
           return (
@@ -42,8 +42,8 @@ const Gigs = () => {
               ) : (
                 <div>
                   <EmptyMessage 
-                    entityName='journalism'
-                    createCopy='Create a new Journalism article' />
+                    entityName='Gigs'
+                    createCopy='Create a new Gig' />
                 </div>
               )}
 

@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import QueryContainer from '../../../containers/QueryContainer';
 import { GET_PRESS } from '../../../queries';
 import List from '../../../components/List';
-import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
+import EmptyMessage from '../../../components/EmptyMessage/EmptyMessage';
+
 
 
 const PressHome = () => {
@@ -40,7 +41,9 @@ const PressHome = () => {
                 />
               ) : (
                 <div>
-                  <EmptyArticlesMessage type='press' />
+                  <EmptyMessage 
+                    entityName='Press'
+                    createCopy='Create a new Press' />
                 </div>
               )}
 

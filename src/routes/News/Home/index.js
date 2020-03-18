@@ -12,7 +12,7 @@ import {
 import { selectUiStateLoading } from '../../../selectors/uiState';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import List from '../../../components/List';
-import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
+import EmptyMessage from '../../../components/EmptyMessage/EmptyMessage';
 
 const dateIsBefore = (a, b) => {
   return new Date(b.createdAt) - new Date(a.createdAt)
@@ -88,7 +88,9 @@ export class News extends React.Component {
                 />
               ) : (
                 <div>
-                  <EmptyArticlesMessage type='news' />
+                  <EmptyMessage 
+                    entityName='News'
+                    createCopy='Create News' />
                 </div>
               )
             }
