@@ -1,51 +1,54 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  GET_PRESS,
-  GET_PRESS_ARTICLE
+  GET_GIG,
+  GET_GIGS
 } from '../../../queries';
-import { DELETE_PRESS } from '../../../mutations';
+import { DELETE_GIG } from '../../../mutations';
 import SingleEntityContainer from '../../../containers/SingleEntityContainer';
 
-const PressView = ({
+const GigsView = ({
   match
 }) => {
   const { id } = match.params;
 
   return (
     <SingleEntityContainer
-      baseUrl='/press'
-      entityName='pressArticle'
-      entityCollection='press'
+      baseUrl='/gigs'
+      entityName='gig'
+      entityCollection='gigs'
       id={id}
-      query={GET_PRESS_ARTICLE}
+      query={GET_GIG}
       render={entityData => (
-        <div>
+          <div>
+          {console.log(entityData)}
           <h4>Excerpt</h4>
-          <p>{entityData.excerpt}</p>
+          <p>{entityData.title}</p>
+          <p>{entityData.location}</p>
+          <p>{entityData.venue}</p>
+          <p>{entityData.date}</p>
 
           <h4>URL</h4>
           <p><a href={entityData.externalLink} target='_blank'>{entityData.externalLink}</a></p>
         </div>
       )}
-      
-      mutation={DELETE_PRESS}
+      mutation={DELETE_GIG}
       mutationSuccessCopy={{
         success: 'Successfully deleted.',
-        homeLink: 'Go to Press'
+        homeLink: 'Go to Gigs'
       }}
       mutationCacheUpdate={{
-        cacheQuery: GET_PRESS,
-        responseObjName: 'deletePress'
+        cacheQuery: GET_GIGS,
+        responseObjName: 'deleteGigs'
       }}
     />
   );
 };
 
-PressView.propTypes = {
+GigsView.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.object
   })
 };
 
-export default PressView;
+export default GigsView;
