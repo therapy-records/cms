@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'; // React 
 import FormFields from '../../../formFields';
-import { CREATE_PRESS } from '../../../mutations';
-import { GET_PRESS } from '../../../queries';
+import { CREATE_PRESS } from '../../../mutations'; // query 
+import { GET_PRESS } from '../../../queries'; // query 
 import PressForm from '../../../components/PressForm';
 import { mapFields } from '../../../utils/form-field-mappings';
 
