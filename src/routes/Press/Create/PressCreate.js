@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; // React 
 import FormFields from '../../../formFields';
 import { CREATE_PRESS } from '../../../mutations';
 import { GET_PRESS } from '../../../queries';
