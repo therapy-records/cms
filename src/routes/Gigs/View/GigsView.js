@@ -6,6 +6,7 @@ import {
 } from '../../../queries';
 import { DELETE_GIG } from '../../../mutations';
 import SingleEntityContainer from '../../../containers/SingleEntityContainer';
+import moment from 'moment';
 
 const GigsView = ({
   match
@@ -20,17 +21,33 @@ const GigsView = ({
       id={id}
       query={GET_GIG}
       render={entityData => (
-          <div>
-          {console.log(entityData)}
-          <h4>Excerpt</h4>
-          <p>{entityData.title}</p>
-          <p>{entityData.location}</p>
-          <p>{entityData.venue}</p>
-          <p>{entityData.date}</p>
 
-          <h4>URL</h4>
-          <p><a href={entityData.externalLink} target='_blank'>{entityData.externalLink}</a></p>
+        <div>
+            <li className="list-item-row" style={{border: "none"}}>
+                {entityData.date &&
+                    <div className='img-container'>
+                        <div className="date">
+                            <p>{moment(new Date(entityData.date)).format('ddd')}</p>
+                            <p>{moment(new Date(entityData.date)).format('DD')}</p>
+                            <p>{moment(new Date(entityData.date)).format('MMM')}</p>
+                        </div>
+                    </div>
+                }
+
+                <div className='content-container'>
+                    <div className='content'>
+                        <div>
+                            <div className='small-tabs-container' style={{display: "inline"}}>
+                                {entityData.title && <h1>{entityData.title}</h1>}
+                                {(entityData.venue && entityData.location && entityData.date) && <p>{entityData.venue}, {entityData.location}, {moment(new Date(entityData.date)).format('LT')}</p>}
+                                {entityData.ticketsUrl && <p><a href={entityData.ticketsUrl} target="_blank">{entityData.ticketsUrl}</a></p>}
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </li>
         </div>
+
       )}
       mutation={DELETE_GIG}
       mutationSuccessCopy={{
