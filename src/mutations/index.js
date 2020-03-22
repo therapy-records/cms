@@ -82,7 +82,7 @@ export const CREATE_GIG = gql`
       location,
       date,
       venue,
-      ticketUrl
+      ticketsUrl
     }
   }
 `;

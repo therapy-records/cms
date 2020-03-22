@@ -47,6 +47,19 @@ export const GET_PRESS = gql`
   }
 `;
 
+export const GET_GIG = gql`
+  {
+    gig {
+      _id,
+      title,
+      location,
+      date,
+      venue,
+      ticketsUrl
+    }
+  }
+`;
+
 export const GET_PRESS_ARTICLE = gql`
   query($id: ID!) {
     pressArticle(_id: $id) {
