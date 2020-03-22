@@ -74,3 +74,15 @@ export const DELETE_PRESS = gql`
     }
   }
 `;
+
+export const CREATE_GIG = gql`
+  mutation($input: GigInput) {
+    createGig(input: $input) {
+      title,
+      location,
+      date,
+      venue,
+      ticketUrl
+    }
+  }
+`;
