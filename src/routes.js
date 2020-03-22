@@ -24,6 +24,7 @@ import CollaboratorsCreate from './routes/Collaborators/Create';
 import CollaboratorView from './routes/Collaborators/View';
 import CollaboratorEdit from './routes/Collaborators/Edit';
 import Gigs from './routes/Gigs';
+import GigCreate from './routes/Gigs/Create/GigCreate'
 import Videos from './routes/Videos';
 import { authCheck } from './actions/auth';
 import './index.css';
@@ -207,6 +208,14 @@ export class Router extends Component {
                   exact
                 />
 
+                <ProtectedRoute
+                  path="/gigs/create"
+                  component={GigCreate}
+                  isAuth={isAuth}
+                  onAuthCheck={onAuthCheck}
+                  exact
+                />
+                
                 <ProtectedRoute
                   path="/videos"
                   component={Videos}
