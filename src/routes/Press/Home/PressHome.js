@@ -42,7 +42,7 @@ const PressHome = () => {
               ) : (
                 <div>
                   <EmptyMessage 
-                    entityName='Press'
+                    entityName='press'
                     createCopy='Create Press' />
                 </div>
               )}

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const EmptyMessage = ({entityName, createCopy}) => (
   <div>
-    <p>No {entityName} yet. <Link to={`${entityName}/create`}>{createCopy}</Link></p>
+    <p>No {entityName} yet. <Link to={`${entityName.toLowerCase()}/create`}>{createCopy}</Link></p>
   </div>
 );
 

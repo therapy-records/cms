@@ -89,7 +89,7 @@ export class News extends React.Component {
               ) : (
                 <div>
                   <EmptyMessage 
-                    entityName='News'
+                    entityName='news'
                     createCopy='Create News' />
                 </div>
               )

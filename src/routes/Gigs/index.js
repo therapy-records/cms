@@ -42,7 +42,7 @@ const Gigs = () => {
               ) : (
                 <div>
                   <EmptyMessage 
-                    entityName='Gigs'
+                    entityName='gigs'
                     createCopy='Create a new Gig' />
                 </div>
               )}
