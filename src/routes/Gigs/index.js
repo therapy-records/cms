@@ -21,7 +21,6 @@ const Gigs = () => {
           return (
             <div>
 
-              
               <div className='heading-with-btns'>
 
                 <div>

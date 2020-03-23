@@ -6,7 +6,7 @@ import configureMockStore from 'redux-mock-store';
 import ConnectedNews, { News } from './index';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import List from '../../../components/List';
-import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
+import EmptyMessage from '../../../components/EmptyMessage';
 import {
   selectNewsArticlesReverse,
   selectNewsHasFetched
@@ -92,7 +92,10 @@ describe('(Component) News - Home', () => {
         />
       );
       const actual = wrapper.containsMatchingElement(
-        <EmptyArticlesMessage type='news' />
+        <EmptyMessage
+          entityName='news'
+          createCopy='Create News'
+        />
       );
       expect(actual).to.equal(true);
     });

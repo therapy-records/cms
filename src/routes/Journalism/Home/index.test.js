@@ -6,7 +6,7 @@ import configureMockStore from 'redux-mock-store';
 import ConnectedJournalism, { Journalism } from './index';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import List from '../../../components/List';
-import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
+import EmptyMessage from '../../../components/EmptyMessage';
 import {
   selectJournalismHasFetched,
   selectSelectedJournalismArticle

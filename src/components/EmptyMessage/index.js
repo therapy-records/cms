@@ -1,3 +1,3 @@
-import EmptyMessage from './EmptyMessagee';
+import EmptyMessage from './EmptyMessage';
 
 export default EmptyMessage;

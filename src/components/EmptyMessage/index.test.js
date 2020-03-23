@@ -19,7 +19,7 @@ describe('(Component) EmptyMessage', () => {
     );
     const actual = wrapper.containsMatchingElement(
       <div>
-        <p>No {entityName} yet. <Link to={`${entityName}/create`}>{createCopy}</Link></p>
+        <p>No {props.entityName} yet. <Link to={`${props.entityName}/create`}>{props.createCopy}</Link></p>
       </div>
     );
     expect(actual).to.eq(true);
