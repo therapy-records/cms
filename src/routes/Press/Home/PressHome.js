@@ -40,11 +40,9 @@ const PressHome = () => {
                   route='press'
                 />
               ) : (
-                <div>
                   <EmptyMessage 
                     entityName='press'
                     createCopy='Create Press' />
-                </div>
               )}
 
             </div>

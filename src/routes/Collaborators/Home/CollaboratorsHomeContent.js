@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import CollaboratorsList from '../../../components/CollaboratorsList';
-// import EmptyMessage from '../../../components/EmptyMessage/EmptyMessage';
 
 const CollaboratorsHomeContent = ({
   listItems,
