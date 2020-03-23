@@ -1,5 +1,6 @@
 import { getFirstImageInArticle } from './news';
 import entityHeading from './entityHeading';
+import moment from 'moment';
 
 // TODO: refactor data models so there is no need for 
 // heading || title || name
@@ -36,8 +37,8 @@ const listItemPropsHandler = ({
 
   let itemDescription = excerpt;
 
-  if (!excerpt && (venue && location)) {
-    itemDescription = `${venue}, ${location}`;
+  if (!excerpt && (venue && location && date)) {
+    itemDescription = `${venue}, ${location}, ${moment(new Date(date)).format('LT')}`;
   }
   const itemExternalLink = externalLink || ticketsUrl;
 

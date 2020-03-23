@@ -18,9 +18,6 @@ const ListItem = ({
   onEditButtonClick,
   cardDesign,
   isDraggable,
-  location,
-  venue,
-  ticketsUrl,
   description,
   externalLink
 }) => {
@@ -44,7 +41,11 @@ const ListItem = ({
 
       {date &&
         <div className='img-container'>
-          {date}
+           <div className="date">
+           <p>{moment(new Date(date)).format('ddd')}</p>
+           <p>{moment(new Date(date)).format('DD')}</p>
+           <p>{moment(new Date(date)).format('MMM')}</p>
+          </div>
         </div>
       }
 
@@ -108,9 +109,6 @@ ListItem.propTypes = {
   onEditButtonClick: PropTypes.func,
   cardDesign: PropTypes.bool,
   isDraggable: PropTypes.bool,
-  location: PropTypes.string,
-  venue: PropTypes.string,
-  ticketsUrl: PropTypes.string,
   description: PropTypes.string,
   externalLink: PropTypes.string
 };
