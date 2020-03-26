@@ -19,7 +19,8 @@ module.exports = {
         "react/prop-types": ["error", { ignore: ['store']}],
         "no-async-promise-executor": 0,
         "no-misleading-character-class": 0,
-        "no-useless-catch": 0
+        "no-useless-catch": 0,
+        "operator-linebreak": 0
     },
     "globals": {
         "localStorage": true,
