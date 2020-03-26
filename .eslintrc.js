@@ -15,6 +15,7 @@ module.exports = {
         "no-console": 0,
         "react/jsx-uses-react": 1,
         "react/jsx-uses-vars": 1,
+        "react/jsx-indent": 0,
         "react/prop-types": ["error", { ignore: ['store']}],
         "no-async-promise-executor": 0,
         "no-misleading-character-class": 0,
