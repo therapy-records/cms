@@ -16,7 +16,6 @@ const MutationContainer = ({
   mutationCacheUpdate,
   stickySuccess
 }) => {
-
   const [
     executeMutation,
     {
@@ -35,13 +34,12 @@ const MutationContainer = ({
         const { [entityCollection]: cacheData } = cache.readQuery({ query: mutationCacheUpdate.cacheQuery });
 
         const updatedData = cacheData.filter(c => c._id !== data[mutationCacheUpdate.responseObjName]._id);
-        
+
         cache.writeQuery({
           query: mutationCacheUpdate.cacheQuery,
           data: { [entityCollection]: updatedData }
         });
       }
-
     }
   });
 
@@ -58,7 +56,7 @@ const MutationContainer = ({
           <p>{successCopy.success}</p>
         </StickySuccess>
       )}
-      
+
       {loading && (
         <LoadingSpinner
           active
@@ -88,7 +86,6 @@ const MutationContainer = ({
 
     </div>
   )
-  
 }
 
 MutationContainer.propTypes = {
@@ -105,7 +102,8 @@ MutationContainer.propTypes = {
   stickySuccess: PropTypes.bool,
   mutationCacheUpdate: PropTypes.shape({
     readQuery: PropTypes.object,
-    responseObjName: PropTypes.string
+    responseObjName: PropTypes.string,
+    cacheQuery: PropTypes.object
   })
 };
 

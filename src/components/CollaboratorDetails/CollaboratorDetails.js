@@ -11,7 +11,6 @@ const CollaboratorDetails = ({
   collabOn,
   urls
 }) => {
-
   const renderHtml = htmlData => {
     return { __html: htmlData };
   };
@@ -31,7 +30,6 @@ const CollaboratorDetails = ({
         </div>
 
         <div>
-
 
           {role && (
             <div className='collaborator-role'>

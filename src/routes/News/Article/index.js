@@ -104,14 +104,14 @@ export class Article extends React.Component {
                     key={index}
                     className={(hasMultipleImages || hasVideo) ? 'single-column-layout' : ''}
                   >
-                  
+
                     {hasCopy &&
                       <div
                         dangerouslySetInnerHTML={this.renderHtml(section.copy)}
                       />
                     }
 
-                    {hasImages && 
+                    {hasImages &&
                       <div>
                         <ul className='images'>
                           {section.images.map(image => {
@@ -176,4 +176,3 @@ const mapStateToProps = (state, props) => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Article)
-

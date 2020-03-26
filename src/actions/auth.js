@@ -14,7 +14,7 @@ export const authCheck = () => {
     const _axios = axios.create({
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': token || ''
+        Authorization: token || ''
       }
     });
 
@@ -29,7 +29,7 @@ export const authCheck = () => {
           }
           localStorage.removeItem('token');
           return dispatch(authError());
-        }).catch(err => {
+        }).catch(catchErr => {
           localStorage.removeItem('token');
           return dispatch(authError());
         });

@@ -1,6 +1,6 @@
 import { isEmptyString } from './strings';
 
-export const arrayOfStringsHasValues = (arr=[]) => {
+export const arrayOfStringsHasValues = (arr = []) => {
   const itemsWithValues = arr.filter(str =>
     str && !isEmptyString(str)
   );
@@ -10,7 +10,7 @@ export const arrayOfStringsHasValues = (arr=[]) => {
   return false;
 }
 
-export const arrayOfObjectsHasValues = (arr=[]) => {
+export const arrayOfObjectsHasValues = (arr = []) => {
   const itemsWithValues = arr.filter(i =>
     i.value && !isEmptyString(i.value)
   );

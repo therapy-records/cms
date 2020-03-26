@@ -105,7 +105,7 @@ export class Article extends React.Component {
 
                 <div>
                   <p>{article.copy}</p>
-                  <p><a href={article.externalLink} target='_blank'>{article.externalLink}</a></p>
+                  <p><a href={article.externalLink} target='_blank' rel='noopener noreferrer'>{article.externalLink}</a></p>
                 </div>
 
               </div>

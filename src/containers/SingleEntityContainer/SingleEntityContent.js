@@ -12,7 +12,6 @@ const SingleEntityContent = ({
   isEdit,
   renderDeleteButton
 }) => {
-
   const heading = isEdit ? `Editing ${entityHeading(data)}` : entityHeading(data);
 
   return (

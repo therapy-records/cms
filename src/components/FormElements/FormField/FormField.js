@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import FormFieldInput from '../FormFieldInput';
 import FormFieldLabel from '../FormFieldLabel';
 import FieldsetLegend from '../FieldsetLegend';
-import FormFieldError from '../FormFieldError'; 
+import FormFieldError from '../FormFieldError';
 
 const FormField = props => {
   const {

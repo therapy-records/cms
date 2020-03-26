@@ -19,10 +19,10 @@ export class NewsFormSection extends Component {
   handleRemoveSectionImage(sectionImageIndex, sectionIndex) {
     this.props.removeSectionImage('NEWS_FORM', `sections.${sectionIndex}.images`, sectionImageIndex);
   }
-  
+
   render() {
     const { fields } = this.props;
-    
+
     return (
       <div>
         <ul>
@@ -72,5 +72,3 @@ export const mapDispatchToProps = {
 };
 
 export default connect(null, mapDispatchToProps)(NewsFormSection);
-
-

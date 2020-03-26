@@ -11,7 +11,6 @@ export const mapFieldArrayOfObjectsWithValues = (field, valuesObj) => {
   const fieldId = field.id;
 
   Object.keys(valuesObj[fieldId]).forEach(key => {
-
     const valueExists = valuesObj[fieldId][key];
     if (valueExists) {
       const childField = field.items.find(child => child.id === key);
@@ -35,7 +34,6 @@ export const mapFieldArrayOfStringsWithValues = (field, valuesObj) => {
 
 export const mapFieldArray = (field, valuesObj) => {
   if (isFieldArrayWithValues(field.id, valuesObj)) {
-
     if (field.type === 'arrayOfObjects') {
       field = mapFieldArrayOfObjectsWithValues(
         field,

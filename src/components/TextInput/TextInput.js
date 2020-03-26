@@ -12,8 +12,9 @@ const textInput = ({
   maxLength,
   meta: {
     touched,
-    error}
-  }) => (
+    error
+  }
+}) => (
   <div className='text-input-container'>
     {(label && !hideLabel) && <label>{label}{required && <span className='required'>*</span>}</label>}
     <input

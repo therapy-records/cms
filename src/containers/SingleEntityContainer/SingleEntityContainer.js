@@ -16,7 +16,6 @@ const SingleEntityContainer = ({
   entityCollection,
   isEdit
 }) => {
-
   return (
     <article className='container'>
       <QueryContainer

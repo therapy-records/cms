@@ -36,7 +36,7 @@ export class ArticleEdit extends React.Component {
   }
 
   componentDidMount() {
-    const {article, match} = this.props;
+    const { article, match } = this.props;
     const paramsId = match.params.id;
     if (!article || !article._id) {
       this.props.onFetchArticle(paramsId);
@@ -74,7 +74,7 @@ export class ArticleEdit extends React.Component {
 
     return (
       <article className='container'>
-        
+
         <LoadingSpinner
           active={promiseLoading}
           fullScreen

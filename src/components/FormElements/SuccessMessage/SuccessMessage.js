@@ -7,7 +7,6 @@ const SuccessMessage = ({
   copy,
   onReset
 }) => {
-
   const heading = copy.success || 'Success!';
   const showCreateNew = (onReset && copy.createLink);
 

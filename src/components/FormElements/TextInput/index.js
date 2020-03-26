@@ -11,7 +11,6 @@ const TextInput = ({
   value: initValue,
   onChange
 }) => {
-
   const [value, setValue] = useState(initValue);
 
   const handleOnChange = value => {

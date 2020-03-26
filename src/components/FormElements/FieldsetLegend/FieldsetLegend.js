@@ -6,8 +6,8 @@ const FieldsetLegend = ({
   legend,
   required
 }) => (
-    <legend>{legend} {required && <span className='required'>*</span>}</legend>
-  )
+  <legend>{legend} {required && <span className='required'>*</span>}</legend>
+)
 
 FieldsetLegend.propTypes = {
   id: PropTypes.string.isRequired,

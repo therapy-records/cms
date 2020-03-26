@@ -53,7 +53,6 @@ export class Journalism extends React.Component {
       ).reverse();
     }
 
-
     return (
       <div className='container'>
 
@@ -68,13 +67,13 @@ export class Journalism extends React.Component {
             <PageHeader
               heading='Journalism ✍️'
               entityCollection='journalism'
-            renderCreateButton
+              renderCreateButton
             />
 
             {hasArticles
               ? (
                 <List
-                data={sortedArticles}
+                  data={sortedArticles}
                   route='journalism'
                   onItemClick={this.handleButtonClick}
                   onViewButtonClick={this.handleButtonClick}

@@ -19,7 +19,6 @@ const ListItem = ({
   cardDesign,
   isDraggable
 }) => {
-
   let containerClassName = cardDesign ? 'list-item-card' : 'list-item-row';
 
   if (isDraggable) {
@@ -110,4 +109,3 @@ ListItem.defaultProps = {
 };
 
 export default ListItem;
-

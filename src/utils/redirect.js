@@ -1,4 +1,4 @@
-const redirectHistory = (history, pathname)  => {
+const redirectHistory = (history, pathname) => {
   setTimeout(() => {
     history.push({
       pathname

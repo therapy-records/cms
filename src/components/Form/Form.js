@@ -17,7 +17,6 @@ const Form = ({
   successCopy,
   refetchQueries
 }) => {
-
   const [state, dispatch] = useReducer(
     formReducer,
     fields,

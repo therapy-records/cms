@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { objectHasValues } from '../../utils/objects'
 
 const CollaboratorUrls = ({ urls }) => {
-
   if (objectHasValues(urls)) {
     return (
       <div>
@@ -23,12 +22,13 @@ const CollaboratorUrls = ({ urls }) => {
                   {isPhone(urlKey) ? (
                     <span>{urlValue}</span>
                   ) : (
-                      <a
-                        href={urlValue}
-                        target='_blank'
-                      >
-                        {urlValue}
-                      </a>
+                    <a
+                      href={urlValue}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                    >
+                      {urlValue}
+                    </a>
                   )}
 
                 </li>

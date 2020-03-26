@@ -1,8 +1,8 @@
-// TODO: refactor data models so there is no need for 
+// TODO: refactor data models so there is no need for
 // heading || title || name
 
 const entityHeading = entity => {
-  const { 
+  const {
     heading,
     title,
     name,

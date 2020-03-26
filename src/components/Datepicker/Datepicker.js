@@ -25,7 +25,7 @@ export class Datepicker extends React.Component {
       input,
       onChange
     } = this.props;
-    
+
     if (!initTime) {
       if (input && input.onChange) {
         input.onChange(this.state.m);
@@ -42,7 +42,7 @@ export class Datepicker extends React.Component {
       input,
       onChange
     } = this.props;
-   
+
     this.setState({ m: e });
 
     if (input && input.onChange) {
@@ -52,7 +52,6 @@ export class Datepicker extends React.Component {
         moment(e).toISOString()
       );
     }
-
   }
 
   render() {
@@ -86,8 +85,8 @@ export class Datepicker extends React.Component {
             type='hidden'
             name={name}
             value={initTime ? moment(initTime).toISOString() : moment(m).toISOString()}
-        />
-      }
+          />
+        }
       </div>
     );
   }

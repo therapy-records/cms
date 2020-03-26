@@ -10,7 +10,7 @@ import { MOCK_GET_STATS } from '../../../mocks/stats.mock'
 
 Enzyme.configure({ adapter: new Adapter() });
 
-let mocks = [
+const mocks = [
   MOCK_GET_STATS
 ];
 

@@ -10,7 +10,6 @@ import {
   GET_STATS
 } from '../../queries'
 import LoadingSpinner from '../../components/LoadingSpinner';
-import StickyError from '../../components/StickyError';
 import CollaboratorDetails from '../../components/CollaboratorDetails';
 import { MOCK_GET_COLLABORATOR } from '../../mocks/collaborators.mock';
 import { MOCK_GET_STATS } from '../../mocks/stats.mock';
@@ -33,17 +32,17 @@ const MockComponent = ({ data }) => {
 }
 
 describe('(Container) QueryContainer', () => {
-  let wrapper,
-    props = {
-      entityName: 'collaborator',
-      query: GET_COLLABORATOR,
-      queryVariables: {
-        id: '1234'
-      },
-      render: renderProps => (
-        <CollaboratorDetails {...renderProps} />
-      )
-    };
+  let wrapper;
+  const props = {
+    entityName: 'collaborator',
+    query: GET_COLLABORATOR,
+    queryVariables: {
+      id: '1234'
+    },
+    render: renderProps => (
+      <CollaboratorDetails {...renderProps} />
+    )
+  };
 
   const actions = async(wrapper, _actions) => {
     await act(async() => {

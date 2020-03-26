@@ -9,4 +9,3 @@ class FormFields {
 }
 
 export default FormFields;
-

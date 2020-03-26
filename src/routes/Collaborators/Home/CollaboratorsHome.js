@@ -6,8 +6,7 @@ import { EDIT_COLLABORATORS_ORDER_NUMBERS } from '../../../mutations';
 import CollaboratorsHomeContent from './CollaboratorsHomeContent';
 
 const CollaboratorsHome = () => {
-
-  const [ idsAndOrderNumbers, setIdsAndOrderNumbers ] = useState([]);
+  const [idsAndOrderNumbers, setIdsAndOrderNumbers] = useState([]);
 
   const handleSetIdsAndOrderNumbers = reorderedList => {
     const arr = [];

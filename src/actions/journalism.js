@@ -44,7 +44,7 @@ export const fetchJournalismArticles = () => {
           dispatch(promiseLoading(false));
           dispatch(promiseSuccess(true));
         },
-        (err) => {
+        (apiError) => {
           dispatch(promiseLoading(false));
           dispatch(promiseError())
         }
@@ -68,7 +68,7 @@ export const postJournalism = () => {
     const _axios = axios.create({
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': token
+        Authorization: token
       }
     });
 
@@ -94,7 +94,7 @@ export const postJournalism = () => {
 export const editJournalism = (postToEdit) => {
   return (dispatch, getState) => {
     dispatch(promiseLoading(true));
-    let getFormValues = () => {
+    const getFormValues = () => {
       if (getState().form.JOURNALISM_FORM &&
         getState().form.JOURNALISM_FORM.values) {
         return getState().form.JOURNALISM_FORM.values;
@@ -112,7 +112,7 @@ export const editJournalism = (postToEdit) => {
     const _axios = axios.create({
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': token
+        Authorization: token
       }
     });
 
@@ -125,7 +125,7 @@ export const editJournalism = (postToEdit) => {
         dispatch(promiseSuccess(true));
         dispatch(setSelectedJournalismArticle(postToEdit));
         dispatch(editJournalismSuccess(true));
-      }, (err) => {
+      }, (apiErrors) => {
         dispatch(promiseLoading(false));
         dispatch(promiseError());
       }

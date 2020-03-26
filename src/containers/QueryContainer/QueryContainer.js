@@ -11,7 +11,6 @@ const QueryContainer = ({
   queryVariables,
   render
 }) => {
-
   const {
     loading,
     error,
@@ -50,7 +49,6 @@ const QueryContainer = ({
     </div>
   );
 };
-
 
 QueryContainer.propTypes = {
   query: PropTypes.object.isRequired,

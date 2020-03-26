@@ -4,4 +4,4 @@ export const containsNumber = str => {
 
 export const isAString = str => typeof str === 'string';
 
-export const isEmptyString = str => str === "";
+export const isEmptyString = str => str === '';
