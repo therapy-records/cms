@@ -3,8 +3,7 @@ import QueryContainer from '../../../containers/QueryContainer';
 import { GET_PRESS } from '../../../queries';
 import PageHeader from '../../../components/PageHeader';
 import List from '../../../components/List';
-import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
-
+import EmptyMessage from '../../../components/EmptyMessage';
 
 const PressHome = () => {
 
@@ -20,8 +19,7 @@ const PressHome = () => {
           const sortedQueryData = queryData.sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate)).reverse();
 
           return (
-            <div>          
-            
+            <div>
               <PageHeader
                 heading='Press 📢'
                 entityCollection='press'
@@ -34,9 +32,10 @@ const PressHome = () => {
                   route='press'
                 />
               ) : (
-                <div>
-                  <EmptyArticlesMessage type='press' />
-                </div>
+                <EmptyMessage
+                  entityName='press'
+                  createCopy='Create Press'
+                />
               )}
 
             </div>
