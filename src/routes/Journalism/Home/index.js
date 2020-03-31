@@ -11,7 +11,7 @@ import {
 import { selectUiStateLoading } from '../../../selectors/uiState';
 import PageHeader from '../../../components/PageHeader';
 import LoadingSpinner from '../../../components/LoadingSpinner';
-import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
+import EmptyMessage from '../../../components/EmptyMessage';
 import List from '../../../components/List';
 
 export class Journalism extends React.Component {
@@ -53,7 +53,6 @@ export class Journalism extends React.Component {
       ).reverse();
     }
 
-
     return (
       <div className='container'>
 
@@ -82,7 +81,10 @@ export class Journalism extends React.Component {
                 />
               ) : (
                 <div>
-                  <EmptyArticlesMessage type='journalism' />
+                  <EmptyMessage
+                    entityName='journalism'
+                    createCopy='Create a new Journalism article'
+                  />
                 </div>
               )}
           </div>
