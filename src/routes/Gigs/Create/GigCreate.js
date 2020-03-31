@@ -3,7 +3,6 @@ import FormFields from '../../../formFields';
 import { CREATE_GIG } from '../../../mutations';
 import { GET_GIG } from '../../../queries';
 import PageHeader from '../../../components/PageHeader';
-// import PressForm from '../../../components/PressForm';
 import GigForm from '../../../components/GigForm/GigForm';
 import { mapFields } from '../../../utils/form-field-mappings';
 
