@@ -151,8 +151,6 @@
 }
 
 .date {
-
- 
   :first-child {
     font-size: 1.1875em;
     font-weight: normal;
@@ -175,3 +173,12 @@
       color: #000;
   }
 }
+
+.no-border {
+  border: none;
+}
+
+.inline-sty {
+  display: inline !important;
+}
+

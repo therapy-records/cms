@@ -18,6 +18,7 @@ const PressView = ({
       entityName='pressArticle'
       entityCollection='press'
       id={id}
+      query={GET_PRESS_ARTICLE}
       render={entityData => (
         <div>
           <h4>Excerpt</h4>
@@ -27,7 +28,7 @@ const PressView = ({
           <p><a href={entityData.externalLink} target='_blank'>{entityData.externalLink}</a></p>
         </div>
       )}
-      query={GET_PRESS_ARTICLE}
+      
       mutation={DELETE_PRESS}
       mutationSuccessCopy={{
         success: 'Successfully deleted.',
