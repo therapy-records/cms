@@ -5,8 +5,6 @@ import PageHeader from '../../../components/PageHeader';
 import List from '../../../components/List';
 import EmptyMessage from '../../../components/EmptyMessage';
 
-
-
 const PressHome = () => {
 
   return (
@@ -21,8 +19,7 @@ const PressHome = () => {
           const sortedQueryData = queryData.sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate)).reverse();
 
           return (
-            <div>          
-            
+            <div>
               <PageHeader
                 heading='Press 📢'
                 entityCollection='press'
@@ -35,9 +32,10 @@ const PressHome = () => {
                   route='press'
                 />
               ) : (
-                  <EmptyMessage 
-                    entityName='press'
-                    createCopy='Create Press' />
+                <EmptyMessage
+                  entityName='press'
+                  createCopy='Create Press'
+                />
               )}
 
             </div>
