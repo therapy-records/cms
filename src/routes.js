@@ -24,7 +24,7 @@ import CollaboratorsCreate from './routes/Collaborators/Create';
 import CollaboratorView from './routes/Collaborators/View';
 import CollaboratorEdit from './routes/Collaborators/Edit';
 import Gigs from './routes/Gigs';
-import GigsView from '../src/routes/Gigs/View/GigsView';
+import GigsView from '../src/routes/Gigs/View';
 import Videos from './routes/Videos';
 import { authCheck } from './actions/auth';
 import './index.css';

@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,kBAAkB;AAClB,mBAAmB,CAAC;EAClB,aAAa,EAAE,GAAG;CACnB;;AAED,AAAA,wBAAwB,CAAC;EACvB,WAAW,EAAE,CAAC;EACd,eAAe,EAAE,IAAI;CACtB",
-    "sources": [
-        "CollaboratorView.scss"
-    ],
-    "names": [],
-    "file": "CollaboratorView.css"
-}

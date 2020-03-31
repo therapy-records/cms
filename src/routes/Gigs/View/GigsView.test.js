@@ -85,9 +85,14 @@ describe('(Component) GigsView', () => {
     it('should render gig details (venue, location, date, url) from <SingleEntityContainer /> render prop', async () => {
         await actions(wrapper, () => {
             wrapper.update();
+            const venue = mocks[0].result.data.gig.venue;
+            const location = mocks[0].result.data.gig.location;
+            const expectedDate = moment(new Date(mocks[0].result.data.gig.date)).format('LT');
+            const ticketsUrl = mocks[0].result.data.gig.ticketsUrl;
+
             const actual = wrapper.containsAllMatchingElements([
-                <p>{mocks[0].result.data.gig.venue}, {mocks[0].result.data.gig.location}, {moment(new Date(mocks[0].result.data.gig.date)).format('LT')}</p>,
-                <p><a href={mocks[0].result.data.gig.ticketsUrl} target="_blank">{mocks[0].result.data.gig.ticketsUrl}</a></p>
+                <p>{venue}, {location}, {expectedDate}</p>,
+                <p><a href={ticketsUrl} target="_blank">{ticketsUrl}</a></p>
             ]);
             expect(actual).to.eq(true);
         });
