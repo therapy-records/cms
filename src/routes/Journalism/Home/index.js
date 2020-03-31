@@ -11,7 +11,7 @@ import {
 import { selectUiStateLoading } from '../../../selectors/uiState';
 import PageHeader from '../../../components/PageHeader';
 import LoadingSpinner from '../../../components/LoadingSpinner';
-import EmptyMessage from '../../../components/EmptyMessage/EmptyMessage';
+import EmptyMessage from '../../../components/EmptyMessage';
 import List from '../../../components/List';
 
 export class Journalism extends React.Component {
