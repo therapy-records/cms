@@ -79,6 +79,7 @@ describe('(Component) PressView', () => {
       expect(actual).to.eq(true);
     });
   });
+  
 
   it('should render press article URL from <QueryContainer /> render prop', async() => {
     await actions(wrapper, () => {

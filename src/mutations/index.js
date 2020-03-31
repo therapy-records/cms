@@ -74,3 +74,11 @@ export const DELETE_PRESS = gql`
     }
   }
 `;
+
+export const DELETE_GIG = gql`
+  mutation($id: ID!) {
+    deleteGig(_id: $id) {
+      _id
+    }
+  }
+`
