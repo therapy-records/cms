@@ -12,7 +12,7 @@ import {
 } from '../../selectors/journalism';
 import { selectJournalismFormValues } from '../../selectors/form';
 import { selectUiStateLoading } from '../../selectors/uiState';
-import ArticleHeader from '../ArticleHeader';
+import PageHeader from '../PageHeader';
 import Datepicker from '../Datepicker/Datepicker';
 import DropzoneImageUpload from '../DropzoneImageUpload';
 import TextInput from '../TextInput';
@@ -42,7 +42,7 @@ export class JournalismForm extends React.Component {
       location,
       promiseLoading,
       articleId,
-      onDeleteArticle
+      onDeleteEntity
     } = this.props;
 
     if (!formValues) return null;
@@ -59,13 +59,13 @@ export class JournalismForm extends React.Component {
     return (
       <section className='article-create'>
 
-        <ArticleHeader
-          baseUrl='/journalism'
-          article={formValues}
-          onDeleteArticle={isEditForm ? () => onDeleteArticle(articleId) : () => { }}
-          promiseLoading={promiseLoading}
+        <PageHeader
+          entityName='journalism'
+          entity={formValues}
           heading={isEditForm ? `Editing ${formValues && formValues.title} ✍️` : 'Create Journalism ✍️'}
-          showDeleteButton={isEditForm}
+          onDeleteEntity={isEditForm ? () => onDeleteEntity(articleId) : () => { }}
+          promiseLoading={promiseLoading}
+          renderDeleteButton={isEditForm}
         />
 
         <form onSubmit={(e) => e.preventDefault()} encType='multipart/form-data'>
@@ -150,7 +150,7 @@ export class JournalismForm extends React.Component {
 
 JournalismForm.propTypes = {
   onSubmitForm: PropTypes.func.isRequired,
-  onDeleteArticle: PropTypes.func.isRequired,
+  onDeleteEntity: PropTypes.func.isRequired,
   error: PropTypes.string,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
@@ -184,7 +184,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  onDeleteArticle: (id) => deleteJournalismArticle(id),
+  onDeleteEntity: (id) => deleteJournalismArticle(id),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InitFromStateForm)

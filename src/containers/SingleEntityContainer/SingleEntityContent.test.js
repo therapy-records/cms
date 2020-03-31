@@ -11,6 +11,7 @@ describe('(Container Component) SingleEntityContent', () => {
   let wrapper,
       props = {
         baseUrl: '/test',
+        entityCollection: 'collaborators',
         data: {
           _id: '1234',
           name: 'Test',
@@ -21,7 +22,6 @@ describe('(Container Component) SingleEntityContent', () => {
         },
         render: CollaboratorDetails,
         executeMutation: sinon.spy(),
-        // isEdit: true,
         renderDeleteButton: true
       };
 
@@ -31,29 +31,30 @@ describe('(Container Component) SingleEntityContent', () => {
     );
   });
 
-  describe('<ArticleHeader />', () => {
-    let articleHeader;
+  describe('<PageHeader />', () => {
+    let pageHeader;
     beforeEach(() => {
-      articleHeader = wrapper.find('ArticleHeader');
+      pageHeader = wrapper.find('PageHeader');
     });
 
     it('should render', () => {
-      expect(articleHeader.prop('baseUrl')).to.eq(props.baseUrl);
-      expect(articleHeader.prop('article')).to.deep.eq({
+      expect(pageHeader.prop('baseUrl')).to.eq(props.baseUrl);
+      expect(pageHeader.prop('entityCollection')).to.eq(props.entityCollection);
+      expect(pageHeader.prop('entity')).to.deep.eq({
         _id: props.data._id,
         author: props.data.author,
         releaseDate: props.data.releaseDate,
         createdAt: props.data.createdAt
       });
-      expect(articleHeader.prop('heading')).to.eq(entityHeading(props.data));
-      expect(articleHeader.prop('showEditButton')).to.eq(true);
-      expect(articleHeader.prop('showDeleteButton')).to.eq(props.renderDeleteButton);
+      expect(pageHeader.prop('heading')).to.eq(entityHeading(props.data));
+      expect(pageHeader.prop('renderEditButton')).to.eq(true);
+      expect(pageHeader.prop('renderDeleteButton')).to.eq(props.renderDeleteButton);
     });
 
-    describe('when articleHeader onDeleteArticle prop is triggered', () => {
+    describe('when pageHeader onDeleteEntity prop is triggered', () => {
       it('should call props.executeMutation', () => {
-        expect(articleHeader.prop('onDeleteArticle')).to.be.a('function');
-        articleHeader.prop('onDeleteArticle')();
+        expect(pageHeader.prop('onDeleteEntity')).to.be.a('function');
+        pageHeader.prop('onDeleteEntity')();
         expect(props.executeMutation).to.have.been.called;
       });
     });
@@ -67,9 +68,9 @@ describe('(Container Component) SingleEntityContent', () => {
       });
     });
     it('should pass a different heading prop', () => {
-      const articleHeader = wrapper.find('ArticleHeader');
+      const pageHeader = wrapper.find('PageHeader');
       const expected = `Editing ${entityHeading(props.data)}`; 
-      expect(articleHeader.prop('heading')).to.eq(expected);
+      expect(pageHeader.prop('heading')).to.eq(expected);
     });
   });
 

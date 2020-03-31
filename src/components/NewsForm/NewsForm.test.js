@@ -21,7 +21,7 @@ describe('(Component) NewsForm', () => {
     handleModalClose: () => {},
     onSubmitForm: () => {},
     onAddArticleSection: () => {},
-    onDeleteArticle: () => {},
+    onDeleteEntity: () => {},
     promiseLoading: false,
     formValues: {
       title: '',
@@ -52,16 +52,16 @@ describe('(Component) NewsForm', () => {
       });
     });
 
-    describe('<ArticleHeader />', () => {
+    describe('<PageHeader />', () => {
       it('should render', () => {
-        const articleHeader = wrapper.find('ArticleHeader');
-        expect(articleHeader.length).to.eq(1);
-        expect(articleHeader.prop('baseUrl')).to.eq('/news');
-        expect(articleHeader.prop('article')).to.eq(props.formValues);
-        expect(articleHeader.prop('onDeleteArticle')).to.eq(null);
-        expect(articleHeader.prop('heading')).to.eq('Create News 🗞️');
-        expect(articleHeader.prop('promiseLoading')).to.eq(props.promiseLoading);
-        expect(articleHeader.prop('showDeleteButton')).to.eq(false);
+        const pageHeader = wrapper.find('PageHeader');
+        expect(pageHeader.length).to.eq(1);
+        expect(pageHeader.prop('entityName')).to.eq('news');
+        expect(pageHeader.prop('entity')).to.eq(props.formValues);
+        expect(pageHeader.prop('onDeleteEntity')).to.eq(null);
+        expect(pageHeader.prop('heading')).to.eq('Create News 🗞️');
+        expect(pageHeader.prop('promiseLoading')).to.eq(props.promiseLoading);
+        expect(pageHeader.prop('renderDeleteButton')).to.eq(false);
       });
 
       describe('when it\'s an `edit` form', () => {
@@ -74,21 +74,21 @@ describe('(Component) NewsForm', () => {
         });
 
         it('should render correct props', () => {
-          const articleHeader = wrapper.find('ArticleHeader');
-          expect(articleHeader.prop('onDeleteArticle')).to.be.a('function');
-          expect(articleHeader.prop('heading')).to.eq(`Editing ${props.formValues.title} 🗞️`);
-          expect(articleHeader.prop('showDeleteButton')).to.eq(true);
+          const pageHeader = wrapper.find('PageHeader');
+          expect(pageHeader.prop('onDeleteEntity')).to.be.a('function');
+          expect(pageHeader.prop('heading')).to.eq(`Editing ${props.formValues.title} 🗞️`);
+          expect(pageHeader.prop('renderDeleteButton')).to.eq(true);
         });
 
-        describe('onDeleteArticle prop', () => {
-          it('should call props.onDeleteArticle with article id', () => {
-            const onDeleteArticleSpy = sinon.spy();
+        describe('onDeleteEntity prop', () => {
+          it('should call props.onDeleteEntity with article id', () => {
+            const onDeleteEntitySpy = sinon.spy();
             wrapper.setProps({
-              onDeleteArticle: onDeleteArticleSpy
+              onDeleteEntity: onDeleteEntitySpy
             });
-            const articleHeader = wrapper.find('ArticleHeader');
-            articleHeader.props().onDeleteArticle();
-            expect(onDeleteArticleSpy).to.have.been.calledWith(props.articleId)
+            const pageHeader = wrapper.find('PageHeader');
+            pageHeader.props().onDeleteEntity();
+            expect(onDeleteEntitySpy).to.have.been.calledWith(props.articleId)
           });
         });
 

@@ -1,7 +1,8 @@
 import React from 'react'; // React 
 import FormFields from '../../../formFields';
-import { CREATE_PRESS } from '../../../mutations'; // query 
-import { GET_PRESS } from '../../../queries'; // query 
+import { CREATE_PRESS } from '../../../mutations';
+import { GET_PRESS } from '../../../queries';
+import PageHeader from '../../../components/PageHeader';
 import PressForm from '../../../components/PressForm';
 import { mapFields } from '../../../utils/form-field-mappings';
 
@@ -9,9 +10,7 @@ const PressCreate = () => {
   return (
     <article className='container'>
 
-      <div className='heading-with-btns'>
-        <h2>Create Press 📢</h2>
-      </div>
+      <PageHeader heading='Create Press 📢' />
 
       <div className='col-clear' />
 

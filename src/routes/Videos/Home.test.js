@@ -1,6 +1,7 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import PageHeader from '../../components/PageHeader';
 import Videos from './index';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -14,9 +15,9 @@ describe('(Component) Videos - Home', () => {
     );
   })
 
-  it('should render a page title', () => {
+  it('should render <PageHeader />', () => {
     const actual = wrapper.containsMatchingElement(
-      <h2>Videos 📽️</h2>
+      <PageHeader heading='Videos 📽️' />
     );
     expect(actual).to.equal(true);
   });

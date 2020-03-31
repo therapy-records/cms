@@ -2,6 +2,7 @@ import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import CollaboratorCreate from './index';
+import PageHeader from '../../../components/PageHeader';
 import CollaboratorForm from '../../../components/CollaboratorForm';
 import FormFields from '../../../formFields';
 import { CREATE_COLLABORATOR } from '../../../mutations';
@@ -19,9 +20,9 @@ describe('(Component) CollaboratorCreate', () => {
       wrapper = shallow(<CollaboratorCreate />);
     });
 
-    it('should render a page title', () => {
+    it('should render <PageHeader />', () => {
       const actual = wrapper.containsMatchingElement(
-        <h2>Add Collaborator 🌈</h2>
+        <PageHeader heading='Add Collaborator 🌈' />
       );
       expect(actual).to.equal(true);
     });

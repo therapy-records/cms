@@ -12,10 +12,11 @@ import {
   selectUiStateLoading,
   selectUiStateSuccess
 } from '../../../selectors/uiState';
-import ArticleHeader from '../../../components/ArticleHeader';
+import PageHeader from '../../../components/PageHeader';
 import { selectSelectedJournalismArticle } from '../../../selectors/journalism';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import redirect from '../../../utils/redirect';
+import entityHeading from '../../../utils/entityHeading';
 import './style.css';
 
 export class Article extends React.Component {
@@ -55,10 +56,9 @@ export class Article extends React.Component {
     const {
       article,
       promiseLoading,
-      onDeleteArticle
+      onDeleteEntity
     } = this.props;
 
-    // todo: move to will/did update
     if (article && article.isDeleted) {
       redirect.redirectHistory(this.props.history, '/journalism');
     }
@@ -81,13 +81,14 @@ export class Article extends React.Component {
         {(!promiseLoading && article && article.title && !article.isDeleted) && (
           <div>
 
-            <ArticleHeader
-              baseUrl='/journalism'
-              article={article}
-              onDeleteArticle={() => onDeleteArticle(article._id)}
+            <PageHeader
+              entityCollection='journalism'
+              entity={article}
+              heading={entityHeading(article)}
+              onDeleteEntity={() => onDeleteEntity(article._id)}
               promiseLoading={promiseLoading}
-              showEditButton
-              showDeleteButton
+              renderEditButton
+              renderDeleteButton
               longHeading
             />
 
@@ -119,7 +120,7 @@ export class Article extends React.Component {
 }
 
 Article.propTypes = {
-  onDeleteArticle: PropTypes.func.isRequired,
+  onDeleteEntity: PropTypes.func.isRequired,
   article: PropTypes.object.isRequired,
   promiseLoading: PropTypes.bool,
   onFetchArticle: PropTypes.func.isRequired,
@@ -132,7 +133,7 @@ Article.propTypes = {
 
 const mapDispatchToProps = {
   onFetchArticle: (id) => fetchSingleJournalismArticle(id),
-  onDeleteArticle: (id) => deleteJournalismArticle(id),
+  onDeleteEntity: (id) => deleteJournalismArticle(id),
   resetPromiseState: () => resetPromiseState(),
   onDestroyArticle: () => destroySelectedJournalismArticle(),
   onSetSelectedJournalismArticle: (article) => setSelectedJournalismArticle(article)

@@ -38,6 +38,7 @@ const SingleEntityContainer = ({
             render={({ executeMutation }) => (
               <SingleEntityContent
                 baseUrl={baseUrl}
+                entityCollection={entityCollection}
                 data={queryData}
                 executeMutation={executeMutation}
                 render={render}

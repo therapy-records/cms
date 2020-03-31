@@ -96,6 +96,7 @@ describe('(Container) SingleEntityContainer', () => {
         const singleEntityContent = wrapper.find('SingleEntityContent');
         expect(singleEntityContent.length).to.eq(1);
         expect(singleEntityContent.prop('baseUrl')).to.eq(props.baseUrl);
+        expect(singleEntityContent.prop('entityCollection')).to.deep.eq(props.entityCollection);
         expect(singleEntityContent.prop('data')).to.deep.eq(mocks[0].result.data[props.entityName]);
         expect(singleEntityContent.prop('executeMutation')).to.be.a('function');
         expect(singleEntityContent.prop('render')).to.eq(props.render);

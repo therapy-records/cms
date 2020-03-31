@@ -1,6 +1,6 @@
 @import 'styles/variables.scss';
 
-.heading-with-btns {
+.page-header {
   margin-bottom: 2em;
   @media(min-width: $bp-xs) {
     display: flex;
@@ -39,7 +39,7 @@
   }
 }
 
-.heading-with-btns.long-heading {
+.page-header.long-heading {
   display: block;
   @media(min-width: $bp-md) {
     display: flex;
