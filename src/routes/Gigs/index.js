@@ -3,7 +3,7 @@ import List from '../../components/List';
 import QueryContainer from '../../containers/QueryContainer';
 import { GET_GIGS } from "../../queries/index"
 import { Link } from 'react-router-dom';
-import EmptyMessage from '../../components/EmptyMessage/EmptyMessage';
+import EmptyMessage from '../../components/EmptyMessage';
 
 const Gigs = () => {
 

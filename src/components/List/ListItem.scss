@@ -1,4 +1,4 @@
-@import 'styles/variables.scss';
+@import '../../../src/styles/variables.scss';
 
 .list-item-row {
   display: flex;
@@ -154,7 +154,7 @@
 
  
   :first-child {
-    font-size: 19px;
+    font-size: 1.1875em;
     font-weight: normal;
     color: #000;
     margin-bottom: 2px;
@@ -171,7 +171,7 @@
   
   :last-child {
       margin-top: 0;
-      font-size: 19px;
+      font-size: 	1.1875em;
       color: #000;
   }
 }

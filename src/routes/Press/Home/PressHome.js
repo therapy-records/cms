@@ -3,7 +3,7 @@ import QueryContainer from '../../../containers/QueryContainer';
 import { GET_PRESS } from '../../../queries';
 import PageHeader from '../../../components/PageHeader';
 import List from '../../../components/List';
-import EmptyMessage from '../../../components/EmptyMessage/EmptyMessage';
+import EmptyMessage from '../../../components/EmptyMessage';
 
 
 
