@@ -16,7 +16,9 @@ describe('(Component) ListItem', () => {
         title: 'testing',
         excerpt: 'test',
         imageUrl: 'test.com',
-        date: new Date().toISOString(),
+        description: 'test',
+        releaseDate: new Date().toISOString(),
+        externalLink: 'testing.com',
         route: 'test',
         onItemClick: () => {},
         onViewButtonClick: () => {},
@@ -77,9 +79,9 @@ describe('(Component) ListItem', () => {
     expect(actual).to.eq(true);
   });
 
-  it('should render a date', () => {
+  it('should render a releaseDate', () => {
     const actual = wrapper.containsMatchingElement(
-      <p className='small-tab'>{moment(new Date(props.date)).format('DD MMM YYYY')}</p>
+      <p className='small-tab'>{moment(new Date(props.releaseDate)).format('DD MMM YYYY')}</p>
     );
     expect(actual).to.eq(true);
   });
@@ -98,9 +100,16 @@ describe('(Component) ListItem', () => {
     expect(actual).to.eq(true);
   });
 
-  it('should render excerpt paragraph', () => {
+  it('should render description paragraph', () => {
     const actual = wrapper.containsMatchingElement(
-      <p>{props.excerpt}</p>
+      <p>{props.description}</p>
+    );
+    expect(actual).to.eq(true);
+  });
+
+  it('should render externalLink', () => {
+    const actual = wrapper.containsMatchingElement(
+      <p><a href={props.externalLink} target="_blank">{props.externalLink}</a></p>
     );
     expect(actual).to.eq(true);
   });

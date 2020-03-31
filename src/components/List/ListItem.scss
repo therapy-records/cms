@@ -1,4 +1,4 @@
-@import 'styles/variables.scss';
+@import '../../../src/styles/variables.scss';
 
 .list-item-row {
   display: flex;
@@ -147,5 +147,31 @@
     &:hover {
       background: rgba(255, 255, 255, 1);
     }
+  }
+}
+
+.date {
+
+ 
+  :first-child {
+    font-size: 1.1875em;
+    font-weight: normal;
+    color: #000;
+    margin-bottom: 2px;
+    text-align: center; 
+  }
+  
+  p {
+      text-align: center; 
+      font-size: 42px;
+      font-weight: normal;
+      color: #000;
+      margin-bottom: 2px;
+  }
+  
+  :last-child {
+      margin-top: 0;
+      font-size: 	1.1875em;
+      color: #000;
   }
 }

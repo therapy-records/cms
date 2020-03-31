@@ -1,14 +1,49 @@
 import React from 'react'
+import PageHeader from '../../components/PageHeader';
+import List from '../../components/List';
+import QueryContainer from '../../containers/QueryContainer';
+import { GET_GIGS } from '../../queries/index';
+import EmptyMessage from '../../components/EmptyMessage';
 
-class Gigs extends React.Component {
-  render() {
-    return (
-      <div className='container'>
-        <h2>Gigs 🗓️</h2>
-        <p>Coming soon...</p>
-      </div>
-    )
-  }
+const Gigs = () => {
+  return (
+    <div className='container'>
+
+      <QueryContainer
+        query={GET_GIGS}
+        entityName='gigs'
+        render={(queryData) => {
+          const hasGigs = (queryData && queryData !== null) && queryData.length;
+          const sortedQueryData = queryData.sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate)).reverse();
+
+          return (
+            <div>
+
+              <PageHeader
+                heading='Gigs 🗓️'
+                entityCollection='gigs'
+                renderCreateButton
+              />
+
+              {hasGigs ? (
+                <List
+                  data={sortedQueryData}
+                  route='gigs'
+                />
+              ) : (
+                <EmptyMessage
+                  entityName='gigs'
+                  createCopy='Create a new Gig'
+                />
+              )}
+
+            </div>
+          )
+        }}
+      />
+
+    </div>
+  )
 }
 
-export default Gigs
+export default Gigs;

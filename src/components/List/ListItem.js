@@ -10,14 +10,16 @@ const ListItem = ({
   author,
   title,
   imageUrl,
-  excerpt,
   date,
+  releaseDate,
   route,
   onItemClick,
   onViewButtonClick,
   onEditButtonClick,
   cardDesign,
-  isDraggable
+  isDraggable,
+  description,
+  externalLink
 }) => {
   let containerClassName = cardDesign ? 'list-item-card' : 'list-item-row';
 
@@ -36,12 +38,22 @@ const ListItem = ({
         </div>
       }
 
+      {date &&
+        <div className='img-container'>
+           <div className="date">
+           <p>{moment(new Date(date)).format('ddd')}</p>
+           <p>{moment(new Date(date)).format('DD')}</p>
+           <p>{moment(new Date(date)).format('MMM')}</p>
+          </div>
+        </div>
+      }
+
       <div className='content-container'>
         <div className='content'>
           <div>
             <div className='small-tabs-container'>
               {author && <p className='small-tab author'>{author}</p>}
-              {date && <p className='small-tab'>{moment(new Date(date)).format('DD MMM YYYY')}</p>}
+              {releaseDate && <p className='small-tab'>{moment(new Date(releaseDate)).format('DD MMM YYYY')}</p>}
             </div>
             <h3>
               <Link
@@ -53,7 +65,8 @@ const ListItem = ({
             </h3>
           </div>
 
-          {excerpt && <p>{excerpt}</p>}
+          {description && <p>{description}</p>}
+          {externalLink && <p><a href={externalLink} target="_blank">{externalLink}</a></p>}
 
           <div className='btns-container btns-always-inline'>
 
@@ -79,6 +92,7 @@ const ListItem = ({
 
     </li>
   );
+
 };
 
 ListItem.propTypes = {
@@ -87,20 +101,22 @@ ListItem.propTypes = {
   author: PropTypes.string,
   imageUrl: PropTypes.string,
   route: PropTypes.string.isRequired,
-  excerpt: PropTypes.string,
   date: PropTypes.string,
+  releaseDate: PropTypes.string,
   onItemClick: PropTypes.func,
   onViewButtonClick: PropTypes.func,
   onEditButtonClick: PropTypes.func,
   cardDesign: PropTypes.bool,
-  isDraggable: PropTypes.bool
+  isDraggable: PropTypes.bool,
+  description: PropTypes.string,
+  externalLink: PropTypes.string
 };
 
 ListItem.defaultProps = {
   author: '',
   imageUrl: '',
-  excerpt: '',
   date: '',
+  releaseDate: '',
   onItemClick: null,
   onViewButtonClick: null,
   onEditButtonClick: null,
