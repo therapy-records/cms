@@ -6,7 +6,7 @@ import ConnectedJournalism, { Journalism } from './index';
 import PageHeader from '../../../components/PageHeader';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import List from '../../../components/List';
-import EmptyArticlesMessage from '../../../components/EmptyArticlesMessage/EmptyArticlesMessage';
+import EmptyMessage from '../../../components/EmptyMessage';
 import {
   selectJournalismHasFetched,
   selectSelectedJournalismArticle
@@ -103,7 +103,7 @@ describe('(Component) Journalism - Home', () => {
           />
         );
         const actual = wrapper.containsMatchingElement(
-          <EmptyArticlesMessage type='journalism' />
+          <EmptyMessage entityName='journalism' createCopy='Create a new Journalism article'/>
         );
         expect(actual).to.equal(true);
       });

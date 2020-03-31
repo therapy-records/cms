@@ -86,3 +86,11 @@ export const CREATE_GIG = gql`
     }
   }
 `;
+
+export const DELETE_GIG = gql`
+  mutation($id: ID!) {
+    deleteGig(_id: $id) {
+      _id
+    }
+  }
+`
