@@ -4,14 +4,14 @@ import Adapter from 'enzyme-adapter-react-16';
 import GigForm from './GigForm';
 import Form from '../Form';
 import { GET_GIG } from '../../queries';
-import { EDIT_PRESS } from '../../mutations';
+import { EDIT_GIG } from '../../mutations';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) GigForm', () => {
   let wrapper,
     props = {
-      mutation: EDIT_PRESS,
+      mutation: EDIT_GIG,
       fields: [
         { id: 'a', value: 'testing' },
         { id: 'b', value: 'testing' },
@@ -31,18 +31,17 @@ describe('(Component) GigForm', () => {
   it('should render <Form /> with correct props', () => {
     const actual = wrapper.containsMatchingElement(
         <Form
-            mutation={mutation}
-            fields={fields}
-            mutateId={id}
-            refetchQueries={refetchQueries}
+            mutation={props.mutation}
+            fields={props.fields}
+            mutateId={props.id}
+            refetchQueries={props.refetchQueries}
             baseUrl='/gigs'
-            submitButtonCopy={isEdit ? 'Update a Gig' : 'Add Gig'}
+            submitButtonCopy='Add Gig'
             successCopy={{
-                success: isEdit ? 'Successfully updated!' : 'Successfully created!',
+                success: 'Successfully created!',
                 homeLink: 'Go to Gigs',
-                createLink: isEdit ? 'Create a Gig' : 'Create another Gig'
+                createLink: 'Create another Gig'
             }}
-            isEdit={isEdit}
         />
     );
     expect(actual).to.equal(true);
