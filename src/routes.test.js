@@ -27,6 +27,7 @@ import CollaboratorsCreate from './routes/Collaborators/Create';
 import CollaboratorView from './routes/Collaborators/View';
 import CollaboratorEdit from './routes/Collaborators/Edit';
 import Gigs from './routes/Gigs';
+import GigCreate from './routes/Gigs/Create'
 import GigsView from './routes/Gigs/View/GigsView'
 import Videos from './routes/Videos';
 
@@ -313,6 +314,19 @@ describe('Router', () => {
     expect(actual).to.equal(true);
   });
 
+  it('should render gig create route', () => {
+    const actual = wrapper.containsMatchingElement(
+      <ProtectedRoute
+        path="/gigs/create"
+        component={GigCreate}
+        isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
+        exact
+      />
+    );
+    expect(actual).to.equal(true);
+  });
+
   it('should render gig view route', () => {
     const actual = wrapper.containsMatchingElement(
       <ProtectedRoute
@@ -325,7 +339,6 @@ describe('Router', () => {
     );
     expect(actual).to.equal(true);
   });
-
 
   it('should render videos route', () => {
     const actual = wrapper.containsMatchingElement(
