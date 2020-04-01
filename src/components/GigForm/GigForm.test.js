@@ -47,30 +47,30 @@ describe('(Component) GigForm', () => {
     expect(actual).to.equal(true);
   });
 
-//   describe('with props.isEdit', () => {
-//     it('should render <Form /> with correct props', () => {
-//       wrapper.setProps({
-//         isEdit: true
-//       });
+  describe('with props.isEdit', () => {
+    it('should render <Form /> with correct props', () => {
+      wrapper.setProps({
+        isEdit: true
+      });
 
-//       const actual = wrapper.containsMatchingElement(
-//         <Form
-//           mutation={props.mutation}
-//           fields={props.fields}
-//           mutateId={props.id}
-//           refetchQueries={props.refetchQueries}
-//           baseUrl='/gigs'
-//           submitButtonCopy='Update article'
-//           successCopy={{
-//             success: 'Successfully updated!',
-//             homeLink: 'Go to Gigs',
-//             createLink: 'Create a Gig'
-//           }}
-//           isEdit
-//         />
-//       );
-//       expect(actual).to.equal(true);
-//     });
-//   });
+      const actual = wrapper.containsMatchingElement(
+        <Form
+          mutation={props.mutation}
+          fields={props.fields}
+          mutateId={props.id}
+          refetchQueries={props.refetchQueries}
+          baseUrl='/gigs'
+          submitButtonCopy='Update a Gig'
+          successCopy={{
+            success: 'Successfully updated!',
+            homeLink: 'Go to Gigs',
+            createLink: 'Create a Gig'
+          }}
+          isEdit
+        />
+      );
+      expect(actual).to.equal(true);
+    });
+  });
 
 });
