@@ -9,21 +9,21 @@ const GigForm = ({
   refetchQueries,
   isEdit
 }) => (
-    <Form
-      mutation={mutation}
-      fields={fields}
-      mutateId={id}
-      refetchQueries={refetchQueries}
-      baseUrl='/gigs'
-      submitButtonCopy={isEdit ? 'Update a Gig' : 'Add Gig'}
-      successCopy={{
-        success: isEdit ? 'Successfully updated!' : 'Successfully created!',
-        homeLink: 'Go to Gigs',
-        createLink: isEdit ? 'Create a Gig' : 'Create another Gig'
-      }}
-      isEdit={isEdit}
-    />
-  );
+  <Form
+    mutation={mutation}
+    fields={fields}
+    mutateId={id}
+    refetchQueries={refetchQueries}
+    baseUrl='/gigs'
+    submitButtonCopy={isEdit ? 'Update a Gig' : 'Add Gig'}
+    successCopy={{
+      success: isEdit ? 'Successfully updated!' : 'Successfully created!',
+      homeLink: 'Go to Gigs',
+      createLink: isEdit ? 'Create a Gig' : 'Create another Gig'
+    }}
+    isEdit={isEdit}
+  />
+);
 
 GigForm.propTypes = {
   mutation: PropTypes.object.isRequired,

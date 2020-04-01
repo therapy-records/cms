@@ -67,7 +67,6 @@ export const EDIT_PRESS = gql`
   }
 `;
 
-
 export const DELETE_PRESS = gql`
 mutation($id: ID!) {
   deletePress(_id: $id) {
@@ -87,7 +86,7 @@ export const CREATE_GIG = gql`
     }
   }
   `;
-  
+
 export const EDIT_GIG = gql`
   mutation($id: ID!, $input: GigInput) {
     editGig(_id: $id, input: $input) {
@@ -107,4 +106,4 @@ export const DELETE_GIG = gql`
       _id
     }
   }
-`
+`;

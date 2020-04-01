@@ -18,9 +18,9 @@ const GigEdit = ({ match }) => {
 
   return (
     <SingleEntityContainer
-      baseUrl='/press'
-      entityName='pressArticle'
-      entityCollection='press'
+      baseUrl='/gigs'
+      entityName='gig'
+      entityCollection='gigs'
       id={id}
       query={GET_GIGS}
       isEdit
@@ -28,7 +28,7 @@ const GigEdit = ({ match }) => {
         <GigForm
           mutation={EDIT_GIG}
           fields={mapFieldsWithValues(
-            new FormFields().press,
+            new FormFields().gig,
             entityData
           )}
           id={id}
@@ -45,11 +45,11 @@ const GigEdit = ({ match }) => {
       mutation={DELETE_GIG}
       mutationSuccessCopy={{
         success: 'Successfully deleted.',
-        homeLink: 'Go to Press'
+        homeLink: 'Go to Gigs'
       }}
       mutationCacheUpdate={{
         cacheQuery: GET_GIG,
-        responseObjName: 'deletePress'
+        responseObjName: 'deleteGig'
       }}
     />
   );
