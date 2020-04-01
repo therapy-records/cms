@@ -46,7 +46,7 @@ export class ArticleCreate extends React.Component {
             baseUrl='/news'
             copy={{
               homeLink: 'Go to News',
-              createLink: 'Create another article',
+              createLink: 'Create another article'
             }}
             onReset={this.handleOnReset}
           />

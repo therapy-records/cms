@@ -31,26 +31,26 @@ const GigsView = ({
       }}
       render={entityData => (
         <div className="list-item-row no-border">
-            {entityData.date &&
+          {entityData.date &&
                 <div className='img-container'>
-                    <div className="date">
-                        <p>{moment(new Date(entityData.date)).format('ddd')}</p>
-                        <p>{moment(new Date(entityData.date)).format('DD')}</p>
-                        <p>{moment(new Date(entityData.date)).format('MMM')}</p>
-                    </div>
+                  <div className="date">
+                    <p>{moment(new Date(entityData.date)).format('ddd')}</p>
+                    <p>{moment(new Date(entityData.date)).format('DD')}</p>
+                    <p>{moment(new Date(entityData.date)).format('MMM')}</p>
+                  </div>
                 </div>
-            }
+          }
 
-            <div className='content-container'>
-                <div className='content'>
-                    <div>
-                        <div className='small-tabs-container inline-sty' >
-                            {(entityData.venue && entityData.location && entityData.date) && <p>{entityData.venue}, {entityData.location}, {moment(new Date(entityData.date)).format('LT')}</p>}
-                            {entityData.ticketsUrl && <p><a href={entityData.ticketsUrl} target="_blank">{entityData.ticketsUrl}</a></p>}
-                        </div>
-                    </div> 
+          <div className='content-container'>
+            <div className='content'>
+              <div>
+                <div className='small-tabs-container inline-sty' >
+                  {(entityData.venue && entityData.location && entityData.date) && <p>{entityData.venue}, {entityData.location}, {moment(new Date(entityData.date)).format('LT')}</p>}
+                  {entityData.ticketsUrl && <p><a href={entityData.ticketsUrl} target='_blank' rel='noopener noreferrer'>{entityData.ticketsUrl}</a></p>}
                 </div>
+              </div>
             </div>
+          </div>
         </div>
       )}
     />

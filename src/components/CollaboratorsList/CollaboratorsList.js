@@ -10,7 +10,6 @@ const CollaboratorsList = ({
   onOrderChanged,
   showSortableList
 }) => {
-
   const [state, dispatch] = useReducer(
     reducer,
     listItems,
@@ -35,30 +34,29 @@ const CollaboratorsList = ({
     return a.orderNumber - b.orderNumber
   });
 
-    return (
-      <div>
-        {showSortableList ? (
-          <SortableList
-            items={sortedItems}
-            route='collaborators'
-            onSortingUpdated={handleOnSortingUpdated}
-          />
-        ) : (
-          <List
-            data={sortedItems}
-            route='collaborators'
-            columns
-          />
-        )}
-      </div>
-    )
-
+  return (
+    <div>
+      {showSortableList ? (
+        <SortableList
+          items={sortedItems}
+          route='collaborators'
+          onSortingUpdated={handleOnSortingUpdated}
+        />
+      ) : (
+        <List
+          data={sortedItems}
+          route='collaborators'
+          columns
+        />
+      )}
+    </div>
+  )
 }
 
 CollaboratorsList.propTypes = {
   listItems: PropTypes.arrayOf(PropTypes.object).isRequired,
   onOrderChanged: PropTypes.func.isRequired,
-  showSortableList: PropTypes.bool,
+  showSortableList: PropTypes.bool
 };
 
 CollaboratorsList.defaultProps = {

@@ -16,7 +16,6 @@ export class Sidebar extends React.PureComponent {
     this.toggleSidebar = this.toggleSidebar.bind(this);
     this.handleResize = this.handleResize.bind(this)
     this.handleOnClickNavItem = this.handleOnClickNavItem.bind(this);
-    
   }
 
   toggleSidebar() {

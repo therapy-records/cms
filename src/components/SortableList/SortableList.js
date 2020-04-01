@@ -24,14 +24,12 @@ SortableListContainer.propTypes = {
   children: PropTypes.arrayOf(PropTypes.element).isRequired
 };
 
-
 const SortableListComponent = ({
   items,
   route,
   onSortingUpdated
 }) => {
-
-  const [ sortingActive, setSortingActive ] = useState(false);
+  const [sortingActive, setSortingActive] = useState(false);
 
   const onSortStart = () => {
     setSortingActive(true);

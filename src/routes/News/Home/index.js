@@ -53,7 +53,7 @@ export class News extends React.Component {
       articles
     } = this.props;
 
-    let _combinedArticles = articles && this.orderArticles(articles);
+    const _combinedArticles = articles && this.orderArticles(articles);
 
     const hasCombinedArticles = (_combinedArticles !== null) && (_combinedArticles && _combinedArticles.length);
 
@@ -86,7 +86,7 @@ export class News extends React.Component {
                 />
               ) : (
                 <div>
-                  <EmptyMessage 
+                  <EmptyMessage
                     entityName='news'
                     createCopy='Create News' />
                 </div>

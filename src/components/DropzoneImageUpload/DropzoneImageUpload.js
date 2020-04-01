@@ -19,7 +19,7 @@ export class DropzoneImageUpload extends React.Component {
   }
 
   componentDidMount() {
-    const {existingImages} = this.props;
+    const { existingImages } = this.props;
     if (existingImages) {
       this.setState({
         images: [...existingImages]
@@ -34,7 +34,6 @@ export class DropzoneImageUpload extends React.Component {
         images: [...existingImages]
       });
     }
-
   }
 
   handleImageResponseUrl(url) {
@@ -57,10 +56,10 @@ export class DropzoneImageUpload extends React.Component {
       invalidDimensions: [],
       isLoading: true
     });
-    let upload = request.post(CLOUDINARY_UPLOAD_URL)
+    const upload = request.post(CLOUDINARY_UPLOAD_URL)
       .field('upload_preset', CLOUDINARY_UPLOAD_PRESET_ID)
       .field('file', file);
-    upload.end((err, response) => {
+    upload.end((uploadErr, response) => {
       if (response.body.secure_url !== '') {
         if (this.validMinimumImageDimensions(response.body)) {
           let updatedImagesArray = [];
@@ -130,7 +129,7 @@ export class DropzoneImageUpload extends React.Component {
       } else if (this.props.onRemove) {
         this.props.onRemove(imageIndex);
       }
-    }) ;
+    });
   }
 
   render() {
@@ -153,7 +152,7 @@ export class DropzoneImageUpload extends React.Component {
 
     return (
       <div className='dropzone-container'>
-        {title &&  (
+        {title && (
           <h5>{title}
             {required && <span className='required'>*</span>}
             &nbsp;
@@ -182,8 +181,8 @@ export class DropzoneImageUpload extends React.Component {
             </Dropzone>
           </div>
 
-          {(images && images.length) ?
-            <div>
+          {(images && images.length)
+            ? <div>
               <ul className='flex-root gallery-images-flex-root'>
                 {images.map((i) => {
                   if (i.length) {
@@ -195,7 +194,7 @@ export class DropzoneImageUpload extends React.Component {
                           className="btn-danger btn-sm-remove"
                           onClick={() => this.removeSingleImage(i)}>
                           remove
-                      </button>
+                        </button>
                       </li>
                     )
                   }
@@ -211,11 +210,11 @@ export class DropzoneImageUpload extends React.Component {
               }
 
             </div>
-          : null}
+            : null}
         </div>
 
-        {invalidDimensions.length ?
-          <ul className="dropzone-dimensions-messages cancel-margin">
+        {invalidDimensions.length
+          ? <ul className="dropzone-dimensions-messages cancel-margin">
             {invalidDimensions.map((message, index) =>
               <li
                 key={index}
@@ -225,7 +224,7 @@ export class DropzoneImageUpload extends React.Component {
               </li>
             )}
           </ul>
-        : null}
+          : null}
 
       </div>
     )

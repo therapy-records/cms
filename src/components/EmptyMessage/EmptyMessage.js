@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const EmptyMessage = ({entityName, createCopy}) => (
+const EmptyMessage = ({ entityName, createCopy }) => (
   <div>
     <p>No {entityName} yet. <Link to={`${entityName.toLowerCase()}/create`}>{createCopy}</Link></p>
   </div>

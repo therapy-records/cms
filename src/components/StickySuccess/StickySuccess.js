@@ -16,5 +16,4 @@ StickySuccess.propTypes = {
   children: PropTypes.element
 };
 
-
 export default StickySuccess;

@@ -26,4 +26,3 @@ const CollaboratorCreate = () => (
 );
 
 export default CollaboratorCreate;
-

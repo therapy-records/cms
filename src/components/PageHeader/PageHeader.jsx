@@ -72,11 +72,9 @@ class PageHeader extends Component {
           {(renderCreateButton || renderDeleteButton || renderEditButton || bespokeButton) && (
             <div className='action-btns'>
 
-
               {bespokeButton && (
                 bespokeButton
               )}
-
 
               {renderDeleteButton && (
                 <button

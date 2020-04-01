@@ -75,7 +75,7 @@ export const fetchSingleNewsArticle = (articleId) => {
           dispatch(promiseSuccess(true));
           dispatch(selectedNewsArticle(res.data));
         },
-        (err) => {
+        (apiError) => {
           dispatch(promiseLoading(false));
           dispatch(promiseError())
         }

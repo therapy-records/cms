@@ -2,7 +2,7 @@ import { getFirstImageInArticle } from './news';
 import entityHeading from './entityHeading';
 import moment from 'moment';
 
-// TODO: refactor data models so there is no need for 
+// TODO: refactor data models so there is no need for
 // heading || title || name
 // date || releaseDate
 // imageUrl || avatarUrl
@@ -16,7 +16,6 @@ const listItemPropsHandler = ({
   cardDesign,
   isDraggable
 }) => {
-
   const {
     _id,
     author,

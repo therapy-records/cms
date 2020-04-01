@@ -4,7 +4,7 @@ CMS UI to manage artist albums, news, bookings, releases and more
 
 ## Prerequisites
 
-- node `8.10.0` or greater
+- node `8.16.1`
 - yarn `1.6.0`or greater
 - [cms-api](https://github.com/therapy-records/cms-api) cloned locally
 

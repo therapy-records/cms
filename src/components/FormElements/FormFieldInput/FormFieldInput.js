@@ -83,7 +83,6 @@ const FormFieldInput = ({
         showSingleHiddenInputValue
       />
     )
-    
   } else if (component === 'TextInputsList') {
     if (type === 'arrayOfStrings') {
       return (

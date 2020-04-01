@@ -13,7 +13,6 @@ const List = ({
   itemsHaveMultipleImages,
   columns
 }) => {
-
   let className = 'list ';
   if (columns) {
     className += 'list-with-columns'

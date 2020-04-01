@@ -18,18 +18,18 @@ const RTE_TOOLBAR_CONFIG = {
 };
 
 class _RichTextEditor extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.handleOnChange = this.handleOnChange.bind(this);
     const initValue = (this.props.input && this.props.input.value) || this.props.value;
     this.state = {
-      value: initValue ?
-        RichTextEditor.createValueFromString(initValue, 'html') :
-        RichTextEditor.createValueFromString('', 'html')
+      value: initValue
+        ? RichTextEditor.createValueFromString(initValue, 'html')
+        : RichTextEditor.createValueFromString('', 'html')
     }
   }
 
-  handleOnChange(value){
+  handleOnChange(value) {
     const {
       input,
       onChange

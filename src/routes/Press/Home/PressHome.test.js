@@ -12,7 +12,7 @@ import List from '../../../components/List';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-let mocks = [
+const mocks = [
   MOCK_GET_PRESS
 ];
 

@@ -9,21 +9,21 @@ const PressForm = ({
   refetchQueries,
   isEdit
 }) => (
-    <Form
-      mutation={mutation}
-      fields={fields}
-      mutateId={id}
-      refetchQueries={refetchQueries}
-      baseUrl='/press'
-      submitButtonCopy={isEdit ? 'Update article' : 'Add Press article'}
-      successCopy={{
-        success: isEdit ? 'Successfully updated!' : 'Successfully created!',
-        homeLink: 'Go to Press',
-        createLink: isEdit ? 'Create a Press article' : 'Create another Press article'
-      }}
-      isEdit={isEdit}
-    />
-  );
+  <Form
+    mutation={mutation}
+    fields={fields}
+    mutateId={id}
+    refetchQueries={refetchQueries}
+    baseUrl='/press'
+    submitButtonCopy={isEdit ? 'Update article' : 'Add Press article'}
+    successCopy={{
+      success: isEdit ? 'Successfully updated!' : 'Successfully created!',
+      homeLink: 'Go to Press',
+      createLink: isEdit ? 'Create a Press article' : 'Create another Press article'
+    }}
+    isEdit={isEdit}
+  />
+);
 
 PressForm.propTypes = {
   mutation: PropTypes.object.isRequired,

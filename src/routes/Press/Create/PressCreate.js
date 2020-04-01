@@ -27,4 +27,3 @@ const PressCreate = () => {
 }
 
 export default PressCreate;
-

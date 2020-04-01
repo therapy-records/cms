@@ -12,7 +12,7 @@ const handleFormData = form => {
   let fieldsWithChildren = {};
 
   for (const pair of data.entries()) {
-    let fieldId = pair[0];
+    const fieldId = pair[0];
     const fieldValue = pair[1];
 
     if (isChildField(fieldId)) {

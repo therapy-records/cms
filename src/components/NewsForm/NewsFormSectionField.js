@@ -36,7 +36,7 @@ export class NewsFormSectionField extends Component {
         ...sectionImages.map(imageObj => imageObj.url)
       ];
     }
-  
+
     const existingImages = sectionImagesArray.length >= 1;
 
     if (existingImages) {
@@ -118,8 +118,8 @@ export class NewsFormSectionField extends Component {
           </div>
 
           <div className={fields.length > 1 ? 'row last row-buttons' : 'row row-buttons'}>
-            {showImageUpload ?
-              <DropzoneImageUpload
+            {showImageUpload
+              ? <DropzoneImageUpload
                 title="Images"
                 component={DropzoneImageUpload}
                 existingImages={sectionImagesArray.length ? sectionImagesArray : []}
@@ -131,8 +131,7 @@ export class NewsFormSectionField extends Component {
                   onRemoveSectionImage(sectionImageIndex, sectionIndex)
                 }
               />
-              :
-              <button
+              : <button
                 type='button'
                 className='button-link'
                 onClick={this.onToggleShowImageUpload}
@@ -140,17 +139,16 @@ export class NewsFormSectionField extends Component {
                 Add image
               </button>
             }
-            
-            {showVideoEmbed ?
-              <Field
+
+            {showVideoEmbed
+              ? <Field
                 name={`${section}.videoEmbed`}
                 type='text'
                 label='Video (iframe embed)'
                 component={TextInput}
                 placeholder='<iframe .... />'
               />
-              :
-              <button
+              : <button
                 type='button'
                 className='button-link'
                 onClick={this.onToggleShowVideoEmbed}
@@ -167,7 +165,6 @@ export class NewsFormSectionField extends Component {
     );
   }
 }
-
 
 NewsFormSectionField.propTypes = {
   fields: PropTypes.object.isRequired,

@@ -74,60 +74,60 @@ export class JournalismForm extends React.Component {
 
           <div className='row-large'>
             <Field name='title'
-                   component={TextInput}
-                   type='text'
-                   placeholder='The Essence of Michel Camilo'
-                   label='Title'
-                   validate={required}
-                   required
+              component={TextInput}
+              type='text'
+              placeholder='The Essence of Michel Camilo'
+              label='Title'
+              validate={required}
+              required
             />
           </div>
 
           <div className='row-large'>
 
-          <Field name='copy'
-                 component={TextInput}
-                 type='text'
-                 placeholder='Jazz In Europe Magazine'
-                 label='Short excerpt'
-                 maxLength={JOUNALISM_FIELD_COPY_MAX_LENGTH}
-                 validate={required}
-                 required
-          />
+            <Field name='copy'
+              component={TextInput}
+              type='text'
+              placeholder='Jazz In Europe Magazine'
+              label='Short excerpt'
+              maxLength={JOUNALISM_FIELD_COPY_MAX_LENGTH}
+              validate={required}
+              required
+            />
           </div>
 
           <div className='row-large'>
             <Field name='externalLink'
-                   component={TextInput}
-                   type='Link to article'
-                   label='Link to article'
-                   placeholder='http://bbc.co.uk/fiona-ross'
-                   validate={required}
-                   required
+              component={TextInput}
+              type='Link to article'
+              label='Link to article'
+              placeholder='http://bbc.co.uk/fiona-ross'
+              validate={required}
+              required
             />
           </div>
 
           <div className='row-large'>
             <Field name='imageUrl'
-                   component={DropzoneImageUpload}
-                   title='Article screenshot'
-                   existingImages={formValues && formValues.imageUrl && [formValues.imageUrl]}
-                   validate={required}
-                   minImageDimensions={JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS}
-                   helpText='Dimensions must be equal'
-                   ctaCopy='Drag & drop image'
-                   required
+              component={DropzoneImageUpload}
+              title='Article screenshot'
+              existingImages={formValues && formValues.imageUrl && [formValues.imageUrl]}
+              validate={required}
+              minImageDimensions={JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS}
+              helpText='Dimensions must be equal'
+              ctaCopy='Drag & drop image'
+              required
             />
           </div>
 
           <div className='row-large'>
 
             <Field name='releaseDate'
-                   component={Datepicker}
-                   initTime={formValues && formValues.releaseDate}
-                   title='Release date'
-                   validate={required}
-                   required
+              component={Datepicker}
+              initTime={formValues && formValues.releaseDate}
+              title='Release date'
+              validate={required}
+              required
             />
           </div>
 
@@ -184,7 +184,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  onDeleteEntity: (id) => deleteJournalismArticle(id),
+  onDeleteEntity: (id) => deleteJournalismArticle(id)
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InitFromStateForm)

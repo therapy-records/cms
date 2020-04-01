@@ -45,7 +45,7 @@ export const fetchNewsArticles = () => {
           dispatch(promiseLoading(false));
           dispatch(promiseSuccess(true));
         },
-        (err) => {
+        (apiError) => {
           dispatch(promiseLoading(false));
           dispatch(promiseError());
         }
@@ -71,7 +71,7 @@ export const postNews = () => {
     const _axios = axios.create({
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': token
+        Authorization: token
       }
     });
 
@@ -83,10 +83,10 @@ export const postNews = () => {
         dispatch(promiseLoading(false));
         dispatch(promiseSuccess(true));
         dispatch(postNewsSuccess(res.data));
-      }, (err) => {
+      }, (apiError) => {
         dispatch(promiseLoading(false));
         dispatch(promiseError());
-        return err;
+        return apiError;
       }
     );
   }
@@ -95,7 +95,7 @@ export const postNews = () => {
 export const editNews = (postToEdit) => {
   return (dispatch, getState) => {
     dispatch(promiseLoading(true));
-    let getFormObj = () => {
+    const getFormObj = () => {
       const newsFormFromState = getState().form.NEWS_FORM;
       if (newsFormFromState &&
         newsFormFromState.values) {
@@ -111,7 +111,7 @@ export const editNews = (postToEdit) => {
     const _axios = axios.create({
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': token
+        Authorization: token
       }
     });
 
@@ -124,7 +124,7 @@ export const editNews = (postToEdit) => {
         dispatch(promiseSuccess(true));
         dispatch(setSelectedNewsArticleEditSuccess(postToEdit))
         dispatch(editNewsSuccess(true));
-      }, (err) => {
+      }, (apiError) => {
         dispatch(promiseLoading(false));
         dispatch(promiseError());
       }

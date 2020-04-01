@@ -23,7 +23,6 @@ import JournalismForm from '../../../components/JournalismForm';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import redirect from '../../../utils/redirect';
 
-
 export class ArticleEdit extends React.Component {
   constructor() {
     super();
@@ -39,7 +38,7 @@ export class ArticleEdit extends React.Component {
 
     this.props.onResetEditSuccess();
   }
-  
+
   componentDidMount() {
     const { article, match } = this.props;
     const paramsId = match.params.id;
@@ -72,7 +71,7 @@ export class ArticleEdit extends React.Component {
     if (article && article.isDeleted) {
       redirect.redirectHistory(this.props.history, '/journalism');
     }
-  
+
     if (!article.isDeleted && !article._id) {
       return null;
     }

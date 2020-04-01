@@ -24,7 +24,7 @@ export function authSuccess(data) {
   }
 }
 
-export function authError(err) {
+export function authError(authErr) {
   return {
     type: USER_AUTH_ERROR,
     payload: {
@@ -50,7 +50,7 @@ export const userLogin = () => {
     const _axios = axios.create({
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': token
+        Authorization: token
       }
     });
 

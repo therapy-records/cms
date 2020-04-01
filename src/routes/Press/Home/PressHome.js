@@ -6,7 +6,6 @@ import List from '../../../components/List';
 import EmptyMessage from '../../../components/EmptyMessage';
 
 const PressHome = () => {
-
   return (
     <div className='container'>
 
@@ -14,12 +13,12 @@ const PressHome = () => {
         query={GET_PRESS}
         entityName='press'
         render={(queryData) => {
-
           const hasArticles = (queryData && queryData !== null) && queryData.length;
           const sortedQueryData = queryData.sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate)).reverse();
 
           return (
             <div>
+
               <PageHeader
                 heading='Press 📢'
                 entityCollection='press'

@@ -18,7 +18,6 @@ import { NEWS_FORM } from '../../constants';
 import NewsFormSection from './NewsFormSection';
 
 export class NewsForm extends React.Component {
-
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -69,14 +68,14 @@ export class NewsForm extends React.Component {
         <form onSubmit={this.handleSubmit} encType='multipart/form-data'>
 
           <div className='row-large'>
-              <Field name='title'
-                    component={TextInput}
-                    type='text'
-                    placeholder='January 2019 update'
-                    label='Title'
-                    validate={required}
-                    required
-              />
+            <Field name='title'
+              component={TextInput}
+              type='text'
+              placeholder='January 2019 update'
+              label='Title'
+              validate={required}
+              required
+            />
           </div>
 
           <FieldArray
@@ -86,9 +85,9 @@ export class NewsForm extends React.Component {
 
           <div className='row-large'>
             <button type='submit'
-                    className='btn-lg'
-                    disabled={error || pristine || submitting || error || invalid}
-                    onClick={() => this.handleSubmit()}
+              className='btn-lg'
+              disabled={error || pristine || submitting || error || invalid}
+              onClick={() => this.handleSubmit()}
             >{submitButtonCopy}
             </button>
           </div>
@@ -114,7 +113,7 @@ NewsForm.propTypes = {
 
 let InitFromStateForm = reduxForm({
   form: NEWS_FORM,
-  enableReinitialize : true
+  enableReinitialize: true
 })(NewsForm);
 
 InitFromStateForm = connect(
@@ -122,18 +121,18 @@ InitFromStateForm = connect(
     initialValues: {
       title: selectSelectedNewsArticleTitle(state),
       sections: selectSelectedNewsArticleSections(state) ||
-                [ EMPTY_ARTICLE_SECTION_OBJ ]
+                [EMPTY_ARTICLE_SECTION_OBJ]
     }
   })
 )(InitFromStateForm);
 
 const mapStateToProps = (state) => ({
   formValues: selectNewsFormValues(state),
-  promiseLoading: selectUiStateLoading(state),
+  promiseLoading: selectUiStateLoading(state)
 });
 
 const mapDispatchToProps = {
-  onDeleteEntity: (id) => deleteNewsArticle(id),
+  onDeleteEntity: (id) => deleteNewsArticle(id)
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InitFromStateForm)

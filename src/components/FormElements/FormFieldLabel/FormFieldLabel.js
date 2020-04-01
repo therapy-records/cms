@@ -22,7 +22,7 @@ FormFieldLabel.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   required: PropTypes.bool,
-  helpText: PropTypes.string,
+  helpText: PropTypes.string
 };
 
 FormFieldLabel.defaultProps = {

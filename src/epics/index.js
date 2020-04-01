@@ -13,7 +13,7 @@ import {
 
 const errorAlertEpic = (action$, store) => {
   return action$
-    .filter(action => 
+    .filter(action =>
       action.type === UISTATE_PROMISE_ERROR
     )
     .mapTo(errorAlert(ERROR_ALERT_MESSAGE))
@@ -29,7 +29,6 @@ const resetErrorAlertEpic = (action$, store) => {
     )
     .mapTo(resetErrorAlert())
 }
-
 
 const rootEpic = combineEpics(
   errorAlertEpic,

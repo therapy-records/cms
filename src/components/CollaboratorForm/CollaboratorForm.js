@@ -9,20 +9,20 @@ const CollaboratorForm = ({
   refetchQueries,
   isEdit
 }) => (
-    <Form
-      mutation={mutation}
-      fields={fields}
-      mutateId={id}
-      refetchQueries={refetchQueries}
-      baseUrl='/collaborators'
-      submitButtonCopy={isEdit ? 'Update Collaborator' : 'Add Collaborator'}
-      successCopy={{
-        success: isEdit ? 'Successfully updated!' : 'Successfully created!',
-        homeLink: 'Go to Collaborators',
-        createLink: isEdit ? 'Create a Collaborator' : 'Create another Collaborator'
-      }}
-      isEdit={isEdit}
-    />
+  <Form
+    mutation={mutation}
+    fields={fields}
+    mutateId={id}
+    refetchQueries={refetchQueries}
+    baseUrl='/collaborators'
+    submitButtonCopy={isEdit ? 'Update Collaborator' : 'Add Collaborator'}
+    successCopy={{
+      success: isEdit ? 'Successfully updated!' : 'Successfully created!',
+      homeLink: 'Go to Collaborators',
+      createLink: isEdit ? 'Create a Collaborator' : 'Create another Collaborator'
+    }}
+    isEdit={isEdit}
+  />
 );
 
 CollaboratorForm.propTypes = {

@@ -1,4 +1,4 @@
-import { EMPTY_ARTICLE_SECTION_OBJ }  from '../utils/news';
+import { EMPTY_ARTICLE_SECTION_OBJ } from '../utils/news';
 import {
   SET_SELECTED_NEWS_ARTICLE,
   SET_SELECTED_NEWS_ARTICLE_DELETED,

@@ -18,7 +18,7 @@ import {
 
 Enzyme.configure({ adapter: new Adapter() });
 
-let mocks = [
+const mocks = [
   MOCK_GET_COLLABORATOR,
   MOCK_DELETE_COLLABORATOR
 ];

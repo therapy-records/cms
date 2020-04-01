@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
 class ProtectedRoute extends React.PureComponent {
-
   componentDidMount() {
     if (!this.props.isAuth) {
       this.props.onAuthCheck();

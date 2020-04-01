@@ -26,7 +26,7 @@ export class Home extends React.Component {
 
   doRedirect(url) {
     this.props.history.push({
-        pathname: url
+      pathname: url
     });
   }
 
@@ -41,8 +41,8 @@ export class Home extends React.Component {
     return (
       <div className='container home-container'>
         <div>
-        
-        {(isAuth || isAuth === null) &&
+
+          {(isAuth || isAuth === null) &&
             <div>
               <LoadingSpinner
                 active

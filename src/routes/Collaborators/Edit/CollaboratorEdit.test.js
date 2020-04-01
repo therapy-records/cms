@@ -20,7 +20,7 @@ import { MOCK_GET_COLLABORATOR } from '../../../mocks/collaborators.mock';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-let mocks = [
+const mocks = [
   MOCK_GET_COLLABORATOR
 ];
 

@@ -30,9 +30,9 @@ class LoadingSpinner extends PureComponent {
     if (fullScreen) {
       return (
         <div className={active ?
-            'loading-spinner-overlay loading-spinner-overlay-active' :
-            'loading-spinner-overlay'}
-        >
+          'loading-spinner-overlay loading-spinner-overlay-active' :
+          'loading-spinner-overlay'
+        }>
           {Spinner()}
         </div>
       )
@@ -50,7 +50,6 @@ class LoadingSpinner extends PureComponent {
     }
 
     return Spinner();
-
   }
 }
 
