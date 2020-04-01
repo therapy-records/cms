@@ -1,7 +1,7 @@
 import React from 'react';
 import FormFields from '../../../formFields';
 import { CREATE_GIG } from '../../../mutations';
-import { GET_GIG } from '../../../queries';
+import { GET_GIGS } from '../../../queries';
 import PageHeader from '../../../components/PageHeader';
 import GigForm from '../../../components/GigForm/GigForm';
 import { mapFields } from '../../../utils/form-field-mappings';
@@ -18,7 +18,7 @@ const GigCreate = () => {
         fields={mapFields(new FormFields().gig)}
         mutation={CREATE_GIG}
         refetchQueries={[
-          { query: GET_GIG }
+          { query: GET_GIGS }
         ]}
       />
 

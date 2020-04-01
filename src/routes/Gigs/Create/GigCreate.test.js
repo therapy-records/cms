@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import GigCreate from './index';
 import FormFields from '../../../formFields';
 import { CREATE_GIG } from '../../../mutations';
-import { GET_GIG } from '../../../queries';
+import { GET_GIGS } from '../../../queries';
 import PageHeader from '../../../components/PageHeader';
 import GigForm from '../../../components/GigForm';
 import { mapFields } from '../../../utils/form-field-mappings';
@@ -27,14 +27,13 @@ describe('(Component) GigCreate', () => {
       expect(actual).to.equal(true);
     });
 
-
     it('should render <GigForm />', () => {
       const actual = wrapper.containsMatchingElement(
         <GigForm
             fields={mapFields(new FormFields().gig)}
             mutation={CREATE_GIG}
             refetchQueries={[
-            { query: GET_GIG }
+            { query: GET_GIGS }
             ]}
         />
       );
@@ -42,5 +41,4 @@ describe('(Component) GigCreate', () => {
     });
 
   });
-
 });
