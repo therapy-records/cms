@@ -22,7 +22,7 @@ const GigEdit = ({ match }) => {
       entityName='gig'
       entityCollection='gigs'
       id={id}
-      query={GET_GIGS}
+      query={GET_GIG}
       isEdit
       render={entityData => (
         <GigForm

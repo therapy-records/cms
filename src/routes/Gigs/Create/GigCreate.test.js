@@ -13,32 +13,27 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) GigCreate', () => {
   let wrapper;
+  beforeEach(() => {
+    wrapper = shallow(<GigCreate />);
+  });
 
-  describe('rendering', () => {
+  it('should render <PageHeader />', () => {
+    const actual = wrapper.containsMatchingElement(
+      <PageHeader heading='Create Gig 🗓️' />
+    );
+    expect(actual).to.equal(true);
+  });
 
-    beforeEach(() => {
-      wrapper = shallow(<GigCreate />);
-    });
-
-    it('should render <PageHeader />', () => {
-      const actual = wrapper.containsMatchingElement(
-        <PageHeader heading='Create Gig 🗓️' />
-      );
-      expect(actual).to.equal(true);
-    });
-
-    it('should render <GigForm />', () => {
-      const actual = wrapper.containsMatchingElement(
-        <GigForm
-            fields={mapFields(new FormFields().gig)}
-            mutation={CREATE_GIG}
-            refetchQueries={[
-            { query: GET_GIGS }
-            ]}
-        />
-      );
-      expect(actual).to.equal(true);
-    });
-
+  it('should render <GigForm />', () => {
+    const actual = wrapper.containsMatchingElement(
+      <GigForm
+        fields={mapFields(new FormFields().gig)}
+        mutation={CREATE_GIG}
+        refetchQueries={[
+          { query: GET_GIGS }
+        ]}
+      />
+    );
+    expect(actual).to.equal(true);
   });
 });
