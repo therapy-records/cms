@@ -54,7 +54,7 @@
     "history": "^4.7.2",
     "html-webpack-plugin": "2.29.0",
     "input-moment": "^0.4.0",
-    "jest": "^24.8.0",
+    "jest": "^25.2.4",
     "moment": "^2.22.1",
     "node-sass-chokidar": "^1.4.0",
     "npm-run-all": "^4.1.2",
@@ -159,7 +159,7 @@
     "extends": "react-app"
   },
   "engines": {
-    "node": ">=8.10.0",
+    "node": "8.16.1",
     "yarn": ">=1.6.0 <=1.22.4",
     "npm": ">=6.13.7"
   }
