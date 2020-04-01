@@ -25,17 +25,15 @@ const mocks = [
 ];
 
 describe('(Component) PressEdit', () => {
-  // eslint-disable-next-line one-var
-  let wrapper,
-    // eslint-disable-next-line prefer-const
-    props = {
-      match: {
-        params: {
-          id: '1234'
-        }
-      },
-      isEdit: true
-    };
+  let wrapper;
+  const props = {
+    match: {
+      params: {
+        id: '1234'
+      }
+    },
+    isEdit: true
+  };
 
   const actions = async(wrapper, _actions) => {
     await act(async() => {
