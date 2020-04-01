@@ -224,7 +224,7 @@ export class Router extends Component {
                   onAuthCheck={onAuthCheck}
                   exact
                 />
-                
+
                 <ProtectedRoute
                   path="/videos"
                   component={Videos}
