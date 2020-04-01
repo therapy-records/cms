@@ -40,10 +40,10 @@ const ListItem = ({
 
       {date &&
         <div className='img-container'>
-           <div className="date">
-           <p>{moment(new Date(date)).format('ddd')}</p>
-           <p>{moment(new Date(date)).format('DD')}</p>
-           <p>{moment(new Date(date)).format('MMM')}</p>
+          <div className="date">
+            <p>{moment(new Date(date)).format('ddd')}</p>
+            <p>{moment(new Date(date)).format('DD')}</p>
+            <p>{moment(new Date(date)).format('MMM')}</p>
           </div>
         </div>
       }
@@ -66,7 +66,7 @@ const ListItem = ({
           </div>
 
           {description && <p>{description}</p>}
-          {externalLink && <p><a href={externalLink} target="_blank">{externalLink}</a></p>}
+          {externalLink && <p><a href={externalLink} target='_blank' rel='noopener noreferrer'>{externalLink}</a></p>}
 
           <div className='btns-container btns-always-inline'>
 
@@ -92,7 +92,6 @@ const ListItem = ({
 
     </li>
   );
-
 };
 
 ListItem.propTypes = {

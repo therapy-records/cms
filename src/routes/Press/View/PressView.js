@@ -28,7 +28,7 @@ const PressView = ({
           <p><a href={entityData.externalLink} target='_blank' rel='noopener noreferrer'>{entityData.externalLink}</a></p>
         </div>
       )}
-      
+
       mutation={DELETE_PRESS}
       mutationSuccessCopy={{
         success: 'Successfully deleted.',
