@@ -25,7 +25,9 @@ const mocks = [
 ];
 
 describe('(Component) PressEdit', () => {
+  // eslint-disable-next-line one-var
   let wrapper,
+    // eslint-disable-next-line prefer-const
     props = {
       match: {
         params: {
@@ -99,5 +101,4 @@ describe('(Component) PressEdit', () => {
       expect(actual).to.equal(true);
     });
   });
-
 });
