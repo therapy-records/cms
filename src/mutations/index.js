@@ -106,4 +106,4 @@ export const DELETE_GIG = gql`
       _id
     }
   }
-`
+`;

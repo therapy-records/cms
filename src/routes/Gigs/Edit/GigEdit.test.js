@@ -4,27 +4,26 @@ import Adapter from 'enzyme-adapter-react-16';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
-import PressEdit from './PressEdit';
+import GigEdit from './GigEdit';
 import {
-  GET_PRESS_ARTICLE,
-  GET_PRESS
+  GET_GIG,
+  GET_GIGS
 } from '../../../queries';
 import {
-  EDIT_PRESS,
-  DELETE_PRESS
+  EDIT_GIG,
+  DELETE_GIG
 } from '../../../mutations';
-import PressForm from '../../../components/PressForm';
+import GigForm from '../../../components/GigForm';
 import FormFields from '../../../formFields';
 import mapFieldsWithValues from '../../../utils/form-field-mappings';
-import { MOCK_GET_PRESS_ARTICLE } from '../../../mocks/press.mock';
-
+import { MOCK_GET_GIG } from '../../../mocks/gigs.mock';
 Enzyme.configure({ adapter: new Adapter() });
 
 const mocks = [
-  MOCK_GET_PRESS_ARTICLE
+  MOCK_GET_GIG
 ];
 
-describe('(Component) PressEdit', () => {
+describe('(Component) GigEdit', () => {
   let wrapper;
   const props = {
     match: {
@@ -47,7 +46,7 @@ describe('(Component) PressEdit', () => {
     wrapper = mount(
       <BrowserRouter>
         <MockedProvider mocks={mocks} addTypename={false}>
-          <PressEdit {...props} />
+          <GigEdit {...props} />
         </MockedProvider>
       </BrowserRouter>
     );
@@ -56,38 +55,38 @@ describe('(Component) PressEdit', () => {
   it('should render <SingleEntityContainer />', () => {
     const singleEntityContainer = wrapper.find('SingleEntityContainer');
     expect(singleEntityContainer.length).to.eq(1);
-    expect(singleEntityContainer.prop('baseUrl')).to.eq('/press');
-    expect(singleEntityContainer.prop('entityName')).to.eq('pressArticle');
-    expect(singleEntityContainer.prop('entityCollection')).to.eq('press');
+    expect(singleEntityContainer.prop('baseUrl')).to.eq('/gigs');
+    expect(singleEntityContainer.prop('entityName')).to.eq('gig');
+    expect(singleEntityContainer.prop('entityCollection')).to.eq('gigs');
     expect(singleEntityContainer.prop('id')).to.eq(props.match.params.id);
-    expect(singleEntityContainer.prop('query')).to.eq(GET_PRESS_ARTICLE);
-    expect(singleEntityContainer.prop('mutation')).to.eq(DELETE_PRESS);
+    expect(singleEntityContainer.prop('query')).to.eq(GET_GIG);
+    expect(singleEntityContainer.prop('mutation')).to.eq(DELETE_GIG);
     expect(singleEntityContainer.prop('mutationSuccessCopy')).to.deep.eq({
       success: 'Successfully deleted.',
-      homeLink: 'Go to Press'
+      homeLink: 'Go to Gigs'
     });
     expect(singleEntityContainer.prop('mutationCacheUpdate')).to.deep.eq({
-      cacheQuery: GET_PRESS,
-      responseObjName: 'deletePress'
+      cacheQuery: GET_GIG,
+      responseObjName: 'deleteGig'
     });
     expect(singleEntityContainer.prop('isEdit')).to.eq(props.isEdit);
   });
 
-  it('should render <PressForm /> from <SingleEntityContainer /> render prop ', async() => {
+  it('should render <GigForm /> from <SingleEntityContainer /> render prop ', async() => {
     await actions(wrapper, () => {
       wrapper.update();
       const actual = wrapper.containsMatchingElement(
-        <PressForm
-          mutation={EDIT_PRESS}
+        <GigForm
+          mutation={EDIT_GIG}
           fields={mapFieldsWithValues(
-            new FormFields().press,
-            mocks[0].result.data.pressArticle
+            new FormFields().gig,
+            mocks[0].result.data.gig
           )}
           id={props.match.params.id}
           refetchQueries={[
-            { query: GET_PRESS },
+            { query: GET_GIG },
             {
-              query: GET_PRESS_ARTICLE,
+              query: GET_GIGS,
               variables: {
                 id: props.match.params.id
               }
