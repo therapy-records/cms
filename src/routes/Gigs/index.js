@@ -14,7 +14,7 @@ const Gigs = () => {
         entityName='gigs'
         render={(queryData) => {
           const hasGigs = (queryData && queryData !== null) && queryData.length;
-          const sortedQueryData = queryData.sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate)).reverse();
+          const sortedQueryData = queryData.sort((a, b) => new Date(a.date) - new Date(b.date)).reverse();
 
           return (
             <div>
