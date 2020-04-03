@@ -13,7 +13,7 @@ const QueryContainer = ({
 }) => {
   const {
     loading,
-    error,
+    error: queryError,
     data: queryData
   } = useQuery(query, {
     variables: queryVariables
@@ -22,6 +22,12 @@ const QueryContainer = ({
   const hasData = (entityName && !isEmptyString(entityName)) ? (queryData && queryData[entityName]) : queryData;
 
   const renderContent = (hasData && !loading);
+
+  const hasQueryPropError = (!loading && !queryError && entityName && !hasData);
+
+  if (hasQueryPropError) {
+    console.warn(`The provided gql query does not return anything with entityName '${entityName}'. Is the entityName correct?`);
+  }
 
   return (
     <div>
@@ -33,10 +39,10 @@ const QueryContainer = ({
         />
       )}
 
-      {error && (
+      {queryError && (
         <StickyError
           message='Sorry, something has gone wrong.'
-          error={error}
+          error={queryError}
         />
       )}
 
