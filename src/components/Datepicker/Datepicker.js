@@ -69,10 +69,14 @@ export class Datepicker extends React.Component {
     const _moment = m;
 
     return (
-      <div className={ renderTime ? 'datepicker render-time' : 'datepicker'}>
-        <div>
-          <h5>{title}</h5>
-        </div>
+      <div className={renderTime ? 'datepicker render-time' : 'datepicker'}>
+
+        {title && (
+          <div>
+            <h5>{title}</h5>
+          </div>
+        )}
+
         <div>
           <InputMoment
             {...input}
