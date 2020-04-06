@@ -22,7 +22,8 @@ const FormFieldInput = ({
   items,
   onChange,
   maxLength,
-  value
+  value,
+  renderTime
 }) => {
   if (component === 'TextInput') {
     return (
@@ -81,6 +82,7 @@ const FormFieldInput = ({
         name={id}
         value={value}
         showSingleHiddenInputValue
+        renderTime={renderTime}
       />
     )
   } else if (component === 'TextInputsList') {
@@ -129,7 +131,8 @@ FormFieldInput.propTypes = {
   items: PropTypes.array,
   onChange: PropTypes.func,
   maxLength: PropTypes.number,
-  value: PropTypes.string
+  value: PropTypes.string,
+  renderTime: PropTypes.bool
 };
 
 FormFieldInput.defaultProps = {
@@ -144,7 +147,8 @@ FormFieldInput.defaultProps = {
   items: [],
   onChange: null,
   maxLength: null,
-  value: ''
+  value: '',
+  renderTime: false
 };
 
 export default FormFieldInput;

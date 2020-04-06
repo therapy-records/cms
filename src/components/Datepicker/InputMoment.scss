@@ -251,6 +251,10 @@
 	display: none;
 }
 
+.datepicker.render-time .m-input-moment .tab {
+	display: block;
+}
+
 .m-input-moment .tab.is-active {
 	display: block
 }
