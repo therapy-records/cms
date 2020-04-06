@@ -71,7 +71,7 @@ const FormFieldInput = ({
         multiple={false}
         ctaCopy={ctaCopy}
         onChange={onChange}
-        existingImages={[value]}
+        existingImages={[ value ]}
       />
     )
   } else if (component === 'Datepicker') {

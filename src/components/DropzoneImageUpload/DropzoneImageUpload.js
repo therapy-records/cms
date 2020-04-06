@@ -22,7 +22,7 @@ export class DropzoneImageUpload extends React.Component {
     const { existingImages } = this.props;
     if (existingImages) {
       this.setState({
-        images: [...existingImages]
+        images: [ ...existingImages ]
       });
     }
   }
@@ -31,7 +31,7 @@ export class DropzoneImageUpload extends React.Component {
     const { existingImages } = this.props;
     if (prevProps.existingImages !== existingImages) {
       this.setState({
-        images: [...existingImages]
+        images: [ ...existingImages ]
       });
     }
   }
@@ -66,11 +66,11 @@ export class DropzoneImageUpload extends React.Component {
           if (this.props.multiple) {
             updatedImagesArray = [
               ...this.state.images,
-              ...[this.handleImageResponseUrl(response.body.secure_url)]
+              ...[ this.handleImageResponseUrl(response.body.secure_url) ]
             ];
           } else {
             updatedImagesArray = [
-              ...[this.handleImageResponseUrl(response.body.secure_url)]
+              ...[ this.handleImageResponseUrl(response.body.secure_url) ]
             ]
           }
           this.setState({

@@ -9,7 +9,7 @@ const CollaboratorsHomeContent = ({
   onListOrderChanged,
   listOrderHasChanged
 }) => {
-  const [showSortableList, toggleShowSortableList] = useState(false);
+  const [ showSortableList, toggleShowSortableList ] = useState(false);
 
   const buttonDisabled = (showSortableList && !listOrderHasChanged);
 

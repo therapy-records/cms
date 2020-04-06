@@ -121,7 +121,7 @@ InitFromStateForm = connect(
     initialValues: {
       title: selectSelectedNewsArticleTitle(state),
       sections: selectSelectedNewsArticleSections(state) ||
-                [EMPTY_ARTICLE_SECTION_OBJ]
+                [ EMPTY_ARTICLE_SECTION_OBJ ]
     }
   })
 )(InitFromStateForm);

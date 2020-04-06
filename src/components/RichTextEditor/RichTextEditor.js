@@ -5,7 +5,7 @@ import './RichTextEditor.css'
 import { isAString } from '../../utils/strings';
 
 const RTE_TOOLBAR_CONFIG = {
-  display: ['INLINE_STYLE_BUTTONS', 'LINK_BUTTONS', 'BLOCK_TYPE_BUTTONS'],
+  display: [ 'INLINE_STYLE_BUTTONS', 'LINK_BUTTONS', 'BLOCK_TYPE_BUTTONS' ],
   INLINE_STYLE_BUTTONS: [
     { label: 'Bold', style: 'BOLD', className: 'custom-css-class' },
     { label: 'Italic', style: 'ITALIC' },

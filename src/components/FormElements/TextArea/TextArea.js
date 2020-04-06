@@ -10,7 +10,7 @@ const TextArea = ({
   value: initValue,
   onChange
 }) => {
-  const [value, setValue] = useState(initValue);
+  const [ value, setValue ] = useState(initValue);
 
   const handleOnChange = value => {
     setValue(value);
