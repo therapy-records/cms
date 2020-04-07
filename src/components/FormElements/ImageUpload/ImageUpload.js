@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useReducer } from 'react';
+import React, { useMemo, useCallback, useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types'
 import { useDropzone } from 'react-dropzone';
 import imageUploadReducer, { initReducerState } from './reducer';
@@ -35,6 +35,32 @@ const rejectStyle = {
   borderColor: '#ff1744'
 };
 
+const getImageDimensions = image => {
+  return new Promise(resolve => {
+    const reader = new FileReader();
+
+    // read the contents of Image File.
+    reader.readAsDataURL(image);
+    reader.onload = (e) => {
+      // initiate the JavaScript Image object.
+      var img = new Image();
+
+      // st the Base64 string return from FileReader as image source
+      img.src = e.target.result;
+
+      // return the File width and height
+      img.onload = () => {
+        const width = img.width;
+        const height = img.height;
+        return resolve({
+          width,
+          height
+        });
+      };
+    };
+  });
+};
+
 const ImageUpload = ({
   ctaCopy,
   minImageDimensions
@@ -51,7 +77,16 @@ const ImageUpload = ({
       type: 'addImages',
       payload: files
     });
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    images.forEach(i => {
+      getImageDimensions(i).then((dimensions) => {
+        console.log(`${i.path} is... ${dimensions.width} and ${dimensions.height}`);
+      });
+    });
+    // do api call here
+  }, [ images.length ]);
 
   const {
     getRootProps,
@@ -99,7 +134,7 @@ const ImageUpload = ({
         <div>
           <ul className='flex-root gallery-images-flex-root'>
             {images.map((i, index) => (
-              <li style={{ clear: 'both', width: '100%' }} key={i + index}>{i}</li>
+              <li style={{ clear: 'both', width: '100%' }} key={i + index}>{i.path}</li>
             ))}
 
             {/*

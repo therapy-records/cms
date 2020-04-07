@@ -10,7 +10,7 @@ function reducer(state, action) {
       const updatedImages = state.images;
 
       action.payload.map((image) => {
-        updatedImages.push(image.path);
+        updatedImages.push(image);
       });
 
       return {
