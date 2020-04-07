@@ -1,12 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Stats from './components/Stats';
+import ImageUpload from '../../components/FormElements/ImageUpload';
 import './style.css';
 
 const Dashboard = () => (
   <div className='container dashboard'>
 
     <h2>Welcome back <span className='wave'>👋</span></h2>
+
+    <ImageUpload />
 
     <div className='ctas'>
       <Link to='news/create' className='btn'>Create News</Link>

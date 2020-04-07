@@ -1,9 +1,11 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo, useCallback, useReducer } from 'react';
 import PropTypes from 'prop-types'
 import { useDropzone } from 'react-dropzone';
+import imageUploadReducer, { initReducerState } from './reducer';
+import './styles.css';
 
-const CLOUDINARY_UPLOAD_PRESET_ID = 'gflm7wbr';
-const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dpv2k0qsj/upload';
+// const CLOUDINARY_UPLOAD_PRESET_ID = 'gflm7wbr';
+// const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dpv2k0qsj/upload';
 
 const baseStyle = {
   flex: 1,
@@ -37,9 +39,18 @@ const ImageUpload = ({
   ctaCopy,
   minImageDimensions
 }) => {
-  const onDrop = useCallback(acceptedFiles => {
-    // Do something with the files
-    console.log('onDrop: ', acceptedFiles);
+  const [ state, dispatch ] = useReducer(
+    imageUploadReducer,
+    [],
+    initReducerState
+  );
+  const { images } = state;
+
+  const onDrop = useCallback(files => {
+    dispatch({
+      type: 'addImages',
+      payload: files
+    });
   }, [])
 
   const {
@@ -50,7 +61,7 @@ const ImageUpload = ({
     isDragReject
   } = useDropzone({
     accept: 'image/*',
-    onDrop
+    onDrop: (files) => onDrop(files)
   });
 
   const style = useMemo(() => ({
@@ -63,17 +74,55 @@ const ImageUpload = ({
     isDragReject
   ]);
 
+  const hasMinImageDimensions = (minImageDimensions && minImageDimensions.width && minImageDimensions.height);
+
   return (
     <div className='image-upload-container'>
 
-      {minImageDimensions &&
+      {hasMinImageDimensions &&
         <span>Must be at least {minImageDimensions.width}px by {minImageDimensions.height}px</span>
       }
 
-      <div {...getRootProps({ style })}>
+      <div {...getRootProps({
+        style,
+        multiple: true
+      })}
+      >
         <input {...getInputProps()} />
         {ctaCopy ? <span>{ctaCopy}</span> : <span>Drag &amp; drop images</span>}
       </div>
+
+      <br />
+      <br />
+
+      {(images && images.length > 0) && (
+        <div>
+          <ul className='flex-root gallery-images-flex-root'>
+            {images.map((i, index) => (
+              <li style={{ clear: 'both', width: '100%' }} key={i + index}>{i}</li>
+            ))}
+
+            {/*
+              images.map((i) => {
+              if (i.length) {
+                return (
+                  <li key={i} className='col-50 no-list-style gallery-image-upload-item'>
+                    <img src={i} alt={`image  ${i + 1}`} />
+                    <button
+                      type="button"
+                      className="btn-danger btn-sm-remove"
+                      remove
+                    >
+                    </button>
+                  </li>
+                )
+              }
+              return null;
+            })
+          */}
+          </ul>
+        </div>
+      )}
 
     </div>
   )
