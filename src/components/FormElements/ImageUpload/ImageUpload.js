@@ -8,11 +8,7 @@ import './styles.css';
 // const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dpv2k0qsj/upload';
 
 const baseStyle = {
-  flex: 1,
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  padding: '20px',
+  padding: '1em',
   borderWidth: 2,
   borderRadius: 2,
   borderColor: '#eeeeee',
@@ -20,7 +16,8 @@ const baseStyle = {
   backgroundColor: '#fafafa',
   color: '#bdbdbd',
   outline: 'none',
-  transition: 'border .24s ease-in-out'
+  transition: 'border .24s ease-in-out',
+  textAlign: 'center'
 };
 
 const activeStyle = {
@@ -85,6 +82,7 @@ const ImageUpload = ({
         console.log(`${i.path} is... ${dimensions.width} and ${dimensions.height}`);
       });
     });
+
     // do api call here
   }, [ images.length ]);
 
@@ -96,7 +94,7 @@ const ImageUpload = ({
     isDragReject
   } = useDropzone({
     accept: 'image/*',
-    onDrop: (files) => onDrop(files)
+    onDrop
   });
 
   const style = useMemo(() => ({
@@ -112,32 +110,31 @@ const ImageUpload = ({
   const hasMinImageDimensions = (minImageDimensions && minImageDimensions.width && minImageDimensions.height);
 
   return (
-    <div className='image-upload-container'>
+    <div className='image-upload'>
 
       {hasMinImageDimensions &&
         <span>Must be at least {minImageDimensions.width}px by {minImageDimensions.height}px</span>
       }
 
-      <div {...getRootProps({
-        style,
-        multiple: true
-      })}
-      >
-        <input {...getInputProps()} />
-        {ctaCopy ? <span>{ctaCopy}</span> : <span>Drag &amp; drop images</span>}
-      </div>
+      <div className='flex-container'>
 
-      <br />
-      <br />
+        <div {...getRootProps({
+          style,
+          multiple: true
+        })}
+        >
+          <input {...getInputProps()} />
+          {ctaCopy ? <span>{ctaCopy}</span> : <span>Drag &amp; drop images</span>}
+        </div>
 
-      {(images && images.length > 0) && (
-        <div>
-          <ul className='flex-root gallery-images-flex-root'>
-            {images.map((i, index) => (
-              <li style={{ clear: 'both', width: '100%' }} key={i + index}>{i.path}</li>
-            ))}
+        {(images && images.length > 0) && (
+          <div>
+            <ul className='flex-root gallery-images-flex-root'>
+              {images.map((i, index) => (
+                <li className='image-upload-item' key={i + index}>{i.path}</li>
+              ))}
 
-            {/*
+              {/*
               images.map((i) => {
               if (i.length) {
                 return (
@@ -155,9 +152,11 @@ const ImageUpload = ({
               return null;
             })
           */}
-          </ul>
-        </div>
-      )}
+            </ul>
+          </div>
+        )}
+
+      </div>
 
     </div>
   )

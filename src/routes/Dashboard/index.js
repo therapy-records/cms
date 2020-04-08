@@ -9,7 +9,12 @@ const Dashboard = () => (
 
     <h2>Welcome back <span className='wave'>👋</span></h2>
 
-    <ImageUpload />
+    <ImageUpload
+      minImageDimensions={{
+        width: 400,
+        height: 400
+      }}
+    />
 
     <div className='ctas'>
       <Link to='news/create' className='btn'>Create News</Link>
