@@ -1,7 +1,7 @@
 import React from 'react'
-import PageHeader from '../../components/PageHeader';
+import PageHeader from '../../../components/PageHeader';
 
-class Videos extends React.Component {
+class VideosHome extends React.Component {
   render() {
     return (
       <div className='container'>
@@ -12,4 +12,4 @@ class Videos extends React.Component {
   }
 }
 
-export default Videos
+export default VideosHome
