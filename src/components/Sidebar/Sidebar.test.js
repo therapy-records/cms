@@ -261,6 +261,31 @@ describe('(Component) Sidebar', () => {
       expect(actual).to.eq(true);
     });
 
+    it('should render a link to gallery', () => {
+      const actual = wrapper.containsMatchingElement(
+        <NavLink
+          to='/gallery'
+          activeClassName='route--active'
+          onClick={wrapper.instance().handleOnClickNavItem}
+        >
+          🌻 Gallery
+        </NavLink>
+      );
+      expect(actual).to.eq(true);
+    });
+
+    it('should render a link to analytics', () => {
+      const actual = wrapper.containsMatchingElement(
+        <NavLink
+          to='/analytics'
+          activeClassName='route--active'
+          onClick={wrapper.instance().handleOnClickNavItem}
+        >
+          📈 Analytics
+        </NavLink>
+      );
+      expect(actual).to.eq(true);
+    });
   });
 
   describe('logout button', () => {

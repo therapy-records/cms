@@ -11,7 +11,7 @@ const TextInputsList = ({
   showAddRemove,
   onChange
 }) => {
-  const [state, dispatch] = useReducer(
+  const [ state, dispatch ] = useReducer(
     reducer,
     items,
     initReducerState

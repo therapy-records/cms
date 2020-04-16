@@ -20,7 +20,8 @@ module.exports = {
         "no-async-promise-executor": 0,
         "no-misleading-character-class": 0,
         "no-useless-catch": 0,
-        "operator-linebreak": 0
+        "operator-linebreak": 0,
+        "array-bracket-spacing": ["error", "always"]
     },
     "globals": {
         "localStorage": true,

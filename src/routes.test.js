@@ -30,7 +30,9 @@ import Gigs from './routes/Gigs';
 import GigCreate from './routes/Gigs/Create';
 import GigsView from './routes/Gigs/View';
 import GigEdit from './routes/Gigs/Edit';
-import Videos from './routes/Videos';
+import VideosHome from './routes/Videos/Home';
+import GalleryHome from './routes/Gallery/Home';
+import AnalyticsHome from './routes/Analytics/Home';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -358,7 +360,33 @@ describe('Router', () => {
     const actual = wrapper.containsMatchingElement(
       <ProtectedRoute
         path="/videos"
-        component={Videos}
+        component={VideosHome}
+        isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
+        exact
+      />
+    );
+    expect(actual).to.equal(true);
+  });
+
+  it('should render gallery route', () => {
+    const actual = wrapper.containsMatchingElement(
+      <ProtectedRoute
+        path="/gallery"
+        component={GalleryHome}
+        isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
+        exact
+      />
+    );
+    expect(actual).to.equal(true);
+  });
+
+  it('should render analytics route', () => {
+    const actual = wrapper.containsMatchingElement(
+      <ProtectedRoute
+        path="/analytics"
+        component={AnalyticsHome}
         isAuth={props.isAuth}
         onAuthCheck={props.onAuthCheck}
         exact

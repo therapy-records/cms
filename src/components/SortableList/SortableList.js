@@ -29,7 +29,7 @@ const SortableListComponent = ({
   route,
   onSortingUpdated
 }) => {
-  const [sortingActive, setSortingActive] = useState(false);
+  const [ sortingActive, setSortingActive ] = useState(false);
 
   const onSortStart = () => {
     setSortingActive(true);
