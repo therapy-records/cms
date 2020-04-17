@@ -166,6 +166,17 @@ describe('(Component) Datepicker', () => {
           expect(onChangeSpy).have.been.calledWith(expected);
         });
       });
+
+      describe('when renderTime prop is true ', () => {
+        it('should render container class name', () => {
+          wrapper = shallow(<Datepicker {...props} />);
+          expect(wrapper.find('.datepicker').length).to.eq(1);
+          wrapper.setProps({
+            renderTime: true
+          });
+          expect(wrapper.find('.datepicker.render-time').length).to.eq(1);
+        });
+      });
     });
   });
 });
