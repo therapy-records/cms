@@ -1,15 +1,5 @@
 @import 'styles/variables.scss';
 
-.datepicker {
-	@media(min-width: $bp-sm) {
-		max-width: 50%;
-	}
-}
-
-.datepicker h5 {
-  margin-bottom: 1em;
-}
-
 .m-calendar {
 	display: inline-block
 }
@@ -294,4 +284,45 @@
   .ion-ios-arrow-left::before {
     content: '<';
   }
+}
+
+/*
+	custom styling
+*/
+.datepicker {
+	@media(min-width: $bp-sm) {
+		max-width: 50%;
+	}
+}
+
+.datepicker h5 {
+  margin-bottom: 1em;
+}
+
+.datepicker.render-time {
+	@media(min-width: $bp-md) {
+		max-width: 100%;
+	}
+
+
+	.m-input-moment {
+
+		.tabs {
+			@media(min-width: $bp-md) {
+				display: flex;
+				width: 100%;
+			}
+		}
+
+		.tab {
+			display: block;
+			@media(min-width: $bp-md) {
+				width: 50%;
+				&.m-time {
+					padding-left: 4em;
+				}
+			}
+		}
+
+	}
 }

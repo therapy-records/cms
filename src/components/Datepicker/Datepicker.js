@@ -60,7 +60,8 @@ export class Datepicker extends React.Component {
       initTime,
       title,
       name,
-      showSingleHiddenInputValue
+      showSingleHiddenInputValue,
+      showTime
     } = this.props;
 
     const { m } = this.state;
@@ -68,10 +69,14 @@ export class Datepicker extends React.Component {
     const _moment = m;
 
     return (
-      <div className='datepicker'>
-        <div>
-          <h5>{title}</h5>
-        </div>
+      <div className={showTime ? 'datepicker render-time' : 'datepicker'}>
+
+        {title && (
+          <div>
+            <h5>{title}</h5>
+          </div>
+        )}
+
         <div>
           <InputMoment
             {...input}
@@ -99,7 +104,8 @@ Datepicker.propTypes = {
   onChange: PropTypes.func,
   showSingleHiddenInputValue: PropTypes.bool,
   name: PropTypes.string,
-  value: PropTypes.string
+  value: PropTypes.string,
+  showTime: PropTypes.bool
 };
 
 Datepicker.defaultProps = {
@@ -108,7 +114,8 @@ Datepicker.defaultProps = {
   onChange: null,
   showSingleHiddenInputValue: false,
   name: '',
-  value: ''
+  value: '',
+  showTime: false
 };
 
 export default Datepicker;

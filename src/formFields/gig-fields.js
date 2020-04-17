@@ -37,7 +37,8 @@ const GIG_FIELDS = [
     type: 'text',
     component: 'Datepicker',
     label: 'Date',
-    required: true
+    required: true,
+    showTime: true
   }
 ];
 
