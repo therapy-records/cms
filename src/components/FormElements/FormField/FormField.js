@@ -85,7 +85,7 @@ FormField.propTypes = {
   touched: PropTypes.bool,
   dirty: PropTypes.bool,
   value: PropTypes.string,
-  renderTime: PropTypes.bool
+  showTime: PropTypes.bool
 };
 
 FormField.defaultProps = {
@@ -104,7 +104,7 @@ FormField.defaultProps = {
   touched: false,
   dirty: false,
   value: '',
-  renderTime: false
+  showTime: false
 };
 
 export default FormField;

@@ -154,7 +154,7 @@ describe('(Component) FormFieldInput', () => {
           id: 'test',
           component: 'Datepicker',
           value: moment.now().toString(),
-          renderTime: false
+          showTime: false
         };
         wrapper.setProps({
           ...mockField,
@@ -167,7 +167,7 @@ describe('(Component) FormFieldInput', () => {
             name={mockField.id}
             value={mockField.value}
             showSingleHiddenInputValue
-            renderTime={mockField.renderTime}
+            showTime={mockField.showTime}
           />
         );
         expect(actual).to.eq(true);

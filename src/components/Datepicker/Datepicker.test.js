@@ -167,12 +167,12 @@ describe('(Component) Datepicker', () => {
         });
       });
 
-      describe('when renderTime prop is true ', () => {
+      describe('when showTime prop is true ', () => {
         it('should render container class name', () => {
           wrapper = shallow(<Datepicker {...props} />);
           expect(wrapper.find('.datepicker').length).to.eq(1);
           wrapper.setProps({
-            renderTime: true
+            showTime: true
           });
           expect(wrapper.find('.datepicker.render-time').length).to.eq(1);
         });
