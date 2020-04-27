@@ -14,8 +14,26 @@ function reducer(state, action) {
       });
 
       return {
+        ...state,
         images: updatedImages
       }
+    }
+
+    case 'addCloudinaryUrlToImage': {
+      const { uploadedUrl, originalPath } = action.payload;
+      const updatedImages = state.images;
+
+      updatedImages.map((i) => {
+        if (i.path === originalPath) {
+          i.cloudinaryUrl = uploadedUrl;
+        }
+        return i;
+      });
+
+      return {
+        ...state,
+        images: updatedImages
+      };
     }
 
     default:

@@ -1,11 +1,11 @@
-import React, { useMemo, useCallback, useReducer, useEffect } from 'react';
+import React, { useMemo, useCallback, useReducer, useState, useEffect } from 'react';
 import PropTypes from 'prop-types'
 import { useDropzone } from 'react-dropzone';
 import request from 'superagent';
 import imageUploadReducer, { initReducerState } from './reducer';
 import './styles.css';
 
-const CLOUDINARY_UPLOAD_PRESET_ID = 'gflm7wbr';
+// TODO: via api
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dpv2k0qsj/upload';
 
 const baseStyle = {
@@ -69,6 +69,10 @@ const ImageUpload = ({
     [],
     initReducerState
   );
+  const [ cloudinarySignature, setCloudinarySignature ] = useState('');
+  const [ cloudinaryTimestamp, setCloudinaryTimestamp ] = useState('');
+  const [ cloudinaryKey, setCloudinaryApiKey ] = useState('');
+
   const { images } = state;
 
   const onDrop = useCallback(files => {
@@ -79,24 +83,54 @@ const ImageUpload = ({
   }, []);
 
   useEffect(() => {
-    if (images.length > 0) {
-      images.forEach(i => {
-        let imageData = {};
-        getImageDimensions(i).then((imageDataResult) => {
-          imageData = imageDataResult;
-          console.log(`${i.path} is... ${imageData.width} and ${imageData.height}`);
+    if (!cloudinarySignature) {
+      fetch('http://localhost:4040/api/cloudinary-signature').then((response) => {
+        return response.json();
+      }).then((data) => {
+        const {
+          key,
+          signature,
+          timestamp
+        } = data;
+        setCloudinarySignature(signature);
+        setCloudinaryApiKey(key);
+        setCloudinaryTimestamp(timestamp);
+      });
+    }
+  }, [ cloudinarySignature ]);
 
-          const upload = request.post(CLOUDINARY_UPLOAD_URL)
-            .field('upload_preset', CLOUDINARY_UPLOAD_PRESET_ID)
-            .field('file', i);
-          upload.end((uploadErr, cloudinaryRes) => {
-            console.log('cloudinaryRes ', cloudinaryRes);
-            if (cloudinaryRes.ok && cloudinaryRes.body) {
-              const { secure_url: uploadedUrl } = cloudinaryRes.body;
-              console.log('uploadedUrl ', uploadedUrl);
-            }
+  useEffect(() => {
+    if (images.length > 0) {
+      images.forEach(image => {
+        if (!image.cloudinaryUrl) {
+          let imageData = {};
+          getImageDimensions(image).then((imageDataResult) => {
+            imageData = imageDataResult;
+            console.log(`${image.path} is... ${imageData.width} and ${imageData.height}`);
+
+            // this breaks when return_delete_token is included
+            const upload = request.post(CLOUDINARY_UPLOAD_URL)
+              .field('file', image)
+              .field('api_key', cloudinaryKey)
+              .field('timestamp', cloudinaryTimestamp)
+              .field('signature', cloudinarySignature)
+              // .field('return_delete_token', true);
+
+            upload.end((uploadErr, cloudinaryRes) => {
+              if (cloudinaryRes && cloudinaryRes.ok && cloudinaryRes.body) {
+                const { secure_url: uploadedUrl } = cloudinaryRes.body;
+
+                dispatch({
+                  type: 'addCloudinaryUrlToImage',
+                  payload: {
+                    uploadedUrl,
+                    originalPath: image.path
+                  }
+                });
+              }
+            });
           });
-        });
+        }
       });
     }
   }, [ images.length ]);
@@ -145,28 +179,13 @@ const ImageUpload = ({
         {(images && images.length > 0) && (
           <div>
             <ul className='flex-root gallery-images-flex-root'>
-              {images.map((i, index) => (
-                <li className='image-upload-item' key={i + index}>{i.path}</li>
+
+              {(images.length && images.length > 0) && images.map((i, index) => (
+                <li className='image-upload-item' key={i.path}>
+                  <img src={i.cloudinaryUrl} />
+                </li>
               ))}
 
-              {/*
-              images.map((i) => {
-              if (i.length) {
-                return (
-                  <li key={i} className='col-50 no-list-style gallery-image-upload-item'>
-                    <img src={i} alt={`image  ${i + 1}`} />
-                    <button
-                      type="button"
-                      className="btn-danger btn-sm-remove"
-                      remove
-                    >
-                    </button>
-                  </li>
-                )
-              }
-              return null;
-            })
-          */}
             </ul>
           </div>
         )}
