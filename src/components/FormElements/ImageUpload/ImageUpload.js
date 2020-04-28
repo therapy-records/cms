@@ -118,12 +118,16 @@ const ImageUpload = ({
 
             upload.end((uploadErr, cloudinaryRes) => {
               if (cloudinaryRes && cloudinaryRes.ok && cloudinaryRes.body) {
-                const { secure_url: uploadedUrl } = cloudinaryRes.body;
+                const {
+                  secure_url: uploadedUrl,
+                  public_id: publicId
+                } = cloudinaryRes.body;
 
                 dispatch({
                   type: 'addCloudinaryUrlToImage',
                   payload: {
                     uploadedUrl,
+                    publicId,
                     originalPath: image.path
                   }
                 });
@@ -134,6 +138,23 @@ const ImageUpload = ({
       });
     }
   }, [ images.length ]);
+
+  const onDelete = (image) => {
+    fetch('http://localhost:4040/api/cloudinary-destroy', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        publicId: image.cloudinaryPublicId
+      })
+    }).then((response) => {
+      return response.json();
+    }).then((data) => {
+
+      // dispatch to remove from reducer
+    });
+  }
 
   const {
     getRootProps,
@@ -180,9 +201,10 @@ const ImageUpload = ({
           <div>
             <ul className='flex-root gallery-images-flex-root'>
 
-              {(images.length && images.length > 0) && images.map((i, index) => (
-                <li className='image-upload-item' key={i.path}>
-                  <img src={i.cloudinaryUrl} />
+              {(images.length && images.length > 0) && images.map((image, index) => (
+                <li className='image-upload-item' key={image.path}>
+                  <img src={image.cloudinaryUrl} />
+                  <button onClick={() => onDelete(image)}>delete</button>
                 </li>
               ))}
 

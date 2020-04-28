@@ -9,6 +9,7 @@ function reducer(state, action) {
     case 'addImages': {
       const updatedImages = state.images;
 
+      // TODO: simplify what's pushed
       action.payload.map((image) => {
         updatedImages.push(image);
       });
@@ -20,11 +21,16 @@ function reducer(state, action) {
     }
 
     case 'addCloudinaryUrlToImage': {
-      const { uploadedUrl, originalPath } = action.payload;
+      const {
+        publicId,
+        uploadedUrl,
+        originalPath
+      } = action.payload;
       const updatedImages = state.images;
 
       updatedImages.map((i) => {
         if (i.path === originalPath) {
+          i.cloudinaryPublicId = publicId;
           i.cloudinaryUrl = uploadedUrl;
         }
         return i;
