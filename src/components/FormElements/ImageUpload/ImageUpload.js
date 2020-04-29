@@ -18,7 +18,11 @@ const baseStyle = {
   color: '#bdbdbd',
   outline: 'none',
   transition: 'border .24s ease-in-out',
-  textAlign: 'center'
+  minHeight: '200px',
+  maxHeight: '200px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center'
 };
 
 const activeStyle = {
@@ -151,8 +155,12 @@ const ImageUpload = ({
     }).then((response) => {
       return response.json();
     }).then((data) => {
-
-      // dispatch to remove from reducer
+      dispatch({
+        type: 'removeImage',
+        payload: {
+          cloudinaryUrl: image.cloudinaryUrl
+        }
+      });
     });
   }
 

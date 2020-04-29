@@ -42,6 +42,17 @@ function reducer(state, action) {
       };
     }
 
+    case 'removeImage': {
+      const updatedImages = state.images.filter((i) =>
+        i.cloudinaryUrl !== action.payload.cloudinaryUrl
+      );
+
+      return {
+        ...state,
+        images: updatedImages
+      }
+    }
+
     default:
       return state;
   }
