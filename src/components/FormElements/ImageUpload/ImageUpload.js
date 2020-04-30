@@ -43,7 +43,8 @@ const getImageDimensions = image => {
 
 const ImageUpload = ({
   ctaCopy,
-  minImageDimensions
+  minImageDimensions,
+  multiple
 }) => {
   const [ state, dispatch ] = useReducer(
     imageUploadReducer,
@@ -89,13 +90,11 @@ const ImageUpload = ({
             imageData = imageDataResult;
             console.log(`${image.path} is... ${imageData.width} and ${imageData.height}`);
 
-            // this breaks when return_delete_token is included
             const upload = request.post(CLOUDINARY_UPLOAD_URL)
               .field('file', image)
               .field('api_key', cloudinaryKey)
               .field('timestamp', cloudinaryTimestamp)
               .field('signature', cloudinarySignature)
-              // .field('return_delete_token', true);
 
             upload.end((uploadErr, cloudinaryRes) => {
               if (cloudinaryRes && cloudinaryRes.ok && cloudinaryRes.body) {
@@ -120,7 +119,7 @@ const ImageUpload = ({
     }
   }, [ images.length ]);
 
-  const onDelete = (image) => {
+  const onRemove = (image) => {
     fetch('http://localhost:4040/api/cloudinary-destroy', {
       method: 'DELETE',
       headers: {
@@ -175,7 +174,7 @@ const ImageUpload = ({
 
         <div {...getRootProps({
           style,
-          multiple: true
+          multiple
         })}
         >
           <input {...getInputProps()} />
@@ -184,14 +183,25 @@ const ImageUpload = ({
 
         {(images && images.length > 0) && (
           <div>
-            <ul className='flex-root gallery-images-flex-root'>
+            <ul className='flex-root uploaded-images-container'>
 
-              {(images.length && images.length > 0) && images.map((image, index) => (
-                <li className='image-upload-item' key={image.path}>
-                  <img src={image.cloudinaryUrl} />
-                  <button onClick={() => onDelete(image)}>delete</button>
-                </li>
-              ))}
+              {(images.length && images.length > 0) && images.map((image, index) => {
+                if (image.cloudinaryUrl) {
+                  return (
+                    <li className='upload-image-list-item' key={image.path}>
+                      <img src={image.cloudinaryUrl} />
+                      <button
+                        type='button'
+                        className='btn-danger btn-sm-remove'
+                        onClick={() => onRemove(image)}
+                      >
+                      remove
+                      </button>
+                    </li>
+                  );
+                }
+                return null;
+              })}
 
             </ul>
           </div>
@@ -206,13 +216,15 @@ const ImageUpload = ({
 ImageUpload.propTypes = {
   ctaCopy: PropTypes.string,
   existingImages: PropTypes.array,
-  minImageDimensions: PropTypes.object
+  minImageDimensions: PropTypes.object,
+  multiple: PropTypes.bool
 };
 
 ImageUpload.defaultProps = {
   ctaCopy: '',
   existingImages: [],
-  minImageDimensions: {}
+  minImageDimensions: {},
+  multiple: false
 };
 
 export default ImageUpload;
