@@ -3,39 +3,16 @@ import PropTypes from 'prop-types'
 import { useDropzone } from 'react-dropzone';
 import request from 'superagent';
 import imageUploadReducer, { initReducerState } from './reducer';
+import {
+  baseStyle,
+  activeStyle,
+  acceptStyle,
+  rejectStyle
+} from './DropzoneStyles.js';
 import './styles.css';
 
 // TODO: via api
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dpv2k0qsj/upload';
-
-const baseStyle = {
-  padding: '1em',
-  borderWidth: 2,
-  borderRadius: 2,
-  borderColor: '#eeeeee',
-  borderStyle: 'dashed',
-  backgroundColor: '#fafafa',
-  color: '#bdbdbd',
-  outline: 'none',
-  transition: 'border .24s ease-in-out',
-  minHeight: '200px',
-  maxHeight: '200px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center'
-};
-
-const activeStyle = {
-  borderColor: '#2196f3'
-};
-
-const acceptStyle = {
-  borderColor: '#00e676'
-};
-
-const rejectStyle = {
-  borderColor: '#ff1744'
-};
 
 const getImageDimensions = image => {
   return new Promise(resolve => {
