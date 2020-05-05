@@ -4,8 +4,7 @@ const GIG_FIELDS = [
     type: 'text',
     component: 'TextInput',
     label: 'Title',
-    placeholder: 'Fiona Ross',
-    required: true
+    placeholder: 'Fiona Ross'
   },
   {
     id: 'location',
