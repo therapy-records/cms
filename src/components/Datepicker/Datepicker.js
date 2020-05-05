@@ -85,6 +85,7 @@ export class Datepicker extends React.Component {
             {...input}
             moment={initTime ? moment(initTime) : _moment}
             onChange={this.handleChange}
+            minStep={15}
           />
         </div>
 

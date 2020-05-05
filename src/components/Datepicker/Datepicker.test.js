@@ -27,7 +27,9 @@ describe('(Component) Datepicker', () => {
 
   describe('rendering', () => {
     it('should render <InputMoment /> by default', () => {
-      expect(wrapper.find(InputMoment).length).to.equal(1);
+      const inputMoment = wrapper.find('InputMoment');
+      expect(inputMoment.length).to.eq(1);
+      expect(inputMoment.prop('minStep')).to.eq(15);
     });
 
     it('should render a title', () => {
