@@ -8,13 +8,16 @@ import './InputMoment.css';
 export class Datepicker extends React.Component {
   constructor(props) {
     super(props);
-    let initTime = (props.initTime && !isEmptyString(props.initTime)) && moment(props.initTime);
+    let initTimeFromProps = (props.initTime && !isEmptyString(props.initTime)) && moment(props.initTime);
     if (props.value) {
-      initTime = moment(new Date(props.value));
+      initTimeFromProps = moment(new Date(props.value));
     }
 
+    const newTime = moment();
+    newTime.set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
+
     this.state = {
-      m: initTime || moment()
+      m: initTimeFromProps || newTime
     }
     this.handleChange = this.handleChange.bind(this);
   }
@@ -89,7 +92,7 @@ export class Datepicker extends React.Component {
           <input
             type='hidden'
             name={name}
-            value={initTime ? moment(initTime).toISOString() : moment(m).toISOString()}
+            value={initTime ? moment(initTime).toISOString() : moment(_moment).toISOString()}
           />
         }
       </div>
