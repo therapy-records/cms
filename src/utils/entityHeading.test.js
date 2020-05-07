@@ -4,8 +4,7 @@ describe('(Utils) entityHeading', () => {
 
   it('should return `heading` when provided', () => {
     const mockEntity = {
-      heading: 'test',
-      about: '<p>test</p>'
+      heading: 'test'
     };
     const result = entityHeading(mockEntity);
     expect(result).to.eq(mockEntity.heading);
@@ -14,8 +13,7 @@ describe('(Utils) entityHeading', () => {
   it('should return `title` when provided', () => {
     const mockEntity = {
       heading: '',
-      title: 'testing',
-      about: '<p>test</p>'
+      title: 'testing'
     };
     const result = entityHeading(mockEntity);
     expect(result).to.eq(mockEntity.title);
@@ -25,8 +23,7 @@ describe('(Utils) entityHeading', () => {
     const mockEntity = {
       heading: '',
       title: '',
-      name: 'testing',
-      about: '<p>test</p>'
+      name: 'testing'
     };
     const result = entityHeading(mockEntity);
     expect(result).to.eq(mockEntity.name);
@@ -37,11 +34,36 @@ describe('(Utils) entityHeading', () => {
       heading: '',
       title: '',
       name: '',
-      author: 'testing',
-      about: '<p>test</p>'
+      author: 'testing'
     };
     const result = entityHeading(mockEntity);
     expect(result).to.eq(mockEntity.author);
+  });
+
+  it('should return `venue` when provided', () => {
+    const mockEntity = {
+      heading: '',
+      title: '',
+      name: '',
+      author: '',
+      venue: 'test'
+    };
+    const result = entityHeading(mockEntity);
+    expect(result).to.eq(mockEntity.venue);
+  });
+
+  describe('when there is title and venue', () => {
+    it('should return `title` and `venue`', () => {
+      const mockEntity = {
+        heading: '',
+        title: 'mock title',
+        name: '',
+        author: '',
+        venue: 'test'
+      };
+      const result = entityHeading(mockEntity);
+      expect(result).to.eq(`${mockEntity.title} - ${mockEntity.venue}`);
+    });
   });
 
 });

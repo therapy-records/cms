@@ -1,13 +1,19 @@
-// TODO: refactor data models so there is no need for
-// heading || title || name
-
 const entityHeading = entity => {
   const {
     heading,
     title,
     name,
-    author
+    author,
+    venue
   } = entity;
+
+  if (title && venue) {
+    return `${title} - ${venue}`;
+  }
+
+  if (venue) {
+    return venue;
+  }
 
   return heading || title || name || author;
 }
