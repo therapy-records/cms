@@ -25,6 +25,11 @@ export const MOCK_GET_STATS = {
         { author: 'a' },
         { author: 'b' },
         { author: 'c' }
+      ],
+      gigs: [
+        { venue: 'a' },
+        { venue: 'b' },
+        { venue: 'c' }
       ]
     }
   }

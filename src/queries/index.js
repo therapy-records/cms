@@ -99,6 +99,9 @@ export const GET_STATS = gql`
     },
     press {
       author
+    },
+    gigs {
+      venue
     }
   }
 `;
