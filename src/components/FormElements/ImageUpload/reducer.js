@@ -9,15 +9,17 @@ function reducer(state, action) {
     case 'addImages': {
       const updatedImages = state.images;
 
+      const newImages = action.payload;
+
       // TODO: simplify what's pushed
-      action.payload.map((image) => {
+      newImages.map((image) => {
         updatedImages.push(image);
       });
 
       return {
         ...state,
         images: updatedImages
-      }
+      };
     }
 
     case 'addCloudinaryUrlToImage': {

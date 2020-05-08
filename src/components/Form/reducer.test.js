@@ -44,7 +44,6 @@ describe('(Component) Form - reducer', () => {
   });
 
   describe('action - isFormValid', () => {
-
     describe('when required fields do NOT have a value', () => {
       it('should set field.error and isValid correctly', () => {
         const mockFields = [
@@ -53,12 +52,12 @@ describe('(Component) Form - reducer', () => {
           { id: 'testFieldC', required: true, value: 'testing', error: 'field is required' }
         ];
         const isFormValidInitState = initReducerState(mockFields);
-        
+
         const action = formReducer(
           isFormValidInitState,
           { type: 'isFormValid' }
         );
-        
+
         const expectedState = {
           isValid: false,
           fields: [
@@ -79,7 +78,7 @@ describe('(Component) Form - reducer', () => {
           { id: 'testFieldC', required: true, value: 'testing' }
         ];
         const isFormValidInitState = initReducerState(mockFields);
-        
+
         const action = formReducer(
           isFormValidInitState,
           { type: 'isFormValid' }
@@ -88,7 +87,6 @@ describe('(Component) Form - reducer', () => {
         expect(action.isValid).to.eq(true);
       });
     });
-
   });
 
   describe('action - submitSuccess', () => {
@@ -117,12 +115,12 @@ describe('(Component) Form - reducer', () => {
         }
       ];
       const resetFormInitState = initReducerState(mockFields);
-      
+
       const action = formReducer(
         resetFormInitState,
         { type: 'resetForm' }
       );
-      
+
       const expectedState = {
         isValid: false,
         submitSuccess: false,
