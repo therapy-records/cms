@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useReducer, useState, useEffect } from 'react';
+import React, { useMemo, useCallback, useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types'
 import { useDropzone } from 'react-dropzone';
 import request from 'superagent';
@@ -43,6 +43,9 @@ const getImageDimensions = image => {
 };
 
 const ImageUpload = ({
+  cloudinaryKey,
+  cloudinarySignature,
+  cloudinaryTimestamp,
   ctaCopy,
   minImageDimensions,
   multiple,
@@ -55,9 +58,6 @@ const ImageUpload = ({
     initImages,
     initReducerState
   );
-  const [ cloudinarySignature, setCloudinarySignature ] = useState('');
-  const [ cloudinaryTimestamp, setCloudinaryTimestamp ] = useState('');
-  const [ cloudinaryKey, setCloudinaryApiKey ] = useState('');
 
   const { images } = state;
 
@@ -67,23 +67,6 @@ const ImageUpload = ({
       payload: files
     });
   }, []);
-
-  useEffect(() => {
-    if (!cloudinarySignature) {
-      fetch('http://localhost:4040/api/cloudinary-signature').then((response) => {
-        return response.json();
-      }).then((data) => {
-        const {
-          key,
-          signature,
-          timestamp
-        } = data;
-        setCloudinarySignature(signature);
-        setCloudinaryApiKey(key);
-        setCloudinaryTimestamp(timestamp);
-      });
-    }
-  }, [ cloudinarySignature ]);
 
   useEffect(() => {
     if (images.length > 0) {
@@ -97,8 +80,8 @@ const ImageUpload = ({
             const upload = request.post(CLOUDINARY_UPLOAD_URL)
               .field('file', image)
               .field('api_key', cloudinaryKey)
-              .field('timestamp', cloudinaryTimestamp)
               .field('signature', cloudinarySignature)
+              .field('timestamp', cloudinaryTimestamp)
 
             upload.end((uploadErr, cloudinaryRes) => {
               if (cloudinaryRes && cloudinaryRes.ok && cloudinaryRes.body) {
@@ -194,6 +177,9 @@ const ImageUpload = ({
 }
 
 ImageUpload.propTypes = {
+  cloudinaryKey: PropTypes.string.isRequired,
+  cloudinarySignature: PropTypes.string.isRequired,
+  cloudinaryTimestamp: PropTypes.string.isRequired,
   ctaCopy: PropTypes.string,
   existingImages: PropTypes.array,
   minImageDimensions: PropTypes.object,

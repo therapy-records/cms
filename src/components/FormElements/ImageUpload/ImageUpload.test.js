@@ -8,6 +8,9 @@ Enzyme.configure({ adapter: new Adapter() });
 describe('(Component) ImageUpload', () => {
   let wrapper;
   const props = {
+    cloudinaryKey: '1234',
+    cloudinarySignature: '5678',
+    cloudinaryTimestamp: '12345678910',
     minImageDimensions: {
       width: 400,
       height: 400

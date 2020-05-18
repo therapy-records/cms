@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Stats from './components/Stats';
-import ImageUpload from '../../components/FormElements/ImageUpload';
+import ImageUploadContainer from '../../components/FormElements/ImageUpload/ImageUploadContainer';
 import './style.css';
 
 const Dashboard = () => (
@@ -9,7 +9,7 @@ const Dashboard = () => (
 
     <h2>Welcome back <span className='wave'>👋</span></h2>
 
-    <ImageUpload
+    <ImageUploadContainer
       minImageDimensions={{
         width: 400,
         height: 400

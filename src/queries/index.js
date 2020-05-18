@@ -105,3 +105,13 @@ export const GET_STATS = gql`
     }
   }
 `;
+
+export const CLOUDINARY_SIGNATURE = gql`
+  {
+    cloudinarySignature {
+      key,
+      signature,
+      timestamp
+    }
+  }
+`;
