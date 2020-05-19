@@ -1,7 +1,7 @@
 import React, { useMemo, useCallback, useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types'
 import { useDropzone } from 'react-dropzone';
-import request from 'superagent';
+// import request from 'superagent';
 import imageUploadReducer, { initReducerState } from './reducer';
 import {
   baseStyle,
@@ -13,7 +13,7 @@ import ImageUploadList from './ImageUploadList';
 import './styles.css';
 
 // TODO: via api
-const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dpv2k0qsj/upload';
+// const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dpv2k0qsj/upload';
 
 const getImageDimensions = image => {
   return new Promise(resolve => {
@@ -77,6 +77,20 @@ const ImageUpload = ({
             imageData = imageDataResult;
             console.log(`${image.path} is... ${imageData.width} and ${imageData.height}`);
 
+            fetch('http://localhost:4040/api/cloudinary-upload', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                image: imageDataResult.base64String
+              })
+            }).then((response) => {
+              return response.json();
+            }).then((data) => {
+            });
+
+            /*
             const upload = request.post(CLOUDINARY_UPLOAD_URL)
               .field('file', image)
               .field('api_key', cloudinaryKey)
@@ -100,6 +114,7 @@ const ImageUpload = ({
                 });
               }
             });
+            */
           });
         }
       });
