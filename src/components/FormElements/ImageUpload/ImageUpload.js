@@ -1,7 +1,6 @@
 import React, { useMemo, useCallback, useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types'
 import { useDropzone } from 'react-dropzone';
-// import request from 'superagent';
 import imageUploadReducer, { initReducerState } from './reducer';
 import {
   baseStyle,
@@ -10,37 +9,8 @@ import {
   rejectStyle
 } from './DropzoneStyles.js';
 import ImageUploadList from './ImageUploadList';
+import getImageDimensions from '../../../utils/get-image-dimensions';
 import './styles.css';
-
-// TODO: via api
-// const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dpv2k0qsj/upload';
-
-const getImageDimensions = image => {
-  return new Promise(resolve => {
-    const reader = new FileReader();
-
-    // read the contents of Image File.
-    reader.readAsDataURL(image);
-    reader.onload = (e) => {
-      // initiate the JavaScript Image object.
-      var img = new Image();
-
-      // st the Base64 string return from FileReader as image source
-      img.src = e.target.result;
-
-      // return the File width and height
-      img.onload = () => {
-        const width = img.width;
-        const height = img.height;
-        return resolve({
-          width,
-          height,
-          base64String: e.target.result
-        });
-      };
-    };
-  });
-};
 
 const ImageUpload = ({
   cloudinaryKey,
@@ -88,33 +58,20 @@ const ImageUpload = ({
             }).then((response) => {
               return response.json();
             }).then((data) => {
+              const {
+                url: uploadedUrl,
+                public_id: publicId
+              } = data.data;
+
+              dispatch({
+                type: 'addCloudinaryUrlToImage',
+                payload: {
+                  uploadedUrl,
+                  publicId,
+                  originalPath: image.path
+                }
+              });
             });
-
-            /*
-            const upload = request.post(CLOUDINARY_UPLOAD_URL)
-              .field('file', image)
-              .field('api_key', cloudinaryKey)
-              .field('signature', cloudinarySignature)
-              .field('timestamp', cloudinaryTimestamp)
-
-            upload.end((uploadErr, cloudinaryRes) => {
-              if (cloudinaryRes && cloudinaryRes.ok && cloudinaryRes.body) {
-                const {
-                  secure_url: uploadedUrl,
-                  public_id: publicId
-                } = cloudinaryRes.body;
-
-                dispatch({
-                  type: 'addCloudinaryUrlToImage',
-                  payload: {
-                    uploadedUrl,
-                    publicId,
-                    originalPath: image.path
-                  }
-                });
-              }
-            });
-            */
           });
         }
       });
