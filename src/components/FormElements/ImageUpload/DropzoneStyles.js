@@ -16,13 +16,14 @@ export const baseStyle = {
 };
 
 export const activeStyle = {
-  borderColor: '#2196f3'
-};
-
-export const acceptStyle = {
-  borderColor: '#00e676'
+  borderColor: '#2196f3',
+  background: 'orange'
 };
 
 export const rejectStyle = {
   borderColor: '#ff1744'
+};
+
+export const loadingStyle = {
+  background: '#BADA55'
 };

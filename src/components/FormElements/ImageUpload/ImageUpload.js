@@ -6,12 +6,13 @@ import imageUploadReducer, { initReducerState } from './reducer';
 import {
   baseStyle,
   activeStyle,
-  acceptStyle,
-  rejectStyle
+  rejectStyle,
+  loadingStyle
 } from './DropzoneStyles.js';
 import ImageUploadList from './ImageUploadList';
 import { CLOUDINARY_UPLOAD } from '../../../mutations';
 import getImageDimensions from '../../../utils/get-image-dimensions';
+import LoadingSpinner from '../../LoadingSpinner';
 import './styles.css';
 
 const ImageUpload = ({
@@ -110,7 +111,6 @@ const ImageUpload = ({
     getRootProps,
     getInputProps,
     isDragActive,
-    isDragAccept,
     isDragReject
   } = useDropzone({
     accept: 'image/*',
@@ -120,11 +120,12 @@ const ImageUpload = ({
   const style = useMemo(() => ({
     ...baseStyle,
     ...(isDragActive ? activeStyle : {}),
-    ...(isDragAccept ? acceptStyle : {}),
-    ...(isDragReject ? rejectStyle : {})
+    ...(isDragReject ? rejectStyle : {}),
+    ...(loading ? loadingStyle : {})
   }), [
     isDragActive,
-    isDragReject
+    isDragReject,
+    loading
   ]);
 
   const hasMinImageDimensions = (minImageDimensions && minImageDimensions.width && minImageDimensions.height);
@@ -132,7 +133,6 @@ const ImageUpload = ({
   return (
     <div className='image-upload'>
 
-      {loading && <p>LOADING</p>}
       {error && <p>Error :(</p>}
 
       {hasMinImageDimensions &&
@@ -147,7 +147,14 @@ const ImageUpload = ({
         })}
         >
           <input {...getInputProps()} />
-          {ctaCopy ? <span>{ctaCopy}</span> : <span>Drag &amp; drop images</span>}
+
+          {!loading && (
+            <div>
+              { ctaCopy ? <span>{ ctaCopy }</span> : <span>Drag &amp; drop images</span>}
+            </div>
+          )}
+
+          {loading && <LoadingSpinner active />}
         </div>
 
         <ImageUploadList images={images} onRemove={onRemove} />

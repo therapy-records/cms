@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './styles.css';
 
 const Spinner = () => (
-  <div className="sk-circle">
+  <div className="sk-circle spinner">
     <div className="sk-circle1 sk-child" />
     <div className="sk-circle2 sk-child" />
     <div className="sk-circle3 sk-child" />
