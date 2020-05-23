@@ -1,5 +1,6 @@
 import React, { useMemo, useCallback, useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types'
+import { useMutation } from '@apollo/react-hooks';
 import { useDropzone } from 'react-dropzone';
 import imageUploadReducer, { initReducerState } from './reducer';
 import {
@@ -9,6 +10,7 @@ import {
   rejectStyle
 } from './DropzoneStyles.js';
 import ImageUploadList from './ImageUploadList';
+import { CLOUDINARY_UPLOAD } from '../../../mutations';
 import getImageDimensions from '../../../utils/get-image-dimensions';
 import './styles.css';
 
@@ -31,6 +33,14 @@ const ImageUpload = ({
 
   const { images } = state;
 
+  const [
+    uploadImages,
+    {
+      loading,
+      error
+    }
+  ] = useMutation(CLOUDINARY_UPLOAD);
+
   const onDrop = useCallback(files => {
     dispatch({
       type: 'addImages',
@@ -45,23 +55,20 @@ const ImageUpload = ({
           let imageData = {};
           getImageDimensions(image).then((imageDataResult) => {
             imageData = imageDataResult;
-            console.log(`${image.path} is... ${imageData.width} and ${imageData.height}`);
+            console.log(`${image.path} dimensions: ${imageData.width} and ${imageData.height}`);
 
-            fetch('http://localhost:4040/api/cloudinary-upload', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                image: imageDataResult.base64String
-              })
-            }).then((response) => {
-              return response.json();
-            }).then((data) => {
+            uploadImages({
+              variables: {
+                input: {
+                  image: imageDataResult.base64String
+                }
+              }
+            }).then((result) => {
+              // TODO: handle errors
               const {
-                url: uploadedUrl,
-                public_id: publicId
-              } = data.data;
+                publicId,
+                url: uploadedUrl
+              } = result.data.cloudinaryUpload;
 
               dispatch({
                 type: 'addCloudinaryUrlToImage',
@@ -124,6 +131,9 @@ const ImageUpload = ({
 
   return (
     <div className='image-upload'>
+
+      {loading && <p>LOADING</p>}
+      {error && <p>Error :(</p>}
 
       {hasMinImageDimensions &&
         <span>Must be at least {minImageDimensions.width}px by {minImageDimensions.height}px</span>

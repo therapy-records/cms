@@ -107,3 +107,12 @@ export const DELETE_GIG = gql`
     }
   }
 `;
+
+export const CLOUDINARY_UPLOAD = gql`
+  mutation($input: CloudinaryUploadInput) {
+    cloudinaryUpload(input: $input) {
+      publicId,
+      url
+    }
+  }
+`;
