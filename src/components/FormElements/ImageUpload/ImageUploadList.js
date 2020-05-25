@@ -39,11 +39,13 @@ const ImageUploadList = ({ images, onRemove }) => {
 
 ImageUploadList.propTypes = {
   images: PropTypes.arrayOf(PropTypes.object),
-  onRemove: PropTypes.func.isRequired
+  // onRemove: PropTypes.func.isRequired
+  onRemove: PropTypes.func
 };
 
 ImageUploadList.defaultProps = {
-  images: []
+  images: [],
+  onRemove: () => {}
 };
 
 export default ImageUploadList;

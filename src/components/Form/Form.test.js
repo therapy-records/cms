@@ -5,7 +5,6 @@ import { act } from 'react-dom/test-utils';
 import { MockedProvider } from '@apollo/react-testing';
 import { BrowserRouter } from 'react-router-dom';
 import Form from './Form';
-import StickyError from '../StickyError';
 import LoadingSpinner from '../LoadingSpinner';
 import { EDIT_COLLABORATOR } from '../../mutations';
 
@@ -91,7 +90,6 @@ describe('(Component) Form', () => {
   };
 
   describe('rendering', () => {
-  
     describe('when there are no errors', () => {
       beforeEach(() => {
         wrapper = mount(
