@@ -1,6 +1,11 @@
-import getImageDimensions, { imageDataObj } from './get-image-dimensions';
+import {
+  imageDataObj,
+  getImageData,
+  getImageDimensions,
+  getImageBase64String
+} from './get-image-data';
 
-describe('(Utils) getImageDimensions', () => {
+describe('(Utils) getImageData', () => {
   describe('imageDataObj', () => {
     it('should return an object from given image data', () => {
       const mockImage = {
@@ -17,9 +22,21 @@ describe('(Utils) getImageDimensions', () => {
     });
   });
 
+  describe('getImageData', () => {
+    it('should be defined', () => {
+      expect(getImageData).to.be.a('function');
+    });
+  });
+
   describe('getImageDimensions', () => {
     it('should be defined', () => {
       expect(getImageDimensions).to.be.a('function');
+    });
+  });
+
+  describe('getImageBase64String', () => {
+    it('should be defined', () => {
+      expect(getImageBase64String).to.be.a('function');
     });
   });
 });

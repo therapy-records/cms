@@ -4,12 +4,13 @@ import { useMutation } from '@apollo/react-hooks';
 import imageUploadReducer, { initReducerState } from './reducer';
 import { CLOUDINARY_UPLOAD } from '../../../mutations';
 import ImageUploadInput from './ImageUploadInput';
-
+import ImageUploadList from './ImageUploadList';
 const ImageUpload = ({
   cloudinaryKey,
   cloudinarySignature,
   cloudinaryTimestamp,
-  existingImages
+  existingImages,
+  minImageDimensions
 }) => {
   const initImages = existingImages;
 
@@ -60,16 +61,30 @@ const ImageUpload = ({
     });
   };
 
-  return (
-    <div>
-      {error && <p>Error: {error}</p>}
+  const hasMinImageDimensions = (minImageDimensions && minImageDimensions.width && minImageDimensions.height);
 
-      <ImageUploadInput
-        onDrop={onDrop}
-        uploadImage={onUploadImage}
-        images={images}
-        loading={loading}
-      />
+  return (
+
+    <div className='image-upload'>
+
+      {hasMinImageDimensions &&
+        <span>Must be at least {minImageDimensions.width}px by {minImageDimensions.height}px</span>
+      }
+
+      <div className='flex-container'>
+
+        <ImageUploadInput
+          onDrop={onDrop}
+          uploadImage={onUploadImage}
+          images={images}
+          loading={loading}
+          error={error}
+        />
+
+        {/* <ImageUploadList images={images} onRemove={onRemove} /> */}
+        <ImageUploadList images={images} />
+
+      </div>
 
     </div>
   )
@@ -79,11 +94,13 @@ ImageUpload.propTypes = {
   cloudinaryKey: PropTypes.string.isRequired,
   cloudinarySignature: PropTypes.string.isRequired,
   cloudinaryTimestamp: PropTypes.string.isRequired,
-  existingImages: PropTypes.array
+  existingImages: PropTypes.array,
+  minImageDimensions: PropTypes.object
 };
 
 ImageUpload.defaultProps = {
-  existingImages: []
+  existingImages: [],
+  minImageDimensions: {}
 };
 
 export default ImageUpload;

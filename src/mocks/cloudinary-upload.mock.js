@@ -5,7 +5,7 @@ export const MOCK_CLOUDINARY_UPLOAD = {
     query: CLOUDINARY_UPLOAD,
     variables: {
       input: {
-        image: 'test-image.jpg'
+        image: 'local-image1.jpg'
       }
     }
   },

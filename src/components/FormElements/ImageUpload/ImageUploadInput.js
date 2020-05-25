@@ -7,10 +7,13 @@ import {
   rejectStyle,
   loadingStyle
 } from './DropzoneStyles.js';
-import ImageUploadList from './ImageUploadList';
-import getImageDimensions from '../../../utils/get-image-dimensions';
+import {
+  getImageBase64String,
+  getImageDimensions
+} from '../../../utils/get-image-data';
 import LoadingSpinner from '../../LoadingSpinner';
 import './styles.css';
+import { objectHasValues } from '../../../utils/objects';
 
 const ImageUploadInput = ({
   onDrop,
@@ -25,12 +28,16 @@ const ImageUploadInput = ({
     if (images.length > 0) {
       images.forEach(image => {
         if (!image.cloudinaryUrl) {
-          let imageData = {};
-          getImageDimensions(image).then((imageDataResult) => {
-            imageData = imageDataResult;
-            console.log(`${image.path} dimensions: ${imageData.width} and ${imageData.height}`);
-            uploadImage(image.path, imageDataResult.base64String);
-          });
+          if (objectHasValues(minImageDimensions)) {
+            getImageDimensions(image).then((imageData) => {
+              console.log(`${image.path} dimensions: ${imageData.width} and ${imageData.height}`);
+              uploadImage(image.path, imageData.base64String);
+            });
+          } else {
+            getImageBase64String(image).then((base64String) =>
+              uploadImage(image.path, base64String)
+            );
+          }
         }
       });
     }
@@ -78,38 +85,21 @@ const ImageUploadInput = ({
     // loading
   ]);
 
-  const hasMinImageDimensions = (minImageDimensions && minImageDimensions.width && minImageDimensions.height);
-
   return (
-    <div className='image-upload'>
+    <div {...getRootProps({
+      style,
+      multiple
+    })}
+    >
+      <input {...getInputProps()} />
 
-      {hasMinImageDimensions &&
-        <span>Must be at least {minImageDimensions.width}px by {minImageDimensions.height}px</span>
-      }
-
-      <div className='flex-container'>
-
-        <div {...getRootProps({
-          style,
-          multiple
-        })}
-        >
-          <input {...getInputProps()} />
-
-          {!loading && (
-            <div>
-              { ctaCopy ? <span>{ ctaCopy }</span> : <span>Drag &amp; drop images</span>}
-            </div>
-          )}
-
-          {loading && <LoadingSpinner active />}
-
+      {!loading && (
+        <div>
+          { ctaCopy ? <span>{ ctaCopy }</span> : <span>Drag &amp; drop images</span>}
         </div>
+      )}
 
-        {/* <ImageUploadList images={images} onRemove={onRemove} /> */}
-        <ImageUploadList images={images} />
-
-      </div>
+      {loading && <LoadingSpinner active />}
 
     </div>
   )
