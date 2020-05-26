@@ -5,6 +5,8 @@ import imageUploadReducer, { initReducerState } from './reducer';
 import { CLOUDINARY_UPLOAD } from '../../../mutations';
 import ImageUploadInput from './ImageUploadInput';
 import ImageUploadList from './ImageUploadList';
+import FormFieldError from '../FormFieldError';
+
 const ImageUpload = ({
   cloudinaryKey,
   cloudinarySignature,
@@ -45,26 +47,30 @@ const ImageUpload = ({
         }
       }
     }).then(result => {
-      const {
-        publicId,
-        url: uploadedUrl
-      } = result.data.cloudinaryUpload;
-
-      dispatch({
-        type: 'addCloudinaryUrlToImage',
-        payload: {
-          uploadedUrl,
+      if (result.data && result.data.cloudinaryUpload) {
+        const {
           publicId,
-          originalPath: localPath
-        }
-      });
+          url: uploadedUrl
+        } = result.data.cloudinaryUpload;
+
+        dispatch({
+          type: 'addCloudinaryUrlToImage',
+          payload: {
+            uploadedUrl,
+            publicId,
+            originalPath: localPath
+          }
+        });
+      }
     });
   };
 
   const hasMinImageDimensions = (minImageDimensions && minImageDimensions.width && minImageDimensions.height);
 
-  return (
+  console.log('YO ERROR.... ', error);
+  const errorMessage = (error && 'Image upload failed');
 
+  return (
     <div className='image-upload'>
 
       {hasMinImageDimensions &&
@@ -78,13 +84,19 @@ const ImageUpload = ({
           uploadImage={onUploadImage}
           images={images}
           loading={loading}
-          error={error}
+          error={errorMessage}
         />
 
         {/* <ImageUploadList images={images} onRemove={onRemove} /> */}
         <ImageUploadList images={images} />
 
       </div>
+
+      {error && (
+        <FormFieldError
+          error={errorMessage}
+        />
+      )}
 
     </div>
   )

@@ -18,3 +18,18 @@ export const MOCK_CLOUDINARY_UPLOAD = {
     }
   }
 };
+
+export const MOCK_CLOUDINARY_UPLOAD_LOADING = {
+  request: {
+    query: CLOUDINARY_UPLOAD,
+    variables: {
+      input: {
+        image: 'local-image1.jpg'
+      }
+    }
+  },
+  result: {
+    loading: true,
+    data: {}
+  }
+};
