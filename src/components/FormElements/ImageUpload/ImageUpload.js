@@ -50,8 +50,6 @@ const ImageUpload = ({
   }, []);
 
   const onUploadImage = (localPath, imgStr) => {
-    console.log('onUploadImage........ localPath \n', localPath);
-    console.log('onUploadImage........ imgStr \n', imgStr);
     uploadImages({
       variables: {
         input: {
