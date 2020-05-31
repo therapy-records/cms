@@ -9,10 +9,10 @@ describe('(Component) ImageUploadList', () => {
   let wrapper;
   const props = {
     images: [
-      { cloudinaryUrl: 'test.com/image1.jpg' },
-      { cloudinaryUrl: 'test.com/image2.jpg' }
+      { cloudinaryUrl: 'test.com/image1.jpg', cloudinaryPublicId: 'asdf1' },
+      { cloudinaryUrl: 'test.com/image2.jpg', cloudinaryPublicId: 'asdf2' }
     ],
-    onRemove: sinon.spy()
+    deleteImage: sinon.spy()
   };
 
   beforeEach(() => {
@@ -33,11 +33,11 @@ describe('(Component) ImageUploadList', () => {
   });
 
   describe('on click remove button', () => {
-    it('should call props.onRemove', () => {
+    it('should call props.deleteImage', () => {
       const button = wrapper.find('li button').first();
       button.simulate('click');
-      expect(props.onRemove).to.been.calledOnce;
-      expect(props.onRemove).to.been.calledWith(props.images[0]);
+      expect(props.deleteImage).to.been.calledOnce;
+      expect(props.deleteImage).to.been.calledWith(props.images[0].cloudinaryPublicId);
     });
   });
 
@@ -53,7 +53,6 @@ describe('(Component) ImageUploadList', () => {
       expect(listItems.length).to.eq(props.images.length - 1);
     });
   });
-
 
   describe('when there are no images', () => {
     it('should return null', () => {

@@ -2,7 +2,10 @@ import React, { useReducer, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useMutation } from '@apollo/react-hooks';
 import imageUploadReducer, { initReducerState } from './reducer';
-import { CLOUDINARY_UPLOAD } from '../../../mutations';
+import {
+  CLOUDINARY_UPLOAD,
+  CLOUDINARY_DELETE
+} from '../../../mutations';
 import ImageUploadInput from './ImageUploadInput';
 import ImageUploadList from './ImageUploadList';
 import FormFieldError from '../FormFieldError';
@@ -32,6 +35,13 @@ const ImageUpload = ({
     }
   ] = useMutation(CLOUDINARY_UPLOAD);
 
+  const [
+    deleteImage,
+    {
+      error: deleteError
+    }
+  ] = useMutation(CLOUDINARY_DELETE);
+
   const onDrop = useCallback(files => {
     dispatch({
       type: 'addImages',
@@ -40,6 +50,8 @@ const ImageUpload = ({
   }, []);
 
   const onUploadImage = (localPath, imgStr) => {
+    console.log('onUploadImage........ localPath \n', localPath);
+    console.log('onUploadImage........ imgStr \n', imgStr);
     uploadImages({
       variables: {
         input: {
@@ -65,10 +77,30 @@ const ImageUpload = ({
     });
   };
 
+  const onDeleteImage = (publicId) => {
+    deleteImage({
+      variables: {
+        input: {
+          publicId
+        }
+      }
+    }).then(result => {
+      const success = (result.data && result.data.cloudinaryDelete && result.data.cloudinaryDelete.success);
+      if (success) {
+        dispatch({
+          type: 'deleteImage',
+          payload: {
+            cloudinaryPublicId: publicId
+          }
+        });
+      }
+    });
+  };
+
   const hasMinImageDimensions = (minImageDimensions && minImageDimensions.width && minImageDimensions.height);
 
-  console.log('YO ERROR.... ', error);
-  const errorMessage = (error && 'Image upload failed');
+  const hasError = (error || deleteError);
+  const errorMessage = hasError && (error ? 'Image upload failed' : 'Delete image failed');
 
   return (
     <div className='image-upload'>
@@ -84,15 +116,16 @@ const ImageUpload = ({
           uploadImage={onUploadImage}
           images={images}
           loading={loading}
-          error={errorMessage}
         />
 
-        {/* <ImageUploadList images={images} onRemove={onRemove} /> */}
-        <ImageUploadList images={images} />
+        <ImageUploadList
+          images={images}
+          deleteImage={onDeleteImage}
+        />
 
       </div>
 
-      {error && (
+      {hasError && (
         <FormFieldError
           error={errorMessage}
         />

@@ -116,3 +116,11 @@ export const CLOUDINARY_UPLOAD = gql`
     }
   }
 `;
+
+export const CLOUDINARY_DELETE = gql`
+  mutation($input: CloudinaryDeleteInput) {
+    cloudinaryDelete(input: $input) {
+      success
+    }
+  }
+`;

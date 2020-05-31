@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-const ImageUploadList = ({ images, onRemove }) => {
+const ImageUploadList = ({ images, deleteImage }) => {
   const hasImages = images && images.length > 0;
 
   if (hasImages) {
@@ -19,7 +19,7 @@ const ImageUploadList = ({ images, onRemove }) => {
                   <button
                     type='button'
                     className='btn-danger btn-sm-remove'
-                    onClick={() => onRemove(image)}
+                    onClick={() => deleteImage(image.cloudinaryPublicId)}
                   >
                     remove
                   </button>
@@ -39,13 +39,11 @@ const ImageUploadList = ({ images, onRemove }) => {
 
 ImageUploadList.propTypes = {
   images: PropTypes.arrayOf(PropTypes.object),
-  // onRemove: PropTypes.func.isRequired
-  onRemove: PropTypes.func
+  deleteImage: PropTypes.func.isRequired
 };
 
 ImageUploadList.defaultProps = {
-  images: [],
-  onRemove: () => {}
+  images: []
 };
 
 export default ImageUploadList;

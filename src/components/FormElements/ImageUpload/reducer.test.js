@@ -118,11 +118,11 @@ describe('(Component) ImageUpload - reducer', () => {
     });
   });
 
-  describe('action - removeImage', () => {
+  describe('action - deleteImage', () => {
     it('should remove an image from state', () => {
       const mockInitImages = [
-        { cloudinaryUrl: 'test/1.jpg' },
-        { cloudinaryUrl: 'test/2.jpg' }
+        { cloudinaryPublicId: 'asdf1' },
+        { cloudinaryPublicId: 'asdf2' }
       ];
 
       const initState = initReducerState(mockInitImages);
@@ -130,9 +130,9 @@ describe('(Component) ImageUpload - reducer', () => {
       const action = imageUploadReducer(
         initState,
         {
-          type: 'removeImage',
+          type: 'deleteImage',
           payload: {
-            cloudinaryUrl: mockInitImages[0].cloudinaryUrl
+            cloudinaryPublicId: mockInitImages[0].cloudinaryPublicId
           }
         }
       );

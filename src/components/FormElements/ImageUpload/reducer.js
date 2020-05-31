@@ -8,10 +8,8 @@ function reducer(state, action) {
   switch (action.type) {
     case 'addImages': {
       const updatedImages = state.images;
-
       const newImages = action.payload;
 
-      // TODO: simplify what's pushed
       newImages.map((image) => {
         updatedImages.push(image);
       });
@@ -35,7 +33,6 @@ function reducer(state, action) {
           i.cloudinaryPublicId = publicId;
           i.cloudinaryUrl = uploadedUrl;
         }
-        return i;
       });
 
       return {
@@ -44,9 +41,9 @@ function reducer(state, action) {
       };
     }
 
-    case 'removeImage': {
+    case 'deleteImage': {
       const updatedImages = state.images.filter((i) =>
-        i.cloudinaryUrl !== action.payload.cloudinaryUrl
+        i.cloudinaryPublicId !== action.payload.cloudinaryPublicId
       );
 
       return {

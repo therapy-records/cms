@@ -5,7 +5,6 @@ import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
 import ImageUpload from './ImageUpload';
-import FormFieldError from '../FormFieldError';
 import {
   MOCK_CLOUDINARY_UPLOAD,
   MOCK_CLOUDINARY_UPLOAD_LOADING,
@@ -59,7 +58,6 @@ describe('(Component) ImageUpload', () => {
       expect(imageUploadInput.prop('uploadImage')).to.be.a('function');
       expect(imageUploadInput.prop('images')).to.deep.eq(props.existingImages);
       expect(imageUploadInput.prop('loading')).to.eq(false);
-      expect(imageUploadInput.prop('error')).to.eq(undefined);
     });
 
     it('should render <ImageUploadInputList />', () => {
@@ -74,7 +72,7 @@ describe('(Component) ImageUpload', () => {
       const imageUploadList = wrapper.find('ImageUploadList');
       expect(imageUploadList.length).to.eq(1);
       expect(imageUploadList.prop('images')).to.eq(props.existingImages);
-      expect(imageUploadList.prop('onRemove')).to.be.a('function');
+      expect(imageUploadList.prop('deleteImage')).to.be.a('function');
     });
 
     it('should render minimum dimensions message', () => {

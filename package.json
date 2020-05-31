@@ -102,7 +102,7 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/**/*.{js,jsx,mjs}"
+      "src/**/*.{js,jsx,}"
     ],
     "setupFiles": [
       "<rootDir>/config/polyfills.js"
@@ -147,7 +147,8 @@
     "coveragePathIgnorePatterns": [
       "src/index.js",
       "src/store.js",
-      "src/components/ProtectedRoute"
+      "src/components/ProtectedRoute",
+      "/node_modules/"
     ]
   },
   "babel": {
