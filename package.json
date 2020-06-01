@@ -12,7 +12,7 @@
     "test": "node scripts/test.js --env=jsdom",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
-    "precommit": "npm run lint && npm test -- --coverage",
+    "precommit": "npm run lint",
     "test-coverage": "npm run lint && npm test -- --coverage"
   },
   "dependencies": {
