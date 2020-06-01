@@ -43,27 +43,6 @@ const ImageUploadInput = ({
     }
   }, [ images.length ]);
 
-  // const onRemove = (image) => {
-  //   fetch('http://localhost:4040/api/cloudinary-destroy', {
-  //     method: 'DELETE',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       publicId: image.cloudinaryPublicId
-  //     })
-  //   }).then((response) => {
-  //     return response.json();
-  //   }).then((data) => {
-  //     dispatch({
-  //       type: 'removeImage',
-  //       payload: {
-  //         cloudinaryUrl: image.cloudinaryUrl
-  //       }
-  //     });
-  //   });
-  // }
-
   const {
     getRootProps,
     getInputProps,
@@ -82,7 +61,6 @@ const ImageUploadInput = ({
   }), [
     isDragActive,
     isDragReject
-    // loading
   ]);
 
   return (
