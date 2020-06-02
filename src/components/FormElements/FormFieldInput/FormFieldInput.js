@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import TextArea from '../TextArea';
 import TextInput from '../TextInput';
 import TextInputsList from '../TextInputsList';
-import DropzoneImageUpload from '../../DropzoneImageUpload';
+import ImageUploadContainer from '../../FormElements/ImageUpload/ImageUploadContainer';
 import RichTextEditor from '../../RichTextEditor';
 import Datepicker from '../../Datepicker';
 
@@ -23,6 +23,7 @@ const FormFieldInput = ({
   onChange,
   maxLength,
   value,
+  multipleImages,
   showTime
 }) => {
   if (component === 'TextInput') {
@@ -61,19 +62,13 @@ const FormFieldInput = ({
     )
   } else if (component === 'ImageUpload') {
     return (
-      <DropzoneImageUpload
-        title={title}
-        component={DropzoneImageUpload}
+      <ImageUploadContainer
         minImageDimensions={minImageDimensions}
-        inputProps={{
-          name: id
-        }}
-        showSingleHiddenInputValue
-        multiple={false}
         ctaCopy={ctaCopy}
-        onChange={onChange}
         existingImages={[ value ]}
+        multiple={multipleImages}
       />
+
     )
   } else if (component === 'Datepicker') {
     return (
@@ -132,6 +127,7 @@ FormFieldInput.propTypes = {
   onChange: PropTypes.func,
   maxLength: PropTypes.number,
   value: PropTypes.string,
+  multipleImages: PropTypes.bool,
   showTime: PropTypes.bool
 };
 
@@ -148,6 +144,7 @@ FormFieldInput.defaultProps = {
   onChange: null,
   maxLength: null,
   value: '',
+  multipleImages: false,
   showTime: false
 };
 

@@ -6,7 +6,8 @@ import FormFieldInput from './FormFieldInput';
 import TextArea from '../TextArea';
 import TextInput from '../TextInput';
 import TextInputsList from '../TextInputsList';
-import DropzoneImageUpload from '../../DropzoneImageUpload';
+// import DropzoneImageUpload from '../../DropzoneImageUpload';
+import ImageUploadContainer from '../../FormElements/ImageUpload/ImageUploadContainer';
 import RichTextEditor from '../../RichTextEditor';
 import Datepicker from '../../Datepicker';
 
@@ -112,7 +113,42 @@ describe('(Component) FormFieldInput', () => {
     });
 
     describe('when field.component is `ImageUpload`', () => {
-      it('should render <DropzoneImageUpload />', () => {
+      // it('should render <DropzoneImageUpload />', () => {
+      //   const mockField = {
+      //     id: 'test',
+      //     component: 'ImageUpload',
+      //     title: 'Test',
+      //     minImageDimensions: {
+      //       width: 10,
+      //       height: 10
+      //     },
+      //     ctaCopy: 'Drop it like it\'s hot',
+      //     value: ''
+      //   };
+      //   wrapper.setProps({
+      //     ...mockField,
+      //     onChange: mockOnChange
+      //   });
+
+      //   const actual = wrapper.containsMatchingElement(
+      //     <DropzoneImageUpload
+      //       title={mockField.title}
+      //       component={DropzoneImageUpload}
+      //       minImageDimensions={mockField.minImageDimensions}
+      //       inputProps={{
+      //         name: mockField.id
+      //       }}
+      //       showSingleHiddenInputValue
+      //       multiple={false}
+      //       ctaCopy={mockField.ctaCopy}
+      //       onChange={mockOnChange}
+      //       existingImages={[mockField.value]}
+      //     />
+      //   );
+      //   expect(actual).to.eq(true);
+      // });
+
+      it('should render <ImageUploadContainer />', () => {
         const mockField = {
           id: 'test',
           component: 'ImageUpload',
@@ -130,22 +166,16 @@ describe('(Component) FormFieldInput', () => {
         });
 
         const actual = wrapper.containsMatchingElement(
-          <DropzoneImageUpload
-            title={mockField.title}
-            component={DropzoneImageUpload}
+          <ImageUploadContainer
             minImageDimensions={mockField.minImageDimensions}
-            inputProps={{
-              name: mockField.id
-            }}
-            showSingleHiddenInputValue
-            multiple={false}
             ctaCopy={mockField.ctaCopy}
-            onChange={mockOnChange}
-            existingImages={[mockField.value]}
+            existingImages={mockField[mockField.value]}
+            multiple={mockField.multipleImages}
           />
         );
         expect(actual).to.eq(true);
       });
+
     });
 
     describe('when field.component is `Datepicker`', () => {

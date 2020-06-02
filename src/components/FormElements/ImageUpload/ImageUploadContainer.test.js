@@ -18,6 +18,18 @@ let mocks = [
 
 describe('(Component) ImageUploadContainer', () => {
   let wrapper;
+  const props = {
+    existingImages: [
+      { cloudinaryUrl: '1.jpg' },
+      { cloudinaryUrl: '2.jpg' }
+    ],
+    minImageDimensions: {
+      width: 100,
+      height: 100
+    },
+    ctaCopy: 'test',
+    multiple: true
+  }
 
   const actions = async(wrapper, _actions) => {
     await act(async() => {
@@ -32,7 +44,7 @@ describe('(Component) ImageUploadContainer', () => {
       wrapper = mount(
         <BrowserRouter>
           <MockedProvider mocks={mocks} addTypename={false}>
-            <ImageUploadContainer />
+            <ImageUploadContainer {...props} />
           </MockedProvider>
         </BrowserRouter>
       );
@@ -44,6 +56,10 @@ describe('(Component) ImageUploadContainer', () => {
             cloudinarySignature={MOCK_CLOUDINARY_SIGNATURE.result.data.cloudinarySignature.signature}
             cloudinaryKey={MOCK_CLOUDINARY_SIGNATURE.result.data.cloudinarySignature.key}
             cloudinaryTimestamp={MOCK_CLOUDINARY_SIGNATURE.result.data.cloudinarySignature.timestamp}
+            existingImages={props.existingImages}
+            minImageDimensions={props.minImageDimensions}
+            ctaCopy={props.ctaCopy}
+            multiple={props.multiple}
           />
         );
         expect(actual).to.eq(true);

@@ -27,7 +27,14 @@ const ImageUploadList = ({ images, deleteImage }) => {
                 </li>
               );
             }
-            return null;
+
+            // this is temporary until
+            // data models are aligned to have cloudinary url and publicID
+            return (
+              <li className='upload-image-list-item' key={image}>
+                <img src={image} />
+              </li>
+            );
           })}
 
         </ul>
@@ -38,7 +45,8 @@ const ImageUploadList = ({ images, deleteImage }) => {
 }
 
 ImageUploadList.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.object),
+  // images: PropTypes.arrayOf(PropTypes.object),
+  images: PropTypes.array,
   deleteImage: PropTypes.func.isRequired
 };
 

@@ -54,12 +54,12 @@ describe('(Component) ImageUploadList', () => {
     });
   });
 
-  describe('when there are no images', () => {
-    it('should return null', () => {
-      wrapper.setProps({
-        images: []
-      });
-      expect(wrapper.type()).to.eq(null);
-    });
-  });
+  // describe('when there are no images', () => {
+  //   it('should return null', () => {
+  //     wrapper.setProps({
+  //       images: []
+  //     });
+  //     expect(wrapper.type()).to.eq(null);
+  //   });
+  // });
 });

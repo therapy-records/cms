@@ -22,7 +22,13 @@ describe('(Component) ImageUpload', () => {
       { cloudinaryUrl: 'test.com/image1.jpg', cloudinaryPublicId: '1100' },
       { cloudinaryUrl: 'test.com/image2.jpg', cloudinaryPublicId: '2200' },
       { cloudinaryUrl: 'test.com/image3.jpg', cloudinaryPublicId: '3300' }
-    ]
+    ],
+    ctaCopy: 'test',
+    minImageDimensions: {
+      width: 100,
+      height: 100
+    },
+    multiple: true
   };
 
   let mocks = [
@@ -56,6 +62,9 @@ describe('(Component) ImageUpload', () => {
     expect(imageUploadInput.prop('uploadImage')).to.be.a('function');
     expect(imageUploadInput.prop('images')).to.deep.eq(props.existingImages);
     expect(imageUploadInput.prop('loading')).to.eq(false);
+    expect(imageUploadInput.prop('ctaCopy')).to.eq(props.ctaCopy);
+    expect(imageUploadInput.prop('minImageDimensions')).to.eq(props.minImageDimensions);
+    expect(imageUploadInput.prop('multiple')).to.eq(props.multiple);
   });
 
   it('should render <ImageUploadInputList />', () => {
@@ -71,26 +80,6 @@ describe('(Component) ImageUpload', () => {
     expect(imageUploadList.length).to.eq(1);
     expect(imageUploadList.prop('images')).to.eq(props.existingImages);
     expect(imageUploadList.prop('deleteImage')).to.be.a('function');
-  });
-
-  it('should render minimum dimensions message', () => {
-    const mockMinImageDimensions = { width: 100, height: 100 };
-
-    wrapper = mount(
-      <BrowserRouter>
-        <MockedProvider mocks={mocks} addTypename={false}>
-          <ImageUpload
-            {...props}
-            minImageDimensions={mockMinImageDimensions}
-          />
-        </MockedProvider>
-      </BrowserRouter>
-    );
-
-    const actual = wrapper.containsMatchingElement(
-      <span>Must be at least {mockMinImageDimensions.width}px by {mockMinImageDimensions.height}px</span>
-    );
-    expect(actual).to.eq(true);
   });
 
   describe('when onDrop method is called', () => {

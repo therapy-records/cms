@@ -15,7 +15,9 @@ const ImageUpload = ({
   cloudinarySignature,
   cloudinaryTimestamp,
   existingImages,
-  minImageDimensions
+  minImageDimensions,
+  ctaCopy,
+  multiple
 }) => {
   const initImages = existingImages;
 
@@ -95,17 +97,11 @@ const ImageUpload = ({
     });
   };
 
-  const hasMinImageDimensions = (minImageDimensions && minImageDimensions.width && minImageDimensions.height);
-
   const hasError = (error || deleteError);
   const errorMessage = hasError && (error ? 'Image upload failed' : 'Delete image failed');
 
   return (
     <div className='image-upload'>
-
-      {hasMinImageDimensions &&
-        <span>Must be at least {minImageDimensions.width}px by {minImageDimensions.height}px</span>
-      }
 
       <div className='flex-container'>
 
@@ -114,6 +110,9 @@ const ImageUpload = ({
           uploadImage={onUploadImage}
           images={images}
           loading={loading}
+          ctaCopy={ctaCopy}
+          minImageDimensions={minImageDimensions}
+          multiple={multiple}
         />
 
         <ImageUploadList
@@ -138,12 +137,16 @@ ImageUpload.propTypes = {
   cloudinarySignature: PropTypes.string.isRequired,
   cloudinaryTimestamp: PropTypes.string.isRequired,
   existingImages: PropTypes.array,
-  minImageDimensions: PropTypes.object
+  ctaCopy: PropTypes.string,
+  minImageDimensions: PropTypes.object,
+  multiple: PropTypes.bool
 };
 
 ImageUpload.defaultProps = {
   existingImages: [],
-  minImageDimensions: {}
+  ctaCopy: '',
+  minImageDimensions: {},
+  multiple: false
 };
 
 export default ImageUpload;
