@@ -110,11 +110,12 @@ describe('(Component) JournalismForm', () => {
 
     });
   });
-  
+
   describe('form fields', () => {
     beforeEach(() => {
       wrapper = shallow(<JournalismForm {...props} />);
     });
+
     it('should render a imageUrl field', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='imageUrl'
@@ -128,6 +129,34 @@ describe('(Component) JournalismForm', () => {
         />
       );
       expect(actual).to.equal(true);
+    });
+
+    describe('when there formValues.imageObj.cloudinaryUrl and no formvalues.imageUrl', () => {
+      it('should render a imageUrl field with formValues.imageObj.cloudinaryUrl', () => {
+        const imageObjProp = {
+          cloudinaryUrl: 'test-url.jpg'
+        };
+        wrapper.setProps({
+          formValues: {
+            ...props.formValues,
+            imageUrl: null,
+            imageObj: imageObjProp
+          }
+        })
+
+        const actual = wrapper.containsMatchingElement(
+          <Field name='imageUrl'
+            component={DropzoneImageUpload}
+            title='Article screenshot'
+            existingImages={[ imageObjProp.cloudinaryUrl ]}
+            minImageDimensions={JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS}
+            helpText='Dimensions must be equal'
+            ctaCopy='Drag & drop image'
+            required
+          />
+        );
+        expect(actual).to.equal(true);
+      });
     });
 
     it('should render a title field', () => {

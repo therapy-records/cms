@@ -43,6 +43,11 @@ export const selectSelectedJournalismArticleExternalLink = createSelector(
   (article) => article && article.externalLink
 );
 
+export const selectSelectedJournalismArticleImage = createSelector(
+  selectSelectedJournalismArticle,
+  (article) => article && article.image
+);
+
 export const selectSelectedJournalismArticleImageUrl = createSelector(
   selectSelectedJournalismArticle,
   (article) => article && article.imageUrl

@@ -10,27 +10,37 @@ import {
   selectSelectedJournalismArticleTitle,
   selectSelectedJournalismArticleCopy,
   selectSelectedJournalismArticleExternalLink,
+  selectSelectedJournalismArticleImage,
   selectSelectedJournalismArticleImageUrl,
-  selectSelectedJournalismArticleReleaseDate,
+  selectSelectedJournalismArticleReleaseDate
 } from './journalism';
 
 const mockArticles = [
   {
     _id: 'xcxcxcxcxccx1234',
     title: 'hello',
-    createdAt: new Date()
+    createdAt: new Date(),
+    image: {
+      cloudinaryUrl: 'test1.jpg'
+    }
   },
   {
     _id: 'asdf1234',
     title: 'hi',
     createdAt: new Date(),
-    imageUrl: 'http://something/test.jpg'
+    imageUrl: 'http://something/test.jpg',
+    image: {
+      cloudinaryUrl: 'test2.jpg'
+    }
   },
   {
     _id: 'zxcv789',
     title: 'crazy',
     createdAt: new Date(),
-    imageUrl: 'http://something/test.jpg'
+    imageUrl: 'http://something/test.jpg',
+    image: {
+      cloudinaryUrl: 'test3.jpg'
+    }
   }
 ];
 
@@ -106,31 +116,37 @@ describe('(Selectors) journalism', () => {
   });
 
   describe('selectSelectedJournalismArticleCopy', () => {
-    it('should return selected/active article title', () => {
+    it('should return selected/active article copy', () => {
       const actual = selectSelectedJournalismArticleCopy(mockState, articleId);
       expect(actual).to.deep.eq(mockState.selectedJournalismArticle.copy);
     });
   });
 
   describe('selectSelectedJournalismArticleExternalLink', () => {
-    it('should return selected/active article title', () => {
+    it('should return selected/active article externalLink', () => {
       const actual = selectSelectedJournalismArticleExternalLink(mockState, articleId);
       expect(actual).to.deep.eq(mockState.selectedJournalismArticle.externalLink);
     });
   });
 
+  describe('selectSelectedJournalismArticleImage', () => {
+    it('should return selected/active article image object', () => {
+      const actual = selectSelectedJournalismArticleImage(mockState, articleId);
+      expect(actual).to.deep.eq(mockState.selectedJournalismArticle.image);
+    });
+  });
+
   describe('selectSelectedJournalismArticleImageUrl', () => {
-    it('should return selected/active article title', () => {
+    it('should return selected/active article imageUrl', () => {
       const actual = selectSelectedJournalismArticleImageUrl(mockState, articleId);
       expect(actual).to.deep.eq(mockState.selectedJournalismArticle.imageUrl);
     });
   });
 
   describe('selectSelectedJournalismArticleReleaseDate', () => {
-    it('should return selected/active article title', () => {
+    it('should return selected/active article releaseDate', () => {
       const actual = selectSelectedJournalismArticleReleaseDate(mockState, articleId);
       expect(actual).to.deep.eq(mockState.selectedJournalismArticle.releaseDate);
     });
   });
-
 });

@@ -7,6 +7,7 @@ import {
   selectSelectedJournalismArticleTitle,
   selectSelectedJournalismArticleCopy,
   selectSelectedJournalismArticleExternalLink,
+  selectSelectedJournalismArticleImage,
   selectSelectedJournalismArticleImageUrl,
   selectSelectedJournalismArticleReleaseDate
 } from '../../selectors/journalism';
@@ -52,6 +53,16 @@ export class JournalismForm extends React.Component {
       isEditForm = true;
     } else {
       isEditForm = false;
+    }
+
+    const imageObjUrl = formValues && formValues.imageObj && formValues.imageObj.cloudinaryUrl;
+    const imageUrl = !imageObjUrl && formValues.imageUrl;
+    let articleImages = [];
+
+    if (imageObjUrl) {
+      articleImages = [ imageObjUrl ];
+    } else if (imageUrl) {
+      articleImages = [ imageUrl ];
     }
 
     const submitButtonCopy = isEditForm ? 'Update article' : 'Post article';
@@ -111,7 +122,7 @@ export class JournalismForm extends React.Component {
             <Field name='imageUrl'
               component={DropzoneImageUpload}
               title='Article screenshot'
-              existingImages={formValues && formValues.imageUrl && [ formValues.imageUrl ]}
+              existingImages={articleImages}
               validate={required}
               minImageDimensions={JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS}
               helpText='Dimensions must be equal'
@@ -172,6 +183,7 @@ InitFromStateForm = connect(
       title: selectSelectedJournalismArticleTitle(state),
       copy: selectSelectedJournalismArticleCopy(state),
       externalLink: selectSelectedJournalismArticleExternalLink(state),
+      imageObj: selectSelectedJournalismArticleImage(state),
       imageUrl: selectSelectedJournalismArticleImageUrl(state),
       releaseDate: selectSelectedJournalismArticleReleaseDate(state)
     }
