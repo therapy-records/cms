@@ -10,7 +10,6 @@ describe('(Component) ImageUploadInput', () => {
   let wrapper;
   const props = {
     onDrop: sinon.spy(),
-    uploadImage: sinon.spy(),
     loading: false,
     minImageDimensions: {
       width: 400,

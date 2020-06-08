@@ -1,6 +1,7 @@
 export function initReducerState(initImages) {
   return {
-    images: initImages
+    images: initImages,
+    validationMessage: null
   };
 }
 
@@ -49,6 +50,22 @@ function reducer(state, action) {
       return {
         ...state,
         images: updatedImages
+      }
+    }
+
+    case 'addValidationMessage': {
+      const validationMessage = action.payload;
+
+      return {
+        ...state,
+        validationMessage
+      }
+    }
+
+    case 'removeValidationMessage': {
+      return {
+        ...state,
+        validationMessage: null
       }
     }
 

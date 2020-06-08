@@ -25,8 +25,8 @@ describe('(Component) ImageUpload', () => {
     ],
     ctaCopy: 'test',
     minImageDimensions: {
-      width: 100,
-      height: 100
+      width: 10,
+      height: 10
     },
     multiple: true
   };
@@ -94,7 +94,7 @@ describe('(Component) ImageUpload', () => {
 
       let imageUploadInput = wrapper.find('ImageUploadInput');
       const mockImagesArray = [
-        { path: 'local-image1.jpg' }
+        { path: 'local-image1.jpg', width: 200, height: 200 }
       ];
 
       await act(async() => {
@@ -126,7 +126,7 @@ describe('(Component) ImageUpload', () => {
 
       let imageUploadInput = wrapper.find('ImageUploadInput');
       const mockImagesArray = [
-        { path: 'local-image1.jpg' }
+        { path: 'local-image1.jpg', width: 200, height: 200 }
       ];
 
       await act(async() => {
@@ -143,7 +143,8 @@ describe('(Component) ImageUpload', () => {
             props.existingImages[1],
             props.existingImages[2],
             {
-              path: mockImagesArray[0].path,
+              // path: mockImagesArray[0].path,
+              ...mockImagesArray[0],
               cloudinaryPublicId: '1234',
               cloudinaryUrl: 'cloudinary.com/1.jpg'
             }
@@ -168,7 +169,7 @@ describe('(Component) ImageUpload', () => {
 
       let imageUploadInput = wrapper.find('ImageUploadInput');
       const mockImagesArray = [
-        { path: 'local-image1.jpg' }
+        { path: 'local-image1.jpg', width: 200, height: 200 }
       ];
 
       await act(async() => {

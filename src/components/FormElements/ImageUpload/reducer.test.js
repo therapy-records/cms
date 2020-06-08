@@ -12,7 +12,8 @@ describe('(Component) ImageUpload - reducer', () => {
     it('should return the correct state shape', () => {
       const result = initReducerState(mockInitImages);
       expect(result).to.deep.eq({
-        images: mockInitImages
+        images: mockInitImages,
+        validationMessage: null
       });
     });
   });
@@ -142,6 +143,37 @@ describe('(Component) ImageUpload - reducer', () => {
       ];
 
       expect(action.images).deep.eq(expectedImages);
+    });
+  });
+
+  describe('action - addValidationMessage', () => {
+    it('should add validationMessage to  state', () => {
+      const initState = initReducerState([]);
+
+      const action = imageUploadReducer(
+        initState,
+        {
+          type: 'addValidationMessage',
+          payload: 'invalid dimensions'
+        }
+      );
+
+      expect(action.validationMessage).to.eq('invalid dimensions');
+    });
+  });
+
+  describe('action - removeValidationMessage', () => {
+    it('should remove validationMessage from state', () => {
+      const initState = initReducerState([]);
+
+      const action = imageUploadReducer(
+        initState,
+        {
+          type: 'removeValidationMessage'
+        }
+      );
+
+      expect(action.validationMessage).to.eq(null);
     });
   });
 

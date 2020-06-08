@@ -42,15 +42,22 @@ describe('(Component) ImageUploadList', () => {
   });
 
   describe('when an image has no cloudinaryUrl', () => {
-    it('should return null', () => {
+    it('should return image without delete button', () => {
+      const noCloudinaryUrlImagesProp = [
+        { cloudinaryUrl: 'test.com/image1.jpg' },
+        {}
+      ];
+
       wrapper.setProps({
-        images: [
-          { cloudinaryUrl: 'test.com/image1.jpg' },
-          { }
-        ]
+        ...props,
+        images: noCloudinaryUrlImagesProp
       });
-      const listItems = wrapper.find('li');
-      expect(listItems.length).to.eq(props.images.length - 1);
+
+      const images = wrapper.find('li img');
+      expect(images.length).to.eq(props.images.length);
+
+      const buttons = wrapper.find('li button');
+      expect(buttons.length).to.eq(1);
     });
   });
 

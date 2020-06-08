@@ -1,4 +1,4 @@
-import React, { useReducer, useCallback } from 'react';
+import React, { useReducer, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useMutation } from '@apollo/react-hooks';
 import imageUploadReducer, { initReducerState } from './reducer';
@@ -9,6 +9,12 @@ import {
 import ImageUploadInput from './ImageUploadInput';
 import ImageUploadList from './ImageUploadList';
 import FormFieldError from '../FormFieldError';
+import { objectHasValues } from '../../../utils/objects';
+import {
+  // getImageBase64String,
+  getImageDimensions
+} from '../../../utils/get-image-data';
+import validateImageDimensions from '../../../utils/validate-image-dimensions';
 
 const ImageUpload = ({
   cloudinaryKey,
@@ -27,7 +33,10 @@ const ImageUpload = ({
     initReducerState
   );
 
-  const { images } = state;
+  const {
+    images,
+    validationMessage
+  } = state;
 
   const [
     uploadImages,
@@ -50,6 +59,37 @@ const ImageUpload = ({
       payload: files
     });
   }, []);
+
+  useEffect(() => {
+    if (images.length > 0) {
+      images.forEach(image => {
+        if (!image.cloudinaryUrl) {
+          if (objectHasValues(minImageDimensions)) {
+            getImageDimensions(image).then((imageData) => {
+              const validateImage = validateImageDimensions(minImageDimensions, imageData);
+              const { isValid, message } = validateImage;
+              if (isValid) {
+                onUploadImage(image.path, imageData.base64String);
+              } else {
+                dispatch({
+                  type: 'addValidationMessage',
+                  payload: message
+                });
+              }
+            });
+            // getImageDimensions(image).then((imageData) => {
+            //   console.log(`${image.path} dimensions: ${imageData.width} and ${imageData.height}`);
+            //   uploadImage(image.path, imageData.base64String);
+            // });
+          } else {
+            // getImageBase64String(image).then((base64String) =>
+            //   uploadImage(image.path, base64String)
+            // );
+          }
+        }
+      });
+    }
+  }, [ images.length ]);
 
   const onUploadImage = (localPath, imgStr) => {
     uploadImages({
@@ -125,6 +165,12 @@ const ImageUpload = ({
       {hasError && (
         <FormFieldError
           error={errorMessage}
+        />
+      )}
+
+      {validationMessage && (
+        <FormFieldError
+          error={validationMessage}
         />
       )}
 

@@ -10,30 +10,35 @@ export const isValid = (minDimensions, image) => {
 
 export const validationMessage = (minDimensions, image) => {
   const { width, height } = image;
-  const messages = [];
+  let message = null;
 
   if (width < minDimensions.width) {
-    messages.push(
-      `Image width is too small (${width}px). Minimum width: ${minDimensions.width}px`
-    );
+    message = `Width is too small (${width}px).`;
   }
 
   if (height < minDimensions.height) {
-    messages.push(
-      `Image height is too small (${height}px). Minimum height: ${minDimensions.height}px`
-    );
+    if (message) {
+      message = message + ` Height is too small (${height}px).`;
+    } else {
+      message = `Height is too small (${height}px).`;
+    }
   }
 
-  return messages;
+  return message;
 };
 
 const validateImageDimensions = (minDimensions, image) => {
   const valid = isValid(minDimensions, image);
 
   if (valid) {
-    return true;
+    return {
+      isValid: true
+    };
   }
-  return validationMessage(minDimensions, image);
+  return {
+    isValid: false,
+    message: validationMessage(minDimensions, image)
+  };
 };
 
 export default validateImageDimensions;

@@ -31,43 +31,42 @@ describe('(Utils) validate-image-dimensions', () => {
   });
 
   describe('validationMessage', () => {
-    it('should return message in array when width is too small', () => {
+    it('should return string when width is too small', () => {
       const minDimensions = { width: 200, height: 200 }
       const mockImage = { width: 100, height: 200 };
 
       const result = validationMessage(minDimensions, mockImage);
-      expect(result).to.deep.eq([
-        `Image width is too small (${mockImage.width}px). Minimum width: ${minDimensions.width}px`
-      ]);
+      expect(result).to.eq(
+        `Width is too small (${mockImage.width}px).`
+      );
     });
 
-    it('should return message in array when height is too small', () => {
+    it('should return string when height is too small', () => {
       const minDimensions = { width: 200, height: 200 }
       const mockImage = { width: 200, height: 100 };
 
       const result = validationMessage(minDimensions, mockImage);
-      expect(result).to.deep.eq([
-        `Image height is too small (${mockImage.height}px). Minimum height: ${minDimensions.height}px`
-      ]);
+      expect(result).to.eq(
+        `Height is too small (${mockImage.height}px).`
+      );
     });
 
-    it('should return multiple messages in array when width & height is too small', () => {
+    it('should return string when width & height is too small', () => {
       const minDimensions = { width: 200, height: 200 }
       const mockImage = { width: 100, height: 100 };
 
       const result = validationMessage(minDimensions, mockImage);
-      expect(result).to.deep.eq([
-        `Image width is too small (${mockImage.width}px). Minimum width: ${minDimensions.width}px`,
-        `Image height is too small (${mockImage.height}px). Minimum height: ${minDimensions.height}px`
-      ]);
+      expect(result).to.eq(
+        `Width is too small (${mockImage.width}px). Height is too small (${mockImage.height}px).`
+      );
     });
 
-    it('should return empty array when dimensions are not below minDimensions', () => {
+    it('should return null when dimensions are above minDimensions', () => {
       const minDimensions = { width: 200, height: 200 }
       const mockImage = { width: 201, height: 201 };
 
       const result = validationMessage(minDimensions, mockImage);
-      expect(result).to.deep.eq([]);
+      expect(result).to.eq(null);
     });
   });
 
@@ -77,7 +76,9 @@ describe('(Utils) validate-image-dimensions', () => {
       const mockImage = { width: 201, height: 201 };
 
       const result = validateImageDimensions(minDimensions, mockImage);
-      expect(result).to.deep.eq(true);
+      expect(result).to.deep.eq({
+        isValid: true
+      });
     });
 
     it('should return validationMessage when invalid', () => {
@@ -85,7 +86,10 @@ describe('(Utils) validate-image-dimensions', () => {
       const mockImage = { width: 199, height: 199 };
 
       const result = validateImageDimensions(minDimensions, mockImage);
-      expect(result).to.deep.eq(validationMessage(minDimensions, mockImage));
+      expect(result).to.deep.eq({
+        isValid: false,
+        message: validationMessage(minDimensions, mockImage)
+      });
     });
   });
 });

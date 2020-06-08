@@ -1,4 +1,5 @@
-import React, { useMemo, useEffect } from 'react';
+// import React, { useMemo, useEffect } from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useDropzone } from 'react-dropzone';
 import {
@@ -6,43 +7,18 @@ import {
   activeStyle,
   rejectStyle,
   loadingStyle
-} from './DropzoneStyles.js';
-import {
-  getImageBase64String,
-  getImageDimensions
-} from '../../../utils/get-image-data';
+} from './DropzoneStyles';
 import LoadingSpinner from '../../LoadingSpinner';
 import './styles.css';
-import { objectHasValues } from '../../../utils/objects';
 
 const ImageUploadInput = ({
   onDrop,
-  uploadImage,
   ctaCopy,
   minImageDimensions,
   multiple,
   images,
   loading
 }) => {
-  useEffect(() => {
-    if (images.length > 0) {
-      images.forEach(image => {
-        if (!image.cloudinaryUrl) {
-          if (objectHasValues(minImageDimensions)) {
-            getImageDimensions(image).then((imageData) => {
-              console.log(`${image.path} dimensions: ${imageData.width} and ${imageData.height}`);
-              uploadImage(image.path, imageData.base64String);
-            });
-          } else {
-            getImageBase64String(image).then((base64String) =>
-              uploadImage(image.path, base64String)
-            );
-          }
-        }
-      });
-    }
-  }, [ images.length ]);
-
   const {
     getRootProps,
     getInputProps,
@@ -85,7 +61,6 @@ const ImageUploadInput = ({
 
 ImageUploadInput.propTypes = {
   onDrop: PropTypes.func.isRequired,
-  uploadImage: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   ctaCopy: PropTypes.string,
   images: PropTypes.array.isRequired,
