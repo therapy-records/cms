@@ -11,7 +11,7 @@ import ImageUploadList from './ImageUploadList';
 import FormFieldError from '../FormFieldError';
 import { objectHasValues } from '../../../utils/objects';
 import {
-  // getImageBase64String,
+  getImageBase64String,
   getImageDimensions
 } from '../../../utils/get-image-data';
 import validateImageDimensions from '../../../utils/validate-image-dimensions';
@@ -85,14 +85,10 @@ const ImageUpload = ({
                 });
               }
             });
-            // getImageDimensions(image).then((imageData) => {
-            //   console.log(`${image.path} dimensions: ${imageData.width} and ${imageData.height}`);
-            //   uploadImage(image.path, imageData.base64String);
-            // });
           } else {
-            // getImageBase64String(image).then((base64String) =>
-            //   uploadImage(image.path, base64String)
-            // );
+            getImageBase64String(image).then((base64String) =>
+              onUploadImage(image.path, base64String)
+            );
           }
         }
       });

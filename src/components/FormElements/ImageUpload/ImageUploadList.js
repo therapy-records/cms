@@ -12,7 +12,7 @@ const ImageUploadList = ({ images, deleteImage }) => {
           {(images.length && images.length > 0) && images.map((image, index) => {
             if (image.cloudinaryUrl) {
               return (
-                <li className='upload-image-list-item' key={image.cloudinaryUrl}>
+                <li className='upload-image-list-item' key={index + image.cloudinaryPublicId}>
 
                   <img src={image.cloudinaryUrl} />
 
@@ -31,7 +31,7 @@ const ImageUploadList = ({ images, deleteImage }) => {
             // this is temporary until
             // data models are aligned to have cloudinary url and publicID
             return (
-              <li className='upload-image-list-item' key={image}>
+              <li className='upload-image-list-item' key={image.path || image}>
                 <img src={image} />
               </li>
             );
