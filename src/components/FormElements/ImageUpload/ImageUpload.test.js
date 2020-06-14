@@ -5,6 +5,7 @@ import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
 import ImageUpload from './ImageUpload';
+import FormFieldError from '../FormFieldError';
 import {
   MOCK_CLOUDINARY_UPLOAD,
   MOCK_CLOUDINARY_UPLOAD_LOADING
@@ -109,6 +110,45 @@ describe('(Component) ImageUpload', () => {
             ...mockImagesArray
           ];
           expect(imageUploadInput.prop('images')).to.deep.eq(expectedImages);
+        });
+      });
+    });
+
+    describe('when an image is too small', () => {
+      it('should render <FormFieldError /> and NOT add image to <ImageUploadInput /> images prop', async() => {
+        wrapper = mount(
+          <BrowserRouter>
+            <MockedProvider mocks={mocks} addTypename={false}>
+              <ImageUpload {...props} />
+            </MockedProvider>
+          </BrowserRouter>
+        );
+
+        const imageUploadInput = wrapper.find('ImageUploadInput');
+        const mockImagesArray = [
+          { path: 'local-image123.jpg', width: 2, height: 2 }
+        ];
+
+        await act(async() => {
+          imageUploadInput.prop('onDrop')(mockImagesArray);
+
+          await actions(wrapper, () => {
+            wrapper.update();
+
+            const expectedValidationMessage = 'Width is too small (2px). Height is too small (2px).';
+            const actual = wrapper.containsMatchingElement(
+              <FormFieldError
+                error={expectedValidationMessage}
+              />
+            );
+            expect(actual).to.eq(true);
+
+            const imageUploadInput = wrapper.find('ImageUploadInput');
+
+            const imageUploadInputImages = imageUploadInput.prop('images');
+            const newImageInArray = imageUploadInputImages.filter((i) => i.path === mockImagesArray[0].path);
+            expect(newImageInArray.length).to.eq(0);
+          });
         });
       });
     });

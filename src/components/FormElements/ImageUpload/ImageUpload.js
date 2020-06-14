@@ -68,9 +68,17 @@ const ImageUpload = ({
             getImageDimensions(image).then((imageData) => {
               const validateImage = validateImageDimensions(minImageDimensions, imageData);
               const { isValid, message } = validateImage;
+
               if (isValid) {
                 onUploadImage(image.path, imageData.base64String);
               } else {
+                dispatch({
+                  type: 'deleteLocalImage',
+                  payload: {
+                    path: image.path
+                  }
+                });
+
                 dispatch({
                   type: 'addValidationMessage',
                   payload: message

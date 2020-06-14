@@ -146,6 +146,33 @@ describe('(Component) ImageUpload - reducer', () => {
     });
   });
 
+  describe('action - deleteLocalImage', () => {
+    it('should remove an image from state', () => {
+      const mockInitImages = [
+        { path: 'a/test.jpg', cloudinaryPublicId: 'asdf1' },
+        { path: 'b/test.jpg', cloudinaryPublicId: 'asdf2' }
+      ];
+
+      const initState = initReducerState(mockInitImages);
+
+      const action = imageUploadReducer(
+        initState,
+        {
+          type: 'deleteLocalImage',
+          payload: {
+            path: mockInitImages[1].path
+          }
+        }
+      );
+
+      const expectedImages = [
+        mockInitImages[0]
+      ];
+
+      expect(action.images).deep.eq(expectedImages);
+    });
+  });
+
   describe('action - addValidationMessage', () => {
     it('should add validationMessage to  state', () => {
       const initState = initReducerState([]);
