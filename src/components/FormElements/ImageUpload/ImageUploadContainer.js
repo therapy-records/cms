@@ -10,7 +10,9 @@ const ImageUploadContainer = ({
   existingImages,
   minImageDimensions,
   ctaCopy,
-  multiple
+  multiple,
+  handleOnUpload,
+  handleOnRemove
 }) => {
   const {
     loading,
@@ -46,6 +48,8 @@ const ImageUploadContainer = ({
       minImageDimensions={minImageDimensions}
       ctaCopy={ctaCopy}
       multiple={multiple}
+      handleOnUpload={handleOnUpload}
+      handleOnRemove={handleOnRemove}
     />
   )
 };
@@ -54,13 +58,17 @@ ImageUploadContainer.propTypes = {
   existingImages: PropTypes.array,
   minImageDimensions: PropTypes.object,
   ctaCopy: PropTypes.string,
-  multiple: PropTypes.bool
+  multiple: PropTypes.bool,
+  handleOnUpload: PropTypes.func,
+  handleOnRemove: PropTypes.func
 };
 
 ImageUploadContainer.defaultProps = {
   minImageDimensions: {},
   ctaCopy: '',
-  multiple: false
+  multiple: false,
+  handleOnUpload: null,
+  handleOnRemove: null
 };
 
 export default ImageUploadContainer;

@@ -23,7 +23,9 @@ const ImageUpload = ({
   existingImages,
   minImageDimensions,
   ctaCopy,
-  multiple
+  multiple,
+  handleOnUpload,
+  handleOnRemove
 }) => {
   const initImages = existingImages;
 
@@ -117,11 +119,25 @@ const ImageUpload = ({
             originalPath: localPath
           }
         });
+
+        // this is purely to support legacy, non-graphql based forms.
+        if (handleOnUpload) {
+          const uploadedImageInState = images.find((i) => i.cloudinaryUrl === uploadedUrl);
+          const uploadedImageIndex = images.indexOf(uploadedImageInState);
+          handleOnUpload(
+            uploadedUrl,
+            uploadedImageIndex
+          )
+        }
       }
     });
   };
 
   const onDeleteImage = (publicId) => {
+    // this is purely to support legacy, non-graphql based forms.
+    const imageInState = images.find((i) => i.cloudinaryPublicId === publicId);
+    const imageIndex = images.indexOf(imageInState);
+
     deleteImage({
       variables: {
         input: {
@@ -137,6 +153,11 @@ const ImageUpload = ({
             cloudinaryPublicId: publicId
           }
         });
+
+        // this is purely to support legacy, non-graphql based forms.
+        if (handleOnRemove) {
+          handleOnRemove(imageIndex)
+        }
       }
     });
   };
@@ -189,14 +210,19 @@ ImageUpload.propTypes = {
   existingImages: PropTypes.array,
   ctaCopy: PropTypes.string,
   minImageDimensions: PropTypes.object,
-  multiple: PropTypes.bool
+  multiple: PropTypes.bool,
+  // handleOnUpload and handleOnRemove are purely to support legacy, non-graphql based forms.
+  handleOnUpload: PropTypes.func,
+  handleOnRemove: PropTypes.func
 };
 
 ImageUpload.defaultProps = {
   existingImages: [],
   ctaCopy: '',
   minImageDimensions: {},
-  multiple: false
+  multiple: false,
+  handleOnUpload: null,
+  handleOnRemove: null
 };
 
 export default ImageUpload;
