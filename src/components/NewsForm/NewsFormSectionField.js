@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import DropzoneImageUpload from '../DropzoneImageUpload';
+// import DropzoneImageUpload from '../DropzoneImageUpload';
+import ImageUploadContainer from '../../components/FormElements/ImageUpload/ImageUploadContainer';
 import RichTextEditor from '../RichTextEditor';
 import TextInput from '../../components/TextInput';
 import { required } from '../../utils/form';
@@ -119,19 +120,19 @@ export class NewsFormSectionField extends Component {
 
           <div className={fields.length > 1 ? 'row last row-buttons' : 'row row-buttons'}>
             {showImageUpload
-              ? <DropzoneImageUpload
-                title="Images"
-                component={DropzoneImageUpload}
-                existingImages={sectionImagesArray.length ? sectionImagesArray : []}
-                minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
-                onChange={(imageUrl, sectionImageIndex) =>
-                  onUpdateSectionImages(imageUrl, sectionImageIndex, sectionIndex)
-                }
-                onRemove={(sectionImageIndex) =>
-                  onRemoveSectionImage(sectionImageIndex, sectionIndex)
-                }
-              />
-              : <button
+              ? (
+                <ImageUploadContainer
+                  existingImages={sectionImagesArray.length ? sectionImagesArray : []}
+                  minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
+                  handleOnUpload={(imageUrl, sectionImageIndex) =>
+                    onUpdateSectionImages(imageUrl, sectionImageIndex, sectionIndex)
+                  }
+                  onRemove={(sectionImageIndex) =>
+                    onRemoveSectionImage(sectionImageIndex, sectionIndex)
+                  }
+                  multiple
+                />
+              ) : <button
                 type='button'
                 className='button-link'
                 onClick={this.onToggleShowImageUpload}
