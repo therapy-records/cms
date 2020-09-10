@@ -127,7 +127,8 @@ input[type="submit"] {
 
 button[disabled],
 input[type="submit"]:disabled {
-  opacity: .7;
+  opacity: .5;
+  cursor: not-allowed;
   &:hover,
   &:focus {
     background: $color-blue-1;
