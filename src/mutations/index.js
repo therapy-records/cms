@@ -4,8 +4,10 @@ export const CREATE_COLLABORATOR = gql`
   mutation($input: CollaboratorInput) {
     createCollaborator(input: $input) {
       name,
-      avatarUrl,
-      collabOn,
+      avatar {
+        cloudinaryUrl
+      },
+      collabOn:,
       role,
       about
     }
@@ -17,7 +19,9 @@ export const EDIT_COLLABORATOR = gql`
     editCollaborator(_id: $id, input: $input) {
       _id,
       name,
-      avatarUrl,
+      avatar {
+        cloudinaryUrl
+      },
       collabOn,
       role,
       about

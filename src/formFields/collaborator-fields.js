@@ -24,7 +24,7 @@ const COLLABORATOR_FIELDS = [
     placeholder: 'Born and raised in...'
   },
   {
-    id: 'avatarUrl',
+    id: 'avatar',
     type: 'text',
     component: 'ImageUpload',
     label: 'Avatar',

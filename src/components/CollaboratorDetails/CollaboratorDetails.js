@@ -6,7 +6,7 @@ import CollaboratorUrls from './CollaboratorUrls';
 const CollaboratorDetails = ({
   name,
   role,
-  avatarUrl,
+  avatar,
   about,
   collabOn,
   urls
@@ -24,7 +24,7 @@ const CollaboratorDetails = ({
 
         <div className='entity-image-container'>
           <img
-            src={avatarUrl}
+            src={avatar.cloudinaryUrl}
             alt={name}
           />
         </div>
@@ -71,7 +71,10 @@ const CollaboratorDetails = ({
 CollaboratorDetails.propTypes = {
   name: PropTypes.string.isRequired,
   role: PropTypes.string,
-  avatarUrl: PropTypes.string.isRequired,
+  avatar: PropTypes.shape({
+    cloudinaryUrl: PropTypes.string,
+    cloudinaryPublicId: PropTypes.string
+  }).isRequired,
   about: PropTypes.string,
   collabOn: PropTypes.arrayOf(PropTypes.string),
   urls: PropTypes.object

@@ -31,7 +31,9 @@ export const GET_COLLABORATORS = gql`
     collaborators {
       _id,
       name,
-      avatarUrl,
+      avatar {
+        cloudinaryUrl
+      },
       orderNumber
     }
   }
@@ -44,7 +46,9 @@ export const GET_COLLABORATOR = gql`
         name,
         role,
         about,
-        avatarUrl,
+        avatar {
+          cloudinaryUrl
+        },
         collabOn,
         urls {
           website,

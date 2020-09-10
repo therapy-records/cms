@@ -84,7 +84,13 @@ FormField.propTypes = {
   error: PropTypes.string,
   touched: PropTypes.bool,
   dirty: PropTypes.bool,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      cloudinaryUrl: PropTypes.string,
+      cloudinaryPublicId: PropTypes.string
+    })
+  ]),
   showTime: PropTypes.bool
 };
 

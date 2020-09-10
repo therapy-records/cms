@@ -65,7 +65,7 @@ const FormFieldInput = ({
       <ImageUploadContainer
         minImageDimensions={minImageDimensions}
         ctaCopy={ctaCopy}
-        existingImages={[ value ]}
+        existingImages={[ value.cloudinaryUrl ]}
         multiple={multipleImages}
       />
 
@@ -126,7 +126,13 @@ FormFieldInput.propTypes = {
   items: PropTypes.array,
   onChange: PropTypes.func,
   maxLength: PropTypes.number,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      cloudinaryUrl: PropTypes.string,
+      cloudinaryPublicId: PropTypes.string
+    })
+  ]),
   multipleImages: PropTypes.bool,
   showTime: PropTypes.bool
 };

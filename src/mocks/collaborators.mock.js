@@ -11,8 +11,8 @@ export const MOCK_GET_COLLABORATORS = {
   result: {
     data: {
       collaborators: [
-        { _id: 'abc1', name: 'test', avatarUrl: 'test.com', orderNumber: 1 },
-        { _id: 'abc2', name: 'testing', avatarUrl: 'test.com', orderNumber: 2 }
+        { _id: 'abc1', name: 'test', avatar: { cloudinaryUrl: 'test.com' }, orderNumber: 1 },
+        { _id: 'abc2', name: 'testing', avatar: { cloudinaryUrl: 'test.com' }, orderNumber: 2 }
       ]
     }
   }
@@ -30,7 +30,7 @@ export const MOCK_GET_COLLABORATOR = {
         name: 'test',
         role: 'testing',
         about: '<p>test</p>',
-        avatarUrl: 'test.com',
+        avatar: { cloudinaryUrl: 'test.com' },
         urls: {
           website: 'test',
           facebook: 'test',
