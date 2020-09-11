@@ -10,9 +10,13 @@ const ImageUploadList = ({ images, deleteImage }) => {
         <ul className='flex-root uploaded-images-container'>
 
           {(images.length && images.length > 0) && images.map((image, index) => {
+            if (!image) {
+              return null;
+            }
+
             if (image.cloudinaryUrl) {
               return (
-                <li className='upload-image-list-item' key={index + image.cloudinaryPublicId}>
+                <li className='upload-image-list-item' key={`${index}-${image.cloudinaryPublicId}`}>
 
                   <img src={image.cloudinaryUrl} />
 
@@ -30,11 +34,11 @@ const ImageUploadList = ({ images, deleteImage }) => {
 
             // this is temporary until
             // data models are aligned to have cloudinary url and publicID
-            return (
-              <li className='upload-image-list-item' key={image.path || image}>
-                <img src={image} />
-              </li>
-            );
+            // return (
+            //   <li className='upload-image-list-item' key={image.path || image}>
+            //     <img src={image} />
+            //   </li>
+            // );
           })}
 
         </ul>

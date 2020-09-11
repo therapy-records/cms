@@ -65,7 +65,7 @@ const ImageUpload = ({
   useEffect(() => {
     if (images.length > 0) {
       images.forEach(image => {
-        if (!image.cloudinaryUrl) {
+        if (image && !image.cloudinaryUrl) {
           if (objectHasValues(minImageDimensions)) {
             getImageDimensions(image).then((imageData) => {
               const validateImage = validateImageDimensions(minImageDimensions, imageData);
@@ -107,7 +107,7 @@ const ImageUpload = ({
     }).then(result => {
       if (result.data && result.data.cloudinaryUpload) {
         const {
-          publicId,
+          publicId: cloudinaryPublicId,
           url: uploadedUrl
         } = result.data.cloudinaryUpload;
 
@@ -115,10 +115,13 @@ const ImageUpload = ({
           type: 'addCloudinaryUrlToImage',
           payload: {
             uploadedUrl,
-            publicId,
+            cloudinaryPublicId,
             originalPath: localPath
           }
         });
+
+        // TODO: Form component needs onChange event.
+        // then Form reducer have 'valid' flag when uploading an image.
 
         // this is purely to support legacy, non-graphql based forms.
         if (handleOnUpload) {
@@ -126,7 +129,8 @@ const ImageUpload = ({
           const uploadedImageIndex = images.indexOf(uploadedImageInState);
           handleOnUpload(
             uploadedUrl,
-            uploadedImageIndex
+            uploadedImageIndex,
+            cloudinaryPublicId
           )
         }
       }
@@ -165,6 +169,22 @@ const ImageUpload = ({
   const hasError = (error || deleteError);
   const errorMessage = hasError && (error ? 'Image upload failed' : 'Delete image failed');
 
+  // console.log('images ', images);
+
+  const imagesHiddenInputValue = [];
+
+  if (images.length > 0) {
+    images.map((i) => {
+      if (i && i.cloudinaryPublicId && i.cloudinaryUrl) {
+        imagesHiddenInputValue.push({
+          cloudinaryPublicId: i.cloudinaryPublicId,
+          cloudinaryUrl: i.cloudinaryUrl
+        });
+      }
+    })
+  }
+  // console.log('imagesHiddenInputValue ', imagesHiddenInputValue);
+
   return (
     <div className='image-upload'>
 
@@ -198,6 +218,12 @@ const ImageUpload = ({
           error={validationMessage}
         />
       )}
+
+      <input
+        type='hidden'
+        id='avatar'
+        value={images}
+      />
 
     </div>
   )

@@ -1,7 +1,8 @@
 export const EMPTY_ARTICLE_SECTION_OBJ = {
   images: [
     {
-      url: ''
+      url: '',
+      cloudinaryPublicId: ''
     }
   ],
   copy: ''

@@ -124,8 +124,8 @@ export class NewsFormSectionField extends Component {
                 <ImageUploadContainer
                   existingImages={sectionImagesArray.length ? sectionImagesArray : []}
                   minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
-                  handleOnUpload={(imageUrl, sectionImageIndex) =>
-                    onUpdateSectionImages(imageUrl, sectionImageIndex, sectionIndex)
+                  handleOnUpload={(imageUrl, sectionImageIndex, cloudinaryPublicId) =>
+                    onUpdateSectionImages(imageUrl, sectionImageIndex, sectionIndex, cloudinaryPublicId)
                   }
                   onRemove={(sectionImageIndex) =>
                     onRemoveSectionImage(sectionImageIndex, sectionIndex)
