@@ -47,7 +47,8 @@ export const GET_COLLABORATOR = gql`
         role,
         about,
         avatar {
-          cloudinaryUrl
+          cloudinaryUrl,
+          cloudinaryPublicId
         },
         collabOn,
         urls {

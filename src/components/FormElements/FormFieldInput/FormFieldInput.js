@@ -65,7 +65,7 @@ const FormFieldInput = ({
       <ImageUploadContainer
         minImageDimensions={minImageDimensions}
         ctaCopy={ctaCopy}
-        existingImages={[ value.cloudinaryUrl ]}
+        existingImages={[ value ]}
         multiple={multipleImages}
       />
 

@@ -25,7 +25,7 @@ const COLLABORATOR_FIELDS = [
   },
   {
     id: 'avatar',
-    type: 'text',
+    type: 'arrayOfObjects',
     component: 'ImageUpload',
     label: 'Avatar',
     required: true,

@@ -34,7 +34,9 @@ export const mapFieldArrayOfStringsWithValues = (field, valuesObj) => {
 
 export const mapFieldArray = (field, valuesObj) => {
   if (isFieldArrayWithValues(field.id, valuesObj)) {
-    if (field.type === 'arrayOfObjects') {
+    if (field.component === 'ImageUpload') {
+      field.value = valuesObj[field.id];
+    } else if (field.type === 'arrayOfObjects') {
       field = mapFieldArrayOfObjectsWithValues(
         field,
         valuesObj
