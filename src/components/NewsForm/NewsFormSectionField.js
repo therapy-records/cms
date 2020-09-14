@@ -77,15 +77,6 @@ export class NewsFormSectionField extends Component {
 
     const sectionImages = fields.get(sectionIndex).images;
 
-    // temporary solution until DropzoneImageUpload is updated to handle `url` and `alt`
-    // currently only handles array of strings/urls
-    let sectionImagesArray = [];
-    if (sectionImages.length) {
-      sectionImagesArray = [
-        ...sectionImages.map(imageObj => imageObj.cloudinaryUrl)
-      ];
-    }
-
     return (
       <li
         key={`${sectionIndex}_${fields.length}`}
@@ -122,7 +113,7 @@ export class NewsFormSectionField extends Component {
             {showImageUpload
               ? (
                 <ImageUploadContainer
-                  existingImages={sectionImagesArray.length ? sectionImagesArray : []}
+                  existingImages={sectionImages.length ? sectionImages : []}
                   minImageDimensions={NEWS_ARTICLE_MIN_IMAGE_DIMENSIONS}
                   handleOnUpload={(imageUrl, sectionImageIndex, cloudinaryPublicId) =>
                     onUpdateSectionImages(imageUrl, sectionImageIndex, sectionIndex, cloudinaryPublicId)
