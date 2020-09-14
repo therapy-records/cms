@@ -1,7 +1,7 @@
 export const EMPTY_ARTICLE_SECTION_OBJ = {
   images: [
     {
-      url: '',
+      cloudinaryUrl: '',
       cloudinaryPublicId: ''
     }
   ],
@@ -20,9 +20,9 @@ export const getFirstImageInArticle = (article) => {
 
   sections && sections.length && sections.forEach((section) => {
     return section.images.forEach(imageObj => {
-      if (imageObj.url.length) {
-        sectionsWithImages.push(imageObj.url);
-        return imageObj.url;
+      if (imageObj.cloudinaryUrl && imageObj.cloudinaryUrl.length) {
+        sectionsWithImages.push(imageObj.cloudinaryUrl);
+        return imageObj.cloudinaryUrl;
       }
       return '';
     });
@@ -40,7 +40,7 @@ export const removeEmptyImageUrls = sections => {
       const sectionImages = [];
 
       section.images.map(imageObj => {
-        if (imageObj.url.length > 0) {
+        if (imageObj.cloudinaryUrl.length > 0) {
           sectionImages.push(imageObj);
         }
       });

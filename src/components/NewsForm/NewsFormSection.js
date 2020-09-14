@@ -13,7 +13,7 @@ export class NewsFormSection extends Component {
   }
 
   handleUpdateSectionImages(imageUrl, sectionImageIndex, sectionIndex, cloudinaryPublicId) {
-    this.props.updateSectionImages('NEWS_FORM', `sections.${sectionIndex}.images.${sectionImageIndex}.url`, imageUrl);
+    this.props.updateSectionImages('NEWS_FORM', `sections.${sectionIndex}.images.${sectionImageIndex}.cloudinaryUrl`, imageUrl);
     this.props.updateSectionImages('NEWS_FORM', `sections.${sectionIndex}.images.${sectionImageIndex}.cloudinaryPublicId`, cloudinaryPublicId);
   }
 

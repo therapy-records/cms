@@ -34,7 +34,7 @@ export class NewsFormSectionField extends Component {
 
     if (sectionImages.length) {
       sectionImagesArray = [
-        ...sectionImages.map(imageObj => imageObj.url)
+        ...sectionImages.map(imageObj => imageObj.cloudinaryUrl)
       ];
     }
 
@@ -82,7 +82,7 @@ export class NewsFormSectionField extends Component {
     let sectionImagesArray = [];
     if (sectionImages.length) {
       sectionImagesArray = [
-        ...sectionImages.map(imageObj => imageObj.url)
+        ...sectionImages.map(imageObj => imageObj.cloudinaryUrl)
       ];
     }
 

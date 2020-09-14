@@ -115,10 +115,10 @@ export class Article extends React.Component {
                       <div>
                         <ul className='images'>
                           {section.images.map(image => {
-                            return image.url && (
-                              <li key={image.url}>
+                            return image.cloudinaryUrl && (
+                              <li key={image.cloudinaryUrl}>
                                 <img
-                                  src={image.url}
+                                  src={image.cloudinaryUrl}
                                   alt='Fiona Ross'
                                 />
                               </li>
