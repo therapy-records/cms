@@ -1,6 +1,7 @@
 @import 'styles/variables.scss';
 
 .image-upload {
+  margin-bottom: 2em;
   .flex-container {
     @media(min-width: $bp-md) {
       display: flex;
@@ -47,4 +48,8 @@
     width: 5em;
     height: 5em;
   }
+}
+
+.loading-container {
+  background: #F5F5F5;
 }

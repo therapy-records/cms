@@ -44,6 +44,7 @@ const ImageUploadInput = ({
       style,
       multiple
     })}
+    className={loading ? 'loading-container' : ''}
     >
       <input {...getInputProps()} />
 

@@ -1,10 +1,10 @@
 export const baseStyle = {
   padding: '1em',
-  borderWidth: 2,
+  borderWidth: 3,
   borderRadius: 2,
-  borderColor: '#eeeeee',
+  borderColor: '#D2D2D2',
   borderStyle: 'dashed',
-  backgroundColor: '#fafafa',
+  backgroundColor: '#FAFAFA',
   color: '#bdbdbd',
   outline: 'none',
   transition: 'border .24s ease-in-out',
@@ -16,8 +16,8 @@ export const baseStyle = {
 };
 
 export const activeStyle = {
-  borderColor: '#2196f3',
-  background: 'orange'
+  borderColor: '#D7D7D7',
+  background: '#F5F5F5'
 };
 
 export const rejectStyle = {
@@ -25,5 +25,6 @@ export const rejectStyle = {
 };
 
 export const loadingStyle = {
-  background: '#BADA55'
+  background: '#FAFAFA',
+  borderColor: '#D7D7D7'
 };
