@@ -56,10 +56,19 @@ const ImageUpload = ({
   ] = useMutation(CLOUDINARY_DELETE);
 
   const onDrop = useCallback(files => {
-    dispatch({
-      type: 'addImages',
-      payload: files
-    });
+    dispatch({ type: 'removeValidationMessage' });
+
+    if (!multiple && files.length > 1) {
+      dispatch({
+        type: 'addValidationMessage',
+        payload: 'Only 1 image allowed.'
+      });
+    } else {
+      dispatch({
+        type: 'addImages',
+        payload: files
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -94,6 +103,7 @@ const ImageUpload = ({
           }
         }
       });
+      // }
     }
   }, [ images.length ]);
 
