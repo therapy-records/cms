@@ -55,7 +55,7 @@ function reducer(state, action) {
 
     case 'deleteLocalImage': {
       const updatedImages = state.images.filter((i) =>
-        i.path !== action.payload.path
+        i && i.path !== action.payload.path
       );
 
       return {

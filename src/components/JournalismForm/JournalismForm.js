@@ -37,6 +37,10 @@ export class JournalismForm extends React.Component {
     this.props.updateSectionImages(JOURNALISM_FORM, 'image', newImage);
   }
 
+  onRemoveImage() {
+    this.props.updateSectionImages(JOURNALISM_FORM, 'image', {});
+  }
+
   render() {
     const {
       error,
@@ -122,6 +126,7 @@ export class JournalismForm extends React.Component {
               handleOnUpload={(imageUrl, sectionImageIndex, cloudinaryPublicId) =>
                 this.onUploadImage(imageUrl, cloudinaryPublicId)
               }
+              onRemove={() => this.onRemoveImage()}
               required
               validate={required}
             />
