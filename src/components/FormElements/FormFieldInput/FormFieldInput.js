@@ -61,11 +61,16 @@ const FormFieldInput = ({
       />
     )
   } else if (component === 'ImageUpload') {
+    let existingImages = [];
+    if (value && value.length) {
+      existingImages = [ value ];
+    }
+
     return (
       <ImageUploadContainer
         minImageDimensions={minImageDimensions}
         ctaCopy={ctaCopy}
-        existingImages={[ value ]}
+        existingImages={existingImages}
         multiple={multipleImages}
       />
 
