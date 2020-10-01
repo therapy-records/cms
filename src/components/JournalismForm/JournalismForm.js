@@ -1,21 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, change } from 'redux-form';
 import { deleteJournalismArticle } from '../../actions/journalismArticle'
 import {
   selectSelectedJournalismArticleTitle,
   selectSelectedJournalismArticleCopy,
   selectSelectedJournalismArticleExternalLink,
   selectSelectedJournalismArticleImage,
-  selectSelectedJournalismArticleImageUrl,
   selectSelectedJournalismArticleReleaseDate
 } from '../../selectors/journalism';
 import { selectJournalismFormValues } from '../../selectors/form';
 import { selectUiStateLoading } from '../../selectors/uiState';
 import PageHeader from '../PageHeader';
 import Datepicker from '../Datepicker/Datepicker';
-import DropzoneImageUpload from '../DropzoneImageUpload';
+import ImageUploadContainer from '../../components/FormElements/ImageUpload/ImageUploadContainer';
 import TextInput from '../TextInput';
 import { required } from '../../utils/form';
 import {
@@ -31,6 +30,11 @@ export const JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS = {
 export class JournalismForm extends React.Component {
   handleSubmit() {
     this.props.onSubmitForm();
+  }
+
+  onUploadImage(cloudinaryUrl, cloudinaryPublicId) {
+    const newImage = { cloudinaryUrl, cloudinaryPublicId };
+    this.props.updateSectionImages(JOURNALISM_FORM, 'image', newImage);
   }
 
   render() {
@@ -53,16 +57,6 @@ export class JournalismForm extends React.Component {
       isEditForm = true;
     } else {
       isEditForm = false;
-    }
-
-    const imageObjUrl = formValues && formValues.imageObj && formValues.imageObj.cloudinaryUrl;
-    const imageUrl = !imageObjUrl && formValues.imageUrl;
-    let articleImages = [];
-
-    if (imageObjUrl) {
-      articleImages = [ imageObjUrl ];
-    } else if (imageUrl) {
-      articleImages = [ imageUrl ];
     }
 
     const submitButtonCopy = isEditForm ? 'Update article' : 'Post article';
@@ -119,15 +113,17 @@ export class JournalismForm extends React.Component {
           </div>
 
           <div className='row-large'>
-            <Field name='imageUrl'
-              component={DropzoneImageUpload}
+            <Field
+              name='image'
+              component={ImageUploadContainer}
               title='Article screenshot'
-              existingImages={articleImages}
-              validate={required}
+              existingImages={[ formValues.image ]}
               minImageDimensions={JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS}
-              helpText='Dimensions must be equal'
-              ctaCopy='Drag & drop image'
+              handleOnUpload={(imageUrl, sectionImageIndex, cloudinaryPublicId) =>
+                this.onUploadImage(imageUrl, cloudinaryPublicId)
+              }
               required
+              validate={required}
             />
           </div>
 
@@ -162,6 +158,8 @@ export class JournalismForm extends React.Component {
 JournalismForm.propTypes = {
   onSubmitForm: PropTypes.func.isRequired,
   onDeleteEntity: PropTypes.func.isRequired,
+  updateSectionImages: PropTypes.func.isRequired,
+  // removeSectionImage: PropTypes.func.isRequired
   error: PropTypes.string,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,
@@ -183,8 +181,7 @@ InitFromStateForm = connect(
       title: selectSelectedJournalismArticleTitle(state),
       copy: selectSelectedJournalismArticleCopy(state),
       externalLink: selectSelectedJournalismArticleExternalLink(state),
-      imageObj: selectSelectedJournalismArticleImage(state),
-      imageUrl: selectSelectedJournalismArticleImageUrl(state),
+      image: selectSelectedJournalismArticleImage(state),
       releaseDate: selectSelectedJournalismArticleReleaseDate(state)
     }
   })
@@ -196,7 +193,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  onDeleteEntity: (id) => deleteJournalismArticle(id)
+  onDeleteEntity: (id) => deleteJournalismArticle(id),
+  updateSectionImages: (...args) => change(...args)
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InitFromStateForm)

@@ -48,11 +48,6 @@ export const selectSelectedJournalismArticleImage = createSelector(
   (article) => article && article.image
 );
 
-export const selectSelectedJournalismArticleImageUrl = createSelector(
-  selectSelectedJournalismArticle,
-  (article) => article && article.imageUrl
-);
-
 export const selectSelectedJournalismArticleReleaseDate = createSelector(
   selectSelectedJournalismArticle,
   (article) => article && article.releaseDate

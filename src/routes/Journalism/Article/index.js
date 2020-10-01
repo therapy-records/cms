@@ -98,7 +98,7 @@ export class Article extends React.Component {
 
                 <div className='entity-image-container'>
                   <img
-                    src={article.imageUrl}
+                    src={article.image.cloudinaryUrl}
                     alt={`Fiona Ross - ${article.title}`}
                   />
                 </div>

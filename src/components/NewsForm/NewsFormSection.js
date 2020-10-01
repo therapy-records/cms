@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { change, arrayRemove } from 'redux-form';
 import NewsFormSectionField from './NewsFormSectionField';
 import { EMPTY_ARTICLE_SECTION_OBJ } from '../../utils/news';
+import { NEWS_FORM } from '../../constants';
 
 export class NewsFormSection extends Component {
   constructor(props) {
@@ -13,12 +14,12 @@ export class NewsFormSection extends Component {
   }
 
   handleUpdateSectionImages(imageUrl, sectionImageIndex, sectionIndex, cloudinaryPublicId) {
-    this.props.updateSectionImages('NEWS_FORM', `sections.${sectionIndex}.images.${sectionImageIndex}.cloudinaryUrl`, imageUrl);
-    this.props.updateSectionImages('NEWS_FORM', `sections.${sectionIndex}.images.${sectionImageIndex}.cloudinaryPublicId`, cloudinaryPublicId);
+    this.props.updateSectionImages(NEWS_FORM, `sections.${sectionIndex}.images.${sectionImageIndex}.cloudinaryUrl`, imageUrl);
+    this.props.updateSectionImages(NEWS_FORM, `sections.${sectionIndex}.images.${sectionImageIndex}.cloudinaryPublicId`, cloudinaryPublicId);
   }
 
   handleRemoveSectionImage(sectionImageIndex, sectionIndex) {
-    this.props.removeSectionImage('NEWS_FORM', `sections.${sectionIndex}.images`, sectionImageIndex);
+    this.props.removeSectionImage(NEWS_FORM, `sections.${sectionIndex}.images`, sectionImageIndex);
   }
 
   render() {
