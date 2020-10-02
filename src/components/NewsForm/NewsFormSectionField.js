@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-// import DropzoneImageUpload from '../DropzoneImageUpload';
 import ImageUploadContainer from '../../components/FormElements/ImageUpload/ImageUploadContainer';
 import RichTextEditor from '../RichTextEditor';
 import TextInput from '../../components/TextInput';
@@ -28,7 +27,8 @@ export class NewsFormSectionField extends Component {
     const sectionImages = fields.get(sectionIndex).images;
     const sectionVideoEmbed = fields.get(sectionIndex).videoEmbed;
 
-    // temporary solution until DropzoneImageUpload is updated to handle `url` and `alt`
+    // TODO
+    // temporary solution until ImageUpload is updated to handle `url` and `alt`
     // currently only handles array of strings/urls
     let sectionImagesArray = [];
 

@@ -164,6 +164,7 @@ describe('(Component) NewsFormSectionField', () => {
       expect(actual).to.eq(true);
     });
 
+    /*
     describe('<DropzoneImageUpload />', () => {
       describe('when state.showImageUpload is false', () => {
         beforeEach(() => {
@@ -273,8 +274,8 @@ describe('(Component) NewsFormSectionField', () => {
         });
 
       });
-
     });
+    */
 
     describe('videoEmbed field', () => {
       it('should NOT render by default', () => {
