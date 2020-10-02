@@ -59,7 +59,7 @@ describe('(Component) ImageUpload - reducer', () => {
 
       const mockImage = {
         originalPath: '/mock1.jpg',
-        publicId: '1',
+        cloudinaryPublicId: '1',
         uploadedUrl: 'test.com/1.jpg'
       };
 

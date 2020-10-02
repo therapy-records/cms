@@ -18,7 +18,11 @@ describe('(Container Component) SingleEntityContent', () => {
           about: '<p>test</p>',
           author: 'test',
           releaseDate: 'test',
-          createdA: 'test'
+          createdAt: 'test',
+          avatar: {
+            cloudinaryUrl: 'test.com',
+            cloudinaryPublicId: '1234',
+          }
         },
         render: CollaboratorDetails,
         executeMutation: sinon.spy(),

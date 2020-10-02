@@ -11,7 +11,6 @@ import {
   selectSelectedJournalismArticleCopy,
   selectSelectedJournalismArticleExternalLink,
   selectSelectedJournalismArticleImage,
-  selectSelectedJournalismArticleImageUrl,
   selectSelectedJournalismArticleReleaseDate
 } from './journalism';
 
@@ -28,7 +27,10 @@ const mockArticles = [
     _id: 'asdf1234',
     title: 'hi',
     createdAt: new Date(),
-    imageUrl: 'http://something/test.jpg',
+    image: {
+      cloudinaryUrl: 'http://something/test.jpg',
+      cloudinaryPublicId: '1234'
+    },
     image: {
       cloudinaryUrl: 'test2.jpg'
     }
@@ -37,7 +39,10 @@ const mockArticles = [
     _id: 'zxcv789',
     title: 'crazy',
     createdAt: new Date(),
-    imageUrl: 'http://something/test.jpg',
+    image: {
+      cloudinaryUrl: 'http://something/test.jpg',
+      cloudinaryPublicId: '1234'
+    },
     image: {
       cloudinaryUrl: 'test3.jpg'
     }
@@ -136,10 +141,10 @@ describe('(Selectors) journalism', () => {
     });
   });
 
-  describe('selectSelectedJournalismArticleImageUrl', () => {
+  describe('selectSelectedJournalismArticleImage', () => {
     it('should return selected/active article imageUrl', () => {
-      const actual = selectSelectedJournalismArticleImageUrl(mockState, articleId);
-      expect(actual).to.deep.eq(mockState.selectedJournalismArticle.imageUrl);
+      const actual = selectSelectedJournalismArticleImage(mockState, articleId);
+      expect(actual).to.deep.eq(mockState.selectedJournalismArticle.image);
     });
   });
 

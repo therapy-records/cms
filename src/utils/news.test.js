@@ -8,12 +8,12 @@ describe('(Utils) form', () => {
     sections: [
       {
         images: [
-          { url: '' }
+          { cloudinaryUrl: '' }
         ]
       },
       {
         images: [
-          { url: 'http://testing.com' }
+          { cloudinaryUrl: 'http://testing.com' }
         ]
       }
     ]
@@ -22,7 +22,7 @@ describe('(Utils) form', () => {
   describe('getFirstImageInArticle', () => {
     it('should return the first section with an image url', () => {
       const result = getFirstImageInArticle(mockArticle);
-      const expected = mockArticle.sections[1].images[0].url;
+      const expected = mockArticle.sections[1].images[0].cloudinaryUrl;
       expect(result).to.eq(expected);      
     });
 
@@ -42,17 +42,17 @@ describe('(Utils) form', () => {
         {
           copy: 'test',
           images: [
-            { url: 'test.jpg' },
-            { url: '' },
-            { url: 'test2.jpg' }
+            { cloudinaryUrl: 'test.jpg' },
+            { cloudinaryUrl: '' },
+            { cloudinaryUrl: 'test2.jpg' }
           ]
         },
         {
           copy: 'test2',
           images: [
-            { url: 'test.jpg' },
-            { url: 'test2.jpg' },
-            { url: '' }
+            { cloudinaryUrl: 'test.jpg' },
+            { cloudinaryUrl: 'test2.jpg' },
+            { cloudinaryUrl: '' }
           ]
         }
       ]);
@@ -60,15 +60,15 @@ describe('(Utils) form', () => {
         {
           copy: 'test',
           images: [
-            { url: 'test.jpg' },
-            { url: 'test2.jpg' }
+            { cloudinaryUrl: 'test.jpg' },
+            { cloudinaryUrl: 'test2.jpg' }
           ]
         },
         {
           copy: 'test2',
           images: [
-            { url: 'test.jpg' },
-            { url: 'test2.jpg' },
+            { cloudinaryUrl: 'test.jpg' },
+            { cloudinaryUrl: 'test2.jpg' },
           ]
         }
       ];

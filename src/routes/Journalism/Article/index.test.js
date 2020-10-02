@@ -20,7 +20,10 @@ describe('(Component) Journalism - Article', () => {
     mockArticle = {
       _id: 'asdf1234',
       title: 'test',
-      imageUrl: 'http://test.com/hi.jpg',
+      image: {
+        cloudinaryUrl: 'http://test.com/hi.jpg',
+        cloudinaryPublicId: '1234'
+      },
       releaseDate: new Date(),
       editedAt: new Date(),
       externalLink: 'http://test.com'

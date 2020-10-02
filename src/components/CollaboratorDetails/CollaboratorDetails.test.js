@@ -9,7 +9,10 @@ Enzyme.configure({ adapter: new Adapter() });
 let wrapper;
 const props = {
   name: 'Testing',
-  avatarUrl: 'test.com',
+  avatar: {
+    cloudinaryUrl: 'test.com',
+    cloudinaryPublicId: '1234'
+  },
   role: 'test',
   about: '<p>test</p>',
   collabOn: [
@@ -33,7 +36,7 @@ describe('(Component) CollaboratorDetails', () => {
     it('should render an image', () => {
       const actual = wrapper.containsMatchingElement(
         <img
-          src={props.avatarUrl}
+          src={props.avatar.cloudinaryUrl}
           alt={props.name}
         />
       );

@@ -30,7 +30,7 @@ export const MOCK_GET_COLLABORATOR = {
         name: 'test',
         role: 'testing',
         about: '<p>test</p>',
-        avatar: { cloudinaryUrl: 'test.com' },
+        avatar: { cloudinaryUrl: 'test.com', cloudinaryPublicId: '1234' },
         urls: {
           website: 'test',
           facebook: 'test',

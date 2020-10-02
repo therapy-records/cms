@@ -23,15 +23,15 @@ describe('(Component) News - Article', () => {
       sections: [
         {
           images: [
-            { url: 'http:/test1.com' },
-            { url: 'http:/test2.com' }
+            { cloudinaryUrl: 'http:/test1.com' },
+            { cloudinaryUrl: 'http:/test2.com' }
           ],
           copy: '<p>test</p>'
         },
         {
           images: [
-            { url: 'http:/test3.com' },
-            { url: 'http:/test4.com' }
+            { cloudinaryUrl: 'http:/test3.com' },
+            { cloudinaryUrl: 'http:/test4.com' }
           ],
           copy: '<p>test</p>',
           videoEmbed: '<iframe />'
@@ -269,13 +269,13 @@ describe('(Component) News - Article', () => {
         it('should render an image for each section', () => {
           const actual = wrapper.containsAllMatchingElements([
             <img
-              key={mockArticle.sections[0].images[0].url}
-              src={mockArticle.sections[0].images[0].url}
+              key={mockArticle.sections[0].images[0].cloudinaryUrl}
+              src={mockArticle.sections[0].images[0].cloudinaryUrl}
               alt='Fiona Ross'
             />,
             <img
-              key={mockArticle.sections[1].images[1].url}
-              src={mockArticle.sections[1].images[1].url}
+              key={mockArticle.sections[1].images[1].cloudinaryUrl}
+              src={mockArticle.sections[1].images[1].cloudinaryUrl}
               alt='Fiona Ross'
             />
           ]);

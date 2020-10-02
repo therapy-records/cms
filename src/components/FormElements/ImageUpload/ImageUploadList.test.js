@@ -54,7 +54,7 @@ describe('(Component) ImageUploadList', () => {
       });
 
       const images = wrapper.find('li img');
-      expect(images.length).to.eq(props.images.length);
+      expect(images.length).to.eq(1);
 
       const buttons = wrapper.find('li button');
       expect(buttons.length).to.eq(1);

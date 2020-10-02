@@ -32,8 +32,8 @@ let mockNewsArticle = {
     {
       copy: 'testing',
       images: [
-        { url: 'test.com' },
-        { url: 'test2.com' }
+        { cloudinaryUrl: 'test.com', cloudinaryPublicId: '1234'},
+        { cloudinaryUrl: 'test2.com', cloudinaryPublicId: '1234' }
       ]
     }
   ]

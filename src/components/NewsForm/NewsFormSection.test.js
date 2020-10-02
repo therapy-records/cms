@@ -35,7 +35,7 @@ describe('(Component) NewsFormSection', () => {
 
   describe('methods', () => {
     describe('handleUpdateSectionImages', () => {
-      it('should call props.updateSectionImages', () => {
+      it('should call props.updateSectionImages twice with cloudinaryUrl and cloudinaryPublicId', () => {
         const updateSectionImagesSpy = sinon.spy();
         wrapper = shallow(
           <NewsFormSection
@@ -47,12 +47,20 @@ describe('(Component) NewsFormSection', () => {
         wrapper.instance().handleUpdateSectionImages(
           'testImage.png',
           1,
-          3
+          3,
+          '1234'
         );
+
         expect(updateSectionImagesSpy).to.have.been.calledWith(
           'NEWS_FORM',
-          `sections.3.images.1.url`,
+          `sections.3.images.1.cloudinaryUrl`,
           'testImage.png'
+        );
+
+        expect(updateSectionImagesSpy).to.have.been.calledWith(
+          'NEWS_FORM',
+          `sections.3.images.1.cloudinaryPublicId`,
+          '1234'
         );
       });
     });
