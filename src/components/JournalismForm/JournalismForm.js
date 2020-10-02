@@ -34,11 +34,11 @@ export class JournalismForm extends React.Component {
 
   onUploadImage(cloudinaryUrl, cloudinaryPublicId) {
     const newImage = { cloudinaryUrl, cloudinaryPublicId };
-    this.props.updateSectionImages(JOURNALISM_FORM, 'image', newImage);
+    this.props.updateImage(JOURNALISM_FORM, 'image', newImage);
   }
 
   onRemoveImage() {
-    this.props.updateSectionImages(JOURNALISM_FORM, 'image', {});
+    this.props.updateImage(JOURNALISM_FORM, 'image', {});
   }
 
   render() {
@@ -126,7 +126,7 @@ export class JournalismForm extends React.Component {
               handleOnUpload={(imageUrl, sectionImageIndex, cloudinaryPublicId) =>
                 this.onUploadImage(imageUrl, cloudinaryPublicId)
               }
-              onRemove={() => this.onRemoveImage()}
+              handleOnRemove={() => this.onRemoveImage()}
               required
               validate={required}
             />
@@ -163,7 +163,7 @@ export class JournalismForm extends React.Component {
 JournalismForm.propTypes = {
   onSubmitForm: PropTypes.func.isRequired,
   onDeleteEntity: PropTypes.func.isRequired,
-  updateSectionImages: PropTypes.func.isRequired,
+  updateImage: PropTypes.func.isRequired,
   // removeSectionImage: PropTypes.func.isRequired
   error: PropTypes.string,
   pristine: PropTypes.bool,
@@ -199,7 +199,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   onDeleteEntity: (id) => deleteJournalismArticle(id),
-  updateSectionImages: (...args) => change(...args)
+  updateImage: (...args) => change(...args)
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InitFromStateForm)

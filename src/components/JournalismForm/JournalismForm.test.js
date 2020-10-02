@@ -8,7 +8,7 @@ import configureMockStore from 'redux-mock-store';
 import TextInput from '../TextInput/TextInput';
 import Datepicker from '../Datepicker/Datepicker';
 import ConnectedJournalismForm, { JournalismForm, JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS } from './JournalismForm';
-import DropzoneImageUpload from '../DropzoneImageUpload';
+import ImageUploadContainer from '../../components/FormElements/ImageUpload/ImageUploadContainer';
 import { required } from '../../utils/form';
 import { selectJournalismFormValues } from '../../selectors/form';
 import { selectUiStateLoading } from '../../selectors/uiState';
@@ -21,9 +21,13 @@ describe('(Component) JournalismForm', () => {
     props,
     baseProps = {
       onSubmitForm: () => {},
+      updateImage: () => {},
       formValues: {
         title: 'test',
-        imageUrl: 'test.com'
+        image: {
+          cloudinaryUrl: 'test.com',
+          cloudinaryPublicId: '1234'
+        }
       },
       articleId: '1234',
       promiseLoading: false,
@@ -116,47 +120,19 @@ describe('(Component) JournalismForm', () => {
       wrapper = shallow(<JournalismForm {...props} />);
     });
 
-    it('should render a imageUrl field', () => {
-      const actual = wrapper.containsMatchingElement(
-        <Field name='imageUrl'
-          component={DropzoneImageUpload}
-          title='Article screenshot'
-          existingImages={[props.formValues.imageUrl]}
-          minImageDimensions={JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS}
-          helpText='Dimensions must be equal'
-          ctaCopy='Drag & drop image'
-          required
-        />
-      );
-      expect(actual).to.equal(true);
-    });
+    it('should render an image field', () => {
+      const imageField = wrapper.find({ name: 'image' });
+      expect(imageField.length).to.eq(1);
+      expect(imageField.prop('name')).to.eq('image');
+      expect(imageField.prop('component')).to.eq(ImageUploadContainer);
+      expect(imageField.prop('title')).to.eq('Article screenshot');
+      expect(imageField.prop('existingImages')).to.deep.equal([props.formValues.image]);
+      expect(imageField.prop('minImageDimensions')).to.eq(JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS);
+      expect(imageField.prop('handleOnUpload')).to.be.a('function');
+      expect(imageField.prop('handleOnRemove')).to.be.a('function');
 
-    describe('when there formValues.imageObj.cloudinaryUrl and no formvalues.imageUrl', () => {
-      it('should render a imageUrl field with formValues.imageObj.cloudinaryUrl', () => {
-        const imageObjProp = {
-          cloudinaryUrl: 'test-url.jpg'
-        };
-        wrapper.setProps({
-          formValues: {
-            ...props.formValues,
-            imageUrl: null,
-            imageObj: imageObjProp
-          }
-        })
-
-        const actual = wrapper.containsMatchingElement(
-          <Field name='imageUrl'
-            component={DropzoneImageUpload}
-            title='Article screenshot'
-            existingImages={[ imageObjProp.cloudinaryUrl ]}
-            minImageDimensions={JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS}
-            helpText='Dimensions must be equal'
-            ctaCopy='Drag & drop image'
-            required
-          />
-        );
-        expect(actual).to.equal(true);
-      });
+      expect(imageField.prop('required')).to.eq(true);
+      expect(imageField.prop('validate')).to.eq(required);
     });
 
     it('should render a title field', () => {
