@@ -164,7 +164,6 @@ JournalismForm.propTypes = {
   onSubmitForm: PropTypes.func.isRequired,
   onDeleteEntity: PropTypes.func.isRequired,
   updateImage: PropTypes.func.isRequired,
-  // removeSectionImage: PropTypes.func.isRequired
   error: PropTypes.string,
   pristine: PropTypes.bool,
   submitting: PropTypes.bool,

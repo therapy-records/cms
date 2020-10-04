@@ -1,6 +1,7 @@
 import React from 'react';
 import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 import { SortableElement } from 'react-sortable-hoc';
 import SortableList, { SortableListContainer } from './SortableList';
@@ -10,6 +11,7 @@ import listItemPropsHandler from '../../utils/list-item-props-handler';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) SortableList', () => {
+  const onSortingUpdatedSpy = sinon.spy();
   let wrapper,
       props = {
         items: [
@@ -27,7 +29,7 @@ describe('(Component) SortableList', () => {
           }
         ],
         route: 'test',
-        onSortingUpdated: () => {}
+        onSortingUpdated: onSortingUpdatedSpy
       }
 
   beforeEach(() => {
@@ -37,6 +39,14 @@ describe('(Component) SortableList', () => {
       </BrowserRouter>
     );
   });
+
+  const actions = async (wrapper, _actions) => {
+    await act(async () => {
+      await (new Promise(resolve => setTimeout(resolve, 0)));
+      _actions();
+      wrapper.update();
+    });
+  };
 
   describe('SortableListContainer', () => {
     it('should render ul with correct class name', () => {
@@ -81,6 +91,41 @@ describe('(Component) SortableList', () => {
       )
     );
     expect(actual).to.eq(true);
+  });
+
+  describe('when onSortStart is called', () => {
+    it('should set sortingActive to true', async () => {
+      let sortableListContainer = wrapper.find('sortableList');
+
+      await actions(wrapper, () => {
+        sortableListContainer.props().onSortStart();
+        wrapper.update();
+        sortableListContainer = wrapper.find('sortableList');
+        expect(sortableListContainer.prop('sortingActive')).to.eq(true);
+      });
+    });
+  });
+
+  describe('when onSortEnd is called', () => {
+    it('should set sortingActive to false and call props.onSortingUpdated', async () => {
+      let sortableListContainer = wrapper.find('sortableList');
+
+      await actions(wrapper, () => {
+        sortableListContainer.props().onSortStart();
+        wrapper.update();
+        sortableListContainer = wrapper.find('sortableList');
+        expect(sortableListContainer.prop('sortingActive')).to.eq(true);
+
+        sortableListContainer.props().onSortEnd({
+          oldIndex: 1,
+          newIndex: 2
+        });
+        wrapper.update();
+        sortableListContainer = wrapper.find('sortableList');
+        expect(sortableListContainer.prop('sortingActive')).to.eq(false);
+        expect(onSortingUpdatedSpy).to.have.been.calledWith(1, 2);
+      });
+    });
   });
 
 });

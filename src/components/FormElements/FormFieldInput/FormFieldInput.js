@@ -61,9 +61,11 @@ const FormFieldInput = ({
       />
     )
   } else if (component === 'ImageUpload') {
-    let existingImages = [];
-    if (value && value.length) {
+    let existingImages;
+    if (value && value.cloudinaryUrl) {
       existingImages = [ value ];
+    } else {
+      existingImages = [];
     }
 
     return (

@@ -12,11 +12,13 @@ import ImageUploadContainer from '../../components/FormElements/ImageUpload/Imag
 import { required } from '../../utils/form';
 import { selectJournalismFormValues } from '../../selectors/form';
 import { selectUiStateLoading } from '../../selectors/uiState';
-import { JOUNALISM_FIELD_COPY_MAX_LENGTH } from '../../constants';
+import { JOURNALISM_FORM, JOUNALISM_FIELD_COPY_MAX_LENGTH } from '../../constants';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) JournalismForm', () => {
+  const updateImageSpy = sinon.spy();
+
   let wrapper,
     props,
     baseProps = {
@@ -31,7 +33,8 @@ describe('(Component) JournalismForm', () => {
       },
       articleId: '1234',
       promiseLoading: false,
-      onDeleteEntity: () => {}
+      onDeleteEntity: () => {},
+      updateImage: updateImageSpy,
     };
     props = baseProps;
 
@@ -120,19 +123,54 @@ describe('(Component) JournalismForm', () => {
       wrapper = shallow(<JournalismForm {...props} />);
     });
 
-    it('should render an image field', () => {
-      const imageField = wrapper.find({ name: 'image' });
-      expect(imageField.length).to.eq(1);
-      expect(imageField.prop('name')).to.eq('image');
-      expect(imageField.prop('component')).to.eq(ImageUploadContainer);
-      expect(imageField.prop('title')).to.eq('Article screenshot');
-      expect(imageField.prop('existingImages')).to.deep.equal([props.formValues.image]);
-      expect(imageField.prop('minImageDimensions')).to.eq(JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS);
-      expect(imageField.prop('handleOnUpload')).to.be.a('function');
-      expect(imageField.prop('handleOnRemove')).to.be.a('function');
 
-      expect(imageField.prop('required')).to.eq(true);
-      expect(imageField.prop('validate')).to.eq(required);
+    describe('ImageUpload', () => {
+      it('should render', () => {
+        const imageField = wrapper.find({ name: 'image' });
+        expect(imageField.length).to.eq(1);
+        expect(imageField.prop('name')).to.eq('image');
+        expect(imageField.prop('component')).to.eq(ImageUploadContainer);
+        expect(imageField.prop('title')).to.eq('Article screenshot');
+        expect(imageField.prop('existingImages')).to.deep.equal([props.formValues.image]);
+        expect(imageField.prop('minImageDimensions')).to.eq(JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS);
+        expect(imageField.prop('handleOnUpload')).to.be.a('function');
+        expect(imageField.prop('handleOnRemove')).to.be.a('function');
+
+        expect(imageField.prop('required')).to.eq(true);
+        expect(imageField.prop('validate')).to.eq(required);
+      });
+
+      it('ImageUpload handleOnUpload should call props.updateImage', () => {
+        const imageField = wrapper.find({ name: 'image' });
+        imageField.props().handleOnUpload(
+          baseProps.formValues.image.cloudinaryUrl,
+          1,
+          baseProps.formValues.image.cloudinaryPublicId
+        );
+
+        expect(updateImageSpy).to.have.been.called;
+        expect(updateImageSpy).to.have.been.calledWith(
+          JOURNALISM_FORM,
+          'image',
+          {
+            cloudinaryUrl: baseProps.formValues.image.cloudinaryUrl,
+            cloudinaryPublicId: baseProps.formValues.image.cloudinaryPublicId
+          },
+        );
+      });
+
+      it('ImageUpload handleOnRemove should call props.updateImage', () => {
+        const imageField = wrapper.find({ name: 'image' });
+        imageField.props().handleOnRemove();
+
+        expect(updateImageSpy).to.have.been.called;
+        expect(updateImageSpy).to.have.been.calledWith(
+          JOURNALISM_FORM,
+          'image',
+          {}
+        );
+      });
+
     });
 
     it('should render a title field', () => {

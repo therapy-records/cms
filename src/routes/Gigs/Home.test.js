@@ -6,8 +6,9 @@ import { BrowserRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
 import PageHeader from '../../components/PageHeader';
 import List from '../../components/List';
+import EmptyMessage from '../../components/EmptyMessage';
 import { GET_GIGS } from '../../queries/index';
-import { MOCK_GET_GIGS } from '../../mocks/gigs.mock';
+import { MOCK_GET_GIGS, MOCK_GET_GIGS_EMPTY } from '../../mocks/gigs.mock';
 import GigsHome from './index';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -72,4 +73,28 @@ describe('(Component) Gigs - Home', () => {
     });
   });
 
+  describe('when there are no gigs', () => {
+    beforeEach(() => {
+      wrapper = mount(
+        <BrowserRouter>
+          <MockedProvider mocks={[MOCK_GET_GIGS_EMPTY]} addTypename={false}>
+            <GigsHome />
+          </MockedProvider>
+        </BrowserRouter>
+      );
+    });
+
+    it('should render <EmptyMessage />', async () => {
+      await actions(wrapper, () => {
+        wrapper.update();
+        const actual = wrapper.containsMatchingElement(
+          <EmptyMessage
+            entityName='gigs'
+            createCopy='Create a new Gig'
+          />
+        );
+        expect(actual).to.equal(true);
+      });
+    });
+  });
 });

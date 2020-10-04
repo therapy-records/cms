@@ -17,6 +17,17 @@ export const MOCK_GET_GIGS = {
   }
 };
 
+export const MOCK_GET_GIGS_EMPTY = {
+  request: {
+    query: GET_GIGS
+  },
+  result: {
+    data: {
+      gigs: []
+    }
+  }
+};
+
 export const MOCK_GET_GIG = {
   request: {
     query: GET_GIG,

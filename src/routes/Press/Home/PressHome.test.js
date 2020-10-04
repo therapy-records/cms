@@ -6,9 +6,10 @@ import { BrowserRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
 import PressHome from './index';
 import { GET_PRESS } from '../../../queries';
-import { MOCK_GET_PRESS } from '../../../mocks/press.mock';
+import { MOCK_GET_PRESS, MOCK_GET_PRESS_EMPTY } from '../../../mocks/press.mock';
 import PageHeader from '../../../components/PageHeader';
 import List from '../../../components/List';
+import EmptyMessage from '../../../components/EmptyMessage';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -72,4 +73,28 @@ describe('(Component) PressHome', () => {
     });
   });
 
+  describe('when there are no articles', () => {
+    beforeEach(() => {
+      wrapper = mount(
+        <BrowserRouter>
+          <MockedProvider mocks={[MOCK_GET_PRESS_EMPTY]} addTypename={false}>
+            <PressHome />
+          </MockedProvider>
+        </BrowserRouter>
+      );
+    });
+
+    it('should render <EmptyMessage />', async () => {
+      await actions(wrapper, () => {
+        wrapper.update();
+        const actual = wrapper.containsMatchingElement(
+          <EmptyMessage
+            entityName='press'
+            createCopy='Create Press'
+          />
+        );
+        expect(actual).to.equal(true);
+      });
+    });
+  });
 });

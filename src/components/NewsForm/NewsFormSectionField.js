@@ -118,7 +118,7 @@ export class NewsFormSectionField extends Component {
                   handleOnUpload={(imageUrl, sectionImageIndex, cloudinaryPublicId) =>
                     onUpdateSectionImages(imageUrl, sectionImageIndex, sectionIndex, cloudinaryPublicId)
                   }
-                  onRemove={(sectionImageIndex) =>
+                  handleOnRemove={(sectionImageIndex) =>
                     onRemoveSectionImage(sectionImageIndex, sectionIndex)
                   }
                   multiple

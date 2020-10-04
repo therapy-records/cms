@@ -25,6 +25,7 @@ const QueryContainer = ({
 
   const hasQueryPropError = (!loading && !queryError && entityName && !hasData);
 
+  /* istanbul ignore next */
   if (hasQueryPropError) {
     console.warn(`The provided gql query does not return anything with entityName '${entityName}'. Is the entityName correct?`);
   }

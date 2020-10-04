@@ -1,10 +1,11 @@
 import React from 'react';
-import { Field } from 'redux-form';
+import { Field, FieldArray } from 'redux-form';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import configureMockStore from 'redux-mock-store';
 import ConnectedNewsForm, {
   NewsForm,
+  NewsFormSection,
   required
 } from './NewsForm';
 import TextInput from '../TextInput';
@@ -128,6 +129,16 @@ describe('(Component) NewsForm', () => {
             label='Title'
             validate={required}
             required
+          />
+        );
+        expect(actual).to.equal(true);
+      });
+
+      it('should render a `sections` component', () => {
+        const actual = wrapper.containsMatchingElement(
+          <FieldArray
+            name='sections'
+            component={NewsFormSection}
           />
         );
         expect(actual).to.equal(true);

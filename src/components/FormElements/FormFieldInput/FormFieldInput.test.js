@@ -112,18 +112,19 @@ describe('(Component) FormFieldInput', () => {
     });
 
     describe('when field.component is `ImageUpload`', () => {
+      const mockField = {
+        id: 'test',
+        component: 'ImageUpload',
+        title: 'Test',
+        minImageDimensions: {
+          width: 10,
+          height: 10
+        },
+        ctaCopy: 'Drop it like it\'s hot',
+        value: ''
+      };
+
       it('should render <ImageUploadContainer />', () => {
-        const mockField = {
-          id: 'test',
-          component: 'ImageUpload',
-          title: 'Test',
-          minImageDimensions: {
-            width: 10,
-            height: 10
-          },
-          ctaCopy: 'Drop it like it\'s hot',
-          value: ''
-        };
         wrapper.setProps({
           ...mockField,
           onChange: mockOnChange
@@ -133,13 +134,41 @@ describe('(Component) FormFieldInput', () => {
           <ImageUploadContainer
             minImageDimensions={mockField.minImageDimensions}
             ctaCopy={mockField.ctaCopy}
-            existingImages={mockField[mockField.value]}
+            // existingImages={mockField[mockField.value]}
+            existingImages={[]}
             multiple={mockField.multipleImages}
           />
         );
         expect(actual).to.eq(true);
       });
 
+      describe('when there is a props.value with image object', () => {
+        it('should render ImageUploadContainer with existingImages array', () => {
+          const mockExistingImage = {
+            cloudinaryUrl: 'test1.com',
+            cloudinaryPublicId: '1234'
+          };
+
+          mockField.value = mockExistingImage;
+
+          wrapper.setProps({
+            ...mockField,
+            onChange: mockOnChange
+          });
+
+          const expectedExistingImages = [mockExistingImage];
+
+          const actual = wrapper.containsMatchingElement(
+            <ImageUploadContainer
+              minImageDimensions={mockField.minImageDimensions}
+              ctaCopy={mockField.ctaCopy}
+              existingImages={expectedExistingImages}
+              multiple={mockField.multipleImages}
+            />
+          );
+          expect(actual).to.eq(true);
+        });
+      });
     });
 
     describe('when field.component is `Datepicker`', () => {

@@ -17,6 +17,17 @@ export const MOCK_GET_PRESS = {
   }
 };
 
+export const MOCK_GET_PRESS_EMPTY = {
+  request: {
+    query: GET_PRESS
+  },
+  result: {
+    data: {
+      press: []
+    }
+  }
+};
+
 export const MOCK_GET_PRESS_ARTICLE = {
   request: {
     query: GET_PRESS_ARTICLE,
