@@ -8,13 +8,16 @@ import ImageUpload from './ImageUpload';
 import FormFieldError from '../FormFieldError';
 import {
   MOCK_CLOUDINARY_UPLOAD,
-  MOCK_CLOUDINARY_UPLOAD_LOADING
+  MOCK_CLOUDINARY_UPLOAD_LOADING,
+  MOCK_CLOUDINARY_DELETE
 } from '../../../mocks/cloudinary-upload.mock';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) ImageUpload', () => {
   let wrapper;
+  const handleOnUploadSpy = sinon.spy();
+
   const props = {
     cloudinaryKey: '1234',
     cloudinarySignature: '5678',
@@ -29,7 +32,8 @@ describe('(Component) ImageUpload', () => {
       width: 10,
       height: 10
     },
-    multiple: true
+    multiple: true,
+    handleOnUpload: handleOnUploadSpy
   };
 
   let mocks = [
@@ -152,6 +156,46 @@ describe('(Component) ImageUpload', () => {
         });
       });
     });
+
+    describe('when multiple images are dropped but props.multiple is false', () => {
+      it('should render <FormFieldError /> and NOT add image to <ImageUploadInput /> images prop', async () => {
+        wrapper = mount(
+          <BrowserRouter>
+            <MockedProvider mocks={mocks} addTypename={false}>
+              <ImageUpload {...props} multiple={false} existingImages={[]} />
+            </MockedProvider>
+          </BrowserRouter>
+        );
+
+        const imageUploadInput = wrapper.find('ImageUploadInput');
+        const mockImagesArray = [
+          { path: 'local-image1.jpg', width: 200, height: 200 },
+          { path: 'local-image2.jpg', width: 200, height: 200 }
+        ];
+
+        await act(async () => {
+          imageUploadInput.prop('onDrop')(mockImagesArray);
+
+          await actions(wrapper, () => {
+            wrapper.update();
+
+            const expectedValidationMessage = 'Only 1 image is allowed.';
+            const actual = wrapper.containsMatchingElement(
+              <FormFieldError
+                error={expectedValidationMessage}
+              />
+            );
+            expect(actual).to.eq(true);
+
+            const imageUploadInput = wrapper.find('ImageUploadInput');
+
+            const imageUploadInputImages = imageUploadInput.prop('images');
+            const newImageInArray = imageUploadInputImages.filter((i) => i.path === mockImagesArray[0].path);
+            expect(newImageInArray.length).to.eq(0);
+          });
+        });
+      });
+    });
   });
 
   describe('when onUploadImage method is called', () => {
@@ -183,7 +227,6 @@ describe('(Component) ImageUpload', () => {
             props.existingImages[1],
             props.existingImages[2],
             {
-              // path: mockImagesArray[0].path,
               ...mockImagesArray[0],
               cloudinaryPublicId: '1234',
               cloudinaryUrl: 'cloudinary.com/1.jpg'
@@ -226,11 +269,4 @@ describe('(Component) ImageUpload', () => {
       });
     });
   });
-
-  // this is a complete pain to unit test
-  // think moving away from enzyme and using pure jest will allow this to work.
-  // describe('when onDeleteImage method is called', () => {
-  //   it('should update <ImageUploadInput /> images prop', async() => {
-  //   });
-  // });
 });

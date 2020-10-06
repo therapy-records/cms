@@ -91,7 +91,6 @@ describe('(Component) CollaboratorsHomeContent', () => {
           expect(button.props().disabled).to.eq(false);
         });
       });
-
     });
 
   });

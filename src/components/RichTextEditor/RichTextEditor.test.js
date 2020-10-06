@@ -18,7 +18,7 @@ describe('(Component) RichTextEditor', () => {
         error: ''
       }
     },
-    onChangeSpy;
+    inputOnChangeSpy;
 
   beforeEach(() => {
     wrapper = shallow(<_RichTextEditor {...props} />);
@@ -27,10 +27,11 @@ describe('(Component) RichTextEditor', () => {
   describe('methods', () => {
     describe('handleOnChange', () => {
       beforeEach(() => {
-        onChangeSpy = sinon.spy();
+        inputOnChangeSpy = sinon.spy();
+
         wrapper.setProps({
           input: {
-            onChange: onChangeSpy
+            onChange: inputOnChangeSpy
           }
         });
       });
@@ -45,8 +46,24 @@ describe('(Component) RichTextEditor', () => {
       it('should call props.input.onChange', () => {
         const mockValue = 'testing';
         wrapper.instance().handleOnChange(mockValue);
-        expect(onChangeSpy).to.have.been.calledOnce;
-        expect(onChangeSpy).to.have.been.calledWith(mockValue.toString('html'));
+        expect(inputOnChangeSpy).to.have.been.calledOnce;
+        expect(inputOnChangeSpy).to.have.been.calledWith(mockValue.toString('html'));
+      });
+
+      describe('when there is no props.input.onChange', () => {
+        it('should call props.onChange', () => {
+          const onChangeSpy = sinon.spy();
+
+          wrapper.setProps({
+            input: {},
+            onChange: onChangeSpy
+          });
+
+          const mockValue = 'testing';
+          wrapper.instance().handleOnChange(mockValue);
+          expect(onChangeSpy).to.have.been.calledOnce;
+          expect(onChangeSpy).to.have.been.calledWith(mockValue.toString('html'));
+        });
       });
     });
   });

@@ -61,7 +61,7 @@ const ImageUpload = ({
     if (!multiple && files.length > 1) {
       dispatch({
         type: 'addValidationMessage',
-        payload: 'Only 1 image allowed.'
+        payload: 'Only 1 image is allowed.'
       });
     } else {
       dispatch({
@@ -137,6 +137,7 @@ const ImageUpload = ({
         if (handleOnUpload) {
           const uploadedImageInState = images.find((i) => i.cloudinaryUrl === uploadedUrl);
           const uploadedImageIndex = images.indexOf(uploadedImageInState);
+
           handleOnUpload(
             uploadedUrl,
             uploadedImageIndex,
@@ -179,8 +180,6 @@ const ImageUpload = ({
   const hasError = (error || deleteError);
   const errorMessage = hasError && (error ? 'Image upload failed' : 'Delete image failed');
 
-  // console.log('images ', images);
-
   const imagesHiddenInputValue = [];
 
   if (images.length > 0) {
@@ -193,7 +192,6 @@ const ImageUpload = ({
       }
     })
   }
-  // console.log('imagesHiddenInputValue ', imagesHiddenInputValue);
 
   return (
     <div className='image-upload'>

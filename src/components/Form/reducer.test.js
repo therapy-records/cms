@@ -106,8 +106,9 @@ describe('(Component) Form - reducer', () => {
     it('should reset the state', () => {
       const mockFields = [
         { id: 'testFieldA' },
+        { id: 'testFieldB', value: 'test' },
         {
-          id: 'testFieldB',
+          id: 'testFieldC',
           items: [
             { value: 'testA' },
             { value: 'testB' } 
@@ -126,8 +127,12 @@ describe('(Component) Form - reducer', () => {
         submitSuccess: false,
         fields: [
           {...mockFields[0] },
-          {
+          { 
             id: mockFields[1].id,
+            value: ''
+          },
+          {
+            id: mockFields[2].id,
             items: [
               { value: '' },
               { value: '' }

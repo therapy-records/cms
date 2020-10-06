@@ -10,13 +10,17 @@ const mockData = [
   {
     _id: 'abcd1234',
     title: 'test',
-    imageUrl: 'test.com',
+    image: {
+      cloudinaryUrl: 'test.com'
+    },
     date: 'test'
   },
   {
     _id: 'abcd12345',
     title: 'test2',
-    imageUrl: 'test2.com',
+    image: {
+      cloudinaryUrl: 'test2.com'
+    },
     date: 'test'
   }
 ];

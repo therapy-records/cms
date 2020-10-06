@@ -20,7 +20,6 @@ const listItemPropsHandler = ({
     _id,
     author,
     image,
-    imageUrl,
     avatar,
     excerpt,
     releaseDate,
@@ -34,7 +33,7 @@ const listItemPropsHandler = ({
   // TODO: rename itemTitle / item.title to `heading`
   const itemTitle = entityHeading(item);
 
-  const itemImageUrl = itemsHaveMultipleImages ? getFirstImageInArticle(item) : (imageUrl || (image && image.cloudinaryUrl) || (avatar && avatar.cloudinaryUrl));
+  const itemImageUrl = itemsHaveMultipleImages ? getFirstImageInArticle(item) : ((image && image.cloudinaryUrl && image.cloudinaryUrl) || (avatar && avatar.cloudinaryUrl && avatar.cloudinaryUrl));
 
   let itemDescription = excerpt;
 
