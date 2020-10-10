@@ -30,6 +30,11 @@ export const MOCK_GET_STATS = {
         { venue: 'a' },
         { venue: 'b' },
         { venue: 'c' }
+      ],
+      gallery: [
+        { description: 'a' },
+        { description: 'b' },
+        { description: 'c' }
       ]
     }
   }

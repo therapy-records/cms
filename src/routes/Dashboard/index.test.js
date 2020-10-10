@@ -51,9 +51,16 @@ describe('(Component) Dashboard', () => {
       expect(actual).to.be.true;
     });
 
-    it('should render a link to create a collaborator', () => {
+    it('should render a link to create a gig', () => {
       const actual = wrapper.containsMatchingElement(
         <Link to='gigs/create'>Add Gig</Link>
+      );
+      expect(actual).to.be.true;
+    });
+
+    it('should render a link to upload galley image', () => {
+      const actual = wrapper.containsMatchingElement(
+        <Link to='gallery/upload'>Upload Gallery Image</Link>
       );
       expect(actual).to.be.true;
     });

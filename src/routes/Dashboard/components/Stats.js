@@ -16,6 +16,7 @@ const Stats = () => (
           <li>{queryData.press.length} Press articles</li>
           <li>{queryData.collaborators.length} Collaborators</li>
           <li>{queryData.gigs.length} Gigs</li>
+          <li>{queryData.gallery.length} Gallery images</li>
         </ul>
       )}
     />

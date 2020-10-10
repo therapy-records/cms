@@ -51,7 +51,8 @@ describe('(Component) Stats', () => {
           <li>{mocks[0].result.data.journalism.length} Journalism articles</li>,
           <li>{mocks[0].result.data.press.length} Press articles</li>,
           <li>{mocks[0].result.data.collaborators.length} Collaborators</li>,
-          <li>{mocks[0].result.data.gigs.length} Gigs</li>
+          <li>{mocks[0].result.data.gigs.length} Gigs</li>,
+          <li>{mocks[0].result.data.gallery.length} Gallery Images</li>
         ]);
       });
     });

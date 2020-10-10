@@ -142,6 +142,9 @@ export const GET_STATS = gql`
     },
     gigs {
       venue
+    },
+    gallery {
+      description
     }
   }
 `;

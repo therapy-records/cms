@@ -14,6 +14,7 @@ const Dashboard = () => (
       <Link to='press/create' className='btn'>Create Press</Link>
       <Link to='collaborators/create' className='btn'>Add Collaborator</Link>
       <Link to='gigs/create' className='btn'>Add Gig</Link>
+      <Link to='gallery/upload' className='btn'>Upload Gallery Image</Link>
     </div>
 
     <Stats />
