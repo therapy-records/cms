@@ -39,6 +39,15 @@ export const GET_COLLABORATORS = gql`
   }
 `;
 
+export const GET_COLLABORATORS_NAMES = gql`
+  {
+    collaborators {
+      _id,
+      name
+    }
+  }
+`;
+
 export const GET_COLLABORATOR = gql`
   query($id: ID!) {
       collaborator(_id: $id) {
