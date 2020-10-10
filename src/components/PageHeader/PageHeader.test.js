@@ -205,11 +205,26 @@ describe('(Component) PageHeader', () => {
       });
     });
 
-    it('should render a `create` Link', () => {
-      const editButton = wrapper.find(Link).last();
-      expect(editButton.length).to.eq(1);
-      const expectedTo = `/${baseProps.entityCollection}/create`;
-      expect(editButton.prop('to')).to.eq(expectedTo);
+    describe('`create` link', () => {
+      it('should render', () => {
+        const editButton = wrapper.find(Link).last();
+        expect(editButton.length).to.eq(1);
+        const expectedTo = `/${baseProps.entityCollection}/create`;
+        expect(editButton.prop('to')).to.eq(expectedTo);
+      });
+
+      it('should render custom text and link with props.createButtonCopy', () => {
+        const mockCreateButtonCopy = 'Upload';
+        wrapper.setProps({ createButtonCopy: 'Upload' });
+        const actual = wrapper.containsMatchingElement(
+          <Link
+            to={`/${props.entityCollection}/${mockCreateButtonCopy.toLowerCase()}`}
+            className='btn'
+          >Upload
+          </Link>
+        );
+        expect(actual).to.equal(true);
+      });
     });
 
     describe('bespoke button', () => {

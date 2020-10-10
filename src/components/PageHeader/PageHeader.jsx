@@ -40,6 +40,7 @@ class PageHeader extends Component {
       renderEditButton,
       renderDeleteButton,
       renderCreateButton,
+      createButtonCopy,
       bespokeButton,
       longHeading
     } = this.props;
@@ -94,9 +95,9 @@ class PageHeader extends Component {
 
               {renderCreateButton && (
                 <Link
-                  to={`/${entityCollection}/create`}
+                  to={`/${entityCollection}/${createButtonCopy.toLowerCase()}`}
                   className='btn'
-                >Create
+                >{createButtonCopy}
                 </Link>
               )}
 
@@ -126,6 +127,7 @@ PageHeader.propTypes = {
   renderEditButton: PropTypes.bool,
   renderDeleteButton: PropTypes.bool,
   renderCreateButton: PropTypes.bool,
+  createButtonCopy: PropTypes.string,
   bespokeButton: PropTypes.node,
   longHeading: PropTypes.bool
 };
@@ -138,6 +140,7 @@ PageHeader.defaultProps = {
   renderEditButton: false,
   renderDeleteButton: false,
   renderCreateButton: false,
+  createButtonCopy: 'Create',
   bespokeButton: null,
   longHeading: false
 };

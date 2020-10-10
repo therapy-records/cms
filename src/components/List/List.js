@@ -11,29 +11,38 @@ const List = ({
   onViewButtonClick,
   onEditButtonClick,
   itemsHaveMultipleImages,
-  columns
+  columns,
+  columnnsPerRow,
+  listItemComponent
 }) => {
   let className = 'list ';
   if (columns) {
-    className += 'list-with-columns'
+    className += 'list-with-columns';
+    if (columnnsPerRow) {
+      className += ` columns-${columnnsPerRow}`;
+    }
   }
 
   return (
     <ul className={className}>
-      {data.map(item => (
-        <ListItem
-          key={item._id}
-          {...listItemPropsHandler({
-            item,
-            route,
-            itemsHaveMultipleImages,
-            cardDesign: columns
-          })}
-          onItemClick={() => onItemClick && onItemClick(item)}
-          onViewButtonClick={() => onViewButtonClick && onViewButtonClick(item)}
-          onEditButtonClick={() => onEditButtonClick && onEditButtonClick(item)}
-        />
-      ))}
+      {data.map(item =>
+        listItemComponent ? (
+          React.createElement(listItemComponent, { key: item._id, ...item })
+        ) : (
+          <ListItem
+            key={item._id}
+            {...listItemPropsHandler({
+              item,
+              route,
+              itemsHaveMultipleImages,
+              cardDesign: columns
+            })}
+            onItemClick={() => onItemClick && onItemClick(item)}
+            onViewButtonClick={() => onViewButtonClick && onViewButtonClick(item)}
+            onEditButtonClick={() => onEditButtonClick && onEditButtonClick(item)}
+          />
+        )
+      )}
     </ul>
   );
 };
@@ -45,7 +54,9 @@ List.propTypes = {
   onViewButtonClick: PropTypes.func,
   onEditButtonClick: PropTypes.func,
   itemsHaveMultipleImages: PropTypes.bool,
-  columns: PropTypes.bool
+  columns: PropTypes.bool,
+  columnnsPerRow: PropTypes.number,
+  listItemComponent: PropTypes.func
 };
 
 List.defaultProps = {
@@ -53,7 +64,9 @@ List.defaultProps = {
   onViewButtonClick: null,
   onEditButtonClick: null,
   itemsHaveMultipleImages: false,
-  columns: false
+  columns: false,
+  columnnsPerRow: 3,
+  listItemComponent: null
 };
 
 export default List;

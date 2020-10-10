@@ -21,10 +21,25 @@
       @media(min-width: $bp-sm) {
         max-width: 50%;
       }
-      @media(min-width: $bp-xlg) {
-        max-width: 33.333%;
+    }
+
+    // default 
+    &.columns-3 {
+      > li {
+        @media(min-width: $bp-xlg) {
+          max-width: 33.333%;
+        }
       }
     }
+
+    &.columns-4 {
+      > li {
+        @media(min-width: $bp-xlg) {
+          max-width: 25%;
+        }
+      }
+    }
+
   }
 }
 

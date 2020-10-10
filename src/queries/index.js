@@ -91,6 +91,18 @@ export const GET_PRESS_ARTICLE = gql`
   }
 `;
 
+export const GET_GALLERY = gql`
+  {
+    gallery {
+      _id,
+      image {
+        cloudinaryUrl,
+        cloudinaryPublicId
+      }
+    }
+  }
+`;
+
 export const GET_STATS = gql`
   {
     news {

@@ -3,6 +3,7 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import List from './index';
 import listItemPropsHandler from '../../utils/list-item-props-handler';
+import GalleryListItem from '../../routes/Gallery/Home/GalleryListItem';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -49,6 +50,17 @@ describe('(Component) List', () => {
       });
       const expected = 'list list-with-columns';
       expect(wrapper.find('ul').hasClass(expected)).to.eq(true);
+    });
+
+    describe('when `columnnsPerRow` prop is passed', () => {
+      it('should add correct className to UL container', () => {
+        wrapper.setProps({
+          columns: true,
+          columnnsPerRow: 4
+        });
+        const expected = 'list list-with-columns columns-4';
+        expect(wrapper.find('ul').hasClass(expected)).to.eq(true);
+      });
     });
   });
 
@@ -107,6 +119,23 @@ describe('(Component) List', () => {
       });
     });
 
+  });
+
+  describe('with props.listItemComponent', () => {
+    it('should render listItemComponent element', () => {
+      wrapper.setProps({
+        listItemComponent: GalleryListItem
+      });
+
+      const listItem = wrapper.find('ListItem');
+      expect(listItem.length).to.eq(0);
+      
+      const actual = wrapper.containsAllMatchingElements([
+        <GalleryListItem {...props.data[0]} />,
+        <GalleryListItem {...props.data[0]} />
+      ]);
+      expect(actual).to.eq(true);
+    });
   });
 
 });

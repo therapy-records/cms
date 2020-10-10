@@ -28,7 +28,7 @@ import GigCreate from './routes/Gigs/Create'
 import GigsView from './routes/Gigs/View';
 import GigEdit from './routes/Gigs/Edit';
 import Videos from './routes/Videos/Home';
-import Gallery from './routes/Gallery/Home';
+import GalleryHome from './routes/Gallery/Home';
 import Analytics from './routes/Analytics/Home';
 import { authCheck } from './actions/auth';
 import './index.css';
@@ -246,7 +246,7 @@ export class Router extends Component {
 
                 <ProtectedRoute
                   path="/gallery"
-                  component={Gallery}
+                  component={GalleryHome}
                   isAuth={isAuth}
                   onAuthCheck={onAuthCheck}
                   exact
