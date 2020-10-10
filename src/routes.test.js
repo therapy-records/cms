@@ -32,6 +32,7 @@ import GigsView from './routes/Gigs/View';
 import GigEdit from './routes/Gigs/Edit';
 import VideosHome from './routes/Videos/Home';
 import GalleryHome from './routes/Gallery/Home';
+import GalleryImageCreate from './routes/Gallery/Create';
 import GalleryImageView from './routes/Gallery/View';
 import AnalyticsHome from './routes/Analytics/Home';
 
@@ -375,6 +376,19 @@ describe('Router', () => {
       <ProtectedRoute
         path="/gallery"
         component={GalleryHome}
+        isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
+        exact
+      />
+    );
+    expect(actual).to.equal(true);
+  });
+
+  it('should render gallery upload route', () => {
+    const actual = wrapper.containsMatchingElement(
+      <ProtectedRoute
+        path="/gallery/upload"
+        component={GalleryImageCreate}
         isAuth={props.isAuth}
         onAuthCheck={props.onAuthCheck}
         exact
