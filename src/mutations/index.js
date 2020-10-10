@@ -130,3 +130,11 @@ export const CLOUDINARY_DELETE = gql`
     }
   }
 `;
+
+export const DELETE_GALLERY_IMAGE = gql`
+  mutation($id: ID!) {
+    deleteGalleryImage(_id: $id) {
+      _id
+    }
+  }
+`;

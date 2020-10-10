@@ -123,16 +123,36 @@ describe('(Component) List', () => {
 
   describe('with props.listItemComponent', () => {
     it('should render listItemComponent element', () => {
+      const mockGalleryData = [
+        {
+          _id: 'abc1',
+          image: {
+            cloudinaryUrl: 'test.com',
+            cloudinaryPublicId: '1234'
+          },
+          description: 'Test 1'
+        },
+        {
+          _id: 'abc2',
+          image: {
+            cloudinaryUrl: 'test.com',
+            cloudinaryPublicId: '1234'
+          },
+          description: 'Test 2'
+        }
+      ];
+
       wrapper.setProps({
-        listItemComponent: GalleryListItem
+        listItemComponent: GalleryListItem,
+        data: mockGalleryData
       });
 
       const listItem = wrapper.find('ListItem');
       expect(listItem.length).to.eq(0);
       
       const actual = wrapper.containsAllMatchingElements([
-        <GalleryListItem {...props.data[0]} />,
-        <GalleryListItem {...props.data[0]} />
+        <GalleryListItem {...mockGalleryData[0]} />,
+        <GalleryListItem {...mockGalleryData[1]} />
       ]);
       expect(actual).to.eq(true);
     });

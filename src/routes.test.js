@@ -32,6 +32,7 @@ import GigsView from './routes/Gigs/View';
 import GigEdit from './routes/Gigs/Edit';
 import VideosHome from './routes/Videos/Home';
 import GalleryHome from './routes/Gallery/Home';
+import GalleryImageView from './routes/Gallery/View';
 import AnalyticsHome from './routes/Analytics/Home';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -374,6 +375,19 @@ describe('Router', () => {
       <ProtectedRoute
         path="/gallery"
         component={GalleryHome}
+        isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
+        exact
+      />
+    );
+    expect(actual).to.equal(true);
+  });
+
+  it('should render gallery view route', () => {
+    const actual = wrapper.containsMatchingElement(
+      <ProtectedRoute
+        path="/gallery/:id"
+        component={GalleryImageView}
         isAuth={props.isAuth}
         onAuthCheck={props.onAuthCheck}
         exact

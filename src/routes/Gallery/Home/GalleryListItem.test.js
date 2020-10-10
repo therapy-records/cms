@@ -14,7 +14,8 @@ describe('(Component) GalleryListItem', () => {
       image: {
         cloudinaryUrl: 'test.com/test.jpg',
         cloudinaryPublicId: '1234',
-      }
+      },
+      description: 'My test image'
     };
 
   beforeEach(() => {
@@ -33,7 +34,7 @@ describe('(Component) GalleryListItem', () => {
       <Link
         to={`/gallery/${props._id}`}
       >
-        <img src={props.image.cloudinaryUrl} />
+        <img src={props.image.cloudinaryUrl} alt={props.description} />
       </Link>
     );
     expect(actual).to.eq(true);

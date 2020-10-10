@@ -4,7 +4,9 @@ const entityHeading = entity => {
     title,
     name,
     author,
-    venue
+    venue,
+    image,
+    description
   } = entity;
 
   if (title && venue) {
@@ -13,6 +15,12 @@ const entityHeading = entity => {
 
   if (venue) {
     return venue;
+  }
+
+  const isGalleryEntity = (image && image.cloudinaryUrl && description);
+
+  if (isGalleryEntity) {
+    return `Gallery - ${description}`;
   }
 
   return heading || title || name || author;
