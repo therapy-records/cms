@@ -31,14 +31,6 @@ const ImageUploadList = ({ images, deleteImage }) => {
                 </li>
               );
             }
-
-            // this is temporary until
-            // data models are aligned to have cloudinary url and publicID
-            // return (
-            //   <li className='upload-image-list-item' key={image.path || image}>
-            //     <img src={image} />
-            //   </li>
-            // );
           })}
 
         </ul>
