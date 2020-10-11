@@ -91,7 +91,8 @@ FormField.propTypes = {
       cloudinaryPublicId: PropTypes.string
     })
   ]),
-  showTime: PropTypes.bool
+  showTime: PropTypes.bool,
+  imageUploadListItemComponent: PropTypes.func
 };
 
 FormField.defaultProps = {
@@ -110,7 +111,8 @@ FormField.defaultProps = {
   touched: false,
   dirty: false,
   value: '',
-  showTime: false
+  showTime: false,
+  imageUploadListItemComponent: null
 };
 
 export default FormField;

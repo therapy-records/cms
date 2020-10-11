@@ -9,6 +9,7 @@ import TextInputsList from '../TextInputsList';
 import ImageUploadContainer from '../../FormElements/ImageUpload/ImageUploadContainer';
 import RichTextEditor from '../../RichTextEditor';
 import Datepicker from '../../Datepicker';
+import GalleryImageUploadList from '../../GalleryImageUploadList';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -121,7 +122,8 @@ describe('(Component) FormFieldInput', () => {
           height: 10
         },
         ctaCopy: 'Drop it like it\'s hot',
-        value: ''
+        value: '',
+        imageUploadListItemComponent: GalleryImageUploadList
       };
 
       it('should render <ImageUploadContainer />', () => {
@@ -134,9 +136,9 @@ describe('(Component) FormFieldInput', () => {
           <ImageUploadContainer
             minImageDimensions={mockField.minImageDimensions}
             ctaCopy={mockField.ctaCopy}
-            // existingImages={mockField[mockField.value]}
             existingImages={[]}
             multiple={mockField.multipleImages}
+            imageUploadListItemComponent={mockField.imageUploadListItemComponent}
           />
         );
         expect(actual).to.eq(true);
@@ -164,6 +166,7 @@ describe('(Component) FormFieldInput', () => {
               ctaCopy={mockField.ctaCopy}
               existingImages={expectedExistingImages}
               multiple={mockField.multipleImages}
+              imageUploadListItemComponent={mockField.imageUploadListItemComponent}
             />
           );
           expect(actual).to.eq(true);
@@ -267,7 +270,6 @@ describe('(Component) FormFieldInput', () => {
           expect(wrapper.type()).to.eq(null);
         });
       });
-
 
     });
 

@@ -80,6 +80,26 @@ function reducer(state, action) {
       }
     }
 
+    case 'changeImageDescription': {
+      const image = state.images.find((i) =>
+        i.cloudinaryPublicId === action.payload.cloudinaryPublicId
+      );
+      const updatedImageDescription = {
+        ...image,
+        description: action.payload.description
+      };
+
+      const updatedImages = [
+        ...state.images.filter((i) => i.cloudinaryPublicId !== action.payload.cloudinaryPublicId),
+        updatedImageDescription
+      ];
+
+      return {
+        ...state,
+        images: updatedImages
+      }
+    }
+
     default:
       return state;
   }

@@ -25,7 +25,8 @@ const ImageUpload = ({
   ctaCopy,
   multiple,
   handleOnUpload,
-  handleOnRemove
+  handleOnRemove,
+  imageUploadListItemComponent
 }) => {
   const initImages = existingImages;
 
@@ -173,6 +174,18 @@ const ImageUpload = ({
     });
   };
 
+  const onChangeDescription = (imagePublicId, description) => {
+    if (description.length) {
+      dispatch({
+        type: 'changeImageDescription',
+        payload: {
+          cloudinaryPublicId: imagePublicId,
+          description
+        }
+      });
+    }
+  }
+
   const hasError = (error || deleteError);
   const errorMessage = hasError && (error ? 'Image upload failed' : 'Delete image failed');
 
@@ -190,9 +203,9 @@ const ImageUpload = ({
   }
 
   return (
-    <div className='image-upload'>
+    <div className={imageUploadListItemComponent ? 'image-upload image-upload-with-bespoke-list' : 'image-upload'}>
 
-      <div className='flex-container'>
+      <div className={imageUploadListItemComponent ? '' : 'flex-container'}>
 
         <ImageUploadInput
           onDrop={onDrop}
@@ -204,10 +217,17 @@ const ImageUpload = ({
           multiple={multiple}
         />
 
-        <ImageUploadList
-          images={images}
-          deleteImage={onDeleteImage}
-        />
+        {imageUploadListItemComponent ? (
+          React.createElement(imageUploadListItemComponent, {
+            images,
+            onChangeDescription
+          })
+        ) : (
+          <ImageUploadList
+            images={images}
+            deleteImage={onDeleteImage}
+          />
+        )}
 
       </div>
 
@@ -263,7 +283,8 @@ ImageUpload.propTypes = {
   minImageDimensions: PropTypes.object,
   multiple: PropTypes.bool,
   handleOnUpload: PropTypes.func,
-  handleOnRemove: PropTypes.func
+  handleOnRemove: PropTypes.func,
+  imageUploadListItemComponent: PropTypes.func
 };
 
 ImageUpload.defaultProps = {
@@ -272,7 +293,8 @@ ImageUpload.defaultProps = {
   minImageDimensions: {},
   multiple: false,
   handleOnUpload: null,
-  handleOnRemove: null
+  handleOnRemove: null,
+  imageUploadListItemComponent: null
 };
 
 export default ImageUpload;

@@ -12,7 +12,8 @@ const ImageUploadContainer = ({
   ctaCopy,
   multiple,
   handleOnUpload,
-  handleOnRemove
+  handleOnRemove,
+  imageUploadListItemComponent
 }) => {
   const {
     loading,
@@ -50,6 +51,7 @@ const ImageUploadContainer = ({
       multiple={multiple}
       handleOnUpload={handleOnUpload}
       handleOnRemove={handleOnRemove}
+      imageUploadListItemComponent={imageUploadListItemComponent}
     />
   )
 };
@@ -60,7 +62,8 @@ ImageUploadContainer.propTypes = {
   ctaCopy: PropTypes.string,
   multiple: PropTypes.bool,
   handleOnUpload: PropTypes.func,
-  handleOnRemove: PropTypes.func
+  handleOnRemove: PropTypes.func,
+  imageUploadListItemComponent: PropTypes.func
 };
 
 ImageUploadContainer.defaultProps = {
@@ -68,7 +71,8 @@ ImageUploadContainer.defaultProps = {
   ctaCopy: '',
   multiple: false,
   handleOnUpload: null,
-  handleOnRemove: null
+  handleOnRemove: null,
+  imageUploadListItemComponent: null
 };
 
 export default ImageUploadContainer;

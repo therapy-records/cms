@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
 import ImageUpload from './ImageUpload';
 import FormFieldError from '../FormFieldError';
+import GalleryImageUploadList from '../../GalleryImageUploadList';
 import {
   MOCK_CLOUDINARY_UPLOAD,
   MOCK_CLOUDINARY_UPLOAD_LOADING,
@@ -52,6 +53,20 @@ describe('(Component) ImageUpload', () => {
     global.window.FileReader = false;
   });
 
+
+  it('should render different container className', () => {
+    wrapper = mount(
+      <BrowserRouter>
+        <MockedProvider mocks={mocks} addTypename={false}>
+          <ImageUpload {...props} />
+        </MockedProvider>
+      </BrowserRouter>
+    );
+
+    const imageUploadContainer = wrapper.find('.image-upload');
+    expect(imageUploadContainer.length).to.eq(1);
+  });
+
   it('should render <ImageUploadInput />', () => {
     wrapper = mount(
       <BrowserRouter>
@@ -85,6 +100,45 @@ describe('(Component) ImageUpload', () => {
     expect(imageUploadList.length).to.eq(1);
     expect(imageUploadList.prop('images')).to.eq(props.existingImages);
     expect(imageUploadList.prop('deleteImage')).to.be.a('function');
+  });
+
+  describe('with props.imageUploadListItemComponent', () => {
+    it('should render different container className', () => {
+      wrapper = mount(
+        <BrowserRouter>
+          <MockedProvider mocks={mocks} addTypename={false}>
+            <ImageUpload
+              {...props}
+              imageUploadListItemComponent={GalleryImageUploadList}
+            />
+          </MockedProvider>
+        </BrowserRouter>
+      );
+
+      const imageUploadContainer = wrapper.find('.image-upload-with-bespoke-list');
+      expect(imageUploadContainer.length).to.eq(1);
+    });
+
+    it('should render the passed component with correct props', () => {
+      wrapper = mount(
+        <BrowserRouter>
+          <MockedProvider mocks={mocks} addTypename={false}>
+            <ImageUpload
+              {...props}
+              imageUploadListItemComponent={GalleryImageUploadList}
+            />
+          </MockedProvider>
+        </BrowserRouter>
+      );
+
+      const imageUploadList = wrapper.find('ImageUploadList');
+      expect(imageUploadList.length).to.eq(0);
+
+      const galleryImageUploadList = wrapper.find('GalleryImageUploadList');
+      expect(galleryImageUploadList.length).to.eq(1);
+      expect(galleryImageUploadList.prop('images')).to.eq(props.existingImages);
+      expect(galleryImageUploadList.prop('onChangeDescription')).to.be.a('function');
+    });
   });
 
   describe('when onDrop method is called', () => {

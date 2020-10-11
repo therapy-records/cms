@@ -2,7 +2,7 @@
 
 .image-upload {
   margin-bottom: 2em;
-  .flex-container {
+  > .flex-container {
     @media(min-width: $bp-md) {
       display: flex;
       width: 100%;
@@ -47,6 +47,13 @@
     margin: 0;
     width: 5em;
     height: 5em;
+  }
+
+  &.image-upload-with-bespoke-list {
+    > div > div {
+      width: 100%;
+      margin-bottom: 3em;
+    }
   }
 }
 

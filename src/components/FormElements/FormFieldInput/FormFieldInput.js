@@ -24,7 +24,8 @@ const FormFieldInput = ({
   maxLength,
   value,
   multipleImages,
-  showTime
+  showTime,
+  imageUploadListItemComponent
 }) => {
   if (component === 'TextInput') {
     return (
@@ -76,6 +77,7 @@ const FormFieldInput = ({
         multiple={multipleImages}
         handleOnUpload={onChange}
         handleOnRemove={onChange}
+        imageUploadListItemComponent={imageUploadListItemComponent}
       />
 
     )
@@ -143,7 +145,8 @@ FormFieldInput.propTypes = {
     })
   ]),
   multipleImages: PropTypes.bool,
-  showTime: PropTypes.bool
+  showTime: PropTypes.bool,
+  imageUploadListItemComponent: PropTypes.func
 };
 
 FormFieldInput.defaultProps = {
@@ -160,7 +163,8 @@ FormFieldInput.defaultProps = {
   maxLength: null,
   value: '',
   multipleImages: false,
-  showTime: false
+  showTime: false,
+  imageUploadListItemComponent: null
 };
 
 export default FormFieldInput;

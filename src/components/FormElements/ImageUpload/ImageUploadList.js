@@ -41,8 +41,7 @@ const ImageUploadList = ({ images, deleteImage }) => {
 }
 
 ImageUploadList.propTypes = {
-  // images: PropTypes.arrayOf(PropTypes.object),
-  images: PropTypes.array,
+  images: PropTypes.arrayOf(PropTypes.object),
   deleteImage: PropTypes.func.isRequired
 };
 

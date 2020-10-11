@@ -9,6 +9,7 @@ import ImageUpload from './ImageUpload';
 import { CLOUDINARY_SIGNATURE } from '../../../queries';
 import LoadingSpinner from '../../LoadingSpinner';
 import { MOCK_CLOUDINARY_SIGNATURE } from '../../../mocks/cloudinary-signature.mock';
+import GalleryImageUploadList from '../../GalleryImageUploadList';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -28,8 +29,11 @@ describe('(Component) ImageUploadContainer', () => {
       height: 100
     },
     ctaCopy: 'test',
-    multiple: true
-  }
+    multiple: true,
+    handleOnUpload: sinon.spy(),
+    handleOnRemove: sinon.spy(),
+    imageUploadListItemComponent: GalleryImageUploadList
+  };
 
   const actions = async(wrapper, _actions) => {
     await act(async() => {
@@ -60,6 +64,9 @@ describe('(Component) ImageUploadContainer', () => {
             minImageDimensions={props.minImageDimensions}
             ctaCopy={props.ctaCopy}
             multiple={props.multiple}
+            handleOnUpload={props.handleOnUpload}
+            handleOnRemove={props.handleOnRemove}
+            imageUploadListItemComponent={props.imageUploadListItemComponent}
           />
         );
         expect(actual).to.eq(true);

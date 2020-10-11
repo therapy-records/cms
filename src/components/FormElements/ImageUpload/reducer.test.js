@@ -204,6 +204,39 @@ describe('(Component) ImageUpload - reducer', () => {
     });
   });
 
+  describe('action - changeImageDescription', () => {
+    it('should add description to image in state', () => {
+      const mockInitImages = [
+        { path: 'a/test.jpg', cloudinaryPublicId: 'asdf1' },
+        { path: 'b/test.jpg', cloudinaryPublicId: 'asdf2' }
+      ];
+
+      const initState = initReducerState(mockInitImages)
+
+      const action = imageUploadReducer(
+        initState,
+        {
+          type: 'changeImageDescription',
+          payload: {
+            cloudinaryPublicId: mockInitImages[1].cloudinaryPublicId,
+            description: 'test description'
+          }
+        }
+      );
+
+      const expectedImages = [
+        mockInitImages[0],
+        {
+          path: mockInitImages[1].path,
+          cloudinaryPublicId: mockInitImages[1].cloudinaryPublicId,
+          description: 'test description'
+        }
+      ];
+
+      expect(action.images).deep.eq(expectedImages);
+    });
+  });
+
   describe('default', () => {
     it('should return state', () => {
       const initState = initReducerState(mockInitImages);
