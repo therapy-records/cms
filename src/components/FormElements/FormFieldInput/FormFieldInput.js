@@ -6,6 +6,7 @@ import TextInputsList from '../TextInputsList';
 import ImageUploadContainer from '../../FormElements/ImageUpload/ImageUploadContainer';
 import RichTextEditor from '../../RichTextEditor';
 import Datepicker from '../../Datepicker';
+import SelectSearch from '../SelectSearch';
 
 const FormFieldInput = ({
   id,
@@ -20,6 +21,7 @@ const FormFieldInput = ({
   minImageDimensions,
   fieldsetLegend,
   items,
+  options,
   onChange,
   maxLength,
   value,
@@ -78,6 +80,7 @@ const FormFieldInput = ({
         handleOnUpload={onChange}
         handleOnRemove={onChange}
         imageUploadListItemComponent={imageUploadListItemComponent}
+        selectOptions={options}
       />
 
     )
@@ -89,6 +92,14 @@ const FormFieldInput = ({
         value={value}
         showSingleHiddenInputValue
         showTime={showTime}
+      />
+    )
+  } else if (component === 'SelectSearch') {
+    return (
+      <SelectSearch
+        onChange={onChange}
+        name={id}
+        options={options}
       />
     )
   } else if (component === 'TextInputsList') {
@@ -135,6 +146,10 @@ FormFieldInput.propTypes = {
   }),
   fieldsetLegend: PropTypes.string,
   items: PropTypes.array,
+  options: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired
+  })),
   onChange: PropTypes.func,
   maxLength: PropTypes.number,
   value: PropTypes.oneOfType([
@@ -159,6 +174,7 @@ FormFieldInput.defaultProps = {
   minImageDimensions: {},
   fieldsetLegend: '',
   items: [],
+  options: [],
   onChange: null,
   maxLength: null,
   value: '',

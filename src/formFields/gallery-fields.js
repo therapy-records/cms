@@ -19,7 +19,7 @@ import GalleryImageUploadList from '../components/GalleryImageUploadList';
 // single gallery image
 // default = multiple gallery images
 
-const GALLERY_FIELDS_MULTIPLE = [
+export const GALLERY_FIELDS_MULTIPLE = [
   {
     id: 'image',
     type: 'arrayOfObjects',
@@ -37,4 +37,23 @@ const GALLERY_FIELDS_MULTIPLE = [
   }
 ]
 
-export default GALLERY_FIELDS_MULTIPLE;
+const galleryFieldsMultiple = (selectOptions) => {
+  const result = GALLERY_FIELDS_MULTIPLE;
+
+  if (selectOptions && selectOptions.length) {
+    const mappedOptions = selectOptions.map((option) => {
+      // TODO maybe should have name & _id removed?
+
+      return {
+        label: option.name,
+        value: option._id
+      };
+    });
+
+    result[0].options = mappedOptions;
+  }
+
+  return result;
+}
+
+export default galleryFieldsMultiple;

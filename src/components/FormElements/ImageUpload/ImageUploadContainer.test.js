@@ -32,7 +32,11 @@ describe('(Component) ImageUploadContainer', () => {
     multiple: true,
     handleOnUpload: sinon.spy(),
     handleOnRemove: sinon.spy(),
-    imageUploadListItemComponent: GalleryImageUploadList
+    imageUploadListItemComponent: GalleryImageUploadList,
+    selectOptions: [
+      { value: 'testA', label: 'Test A' },
+      { value: 'testB', label: 'Test B' },
+    ]
   };
 
   const actions = async(wrapper, _actions) => {
@@ -67,6 +71,7 @@ describe('(Component) ImageUploadContainer', () => {
             handleOnUpload={props.handleOnUpload}
             handleOnRemove={props.handleOnRemove}
             imageUploadListItemComponent={props.imageUploadListItemComponent}
+            selectOptions={props.selectOptions}
           />
         );
         expect(actual).to.eq(true);

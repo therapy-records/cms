@@ -9,6 +9,7 @@ import TextInputsList from '../TextInputsList';
 import ImageUploadContainer from '../../FormElements/ImageUpload/ImageUploadContainer';
 import RichTextEditor from '../../RichTextEditor';
 import Datepicker from '../../Datepicker';
+import SelectSearch from '../../FormElements/SelectSearch';
 import GalleryImageUploadList from '../../GalleryImageUploadList';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -20,7 +21,13 @@ describe('(Component) FormFieldInput', () => {
       type: 'text',
       component: 'TextInput'
     };
+
   const mockOnChange = () => { };
+
+  const mockOptions = [
+    { value: 'testA', label: 'Test A' },
+    { value: 'testB', label: 'Test B' },
+  ];
 
   describe('rendering', () => {
 
@@ -129,7 +136,8 @@ describe('(Component) FormFieldInput', () => {
       it('should render <ImageUploadContainer />', () => {
         wrapper.setProps({
           ...mockField,
-          onChange: mockOnChange
+          onChange: mockOnChange,
+          options: mockOptions
         });
 
         const actual = wrapper.containsMatchingElement(
@@ -139,6 +147,7 @@ describe('(Component) FormFieldInput', () => {
             existingImages={[]}
             multiple={mockField.multipleImages}
             imageUploadListItemComponent={mockField.imageUploadListItemComponent}
+            selectOptions={mockOptions}
           />
         );
         expect(actual).to.eq(true);
@@ -155,7 +164,8 @@ describe('(Component) FormFieldInput', () => {
 
           wrapper.setProps({
             ...mockField,
-            onChange: mockOnChange
+            onChange: mockOnChange,
+            options: mockOptions
           });
 
           const expectedExistingImages = [mockExistingImage];
@@ -167,6 +177,7 @@ describe('(Component) FormFieldInput', () => {
               existingImages={expectedExistingImages}
               multiple={mockField.multipleImages}
               imageUploadListItemComponent={mockField.imageUploadListItemComponent}
+              selectOptions={mockOptions}
             />
           );
           expect(actual).to.eq(true);
@@ -194,6 +205,32 @@ describe('(Component) FormFieldInput', () => {
             value={mockField.value}
             showSingleHiddenInputValue
             showTime={mockField.showTime}
+          />
+        );
+        expect(actual).to.eq(true);
+      });
+    });
+
+    describe('when field.component is `SelectSearch`', () => {
+      it('should render <SelectSearch />', () => {
+        const mockField = {
+          id: 'test',
+          component: 'SelectSearch',
+          value: moment.now().toString(),
+          showTime: false,
+          options: mockOptions
+        };
+
+        wrapper.setProps({
+          ...mockField,
+          onChange: mockOnChange
+        });
+
+        const actual = wrapper.containsMatchingElement(
+          <SelectSearch
+            onChange={mockOnChange}
+            name={mockField.id}
+            options={mockOptions}
           />
         );
         expect(actual).to.eq(true);

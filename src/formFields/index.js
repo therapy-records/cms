@@ -1,14 +1,14 @@
 import COLLABORATOR_FIELDS from './collaborator-fields';
 import PRESS_FIELDS from './press-fields';
 import GIG_FIELDS from './gig-fields'
-import GALLERY_FIELDS_MULTIPLE from './gallery-fields';
+import galleryFieldsMultiple from './gallery-fields';
 
 class FormFields {
-  constructor() {
+  constructor(selectOptions) {
     this.collaborator = COLLABORATOR_FIELDS;
     this.press = PRESS_FIELDS;
     this.gig = GIG_FIELDS;
-    this.gallery = GALLERY_FIELDS_MULTIPLE;
+    this.gallery = galleryFieldsMultiple(selectOptions);
   }
 }
 

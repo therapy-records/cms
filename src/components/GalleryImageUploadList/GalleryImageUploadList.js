@@ -5,7 +5,8 @@ import './GalleryImageUploadList.css';
 
 const GalleryImageUploadList = ({
   images,
-  onChangeDescription
+  onChangeDescription,
+  selectOptions
 }) => {
   const hasImages = images && images.length > 0;
 
@@ -35,14 +36,14 @@ const GalleryImageUploadList = ({
               />
 
               <FormField
-                id={`collaboratorsInImage-${index}`}
-                component='TextInput'
-                type='text'
-                placeholder='test....'
-                label='Who is in this image?'
-                name='temp...'
+                id='collaboratorsInImage'
+                component='SelectSearch'
+                type='arrayOfSomething'
                 required
+                label='Who is in this image?'
+                options={selectOptions}
               />
+
             </div>
 
             <button className='btn-danger'>Remove</button>
@@ -56,11 +57,16 @@ const GalleryImageUploadList = ({
 
 GalleryImageUploadList.propTypes = {
   images: PropTypes.arrayOf(PropTypes.object),
-  onChangeDescription: PropTypes.func.isRequired
+  onChangeDescription: PropTypes.func.isRequired,
+  selectOptions: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired
+  })).isRequired
 };
 
 GalleryImageUploadList.defaultProps = {
-  images: []
+  images: [],
+  selectOptions: []
 };
 
 export default GalleryImageUploadList;

@@ -26,7 +26,8 @@ const ImageUpload = ({
   multiple,
   handleOnUpload,
   handleOnRemove,
-  imageUploadListItemComponent
+  imageUploadListItemComponent,
+  selectOptions
 }) => {
   const initImages = existingImages;
 
@@ -220,7 +221,8 @@ const ImageUpload = ({
         {imageUploadListItemComponent ? (
           React.createElement(imageUploadListItemComponent, {
             images,
-            onChangeDescription
+            onChangeDescription,
+            selectOptions
           })
         ) : (
           <ImageUploadList
@@ -284,7 +286,11 @@ ImageUpload.propTypes = {
   multiple: PropTypes.bool,
   handleOnUpload: PropTypes.func,
   handleOnRemove: PropTypes.func,
-  imageUploadListItemComponent: PropTypes.func
+  imageUploadListItemComponent: PropTypes.func,
+  selectOptions: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired
+  }))
 };
 
 ImageUpload.defaultProps = {
@@ -294,7 +300,8 @@ ImageUpload.defaultProps = {
   multiple: false,
   handleOnUpload: null,
   handleOnRemove: null,
-  imageUploadListItemComponent: null
+  imageUploadListItemComponent: null,
+  selectOptions: []
 };
 
 export default ImageUpload;

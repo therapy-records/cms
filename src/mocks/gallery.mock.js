@@ -49,4 +49,3 @@ export const MOCK_GET_GALLERY_IMAGE = {
     }
   }
 };
-

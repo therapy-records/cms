@@ -40,7 +40,7 @@ const GalleryImageCreate = () => (
             <br />
 
             <GalleryForm
-              fields={mapFields(new FormFields().gallery)}
+              fields={mapFields(new FormFields(allCollaborators).gallery)}
               mutation={CREATE_GALLERY_IMAGE}
               refetchQueries={[
                 { query: GET_GALLERY }

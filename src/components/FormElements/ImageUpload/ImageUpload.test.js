@@ -34,7 +34,11 @@ describe('(Component) ImageUpload', () => {
       height: 10
     },
     multiple: true,
-    handleOnUpload: handleOnUploadSpy
+    handleOnUpload: handleOnUploadSpy,
+    selectOptions: [
+      { value: 'testA', label: 'Test A' },
+      { value: 'testB', label: 'Test B' },
+    ]
   };
 
   let mocks = [
@@ -138,6 +142,7 @@ describe('(Component) ImageUpload', () => {
       expect(galleryImageUploadList.length).to.eq(1);
       expect(galleryImageUploadList.prop('images')).to.eq(props.existingImages);
       expect(galleryImageUploadList.prop('onChangeDescription')).to.be.a('function');
+      expect(galleryImageUploadList.prop('selectOptions')).to.eq(props.selectOptions)
     });
   });
 

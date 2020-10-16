@@ -80,6 +80,10 @@ FormField.propTypes = {
   fieldsetLegend: PropTypes.string,
   helpText: PropTypes.string,
   items: PropTypes.array,
+  options: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired
+  })),
   onChange: PropTypes.func,
   error: PropTypes.string,
   touched: PropTypes.bool,
@@ -106,6 +110,7 @@ FormField.defaultProps = {
   fieldsetLegend: '',
   helpText: '',
   items: [],
+  options: [],
   onChange: null,
   error: '',
   touched: false,
