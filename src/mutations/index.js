@@ -5,7 +5,8 @@ export const CREATE_COLLABORATOR = gql`
     createCollaborator(input: $input) {
       name,
       avatar {
-        cloudinaryUrl
+        cloudinaryUrl,
+        cloudinaryPublicId
       },
       collabOn:,
       role,
@@ -20,7 +21,8 @@ export const EDIT_COLLABORATOR = gql`
       _id,
       name,
       avatar {
-        cloudinaryUrl
+        cloudinaryUrl,
+        cloudinaryPublicId
       },
       collabOn,
       role,

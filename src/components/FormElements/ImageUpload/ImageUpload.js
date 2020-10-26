@@ -130,18 +130,16 @@ const ImageUpload = ({
           }
         });
 
-        // TODO: Form component needs onChange event.
-        // then Form reducer have 'valid' flag when uploading an image.
-
-        // this is purely to support legacy, non-graphql based forms.
         if (handleOnUpload) {
-          const uploadedImageInState = images.find((i) => i.cloudinaryUrl === uploadedUrl);
+          const uploadedImageInState = images.find((i) => i && i.cloudinaryUrl === uploadedUrl);
           const uploadedImageIndex = images.indexOf(uploadedImageInState);
 
           handleOnUpload(
-            uploadedUrl,
-            uploadedImageIndex,
-            cloudinaryPublicId
+            {
+              cloudinaryUrl: uploadedUrl,
+              cloudinaryPublicId
+            },
+            uploadedImageIndex
           )
         }
       }
@@ -149,7 +147,6 @@ const ImageUpload = ({
   };
 
   const onDeleteImage = (publicId) => {
-    // this is purely to support legacy, non-graphql based forms.
     const imageInState = images.find((i) => i.cloudinaryPublicId === publicId);
     const imageIndex = images.indexOf(imageInState);
 
@@ -169,7 +166,6 @@ const ImageUpload = ({
           }
         });
 
-        // this is purely to support legacy, non-graphql based forms.
         if (handleOnRemove) {
           handleOnRemove(imageIndex)
         }
@@ -227,12 +223,33 @@ const ImageUpload = ({
         />
       )}
 
-      <input
-        type='hidden'
-        id='avatar'
-        value={images}
-      />
+      {multiple ? (
+        <input
+          readOnly
+          style={{ display: 'none' }}
+          id='avatar'
+          name='avatar'
+          value={imagesHiddenInputValue}
+        />
+      ) : (
+        <div>
+          <input
+            readOnly
+            style = {{ display: 'none' }}
+            id='avatar.cloudinaryUrl'
+            name='avatar.cloudinaryUrl'
+            value={imagesHiddenInputValue.length && imagesHiddenInputValue[0].cloudinaryUrl}
+          />
 
+          <input
+            readOnly
+            style={{ display: 'none' }}
+            id='avatar.cloudinaryPublicId'
+            name='avatar.cloudinaryPublicId'
+            value={imagesHiddenInputValue.length && imagesHiddenInputValue[0].cloudinaryPublicId}
+          />
+        </div>
+      )}
     </div>
   )
 }
@@ -245,7 +262,6 @@ ImageUpload.propTypes = {
   ctaCopy: PropTypes.string,
   minImageDimensions: PropTypes.object,
   multiple: PropTypes.bool,
-  // handleOnUpload and handleOnRemove are purely to support legacy, non-graphql based forms.
   handleOnUpload: PropTypes.func,
   handleOnRemove: PropTypes.func
 };

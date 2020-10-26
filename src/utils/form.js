@@ -2,9 +2,23 @@ import {
   isChildField,
   handleChildField
 } from './form-field-child-handler';
+import {
+  isAnObject,
+  objectHasValues
+} from '../utils/objects';
 
 // NOTE: remove in future, this is only used for redux-form fields.
-export const required = value => value ? undefined : 'required';
+export const required = value => {
+  if ((!isAnObject(value) && value)
+    || (isAnObject(value) && objectHasValues(value))) {
+    return undefined;
+  }
+  return 'required';
+};
+
+const isAvatarField = (fieldId) => fieldId === 'avatar';
+
+const isSingleImage = (fieldId) => isAvatarField(fieldId);
 
 const handleFormData = form => {
   const data = new FormData(form);
@@ -21,6 +35,13 @@ const handleFormData = form => {
         fieldValue,
         fieldsWithChildren
       );
+    } else if (isSingleImage(fieldId)) {
+      postData = {
+        ...postData,
+        [fieldId]: {
+          ...fieldValue[0]
+        }
+      }
     } else {
       postData = {
         ...postData,

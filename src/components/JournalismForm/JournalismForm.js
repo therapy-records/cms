@@ -32,8 +32,12 @@ export class JournalismForm extends React.Component {
     this.props.onSubmitForm();
   }
 
-  onUploadImage(cloudinaryUrl, cloudinaryPublicId) {
-    const newImage = { cloudinaryUrl, cloudinaryPublicId };
+  onUploadImage(imageObj) {
+    const newImage = {
+      cloudinaryUrl: imageObj.cloudinaryUrl,
+      cloudinaryPublicId: imageObj.cloudinaryPublicId
+    };
+
     this.props.updateImage(JOURNALISM_FORM, 'image', newImage);
   }
 
@@ -123,8 +127,8 @@ export class JournalismForm extends React.Component {
               title='Article screenshot'
               existingImages={[ formValues.image ]}
               minImageDimensions={JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS}
-              handleOnUpload={(imageUrl, sectionImageIndex, cloudinaryPublicId) =>
-                this.onUploadImage(imageUrl, cloudinaryPublicId)
+              handleOnUpload={(imageObj, sectionImageIndex) =>
+                this.onUploadImage(imageObj)
               }
               handleOnRemove={() => this.onRemoveImage()}
               required

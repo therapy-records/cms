@@ -30,7 +30,7 @@ function reducer(state, action) {
       const updatedImages = state.images;
 
       updatedImages.map((i) => {
-        if (i.path === originalPath) {
+        if (i && i.path === originalPath) {
           i.cloudinaryPublicId = cloudinaryPublicId;
           i.cloudinaryUrl = uploadedUrl;
         }

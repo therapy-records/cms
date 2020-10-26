@@ -74,6 +74,8 @@ const FormFieldInput = ({
         ctaCopy={ctaCopy}
         existingImages={existingImages}
         multiple={multipleImages}
+        handleOnUpload={onChange}
+        handleOnRemove={onChange}
       />
 
     )
