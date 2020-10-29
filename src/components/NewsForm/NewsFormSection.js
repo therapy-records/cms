@@ -13,8 +13,9 @@ export class NewsFormSection extends Component {
     this.handleRemoveSectionImage = this.handleRemoveSectionImage.bind(this);
   }
 
-  handleUpdateSectionImages(imageUrl, sectionImageIndex, sectionIndex, cloudinaryPublicId) {
-    this.props.updateSectionImages(NEWS_FORM, `sections.${sectionIndex}.images.${sectionImageIndex}.cloudinaryUrl`, imageUrl);
+  handleUpdateSectionImages(image, sectionImageIndex, sectionIndex) {
+    const { cloudinaryUrl, cloudinaryPublicId } = image;
+    this.props.updateSectionImages(NEWS_FORM, `sections.${sectionIndex}.images.${sectionImageIndex}.cloudinaryUrl`, cloudinaryUrl);
     this.props.updateSectionImages(NEWS_FORM, `sections.${sectionIndex}.images.${sectionImageIndex}.cloudinaryPublicId`, cloudinaryPublicId);
   }
 

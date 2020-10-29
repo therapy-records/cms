@@ -1,10 +1,5 @@
 export const EMPTY_ARTICLE_SECTION_OBJ = {
-  images: [
-    {
-      cloudinaryUrl: '',
-      cloudinaryPublicId: ''
-    }
-  ],
+  images: [],
   copy: ''
 };
 
