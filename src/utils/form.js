@@ -20,6 +20,8 @@ const isAvatarField = (fieldId) => fieldId === 'avatar';
 
 const isSingleImage = (fieldId) => isAvatarField(fieldId);
 
+const isGalleryImagesField = (fieldId) => fieldId === 'galleryImages';
+
 const handleFormData = form => {
   const data = new FormData(form);
   let postData = {};
@@ -42,6 +44,10 @@ const handleFormData = form => {
           ...fieldValue[0]
         }
       }
+    } else if (isGalleryImagesField(fieldId)) {
+      // galleryImages 'field' contains array of objects in the shape we want it,
+      // no need for any other fields.
+      postData = JSON.parse(fieldValue);
     } else {
       postData = {
         ...postData,
@@ -49,11 +55,14 @@ const handleFormData = form => {
       }
     }
 
-    postData = {
-      ...postData,
-      ...fieldsWithChildren
+    if (!isGalleryImagesField(fieldId)) {
+      postData = {
+        ...postData,
+        ...fieldsWithChildren
+      }
     }
   }
+
   return postData;
 };
 

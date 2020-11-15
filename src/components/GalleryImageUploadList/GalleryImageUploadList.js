@@ -6,6 +6,7 @@ import './GalleryImageUploadList.css';
 const GalleryImageUploadList = ({
   images,
   onChangeDescription,
+  onChangeCollaboratorsInImage,
   selectOptions
 }) => {
   const hasImages = images && images.length > 0;
@@ -42,6 +43,9 @@ const GalleryImageUploadList = ({
                 required
                 label='Who is in this image?'
                 options={selectOptions}
+                onChange={(value) => {
+                  onChangeCollaboratorsInImage(image.cloudinaryPublicId, value)
+                }}
               />
 
             </div>
@@ -58,6 +62,7 @@ const GalleryImageUploadList = ({
 GalleryImageUploadList.propTypes = {
   images: PropTypes.arrayOf(PropTypes.object),
   onChangeDescription: PropTypes.func.isRequired,
+  onChangeCollaboratorsInImage: PropTypes.func.isRequired,
   selectOptions: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired

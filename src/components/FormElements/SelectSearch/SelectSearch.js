@@ -17,24 +17,30 @@ const customStyles = {
   })
 };
 
-const SelectSearch = ({ options }) => {
-  const [ selectedOption, setSelectedOption ] = useState(null);
+const SelectSearch = ({
+  options,
+  onChange
+}) => {
+  const [ selectedOption, setSelectedOption ] = useState([]);
 
   return (
     <Select
       defaultValue={selectedOption}
-      onChange={setSelectedOption}
+      onChange={(value) => {
+        onChange(value)
+        setSelectedOption(value)
+      }}
       options={options}
       closeMenuOnSelect={false}
       isMulti
       name='collaboratorsInImage'
       styles={customStyles}
-    // defaultValue={[ {} ]}
     />
   );
 };
 
 SelectSearch.propTypes = {
+  onChange: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired

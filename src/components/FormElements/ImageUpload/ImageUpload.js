@@ -187,20 +187,33 @@ const ImageUpload = ({
     }
   }
 
+  const onChangeCollaboratorsInImage = (imagePublicId, collaboratorsArray) => {
+    const collaboratorsIdArray = collaboratorsArray.map((c) => c.value);
+
+    dispatch({
+      type: 'changeCollaboratorsInImage',
+      payload: {
+        cloudinaryPublicId: imagePublicId,
+        collaboratorsArray: collaboratorsIdArray
+      }
+    });
+  }
+
   const hasError = (error || deleteError);
   const errorMessage = hasError && (error ? 'Image upload failed' : 'Delete image failed');
 
-  const imagesHiddenInputValue = [];
+  let imagesHiddenInputValue = [];
 
   if (images.length > 0) {
-    images.map((i) => {
-      if (i && i.cloudinaryPublicId && i.cloudinaryUrl) {
-        imagesHiddenInputValue.push({
-          cloudinaryPublicId: i.cloudinaryPublicId,
-          cloudinaryUrl: i.cloudinaryUrl
-        });
-      }
-    })
+    imagesHiddenInputValue = images.map((image, index) => {
+      const imageObj = {
+        cloudinaryPublicId: image.cloudinaryPublicId,
+        cloudinaryUrl: image.cloudinaryUrl,
+        description: image.description,
+        collaboratorsInImage: image.collaboratorsInImage
+      };
+      return imageObj;
+    });
   }
 
   return (
@@ -222,6 +235,7 @@ const ImageUpload = ({
           React.createElement(imageUploadListItemComponent, {
             images,
             onChangeDescription,
+            onChangeCollaboratorsInImage,
             selectOptions
           })
         ) : (
@@ -249,9 +263,9 @@ const ImageUpload = ({
         <input
           readOnly
           style={{ display: 'none' }}
-          id='avatar'
-          name='avatar'
-          value={imagesHiddenInputValue}
+          id='galleryImages'
+          name='galleryImages'
+          value={JSON.stringify(imagesHiddenInputValue)}
         />
       ) : (
         <div>

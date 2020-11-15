@@ -100,6 +100,27 @@ function reducer(state, action) {
       }
     }
 
+    case 'changeCollaboratorsInImage': {
+      const image = state.images.find((i) =>
+        i.cloudinaryPublicId === action.payload.cloudinaryPublicId
+      );
+
+      const updatedImageCollabs = {
+        ...image,
+        collaboratorsInImage: action.payload.collaboratorsArray
+      };
+
+      const updatedImages = [
+        ...state.images.filter((i) => i.cloudinaryPublicId !== action.payload.cloudinaryPublicId),
+        updatedImageCollabs
+      ];
+
+      return {
+        ...state,
+        images: updatedImages
+      }
+    }
+
     default:
       return state;
   }

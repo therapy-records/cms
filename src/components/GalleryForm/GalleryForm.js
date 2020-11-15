@@ -15,7 +15,7 @@ const GalleryForm = ({
     mutateId={id}
     refetchQueries={refetchQueries}
     baseUrl='/gallery'
-    submitButtonCopy={isEdit ? 'Update Gallery Image' : 'Add Gallery Image'}
+    submitButtonCopy={isEdit ? 'Update Gallery Image' : 'Upload'}
     successCopy={{
       success: isEdit ? 'Successfully updated!' : 'Successfully created!',
       homeLink: 'Go to Gallery',
