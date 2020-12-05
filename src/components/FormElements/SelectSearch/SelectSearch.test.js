@@ -23,7 +23,7 @@ describe('(Component) SelectSearch', () => {
     it('should render <Select />', () => {
       // note: compiled component from Select library, is called 'StateManager'
       const select = wrapper.find('StateManager');
-      expect(select.prop('defaultValue')).to.eq(null);
+      expect(select.prop('defaultValue')).to.deep.eq([]);
       expect(select.prop('onChange')).to.be.a('function');
       expect(select.prop('options')).to.eq(props.options);
       expect(select.prop('closeMenuOnSelect')).to.eq(false);
