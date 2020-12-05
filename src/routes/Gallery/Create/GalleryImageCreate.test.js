@@ -8,7 +8,7 @@ import GalleryImageCreate from './index';
 import PageHeader from '../../../components/PageHeader';
 import GalleryForm from '../../../components/GalleryForm';
 import FormFields from '../../../formFields';
-import { CREATE_GALLERY_IMAGE } from '../../../mutations';
+import { CREATE_GALLERY_IMAGES } from '../../../mutations';
 import {
   GET_COLLABORATORS_NAMES,
   GET_GALLERY
@@ -67,7 +67,7 @@ describe('(Component) GalleryImageCreate', () => {
       const actual = wrapper.containsMatchingElement(
         <GalleryForm
           fields={mapFields(new FormFields().gallery)}
-          mutation={CREATE_GALLERY_IMAGE}
+          mutation={CREATE_GALLERY_IMAGES}
           refetchQueries={[
             { query: GET_GALLERY }
           ]}

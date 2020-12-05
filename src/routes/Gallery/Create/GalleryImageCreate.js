@@ -1,6 +1,6 @@
 import React from 'react';
 import FormFields from '../../../formFields';
-import { CREATE_GALLERY_IMAGE } from '../../../mutations';
+import { CREATE_GALLERY_IMAGES } from '../../../mutations';
 import {
   GET_COLLABORATORS_NAMES,
   GET_GALLERY
@@ -28,7 +28,7 @@ const GalleryImageCreate = () => (
 
             <GalleryForm
               fields={mapFields(new FormFields(allCollaborators).gallery)}
-              mutation={CREATE_GALLERY_IMAGE}
+              mutation={CREATE_GALLERY_IMAGES}
               refetchQueries={[
                 { query: GET_GALLERY }
               ]}

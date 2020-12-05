@@ -131,14 +131,13 @@ export const CLOUDINARY_DELETE = gql`
   }
 `;
 
-export const CREATE_GALLERY_IMAGE = gql`
+export const CREATE_GALLERY_IMAGES = gql`
   mutation($input: GalleryInput) {
-    createGalleryImage(input: $input) {
-      image {
-        cloudinaryUrl,
-        cloudinaryPublicId,
-      },
-      description
+    createGalleryImages(input: $input) {
+      cloudinaryUrl,
+      cloudinaryPublicId,
+      description,
+      collaboratorsInImage
     }
   }
 `;

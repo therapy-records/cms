@@ -47,7 +47,9 @@ const handleFormData = form => {
     } else if (isGalleryImagesField(fieldId)) {
       // galleryImages 'field' contains array of objects in the shape we want it,
       // no need for any other fields.
-      postData = JSON.parse(fieldValue);
+      postData = {
+        images: JSON.parse(fieldValue)
+      };
     } else {
       postData = {
         ...postData,

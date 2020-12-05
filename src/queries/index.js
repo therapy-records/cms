@@ -104,10 +104,8 @@ export const GET_GALLERY = gql`
   {
     gallery {
       _id,
-      image {
-        cloudinaryUrl,
-        cloudinaryPublicId
-      },
+      cloudinaryUrl,
+      cloudinaryPublicId,
       description
     }
   }
@@ -117,11 +115,10 @@ export const GET_GALLERY_IMAGE = gql`
   query($id: ID!) {
     galleryImage(_id: $id) {
       _id,
-      image {
-        cloudinaryUrl,
-        cloudinaryPublicId
-      },
-      description
+      cloudinaryUrl,
+      cloudinaryPublicId,
+      description,
+      collaboratorsInImage
     }
   }
 `;
