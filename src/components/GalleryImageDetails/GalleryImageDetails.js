@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const GalleryImageDetails = ({
-  image,
+  cloudinaryUrl,
   description
 }) => (
   <div className='entity-container'>
@@ -10,7 +10,7 @@ const GalleryImageDetails = ({
     <div className='flex-root'>
 
       <div className='entity-image-container'>
-        <img src={image.cloudinaryUrl} alt={description} />
+        <img src={cloudinaryUrl} alt={description} />
       </div>
 
       <div>
@@ -23,10 +23,8 @@ const GalleryImageDetails = ({
 );
 
 GalleryImageDetails.propTypes = {
-  image: PropTypes.shape({
-    cloudinaryUrl: PropTypes.string.isRequired,
-    cloudinaryPublicId: PropTypes.string.isRequired
-  }).isRequired,
+  cloudinaryUrl: PropTypes.string.isRequired,
+  cloudinaryPublicId: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired
 };
 

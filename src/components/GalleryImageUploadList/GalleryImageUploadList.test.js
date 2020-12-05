@@ -8,6 +8,8 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('(Component) GalleryImageUploadList', () => {
   let onChangeDescriptionSpy = sinon.spy();
+  let onChangeCollaboratorsInImageSpy = sinon.spy();
+
   let wrapper,
     props = {
       images: [
@@ -18,7 +20,8 @@ describe('(Component) GalleryImageUploadList', () => {
       selectOptions: [
         { value: 'test1', label: 'Testing 1' },
         { value: 'test2', label: 'Testing 2' }
-      ]
+      ],
+      onChangeCollaboratorsInImage: onChangeCollaboratorsInImageSpy
     };
 
 

@@ -126,18 +126,14 @@ describe('(Component) List', () => {
       const mockGalleryData = [
         {
           _id: 'abc1',
-          image: {
-            cloudinaryUrl: 'test.com',
-            cloudinaryPublicId: '1234'
-          },
+          cloudinaryUrl: 'test.com',
+          cloudinaryPublicId: '1234',
           description: 'Test 1'
         },
         {
           _id: 'abc2',
-          image: {
-            cloudinaryUrl: 'test.com',
-            cloudinaryPublicId: '1234'
-          },
+          cloudinaryUrl: 'test.com',
+          cloudinaryPublicId: '1234',
           description: 'Test 2'
         }
       ];

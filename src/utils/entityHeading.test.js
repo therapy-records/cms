@@ -66,7 +66,7 @@ describe('(Utils) entityHeading', () => {
     });
   });
 
-  describe('when there is image object and description', () => {
+  describe('when there is cloudinaryUrl and description', () => {
     it('should return `Gallery` and `description`', () => {
       const mockEntity = {
         heading: '',
@@ -74,9 +74,7 @@ describe('(Utils) entityHeading', () => {
         name: '',
         author: '',
         description: 'Test image description',
-        image: {
-          cloudinaryUrl: 'test.com/test.jpg'
-        }
+        cloudinaryUrl: 'test.com/test.jpg'
       };
       const result = entityHeading(mockEntity);
       expect(result).to.eq(`Gallery - ${mockEntity.description}`);

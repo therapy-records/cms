@@ -7,10 +7,8 @@ Enzyme.configure({ adapter: new Adapter() });
 
 let wrapper;
 const props = {
-  image: {
-    cloudinaryUrl: 'test.com/test.jpg',
-    cloudinaryPublicId: '1234'
-  },
+  cloudinaryUrl: 'test.com/test.jpg',
+  cloudinaryPublicId: '1234',
   description: 'test'
 };
 
@@ -25,7 +23,7 @@ describe('(Component) GalleryImageDetails', () => {
     it('should render an image', () => {
       const actual = wrapper.containsMatchingElement(
         <img
-          src={props.image.cloudinaryUrl}
+          src={props.cloudinaryUrl}
           alt={props.description}
         />
       );

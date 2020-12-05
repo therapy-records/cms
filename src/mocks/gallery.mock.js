@@ -12,18 +12,14 @@ export const MOCK_GET_GALLERY = {
       gallery: [
         {
           _id: 'abc1',
-          image: {
-            cloudinaryUrl: 'test.com',
-            cloudinaryPublicId: '1234'
-          },
+          cloudinaryUrl: 'test.com',
+          cloudinaryPublicId: '1234',
           description: 'Test 1'
         },
         {
           _id: 'abc2',
-          image: {
-            cloudinaryUrl: 'test.com',
-            cloudinaryPublicId: '1234'
-          },
+          cloudinaryUrl: 'test.com',
+          cloudinaryPublicId: '1234',
           description: 'Test 2'
         }
       ]
@@ -40,11 +36,10 @@ export const MOCK_GET_GALLERY_IMAGE = {
     data: {
       galleryImage: {
         _id: 'abc1',
-        image: {
-          cloudinaryUrl: 'test.com',
-          cloudinaryPublicId: '1234'
-        },
-        description: 'Test 1'
+        cloudinaryUrl: 'test.com',
+        cloudinaryPublicId: '1234',
+        description: 'Test 1',
+        collaboratorsInImage: []
       }
     }
   }
