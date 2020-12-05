@@ -108,7 +108,10 @@ Datepicker.propTypes = {
   onChange: PropTypes.func,
   showSingleHiddenInputValue: PropTypes.bool,
   name: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
   showTime: PropTypes.bool
 };
 
