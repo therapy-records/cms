@@ -31,6 +31,7 @@ import Videos from './routes/Videos/Home';
 import GalleryHome from './routes/Gallery/Home';
 import GalleryImageCreate from './routes/Gallery/Create';
 import GalleryImageView from './routes/Gallery/View';
+import GalleryImageEdit from './routes/Gallery/Edit';
 import Analytics from './routes/Analytics/Home';
 import { authCheck } from './actions/auth';
 import './index.css';
@@ -257,6 +258,14 @@ export class Router extends Component {
                 <ProtectedRoute
                   path="/gallery/:id"
                   component={GalleryImageView}
+                  isAuth={isAuth}
+                  onAuthCheck={onAuthCheck}
+                  exact
+                />
+
+                <ProtectedRoute
+                  path="/gallery/:id/edit"
+                  component={GalleryImageEdit}
                   isAuth={isAuth}
                   onAuthCheck={onAuthCheck}
                   exact

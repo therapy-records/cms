@@ -13,8 +13,16 @@ describe('(Component) GalleryImageUploadList', () => {
   let wrapper,
     props = {
       images: [
-        { cloudinaryUrl: 'test.com', cloudinaryPublicId: '1234' },
-        { cloudinaryUrl: 'test2.com', cloudinaryPublicId: '1234' }
+        {
+          cloudinaryUrl: 'test.com',
+          cloudinaryPublicId: '1234',
+          description: 'Test description 1'
+        },
+        {
+          cloudinaryUrl: 'test2.com',
+          cloudinaryPublicId: '1234',
+          description: 'Test description 2'
+         }
       ],
       onChangeDescription: onChangeDescriptionSpy,
       selectOptions: [
@@ -57,6 +65,7 @@ describe('(Component) GalleryImageUploadList', () => {
       expect(formField.prop('label')).to.eq('Description');
       expect(formField.prop('name')).to.eq('temp...');
       expect(formField.prop('required')).to.eq(true);
+      expect(formField.prop('value')).to.eq(props.images[0].description);
       expect(formField.prop('onChange')).to.be.a('function');
     });
 

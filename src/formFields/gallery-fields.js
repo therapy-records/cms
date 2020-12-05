@@ -1,19 +1,22 @@
 import GalleryImageUploadList from '../components/GalleryImageUploadList';
-// const GALLERY_FIELDS = [
-//   {
-//     id: 'image',
-//     type: 'arrayOfObjects',
-//     component: 'ImageUpload',
-//     label: 'Images',
-//     required: true,
-//     ctaCopy: 'Drag & drop image',
-//     minImageDimensions: {
-//       width: 250,
-//       height: 250
-//     },
-//     helpText: 'helpText TODO'
-//   }
-// ];
+
+export const GALLERY_SINGLE_FIELDS = [
+  {
+    id: 'image',
+    type: 'arrayOfObjects',
+    component: 'ImageUpload',
+    label: 'Image',
+    required: true,
+    ctaCopy: 'Drag & drop image',
+    minImageDimensions: {
+      width: 250,
+      height: 250
+    },
+    helpText: 'helpText TODO',
+    multipleImages: false,
+    imageUploadListItemComponent: GalleryImageUploadList
+  }
+];
 
 // TODO
 // single gallery image
@@ -37,7 +40,7 @@ export const GALLERY_FIELDS_MULTIPLE = [
   }
 ]
 
-const galleryFieldsMultiple = (selectOptions) => {
+export const galleryFieldsMultiple = (selectOptions) => {
   const result = GALLERY_FIELDS_MULTIPLE;
 
   if (selectOptions && selectOptions.length) {
@@ -55,5 +58,3 @@ const galleryFieldsMultiple = (selectOptions) => {
 
   return result;
 }
-
-export default galleryFieldsMultiple;

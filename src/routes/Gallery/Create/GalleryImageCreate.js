@@ -17,7 +17,7 @@ const GalleryImageCreate = () => (
       query={GET_COLLABORATORS_NAMES}
       entityName='collaborators'
       render={queryData => {
-        const allCollaborators = queryData;
+        const allGalleryImages = queryData;
 
         return (
           <div>
@@ -27,7 +27,7 @@ const GalleryImageCreate = () => (
             <div className='col-clear' />
 
             <GalleryForm
-              fields={mapFields(new FormFields(allCollaborators).gallery)}
+              fields={mapFields(new FormFields(allGalleryImages).gallery)}
               mutation={CREATE_GALLERY_IMAGES}
               refetchQueries={[
                 { query: GET_GALLERY }

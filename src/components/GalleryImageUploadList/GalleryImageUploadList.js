@@ -31,6 +31,7 @@ const GalleryImageUploadList = ({
                 label='Description'
                 name='temp...'
                 required
+                value={image.description}
                 onChange={(value) => {
                   onChangeDescription(image.cloudinaryPublicId, value)
                 }}

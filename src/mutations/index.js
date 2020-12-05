@@ -142,6 +142,17 @@ export const CREATE_GALLERY_IMAGES = gql`
   }
 `;
 
+export const EDIT_GALLERY_IMAGE = gql`
+  mutation($input: GalleryInput) {
+    editGalleryImage(input: $input) {
+      cloudinaryUrl,
+      cloudinaryPublicId,
+      description,
+      collaboratorsInImage
+    }
+  }
+`;
+
 export const DELETE_GALLERY_IMAGE = gql`
   mutation($id: ID!) {
     deleteGalleryImage(_id: $id) {

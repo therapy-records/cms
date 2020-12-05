@@ -34,6 +34,7 @@ import VideosHome from './routes/Videos/Home';
 import GalleryHome from './routes/Gallery/Home';
 import GalleryImageCreate from './routes/Gallery/Create';
 import GalleryImageView from './routes/Gallery/View';
+import GalleryImageEdit from './routes/Gallery/Edit';
 import AnalyticsHome from './routes/Analytics/Home';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -410,6 +411,19 @@ describe('Router', () => {
     expect(actual).to.equal(true);
   });
 
+  it('should render gallery edit route', () => {
+    const actual = wrapper.containsMatchingElement(
+      <ProtectedRoute
+        path="/gallery/:id/edit"
+        component={GalleryImageEdit}
+        isAuth={props.isAuth}
+        onAuthCheck={props.onAuthCheck}
+        exact
+      />
+    );
+    expect(actual).to.equal(true);
+  });
+ 
   it('should render analytics route', () => {
     const actual = wrapper.containsMatchingElement(
       <ProtectedRoute
