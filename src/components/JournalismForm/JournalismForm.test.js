@@ -143,9 +143,11 @@ describe('(Component) JournalismForm', () => {
       it('ImageUpload handleOnUpload should call props.updateImage', () => {
         const imageField = wrapper.find({ name: 'image' });
         imageField.props().handleOnUpload(
-          baseProps.formValues.image.cloudinaryUrl,
-          1,
-          baseProps.formValues.image.cloudinaryPublicId
+          {
+            cloudinaryUrl: baseProps.formValues.image.cloudinaryUrl,
+            cloudinaryPublicId: baseProps.formValues.image.cloudinaryPublicId
+          },
+          1
         );
 
         expect(updateImageSpy).to.have.been.called;

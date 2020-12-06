@@ -45,10 +45,12 @@ describe('(Component) NewsFormSection', () => {
         );
 
         wrapper.instance().handleUpdateSectionImages(
-          'testImage.png',
+          {
+            cloudinaryUrl: 'testImage.png',
+            cloudinaryPublicId: '1234',
+          },
           1,
-          3,
-          '1234'
+          3
         );
 
         expect(updateSectionImagesSpy).to.have.been.calledWith(
