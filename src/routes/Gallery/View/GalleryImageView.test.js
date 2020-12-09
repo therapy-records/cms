@@ -5,17 +5,17 @@ import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
 import {
-  GET_GALLERY_IMAGE,
+  GET_GALLERY_IMAGE_WITH_COLLAB_NAMES,
 } from '../../../queries';
 import { DELETE_GALLERY_IMAGE } from '../../../mutations';
 import GalleryImageView from './GalleryImageView';
 import GalleryImageDetails from '../../../components/GalleryImageDetails';
-import { MOCK_GET_GALLERY_IMAGE } from '../../../mocks/gallery.mock';
+import { MOCK_GET_GALLERY_IMAGE_WITH_COLLAB_NAMES } from '../../../mocks/gallery.mock';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 const mocks = [
-  MOCK_GET_GALLERY_IMAGE
+  MOCK_GET_GALLERY_IMAGE_WITH_COLLAB_NAMES
 ];
 
 describe('(Component) GalleryImageView', () => {
@@ -50,10 +50,10 @@ describe('(Component) GalleryImageView', () => {
     const singleEntityContainer = wrapper.find('SingleEntityContainer');
     expect(singleEntityContainer.length).to.eq(1);
     expect(singleEntityContainer.prop('baseUrl')).to.eq('/gallery');
-    expect(singleEntityContainer.prop('entityName')).to.eq('galleryImage');
+    expect(singleEntityContainer.prop('entityName')).to.eq('galleryImageWithCollaboratorNames');
     expect(singleEntityContainer.prop('entityCollection')).to.eq('gallery');
     expect(singleEntityContainer.prop('id')).to.eq(props.match.params.id);
-    expect(singleEntityContainer.prop('query')).to.eq(GET_GALLERY_IMAGE);
+    expect(singleEntityContainer.prop('query')).to.eq(GET_GALLERY_IMAGE_WITH_COLLAB_NAMES);
     expect(singleEntityContainer.prop('mutation')).to.eq(DELETE_GALLERY_IMAGE);
   });
 
@@ -61,7 +61,7 @@ describe('(Component) GalleryImageView', () => {
     await actions(wrapper, () => {
       wrapper.update();
       const actual = wrapper.containsMatchingElement(
-        <GalleryImageDetails {...mocks[0].result.data.galleryImage} />
+        <GalleryImageDetails {...mocks[0].result.data.galleryImageWithCollaboratorNames} />
       );
       expect(actual).to.equal(true);
     });

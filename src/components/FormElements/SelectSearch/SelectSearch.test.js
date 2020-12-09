@@ -12,6 +12,7 @@ describe('(Component) SelectSearch', () => {
       { value: 'testA', label: 'Test A' },
       { value: 'testB', label: 'Test B' },
     ],
+    onChange: sinon.spy()
   };
 
   describe('rendering', () => {

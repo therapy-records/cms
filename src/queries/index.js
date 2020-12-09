@@ -123,6 +123,21 @@ export const GET_GALLERY_IMAGE = gql`
   }
 `;
 
+export const GET_GALLERY_IMAGE_WITH_COLLAB_NAMES = gql`
+  query($id: ID!) {
+    galleryImageWithCollaboratorNames(_id: $id) {
+      _id,
+      cloudinaryUrl,
+      cloudinaryPublicId,
+      description,
+      collaboratorsInImage {
+        _id,
+        name
+      }
+    }
+  }
+`;
+
 export const GET_STATS = gql`
   {
     news {

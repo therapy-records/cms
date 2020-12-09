@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  GET_GALLERY_IMAGE
-  // GET_GALLERY
+  GET_GALLERY_IMAGE_WITH_COLLAB_NAMES
 } from '../../../queries';
 import { DELETE_GALLERY_IMAGE } from '../../../mutations';
 import SingleEntityContainer from '../../../containers/SingleEntityContainer';
@@ -16,10 +15,10 @@ const GalleryImageView = ({
   return (
     <SingleEntityContainer
       baseUrl='/gallery'
-      entityName='galleryImage'
+      entityName='galleryImageWithCollaboratorNames'
       entityCollection='gallery'
       id={id}
-      query={GET_GALLERY_IMAGE}
+      query={GET_GALLERY_IMAGE_WITH_COLLAB_NAMES}
       mutation={DELETE_GALLERY_IMAGE}
       render={entityData => (
         <GalleryImageDetails {...entityData} />
