@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
 import {
   GET_GALLERY_IMAGE_WITH_COLLAB_NAMES,
+  GET_GALLERY,
 } from '../../../queries';
 import { DELETE_GALLERY_IMAGE } from '../../../mutations';
 import GalleryImageView from './GalleryImageView';
@@ -55,6 +56,14 @@ describe('(Component) GalleryImageView', () => {
     expect(singleEntityContainer.prop('id')).to.eq(props.match.params.id);
     expect(singleEntityContainer.prop('query')).to.eq(GET_GALLERY_IMAGE_WITH_COLLAB_NAMES);
     expect(singleEntityContainer.prop('mutation')).to.eq(DELETE_GALLERY_IMAGE);
+    expect(singleEntityContainer.prop('mutationSuccessCopy')).to.deep.eq({
+      success: 'Successfully deleted.',
+      homeLink: 'Go to Gallery'
+    });
+    expect(singleEntityContainer.prop('mutationCacheUpdate')).to.deep.eq({
+      cacheQuery: GET_GALLERY,
+      responseObjName: 'deleteGalleryImage'
+    });
   });
 
   it('should render <GalleryImageDetails /> from <SingleEntityContainer /> render prop ', async () => {
