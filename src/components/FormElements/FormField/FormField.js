@@ -84,6 +84,10 @@ FormField.propTypes = {
     value: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired
   })),
+  defaultOptions: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired
+  })),
   onChange: PropTypes.func,
   error: PropTypes.string,
   touched: PropTypes.bool,
@@ -111,6 +115,7 @@ FormField.defaultProps = {
   helpText: '',
   items: [],
   options: [],
+  defaultOptions: [],
   onChange: null,
   error: '',
   touched: false,

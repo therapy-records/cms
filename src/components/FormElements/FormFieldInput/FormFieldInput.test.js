@@ -25,6 +25,11 @@ describe('(Component) FormFieldInput', () => {
   const mockOnChange = () => { };
 
   const mockOptions = [
+    { value: 'testC', label: 'Test C' },
+    { value: 'testD', label: 'Test D' },
+  ];
+
+  const mockDefaultOptions = [
     { value: 'testA', label: 'Test A' },
     { value: 'testB', label: 'Test B' },
   ];
@@ -130,14 +135,18 @@ describe('(Component) FormFieldInput', () => {
         },
         ctaCopy: 'Drop it like it\'s hot',
         value: '',
-        imageUploadListItemComponent: GalleryImageUploadList
+        imageUploadListItemComponent: GalleryImageUploadList,
+        description: 'Test description',
+        multipleImages: true,
+        type: 'imageObject'
       };
 
       it('should render <ImageUploadContainer />', () => {
         wrapper.setProps({
           ...mockField,
           onChange: mockOnChange,
-          options: mockOptions
+          options: mockOptions,
+          defaultOptions: mockDefaultOptions,
         });
 
         const actual = wrapper.containsMatchingElement(
@@ -146,8 +155,14 @@ describe('(Component) FormFieldInput', () => {
             ctaCopy={mockField.ctaCopy}
             existingImages={[]}
             multiple={mockField.multipleImages}
+            handleOnUpload={mockOnChange}
+            handleOnRemove={mockOnChange}
+            handleOnChange={mockOnChange}
             imageUploadListItemComponent={mockField.imageUploadListItemComponent}
             selectOptions={mockOptions}
+            defaultSelectOptions={mockDefaultOptions}
+            description={mockField.description}
+            dataType={mockField.type}
           />
         );
         expect(actual).to.eq(true);
@@ -159,13 +174,14 @@ describe('(Component) FormFieldInput', () => {
             cloudinaryUrl: 'test1.com',
             cloudinaryPublicId: '1234'
           };
-
+          
           mockField.value = mockExistingImage;
 
           wrapper.setProps({
             ...mockField,
             onChange: mockOnChange,
-            options: mockOptions
+            options: mockOptions,
+            defaultOptions: mockDefaultOptions
           });
 
           const expectedExistingImages = [mockExistingImage];
@@ -176,8 +192,14 @@ describe('(Component) FormFieldInput', () => {
               ctaCopy={mockField.ctaCopy}
               existingImages={expectedExistingImages}
               multiple={mockField.multipleImages}
+              handleOnUpload={mockOnChange}
+              handleOnRemove={mockOnChange}
+              handleOnChange={mockOnChange}
               imageUploadListItemComponent={mockField.imageUploadListItemComponent}
               selectOptions={mockOptions}
+              defaultSelectOptions={mockDefaultOptions}
+              description={mockField.description}
+              dataType={mockField.type}
             />
           );
           expect(actual).to.eq(true);

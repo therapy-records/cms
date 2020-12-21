@@ -190,7 +190,6 @@ describe('(Utils) form-field-mappings', () => {
         expect(result).to.deep.eq(expected);
       });
     });
-
   });
 
   describe('mapFieldsWithValues', () => {
@@ -238,6 +237,33 @@ describe('(Utils) form-field-mappings', () => {
         { ...mapFieldArrayOfStringsWithValues(mockFieldsArray[3], mockValuesObj) }
       ];
       expect(result).to.deep.eq(expected);
+    });
+
+    describe('when the field type is `imageObject`', () => {
+      it('should return the mapped field with values object', () => {
+        const mockFieldsArray = [
+          {
+            id: 'test',
+            type: 'imageObject',
+            component: 'ImageUpload'
+          }
+        ];
+
+        const mockValuesObj = {
+          cloudinaryPublicId: '12345678',
+          cloudinaryUrl: 'test.com/image.jpg'
+        };
+
+        const result = mapFieldsWithValues(mockFieldsArray, mockValuesObj);
+        const expectedObj = {
+          ...mockFieldsArray[0],
+          value: mockValuesObj
+        };
+
+        expect(result).to.deep.eq([
+          expectedObj
+        ]);
+      });
     });
   });
 

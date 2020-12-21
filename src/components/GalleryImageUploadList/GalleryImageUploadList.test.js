@@ -29,6 +29,10 @@ describe('(Component) GalleryImageUploadList', () => {
         { value: 'test1', label: 'Testing 1' },
         { value: 'test2', label: 'Testing 2' }
       ],
+      defaultSelectOptions: [
+        { value: 'testA', label: 'Test A' },
+        { value: 'testB', label: 'Test B' },
+      ],
       onChangeCollaboratorsInImage: onChangeCollaboratorsInImageSpy
     };
 
@@ -81,18 +85,30 @@ describe('(Component) GalleryImageUploadList', () => {
     });
   });
 
-  it('should render collaboratorsInImage <FormField />', () => {
-    const actual = wrapper.containsMatchingElement(
-      <FormField
-        id='collaboratorsInImage'
-        component='SelectSearch'
-        type='arrayOfSomething'
-        required
-        label='Who is in this image?'
-        options={props.selectOptions}
-      />
-    );
-    expect(actual).to.eq(true);
+  describe('collaboratorsInImage <FormField />', () => {
+    it('should render', () => {
+      const formField = wrapper.find('FormField').last();
+
+      expect(formField.prop('id')).to.eq('collaboratorsInImage');
+      expect(formField.prop('component')).to.eq('SelectSearch');
+      expect(formField.prop('type')).to.eq('arrayOfSomething');
+      expect(formField.prop('label')).to.eq('Who is in this image?');
+      expect(formField.prop('options')).to.eq(props.selectOptions);
+      expect(formField.prop('defaultOptions')).to.eq(props.defaultSelectOptions);
+      expect(formField.prop('onChange')).to.be.a('function');
+    });
+
+    it('should call onChangeCollaboratorsInImage prop when onChange is called', () => {
+      const formField = wrapper.find('FormField').last();
+      const mockValue = 'testing';
+      formField.props().onChange(mockValue);
+      expect(onChangeCollaboratorsInImageSpy).to.have.been.called;
+      expect(onChangeCollaboratorsInImageSpy).to.have.been.calledWith(
+        props.images[1].cloudinaryPublicId,
+        mockValue
+      );
+
+    });
   });
 
   it('should render remove button', () => {

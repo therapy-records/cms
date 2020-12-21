@@ -138,6 +138,25 @@ export const GET_GALLERY_IMAGE_WITH_COLLAB_NAMES = gql`
   }
 `;
 
+export const GET_GALLERY_IMAGE_WITH_ALL_COLLABORATORS = gql`
+  query($id: ID!) {
+    galleryImageWithAllCollaborators(_id: $id) {
+      _id,
+      cloudinaryUrl,
+      cloudinaryPublicId,
+      description,
+      collaborators {
+        _id,
+        name
+      }
+      collaboratorsInImage {
+        _id,
+        name
+      }
+    }
+  }
+`;
+
 export const GET_STATS = gql`
   {
     news {

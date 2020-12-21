@@ -13,8 +13,11 @@ const ImageUploadContainer = ({
   multiple,
   handleOnUpload,
   handleOnRemove,
+  handleOnChange,
   imageUploadListItemComponent,
-  selectOptions
+  selectOptions,
+  defaultSelectOptions,
+  dataType
 }) => {
   const {
     loading,
@@ -52,8 +55,11 @@ const ImageUploadContainer = ({
       multiple={multiple}
       handleOnUpload={handleOnUpload}
       handleOnRemove={handleOnRemove}
+      handleOnChange={handleOnChange}
       imageUploadListItemComponent={imageUploadListItemComponent}
       selectOptions={selectOptions}
+      defaultSelectOptions={defaultSelectOptions}
+      dataType={dataType}
     />
   )
 };
@@ -65,11 +71,17 @@ ImageUploadContainer.propTypes = {
   multiple: PropTypes.bool,
   handleOnUpload: PropTypes.func,
   handleOnRemove: PropTypes.func,
+  handleOnChange: PropTypes.func,
   imageUploadListItemComponent: PropTypes.func,
   selectOptions: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired
-  }))
+  })),
+  defaultSelectOptions: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired
+  })),
+  dataType: PropTypes.string
 };
 
 ImageUploadContainer.defaultProps = {
@@ -78,8 +90,11 @@ ImageUploadContainer.defaultProps = {
   multiple: false,
   handleOnUpload: null,
   handleOnRemove: null,
+  handleOnChange: null,
   imageUploadListItemComponent: null,
-  selectOptions: []
+  selectOptions: [],
+  defaultSelectOptions: [],
+  dataType: ''
 };
 
 export default ImageUploadContainer;

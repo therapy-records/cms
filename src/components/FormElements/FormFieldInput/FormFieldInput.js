@@ -22,12 +22,14 @@ const FormFieldInput = ({
   fieldsetLegend,
   items,
   options,
+  defaultOptions,
   onChange,
   maxLength,
   value,
   multipleImages,
   showTime,
-  imageUploadListItemComponent
+  imageUploadListItemComponent,
+  description
 }) => {
   if (component === 'TextInput') {
     return (
@@ -79,8 +81,12 @@ const FormFieldInput = ({
         multiple={multipleImages}
         handleOnUpload={onChange}
         handleOnRemove={onChange}
+        handleOnChange={onChange}
         imageUploadListItemComponent={imageUploadListItemComponent}
         selectOptions={options}
+        defaultSelectOptions={defaultOptions}
+        description={description}
+        dataType={type}
       />
 
     )
@@ -100,6 +106,7 @@ const FormFieldInput = ({
         onChange={onChange}
         name={id}
         options={options}
+        defaultOptions={defaultOptions}
       />
     )
   } else if (component === 'TextInputsList') {
@@ -150,6 +157,10 @@ FormFieldInput.propTypes = {
     value: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired
   })),
+  defaultOptions: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired
+  })),
   onChange: PropTypes.func,
   maxLength: PropTypes.number,
   value: PropTypes.oneOfType([
@@ -161,7 +172,8 @@ FormFieldInput.propTypes = {
   ]),
   multipleImages: PropTypes.bool,
   showTime: PropTypes.bool,
-  imageUploadListItemComponent: PropTypes.func
+  imageUploadListItemComponent: PropTypes.func,
+  description: PropTypes.string
 };
 
 FormFieldInput.defaultProps = {
@@ -175,12 +187,14 @@ FormFieldInput.defaultProps = {
   fieldsetLegend: '',
   items: [],
   options: [],
+  defaultOptions: [],
   onChange: null,
   maxLength: null,
   value: '',
   multipleImages: false,
   showTime: false,
-  imageUploadListItemComponent: null
+  imageUploadListItemComponent: null,
+  description: ''
 };
 
 export default FormFieldInput;

@@ -7,7 +7,8 @@ const GalleryImageUploadList = ({
   images,
   onChangeDescription,
   onChangeCollaboratorsInImage,
-  selectOptions
+  selectOptions,
+  defaultSelectOptions
 }) => {
   const hasImages = images && images.length > 0;
 
@@ -41,9 +42,9 @@ const GalleryImageUploadList = ({
                 id='collaboratorsInImage'
                 component='SelectSearch'
                 type='arrayOfSomething'
-                required
                 label='Who is in this image?'
                 options={selectOptions}
+                defaultOptions={defaultSelectOptions}
                 onChange={(value) => {
                   onChangeCollaboratorsInImage(image.cloudinaryPublicId, value)
                 }}
@@ -67,12 +68,17 @@ GalleryImageUploadList.propTypes = {
   selectOptions: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired
-  })).isRequired
+  })).isRequired,
+  defaultSelectOptions: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired
+  }))
 };
 
 GalleryImageUploadList.defaultProps = {
   images: [],
-  selectOptions: []
+  selectOptions: [],
+  defaultSelectOptions: []
 };
 
 export default GalleryImageUploadList;

@@ -27,7 +27,17 @@ describe('(Component) FormField', () => {
         onChange: () => { },
         error: '',
         touched: false,
-        dirty: false
+        dirty: false,
+        value: 'Test value',
+        showTime: false,
+        options: [
+          { value: '1234', label: 'Test option A' },
+          { value: '5678', label: 'Test option B' }
+        ],
+        defaultOptions: [
+          { value: '1', label: 'Test option 1' },
+          { value: '2', label: 'Test option 2' }
+        ]
       };
 
   beforeEach(() => {

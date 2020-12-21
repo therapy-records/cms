@@ -47,7 +47,19 @@ export const mapFieldArray = (field, valuesObj) => {
         valuesObj
       );
     }
+  } else if (field.component === 'ImageUpload') {
+    // NOTE this is purely for single gallery image edit
+    field = {
+      ...field,
+      ...valuesObj,
+      value: {
+        cloudinaryPublicId: valuesObj.cloudinaryPublicId,
+        cloudinaryUrl: valuesObj.cloudinaryUrl,
+        description: valuesObj.description
+      }
+    };
   }
+
   return field;
 };
 
@@ -57,6 +69,11 @@ export const mapFieldsWithValues = (fields, valuesObj) =>
 
     if (isFieldArray(field.type)) {
       field = mapFieldArray(field, valuesObj);
+    } else if (field.type === 'imageObject') {
+      field.value = {
+        cloudinaryPublicId: valuesObj.cloudinaryPublicId,
+        cloudinaryUrl: valuesObj.cloudinaryUrl
+      };
     } else {
       const value = valuesObj[fieldId];
       if (value) {

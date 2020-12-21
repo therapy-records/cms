@@ -106,10 +106,12 @@ const Form = ({
 
             {state.fields.map((field) => (
               <div key={field.id} className='row-large'>
+
                 <FormField
                   {...field}
                   onChange={(value) => handleFieldValueChange(field.id, value)}
                 />
+
               </div>
             ))}
 

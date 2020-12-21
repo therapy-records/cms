@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/react-testing';
 import GalleryImageEdit from './GalleryImageEdit';
 import {
-  GET_GALLERY_IMAGE,
+  GET_GALLERY_IMAGE_WITH_ALL_COLLABORATORS,
   GET_GALLERY
 } from '../../../queries';
 import {
@@ -16,12 +16,12 @@ import {
 import GalleryForm from '../../../components/GalleryForm';
 import FormFields from '../../../formFields';
 import mapFieldsWithValues from '../../../utils/form-field-mappings';
-import { MOCK_GET_GALLERY_IMAGE } from '../../../mocks/gallery.mock';
+import { MOCK_GET_GALLERY_IMAGE_WITH_ALL_COLLABORATORS } from '../../../mocks/gallery.mock';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 const mocks = [
-  MOCK_GET_GALLERY_IMAGE
+  MOCK_GET_GALLERY_IMAGE_WITH_ALL_COLLABORATORS
 ];
 
 describe('(Component) GalleryImageEdit', () => {
@@ -57,10 +57,10 @@ describe('(Component) GalleryImageEdit', () => {
     const singleEntityContainer = wrapper.find('SingleEntityContainer');
     expect(singleEntityContainer.length).to.eq(1);
     expect(singleEntityContainer.prop('baseUrl')).to.eq('/gallery');
-    expect(singleEntityContainer.prop('entityName')).to.eq('galleryImage');
+    expect(singleEntityContainer.prop('entityName')).to.eq('galleryImageWithAllCollaborators');
     expect(singleEntityContainer.prop('entityCollection')).to.eq('gallery');
     expect(singleEntityContainer.prop('id')).to.eq(props.match.params.id);
-    expect(singleEntityContainer.prop('query')).to.eq(GET_GALLERY_IMAGE);
+    expect(singleEntityContainer.prop('query')).to.eq(GET_GALLERY_IMAGE_WITH_ALL_COLLABORATORS);
     expect(singleEntityContainer.prop('mutation')).to.eq(DELETE_GALLERY_IMAGE);
     expect(singleEntityContainer.prop('mutationSuccessCopy')).to.deep.eq({
       success: 'Successfully deleted.',
@@ -79,8 +79,8 @@ describe('(Component) GalleryImageEdit', () => {
       const actual = wrapper.containsMatchingElement(
         <GalleryForm
           fields={mapFieldsWithValues(
-            new FormFields().gallerySingle,
-            { image: mocks[0].result.data.galleryImage }
+            new FormFields().galleryEdit,
+            mocks[0].result.data
           )}
           mutation={EDIT_GALLERY_IMAGE}
           id={props.match.params.id}

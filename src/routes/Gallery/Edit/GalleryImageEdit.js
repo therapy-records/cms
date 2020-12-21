@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  GET_GALLERY_IMAGE,
+  GET_GALLERY_IMAGE_WITH_ALL_COLLABORATORS,
   GET_GALLERY
 } from '../../../queries';
 import {
@@ -19,16 +19,16 @@ const GalleryImageEdit = ({ match }) => {
   return (
     <SingleEntityContainer
       baseUrl='/gallery'
-      entityName='galleryImage'
+      entityName='galleryImageWithAllCollaborators'
       entityCollection='gallery'
       id={id}
-      query={GET_GALLERY_IMAGE}
+      query={GET_GALLERY_IMAGE_WITH_ALL_COLLABORATORS}
       isEdit
       render={entityData => (
         <GalleryForm
           fields={mapFieldsWithValues(
-            new FormFields().gallerySingle,
-            { image: entityData }
+            new FormFields(entityData).galleryEdit,
+            entityData
           )}
           mutation={EDIT_GALLERY_IMAGE}
           id={id}

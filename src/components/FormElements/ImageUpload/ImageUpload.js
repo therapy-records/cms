@@ -26,8 +26,12 @@ const ImageUpload = ({
   multiple,
   handleOnUpload,
   handleOnRemove,
+  handleOnChange,
   imageUploadListItemComponent,
-  selectOptions
+  selectOptions,
+  defaultSelectOptions,
+  description,
+  dataType
 }) => {
   const initImages = existingImages;
 
@@ -60,7 +64,37 @@ const ImageUpload = ({
   const onDrop = useCallback(files => {
     dispatch({ type: 'removeValidationMessage' });
 
-    if (!multiple && files.length > 1) {
+    // if user drops an image and there is already an image
+    if (!multiple && files.length === 1) {
+      const publicId = images[0].cloudinaryPublicId;
+
+      deleteImage({
+        variables: {
+          input: {
+            publicId
+          }
+        }
+      }).then(result => {
+        const success = (result.data && result.data.cloudinaryDelete && result.data.cloudinaryDelete.success);
+        if (success) {
+          dispatch({
+            type: 'deleteImage',
+            payload: {
+              cloudinaryPublicId: publicId
+            }
+          });
+
+          if (handleOnRemove) {
+            handleOnRemove(0);
+          }
+
+          dispatch({
+            type: 'addImages',
+            payload: files
+          });
+        }
+      });
+    } else if (!multiple && files.length > 1) {
       dispatch({
         type: 'addValidationMessage',
         payload: 'Only 1 image is allowed.'
@@ -105,7 +139,6 @@ const ImageUpload = ({
           }
         }
       });
-      // }
     }
   }, [ images.length ]);
 
@@ -116,20 +149,22 @@ const ImageUpload = ({
           image: imgStr
         }
       }
-    }).then(result => {
+    }).then((result) => {
       if (result.data && result.data.cloudinaryUpload) {
         const {
           publicId: cloudinaryPublicId,
           url: uploadedUrl
         } = result.data.cloudinaryUpload;
 
+        const newImageObj = {
+          uploadedUrl,
+          cloudinaryPublicId,
+          originalPath: localPath
+        };
+
         dispatch({
           type: 'addCloudinaryUrlToImage',
-          payload: {
-            uploadedUrl,
-            cloudinaryPublicId,
-            originalPath: localPath
-          }
+          payload: newImageObj
         });
 
         if (handleOnUpload) {
@@ -184,6 +219,7 @@ const ImageUpload = ({
           description
         }
       });
+      handleOnChange(description);
     }
   }
 
@@ -236,7 +272,9 @@ const ImageUpload = ({
             images,
             onChangeDescription,
             onChangeCollaboratorsInImage,
-            selectOptions
+            selectOptions,
+            defaultSelectOptions,
+            description
           })
         ) : (
           <ImageUploadList
@@ -269,21 +307,51 @@ const ImageUpload = ({
         />
       ) : (
         <div>
-          <input
-            readOnly
-            style = {{ display: 'none' }}
-            id='avatar.cloudinaryUrl'
-            name='avatar.cloudinaryUrl'
-            value={imagesHiddenInputValue.length && imagesHiddenInputValue[0].cloudinaryUrl}
-          />
+          {dataType === 'imageObject' ? (
+            <div>
+              <input
+                readOnly
+                style={{ display: 'none' }}
+                id='cloudinaryUrl'
+                name='cloudinaryUrl'
+                value={imagesHiddenInputValue.length && imagesHiddenInputValue[0].cloudinaryUrl}
+              />
 
-          <input
-            readOnly
-            style={{ display: 'none' }}
-            id='avatar.cloudinaryPublicId'
-            name='avatar.cloudinaryPublicId'
-            value={imagesHiddenInputValue.length && imagesHiddenInputValue[0].cloudinaryPublicId}
-          />
+              <input
+                readOnly
+                style={{ display: 'none' }}
+                id='cloudinaryPublicId'
+                name='cloudinaryPublicId'
+                value={imagesHiddenInputValue.length && imagesHiddenInputValue[0].cloudinaryPublicId}
+              />
+
+              <input
+                readOnly
+                style={{ display: 'none' }}
+                id='collaboratorsInImage'
+                name='collaboratorsInImage'
+                value={JSON.stringify(imagesHiddenInputValue.collaboratorsInImage)}
+              />
+            </div>
+          ) : (
+            <div>
+              <input
+                readOnly
+                style = {{ display: 'none' }}
+                id='avatar.cloudinaryUrl'
+                name='avatar.cloudinaryUrl'
+                value={imagesHiddenInputValue.length && imagesHiddenInputValue[0].cloudinaryUrl}
+              />
+
+              <input
+                readOnly
+                style={{ display: 'none' }}
+                id='avatar.cloudinaryPublicId'
+                name='avatar.cloudinaryPublicId'
+                value={imagesHiddenInputValue.length && imagesHiddenInputValue[0].cloudinaryPublicId}
+              />
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -300,11 +368,18 @@ ImageUpload.propTypes = {
   multiple: PropTypes.bool,
   handleOnUpload: PropTypes.func,
   handleOnRemove: PropTypes.func,
+  handleOnChange: PropTypes.func,
   imageUploadListItemComponent: PropTypes.func,
   selectOptions: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired
-  }))
+  })),
+  defaultSelectOptions: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired
+  })),
+  description: PropTypes.string,
+  dataType: PropTypes.string
 };
 
 ImageUpload.defaultProps = {
@@ -314,8 +389,12 @@ ImageUpload.defaultProps = {
   multiple: false,
   handleOnUpload: null,
   handleOnRemove: null,
+  handleOnChange: null,
   imageUploadListItemComponent: null,
-  selectOptions: []
+  selectOptions: [],
+  defaultSelectOptions: [],
+  description: '',
+  dataType: ''
 };
 
 export default ImageUpload;

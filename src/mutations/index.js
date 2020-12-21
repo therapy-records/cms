@@ -143,8 +143,8 @@ export const CREATE_GALLERY_IMAGES = gql`
 `;
 
 export const EDIT_GALLERY_IMAGE = gql`
-  mutation($input: GalleryInput) {
-    editGalleryImage(input: $input) {
+  mutation($id: ID!, $input: GallerySingleInput) {
+    editGalleryImage(_id: $id, input: $input) {
       cloudinaryUrl,
       cloudinaryPublicId,
       description,

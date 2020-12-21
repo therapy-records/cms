@@ -12,6 +12,10 @@ describe('(Component) SelectSearch', () => {
       { value: 'testA', label: 'Test A' },
       { value: 'testB', label: 'Test B' },
     ],
+    defaultOptions: [
+      { value: 'testC', label: 'Test C' },
+      { value: 'testD', label: 'Test D' },
+    ],
     onChange: sinon.spy()
   };
 
@@ -24,7 +28,7 @@ describe('(Component) SelectSearch', () => {
     it('should render <Select />', () => {
       // note: compiled component from Select library, is called 'StateManager'
       const select = wrapper.find('StateManager');
-      expect(select.prop('defaultValue')).to.deep.eq([]);
+      expect(select.prop('defaultValue')).to.deep.eq(props.defaultOptions);
       expect(select.prop('onChange')).to.be.a('function');
       expect(select.prop('options')).to.eq(props.options);
       expect(select.prop('closeMenuOnSelect')).to.eq(false);

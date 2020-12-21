@@ -57,7 +57,6 @@ describe('(Component) ImageUpload', () => {
     global.window.FileReader = false;
   });
 
-
   it('should render different container className', () => {
     wrapper = mount(
       <BrowserRouter>

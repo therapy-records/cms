@@ -32,11 +32,17 @@ describe('(Component) ImageUploadContainer', () => {
     multiple: true,
     handleOnUpload: sinon.spy(),
     handleOnRemove: sinon.spy(),
+    handleOnChange: sinon.spy(),
     imageUploadListItemComponent: GalleryImageUploadList,
     selectOptions: [
       { value: 'testA', label: 'Test A' },
-      { value: 'testB', label: 'Test B' },
-    ]
+      { value: 'testB', label: 'Test B' }
+    ],
+    defaultSelectOptions: [
+      { value: 'testC', label: 'Test C' },
+      { value: 'testD', label: 'Test D' }
+    ],
+    dataType: 'imageObject'
   };
 
   const actions = async(wrapper, _actions) => {
@@ -70,8 +76,11 @@ describe('(Component) ImageUploadContainer', () => {
             multiple={props.multiple}
             handleOnUpload={props.handleOnUpload}
             handleOnRemove={props.handleOnRemove}
+            handleOnChange={props.handleOnChange}
             imageUploadListItemComponent={props.imageUploadListItemComponent}
             selectOptions={props.selectOptions}
+            defaultSelectOptions={props.defaultSelectOptions}
+            dataType={props.dataType}
           />
         );
         expect(actual).to.eq(true);

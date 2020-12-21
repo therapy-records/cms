@@ -19,16 +19,17 @@ const customStyles = {
 
 const SelectSearch = ({
   options,
+  defaultOptions,
   onChange
 }) => {
-  const [ selectedOption, setSelectedOption ] = useState([]);
+  const [ selectedOptions, setSelectedOptions ] = useState(defaultOptions);
 
   return (
     <Select
-      defaultValue={selectedOption}
+      defaultValue={selectedOptions}
       onChange={(value) => {
         onChange(value)
-        setSelectedOption(value)
+        setSelectedOptions(value)
       }}
       options={options}
       closeMenuOnSelect={false}
@@ -44,7 +45,15 @@ SelectSearch.propTypes = {
   options: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired
-  })).isRequired
+  })).isRequired,
+  defaultOptions: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired
+  }))
+};
+
+SelectSearch.defaultProps = {
+  defaultOptions: []
 };
 
 export default SelectSearch;
