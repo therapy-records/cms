@@ -69,6 +69,19 @@ describe('(Component) PressView', () => {
     });
   });
 
+  it('should render press article image from <QueryContainer /> render prop', async () => {
+    await actions(wrapper, () => {
+      wrapper.update();
+      const actual = wrapper.containsMatchingElement(
+        <img
+          src={mocks[0].result.data.pressArticle.image.cloudinaryUrl}
+          alt={mocks[0].result.data.pressArticle.title}
+        />
+      );
+      expect(actual).to.eq(true);
+    });
+  });
+
   it('should render press article excerpt from <QueryContainer /> render prop', async() => {
     await actions(wrapper, () => {
       wrapper.update();
@@ -79,7 +92,6 @@ describe('(Component) PressView', () => {
       expect(actual).to.eq(true);
     });
   });
-  
 
   it('should render press article URL from <QueryContainer /> render prop', async() => {
     await actions(wrapper, () => {

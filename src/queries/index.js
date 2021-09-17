@@ -73,7 +73,11 @@ export const GET_PRESS = gql`
       author,
       title,
       excerpt,
-      releaseDate
+      releaseDate,
+      image {
+        cloudinaryUrl,
+        cloudinaryPublicId
+      }
     }
   }
 `;
@@ -86,7 +90,11 @@ export const GET_PRESS_ARTICLE = gql`
       title,
       excerpt,
       externalLink,
-      releaseDate
+      releaseDate,
+      image {
+        cloudinaryUrl,
+        cloudinaryPublicId
+      },
     }
   }
 `;

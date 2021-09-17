@@ -55,7 +55,11 @@ export const CREATE_PRESS = gql`
       title,
       excerpt,
       externalLink,
-      releaseDate
+      releaseDate,
+      image {
+        cloudinaryUrl,
+        cloudinaryPublicId
+      }
     }
   }
 `;
@@ -68,7 +72,11 @@ export const EDIT_PRESS = gql`
       title,
       excerpt,
       externalLink,
-      releaseDate
+      releaseDate,
+      image {
+        cloudinaryUrl,
+        cloudinaryPublicId
+      }
     }
   }
 `;

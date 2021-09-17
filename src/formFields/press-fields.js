@@ -38,6 +38,19 @@ const PRESS_FIELDS = [
     component: 'Datepicker',
     label: 'Release Date',
     required: true
+  },
+  {
+    id: 'image',
+    type: 'arrayOfObjects',
+    component: 'ImageUpload',
+    label: 'Image',
+    required: true,
+    ctaCopy: 'Drag & drop image',
+    minImageDimensions: {
+      width: 400,
+      height: 400
+    },
+    helpText: 'Must be at least 400px by 400px'
   }
 ];
 

@@ -76,6 +76,7 @@ const FormFieldInput = ({
         multiple={multipleImages}
         handleOnUpload={onChange}
         handleOnRemove={onChange}
+        id={id}
       />
 
     )

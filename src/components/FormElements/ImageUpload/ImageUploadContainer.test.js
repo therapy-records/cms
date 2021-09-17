@@ -28,8 +28,9 @@ describe('(Component) ImageUploadContainer', () => {
       height: 100
     },
     ctaCopy: 'test',
-    multiple: true
-  }
+    multiple: true,
+    id: 'test'
+  };
 
   const actions = async(wrapper, _actions) => {
     await act(async() => {
@@ -60,6 +61,7 @@ describe('(Component) ImageUploadContainer', () => {
             minImageDimensions={props.minImageDimensions}
             ctaCopy={props.ctaCopy}
             multiple={props.multiple}
+            id={props.id}
           />
         );
         expect(actual).to.eq(true);

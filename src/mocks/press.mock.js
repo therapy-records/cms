@@ -10,8 +10,28 @@ export const MOCK_GET_PRESS = {
   result: {
     data: {
       press: [
-        { _id: 'abc1', author: 'test', title: 'test', excerpt: 'test', releaseDate: new Date().toISOString() },
-        { _id: 'abc2', author: 'testing', title: 'testing', excerpt: 'test', releaseDate: new Date().toISOString() }
+        {
+          _id: 'abc1',
+          author: 'test',
+          title: 'test',
+          excerpt: 'test',
+          releaseDate: new Date().toISOString(),
+          image: {
+            cloudinaryUrl: 'test.com',
+            cloudinaryPublicId: '1234'
+          }
+        },
+        {
+          _id: 'abc2',
+          author: 'testing',
+          title: 'testing',
+          excerpt: 'test',
+          releaseDate: new Date().toISOString(),
+          image: {
+            cloudinaryUrl: 'test.com',
+            cloudinaryPublicId: '1234'
+          }
+        }
       ]
     }
   }
@@ -41,7 +61,11 @@ export const MOCK_GET_PRESS_ARTICLE = {
         title: 'test title',
         excerpt: 'test',
         externalLink: 'test.com',
-        releaseDate: new Date().toISOString()
+        releaseDate: new Date().toISOString(),
+        image: {
+          cloudinaryUrl: 'test.com',
+          cloudinaryPublicId: '1234'
+        }
       }
     }
   }

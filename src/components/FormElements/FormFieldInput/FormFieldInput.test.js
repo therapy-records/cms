@@ -137,6 +137,7 @@ describe('(Component) FormFieldInput', () => {
             // existingImages={mockField[mockField.value]}
             existingImages={[]}
             multiple={mockField.multipleImages}
+            id={mockField.id}
           />
         );
         expect(actual).to.eq(true);
@@ -164,6 +165,7 @@ describe('(Component) FormFieldInput', () => {
               ctaCopy={mockField.ctaCopy}
               existingImages={expectedExistingImages}
               multiple={mockField.multipleImages}
+              id={mockField.id}
             />
           );
           expect(actual).to.eq(true);

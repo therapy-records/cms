@@ -25,7 +25,8 @@ const ImageUpload = ({
   ctaCopy,
   multiple,
   handleOnUpload,
-  handleOnRemove
+  handleOnRemove,
+  id
 }) => {
   const initImages = existingImages;
 
@@ -227,8 +228,8 @@ const ImageUpload = ({
         <input
           readOnly
           style={{ display: 'none' }}
-          id='avatar'
-          name='avatar'
+          id={id}
+          name={id}
           value={imagesHiddenInputValue}
         />
       ) : (
@@ -236,16 +237,16 @@ const ImageUpload = ({
           <input
             readOnly
             style = {{ display: 'none' }}
-            id='avatar.cloudinaryUrl'
-            name='avatar.cloudinaryUrl'
+            id={`${id}.cloudinaryUrl`}
+            name={`${id}.cloudinaryUrl`}
             value={imagesHiddenInputValue.length && imagesHiddenInputValue[0].cloudinaryUrl}
           />
 
           <input
             readOnly
             style={{ display: 'none' }}
-            id='avatar.cloudinaryPublicId'
-            name='avatar.cloudinaryPublicId'
+            id={`${id}.cloudinaryPublicId`}
+            name={`${id}.cloudinaryPublicId`}
             value={imagesHiddenInputValue.length && imagesHiddenInputValue[0].cloudinaryPublicId}
           />
         </div>
@@ -263,7 +264,8 @@ ImageUpload.propTypes = {
   minImageDimensions: PropTypes.object,
   multiple: PropTypes.bool,
   handleOnUpload: PropTypes.func,
-  handleOnRemove: PropTypes.func
+  handleOnRemove: PropTypes.func,
+  id: PropTypes.string
 };
 
 ImageUpload.defaultProps = {
@@ -272,7 +274,8 @@ ImageUpload.defaultProps = {
   minImageDimensions: {},
   multiple: false,
   handleOnUpload: null,
-  handleOnRemove: null
+  handleOnRemove: null,
+  id: ''
 };
 
 export default ImageUpload;

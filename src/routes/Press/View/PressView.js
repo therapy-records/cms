@@ -20,12 +20,26 @@ const PressView = ({
       id={id}
       query={GET_PRESS_ARTICLE}
       render={entityData => (
-        <div>
-          <h4>Excerpt</h4>
-          <p>{entityData.excerpt}</p>
+        <div className='entity-container'>
 
-          <h4>URL</h4>
-          <p><a href={entityData.externalLink} target='_blank' rel='noopener noreferrer'>{entityData.externalLink}</a></p>
+          <div className='flex-root'>
+
+            <div className='entity-image-container'>
+              <img
+                src={entityData.image.cloudinaryUrl}
+                alt={entityData.title}
+              />
+            </div>
+
+            <div>
+              <h4>Excerpt</h4>
+              <p>{entityData.excerpt}</p>
+
+              <h4>URL</h4>
+              <p><a href={entityData.externalLink} target='_blank' rel='noopener noreferrer'>{entityData.externalLink}</a></p>
+            </div>
+
+          </div>
         </div>
       )}
 
