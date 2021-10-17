@@ -14,7 +14,6 @@ const PressHome = () => {
         entityName='press'
         render={(queryData) => {
           const hasArticles = (queryData && queryData !== null) && queryData.length;
-          const sortedQueryData = queryData.sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate)).reverse();
 
           return (
             <div>
@@ -27,7 +26,7 @@ const PressHome = () => {
 
               {hasArticles ? (
                 <List
-                  data={sortedQueryData}
+                  data={queryData}
                   route='press'
                 />
               ) : (
