@@ -14,6 +14,7 @@ export const MOCK_GET_PRESS = {
           _id: 'abc1',
           author: 'test',
           title: 'test',
+          category: 'Mock category A',
           excerpt: 'test',
           releaseDate: new Date().toISOString(),
           image: {
@@ -25,6 +26,7 @@ export const MOCK_GET_PRESS = {
           _id: 'abc2',
           author: 'testing',
           title: 'testing',
+          category: 'Mock category A',
           excerpt: 'test',
           releaseDate: new Date().toISOString(),
           image: {
@@ -65,7 +67,8 @@ export const MOCK_GET_PRESS_ARTICLE = {
         image: {
           cloudinaryUrl: 'test.com',
           cloudinaryPublicId: '1234'
-        }
+        },
+        category: 'Mock category A'
       }
     }
   }

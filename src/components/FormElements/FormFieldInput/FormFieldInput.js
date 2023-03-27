@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TextArea from '../TextArea';
 import TextInput from '../TextInput';
+import Select from '../Select';
 import TextInputsList from '../TextInputsList';
 import ImageUploadContainer from '../../FormElements/ImageUpload/ImageUploadContainer';
 import RichTextEditor from '../../RichTextEditor';
@@ -23,6 +24,7 @@ const FormFieldInput = ({
   onChange,
   maxLength,
   value,
+  options,
   multipleImages,
   showTime
 }) => {
@@ -48,6 +50,17 @@ const FormFieldInput = ({
         onChange={onChange}
         maxLength={maxLength}
         value={value}
+      />
+    )
+  } else if (component === 'Select') {
+    return (
+      <Select
+        label={label}
+        name={id}
+        required={required}
+        onChange={onChange}
+        value={value}
+        options={options}
       />
     )
   } else if (component === 'RichTextEditor') {
@@ -143,6 +156,7 @@ FormFieldInput.propTypes = {
       cloudinaryPublicId: PropTypes.string
     })
   ]),
+  options: PropTypes.array,
   multipleImages: PropTypes.bool,
   showTime: PropTypes.bool
 };

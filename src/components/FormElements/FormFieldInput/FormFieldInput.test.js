@@ -4,6 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import moment from 'moment';
 import FormFieldInput from './FormFieldInput';
 import TextArea from '../TextArea';
+import Select from '../Select';
 import TextInput from '../TextInput';
 import TextInputsList from '../TextInputsList';
 import ImageUploadContainer from '../../FormElements/ImageUpload/ImageUploadContainer';
@@ -81,6 +82,38 @@ describe('(Component) FormFieldInput', () => {
             onChange={mockOnChange}
             maxLength={mockField.maxLength}
             value={mockField.value}
+          />
+        );
+        expect(actual).to.eq(true);
+      });
+    });
+
+    describe('when field.component is `Select`', () => {
+      it('should render <Select />', () => {
+        const mockField = {
+          id: 'test',
+          component: 'Select',
+          placeholder: 'testing',
+          label: 'Test',
+          required: true,
+          options: [
+            { text: 'Category A', value: 'A' },
+            { text: 'Category B', value: 'B' }
+          ]
+        };
+        wrapper.setProps({
+          ...mockField,
+          onChange: mockOnChange
+        });
+
+        const actual = wrapper.containsMatchingElement(
+          <Select
+            label={mockField.label}
+            name={mockField.id}
+            required={mockField.required}
+            onChange={mockField.onChange}
+            value={mockField.value}
+            options={mockField.options}
           />
         );
         expect(actual).to.eq(true);

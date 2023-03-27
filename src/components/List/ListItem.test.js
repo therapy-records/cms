@@ -14,6 +14,7 @@ describe('(Component) ListItem', () => {
         _id: 'test',
         author: 'test',
         title: 'testing',
+        category: 'Category A',
         excerpt: 'test',
         imageUrl: 'test.com',
         description: 'test',
@@ -72,6 +73,13 @@ describe('(Component) ListItem', () => {
     expect(actual).to.eq(true);
   });
   
+  it('should render category', () => {
+    const actual = wrapper.containsMatchingElement(
+      <p>{props.category}</p>
+    );
+    expect(actual).to.eq(true);
+  });
+
   it('should render author', () => {
     const actual = wrapper.containsMatchingElement(
       <p>{props.author}</p>

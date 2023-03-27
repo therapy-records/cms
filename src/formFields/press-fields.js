@@ -8,6 +8,31 @@ const PRESS_FIELDS = [
     required: true
   },
   {
+    id: 'category',
+    type: 'select',
+    component: 'Select',
+    label: 'Category',
+    options: [
+      {
+        text: 'Please select',
+        value: null
+      },
+      {
+        text: 'Reviews',
+        value: 'Reviews'
+      },
+      {
+        text: 'Interviews',
+        value: 'Interviews'
+      },
+      {
+        text: 'Other',
+        value: 'Other'
+      }
+    ],
+    required: true
+  },
+  {
     id: 'title',
     type: 'text',
     component: 'TextInput',

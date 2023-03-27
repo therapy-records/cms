@@ -122,7 +122,8 @@ blockquote {
     color: #C2C2C2;
     margin-left: 0.5em;
   }
-  &.author {
+  &.author,
+  &.category {
     color: #000;
     opacity: 1;
   }
