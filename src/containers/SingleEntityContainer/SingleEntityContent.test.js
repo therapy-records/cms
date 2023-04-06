@@ -17,6 +17,7 @@ describe('(Container Component) SingleEntityContent', () => {
           name: 'Test',
           about: '<p>test</p>',
           author: 'test',
+          category: 'mock category',
           releaseDate: 'test',
           createdAt: 'test',
           avatar: {
@@ -47,6 +48,7 @@ describe('(Container Component) SingleEntityContent', () => {
       expect(pageHeader.prop('entity')).to.deep.eq({
         _id: props.data._id,
         author: props.data.author,
+        category: props.data.category,
         releaseDate: props.data.releaseDate,
         createdAt: props.data.createdAt
       });

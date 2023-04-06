@@ -14,6 +14,7 @@ describe('(Component) PageHeader', () => {
     mockEntity = {
       _id: 'asdf1234',
       title: 'hello world',
+      category: 'mock category',
       sections: [
         {
           images: [
@@ -106,6 +107,13 @@ describe('(Component) PageHeader', () => {
         <h2>{props.heading}</h2>
       );
       expect(actual).to.equal(true);
+    });
+
+    it('should render `category`', () => {
+      const actual = wrapper.containsMatchingElement(
+        <p className='small-tab category'>{mockEntity.category}</p>
+      );
+      expect(actual).to.eq(true);
     });
 
     it('should render `author`', () => {
