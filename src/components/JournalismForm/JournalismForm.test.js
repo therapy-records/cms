@@ -6,6 +6,7 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import configureMockStore from 'redux-mock-store';
 import TextInput from '../TextInput/TextInput';
+import Select from '../FormElements/Select';
 import Datepicker from '../Datepicker/Datepicker';
 import ConnectedJournalismForm, { JournalismForm, JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS } from './JournalismForm';
 import ImageUploadContainer from '../../components/FormElements/ImageUpload/ImageUploadContainer';
@@ -209,6 +210,45 @@ describe('(Component) JournalismForm', () => {
         <Field name='externalLink'
                component={TextInput}
                required
+        />
+      );
+      expect(actual).to.equal(true)
+    });
+
+    it('should render an category field', () => {
+      const actual = wrapper.containsMatchingElement(
+        <Field name='category'
+          component={Select}
+          type='select'
+          label='Category'
+          options={[
+            {
+              text: 'Please select',
+              value: null
+            },
+            {
+              text: 'Women in Jazz Media',
+              value: 'Women in Jazz Media'
+            },
+            {
+              text: 'Jazz in Europe',
+              value: 'Jazz in Europe'
+            },
+            {
+              text: 'Kind of Jazz',
+              value: 'Kind of Jazz'
+            },
+            {
+              text: 'Jazz Quarterly',
+              value: 'Jazz Quarterly'
+            },
+            {
+              text: 'Other',
+              value: 'Other'
+            }
+          ]}
+          required
+          hideLabel={false}
         />
       );
       expect(actual).to.equal(true)

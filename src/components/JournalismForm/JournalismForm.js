@@ -16,6 +16,7 @@ import PageHeader from '../PageHeader';
 import Datepicker from '../Datepicker/Datepicker';
 import ImageUploadContainer from '../../components/FormElements/ImageUpload/ImageUploadContainer';
 import TextInput from '../TextInput';
+import Select from '../FormElements/Select';
 import { required } from '../../utils/form';
 import {
   JOURNALISM_FORM,
@@ -43,6 +44,10 @@ export class JournalismForm extends React.Component {
 
   onRemoveImage() {
     this.props.updateImage(JOURNALISM_FORM, 'image', {});
+  }
+
+  onCategoryChange(newCategory) {
+    this.props.updateImage(JOURNALISM_FORM, 'category', newCategory);
   }
 
   render() {
@@ -112,11 +117,48 @@ export class JournalismForm extends React.Component {
           <div className='row-large'>
             <Field name='externalLink'
               component={TextInput}
-              type='Link to article'
+              type='text'
               label='Link to article'
               placeholder='http://bbc.co.uk/fiona-ross'
               validate={required}
               required
+            />
+          </div>
+
+          <div className='row-large'>
+            <Field name='category'
+              component={Select}
+              type='select'
+              label='Category'
+              options={[
+                {
+                  text: 'Please select',
+                  value: null
+                },
+                {
+                  text: 'Women in Jazz Media',
+                  value: 'Women in Jazz Media'
+                },
+                {
+                  text: 'Jazz in Europe',
+                  value: 'Jazz in Europe'
+                },
+                {
+                  text: 'Kind of Jazz',
+                  value: 'Kind of Jazz'
+                },
+                {
+                  text: 'Jazz Quarterly',
+                  value: 'Jazz Quarterly'
+                },
+                {
+                  text: 'Other',
+                  value: 'Other'
+                }
+              ]}
+              validate={required}
+              required
+              hideLabel={false}
             />
           </div>
 

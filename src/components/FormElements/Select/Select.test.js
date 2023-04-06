@@ -21,13 +21,35 @@ describe('(Component) Select', () => {
         text: 'Option B',
         value: 'B'
       }
-    ]
+    ],
+    label: 'mock label',
+    hideLabel: false
   };
 
   beforeEach(() => {
     wrapper = shallow(
       <Select {...props} />
     );
+  });
+
+  it('should render a label', () => {
+    const actual = wrapper.containsMatchingElement(
+      <label>{props.label}</label>
+    );
+
+    expect(actual).to.eq(true);
+  });
+
+  describe('when props.hideLabel is true', () => {
+    it('should NOT render a label', () => {
+      wrapper.setProps({
+        hideLabel: true
+      });
+
+      const label = wrapper.find('label');
+
+      expect(label.length).to.eq(0);
+    });
   });
 
   it('should render an input with props', () => {
@@ -63,7 +85,7 @@ describe('(Component) Select', () => {
         onChange: onChangeSpy
       });
 
-      let element = wrapper.find('select');
+      const element = wrapper.find('select');
 
       element.simulate('change', {
         target: { value: 'testing' }
@@ -74,4 +96,24 @@ describe('(Component) Select', () => {
     });
   });
 
+  describe('input.onChange', () => {
+    it('should call props.input.onChange', () => {
+      const onChangeSpy = sinon.spy();
+
+      wrapper.setProps({
+        input: {
+          onChange: onChangeSpy
+        }
+      });
+
+      const element = wrapper.find('select');
+
+      element.simulate('change', {
+        target: { value: 'testing' }
+      });
+
+      expect(onChangeSpy).to.have.been.calledOnce;
+      expect(onChangeSpy).to.have.been.calledWith('testing');
+    });
+  });
 });
