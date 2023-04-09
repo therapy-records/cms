@@ -22,3 +22,41 @@ export const NEWS_FORM = 'NEWS_FORM';
 export const JOURNALISM_FORM = 'JOURNALISM_FORM';
 
 export const JOUNALISM_FIELD_COPY_MAX_LENGTH = 50;
+
+export const JOURNALISM_CATEGORIES = {
+  WIJM: {
+    TEXT: 'Women in Jazz Media',
+    VALUE: 1
+  },
+  JAZZ_IN_EUROPE: {
+    TEXT: 'Jazz in Europe',
+    VALUE: 2
+  },
+  KIND_OF_JAZZ: {
+    TEXT: 'Kind of Jazz',
+    VALUE: 3
+  },
+  JAZZ_QUARTERLY: {
+    TEXT: 'Jazz Quarterly',
+    VALUE: 4
+  },
+  OTHER: {
+    TEXT: 'Other',
+    VALUE: 5
+  }
+};
+
+export const PRESS_CATEGORIES = {
+  REVIEWS: {
+    TEXT: 'Reviews',
+    VALUE: 1
+  },
+  INTERVIEWS: {
+    TEXT: 'Interviews',
+    VALUE: 2
+  },
+  OTHER: {
+    TEXT: 'Other',
+    VALUE: 3
+  }
+};

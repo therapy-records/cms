@@ -53,10 +53,10 @@ class PageHeader extends Component {
         <div className={containerClassName}>
           <div>
 
-          <h2>{heading}</h2>
+            <h2>{heading}</h2>
 
-            {entity.category &&
-              <p className='small-tab category'>{entity.category}</p>
+            {entity.categoryId &&
+              <p className='small-tab category'>{entity.categoryId}</p>
             }
 
             {entity.author &&

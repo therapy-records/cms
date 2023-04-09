@@ -72,7 +72,7 @@ export const GET_PRESS = gql`
       _id,
       author,
       title,
-      category,
+      categoryId,
       excerpt,
       releaseDate,
       image {
@@ -89,7 +89,7 @@ export const GET_PRESS_ARTICLE = gql`
       _id,
       author,
       title,
-      category,
+      categoryId,
       excerpt,
       externalLink,
       releaseDate,

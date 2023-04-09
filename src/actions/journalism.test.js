@@ -25,7 +25,7 @@ let mockArticle = {
   _id: 'asdfsaf',
   title: 'hello',
   copy: 'world',
-  category: 'Other',
+  categoryId: 1,
   imageUrl: 'http://image.com',
   externalLink: 'test.com',
   releaseDate: new Date()

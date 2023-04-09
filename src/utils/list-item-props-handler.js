@@ -19,7 +19,7 @@ const listItemPropsHandler = ({
   const {
     _id,
     author,
-    category,
+    categoryId,
     image,
     avatar,
     excerpt,
@@ -49,7 +49,7 @@ const listItemPropsHandler = ({
     _id,
     title: itemTitle,
     author,
-    category,
+    categoryId,
     description: itemDescription,
     imageUrl: itemImageUrl,
     date,

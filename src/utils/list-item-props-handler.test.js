@@ -17,7 +17,7 @@ describe('(Utils) list-item-props-handler', () => {
     excerpt: 'testing',
     externalLink: 'test.com',
     ticketsUrl: 'tickets.com',
-    category: 'Mock category'
+    categoryId: 1
   };
 
   it('should return an object with correct properties/values', () => {
@@ -43,7 +43,7 @@ describe('(Utils) list-item-props-handler', () => {
       cardDesign: true,
       isDraggable: true,
       externalLink: mockItem.externalLink,
-      category: mockItem.category
+      categoryId: mockItem.categoryId
     };
 
     expect(result).to.deep.eq(expected);

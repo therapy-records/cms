@@ -23,7 +23,7 @@ const SingleEntityContent = ({
         entity={{
           _id: data._id,
           author: data.author,
-          category: data.category,
+          categoryId: data.categoryId,
           releaseDate: data.releaseDate,
           createdAt: data.createdAt
         }}

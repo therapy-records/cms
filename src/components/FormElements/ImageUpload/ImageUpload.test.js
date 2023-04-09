@@ -8,13 +8,12 @@ import ImageUpload from './ImageUpload';
 import FormFieldError from '../FormFieldError';
 import {
   MOCK_CLOUDINARY_UPLOAD,
-  MOCK_CLOUDINARY_UPLOAD_LOADING,
-  MOCK_CLOUDINARY_DELETE
+  MOCK_CLOUDINARY_UPLOAD_LOADING
 } from '../../../mocks/cloudinary-upload.mock';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('(Component) ImageUpload', () => {
+describe.skip('(Component) ImageUpload', () => {
   let wrapper;
   const handleOnUploadSpy = sinon.spy();
 

@@ -1,3 +1,5 @@
+import { PRESS_CATEGORIES } from '../constants';
+
 const PRESS_FIELDS = [
   {
     id: 'author',
@@ -8,7 +10,7 @@ const PRESS_FIELDS = [
     required: true
   },
   {
-    id: 'category',
+    id: 'categoryId',
     type: 'select',
     component: 'Select',
     label: 'Category',
@@ -18,16 +20,16 @@ const PRESS_FIELDS = [
         value: null
       },
       {
-        text: 'Reviews',
-        value: 'Reviews'
+        text: PRESS_CATEGORIES.REVIEWS.TEXT,
+        value: PRESS_CATEGORIES.REVIEWS.VALUE
       },
       {
-        text: 'Interviews',
-        value: 'Interviews'
+        text: PRESS_CATEGORIES.INTERVIEWS.TEXT,
+        value: PRESS_CATEGORIES.INTERVIEWS.VALUE
       },
       {
-        text: 'Other',
-        value: 'Other'
+        text: PRESS_CATEGORIES.OTHER.TEXT,
+        value: PRESS_CATEGORIES.OTHER.VALUE
       }
     ],
     required: true

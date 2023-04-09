@@ -9,7 +9,7 @@ const ListItem = ({
   _id,
   title,
   author,
-  category,
+  categoryId,
   imageUrl,
   date,
   releaseDate,
@@ -54,7 +54,7 @@ const ListItem = ({
           <div>
             <div className='small-tabs-container'>
               <div>
-                {category && <p className='small-tab category'>{category}</p>}
+                {categoryId && <p className='small-tab category'>{categoryId}</p>}
                 {author && <p className='small-tab author'>{author}</p>}
               </div>
               {releaseDate && <p className='small-tab'>{moment(new Date(releaseDate)).format('DD MMM YYYY')}</p>}
@@ -102,7 +102,7 @@ ListItem.propTypes = {
   _id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   author: PropTypes.string,
-  category: PropTypes.string,
+  categoryId: PropTypes.number,
   imageUrl: PropTypes.string,
   route: PropTypes.string.isRequired,
   date: PropTypes.string,
@@ -118,7 +118,6 @@ ListItem.propTypes = {
 
 ListItem.defaultProps = {
   author: '',
-  category: '',
   imageUrl: '',
   date: '',
   releaseDate: '',

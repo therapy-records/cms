@@ -13,7 +13,11 @@ import ImageUploadContainer from '../../components/FormElements/ImageUpload/Imag
 import { required } from '../../utils/form';
 import { selectJournalismFormValues } from '../../selectors/form';
 import { selectUiStateLoading } from '../../selectors/uiState';
-import { JOURNALISM_FORM, JOUNALISM_FIELD_COPY_MAX_LENGTH } from '../../constants';
+import {
+  JOURNALISM_FORM,
+  JOUNALISM_FIELD_COPY_MAX_LENGTH,
+  JOURNALISM_CATEGORIES
+} from '../../constants';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -217,7 +221,7 @@ describe('(Component) JournalismForm', () => {
 
     it('should render an category field', () => {
       const actual = wrapper.containsMatchingElement(
-        <Field name='category'
+        <Field name='categoryId'
           component={Select}
           type='select'
           label='Category'
@@ -227,24 +231,24 @@ describe('(Component) JournalismForm', () => {
               value: null
             },
             {
-              text: 'Women in Jazz Media',
-              value: 'Women in Jazz Media'
+              text: JOURNALISM_CATEGORIES.WIJM.TEXT,
+              value: JOURNALISM_CATEGORIES.WIJM.VALUE
             },
             {
-              text: 'Jazz in Europe',
-              value: 'Jazz in Europe'
+              text: JOURNALISM_CATEGORIES.JAZZ_IN_EUROPE.TEXT,
+              value: JOURNALISM_CATEGORIES.JAZZ_IN_EUROPE.VALUE
             },
             {
-              text: 'Kind of Jazz',
-              value: 'Kind of Jazz'
+              text: JOURNALISM_CATEGORIES.KIND_OF_JAZZ.TEXT,
+              value: JOURNALISM_CATEGORIES.KIND_OF_JAZZ.VALUE
             },
             {
-              text: 'Jazz Quarterly',
-              value: 'Jazz Quarterly'
+              text: JOURNALISM_CATEGORIES.JAZZ_QUARTERLY.TEXT,
+              value: JOURNALISM_CATEGORIES.JAZZ_QUARTERLY.VALUE
             },
             {
-              text: 'Other',
-              value: 'Other'
+              text: JOURNALISM_CATEGORIES.OTHER.TEXT,
+              value: JOURNALISM_CATEGORIES.OTHER.VALUE
             }
           ]}
           required

@@ -14,7 +14,7 @@ describe('(Component) PageHeader', () => {
     mockEntity = {
       _id: 'asdf1234',
       title: 'hello world',
-      category: 'mock category',
+      categoryId: 1,
       sections: [
         {
           images: [
@@ -109,9 +109,9 @@ describe('(Component) PageHeader', () => {
       expect(actual).to.equal(true);
     });
 
-    it('should render `category`', () => {
+    it('should render `categoryId`', () => {
       const actual = wrapper.containsMatchingElement(
-        <p className='small-tab category'>{mockEntity.category}</p>
+        <p className='small-tab category'>{mockEntity.categoryId}</p>
       );
       expect(actual).to.eq(true);
     });
