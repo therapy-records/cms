@@ -13,6 +13,7 @@ import PageHeader from '../../../components/PageHeader';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import EmptyMessage from '../../../components/EmptyMessage';
 import List from '../../../components/List';
+import { getJournalismCategoryById } from '../../../helpers';
 
 export class Journalism extends React.Component {
   constructor() {
@@ -46,9 +47,21 @@ export class Journalism extends React.Component {
     } = this.props;
 
     const hasArticles = (articles && articles !== null) && articles.length;
+
     let sortedArticles;
+
     if (hasArticles) {
-      sortedArticles = articles.sort((a, b) =>
+      const mappedArticles = articles.map((article) => {
+        const mapped = article;
+
+        if (article.categoryId) {
+          mapped.category = getJournalismCategoryById(article.categoryId).TEXT;
+        }
+
+        return mapped;
+      });
+
+      sortedArticles = mappedArticles.sort((a, b) =>
         new Date(a.releaseDate) - new Date(b.releaseDate)
       ).reverse();
     }

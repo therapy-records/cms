@@ -11,7 +11,8 @@ import {
   selectJournalismHasFetched,
   selectSelectedJournalismArticle
 } from '../../../selectors/journalism';
-import {selectUiStateLoading} from '../../../selectors/uiState';
+import { selectUiStateLoading } from '../../../selectors/uiState';
+import { getJournalismCategoryById } from '../../../helpers';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -62,10 +63,20 @@ describe('(Component) Journalism - Home', () => {
     });
 
     it('should render <List />', () => {
-      const expectedDataProp = props.articles.sort((a, b) =>
+      const mappedArticles = props.articles.map((article) => {
+        const mapped = article;
+
+        if (article.categoryId) {
+          mapped.category = getJournalismCategoryById(article.categoryId).TEXT;
+        }
+
+        return mapped;
+      });
+
+      const expectedDataProp = mappedArticles.sort((a, b) =>
         new Date(a.releaseDate) - new Date(b.releaseDate)
       ).reverse();
-     
+
       const actual = wrapper.containsMatchingElement(
         <List
           data={expectedDataProp}

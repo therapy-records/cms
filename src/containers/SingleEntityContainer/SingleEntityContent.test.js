@@ -4,6 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import SingleEntityContent from './SingleEntityContent';
 import CollaboratorDetails from '../../components/CollaboratorDetails';
 import entityHeading from '../../utils/entityHeading';
+import { getPressCategoryById } from '../../helpers';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -17,6 +18,7 @@ describe('(Container Component) SingleEntityContent', () => {
           name: 'Test',
           about: '<p>test</p>',
           author: 'test',
+          categoryId: 1,
           releaseDate: 'test',
           createdAt: 'test',
           avatar: {
@@ -37,6 +39,7 @@ describe('(Container Component) SingleEntityContent', () => {
 
   describe('<PageHeader />', () => {
     let pageHeader;
+
     beforeEach(() => {
       pageHeader = wrapper.find('PageHeader');
     });
@@ -47,12 +50,29 @@ describe('(Container Component) SingleEntityContent', () => {
       expect(pageHeader.prop('entity')).to.deep.eq({
         _id: props.data._id,
         author: props.data.author,
+        categoryId: props.data.categoryId,
         releaseDate: props.data.releaseDate,
         createdAt: props.data.createdAt
       });
       expect(pageHeader.prop('heading')).to.eq(entityHeading(props.data));
+
       expect(pageHeader.prop('renderEditButton')).to.eq(true);
       expect(pageHeader.prop('renderDeleteButton')).to.eq(props.renderDeleteButton);
+    });
+
+    it('should render category prop when entityCollection is `press`', () => {
+      wrapper = shallow(
+        <SingleEntityContent
+          {...props}
+          entityCollection='press'
+        />
+      );
+
+      pageHeader = wrapper.find('PageHeader');
+
+      const expectedCategory = getPressCategoryById(props.data.categoryId).TEXT;
+
+      expect(pageHeader.prop('category')).to.eq(expectedCategory);
     });
 
     describe('when pageHeader onDeleteEntity prop is triggered', () => {

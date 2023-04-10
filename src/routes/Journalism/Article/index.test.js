@@ -11,6 +11,7 @@ import {
 import { selectSelectedJournalismArticle } from '../../../selectors/journalism';
 import redirect from '../../../utils/redirect';
 import entityHeading from '../../../utils/entityHeading';
+import { getJournalismCategoryById } from '../../../helpers';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -26,7 +27,8 @@ describe('(Component) Journalism - Article', () => {
       },
       releaseDate: new Date(),
       editedAt: new Date(),
-      externalLink: 'http://test.com'
+      externalLink: 'http://test.com',
+      categoryId: 1
     },
     baseProps = {
       resetPromiseState: sinon.spy(),
@@ -228,6 +230,11 @@ describe('(Component) Journalism - Article', () => {
         expect(pageHeader.prop('entityCollection')).to.eq('journalism');
         expect(pageHeader.prop('entity')).to.eq(mockArticle);
         expect(pageHeader.prop('heading')).to.eq(entityHeading(mockArticle));
+
+        const expectedCategory = getJournalismCategoryById(mockArticle.categoryId).TEXT
+
+        expect(pageHeader.prop('category')).to.eq(expectedCategory);
+
         expect(pageHeader.prop('onDeleteEntity')).to.be.a('function');
         expect(pageHeader.prop('promiseLoading')).to.eq(props.promiseLoading);
         expect(pageHeader.prop('renderEditButton')).to.eq(true);

@@ -14,6 +14,7 @@ describe('(Component) PageHeader', () => {
     mockEntity = {
       _id: 'asdf1234',
       title: 'hello world',
+      categoryId: 1,
       sections: [
         {
           images: [
@@ -41,7 +42,8 @@ describe('(Component) PageHeader', () => {
       onDeleteEntity: sinon.spy(),
       renderEditButton: true,
       renderDeleteButton: true,
-      renderCreateButton: true
+      renderCreateButton: true,
+      category: 'Mock category'
     };
   props = baseProps;
 
@@ -106,6 +108,13 @@ describe('(Component) PageHeader', () => {
         <h2>{props.heading}</h2>
       );
       expect(actual).to.equal(true);
+    });
+
+    it('should render `category`', () => {
+      const actual = wrapper.containsMatchingElement(
+        <p className='small-tab category'>{props.category}</p>
+      );
+      expect(actual).to.eq(true);
     });
 
     it('should render `author`', () => {

@@ -1,3 +1,5 @@
+import { PRESS_CATEGORIES } from '../constants';
+
 const PRESS_FIELDS = [
   {
     id: 'author',
@@ -5,6 +7,31 @@ const PRESS_FIELDS = [
     component: 'TextInput',
     label: 'Author',
     placeholder: 'Sky News',
+    required: true
+  },
+  {
+    id: 'categoryId',
+    type: 'select',
+    component: 'Select',
+    label: 'Category',
+    options: [
+      {
+        text: 'Please select',
+        value: null
+      },
+      {
+        text: PRESS_CATEGORIES.REVIEWS.TEXT,
+        value: PRESS_CATEGORIES.REVIEWS.VALUE
+      },
+      {
+        text: PRESS_CATEGORIES.INTERVIEWS.TEXT,
+        value: PRESS_CATEGORIES.INTERVIEWS.VALUE
+      },
+      {
+        text: PRESS_CATEGORIES.OTHER.TEXT,
+        value: PRESS_CATEGORIES.OTHER.VALUE
+      }
+    ],
     required: true
   },
   {

@@ -7,8 +7,9 @@ import './ListItem.css';
 
 const ListItem = ({
   _id,
-  author,
   title,
+  author,
+  category,
   imageUrl,
   date,
   releaseDate,
@@ -52,7 +53,10 @@ const ListItem = ({
         <div className='content'>
           <div>
             <div className='small-tabs-container'>
-              {author && <p className='small-tab author'>{author}</p>}
+              <div>
+                {category && <p className='small-tab category'>{category}</p>}
+                {author && <p className='small-tab author'>{author}</p>}
+              </div>
               {releaseDate && <p className='small-tab'>{moment(new Date(releaseDate)).format('DD MMM YYYY')}</p>}
             </div>
             <h3>
@@ -98,6 +102,7 @@ ListItem.propTypes = {
   _id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   author: PropTypes.string,
+  category: PropTypes.string,
   imageUrl: PropTypes.string,
   route: PropTypes.string.isRequired,
   date: PropTypes.string,

@@ -6,13 +6,18 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import configureMockStore from 'redux-mock-store';
 import TextInput from '../TextInput/TextInput';
+import Select from '../FormElements/Select';
 import Datepicker from '../Datepicker/Datepicker';
 import ConnectedJournalismForm, { JournalismForm, JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS } from './JournalismForm';
 import ImageUploadContainer from '../../components/FormElements/ImageUpload/ImageUploadContainer';
 import { required } from '../../utils/form';
 import { selectJournalismFormValues } from '../../selectors/form';
 import { selectUiStateLoading } from '../../selectors/uiState';
-import { JOURNALISM_FORM, JOUNALISM_FIELD_COPY_MAX_LENGTH } from '../../constants';
+import {
+  JOURNALISM_FORM,
+  JOUNALISM_FIELD_COPY_MAX_LENGTH,
+  JOURNALISM_CATEGORIES
+} from '../../constants';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -187,6 +192,45 @@ describe('(Component) JournalismForm', () => {
         />
       );
       expect(actual).to.equal(true);
+    });
+
+    it('should render a category field', () => {
+      const actual = wrapper.containsMatchingElement(
+        <Field name='categoryId'
+          component={Select}
+          type='select'
+          label='Category'
+          options={[
+            {
+              text: 'Please select',
+              value: null
+            },
+            {
+              text: JOURNALISM_CATEGORIES.WIJM.TEXT,
+              value: JOURNALISM_CATEGORIES.WIJM.VALUE
+            },
+            {
+              text: JOURNALISM_CATEGORIES.JAZZ_IN_EUROPE.TEXT,
+              value: JOURNALISM_CATEGORIES.JAZZ_IN_EUROPE.VALUE
+            },
+            {
+              text: JOURNALISM_CATEGORIES.KIND_OF_JAZZ.TEXT,
+              value: JOURNALISM_CATEGORIES.KIND_OF_JAZZ.VALUE
+            },
+            {
+              text: JOURNALISM_CATEGORIES.JAZZ_QUARTERLY.TEXT,
+              value: JOURNALISM_CATEGORIES.JAZZ_QUARTERLY.VALUE
+            },
+            {
+              text: JOURNALISM_CATEGORIES.OTHER.TEXT,
+              value: JOURNALISM_CATEGORIES.OTHER.VALUE
+            }
+          ]}
+          required
+          hideLabel={false}
+        />
+      );
+      expect(actual).to.equal(true)
     });
 
     it('should render a copy field', () => {

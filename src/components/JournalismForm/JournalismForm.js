@@ -7,6 +7,7 @@ import {
   selectSelectedJournalismArticleTitle,
   selectSelectedJournalismArticleCopy,
   selectSelectedJournalismArticleExternalLink,
+  selectSelectedJournalismArticleCategoryId,
   selectSelectedJournalismArticleImage,
   selectSelectedJournalismArticleReleaseDate
 } from '../../selectors/journalism';
@@ -16,10 +17,12 @@ import PageHeader from '../PageHeader';
 import Datepicker from '../Datepicker/Datepicker';
 import ImageUploadContainer from '../../components/FormElements/ImageUpload/ImageUploadContainer';
 import TextInput from '../TextInput';
+import Select from '../FormElements/Select';
 import { required } from '../../utils/form';
 import {
   JOURNALISM_FORM,
-  JOUNALISM_FIELD_COPY_MAX_LENGTH
+  JOUNALISM_FIELD_COPY_MAX_LENGTH,
+  JOURNALISM_CATEGORIES
 } from '../../constants';
 
 export const JOURNALISM_ARTICLE_MIN_IMAGE_DIMENSIONS = {
@@ -97,6 +100,43 @@ export class JournalismForm extends React.Component {
           </div>
 
           <div className='row-large'>
+            <Field name='categoryId'
+              component={Select}
+              type='select'
+              label='Category'
+              options={[
+                {
+                  text: 'Please select',
+                  value: null
+                },
+                {
+                  text: JOURNALISM_CATEGORIES.WIJM.TEXT,
+                  value: JOURNALISM_CATEGORIES.WIJM.VALUE
+                },
+                {
+                  text: JOURNALISM_CATEGORIES.JAZZ_IN_EUROPE.TEXT,
+                  value: JOURNALISM_CATEGORIES.JAZZ_IN_EUROPE.VALUE
+                },
+                {
+                  text: JOURNALISM_CATEGORIES.KIND_OF_JAZZ.TEXT,
+                  value: JOURNALISM_CATEGORIES.KIND_OF_JAZZ.VALUE
+                },
+                {
+                  text: JOURNALISM_CATEGORIES.JAZZ_QUARTERLY.TEXT,
+                  value: JOURNALISM_CATEGORIES.JAZZ_QUARTERLY.VALUE
+                },
+                {
+                  text: JOURNALISM_CATEGORIES.OTHER.TEXT,
+                  value: JOURNALISM_CATEGORIES.OTHER.VALUE
+                }
+              ]}
+              validate={required}
+              required
+              hideLabel={false}
+            />
+          </div>
+
+          <div className='row-large'>
 
             <Field name='copy'
               component={TextInput}
@@ -112,7 +152,7 @@ export class JournalismForm extends React.Component {
           <div className='row-large'>
             <Field name='externalLink'
               component={TextInput}
-              type='Link to article'
+              type='text'
               label='Link to article'
               placeholder='http://bbc.co.uk/fiona-ross'
               validate={required}
@@ -189,6 +229,7 @@ InitFromStateForm = connect(
       title: selectSelectedJournalismArticleTitle(state),
       copy: selectSelectedJournalismArticleCopy(state),
       externalLink: selectSelectedJournalismArticleExternalLink(state),
+      categoryId: selectSelectedJournalismArticleCategoryId(state),
       image: selectSelectedJournalismArticleImage(state),
       releaseDate: selectSelectedJournalismArticleReleaseDate(state)
     }

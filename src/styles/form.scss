@@ -36,6 +36,13 @@ textarea {
   font-family: $font-main;
 }
 
+select {
+  padding: 0.8em;
+  font-size: .9em;
+  background: 0;
+  border: solid 1px #b7b7b7;
+}
+
 .required {
   color: $color-red-3;
   font-size: .8em;

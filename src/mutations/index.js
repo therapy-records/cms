@@ -73,6 +73,7 @@ export const EDIT_PRESS = gql`
       excerpt,
       externalLink,
       releaseDate,
+      categoryId,
       image {
         cloudinaryUrl,
         cloudinaryPublicId

@@ -10,6 +10,7 @@ import {
   selectSelectedJournalismArticleTitle,
   selectSelectedJournalismArticleCopy,
   selectSelectedJournalismArticleExternalLink,
+  selectSelectedJournalismArticleCategoryId,
   selectSelectedJournalismArticleImage,
   selectSelectedJournalismArticleReleaseDate
 } from './journalism';
@@ -21,7 +22,8 @@ const mockArticles = [
     createdAt: new Date(),
     image: {
       cloudinaryUrl: 'test1.jpg'
-    }
+    },
+    categoryId: 1
   },
   {
     _id: 'asdf1234',
@@ -31,9 +33,7 @@ const mockArticles = [
       cloudinaryUrl: 'http://something/test.jpg',
       cloudinaryPublicId: '1234'
     },
-    image: {
-      cloudinaryUrl: 'test2.jpg'
-    }
+    categoryId: 2
   },
   {
     _id: 'zxcv789',
@@ -43,9 +43,7 @@ const mockArticles = [
       cloudinaryUrl: 'http://something/test.jpg',
       cloudinaryPublicId: '1234'
     },
-    image: {
-      cloudinaryUrl: 'test3.jpg'
-    }
+    categoryId: 3
   }
 ];
 
@@ -131,6 +129,13 @@ describe('(Selectors) journalism', () => {
     it('should return selected/active article externalLink', () => {
       const actual = selectSelectedJournalismArticleExternalLink(mockState, articleId);
       expect(actual).to.deep.eq(mockState.selectedJournalismArticle.externalLink);
+    });
+  });
+
+  describe('selectSelectedJournalismArticleCategoryId', () => {
+    it('should return selected/active article externalLink', () => {
+      const actual = selectSelectedJournalismArticleCategoryId(mockState, articleId);
+      expect(actual).to.deep.eq(mockState.selectedJournalismArticle.categoryId);
     });
   });
 

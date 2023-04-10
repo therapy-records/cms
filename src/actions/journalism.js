@@ -102,9 +102,11 @@ export const editJournalism = (postToEdit) => {
         return null;
       }
     }
+
     const reduxFormObj = getFormValues();
     postToEdit.title = reduxFormObj.title;
     postToEdit.copy = reduxFormObj.copy;
+    postToEdit.categoryId = Number(reduxFormObj.categoryId);
 
     postToEdit.imageUrl = reduxFormObj.imageUrl;
 

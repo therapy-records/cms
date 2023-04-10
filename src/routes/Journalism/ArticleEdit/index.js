@@ -56,6 +56,7 @@ export class ArticleEdit extends React.Component {
       article,
       onEditArticle
     } = this.props;
+
     onEditArticle(article);
   }
 
