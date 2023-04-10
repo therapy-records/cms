@@ -100,30 +100,6 @@ export class JournalismForm extends React.Component {
           </div>
 
           <div className='row-large'>
-
-            <Field name='copy'
-              component={TextInput}
-              type='text'
-              placeholder='Jazz In Europe Magazine'
-              label='Short excerpt'
-              maxLength={JOUNALISM_FIELD_COPY_MAX_LENGTH}
-              validate={required}
-              required
-            />
-          </div>
-
-          <div className='row-large'>
-            <Field name='externalLink'
-              component={TextInput}
-              type='text'
-              label='Link to article'
-              placeholder='http://bbc.co.uk/fiona-ross'
-              validate={required}
-              required
-            />
-          </div>
-
-          <div className='row-large'>
             <Field name='categoryId'
               component={Select}
               type='select'
@@ -157,6 +133,30 @@ export class JournalismForm extends React.Component {
               validate={required}
               required
               hideLabel={false}
+            />
+          </div>
+
+          <div className='row-large'>
+
+            <Field name='copy'
+              component={TextInput}
+              type='text'
+              placeholder='Jazz In Europe Magazine'
+              label='Short excerpt'
+              maxLength={JOUNALISM_FIELD_COPY_MAX_LENGTH}
+              validate={required}
+              required
+            />
+          </div>
+
+          <div className='row-large'>
+            <Field name='externalLink'
+              component={TextInput}
+              type='text'
+              label='Link to article'
+              placeholder='http://bbc.co.uk/fiona-ross'
+              validate={required}
+              required
             />
           </div>
 

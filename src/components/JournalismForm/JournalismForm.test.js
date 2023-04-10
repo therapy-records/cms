@@ -194,32 +194,7 @@ describe('(Component) JournalismForm', () => {
       expect(actual).to.equal(true);
     });
 
-    it('should render a copy field', () => {
-      const actual = wrapper.containsMatchingElement(
-        <Field name='copy'
-               component={TextInput}
-               type='text'
-               placeholder='Jazz In Europe Magazine'
-               label='Short excerpt'
-               maxLength={JOUNALISM_FIELD_COPY_MAX_LENGTH}
-               validate={required}
-               required
-        />
-      );
-      expect(actual).to.equal(true)
-    });
-
-    it('should render an externalLink field', () => {
-      const actual = wrapper.containsMatchingElement(
-        <Field name='externalLink'
-               component={TextInput}
-               required
-        />
-      );
-      expect(actual).to.equal(true)
-    });
-
-    it('should render an category field', () => {
+    it('should render a category field', () => {
       const actual = wrapper.containsMatchingElement(
         <Field name='categoryId'
           component={Select}
@@ -253,6 +228,31 @@ describe('(Component) JournalismForm', () => {
           ]}
           required
           hideLabel={false}
+        />
+      );
+      expect(actual).to.equal(true)
+    });
+
+    it('should render a copy field', () => {
+      const actual = wrapper.containsMatchingElement(
+        <Field name='copy'
+               component={TextInput}
+               type='text'
+               placeholder='Jazz In Europe Magazine'
+               label='Short excerpt'
+               maxLength={JOUNALISM_FIELD_COPY_MAX_LENGTH}
+               validate={required}
+               required
+        />
+      );
+      expect(actual).to.equal(true)
+    });
+
+    it('should render an externalLink field', () => {
+      const actual = wrapper.containsMatchingElement(
+        <Field name='externalLink'
+               component={TextInput}
+               required
         />
       );
       expect(actual).to.equal(true)
