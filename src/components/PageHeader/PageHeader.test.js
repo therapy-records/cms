@@ -42,7 +42,8 @@ describe('(Component) PageHeader', () => {
       onDeleteEntity: sinon.spy(),
       renderEditButton: true,
       renderDeleteButton: true,
-      renderCreateButton: true
+      renderCreateButton: true,
+      category: 'Mock category'
     };
   props = baseProps;
 
@@ -109,9 +110,9 @@ describe('(Component) PageHeader', () => {
       expect(actual).to.equal(true);
     });
 
-    it('should render `categoryId`', () => {
+    it('should render `category`', () => {
       const actual = wrapper.containsMatchingElement(
-        <p className='small-tab category'>{mockEntity.categoryId}</p>
+        <p className='small-tab category'>{props.category}</p>
       );
       expect(actual).to.eq(true);
     });

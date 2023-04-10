@@ -7,6 +7,7 @@ import {
   selectSelectedJournalismArticleTitle,
   selectSelectedJournalismArticleCopy,
   selectSelectedJournalismArticleExternalLink,
+  selectSelectedJournalismArticleCategoryId,
   selectSelectedJournalismArticleImage,
   selectSelectedJournalismArticleReleaseDate
 } from '../../selectors/journalism';
@@ -228,6 +229,7 @@ InitFromStateForm = connect(
       title: selectSelectedJournalismArticleTitle(state),
       copy: selectSelectedJournalismArticleCopy(state),
       externalLink: selectSelectedJournalismArticleExternalLink(state),
+      categoryId: selectSelectedJournalismArticleCategoryId(state),
       image: selectSelectedJournalismArticleImage(state),
       releaseDate: selectSelectedJournalismArticleReleaseDate(state)
     }

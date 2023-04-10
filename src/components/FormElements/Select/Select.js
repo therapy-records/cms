@@ -34,6 +34,7 @@ const Select = ({
           <option
             key={index}
             value={option.value}
+            selected={initValue === option.value}
           >{option.text}</option>
         ))}
       </select>

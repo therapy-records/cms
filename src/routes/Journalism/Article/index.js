@@ -17,6 +17,7 @@ import { selectSelectedJournalismArticle } from '../../../selectors/journalism';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import redirect from '../../../utils/redirect';
 import entityHeading from '../../../utils/entityHeading';
+import { getJournalismCategoryById } from '../../../helpers';
 import './style.css';
 
 export class Article extends React.Component {
@@ -85,6 +86,7 @@ export class Article extends React.Component {
               entityCollection='journalism'
               entity={article}
               heading={entityHeading(article)}
+              category={article.categoryId ? getJournalismCategoryById(article.categoryId).TEXT : null}
               onDeleteEntity={() => onDeleteEntity(article._id)}
               promiseLoading={promiseLoading}
               renderEditButton

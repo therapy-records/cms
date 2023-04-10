@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PageHeader from '../../components/PageHeader';
 import entityHeading from '../../utils/entityHeading';
+import { getPressCategoryById } from '../../helpers';
 
 const SingleEntityContent = ({
   baseUrl,
@@ -13,6 +14,12 @@ const SingleEntityContent = ({
   renderDeleteButton
 }) => {
   const heading = isEdit ? `Editing ${entityHeading(data)}` : entityHeading(data);
+
+  let category;
+
+  if (entityCollection === 'press' && data.categoryId) {
+    category = getPressCategoryById(data.categoryId).TEXT;
+  }
 
   return (
     <div>
@@ -28,6 +35,7 @@ const SingleEntityContent = ({
           createdAt: data.createdAt
         }}
         heading={heading}
+        category={category}
         renderEditButton={!isEdit}
         onDeleteEntity={() => executeMutation()}
         renderDeleteButton={renderDeleteButton}

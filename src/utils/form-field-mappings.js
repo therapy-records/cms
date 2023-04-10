@@ -59,6 +59,7 @@ export const mapFieldsWithValues = (fields, valuesObj) =>
       field = mapFieldArray(field, valuesObj);
     } else {
       const value = valuesObj[fieldId];
+
       if (value) {
         field.value = value;
       }

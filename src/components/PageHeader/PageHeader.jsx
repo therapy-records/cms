@@ -35,6 +35,7 @@ class PageHeader extends Component {
     const {
       entityCollection,
       entity,
+      category,
       heading,
       promiseLoading,
       renderEditButton,
@@ -55,8 +56,8 @@ class PageHeader extends Component {
 
             <h2>{heading}</h2>
 
-            {entity.categoryId &&
-              <p className='small-tab category'>{entity.categoryId}</p>
+            {category &&
+              <p className='small-tab category'>{category}</p>
             }
 
             {entity.author &&
@@ -125,6 +126,7 @@ PageHeader.propTypes = {
   heading: PropTypes.string.isRequired,
   entityCollection: PropTypes.string,
   entity: PropTypes.object,
+  category: PropTypes.string,
   onDeleteEntity: PropTypes.func,
   promiseLoading: PropTypes.bool,
   renderEditButton: PropTypes.bool,
@@ -137,6 +139,7 @@ PageHeader.propTypes = {
 PageHeader.defaultProps = {
   entityCollection: '',
   entity: {},
+  category: '',
   onDeleteEntity: null,
   promiseLoading: false,
   renderEditButton: false,

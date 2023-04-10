@@ -23,7 +23,8 @@ describe('(Component) Select', () => {
       }
     ],
     label: 'mock label',
-    hideLabel: false
+    hideLabel: false,
+    value: 'B'
   };
 
   beforeEach(() => {
@@ -67,10 +68,12 @@ describe('(Component) Select', () => {
       <option
         key={1}
         value={props.options[0].value}
+        selected={false}
       >{props.options[0].text}</option>,
       <option
         key={2}
         value={props.options[1].value}
+        selected={true}
       >{props.options[1].text}</option>
     ]);
 

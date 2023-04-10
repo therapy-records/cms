@@ -10,6 +10,7 @@ import { MOCK_GET_PRESS, MOCK_GET_PRESS_EMPTY } from '../../../mocks/press.mock'
 import PageHeader from '../../../components/PageHeader';
 import List from '../../../components/List';
 import EmptyMessage from '../../../components/EmptyMessage';
+import { getPressCategoryById } from '../../../helpers';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -61,7 +62,17 @@ describe('(Component) PressHome', () => {
 
   it('should render a <List /> from <QueryContainer /> render prop', async() => {
     await actions(wrapper, () => {
-      const expectedData = MOCK_GET_PRESS.result.data.press.sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate));
+      const mappedData = MOCK_GET_PRESS.result.data.press.map((article) => {
+        const mapped = article;
+
+        if (article.categoryId) {
+          mapped.category = getPressCategoryById(article.categoryId).TEXT;
+        }
+
+        return mapped;
+      });
+
+      const expectedData = mappedData.sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate));
 
       wrapper.update();
 
